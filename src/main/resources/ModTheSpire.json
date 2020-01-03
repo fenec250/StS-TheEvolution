@@ -1,0 +1,12 @@
+{
+  "modid": "EvolutionMod",
+  "name": "The Evolution",
+  "author_list": ["Fenec250"],
+  "description": "Adds a new character: The Evolution.",
+  "dependencies": ["basemod"],
+  "credits": "Johnny Devo for the base project and temp art. Syvaron for the character and portraits",
+  "version": "0.0.1",
+  "sts_version": "07-17-2019",
+  "mts_version": "3.14.1",
+  "update_json": "https://api.github.com/repos/Fenec250/StS-TheEvolution/releases/latest"
+}

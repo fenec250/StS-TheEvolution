@@ -1,0 +1,60 @@
+{
+  "evolutionmod:CentaurGene": {
+    "NAME": "Centaur gene",
+    "DESCRIPTION": ["At the start of your turn gain ", " Strength until the end of your turn"]
+  },
+  "evolutionmod:PlantGene": {
+    "NAME": "Plant gene",
+    "DESCRIPTION": ["At the start of your turn gain ", " Thorns and ", " Block."]
+//    "DESCRIPTION": ["At the start of your turn apply ", " Poison and ", " Weak to a random enemy NL Doesn't target enemies with Artifact"]
+  },
+  "evolutionmod:MerfolkGene": {
+    "NAME": "Merfolk gene",
+    "DESCRIPTION": ["At the end of your turn gain ", " Block"]
+  },
+  "evolutionmod:HarpyGene": {
+    "NAME": "Harpy gene",
+    "DESCRIPTION": ["At the start of your turn draw a card", " and gain ", " Swiftness"]
+  },
+  "evolutionmod:LavafolkGene": {
+    "NAME": "Lavafolk gene",
+    "DESCRIPTION": ["At the end of your turn deal ", " damage to a random enemy"]
+  },
+  "evolutionmod:SuccubusGene": {
+    "NAME": "Succubus gene",
+    "DESCRIPTION": ["At the start of your turn apply ", " vulnerable and deal ", " damage to a random enemy"]
+//    "DESCRIPTION": ["At the start of yout turn apply ", " vulnerable and deal ", " damage to a random enemy NL Doesn't target enemies with Artifact"]
+  },
+  "evolutionmod:LymeanGene": {
+    "NAME": "Lymean gene",
+    "DESCRIPTION": ["At the start of your turn heal ", " HP and gain ", " Block."]
+  }
+//  "evolutionmod:DancePower": {
+//    "NAME": "Dance",
+//    "DESCRIPTIONS": ["The next card played is free if it is a Dance less than ", ". You played ", " steps in this dance"]
+//  },
+//
+//
+//  "evolutionmod:BeatOfLifePower": {
+//    "NAME": "Beat of Life",
+//    "DESCRIPTIONS": ["When you gain Rhythm, gain ", "as much block.", " times as much block."]
+//  },
+//  "evolutionmod:ChoreographyPower": {
+//    "NAME": "Choreography",
+//    "DESCRIPTIONS": ["At the beggining of your turn, dance "]
+//  },
+//  "evolutionmod:HotPower": {
+//    "NAME": "Hot",
+//    "DESCRIPTIONS": ["When you Dance, deal ", " damage times the number of Steps to all enemies"]
+//  },
+//  "evolutionmod:RefrainPower": {
+//    "NAME": "Refrain",
+//    "DESCRIPTIONS": ["Gain ", " Rhythm at the start of your turn."]
+//  },
+//
+//
+//  "mystighjcmod:ArtesPlayedPower": {
+//    "NAME": "[#FF5252]Poise[]",
+//    "DESCRIPTIONS": ["You have played ", " [#FF5252]Arte[] this turn.", " [#FF5252]Artes[] this turn."]
+//  }
+}
