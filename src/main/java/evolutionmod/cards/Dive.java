@@ -6,9 +6,14 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.MerfolkGene;
 import evolutionmod.patches.AbstractCardEnum;
+
+import java.util.Collection;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Dive
         extends AdaptableEvoCard {
@@ -35,11 +40,13 @@ public class Dive
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, this.block));
-        p.orbs.stream()
-                .filter(o -> o instanceof MerfolkGene)
-                .limit(1)
-                .forEach(o -> this.addAdaptation(((AbstractGene) o).getAdaptation()));
-        this.useAdaptations(p, m);
+	    Set<AbstractOrb> orbsToConsume = p.orbs.stream()
+			    .filter(o -> o instanceof MerfolkGene)
+			    .limit(1)
+			    .filter(o -> 0 < this.addAdaptation(((AbstractGene) o).getAdaptation()))
+			    .collect(Collectors.toSet());
+	    consumeOrbs(p, orbsToConsume);
+	    this.useAdaptations(p, m);
     }
 
 	@Override

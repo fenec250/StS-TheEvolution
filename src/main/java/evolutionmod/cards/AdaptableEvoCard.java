@@ -6,8 +6,12 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.orbs.AbstractOrb;
+import com.megacrit.cardcrawl.orbs.EmptyOrbSlot;
 import evolutionmod.orbs.AbstractGene;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,20 +63,22 @@ public abstract class AdaptableEvoCard extends CustomCard {
 //    	adaptations.forEach(f -> f.apply(p, m));
     	this.adaptationMap.values().forEach(f -> f.apply(p, m));
     }
-//
-//    public void selfAdapt(AbstractPlayer player) {
-//    	getFilteredGenes(player, o -> true).stream()
-//			    .map(AbstractGene::getAdaptation)
-//			    .forEach(this::addAdaptation);
-//    }
-//
-//    protected List<AbstractGene> getFilteredGenes(AbstractPlayer player, Predicate<AbstractGene> filter) {
-//    	return player.orbs.stream()
-//			    .filter(o -> o instanceof AbstractGene)
-//			    .map(o -> (AbstractGene) o)
-//			    .filter(filter)
-//			    .collect(Collectors.toList());
-//    }
+
+    protected boolean consumeOrbs(AbstractPlayer player, Collection<AbstractOrb> orbs) {
+	    if (player.orbs.isEmpty()) {
+	    	return false;
+	    }
+	    boolean result = player.orbs.removeAll(orbs);
+	    if (result) {
+		    for (int i = 0; i < orbs.size(); ++i) {
+		    	player.orbs.add(new EmptyOrbSlot(((AbstractOrb)player.orbs.get(0)).cX, ((AbstractOrb)player.orbs.get(0)).cY));
+		    }
+		    for (int i = 0; i < player.orbs.size(); ++i) {
+			    ((AbstractOrb)player.orbs.get(i)).setSlot(i, player.maxOrbs);
+		    }
+	    }
+	    return result;
+    }
 
     public abstract static class AbstractAdaptation {
     	public int amount;

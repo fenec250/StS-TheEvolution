@@ -6,12 +6,16 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
+import com.megacrit.cardcrawl.orbs.EmptyOrbSlot;
 import evolutionmod.cards.AdaptableEvoCard;
 import evolutionmod.cards.DefendEvo;
 import evolutionmod.cards.StrikeEvo;
 import evolutionmod.orbs.AbstractGene;
 
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 
 public class AdaptationAction extends AbstractGameAction {
 
@@ -28,8 +32,6 @@ public class AdaptationAction extends AbstractGameAction {
 	}
 
 	public void update() {
-//		SkillFromDeckToHandAction;
-//		if (this.duration == this.startDuration) {
 		if (!started) {
 			if (player.orbs.isEmpty()) {
 				this.isDone = true;
@@ -51,14 +53,20 @@ public class AdaptationAction extends AbstractGameAction {
 		} else {
 			if (AbstractDungeon.gridSelectScreen.selectedCards.size() != 0) {
 				AdaptableEvoCard card = (AdaptableEvoCard) AbstractDungeon.gridSelectScreen.selectedCards.get(0);
-				int i = genesNumber;
+				int amountToAdd = genesNumber;
 				Iterator<AbstractOrb> iterator = player.orbs.iterator();
-				while (i > 0 && iterator.hasNext()) {
+				Set<AbstractOrb> orbsToRemove = new HashSet<>();
+				while (amountToAdd > 0 && iterator.hasNext()) {
 					AbstractOrb orb = iterator.next();
 					if (orb instanceof AbstractGene) {
-						i -= card.addAdaptation(((AbstractGene) orb).getAdaptation());
+						int amountChange = card.addAdaptation(((AbstractGene) orb).getAdaptation());
+						amountToAdd -= amountChange;
+						if (amountChange > 0) {
+							orbsToRemove.add(orb);
+						}
 					}
 				}
+				consumeOrbs(player, orbsToRemove);
 
 				card.modifyCostForTurn(-1);
 				AbstractDungeon.gridSelectScreen.selectedCards.clear();
@@ -68,5 +76,22 @@ public class AdaptationAction extends AbstractGameAction {
 		}
 		//AbstractDungeon.cardRng.random([ArrayList].size() - 1)
 
+	}
+
+	// FIXME: this is a duplication of AdaptableEvoCard.consumeOrbs
+	protected boolean consumeOrbs(AbstractPlayer player, Collection<AbstractOrb> orbs) {
+		if (player.orbs.isEmpty()) {
+			return false;
+		}
+		boolean result = player.orbs.removeAll(orbs);
+		if (result) {
+			for (int i = 0; i < orbs.size(); ++i) {
+				player.orbs.add(new EmptyOrbSlot(((AbstractOrb)player.orbs.get(0)).cX, ((AbstractOrb)player.orbs.get(0)).cY));
+			}
+			for (int i = 0; i < player.orbs.size(); ++i) {
+				((AbstractOrb)player.orbs.get(i)).setSlot(i, player.maxOrbs);
+			}
+		}
+		return result;
 	}
 }
