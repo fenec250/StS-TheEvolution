@@ -9,6 +9,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.LockOnPower;
 import com.megacrit.cardcrawl.powers.ThornsPower;
 import com.megacrit.cardcrawl.powers.WeakPower;
+import evolutionmod.powers.BramblesPower;
 import evolutionmod.powers.LoseThornsPower;
 import evolutionmod.powers.MarkPower;
 
@@ -40,9 +41,7 @@ public class PlantGeneAction extends AbstractGameAction {
 		AbstractDungeon.actionManager.addToTop(
 				new ApplyPowerAction(this.target, this.source, new WeakPower(this.target, this.weak, false), this.weak));
 		AbstractDungeon.actionManager.addToTop(
-				new ApplyPowerAction(this.source, this.source, new ThornsPower(this.source, this.thorn), this.thorn));
-		AbstractDungeon.actionManager.addToTop(
-				new ApplyPowerAction(this.source, this.source, new LoseThornsPower(this.source, this.thorn), this.thorn));
+				new ApplyPowerAction(this.source, this.source, new BramblesPower(this.source, this.thorn), this.thorn));
 
 		this.isDone = true;
 

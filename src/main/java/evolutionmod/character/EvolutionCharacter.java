@@ -157,17 +157,15 @@ public class EvolutionCharacter extends CustomPlayer {
     public ArrayList<String> getStartingDeck() {
         ArrayList<String> retVal = new ArrayList<>();
         retVal.add(StrikeEvo.ID);
-//        retVal.add(StrikeEvo.ID);
-        retVal.add(WaterBolt.ID);
-//        retVal.add(StrikeEvo.ID);
-//        retVal.add(StrikeEvo.ID);
+        retVal.add(StrikeEvo.ID);
+        retVal.add(StrikeEvo.ID);
+        retVal.add(StrikeEvo.ID);
         retVal.add(StrikeEvo.ID);
 
         retVal.add(DefendEvo.ID);
-//        retVal.add(DefendEvo.ID);
-        retVal.add(Dive.ID);
-//        retVal.add(DefendEvo.ID);
-//        retVal.add(DefendEvo.ID);
+        retVal.add(DefendEvo.ID);
+        retVal.add(DefendEvo.ID);
+        retVal.add(DefendEvo.ID);
         retVal.add(DefendEvo.ID);
 
         retVal.add(Adaptation.ID);

@@ -37,18 +37,18 @@
   },
   "evolutionmod:Brambles": {
     "NAME": "Brambles",
-    "DESCRIPTION": "Gain !B! Block NL Gain !M! Thorn until your next turn NL Evolve a [#60B040]Plant[] gene",
+    "DESCRIPTION": "Gain !B! Block NL Gain !M! Brambles NL Evolve a [#60B040]Plant[] gene",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:VineLash": {
     "NAME": "Vine lash",
-    "DESCRIPTION": "Gain !M! Thorns until your next turn NL Adapt this with a Plant gene NL Deal damage equal to twice your Thorns.",
+    "DESCRIPTION": "Gain !M! Brambles NL Adapt this with a Plant gene NL Deal damage equal to twice your Thorns.",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:Constrict": {
     "NAME": "Constrict",
-    "DESCRIPTION": "Gain !B! Block. NL Apply Constricted equal to your Thorn to an enemy NL Evolve a Plant gene",
-    "UPGRADE_DESCRIPTION": "Gain !B! Block. NL Apply Constricted equal to your Thorn to all enemies NL Evolve a Plant gene"
+    "DESCRIPTION": "Gain !B! Block. NL Apply Constricted equal to your Thorns and Brambles to an enemy NL Evolve a Plant gene",
+    "UPGRADE_DESCRIPTION": "Gain !B! Block. NL Apply Constricted equal to your Thorns and Brambles to all enemies NL Evolve a Plant gene"
   },
   "evolutionmod:TalonStrike": {
     "NAME": "Talon strike",
@@ -122,7 +122,7 @@
   },
   "evolutionmod:Purify": {
     "NAME": "Purify",
-    "DESCRIPTION": "Exhaust 1 to !M! cards. NL Adapt this with a [#5090FF]Lymean[] gene.",
+    "DESCRIPTION": "Exhaust 1 to !M! cards. NL Adapt this with a [#50FFFF]Lymean[] gene.",
     "UPGRADE_DESCRIPTION": ""
   },
 

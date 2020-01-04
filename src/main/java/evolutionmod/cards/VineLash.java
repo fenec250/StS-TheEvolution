@@ -12,6 +12,7 @@ import evolutionmod.actions.ThornDamageAction;
 import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.PlantGene;
 import evolutionmod.patches.AbstractCardEnum;
+import evolutionmod.powers.BramblesPower;
 import evolutionmod.powers.LoseThornsPower;
 
 public class VineLash
@@ -39,9 +40,7 @@ public class VineLash
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         AbstractDungeon.actionManager.addToTop(
-                new ApplyPowerAction(p, p, new ThornsPower(p, this.magicNumber), this.magicNumber));
-        AbstractDungeon.actionManager.addToTop(
-                new ApplyPowerAction(p, p, new LoseThornsPower(p, this.magicNumber), this.magicNumber));
+                new ApplyPowerAction(p, p, new BramblesPower(p, this.magicNumber), this.magicNumber));
         p.orbs.stream()
                 .filter(o -> o instanceof PlantGene)
                 .limit(1)

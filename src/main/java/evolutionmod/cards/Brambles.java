@@ -13,6 +13,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.ThornsPower;
 import evolutionmod.orbs.PlantGene;
 import evolutionmod.patches.AbstractCardEnum;
+import evolutionmod.powers.BramblesPower;
 import evolutionmod.powers.LoseThornsPower;
 
 public class Brambles
@@ -41,9 +42,7 @@ public class Brambles
     public void use(AbstractPlayer p, AbstractMonster m) {
         AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, this.block));
         AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(
-                p, p, new ThornsPower(p, this.magicNumber), this.magicNumber));
-        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(
-                p, p, new LoseThornsPower(p, this.magicNumber), this.magicNumber));
+                p, p, new BramblesPower(p, this.magicNumber), this.magicNumber));
         AbstractDungeon.actionManager.addToBottom(new ChannelAction(new PlantGene()));
     }
 

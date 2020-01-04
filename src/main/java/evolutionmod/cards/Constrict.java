@@ -14,6 +14,7 @@ import com.megacrit.cardcrawl.powers.ConstrictedPower;
 import com.megacrit.cardcrawl.powers.ThornsPower;
 import evolutionmod.orbs.PlantGene;
 import evolutionmod.patches.AbstractCardEnum;
+import evolutionmod.powers.BramblesPower;
 
 public class Constrict
         extends CustomCard {
@@ -37,15 +38,22 @@ public class Constrict
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, this.block));
+        int constricted = 0;
         if (p.hasPower(ThornsPower.POWER_ID)) {
-            int constricted = p.getPower(ThornsPower.POWER_ID).amount;
+            constricted += p.getPower(ThornsPower.POWER_ID).amount;
+        }
+        if (p.hasPower(BramblesPower.POWER_ID)) {
+            constricted += p.getPower(BramblesPower.POWER_ID).amount;
+        }
+        if (constricted > 0) {
+            final int finalConstricted = constricted;
             if (!this.upgraded) {
                 AbstractDungeon.actionManager.addToBottom(
-                        new ApplyPowerAction(m, p, new ConstrictedPower(m, p, constricted), constricted));
+                        new ApplyPowerAction(m, p, new ConstrictedPower(m, p, finalConstricted), finalConstricted));
             } else {
                 AbstractDungeon.getMonsters().monsters.forEach(mo ->
-                        AbstractDungeon.actionManager.addToBottom(
-                                new ApplyPowerAction(mo, p, new ConstrictedPower(mo, p, constricted), constricted, true))
+                        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(
+                                mo, p, new ConstrictedPower(mo, p, finalConstricted), finalConstricted, true))
                 );
             }
         }

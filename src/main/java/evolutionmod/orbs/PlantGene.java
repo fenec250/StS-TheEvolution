@@ -10,6 +10,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.powers.ThornsPower;
 import evolutionmod.cards.AdaptableEvoCard;
+import evolutionmod.powers.BramblesPower;
 import evolutionmod.powers.LoseThornsPower;
 
 public class PlantGene extends AbstractGene {
@@ -42,9 +43,7 @@ public class PlantGene extends AbstractGene {
 		int thorns = thornsPerGene() * times;
 		int block = blockPerGene() * times;
 		AbstractDungeon.actionManager.addToTop(
-				new ApplyPowerAction(p, p, new ThornsPower(p, thorns), thorns));
-		AbstractDungeon.actionManager.addToTop(
-				new ApplyPowerAction(p, p, new LoseThornsPower(p, thorns), thorns));
+				new ApplyPowerAction(p, p, new BramblesPower(p, thorns), thorns));
 		AbstractDungeon.actionManager.addToTop(new GainBlockAction(p, p, block));
 	}
 

@@ -5,7 +5,7 @@
   },
   "evolutionmod:PlantGene": {
     "NAME": "Plant gene",
-    "DESCRIPTION": ["At the start of your turn gain ", " Thorns and ", " Block."]
+    "DESCRIPTION": ["At the start of your turn gain ", " Brambles and ", " Block."]
 //    "DESCRIPTION": ["At the start of your turn apply ", " Poison and ", " Weak to a random enemy NL Doesn't target enemies with Artifact"]
   },
   "evolutionmod:MerfolkGene": {

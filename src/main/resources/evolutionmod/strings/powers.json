@@ -37,6 +37,10 @@
     "NAME": "Drowning",
     "DESCRIPTIONS": ["At the end of your turn this character will take ", " times ", "your Block as damage"]
   },
+  "evolutionmod:BramblesPower": {
+    "NAME": "Brambles",
+    "DESCRIPTIONS": ["When recieving Attack damage deal ", " damages back"]
+  },
   "evolutionmod:LoseThornsPower": {
     "NAME": "Thorns Down",
     "DESCRIPTIONS": ["At the beggining of your turn lose ", " Thorn and remove this"]

@@ -10,6 +10,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.ThornsPower;
 import com.megacrit.cardcrawl.powers.WeakPower;
+import evolutionmod.powers.BramblesPower;
 import evolutionmod.powers.LoseThornsPower;
 import evolutionmod.powers.MarkPower;
 
@@ -30,11 +31,16 @@ public class ThornDamageAction extends AbstractGameAction {
 			this.isDone = true;
 			return;
 		}
+		int damage = 0;
 		if (this.source.hasPower(ThornsPower.POWER_ID)) {
-			AbstractDungeon.actionManager.addToTop(new DamageAction(
-					this.target, new DamageInfo(this.source, this.source.getPower(ThornsPower.POWER_ID).amount * power,
-					DamageInfo.DamageType.NORMAL), AttackEffect.NONE, true));
+			damage += this.source.getPower(ThornsPower.POWER_ID).amount * power;
 		}
+		if (this.source.hasPower(BramblesPower.POWER_ID)) {
+			damage += this.source.getPower(BramblesPower.POWER_ID).amount * power;
+		}
+		AbstractDungeon.actionManager.addToTop(new DamageAction(
+				this.target, new DamageInfo(this.source, damage,
+				DamageInfo.DamageType.NORMAL), AttackEffect.NONE, true));
 
 		this.isDone = true;
 
