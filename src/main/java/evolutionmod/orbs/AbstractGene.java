@@ -23,6 +23,8 @@ public abstract class AbstractGene extends CustomOrb {
 //		if (AbstractDungeon.player.hasPower("TODO Tanid form")) {
 //			this.apply(AbstractDungeon.player, null, AbstractDungeon.player.getPower("TODO Tanid form").amount);
 //		}
+		onStartOfTurn();
+		onEndOfTurn();
 	}
 
 	public abstract AdaptableEvoCard.AbstractAdaptation getAdaptation();

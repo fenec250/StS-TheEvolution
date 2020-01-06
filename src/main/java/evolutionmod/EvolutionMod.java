@@ -18,34 +18,10 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.localization.CharacterStrings;
 import com.megacrit.cardcrawl.localization.OrbStrings;
 import com.megacrit.cardcrawl.localization.PowerStrings;
-import evolutionmod.cards.Adaptation;
-import evolutionmod.cards.AquaticForm;
-import evolutionmod.cards.Brambles;
-import evolutionmod.cards.ChannelMagic;
-import evolutionmod.cards.Charm;
-import evolutionmod.cards.Constrict;
-import evolutionmod.cards.MagicForm;
-import evolutionmod.cards.Purify;
-import evolutionmod.cards.VineLash;
-import evolutionmod.cards.DefendEvo;
-import evolutionmod.cards.Dive;
-import evolutionmod.cards.Drown;
-import evolutionmod.cards.Eruption;
-import evolutionmod.cards.Evolution;
-import evolutionmod.cards.FeatherStorm;
-import evolutionmod.cards.FlameStrike;
-import evolutionmod.cards.HoofKick;
-import evolutionmod.cards.Seduce;
-import evolutionmod.cards.Stampede;
-import evolutionmod.cards.Strip;
-import evolutionmod.cards.TakeOff;
-import evolutionmod.cards.TalonStrike;
-import evolutionmod.cards.WaterBolt;
-import evolutionmod.cards.WindUp;
+import evolutionmod.cards.*;
 import evolutionmod.character.EvolutionCharacter;
 import evolutionmod.patches.AbstractCardEnum;
 import evolutionmod.patches.EvolutionEnum;
-import evolutionmod.cards.StrikeEvo;
 
 import java.nio.charset.StandardCharsets;
 
@@ -91,7 +67,7 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
 
     @Override
     public void receiveEditCards() {
-//        BaseMod.addDynamicVariable(new AbstractMelodyCard.TempoNumber());
+        BaseMod.addDynamicVariable(new AdaptableEvoCard.MaxAdaptationNumber());
 
         //Basic. 2 attacks, 2 skills
         BaseMod.addCard(new Adaptation());
@@ -120,12 +96,11 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
         BaseMod.addCard(new TakeOff());
         BaseMod.addCard(new Dive());
         BaseMod.addCard(new WindUp());
-        BaseMod.addCard(new ChannelMagic());
+//        BaseMod.addCard(new ChannelMagic());
         BaseMod.addCard(new Purify());
         //6 powers
         BaseMod.addCard(new AquaticForm());
         BaseMod.addCard(new MagicForm());
-//        BaseMod.addCard(new Hot());
 
         //Rares.
         //4 attacks
@@ -137,8 +112,6 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
         BaseMod.addCard(new Drown());
         BaseMod.addCard(new Constrict());
         //6 powers
-//        BaseMod.addCard(new BeatOfLife());
-//        BaseMod.addCard(new Choreography());
     }
 
     @Override
@@ -150,6 +123,11 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
     public void receiveEditKeywords() {
         String[] keywordRhythm = {"adapt"};
         BaseMod.addKeyword(keywordRhythm, "Add the effect of a channeled gene to a card until the end of the combat.");
+
+        String[] keywordCentaur = {"Centaur"};
+        BaseMod.addKeyword("[#B06050]Centaur gene[]", keywordCentaur, "At the start of your turn gain 1 Strength until the end of your turn.");
+        String[] keywordPlant = {"Plant"};
+        BaseMod.addKeyword("[#60B040]Plant gene[]", keywordPlant, "At the start of your turn gain 1 Brambles and 2 Block.");
 //        String[] keywordTempo = {"mist"};
 //        BaseMod.addKeyword(keywordTempo, "At 10 Mist you gain 1 Intangible");
 //        String[] keywordStep = {"step", "steps"};

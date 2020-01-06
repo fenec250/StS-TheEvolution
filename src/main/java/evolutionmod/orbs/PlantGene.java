@@ -18,7 +18,7 @@ public class PlantGene extends AbstractGene {
 	public static final OrbStrings orbStrings = CardCrawlGame.languagePack.getOrbString(ID);
 	public static final String NAME = orbStrings.NAME;
 	public static final String[] DESCRIPTION = orbStrings.DESCRIPTION;
-	public static final String IMG_PATH = "evolutionmod/images/cards/strike.png";
+	public static final String IMG_PATH = "evolutionmod/images/orbs/PlantGene.png";
 
 	public PlantGene() {
 		super(ID, NAME, buildDescription(), IMG_PATH);
@@ -54,9 +54,7 @@ public class PlantGene extends AbstractGene {
 
 	@Override
 	public void updateDescription() {
-//		super.updateDescription();
-//		this.description = "#yPassive: " + buildDescription() + " NL #yEvoke: ";
-		this.description = "#yPassive: " + buildDescription();
+		this.description = "#yPassive and #yEvoke: " + buildDescription();
 	}
 
 	private static String buildDescription() {
@@ -92,7 +90,7 @@ public class PlantGene extends AbstractGene {
 
 		@Override
 		public String text() {
-			return "Plant";
+			return "[#60B040]Plant[]";
 		}
 
 		@Override

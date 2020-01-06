@@ -27,7 +27,7 @@
   },
   "evolutionmod:WindUp": {
     "NAME": "Wind up",
-    "DESCRIPTION": "Draw !M! cards NL Adapt this with a Centaur gene up to !M! times.",
+    "DESCRIPTION": "Draw !M! cards NL Adapt this with a Centaur gene up to !evolutionmod:MA! times.",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:Stampede": {
@@ -42,13 +42,13 @@
   },
   "evolutionmod:VineLash": {
     "NAME": "Vine lash",
-    "DESCRIPTION": "Gain !M! Brambles NL Adapt this with a Plant gene NL Deal damage equal to twice your Thorns.",
+    "DESCRIPTION": "Gain !M! Brambles NL Adapt this with a [#60B040]Plant[] gene up to !evolutionmod:MA! times NL Deal damage equal to twice your Thorns.",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:Constrict": {
     "NAME": "Constrict",
-    "DESCRIPTION": "Gain !B! Block. NL Apply Constricted equal to your Thorns and Brambles to an enemy NL Evolve a Plant gene",
-    "UPGRADE_DESCRIPTION": "Gain !B! Block. NL Apply Constricted equal to your Thorns and Brambles to all enemies NL Evolve a Plant gene"
+    "DESCRIPTION": "Gain !B! Block. NL Apply Constricted equal to your Thorns and Brambles to an enemy NL Evolve a [#60B040]Plant[] gene",
+    "UPGRADE_DESCRIPTION": "Gain !B! Block. NL Apply Constricted equal to your Thorns and Brambles to all enemies NL Evolve a [#60B040]Plant[] gene"
   },
   "evolutionmod:TalonStrike": {
     "NAME": "Talon strike",
@@ -57,7 +57,7 @@
   },
   "evolutionmod:TakeOff": {
     "NAME": "Take Off",
-    "DESCRIPTION": "Gain !B! block NL draw 1 card NL Adapt this with a [#FFFF80]Harpy[] gene up to !M! times.",
+    "DESCRIPTION": "Gain !B! block NL draw 1 card NL Adapt this with a [#FFFF80]Harpy[] gene up to !evolutionmod:MA! times.",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:FeatherStorm": {
@@ -72,7 +72,7 @@
   },
   "evolutionmod:Dive": {
     "NAME": "Dive",
-    "DESCRIPTION": "Gain !B! block NL Adapt this with a [#5252FF]Merfolk[] genes up to !M! times.",
+    "DESCRIPTION": "Gain !B! block NL Adapt this with a [#5252FF]Merfolk[] gene up to !evolutionmod:MA! times.",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:Drown": {
@@ -87,7 +87,7 @@
   },
   "evolutionmod:Strip": {
     "NAME": "Strip",
-    "DESCRIPTION": "remove all Block from the enemy NL deal !D! damage NL Adapt this with a !M! [#F04040]Succubus[] genes",
+    "DESCRIPTION": "remove all Block from the enemy NL deal !D! damage NL Adapt this with a [#F04040]Succubus[] gene up to !evolutionmod:MA! times.",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:Seduce": {
@@ -107,7 +107,7 @@
   },
   "evolutionmod:ChannelMagic": {
     "NAME": "Channel magic",
-    "DESCRIPTION": "Gain !M! Lavafolk Form until your next turn. NL Adapt this with a [#FF9050]Lavafolk[] gene.",
+    "DESCRIPTION": "Gain !M! Lavafolk Form until your next turn. NL Adapt this with a [#FF9050]Lavafolk[] gene up to !evolutionmod:MA! times.",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:Eruption": {

@@ -12,10 +12,7 @@ import evolutionmod.cards.DefendEvo;
 import evolutionmod.cards.StrikeEvo;
 import evolutionmod.orbs.AbstractGene;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 
 public class AdaptationAction extends AbstractGameAction {
 
@@ -54,19 +51,15 @@ public class AdaptationAction extends AbstractGameAction {
 			if (AbstractDungeon.gridSelectScreen.selectedCards.size() != 0) {
 				AdaptableEvoCard card = (AdaptableEvoCard) AbstractDungeon.gridSelectScreen.selectedCards.get(0);
 				int amountToAdd = genesNumber;
-				Iterator<AbstractOrb> iterator = player.orbs.iterator();
-				Set<AbstractOrb> orbsToRemove = new HashSet<>();
+				ArrayList<AbstractOrb> orbs = new ArrayList(player.orbs);
+				Iterator<AbstractOrb> iterator = orbs.iterator();
 				while (amountToAdd > 0 && iterator.hasNext()) {
 					AbstractOrb orb = iterator.next();
 					if (orb instanceof AbstractGene) {
-						int amountChange = card.addAdaptation(((AbstractGene) orb).getAdaptation());
+						int amountChange = card.addAdaptation((AbstractGene) orb);
 						amountToAdd -= amountChange;
-						if (amountChange > 0) {
-							orbsToRemove.add(orb);
-						}
 					}
 				}
-				consumeOrbs(player, orbsToRemove);
 
 				card.modifyCostForTurn(-1);
 				AbstractDungeon.gridSelectScreen.selectedCards.clear();
@@ -74,7 +67,6 @@ public class AdaptationAction extends AbstractGameAction {
 				this.tickDuration();
 			}
 		}
-		//AbstractDungeon.cardRng.random([ArrayList].size() - 1)
 
 	}
 

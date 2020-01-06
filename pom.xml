@@ -14,7 +14,6 @@
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <sts.path>/Users/clanteigne/Library/Application Support/Steam/steamapps/common/SlayTheSpire/SlayTheSpire.app/Contents/Resources</sts.path>
     </properties>
 
     <!-- These are the dependencies that were placed in the libs folder.
