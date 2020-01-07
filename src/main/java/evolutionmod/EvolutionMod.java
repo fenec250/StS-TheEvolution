@@ -18,7 +18,36 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.localization.CharacterStrings;
 import com.megacrit.cardcrawl.localization.OrbStrings;
 import com.megacrit.cardcrawl.localization.PowerStrings;
-import evolutionmod.cards.*;
+import evolutionmod.cards.AdaptableEvoCard;
+import evolutionmod.cards.Adaptation;
+import evolutionmod.cards.AquaticForm;
+import evolutionmod.cards.Brambles;
+import evolutionmod.cards.ChannelMagic;
+import evolutionmod.cards.Charm;
+import evolutionmod.cards.Constrict;
+import evolutionmod.cards.Drone;
+import evolutionmod.cards.GatherFood;
+import evolutionmod.cards.Hivemind;
+import evolutionmod.cards.Incubate;
+import evolutionmod.cards.MagicForm;
+import evolutionmod.cards.Purify;
+import evolutionmod.cards.StrikeEvo;
+import evolutionmod.cards.VineLash;
+import evolutionmod.cards.DefendEvo;
+import evolutionmod.cards.Dive;
+import evolutionmod.cards.Drown;
+import evolutionmod.cards.Eruption;
+import evolutionmod.cards.Evolution;
+import evolutionmod.cards.FeatherStorm;
+import evolutionmod.cards.FlameStrike;
+import evolutionmod.cards.HoofKick;
+import evolutionmod.cards.Seduce;
+import evolutionmod.cards.Stampede;
+import evolutionmod.cards.Strip;
+import evolutionmod.cards.TakeOff;
+import evolutionmod.cards.TalonStrike;
+import evolutionmod.cards.WaterBolt;
+import evolutionmod.cards.WindUp;
 import evolutionmod.character.EvolutionCharacter;
 import evolutionmod.patches.AbstractCardEnum;
 import evolutionmod.patches.EvolutionEnum;
@@ -69,6 +98,7 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
     public void receiveEditCards() {
         BaseMod.addDynamicVariable(new AdaptableEvoCard.MaxAdaptationNumber());
 
+        //Vex quote: i shoot for 18 commons, 10 damage 6 block 2 other as a "blueprint" and modify if anything jumps out at me
         //Basic. 2 attacks, 2 skills
         BaseMod.addCard(new Adaptation());
         BaseMod.addCard(new Evolution());
@@ -76,7 +106,7 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
         BaseMod.addCard(new StrikeEvo());
 
         //Special
-//        BaseMod.addCard(new BladeBurst());
+        BaseMod.addCard(new Drone());
 //
         //Commons
         //10 attacks
@@ -84,6 +114,7 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
         BaseMod.addCard(new TalonStrike());
         BaseMod.addCard(new WaterBolt());
         BaseMod.addCard(new FlameStrike());
+        BaseMod.addCard(new GatherFood());
         //8 skills
         BaseMod.addCard(new Charm());
         BaseMod.addCard(new Brambles());
@@ -98,6 +129,7 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
         BaseMod.addCard(new WindUp());
 //        BaseMod.addCard(new ChannelMagic());
         BaseMod.addCard(new Purify());
+        BaseMod.addCard(new Hivemind());
         //6 powers
         BaseMod.addCard(new AquaticForm());
         BaseMod.addCard(new MagicForm());
@@ -111,6 +143,7 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
         //8 skills
         BaseMod.addCard(new Drown());
         BaseMod.addCard(new Constrict());
+        BaseMod.addCard(new Incubate());
         //6 powers
     }
 

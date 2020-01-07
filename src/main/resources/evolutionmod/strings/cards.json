@@ -125,26 +125,42 @@
     "DESCRIPTION": "Exhaust 1 to !M! cards. NL Adapt this with a [#50FFFF]Lymean[] gene.",
     "UPGRADE_DESCRIPTION": ""
   },
+  "evolutionmod:GatherFood": {
+    "NAME": "Gather Food",
+    "DESCRIPTION": "Deal !D! damage. NL Evolve an [#A0A020]Insect[] gene.",
+    "UPGRADE_DESCRIPTION": ""
+  },
+  "evolutionmod:Hivemind": {
+    "NAME": "Hivemind",
+    "DESCRIPTION": "Adapt this with an Insect gene up to MA times. NL Consume your leftmost Gene and Adapt up to !M! Drones in your hand with free copies.",
+    "UPGRADE_DESCRIPTION": ""
+  },
+  "evolutionmod:Incubate": {
+    "NAME": "Incubate",
+    "DESCRIPTION": "Upgrade a Drone in your hand. NL Evolve an Insect gene.",
+    "UPGRADE_DESCRIPTION": ""
+  },
 
   "evolutionmod:AquaticForm": {
     "NAME": "Aquatic form",
-    "DESCRIPTION": "Increase the effect of Merfolk and Lizard Genes by !M!",
+    "DESCRIPTION": "Increase the Block and Poison of Merfolk and Lizard Genes by !M!",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:MagicForm": {
     "NAME": "Magic form",
-    "DESCRIPTION": "Increase the effect of Lavafolk and Lymean Genes by !M!",
+    "DESCRIPTION": "Increase the damage and Block of Lavafolk and Lymean Genes by !M!",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:StrengthForm": {
     "NAME": "Strength form",
     "DESCRIPTION": "Increase the effect of Centaur and Beast Genes by !M!",
     "UPGRADE_DESCRIPTION": ""
-//  },
-//  "evolutionmod:MagicForm": {
-//    "NAME": "Magic form",
-//    "DESCRIPTION": "Increase the effect of Lavafolk and Lizard Genes by !M!",
-//    "UPGRADE_DESCRIPTION": ""
+  },
+
+  "evolutionmod:Drone": {
+    "NAME": "Drone",
+    "DESCRIPTION": "Gain !B! Block. NL Deal !D! damage. NL Exhaust. Ethereal.",
+    "UPGRADE_DESCRIPTION": ""
   }
 //  "evolutionmod:Offbeat": {
 //    "NAME": "Offbeat",

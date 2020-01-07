@@ -28,6 +28,10 @@
   "evolutionmod:LymeanGene": {
     "NAME": "Lymean gene",
     "DESCRIPTION": ["At the start of your turn heal ", " HP and gain ", " Block."]
+  },
+  "evolutionmod:InsectGene": {
+    "NAME": "Insect gene",
+    "DESCRIPTION": ["At the end of your turn shuffle a Drone in your draw pile."]
   }
 //  "evolutionmod:DancePower": {
 //    "NAME": "Dance",

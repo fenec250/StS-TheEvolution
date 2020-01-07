@@ -11,6 +11,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.CentaurGene;
 import evolutionmod.orbs.HarpyGene;
+import evolutionmod.orbs.InsectGene;
 import evolutionmod.orbs.LavafolkGene;
 import evolutionmod.orbs.MerfolkGene;
 import evolutionmod.orbs.PlantGene;
@@ -60,6 +61,7 @@ public class Evolution
 		genesPool.add(new LavafolkGene());
 		genesPool.add(new SuccubusGene());
 //		genesPool.add(new LymeanGene()); REMINDER possible upgrade: channel NEW genes
+		genesPool.add(new InsectGene());
 		if (this.upgraded) {
 			Set<String> exclude =
 			AbstractDungeon.player.orbs.stream()
