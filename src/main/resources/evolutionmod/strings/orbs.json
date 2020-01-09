@@ -32,6 +32,14 @@
   "evolutionmod:InsectGene": {
     "NAME": "Insect gene",
     "DESCRIPTION": ["At the end of your turn shuffle a Drone in your draw pile."]
+  },
+  "evolutionmod:BeastGene": {
+    "NAME": "Beast gene",
+    "DESCRIPTION": ["At the start of your turn gain ", " Dexterity until the end of your turn."]
+  },
+  "evolutionmod:LizardGene": {
+    "NAME": "Succubus gene",
+    "DESCRIPTION": ["At the start of your turn apply ", " poison to a random enemy"]
   }
 //  "evolutionmod:DancePower": {
 //    "NAME": "Dance",

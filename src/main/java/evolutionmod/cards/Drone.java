@@ -28,7 +28,7 @@ public class Drone
     public Drone() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.ATTACK, AbstractCardEnum.EVOLUTION_BLUE,
-                CardRarity.BASIC, CardTarget.ENEMY);
+                CardRarity.SPECIAL, CardTarget.ENEMY);
         this.damage = this.baseDamage = DAMAGE_AMT;
         this.exhaust = true;
         this.isEthereal = true;

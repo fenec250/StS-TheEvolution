@@ -1,22 +1,24 @@
 package evolutionmod.orbs;
 
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.OrbStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
+import com.megacrit.cardcrawl.powers.PoisonPower;
 import evolutionmod.actions.SuccubusGeneAction;
 import evolutionmod.cards.AdaptableEvoCard;
 
-public class SuccubusGene extends AbstractGene {
-	public static final String ID = "evolutionmod:SuccubusGene";
+public class LizardGene extends AbstractGene {
+	public static final String ID = "evolutionmod:LizardGene";
 	public static final OrbStrings orbStrings = CardCrawlGame.languagePack.getOrbString(ID);
 	public static final String NAME = orbStrings.NAME;
 	public static final String[] DESCRIPTION = orbStrings.DESCRIPTION;
 	public static final String IMG_PATH = "evolutionmod/images/cards/strike.png";
 
-	public SuccubusGene() {
+	public LizardGene() {
 		super(ID, NAME, buildDescription(), IMG_PATH);
 	}
 
@@ -28,7 +30,7 @@ public class SuccubusGene extends AbstractGene {
 
 	@Override
 	public AbstractOrb makeCopy() {
-		return new SuccubusGene();
+		return new LizardGene();
 	}
 
 	@Override
@@ -36,12 +38,13 @@ public class SuccubusGene extends AbstractGene {
 	}
 
 	public static void apply(AbstractPlayer p, AbstractMonster m, int times) {
-		AbstractDungeon.actionManager.addToTop(new SuccubusGeneAction(p, m, damagePerGene() * times, times));
+		AbstractDungeon.actionManager.addToTop(new ApplyPowerAction(
+				m, p, new PoisonPower(m, p, poisonPerGene() * times), poisonPerGene() * times));
 	}
 
 	@Override
 	public AdaptableEvoCard.AbstractAdaptation getAdaptation() {
-		return new SuccubusAdaptation(1);
+		return new LizardAdaptation(1);
 	}
 
 	@Override
@@ -50,31 +53,30 @@ public class SuccubusGene extends AbstractGene {
 	}
 
 	private static String buildDescription() {
-		return DESCRIPTION[0] + 1 + DESCRIPTION[1] + damagePerGene() + DESCRIPTION[2];
+		return DESCRIPTION[0] + poisonPerGene() + DESCRIPTION[1];
 	}
-
-	private static int damagePerGene() {
-		int damage = 1;
-		if (AbstractDungeon.player.hasPower("evolution:SuccubusForm")) {
-			damage += AbstractDungeon.player.getPower("evolution:SuccubusForm").amount;
+	private static int poisonPerGene() {
+		int poison = 2;
+		if (AbstractDungeon.player.hasPower("evolution:LizardForm")) {
+			poison += AbstractDungeon.player.getPower("evolution:LizardForm").amount;
 		}
-		return damage;
+		return poison;
 	}
 
-	private static class SuccubusAdaptation extends AdaptableEvoCard.AbstractAdaptation {
+	private static class LizardAdaptation extends AdaptableEvoCard.AbstractAdaptation {
 
-		SuccubusAdaptation(int amount) {
+		LizardAdaptation(int amount) {
 			super(amount);
 		}
 
 		@Override
 		public void apply(AbstractPlayer p, AbstractMonster m) {
-			SuccubusGene.apply(p, m, this.amount);
+			LizardGene.apply(p, m, this.amount);
 		}
 
 		@Override
 		public String text() {
-			return "[#F04040]Succubus[]";
+			return "Lizard";
 		}
 
 		@Override

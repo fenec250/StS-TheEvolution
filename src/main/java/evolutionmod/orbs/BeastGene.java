@@ -7,18 +7,18 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.OrbStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
-import com.megacrit.cardcrawl.powers.LoseStrengthPower;
-import com.megacrit.cardcrawl.powers.StrengthPower;
+import com.megacrit.cardcrawl.powers.DexterityPower;
+import com.megacrit.cardcrawl.powers.LoseDexterityPower;
 import evolutionmod.cards.AdaptableEvoCard;
 
-public class CentaurGene extends AbstractGene {
-	public static final String ID = "evolutionmod:CentaurGene";
+public class BeastGene extends AbstractGene {
+	public static final String ID = "evolutionmod:BeastGene";
 	public static final OrbStrings orbStrings = CardCrawlGame.languagePack.getOrbString(ID);
 	public static final String NAME = orbStrings.NAME;
 	public static final String[] DESCRIPTION = orbStrings.DESCRIPTION;
-	public static final String IMG_PATH = "evolutionmod/images/orbs/CentaurGene.png";
+	public static final String IMG_PATH = "evolutionmod/images/orbs/BeastGene.png";
 
-	public CentaurGene() {
+	public BeastGene() {
 		super(ID, NAME, "first", IMG_PATH);
 	}
 
@@ -30,7 +30,7 @@ public class CentaurGene extends AbstractGene {
 
 	@Override
 	public AbstractOrb makeCopy() {
-		return new CentaurGene();
+		return new BeastGene();
 	}
 
 	@Override
@@ -38,47 +38,48 @@ public class CentaurGene extends AbstractGene {
 	}
 
 	public static void apply(AbstractPlayer p, AbstractMonster m, int times) {
-		int strengthToApply = strengthToApply() * times;
-		AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new StrengthPower(p, strengthToApply), strengthToApply));
-		AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new LoseStrengthPower(p, strengthToApply), strengthToApply));
+		int strengthToApply = dexterityToApply() * times;
+		AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new DexterityPower(p, strengthToApply), strengthToApply));
+		AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new LoseDexterityPower(p, strengthToApply), strengthToApply));
 	}
 
 	@Override
 	public void updateDescription() {
+//		super.updateDescription();
 		this.description = "#yPassive and #yEvoke: " + buildDescription();
 	}
 
 	@Override
 	public AdaptableEvoCard.AbstractAdaptation getAdaptation() {
-		return new CentaurAdaptation(1);
+		return new BeastAdaptation(1);
 	}
 
 	private static String buildDescription() {
-		return DESCRIPTION[0] + strengthToApply() + DESCRIPTION[1];
+		return DESCRIPTION[0] + dexterityToApply() + DESCRIPTION[1];
 	}
 
-	private static int strengthToApply() {
-		int strengthToApply = 1;
-		if (AbstractDungeon.player.hasPower("evolution:CentaurForm")) {
-			strengthToApply += AbstractDungeon.player.getPower("evolution:CentaurForm").amount;
+	private static int dexterityToApply() {
+		int dexterityToApply = 1;
+		if (AbstractDungeon.player.hasPower("evolution:BeastForm")) {
+			dexterityToApply += AbstractDungeon.player.getPower("evolution:BeastForm").amount;
 		}
-		return strengthToApply;
+		return dexterityToApply;
 	}
 
-	private static class CentaurAdaptation extends AdaptableEvoCard.AbstractAdaptation {
+	private static class BeastAdaptation extends AdaptableEvoCard.AbstractAdaptation {
 
-		CentaurAdaptation(int amount) {
+		BeastAdaptation(int amount) {
 			super(amount);
 		}
 
 		@Override
 		public void apply(AbstractPlayer p, AbstractMonster m) {
-			CentaurGene.apply(p, m, this.amount);
+			BeastGene.apply(p, m, this.amount);
 		}
 
 		@Override
 		public String text() {
-			return "[#FF8040]Centaur[]";
+			return "Beast";
 		}
 
 		@Override

@@ -25,8 +25,8 @@ public class Constrict
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = "evolutionmod/images/cards/PlantForm.png";
     private static final int COST = 2;
-    private static final int BLOCK_AMT = 8;
-    private static final int UPGRADE_BLOCK_AMT = 4;
+    private static final int BLOCK_AMT = 10;
+    private static final int UPGRADE_BLOCK_AMT = 2;
 
     public Constrict() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,

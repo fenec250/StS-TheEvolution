@@ -13,6 +13,8 @@ import evolutionmod.orbs.AbstractGene;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 
 public abstract class AdaptableEvoCard extends CustomCard {
@@ -57,7 +59,12 @@ public abstract class AdaptableEvoCard extends CustomCard {
 	@Override
 	public AbstractCard makeCopy() {
 		AdaptableEvoCard card = (AdaptableEvoCard) super.makeCopy();
-		card.adaptationMap.putAll(this.adaptationMap);
+		card.adaptationMap = this.adaptationMap.values().stream()
+				.map(AbstractAdaptation::makeCopy)
+				.collect(Collectors.toMap(
+						AbstractAdaptation::getGeneId,
+						Function.identity(),
+						(a, b) -> {a.amount += b.amount; return a;}));
 		card.adaptationMaximum = this.adaptationMaximum;
 		card.adaptationUpgraded = this.adaptationUpgraded;
 		return card;
@@ -105,6 +112,16 @@ public abstract class AdaptableEvoCard extends CustomCard {
 	    public abstract void apply(AbstractPlayer player, AbstractMonster monster);
 	    public abstract String text();
 	    public abstract String getGeneId();
+
+		public AbstractAdaptation makeCopy() {
+			try {
+				AbstractAdaptation adaptation = this.getClass().newInstance();
+				adaptation.amount = this.amount;
+				return adaptation;
+			} catch (IllegalAccessException | InstantiationException var2) {
+				throw new RuntimeException("EvolutionMod failed to auto-generate makeCopy for adaptation: " + this.getGeneId());
+			}
+		}
     }
 
     protected void upgradeAdaptationMaximum(int change) {

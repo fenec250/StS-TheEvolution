@@ -24,6 +24,7 @@ public class TakeOff
     private static final int UPGRADE_BLOCK_AMT = 3;
     private static final int MAX_ADAPT_AMT = 2;
     private static final int UPGRADE_MAX_ADAPT_AMT = 1;
+    private static final int DRAW_AMT = 1;
 
     public TakeOff() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -31,12 +32,13 @@ public class TakeOff
                 CardRarity.UNCOMMON, CardTarget.SELF);
         this.block = this.baseBlock = BLOCK_AMT;
         this.adaptationMaximum = MAX_ADAPT_AMT;
+        this.magicNumber = this.baseMagicNumber = DRAW_AMT;
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, this.block));
-        AbstractDungeon.actionManager.addToBottom(new DrawCardAction(p, 1));
+        AbstractDungeon.actionManager.addToBottom(new DrawCardAction(p, this.magicNumber));
         p.orbs.stream()
                 .filter(o -> o instanceof HarpyGene)
                 .findAny()

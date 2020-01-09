@@ -26,9 +26,9 @@ public class Brambles
     public static final String IMG_PATH = "evolutionmod/images/cards/PlantForm.png";
     private static final int COST = 1;
     private static final int BLOCK_AMT = 7;
-    private static final int UPGRADE_BLOCK_AMT = 3;
+    private static final int UPGRADE_BLOCK_AMT = 2;
     private static final int THORN_AMT = 2;
-    private static final int UPGRADE_THORN_AMT = 2;
+    private static final int UPGRADE_THORN_AMT = 1;
 
     public Brambles() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,

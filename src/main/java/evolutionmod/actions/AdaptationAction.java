@@ -16,13 +16,16 @@ import java.util.*;
 
 public class AdaptationAction extends AbstractGameAction {
 
+
 	private AbstractPlayer player;
-	private int genesNumber;
+	private int geneAmt;
+	private boolean reduceCost;
 	private boolean started;
 
-	public AdaptationAction(AbstractPlayer player, int genesNumber) {
+	public AdaptationAction(AbstractPlayer player, int geneAmt, boolean reduceCost) {
 		this.player = player;
-		this.genesNumber = genesNumber;
+		this.geneAmt = geneAmt;
+		this.reduceCost = reduceCost;
 		this.duration = this.startDuration = Settings.ACTION_DUR_FAST;
 		this.actionType = ActionType.DAMAGE;
 		this.started = false;
@@ -50,7 +53,7 @@ public class AdaptationAction extends AbstractGameAction {
 		} else {
 			if (AbstractDungeon.gridSelectScreen.selectedCards.size() != 0) {
 				AdaptableEvoCard card = (AdaptableEvoCard) AbstractDungeon.gridSelectScreen.selectedCards.get(0);
-				int amountToAdd = genesNumber;
+				int amountToAdd = geneAmt;
 				ArrayList<AbstractOrb> orbs = new ArrayList(player.orbs);
 				Iterator<AbstractOrb> iterator = orbs.iterator();
 				while (amountToAdd > 0 && iterator.hasNext()) {
@@ -61,7 +64,9 @@ public class AdaptationAction extends AbstractGameAction {
 					}
 				}
 
-				card.modifyCostForTurn(-1);
+				if (reduceCost) {
+					card.modifyCostForTurn(-1);
+				}
 				AbstractDungeon.gridSelectScreen.selectedCards.clear();
 				this.isDone = true;
 				this.tickDuration();

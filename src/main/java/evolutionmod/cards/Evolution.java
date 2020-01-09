@@ -13,13 +13,13 @@ import evolutionmod.orbs.CentaurGene;
 import evolutionmod.orbs.HarpyGene;
 import evolutionmod.orbs.InsectGene;
 import evolutionmod.orbs.LavafolkGene;
+import evolutionmod.orbs.LymeanGene;
 import evolutionmod.orbs.MerfolkGene;
 import evolutionmod.orbs.PlantGene;
 import evolutionmod.orbs.SuccubusGene;
 import evolutionmod.patches.AbstractCardEnum;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -60,7 +60,7 @@ public class Evolution
 		genesPool.add(new HarpyGene());
 		genesPool.add(new LavafolkGene());
 		genesPool.add(new SuccubusGene());
-//		genesPool.add(new LymeanGene()); REMINDER possible upgrade: channel NEW genes
+		genesPool.add(new LymeanGene());
 		genesPool.add(new InsectGene());
 		if (this.upgraded) {
 			Set<String> exclude =

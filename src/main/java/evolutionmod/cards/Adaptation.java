@@ -20,8 +20,7 @@ public class Adaptation
 	public static final String[] EXTENDED_DESCRIPTION = cardStrings.EXTENDED_DESCRIPTION;
 	public static final String IMG_PATH = "evolutionmod/images/cards/strike.png";
 	private static final int COST = 1;
-	private static final int ADAPT_AMT = 1;
-	private static final int UPGRADE_ADAPT_AMT = 1;
+	private static final int ADAPT_AMT = 2;
 
 	public Adaptation() {
 		super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -32,7 +31,7 @@ public class Adaptation
 
 	@Override
 	public void use(AbstractPlayer p, AbstractMonster m) {
-		AbstractDungeon.actionManager.addToBottom(new AdaptationAction(p, this.magicNumber));
+		AbstractDungeon.actionManager.addToBottom(new AdaptationAction(p, this.magicNumber, this.upgraded));
 	}
 
 	@Override
@@ -44,7 +43,6 @@ public class Adaptation
 	public void upgrade() {
 		if (!this.upgraded) {
 			this.upgradeName();
-			this.upgradeMagicNumber(UPGRADE_ADAPT_AMT);
 		}
 	}
 }
