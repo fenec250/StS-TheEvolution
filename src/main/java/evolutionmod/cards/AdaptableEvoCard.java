@@ -112,16 +112,7 @@ public abstract class AdaptableEvoCard extends CustomCard {
 	    public abstract void apply(AbstractPlayer player, AbstractMonster monster);
 	    public abstract String text();
 	    public abstract String getGeneId();
-
-		public AbstractAdaptation makeCopy() {
-			try {
-				AbstractAdaptation adaptation = this.getClass().newInstance();
-				adaptation.amount = this.amount;
-				return adaptation;
-			} catch (IllegalAccessException | InstantiationException var2) {
-				throw new RuntimeException("EvolutionMod failed to auto-generate makeCopy for adaptation: " + this.getGeneId());
-			}
-		}
+		public abstract AbstractAdaptation makeCopy();
     }
 
     protected void upgradeAdaptationMaximum(int change) {

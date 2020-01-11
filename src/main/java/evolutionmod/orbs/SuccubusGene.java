@@ -81,5 +81,10 @@ public class SuccubusGene extends AbstractGene {
 		public String getGeneId() {
 			return ID;
 		}
+
+		@Override
+		public AdaptableEvoCard.AbstractAdaptation makeCopy() {
+			return new SuccubusAdaptation(this.amount);
+		}
 	}
 }

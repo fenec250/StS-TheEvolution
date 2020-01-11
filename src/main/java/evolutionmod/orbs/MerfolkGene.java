@@ -91,5 +91,10 @@ public class MerfolkGene extends AbstractGene {
 		public String getGeneId() {
 			return ID;
 		}
+
+		@Override
+		public AdaptableEvoCard.AbstractAdaptation makeCopy() {
+			return new MerfolkAdaptation(this.amount);
+		}
 	}
 }

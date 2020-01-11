@@ -1,7 +1,6 @@
 package evolutionmod.actions;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -9,10 +8,7 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.ThornsPower;
-import com.megacrit.cardcrawl.powers.WeakPower;
 import evolutionmod.powers.BramblesPower;
-import evolutionmod.powers.LoseThornsPower;
-import evolutionmod.powers.MarkPower;
 
 public class ThornDamageAction extends AbstractGameAction {
 
@@ -23,7 +19,7 @@ public class ThornDamageAction extends AbstractGameAction {
 		this.target = monster;
 		this.power = power;
 		this.duration = this.startDuration = Settings.ACTION_DUR_FAST;
-		this.actionType = ActionType.DEBUFF;
+		this.actionType = ActionType.DAMAGE;
 	}
 
 	public void update() {

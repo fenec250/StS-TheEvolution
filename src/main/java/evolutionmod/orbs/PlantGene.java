@@ -97,5 +97,10 @@ public class PlantGene extends AbstractGene {
 		public String getGeneId() {
 			return ID;
 		}
+
+		@Override
+		public AdaptableEvoCard.AbstractAdaptation makeCopy() {
+			return new PlantAdaptation(this.amount);
+		}
 	}
 }

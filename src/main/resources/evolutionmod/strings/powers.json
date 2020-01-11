@@ -52,5 +52,9 @@
   "evolutionmod:EruptionPower": {
     "NAME": "Eruption",
     "DESCRIPTIONS": ["Your Lavafolk genes and adaptations deal double damage. Reduces by 1 at the beggining of your turn."]
+  },
+  "evolutionmod:MatureEgg": {
+    "NAME": "Mature eggs",
+    "DESCRIPTIONS": ["Your next ", " Drones will be upgraded."]
   }
 }

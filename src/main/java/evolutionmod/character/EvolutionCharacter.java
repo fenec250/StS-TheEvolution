@@ -18,10 +18,8 @@ import com.megacrit.cardcrawl.localization.CharacterStrings;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
 import evolutionmod.cards.Adaptation;
 import evolutionmod.cards.DefendEvo;
-import evolutionmod.cards.Dive;
 import evolutionmod.cards.Evolution;
 import evolutionmod.cards.StrikeEvo;
-import evolutionmod.cards.WaterBolt;
 import evolutionmod.patches.AbstractCardEnum;
 import evolutionmod.patches.EvolutionEnum;
 
@@ -69,7 +67,7 @@ public class EvolutionCharacter extends CustomPlayer {
 
     @Override
     public String getSpireHeartText() {
-        return "NL You ready your appendages..."; //UPDATE BODY TEXT :(
+        return " NL You ready your appendages..."; //UPDATE BODY TEXT :(
     }
 
     @Override

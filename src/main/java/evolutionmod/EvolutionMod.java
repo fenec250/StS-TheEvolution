@@ -87,6 +87,7 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
         BaseMod.addCard(new FlameStrike());
         BaseMod.addCard(new GatherFood());
         BaseMod.addCard(new DrainMana());
+        BaseMod.addCard(new ClawSlash());
         //8 skills
         BaseMod.addCard(new Charm());
         BaseMod.addCard(new Brambles());
@@ -102,6 +103,7 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
 //        BaseMod.addCard(new ChannelMagic());
         BaseMod.addCard(new Purify());
         BaseMod.addCard(new Hivemind());
+        BaseMod.addCard(new HeightenedSenses());
         //6 powers
         BaseMod.addCard(new AquaticForm());
         BaseMod.addCard(new MagicForm());
@@ -127,13 +129,19 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
 
     @Override
     public void receiveEditKeywords() {
-        String[] keywordRhythm = {"adapt"};
-        BaseMod.addKeyword(keywordRhythm, "Add the effect of a channeled gene to a card until the end of the combat.");
+        String[] keywordAdapt = {"adapt"};
+        BaseMod.addKeyword(keywordAdapt, "Consume a channeled Gene. Add its effect to the card until the end of the combat.");
+        String[] keywordBrambles = {"brambles"};
+        BaseMod.addKeyword("Brambles", keywordBrambles, "Consume a channeled Gene. Add its effect to the card until the end of the combat.");
+        String[] keywordDrone = {"drone", "drones"};
+        BaseMod.addKeyword("Drone", keywordDrone, "Drones are 0 cost attacks which Exhaust.");
+        String[] keywordRage = {"rage"};
+        BaseMod.addKeyword("Rage", keywordRage, "Whenever you play an Attack this turn, gain this amount of Block.");
 
-        String[] keywordCentaur = {"Centaur"};
-        BaseMod.addKeyword("[#B06050]Centaur gene[]", keywordCentaur, "At the start of your turn gain 1 Strength until the end of your turn.");
-        String[] keywordPlant = {"Plant"};
-        BaseMod.addKeyword("[#60B040]Plant gene[]", keywordPlant, "At the start of your turn gain 1 Brambles and 2 Block.");
+        String[] keywordCentaur = {"centaur"};
+        BaseMod.addKeyword("[#B06050]Centaur gene[]", keywordCentaur, "An orb which gives 1 Strength at the start of your turn until the end of your turn.");
+        String[] keywordPlant = {"plant"};
+        BaseMod.addKeyword("[#60B040]Plant gene[]", keywordPlant, "An orb which gives 1 Brambles and 2 Block at the start of your turn.");
 //        String[] keywordTempo = {"mist"};
 //        BaseMod.addKeyword(keywordTempo, "At 10 Mist you gain 1 Intangible");
 //        String[] keywordStep = {"step", "steps"};

@@ -89,5 +89,10 @@ public class LavafolkGene extends AbstractGene {
 		public String getGeneId() {
 			return ID;
 		}
+
+		@Override
+		public AdaptableEvoCard.AbstractAdaptation makeCopy() {
+			return new LavafolkAdaptation(this.amount);
+		}
 	}
 }

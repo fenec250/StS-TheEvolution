@@ -37,6 +37,10 @@
     "NAME": "Beast gene",
     "DESCRIPTION": ["At the start of your turn gain ", " Dexterity until the end of your turn."]
   },
+  "evolutionmod:BeastGeneV2": {
+    "NAME": "Beast gene",
+    "DESCRIPTION": ["At the start of your turn gain ", " Rage until the end of your turn."]
+  },
   "evolutionmod:LizardGene": {
     "NAME": "Succubus gene",
     "DESCRIPTION": ["At the start of your turn apply ", " poison to a random enemy"]

@@ -11,8 +11,8 @@
   },
   "evolutionmod:Adaptation": {
     "NAME": "Adaptation",
-    "DESCRIPTION": "Adapt a Strike or Defend with your two rightmost  Genes, ignoring duplicates.",
-    "UPGRADE_DESCRIPTION": "Adapt a Strike or Defend with your two rightmost Genes, ignoring duplicates. NL Reduce its cost by 1 this turn."
+    "DESCRIPTION": "Adapt a basic Strike or Defend with your two rightmost  Genes, ignoring duplicates.",
+    "UPGRADE_DESCRIPTION": "Adapt a basic Strike or Defend with your two rightmost Genes, ignoring duplicates. NL Reduce its cost by 1 this turn."
   },
   "evolutionmod:Evolution": {
     "NAME": "Evolution",
@@ -42,7 +42,7 @@
   },
   "evolutionmod:VineLash": {
     "NAME": "Vine lash",
-    "DESCRIPTION": "Gain !M! Brambles NL Adapt this with a [#60B040]Plant[] gene up to !evolutionmod:MA! times NL Deal damage equal to twice your Thorns.",
+    "DESCRIPTION": "Gain !M! Brambles. Adapt this with a [#60B040]Plant[] gene up to !evolutionmod:MA! times. Deal damage equal to your your Thorns and Brambles.",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:Constrict": {
@@ -117,18 +117,18 @@
   },
   "evolutionmod:DrainMana": {
     "NAME": "Drain Mana",
-    "DESCRIPTION": "Deal !D! damage. NL Draw !M! cards NL Evolve a [#5090FF]Lymean[] gene.",
+    "DESCRIPTION": "Deal !D! damage. NL Draw !M! cards NL Evolve a [#50FFFF]Lymean[] gene.",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:Purify": {
     "NAME": "Purify",
-    "DESCRIPTION": "Exhaust 1 to !M! cards. NL Adapt this with a [#50FFFF]Lymean[] gene.",
+    "DESCRIPTION": "Exhaust 1 to !M! cards. NL Adapt this with a [#50FFFF]Lymean[] gene up to !evolutionmod:MA! times.",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:Aegis": {
     "NAME": "Aegis",
-    "DESCRIPTION": "Give Intangible to everyone. NL When you play an attack, Exhaust Aegis. NL Evolve a [#5090FF]Lymean[] gene.",
-    "UPGRADE_DESCRIPTION": "Give Intangible to everyone. NL When you play an attack, discard Aegis. NL Evolve a [#5090FF]Lymean[] gene."
+    "DESCRIPTION": "Give Intangible to everyone. NL When you play an attack, Exhaust Aegis. NL Evolve a [#50FFFF]Lymean[] gene.",
+    "UPGRADE_DESCRIPTION": "Give Intangible to everyone. NL When you play an attack, discard Aegis. NL Evolve a [#50FFFF]Lymean[] gene."
   },
   "evolutionmod:GatherFood": {
     "NAME": "Gather Food",
@@ -137,14 +137,29 @@
   },
   "evolutionmod:Hivemind": {
     "NAME": "Hivemind",
-    "DESCRIPTION": "Adapt this with an Insect gene up to MA times. NL Consume your leftmost Gene and Adapt up to !M! Drones in your hand with free copies.",
-    "UPGRADE_DESCRIPTION": ""
+    "DESCRIPTION": "Add !M! Drone to your hand. NL Adapt this with an Insect gene up to !evolutionmod:MA! times.",
+    "UPGRADE_DESCRIPTION": "Add !M! Drones to your hand. NL Adapt this with an Insect gene up to !evolutionmod:MA! times."
   },
   "evolutionmod:Incubate": {
     "NAME": "Incubate",
-    "DESCRIPTION": "Upgrade a Drone in your hand. NL Evolve an Insect gene.",
+    "DESCRIPTION": "Your next !M! Drones will be upgraded. NL Evolve an Insect gene.",
     "UPGRADE_DESCRIPTION": ""
   },
+  "evolutionmod:ClawSlash": {
+    "NAME": "Claw slash",
+    "DESCRIPTION": "Deal !D! damage twice. NL Evolve a [#B06060]Beast[] gene.",
+    "UPGRADE_DESCRIPTION": ""
+  },
+  "evolutionmod:HeightenedSenses": {
+    "NAME": "Heightened senses",
+    "DESCRIPTION": "Draw !M! cards. NL Discard all cards drawn this way that. NL  Adapt this with a Beast gene up to !evolutionmod:MA! times.",
+    "UPGRADE_DESCRIPTION": ""
+  },
+//  "evolutionmod:Rush": {
+//    "NAME": "Rush",
+//    "DESCRIPTION": "Deal !D! damage. NL Draw a random Strike from your deck and play it on the same target.",
+//    "UPGRADE_DESCRIPTION": ""
+//  },
 
   "evolutionmod:AquaticForm": {
     "NAME": "Aquatic form",

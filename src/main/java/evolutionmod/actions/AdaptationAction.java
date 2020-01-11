@@ -27,7 +27,7 @@ public class AdaptationAction extends AbstractGameAction {
 		this.geneAmt = geneAmt;
 		this.reduceCost = reduceCost;
 		this.duration = this.startDuration = Settings.ACTION_DUR_FAST;
-		this.actionType = ActionType.DAMAGE;
+		this.actionType = ActionType.SPECIAL;
 		this.started = false;
 	}
 

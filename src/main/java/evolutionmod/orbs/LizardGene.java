@@ -83,5 +83,10 @@ public class LizardGene extends AbstractGene {
 		public String getGeneId() {
 			return ID;
 		}
+
+		@Override
+		public AdaptableEvoCard.AbstractAdaptation makeCopy() {
+			return new LizardAdaptation(this.amount);
+		}
 	}
 }

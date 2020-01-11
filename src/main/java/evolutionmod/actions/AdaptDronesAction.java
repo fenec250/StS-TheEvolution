@@ -17,7 +17,7 @@ public class AdaptDronesAction extends AbstractGameAction {
 		this.player = player;
 		this.droneNumber = droneNumber;
 		this.duration = this.startDuration = Settings.ACTION_DUR_FAST;
-		this.actionType = ActionType.DAMAGE;
+		this.actionType = ActionType.SPECIAL;
 	}
 
 	public void update() {

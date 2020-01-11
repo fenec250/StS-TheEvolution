@@ -33,7 +33,7 @@ public class IncubateAction extends AbstractGameAction {
 		this.player = player;
 		this.reduceCost = shouldReduceCost;
 		this.duration = this.startDuration = Settings.ACTION_DUR_FAST;
-		this.actionType = ActionType.DAMAGE;
+		this.actionType = ActionType.SPECIAL;
 	}
 
 	public void update() {

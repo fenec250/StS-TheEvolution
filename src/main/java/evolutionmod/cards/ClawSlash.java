@@ -1,60 +1,52 @@
 package evolutionmod.cards;
 
+import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
-import com.megacrit.cardcrawl.actions.common.GainBlockAction;
-import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
+import com.megacrit.cardcrawl.actions.defect.ChannelAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import evolutionmod.orbs.BeastGeneV2;
 import evolutionmod.patches.AbstractCardEnum;
-import evolutionmod.powers.MatureEggPower;
 
-public class Drone
-        extends AdaptableEvoCard {
-    public static final String ID = "evolutionmod:Drone";
+public class ClawSlash
+        extends CustomCard {
+    public static final String ID = "evolutionmod:ClawSlash";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-    public static final String IMG_PATH = "evolutionmod/images/cards/strike.png";
-    private static final int COST = 0;
-    private static final int DAMAGE_AMT = 3;
-    private static final int UPGRADE_DAMAGE_AMT = 5;
-    private static final int UPGRADE_BLOCK_AMT = 6;
+    public static final String IMG_PATH = "evolutionmod/images/cards/BeastForm.png";
+    private static final int COST = 1;
+    private static final int DAMAGE_AMT = 4;
+    private static final int UPGRADE_DAMAGE_AMT = 2;
 
-    public Drone() {
+    public ClawSlash() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.ATTACK, AbstractCardEnum.EVOLUTION_BLUE,
-                CardRarity.SPECIAL, CardTarget.ENEMY);
+                CardRarity.COMMON, CardTarget.ENEMY);
         this.damage = this.baseDamage = DAMAGE_AMT;
-        this.exhaust = true;
-        this.isEthereal = true;
-        AbstractPlayer player = AbstractDungeon.player;
-        if (player != null && player.hasPower(MatureEggPower.POWER_ID)) {
-            this.upgrade();
-            AbstractDungeon.actionManager.addToTop(new ReducePowerAction(player, player, MatureEggPower.POWER_ID, 1));
-        }
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        if (upgraded) {
-            AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, this.block));
-        }
         AbstractDungeon.actionManager.addToBottom(new DamageAction(
                 m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
                 AbstractGameAction.AttackEffect.BLUNT_HEAVY));
-        this.useAdaptations(p, m);
+        AbstractDungeon.actionManager.addToBottom(new DamageAction(
+                m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
+                AbstractGameAction.AttackEffect.BLUNT_HEAVY));
+        AbstractDungeon.actionManager.addToBottom(new ChannelAction(new BeastGeneV2()));
     }
 
     @Override
-    public void applyPowers() {
-        super.applyPowers();
-        // if player has InsectForm, add its amount to damage.
+    public AbstractCard makeCopy() {
+        return new ClawSlash();
     }
 
     @Override
@@ -62,9 +54,6 @@ public class Drone
         if (!this.upgraded) {
             this.upgradeName();
             this.upgradeDamage(UPGRADE_DAMAGE_AMT);
-            this.block = this.baseBlock = UPGRADE_BLOCK_AMT;
-            this.rawDescription = UPGRADE_DESCRIPTION;
-            this.initializeDescription();
         }
     }
 }
