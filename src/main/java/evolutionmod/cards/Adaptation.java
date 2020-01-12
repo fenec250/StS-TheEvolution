@@ -47,4 +47,10 @@ public class Adaptation
 			initializeDescription();
 		}
 	}
+
+	@Override
+	public void triggerOnEndOfTurnForPlayingCard() {
+		super.triggerOnEndOfTurnForPlayingCard();
+		this.retain = true;
+	}
 }

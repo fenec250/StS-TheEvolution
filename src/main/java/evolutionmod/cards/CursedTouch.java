@@ -2,7 +2,9 @@ package evolutionmod.cards;
 
 import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
+import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -11,27 +13,35 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import evolutionmod.orbs.HarpyGene;
+import com.megacrit.cardcrawl.powers.WeakPower;
+import evolutionmod.orbs.AbstractGene;
+import evolutionmod.orbs.GhostGene;
+import evolutionmod.orbs.LymeanGene;
 import evolutionmod.patches.AbstractCardEnum;
 
-public class TalonStrike
-        extends CustomCard {
-    public static final String ID = "evolutionmod:TalonStrike";
+public class CursedTouch
+        extends AdaptableEvoCard {
+    public static final String ID = "evolutionmod:CursedTouch";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = "evolutionmod/images/cards/strike.png";
     private static final int COST = 1;
-    private static final int DAMAGE_AMT = 7;
-    private static final int UPGRADE_DAMAGE_AMT = 3;
+    private static final int DAMAGE_AMT = 4;
+    private static final int UPGRADE_DAMAGE_AMT = 2;
+    private static final int WEAK_AMT = 2;
+    private static final int UPGRADE_WEAK_AMT = 1;
+    private static final int MAX_ADAPT_AMT = 2;
+    private static final int UPGRADE_MAX_ADAPT_AMT = 1;
 
-    public TalonStrike() {
+    public CursedTouch() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.ATTACK, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.COMMON, CardTarget.ENEMY);
         this.damage = this.baseDamage = DAMAGE_AMT;
-        this.tags.add(CardTags.STRIKE);
+        this.magicNumber = this.baseMagicNumber = WEAK_AMT;
+        this.adaptationMaximum = MAX_ADAPT_AMT;
     }
 
     @Override
@@ -39,12 +49,31 @@ public class TalonStrike
         AbstractDungeon.actionManager.addToBottom(new DamageAction(
                 m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
                 AbstractGameAction.AttackEffect.BLUNT_HEAVY));
-        AbstractDungeon.actionManager.addToBottom(new ChannelAction(new HarpyGene()));
+        AbstractDungeon.actionManager.addToTop(
+                new ApplyPowerAction(m, p, new WeakPower(m, this.magicNumber, false), this.magicNumber));
+//        AbstractDungeon.actionManager.addToBottom(new ChannelAction(new GhostGene()));
+        p.orbs.stream()
+                .filter(o -> o instanceof GhostGene)
+                .findAny()
+                .ifPresent(o -> this.addAdaptation((AbstractGene) o));
+        this.useAdaptations(p, m);
+    }
+
+    @Override
+    public int addAdaptation(AbstractGene gene) {
+        if (!gene.ID.equals(GhostGene.ID)) {
+            return 0;
+        }
+        if (this.adaptationMap.containsKey(GhostGene.ID)
+                && this.adaptationMaximum <= this.adaptationMap.get(GhostGene.ID).amount) {
+            return 0;
+        }
+        return super.addAdaptation(gene);
     }
 
     @Override
     public AbstractCard makeCopy() {
-        return new TalonStrike();
+        return new CursedTouch();
     }
 
     @Override
@@ -52,6 +81,8 @@ public class TalonStrike
         if (!this.upgraded) {
             this.upgradeName();
             this.upgradeDamage(UPGRADE_DAMAGE_AMT);
+            this.upgradeMagicNumber(UPGRADE_WEAK_AMT);
+            this.upgradeAdaptationMaximum(UPGRADE_MAX_ADAPT_AMT);
         }
     }
 }

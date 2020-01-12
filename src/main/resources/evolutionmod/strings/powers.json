@@ -1,19 +1,19 @@
 {
-  "evolutionmod:CentaurFormPower": {
-    "NAME": "Centaur form",
-    "DESCRIPTIONS": ["The first time you gain Strength each turn gain ", " Strength until the end of the turn."]
-  },
-  "evolutionmod:PlantFormPower": {
-    "NAME": "Plant form",
-    "DESCRIPTIONS": ["Increase the Poison applied by Plant Genes and adaptation by 2 times this amount"]
-  },
+//  "evolutionmod:CentaurFormPower": {
+//    "NAME": "Centaur form",
+//    "DESCRIPTIONS": ["The first time you gain Strength each turn gain ", " Strength until the end of the turn."]
+//  },
+//  "evolutionmod:PlantFormPower": {
+//    "NAME": "Plant form",
+//    "DESCRIPTIONS": ["Increase the Block gained by Plant Genes and adaptation by "]
+//  },
   "evolutionmod:MerfolkFormPower": {
     "NAME": "Merfolk form",
     "DESCRIPTIONS": ["Increase the Block gained by Merfolk Genes and adaptation by "]
-  },
-  "evolutionmod:HarpyFormPower": {
-    "NAME": "Harpy form",
-    "DESCRIPTIONS": ["Harpy genes and adaptations also give this amount of Swiftness"]
+//  },
+//  "evolutionmod:HarpyFormPower": {
+//    "NAME": "Harpy form",
+//    "DESCRIPTIONS": ["Harpy genes and adaptations also give this amount of Swiftness"]
   },
   "evolutionmod:LavafolkFormPower": {
     "NAME": "Lavafolk form",
@@ -26,6 +26,10 @@
   "evolutionmod:LymeanFormPower": {
     "NAME": "Lymean form",
     "DESCRIPTIONS": ["Increase the Block gained by Lymean Genes and adaptations by "]
+  },
+  "evolutionmod:LizardFormPower": {
+    "NAME": "Lizard form",
+    "DESCRIPTIONS": ["Increase the Poison applied by Lizard Genes and adaptations by "]
   },
 
 
@@ -51,10 +55,14 @@
   },
   "evolutionmod:EruptionPower": {
     "NAME": "Eruption",
-    "DESCRIPTIONS": ["Your Lavafolk genes and adaptations deal double damage. Reduces by 1 at the beggining of your turn."]
+    "DESCRIPTIONS": ["Your Lavafolk genes and adaptations deal double damage. Reduces by 1 at the beginning of your turn."]
   },
-  "evolutionmod:MatureEgg": {
+  "evolutionmod:MatureEggPower": {
     "NAME": "Mature eggs",
     "DESCRIPTIONS": ["Your next ", " Drones will be upgraded."]
+  },
+  "evolutionmod:PoisonCoatedPower": {
+    "NAME": "Poison Coated",
+    "DESCRIPTIONS": ["Whenever an Attack deals unblocked damage this turn, apply ", " Poison."]
   }
 }

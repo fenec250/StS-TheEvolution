@@ -2,26 +2,23 @@ package evolutionmod.actions;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.LockOnPower;
-import com.megacrit.cardcrawl.powers.ThornsPower;
 import com.megacrit.cardcrawl.powers.WeakPower;
-import evolutionmod.powers.BramblesPower;
-import evolutionmod.powers.LoseThornsPower;
 import evolutionmod.powers.MarkPower;
 
-public class PlantGeneAction extends AbstractGameAction {
+public class GhostGeneAction extends AbstractGameAction {
 
-	private int thorn;
+	private int block;
 	private int weak;
 
-	public PlantGeneAction(AbstractPlayer player, AbstractMonster monster, int thorn, int weak) {
+	public GhostGeneAction(AbstractPlayer player, AbstractMonster monster, int block, int weak) {
 		this.source = player;
 		this.target = monster;
-		this.thorn = thorn;
+		this.block = block;
 		this.weak = weak;
 		this.duration = this.startDuration = Settings.ACTION_DUR_FAST;
 		this.actionType = ActionType.DEBUFF;
@@ -32,7 +29,7 @@ public class PlantGeneAction extends AbstractGameAction {
 			this.isDone = true;
 			return;
 		}
-		if (this.target == null || this.target.isDeadOrEscaped()) {
+		if (this.target == null) {
 			this.target = AbstractDungeon.getMonsters().monsters.stream()
 					.filter(m -> m.hasPower(MarkPower.POWER_ID) && !m.isDeadOrEscaped())
 					.findAny()
@@ -40,8 +37,7 @@ public class PlantGeneAction extends AbstractGameAction {
 		}
 		AbstractDungeon.actionManager.addToTop(
 				new ApplyPowerAction(this.target, this.source, new WeakPower(this.target, this.weak, false), this.weak));
-		AbstractDungeon.actionManager.addToTop(
-				new ApplyPowerAction(this.source, this.source, new BramblesPower(this.source, this.thorn), this.thorn));
+		AbstractDungeon.actionManager.addToBottom(new GainBlockAction(this.source, this.source, this.block));
 
 		this.isDone = true;
 

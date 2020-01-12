@@ -9,6 +9,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import evolutionmod.patches.AbstractCardEnum;
+import evolutionmod.powers.LizardFormPower;
 import evolutionmod.powers.MerfolkFormPower;
 
 public class AquaticForm
@@ -34,9 +35,8 @@ public class AquaticForm
     public void use(AbstractPlayer p, AbstractMonster m) {
         AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
                 new MerfolkFormPower(p, this.magicNumber)));
-        // TODO: Lizard form
-//        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
-//                new MerfolkFormPower(p, this.magicNumber)));
+        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
+                new LizardFormPower(p, this.magicNumber)));
     }
 
     @Override

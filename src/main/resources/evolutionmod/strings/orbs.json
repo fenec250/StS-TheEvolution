@@ -42,8 +42,12 @@
     "DESCRIPTION": ["At the start of your turn gain ", " Rage until the end of your turn."]
   },
   "evolutionmod:LizardGene": {
-    "NAME": "Succubus gene",
-    "DESCRIPTION": ["At the start of your turn apply ", " poison to a random enemy"]
+    "NAME": "Lizard gene",
+    "DESCRIPTION": ["At the start of your turn apply ", " Poison to a random enemy"]
+  },
+  "evolutionmod:GhostGene": {
+    "NAME": "Ghost gene",
+    "DESCRIPTION": ["At the start of your turn apply ", " Weak to a random enemy and gain ", " Block."]
   }
 //  "evolutionmod:DancePower": {
 //    "NAME": "Dance",

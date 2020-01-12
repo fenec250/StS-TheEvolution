@@ -9,6 +9,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import evolutionmod.orbs.AbstractGene;
+import evolutionmod.orbs.BeastGeneV2;
 import evolutionmod.orbs.CentaurGene;
 import evolutionmod.orbs.HarpyGene;
 import evolutionmod.orbs.InsectGene;
@@ -33,7 +34,6 @@ public class Evolution
 	public static final String IMG_PATH = "evolutionmod/images/cards/strike.png";
 	private static final int COST = 0;
 	private static final int GENE_AMT = 2;
-//	private static final int UPGRADE_GENE_AMT = 1;
 
 	private ArrayList<AbstractGene> genes;
 
@@ -50,9 +50,21 @@ public class Evolution
 	}
 
 	@Override
+	public void triggerOnEndOfTurnForPlayingCard() {
+		super.triggerOnEndOfTurnForPlayingCard();
+		if (this.upgraded) {
+			this.retain = true;
+			rerollGenes();
+		}
+	}
+
+	@Override
 	public void triggerWhenDrawn() {
 		super.triggerWhenDrawn();
-		this.genes = new ArrayList<AbstractGene>();
+		rerollGenes();
+	}
+
+	public void rerollGenes() {
 		ArrayList<AbstractGene> genesPool = new ArrayList<>();
 		genesPool.add(new CentaurGene());
 		genesPool.add(new PlantGene());
@@ -62,15 +74,17 @@ public class Evolution
 		genesPool.add(new SuccubusGene());
 		genesPool.add(new LymeanGene());
 		genesPool.add(new InsectGene());
-		if (this.upgraded) {
-			Set<String> exclude =
-			AbstractDungeon.player.orbs.stream()
-					.map(o -> o.ID)
-					.collect(Collectors.toSet());
-			genesPool.removeIf(gene -> exclude.contains(gene.ID));
-		}
+		genesPool.add(new BeastGeneV2());
+//		if (this.upgraded) {
+//			Set<String> exclude =
+//			AbstractDungeon.player.orbs.stream()
+//					.map(o -> o.ID)
+//					.collect(Collectors.toSet());
+//			genesPool.removeIf(gene -> exclude.contains(gene.ID));
+//		}
 		StringBuilder description = new StringBuilder(DESCRIPTION + " NL ");
 
+		this.genes = new ArrayList<AbstractGene>();
 		for (int i = 0; i < this.magicNumber; ++i) {
 			AbstractGene gene = genesPool.get(AbstractDungeon.cardRng.random(genesPool.size() - 1));
 			genes.add(gene);
@@ -89,6 +103,8 @@ public class Evolution
 	public void upgrade() {
 		if (!this.upgraded) {
 			this.upgradeName();
+			this.rawDescription = UPGRADE_DESCRIPTION;
+			this.initializeDescription();
 //			this.upgradeMagicNumber(UPGRADE_GENE_AMT);
 		}
 	}

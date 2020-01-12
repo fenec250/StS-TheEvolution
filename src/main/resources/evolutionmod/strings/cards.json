@@ -11,13 +11,13 @@
   },
   "evolutionmod:Adaptation": {
     "NAME": "Adaptation",
-    "DESCRIPTION": "Adapt a basic Strike or Defend with your two rightmost  Genes, ignoring duplicates.",
-    "UPGRADE_DESCRIPTION": "Adapt a basic Strike or Defend with your two rightmost Genes, ignoring duplicates. NL Reduce its cost by 1 this turn."
+    "DESCRIPTION": "Adapt a basic Strike or Defend with your two rightmost  Genes, ignoring duplicates. NL Retain.",
+    "UPGRADE_DESCRIPTION": "Adapt a basic Strike or Defend with your two rightmost Genes, ignoring duplicates. NL Reduce its cost by 1 this turn. NL Retain."
   },
   "evolutionmod:Evolution": {
     "NAME": "Evolution",
     "DESCRIPTION": "Evolve !M! Genes randomized when drawn",
-    "UPGRADE_DESCRIPTION": "Evolve !M! Genes different from those currently channeled when drawn"
+    "UPGRADE_DESCRIPTION": "Evolve !M! randomized when drawn and at the end of your turn. NL Retain."
   },
 
   "evolutionmod:HoofKick": {
@@ -87,7 +87,7 @@
   },
   "evolutionmod:Strip": {
     "NAME": "Strip",
-    "DESCRIPTION": "remove all Block from the enemy NL deal !D! damage NL Adapt this with a [#F04040]Succubus[] gene up to !evolutionmod:MA! times.",
+    "DESCRIPTION": "Remove all Block from the enemy. NL Deal !D! damage. NL Adapt this with a [#F04040]Succubus[] gene up to !evolutionmod:MA! times.",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:Seduce": {
@@ -152,14 +152,60 @@
   },
   "evolutionmod:HeightenedSenses": {
     "NAME": "Heightened senses",
-    "DESCRIPTION": "Draw !M! cards. NL Discard all cards drawn this way that. NL  Adapt this with a Beast gene up to !evolutionmod:MA! times.",
+    "DESCRIPTION": "Draw !M! cards. NL Discard all cards drawn this way which are not Attacks. NL Adapt this with a Beast gene up to !evolutionmod:MA! times.",
     "UPGRADE_DESCRIPTION": ""
   },
-//  "evolutionmod:Rush": {
-//    "NAME": "Rush",
-//    "DESCRIPTION": "Deal !D! damage. NL Draw a random Strike from your deck and play it on the same target.",
-//    "UPGRADE_DESCRIPTION": ""
-//  },
+  "evolutionmod:Rush": {
+    "NAME": "Rush",
+    "DESCRIPTION": "Deal !D! damage. NL Play a random Strike from your deck on the same target. NL Evolve a [#B06060]Beast[] gene.",
+    "UPGRADE_DESCRIPTION": "Deal !D! damage. NL Draw a random Strike from your deck and play a copy on the same target. NL Evolve a [#B06060]Beast[] gene."
+  },
+  "evolutionmod:Regenerate": {
+    "NAME": "Regenerate",
+    "DESCRIPTION": "Gain !B! Block. NL Exhaust a random Status. NL Evolve a [#B0F0B0]Lizard[] gene.",
+    "UPGRADE_DESCRIPTION": ""
+  },
+  "evolutionmod:PoisonFangs": {
+    "NAME": "Poison Fangs",
+    "DESCRIPTION": "Deal !D! damage. NL Apply !M! Poison. NL Adapt this with a Lizard gene up to !evolutionmod:MA! times.",
+    "UPGRADE_DESCRIPTION": ""
+  },
+  "evolutionmod:PoisonSpit": {
+    "NAME": "Poison Spit",
+    "DESCRIPTION": "Whenever an Attack deals unblocked damage this turn, apply !M! Poison. NL Evolve a Lizard gene.",
+    "UPGRADE_DESCRIPTION": ""
+  },
+  "evolutionmod:ShadowShift": {
+    "NAME": "Shadow Shift",
+    "DESCRIPTION": "Discard your hand. NL Gain !B! Block for each card discarded. NL Evolve a Ghost gene.",
+    "UPGRADE_DESCRIPTION": ""
+  },
+  "evolutionmod:CursedTouch": {
+    "NAME": "Cursed Touch",
+    "DESCRIPTION": "Deal !D! damage. NL Apply !M! Weak. NL Adapt this with a Ghost gene up to !evolutionmod:MA! times.",
+    "UPGRADE_DESCRIPTION": ""
+  },
+  "evolutionmod:DrainCurse": {
+    "NAME": "Drain Curse",
+    "DESCRIPTION": "Deal !D! damage. NL Remove all but 1 Weak from the ennemy. NL Gain twice that many Block. NL Evolve a Ghost gene.",
+    "UPGRADE_DESCRIPTION": "Deal !D! damage. NL Draw a random Strike from your deck and play a copy on the same target. NL Evolve a [#B06060]Beast[] gene."
+  },
+  "evolutionmod:ShiftingStrike": {
+    "NAME": "Shifting strike",
+    "DESCRIPTION": "Deal !D! damage. NL Trigger your first !M! genes.",
+    "UPGRADE_DESCRIPTION": ""
+  },
+  "evolutionmod:ShiftingGuard": {
+    "NAME": "Shifting guard",
+    "DESCRIPTION": "Gain !B! Block. NL Trigger your first !M! genes.",
+    "UPGRADE_DESCRIPTION": ""
+  },
+
+  "evolutionmod:ShiftingPower": {
+    "NAME": "Shifting power",
+    "DESCRIPTION": "Draw a card. NL Trigger your first !M! genes.",
+    "UPGRADE_DESCRIPTION": ""
+  },
 
   "evolutionmod:AquaticForm": {
     "NAME": "Aquatic form",

@@ -1,57 +1,58 @@
 package evolutionmod.cards;
 
 import basemod.abstracts.CustomCard;
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import evolutionmod.actions.SeduceAction;
-import evolutionmod.orbs.SuccubusGene;
+import evolutionmod.actions.ShadowShiftAction;
+import evolutionmod.orbs.GhostGene;
+import evolutionmod.orbs.PlantGene;
 import evolutionmod.patches.AbstractCardEnum;
+import evolutionmod.powers.BramblesPower;
 
-public class Seduce
+public class ShadowShift
         extends CustomCard {
-    public static final String ID = "evolutionmod:Seduce";
+    public static final String ID = "evolutionmod:ShadowShift";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-    public static final String IMG_PATH = "evolutionmod/images/cards/strike.png";
+    public static final String IMG_PATH = "evolutionmod/images/cards/PlantForm.png";
     private static final int COST = 2;
-    private static final int DAMAGE_AMT = 9;
-    private static final int UPGRADE_DAMAGE_AMT = 3;
+    private static final int BLOCK_AMT = 4;
+    private static final int UPGRADE_BLOCK_AMT = 2;
 
-    public Seduce() {
+    public ShadowShift() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
-                CardType.ATTACK, AbstractCardEnum.EVOLUTION_BLUE,
-                CardRarity.RARE, CardTarget.ENEMY);
-        this.damage = this.baseDamage = DAMAGE_AMT;
+                CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
+                CardRarity.COMMON, CardTarget.SELF);
+        this.block = this.baseBlock = BLOCK_AMT;
+//        this.magicNumber = this.baseMagicNumber = THORN_AMT;
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-//        HeavyBlade;
-        AbstractDungeon.actionManager.addToBottom(new SeduceAction(
-                p, m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
-                AbstractGameAction.AttackEffect.BLUNT_HEAVY));
-        AbstractDungeon.actionManager.addToBottom(new ChannelAction(new SuccubusGene()));
+        AbstractDungeon.actionManager.addToBottom(new ShadowShiftAction(p, this.block));
+        AbstractDungeon.actionManager.addToBottom(new ChannelAction(new GhostGene()));
     }
 
     @Override
     public AbstractCard makeCopy() {
-        return new Seduce();
+        return new ShadowShift();
     }
 
     @Override
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeDamage(UPGRADE_DAMAGE_AMT);
+            this.upgradeBlock(UPGRADE_BLOCK_AMT);
+//            this.upgradeMagicNumber(UPGRADE_THORN_AMT);
         }
     }
 }

@@ -1,25 +1,23 @@
 package evolutionmod.orbs;
 
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.OrbStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
-import com.megacrit.cardcrawl.powers.PoisonPower;
-import evolutionmod.actions.LizardGeneAction;
+import evolutionmod.actions.GhostGeneAction;
+import evolutionmod.actions.SuccubusGeneAction;
 import evolutionmod.cards.AdaptableEvoCard;
-import evolutionmod.powers.LizardFormPower;
 
-public class LizardGene extends AbstractGene {
-	public static final String ID = "evolutionmod:LizardGene";
+public class GhostGene extends AbstractGene {
+	public static final String ID = "evolutionmod:GhostGene";
 	public static final OrbStrings orbStrings = CardCrawlGame.languagePack.getOrbString(ID);
 	public static final String NAME = orbStrings.NAME;
 	public static final String[] DESCRIPTION = orbStrings.DESCRIPTION;
 	public static final String IMG_PATH = "evolutionmod/images/cards/strike.png";
 
-	public LizardGene() {
+	public GhostGene() {
 		super(ID, NAME, buildDescription(), IMG_PATH);
 	}
 
@@ -31,7 +29,7 @@ public class LizardGene extends AbstractGene {
 
 	@Override
 	public AbstractOrb makeCopy() {
-		return new LizardGene();
+		return new GhostGene();
 	}
 
 	@Override
@@ -39,13 +37,12 @@ public class LizardGene extends AbstractGene {
 	}
 
 	public static void apply(AbstractPlayer p, AbstractMonster m, int times) {
-		AbstractDungeon.actionManager.addToBottom(new LizardGeneAction(
-				p, m, poisonPerGene() * times));
+		AbstractDungeon.actionManager.addToBottom(new GhostGeneAction(p, m, blockPerGene() * times, times));
 	}
 
 	@Override
 	public AdaptableEvoCard.AbstractAdaptation getAdaptation() {
-		return new LizardAdaptation(1);
+		return new GhostAdaptation(1);
 	}
 
 	@Override
@@ -54,30 +51,31 @@ public class LizardGene extends AbstractGene {
 	}
 
 	private static String buildDescription() {
-		return DESCRIPTION[0] + poisonPerGene() + DESCRIPTION[1];
+		return DESCRIPTION[0] + 1 + DESCRIPTION[1] + blockPerGene() + DESCRIPTION[2];
 	}
-	private static int poisonPerGene() {
-		int poison = 2;
-		if (AbstractDungeon.player.hasPower(LizardFormPower.POWER_ID)) {
-			poison += AbstractDungeon.player.getPower(LizardFormPower.POWER_ID).amount;
+
+	private static int blockPerGene() {
+		int damage = 1;
+		if (AbstractDungeon.player.hasPower("evolutionmod:GhostForm")) {
+			damage += AbstractDungeon.player.getPower("evolutionmod:GhostForm").amount;
 		}
-		return poison;
+		return damage;
 	}
 
-	private static class LizardAdaptation extends AdaptableEvoCard.AbstractAdaptation {
+	private static class GhostAdaptation extends AdaptableEvoCard.AbstractAdaptation {
 
-		LizardAdaptation(int amount) {
+		GhostAdaptation(int amount) {
 			super(amount);
 		}
 
 		@Override
 		public void apply(AbstractPlayer p, AbstractMonster m) {
-			LizardGene.apply(p, m, this.amount);
+			GhostGene.apply(p, m, this.amount);
 		}
 
 		@Override
 		public String text() {
-			return "Lizard";
+			return "Ghost";
 		}
 
 		@Override
@@ -87,7 +85,7 @@ public class LizardGene extends AbstractGene {
 
 		@Override
 		public AdaptableEvoCard.AbstractAdaptation makeCopy() {
-			return new LizardAdaptation(this.amount);
+			return new GhostAdaptation(this.amount);
 		}
 	}
 }

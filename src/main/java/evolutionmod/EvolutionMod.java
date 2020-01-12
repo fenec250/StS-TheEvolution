@@ -88,14 +88,21 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
         BaseMod.addCard(new GatherFood());
         BaseMod.addCard(new DrainMana());
         BaseMod.addCard(new ClawSlash());
+        BaseMod.addCard(new ShiftingStrike());
         //8 skills
         BaseMod.addCard(new Charm());
         BaseMod.addCard(new Brambles());
+        BaseMod.addCard(new Regenerate());
+        BaseMod.addCard(new ShiftingGuard());
+        BaseMod.addCard(new ShiftingPower());
+        BaseMod.addCard(new ShadowShift());
 
         //Uncommons
         //11 attacks
         BaseMod.addCard(new Strip());
         BaseMod.addCard(new VineLash());
+        BaseMod.addCard(new PoisonFangs());
+        BaseMod.addCard(new CursedTouch());
         //18 skills
         BaseMod.addCard(new TakeOff());
         BaseMod.addCard(new Dive());
@@ -114,11 +121,13 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
         BaseMod.addCard(new Seduce());
         BaseMod.addCard(new FeatherStorm());
         BaseMod.addCard(new Eruption());
+        BaseMod.addCard(new Rush());
         //8 skills
         BaseMod.addCard(new Drown());
         BaseMod.addCard(new Constrict());
         BaseMod.addCard(new Incubate());
         BaseMod.addCard(new Aegis());
+        BaseMod.addCard(new PoisonSpit());
         //6 powers
     }
 
