@@ -35,7 +35,7 @@ public class VineLash
                 CardRarity.UNCOMMON, CardTarget.ENEMY);
         this.damage = this.baseDamage = 0;
         this.magicNumber = this.baseMagicNumber = THORN_AMT;
-        this.adaptationMaximum = MAX_ADAPT_AMT;
+        this.maxAdaptationMap.put(PlantGene.ID, MAX_ADAPT_AMT);
     }
 
     @Override
@@ -43,23 +43,11 @@ public class VineLash
         AbstractDungeon.actionManager.addToTop(
                 new ApplyPowerAction(p, p, new BramblesPower(p, this.magicNumber), this.magicNumber));
         p.orbs.stream()
-                .filter(o -> o instanceof PlantGene)
+                .filter(o -> this.canAdaptWith(o) > 0)
                 .findAny()
-                .ifPresent(o -> this.addAdaptation((AbstractGene) o));
+                .ifPresent(o -> this.tryAdaptingWith((AbstractGene) o, true));
         this.useAdaptations(p, m);
         AbstractDungeon.actionManager.addToBottom(new ThornDamageAction(p, m, THORN_DAMAGE_AMT));
-    }
-
-    @Override
-    public int addAdaptation(AbstractGene gene) {
-        if (!gene.ID.equals(PlantGene.ID)) {
-            return 0;
-        }
-        if (this.adaptationMap.containsKey(PlantGene.ID)
-                && this.adaptationMaximum <= this.adaptationMap.get(PlantGene.ID).amount) {
-            return 0;
-        }
-        return super.addAdaptation(gene);
     }
 
     @Override
@@ -72,7 +60,7 @@ public class VineLash
         if (!this.upgraded) {
             this.upgradeName();
             this.upgradeMagicNumber(UPGRADE_THORN_AMT);
-            this.upgradeAdaptationMaximum(UPGRADE_MAX_ADAPT_AMT);
+            this.upgradeAdaptationMaximum(PlantGene.ID, UPGRADE_MAX_ADAPT_AMT);
         }
     }
 }

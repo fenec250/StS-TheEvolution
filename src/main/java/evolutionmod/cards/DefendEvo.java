@@ -37,10 +37,9 @@ public class DefendEvo
     }
 
     @Override
-    public int addAdaptation(AbstractAdaptation adaptation) {
+    public int canAdaptWith(AbstractAdaptation adaptation) {
         if (!this.adaptationMap.containsKey(adaptation.getGeneId())) {
-            adaptation.amount = 1;
-            return super.addAdaptation(adaptation);
+            return 1;
         }
         return 0;
     }

@@ -71,7 +71,7 @@ public class IncubateAction extends AbstractGameAction {
 				}
 
 				if (reduceCost) {
-					card.modifyCostForTurn(-1);
+					card.setCostForTurn(card.costForTurn - 1);
 				}
 				AbstractDungeon.gridSelectScreen.selectedCards.clear();
 				this.isDone = true;

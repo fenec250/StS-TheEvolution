@@ -38,7 +38,7 @@ public class PoisonFangs
                 CardRarity.UNCOMMON, CardTarget.ENEMY);
         this.damage = this.baseDamage = DAMAGE_AMT;
         this.magicNumber = this.baseMagicNumber = POISON_AMT;
-        this.adaptationMaximum = MAX_ADAPT_AMT;
+        this.maxAdaptationMap.put(LizardGene.ID, MAX_ADAPT_AMT);
     }
 
     @Override
@@ -47,24 +47,12 @@ public class PoisonFangs
                 m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
                 AbstractGameAction.AttackEffect.BLUNT_HEAVY));
         p.orbs.stream()
-                .filter(o -> o instanceof LizardGene)
+                .filter(o -> this.canAdaptWith(o) > 0)
                 .findAny()
-                .ifPresent(o -> this.addAdaptation((AbstractGene) o));
+                .ifPresent(o -> this.tryAdaptingWith((AbstractGene) o, true));
         AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(
                 m, p, new PoisonPower(m, p, this.magicNumber), this.magicNumber));
         this.useAdaptations(p, m);
-    }
-
-    @Override
-    public int addAdaptation(AbstractGene gene) {
-        if (!gene.ID.equals(LizardGene.ID)) {
-            return 0;
-        }
-        if (this.adaptationMap.containsKey(LizardGene.ID)
-                && this.adaptationMaximum <= this.adaptationMap.get(LizardGene.ID).amount) {
-            return 0;
-        }
-        return super.addAdaptation(gene);
     }
 
     @Override
@@ -73,7 +61,7 @@ public class PoisonFangs
             this.upgradeName();
             this.upgradeDamage(UPGRADE_DAMAGE_AMT);
             this.upgradeMagicNumber(UPGRADE_POISON_AMT);
-            this.upgradeAdaptationMaximum(UPGRADE_MAX_ADAPT_AMT);
+            this.upgradeAdaptationMaximum(LizardGene.ID, UPGRADE_MAX_ADAPT_AMT);
         }
     }
 }

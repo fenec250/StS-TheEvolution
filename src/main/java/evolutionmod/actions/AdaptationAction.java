@@ -59,36 +59,18 @@ public class AdaptationAction extends AbstractGameAction {
 				while (amountToAdd > 0 && iterator.hasNext()) {
 					AbstractOrb orb = iterator.next();
 					if (orb instanceof AbstractGene) {
-						int amountChange = card.addAdaptation((AbstractGene) orb);
+						int amountChange = card.tryAdaptingWith(orb, true);
 						amountToAdd -= amountChange;
 					}
 				}
 
 				if (reduceCost) {
-					card.modifyCostForTurn(-1);
+					card.setCostForTurn(card.costForTurn - 1);
 				}
 				AbstractDungeon.gridSelectScreen.selectedCards.clear();
 				this.isDone = true;
 				this.tickDuration();
 			}
 		}
-
-	}
-
-	// FIXME: this is a duplication of AdaptableEvoCard.consumeOrbs
-	protected boolean consumeOrbs(AbstractPlayer player, Collection<AbstractOrb> orbs) {
-		if (player.orbs.isEmpty()) {
-			return false;
-		}
-		boolean result = player.orbs.removeAll(orbs);
-		if (result) {
-			for (int i = 0; i < orbs.size(); ++i) {
-				player.orbs.add(new EmptyOrbSlot(((AbstractOrb)player.orbs.get(0)).cX, ((AbstractOrb)player.orbs.get(0)).cY));
-			}
-			for (int i = 0; i < player.orbs.size(); ++i) {
-				((AbstractOrb)player.orbs.get(i)).setSlot(i, player.maxOrbs);
-			}
-		}
-		return result;
 	}
 }

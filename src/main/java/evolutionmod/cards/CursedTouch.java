@@ -41,7 +41,7 @@ public class CursedTouch
                 CardRarity.COMMON, CardTarget.ENEMY);
         this.damage = this.baseDamage = DAMAGE_AMT;
         this.magicNumber = this.baseMagicNumber = WEAK_AMT;
-        this.adaptationMaximum = MAX_ADAPT_AMT;
+        this.maxAdaptationMap.put(GhostGene.ID, MAX_ADAPT_AMT);
     }
 
     @Override
@@ -52,24 +52,27 @@ public class CursedTouch
         AbstractDungeon.actionManager.addToTop(
                 new ApplyPowerAction(m, p, new WeakPower(m, this.magicNumber, false), this.magicNumber));
 //        AbstractDungeon.actionManager.addToBottom(new ChannelAction(new GhostGene()));
+//        if (this.canAdaptWith())
+//        this.maxAdaptationMap.put(GholdstGene.ID, MAX_ADAPT_AMT);
         p.orbs.stream()
-                .filter(o -> o instanceof GhostGene)
+                .filter(o -> this.canAdaptWith(o) > 0)
                 .findAny()
-                .ifPresent(o -> this.addAdaptation((AbstractGene) o));
+                .ifPresent(o -> this.tryAdaptingWith((AbstractGene) o, true));
+//        this.upgradeAdaptationMaximum(GholdstGene.ID, UPGRADE_MAX_ADAPT_AMT);
         this.useAdaptations(p, m);
     }
 
-    @Override
-    public int addAdaptation(AbstractGene gene) {
-        if (!gene.ID.equals(GhostGene.ID)) {
-            return 0;
-        }
-        if (this.adaptationMap.containsKey(GhostGene.ID)
-                && this.adaptationMaximum <= this.adaptationMap.get(GhostGene.ID).amount) {
-            return 0;
-        }
-        return super.addAdaptation(gene);
-    }
+//    @Override
+//    public int addAdaptation(AbstractGene gene) {
+//        if (!gene.ID.equals(GhostGene.ID)) {
+//            return 0;
+//        }
+//        if (this.adaptationMap.containsKey(GhostGene.ID)
+//                && this.adaptationMaximum <= this.adaptationMap.get(GhostGene.ID).amount) {
+//            return 0;
+//        }
+//        return super.addAdaptation(gene);
+//    }
 
     @Override
     public AbstractCard makeCopy() {
@@ -82,7 +85,7 @@ public class CursedTouch
             this.upgradeName();
             this.upgradeDamage(UPGRADE_DAMAGE_AMT);
             this.upgradeMagicNumber(UPGRADE_WEAK_AMT);
-            this.upgradeAdaptationMaximum(UPGRADE_MAX_ADAPT_AMT);
+            this.upgradeAdaptationMaximum(GhostGene.ID, UPGRADE_MAX_ADAPT_AMT);
         }
     }
 }

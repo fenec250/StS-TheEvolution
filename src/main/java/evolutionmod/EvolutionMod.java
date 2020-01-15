@@ -28,7 +28,7 @@ import java.nio.charset.StandardCharsets;
 @SpireInitializer
 public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscriber, EditKeywordsSubscriber, EditRelicsSubscriber, EditStringsSubscriber, PostInitializeSubscriber {
 
-    private static final Color melodyLime = CardHelper.getColor(191.0f, 255.0f, 1.0f); //0xbfff00
+    private static final Color melodyLime = CardHelper.getColor(191, 255, 1); //0xbfff00
     private static final String attackCard = "evolutionmod/images/512/bg_attack_mystic.png"; //TODO: change these images
     private static final String skillCard = "evolutionmod/images/512/bg_skill_mystic.png";
     private static final String powerCard = "evolutionmod/images/512/bg_power_mystic.png";

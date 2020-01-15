@@ -4,9 +4,9 @@
   "author_list": ["Fenec250"],
   "description": "Adds a new character: The Evolution.",
   "dependencies": ["basemod"],
-  "credits": "Johnny Devo for the base project and temp art. Syvaron for the character and portraits",
+  "credits": "Johnny Devo for the base project and temp art. Syvaron for the character and card art.",
   "version": "0.0.1",
-  "sts_version": "07-17-2019",
-  "mts_version": "3.14.1",
+  "sts_version": "01-14-2020",
+  "mts_version": "3.15.0",
   "update_json": "https://api.github.com/repos/Fenec250/StS-TheEvolution/releases/latest"
 }

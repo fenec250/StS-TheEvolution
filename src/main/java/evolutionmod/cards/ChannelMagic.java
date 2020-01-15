@@ -23,12 +23,15 @@ public class ChannelMagic
     private static final int MARK_AMT = 1;
     private static final int UPGRADE_MARK_AMT = 1;
     private static final int FORM_AMT = 1;
+    private static final int MAX_ADAPT_AMT = 2;
+    private static final int UPGRADE_MAX_ADAPT_AMT = 1;
 
     public ChannelMagic() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.UNCOMMON, CardTarget.ENEMY);
         this.magicNumber = this.baseMagicNumber = FORM_AMT;
+        this.maxAdaptationMap.put(LavafolkGene.ID, MAX_ADAPT_AMT);
     }
 
     @Override
@@ -37,9 +40,9 @@ public class ChannelMagic
                 m, p, new MarkPower(m, this.magicNumber), this.magicNumber
         ));
         p.orbs.stream()
-                .filter(o -> o instanceof LavafolkGene)
-                .limit(1)
-                .forEach(o -> this.addAdaptation(((AbstractGene) o).getAdaptation()));
+                .filter(o -> this.canAdaptWith(o) > 0)
+                .findAny()
+                .ifPresent(o -> this.tryAdaptingWith((AbstractGene) o, true));
         this.useAdaptations(p, m);
     }
 
@@ -48,6 +51,7 @@ public class ChannelMagic
         if (!this.upgraded) {
             this.upgradeName();
             this.upgradeMagicNumber(UPGRADE_MARK_AMT);
+            this.upgradeAdaptationMaximum(LavafolkGene.ID, UPGRADE_MAX_ADAPT_AMT);
         }
     }
 }

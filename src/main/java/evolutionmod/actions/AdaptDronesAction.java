@@ -30,26 +30,10 @@ public class AdaptDronesAction extends AbstractGameAction {
 		player.hand.group.stream()
 				.filter(c -> c.cardID.equals(Drone.ID))
 				.limit(droneNumber)
-				.forEach(c -> ((Drone) c).addAdaptation(gene.getAdaptation()));
-		consumeOrb(player, gene);
+				.forEach(c -> ((Drone) c).tryAdaptingWith(gene, true));
 
 		this.isDone = true;
 		this.tickDuration();
 		//AbstractDungeon.cardRng.random([ArrayList].size() - 1)
-	}
-
-	// FIXME: this is a duplication of AdaptableEvoCard.consumeOrb
-	protected boolean consumeOrb(AbstractPlayer player, AbstractOrb orb) {
-		if (player.orbs.isEmpty()) {
-			return false;
-		}
-		boolean result = player.orbs.remove(orb);
-		if (result) {
-			player.orbs.add(new EmptyOrbSlot(((AbstractOrb)player.orbs.get(0)).cX, ((AbstractOrb)player.orbs.get(0)).cY));
-			for (int i = 0; i < player.orbs.size(); ++i) {
-				((AbstractOrb)player.orbs.get(i)).setSlot(i, player.maxOrbs);
-			}
-		}
-		return result;
 	}
 }

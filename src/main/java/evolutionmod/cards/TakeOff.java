@@ -31,7 +31,7 @@ public class TakeOff
                 CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.UNCOMMON, CardTarget.SELF);
         this.block = this.baseBlock = BLOCK_AMT;
-        this.adaptationMaximum = MAX_ADAPT_AMT;
+        this.maxAdaptationMap.put(HarpyGene.ID, MAX_ADAPT_AMT);
         this.magicNumber = this.baseMagicNumber = DRAW_AMT;
     }
 
@@ -40,22 +40,10 @@ public class TakeOff
         AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, this.block));
         AbstractDungeon.actionManager.addToBottom(new DrawCardAction(p, this.magicNumber));
         p.orbs.stream()
-                .filter(o -> o instanceof HarpyGene)
+                .filter(o -> this.canAdaptWith(o) > 0)
                 .findAny()
-                .ifPresent(o -> this.addAdaptation((AbstractGene) o));
+                .ifPresent(o -> this.tryAdaptingWith((AbstractGene) o, true));
         this.useAdaptations(p, m);
-    }
-
-    @Override
-    public int addAdaptation(AbstractGene gene) {
-        if (!gene.ID.equals(HarpyGene.ID)) {
-            return 0;
-        }
-        if (this.adaptationMap.containsKey(HarpyGene.ID)
-                && this.adaptationMaximum <= this.adaptationMap.get(HarpyGene.ID).amount) {
-            return 0;
-        }
-        return super.addAdaptation(gene);
     }
 
     @Override
@@ -63,7 +51,7 @@ public class TakeOff
         if (!this.upgraded) {
             this.upgradeName();
             this.upgradeBlock(UPGRADE_BLOCK_AMT);
-            this.upgradeAdaptationMaximum(UPGRADE_MAX_ADAPT_AMT);
+            this.upgradeAdaptationMaximum(HarpyGene.ID, UPGRADE_MAX_ADAPT_AMT);
         }
     }
 }

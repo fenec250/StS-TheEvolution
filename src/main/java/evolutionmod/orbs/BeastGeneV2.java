@@ -77,7 +77,7 @@ public class BeastGeneV2 extends AbstractGene {
 
 		@Override
 		public String text() {
-			return "Beast";
+			return "Beast" + (this.amount > 1 ? "x" + this.amount : "");
 		}
 
 		@Override

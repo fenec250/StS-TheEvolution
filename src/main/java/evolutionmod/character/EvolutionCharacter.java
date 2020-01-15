@@ -31,11 +31,12 @@ public class EvolutionCharacter extends CustomPlayer {
     public static final String MY_CHARACTER_SHOULDER_1 = "evolutionmod/images/char/shoulder.png";
     public static final String MY_CHARACTER_CORPSE = "evolutionmod/images/char/corpse.png";
     public static final String MY_CHARACTER_ANIMATION = "evolutionmod/images/char/idle/Animation.scml";
+    public static final String MY_CHARACTER_PORTRAIT = "evolutionmod/images/cards/CentaurForm.png";
     private static final String ID = "evolutionmod:EvolutionCharacter";
     private static final CharacterStrings characterStrings = CardCrawlGame.languagePack.getCharacterString(ID);
     private static final String[] NAMES = characterStrings.NAMES;
     private static final String[] TEXT = characterStrings.TEXT;
-    private static final Color melodyLime = CardHelper.getColor(191.0f, 255.0f, 1.0f); //0xbfff00
+    private static final Color melodyLime = CardHelper.getColor(191, 255, 1); //0xbfff00
     private static final float DIALOG_X_ADJUSTMENT = 0.0F;
     private static final float DIALOG_Y_ADJUSTMENT = 220.0F;
     public static final String[] orbTextures = {
@@ -63,6 +64,11 @@ public class EvolutionCharacter extends CustomPlayer {
                 MY_CHARACTER_SHOULDER_1,
                 MY_CHARACTER_CORPSE,
                 getLoadout(), 20.0F, -10.0F, 220.0F, 290.0F, new EnergyManager(ENERGY_PER_TURN));
+    }
+
+    @Override
+    public String getPortraitImageName() {
+        return MY_CHARACTER_PORTRAIT;
     }
 
     @Override

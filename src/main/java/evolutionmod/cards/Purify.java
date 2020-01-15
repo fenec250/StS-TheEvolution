@@ -29,30 +29,19 @@ public class Purify
                 CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.UNCOMMON, CardTarget.SELF);
         this.magicNumber = this.baseMagicNumber = MAX_EXHAUST_AMT;
-        this.adaptationMaximum = MAX_ADAPT_AMT;
+        this.maxAdaptationMap.put(LymeanGene.ID, MAX_ADAPT_AMT);
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         AbstractDungeon.actionManager.addToBottom(
-                new ExhaustAction(p, p, this.magicNumber, false, true, true));
+                new ExhaustAction(this.magicNumber, false, true, true));
+//                new ExhaustAction(this.magicNumber, false, true, false));
         p.orbs.stream()
-                .filter(o -> o instanceof LymeanGene)
+                .filter(o -> this.canAdaptWith(o) > 0)
                 .findAny()
-                .ifPresent(o -> this.addAdaptation((AbstractGene) o));
+                .ifPresent(o -> this.tryAdaptingWith((AbstractGene) o, true));
         this.useAdaptations(p, m);
-    }
-
-    @Override
-    public int addAdaptation(AbstractGene gene) {
-        if (!gene.ID.equals(LymeanGene.ID)) {
-            return 0;
-        }
-        if (this.adaptationMap.containsKey(LymeanGene.ID)
-                && this.adaptationMaximum <= this.adaptationMap.get(LymeanGene.ID).amount) {
-            return 0;
-        }
-        return super.addAdaptation(gene);
     }
 
     @Override
@@ -60,7 +49,7 @@ public class Purify
         if (!this.upgraded) {
             this.upgradeName();
             this.upgradeMagicNumber(UPGRADE_MAX_EXHAUST_AMT);
-            this.upgradeAdaptationMaximum(UPGRADE_MAX_ADAPT_AMT);
+            this.upgradeAdaptationMaximum(LymeanGene.ID, UPGRADE_MAX_ADAPT_AMT);
         }
     }
 }

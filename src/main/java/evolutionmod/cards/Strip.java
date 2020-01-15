@@ -32,7 +32,7 @@ public class Strip
                 CardType.ATTACK, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.UNCOMMON, CardTarget.ENEMY);
         this.damage = this.baseDamage = DAMAGE_AMT;
-        this.adaptationMaximum = MAX_ADAPT_AMT;
+        this.maxAdaptationMap.put(SuccubusGene.ID, MAX_ADAPT_AMT);
     }
 
     @Override
@@ -42,22 +42,10 @@ public class Strip
                 m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
                 AbstractGameAction.AttackEffect.BLUNT_HEAVY));
         p.orbs.stream()
-                .filter(o -> o instanceof SuccubusGene)
+                .filter(o -> this.canAdaptWith(o) > 0)
                 .findAny()
-                .ifPresent(o -> this.addAdaptation((AbstractGene) o));
+                .ifPresent(o -> this.tryAdaptingWith((AbstractGene) o, true));
         this.useAdaptations(p, m);
-    }
-
-    @Override
-    public int addAdaptation(AbstractGene gene) {
-        if (!gene.ID.equals(SuccubusGene.ID)) {
-            return 0;
-        }
-        if (this.adaptationMap.containsKey(SuccubusGene.ID)
-                && this.adaptationMaximum <= this.adaptationMap.get(SuccubusGene.ID).amount) {
-            return 0;
-        }
-        return super.addAdaptation(gene);
     }
 
     @Override
@@ -65,7 +53,7 @@ public class Strip
         if (!this.upgraded) {
             this.upgradeName();
             this.upgradeDamage(UPGRADE_DAMAGE_AMT);
-            this.upgradeAdaptationMaximum(UPGRADE_MAX_ADAPT_AMT);
+            this.upgradeAdaptationMaximum(SuccubusGene.ID, UPGRADE_MAX_ADAPT_AMT);
         }
     }
 }

@@ -29,29 +29,18 @@ public class HeightenedSenses
                 CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.UNCOMMON, CardTarget.SELF);
         this.magicNumber = this.baseMagicNumber = DRAW_AMT;
-        this.adaptationMaximum = MAX_ADAPT_AMT;
+        this.maxAdaptationMap.put(BeastGeneV2.ID, MAX_ADAPT_AMT);
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
+        // TODO: Check to do like ScrapeFollowUpAction
         AbstractDungeon.actionManager.addToBottom(new HeightenedSensesAction(p, this.magicNumber));
         p.orbs.stream()
-                .filter(o -> o instanceof BeastGeneV2)
+                .filter(o -> this.canAdaptWith(o) > 0)
                 .findAny()
-                .ifPresent(o -> this.addAdaptation((AbstractGene) o));
+                .ifPresent(o -> this.tryAdaptingWith((AbstractGene) o, true));
         this.useAdaptations(p, m);
-    }
-
-    @Override
-    public int addAdaptation(AbstractGene gene) {
-        if (!gene.ID.equals(BeastGeneV2.ID)) {
-            return 0;
-        }
-        if (this.adaptationMap.containsKey(BeastGeneV2.ID)
-                && this.adaptationMaximum <= this.adaptationMap.get(BeastGeneV2.ID).amount) {
-            return 0;
-        }
-        return super.addAdaptation(gene);
     }
 
     @Override
@@ -59,7 +48,7 @@ public class HeightenedSenses
         if (!this.upgraded) {
             this.upgradeName();
             this.upgradeMagicNumber(UPGRADED_DRAW_AMT);
-            this.upgradeAdaptationMaximum(UPGRADE_MAX_ADAPT_AMT);
+            this.upgradeAdaptationMaximum(BeastGeneV2.ID, UPGRADE_MAX_ADAPT_AMT);
         }
     }
 }
