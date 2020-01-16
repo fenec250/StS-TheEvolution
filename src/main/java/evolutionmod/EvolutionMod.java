@@ -18,10 +18,12 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.localization.CharacterStrings;
 import com.megacrit.cardcrawl.localization.OrbStrings;
 import com.megacrit.cardcrawl.localization.PowerStrings;
+import com.megacrit.cardcrawl.localization.RelicStrings;
 import evolutionmod.cards.*;
 import evolutionmod.character.EvolutionCharacter;
 import evolutionmod.patches.AbstractCardEnum;
 import evolutionmod.patches.EvolutionEnum;
+import evolutionmod.relics.TorisGift;
 
 import java.nio.charset.StandardCharsets;
 
@@ -170,8 +172,8 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
         BaseMod.loadCustomStrings(CharacterStrings.class, characterStrings);
         String powerStrings = Gdx.files.internal("evolutionmod/strings/powers.json").readString(String.valueOf(StandardCharsets.UTF_8));
         BaseMod.loadCustomStrings(PowerStrings.class, powerStrings);
-//        String relicStrings = Gdx.files.internal("evolutionmod/strings/relics.json").readString(String.valueOf(StandardCharsets.UTF_8));
-//        BaseMod.loadCustomStrings(RelicStrings.class, relicStrings);
+        String relicStrings = Gdx.files.internal("evolutionmod/strings/relics.json").readString(String.valueOf(StandardCharsets.UTF_8));
+        BaseMod.loadCustomStrings(RelicStrings.class, relicStrings);
 //        String uiStrings = Gdx.files.internal("evolutionmod/strings/ui.json").readString(String.valueOf(StandardCharsets.UTF_8));
 //        BaseMod.loadCustomStrings(UIStrings.class, uiStrings);
     }
@@ -179,6 +181,6 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
     @Override
     public void receiveEditRelics() {
         //starter
-//        BaseMod.addRelicToCustomPool(new SpellBook(), MELODY_LIME);
+        BaseMod.addRelicToCustomPool(new TorisGift(), AbstractCardEnum.EVOLUTION_BLUE);
     }
 }

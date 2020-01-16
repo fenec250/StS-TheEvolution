@@ -14,6 +14,7 @@ import evolutionmod.orbs.CentaurGene;
 import evolutionmod.orbs.HarpyGene;
 import evolutionmod.orbs.InsectGene;
 import evolutionmod.orbs.LavafolkGene;
+import evolutionmod.orbs.LizardGene;
 import evolutionmod.orbs.LymeanGene;
 import evolutionmod.orbs.MerfolkGene;
 import evolutionmod.orbs.PlantGene;
@@ -75,6 +76,7 @@ public class Evolution
 		genesPool.add(new LymeanGene());
 		genesPool.add(new InsectGene());
 		genesPool.add(new BeastGeneV2());
+		genesPool.add(new LizardGene());
 //		if (this.upgraded) {
 //			Set<String> exclude =
 //			AbstractDungeon.player.orbs.stream()

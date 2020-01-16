@@ -16,12 +16,14 @@ import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.ScreenShake;
 import com.megacrit.cardcrawl.localization.CharacterStrings;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
+import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import evolutionmod.cards.Adaptation;
 import evolutionmod.cards.DefendEvo;
 import evolutionmod.cards.Evolution;
 import evolutionmod.cards.StrikeEvo;
 import evolutionmod.patches.AbstractCardEnum;
 import evolutionmod.patches.EvolutionEnum;
+import evolutionmod.relics.TorisGift;
 
 import java.util.ArrayList;
 
@@ -180,8 +182,8 @@ public class EvolutionCharacter extends CustomPlayer {
     @Override
     public ArrayList<String> getStartingRelics() {
         ArrayList<String> retVal = new ArrayList<>();
-//        retVal.add(SpellBook.ID);
-//        UnlockTracker.markRelicAsSeen(SpellBook.ID);
+        retVal.add(TorisGift.ID);
+        UnlockTracker.markRelicAsSeen(TorisGift.ID);
         return retVal;
     }
 
