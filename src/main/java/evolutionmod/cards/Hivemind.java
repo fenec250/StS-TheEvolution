@@ -29,7 +29,7 @@ public class Hivemind
                 CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.UNCOMMON, CardTarget.SELF);
         this.magicNumber = this.baseMagicNumber = DRONES_AMT;
-        this.maxAdaptationMap.put(InsectGene.ID, MAX_ADAPT_AMT);
+        this.adaptationMap.put(InsectGene.ID, new InsectGene.Adaptation(0, MAX_ADAPT_AMT));
     }
 
     @Override

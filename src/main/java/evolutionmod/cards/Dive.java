@@ -34,7 +34,7 @@ public class Dive
                 CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.UNCOMMON, CardTarget.SELF);
         this.block = this.baseBlock = BLOCK_AMT;
-        this.maxAdaptationMap.put(MerfolkGene.ID, MAX_ADAPT_AMT);
+        this.adaptationMap.put(MerfolkGene.ID, new MerfolkGene.Adaptation(0, MAX_ADAPT_AMT));
     }
 
     @Override

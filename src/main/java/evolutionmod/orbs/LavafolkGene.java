@@ -45,7 +45,11 @@ public class LavafolkGene extends AbstractGene {
 
 	@Override
 	public AdaptableEvoCard.AbstractAdaptation getAdaptation() {
-		return new LavafolkAdaptation(1);
+		return new Adaptation(1);
+	}
+
+	public static AdaptableEvoCard.AbstractAdaptation getAdaptation(int amount, int maximum) {
+		return new Adaptation(amount, maximum);
 	}
 
 	@Override
@@ -69,10 +73,16 @@ public class LavafolkGene extends AbstractGene {
 		return damage;
 	}
 
-	private static class LavafolkAdaptation extends AdaptableEvoCard.AbstractAdaptation {
+	public static class Adaptation extends AdaptableEvoCard.AbstractAdaptation {
 
-		LavafolkAdaptation(int amount) {
+		public Adaptation(int amount) {
 			super(amount);
+		}
+		public Adaptation(int amount, int max) {
+			super(amount, max);
+		}
+		Adaptation(Adaptation adaptation) {
+			super(adaptation);
 		}
 
 		@Override
@@ -92,7 +102,7 @@ public class LavafolkGene extends AbstractGene {
 
 		@Override
 		public AdaptableEvoCard.AbstractAdaptation makeCopy() {
-			return new LavafolkAdaptation(this.amount);
+			return new Adaptation(this);
 		}
 	}
 }

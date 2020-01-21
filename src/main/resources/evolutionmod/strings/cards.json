@@ -207,6 +207,11 @@
     "UPGRADE_DESCRIPTION": ""
   },
 
+  "evolutionmod:Grow": {
+    "NAME": "Grow",
+    "DESCRIPTION": "Gain !M! Orb slots.",
+    "UPGRADE_DESCRIPTION": ""
+  },
   "evolutionmod:AquaticForm": {
     "NAME": "Aquatic form",
     "DESCRIPTION": "Increase the Block and Poison of Merfolk and Lizard Genes by !M!",

@@ -41,7 +41,7 @@ public class SuccubusGene extends AbstractGene {
 
 	@Override
 	public AdaptableEvoCard.AbstractAdaptation getAdaptation() {
-		return new SuccubusAdaptation(1);
+		return new Adaptation(1);
 	}
 
 	@Override
@@ -61,10 +61,16 @@ public class SuccubusGene extends AbstractGene {
 		return damage;
 	}
 
-	private static class SuccubusAdaptation extends AdaptableEvoCard.AbstractAdaptation {
+	public static class Adaptation extends AdaptableEvoCard.AbstractAdaptation {
 
-		SuccubusAdaptation(int amount) {
+		public Adaptation(int amount) {
 			super(amount);
+		}
+		public Adaptation(int amount, int max) {
+			super(amount, max);
+		}
+		Adaptation(Adaptation adaptation) {
+			super(adaptation);
 		}
 
 		@Override
@@ -84,7 +90,7 @@ public class SuccubusGene extends AbstractGene {
 
 		@Override
 		public AdaptableEvoCard.AbstractAdaptation makeCopy() {
-			return new SuccubusAdaptation(this.amount);
+			return new Adaptation(this);
 		}
 	}
 }

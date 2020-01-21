@@ -12,7 +12,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.IntangiblePlayerPower;
-import evolutionmod.orbs.LymeanGene;
+import evolutionmod.orbs.LymeanGeneV2;
 import evolutionmod.patches.AbstractCardEnum;
 
 public class Aegis
@@ -39,7 +39,7 @@ public class Aegis
                 AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(
                         mo, p, new IntangiblePlayerPower(mo, 1), 1
                 )));
-        AbstractDungeon.actionManager.addToBottom(new ChannelAction(new LymeanGene()));
+        AbstractDungeon.actionManager.addToBottom(new ChannelAction(new LymeanGeneV2()));
     }
 
     @Override

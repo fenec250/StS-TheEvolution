@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 public abstract class AdaptableEvoCard extends CustomCard {
 
 	protected Map<String, AbstractAdaptation> adaptationMap;
-	protected Map<String, Integer> maxAdaptationMap;
 //	protected int adaptationMaximum = -1;
 	protected boolean adaptationUpgraded = false;
 	protected String initialRawDescription;
@@ -31,7 +30,6 @@ public abstract class AdaptableEvoCard extends CustomCard {
                             final CardRarity rarity, final CardTarget target) {
         super(id, name, img, cost, rawDescription, type, color, rarity, target);
 	    this.adaptationMap = new HashMap<>();
-	    this.maxAdaptationMap = new HashMap<>();
 	    this.initialRawDescription = rawDescription;
 	    this.isNameAdapted = false;
     }
@@ -50,13 +48,10 @@ public abstract class AdaptableEvoCard extends CustomCard {
 
 	protected int canAdaptWith(AbstractAdaptation adaptation) {
 		String geneId = adaptation.getGeneId();
-		if (!this.maxAdaptationMap.containsKey(geneId)) {
+		if (!this.adaptationMap.containsKey(geneId)) {
 			return 0;
 		}
-		int maxAmount = this.maxAdaptationMap.get(geneId);
-		if (this.adaptationMap.containsKey(geneId)) {
-			maxAmount -= this.adaptationMap.get(geneId).amount;
-		}
+		int maxAmount = this.adaptationMap.get(geneId).max - this.adaptationMap.get(geneId).amount;
 		if (adaptation.amount > maxAmount) {
 			return maxAmount;
 		}
@@ -113,7 +108,6 @@ public abstract class AdaptableEvoCard extends CustomCard {
 		AdaptableEvoCard card = (AdaptableEvoCard) super.makeCopy();
 		card.adaptationMap = this.adaptationMap.entrySet().stream().collect(
 				Collectors.toMap(Map.Entry::getKey, (e) -> e.getValue().makeCopy()));
-		card.maxAdaptationMap = new HashMap<>(this.maxAdaptationMap);
 		card.initialRawDescription = this.initialRawDescription;
 		card.isNameAdapted = this.isNameAdapted;
 		return card;
@@ -155,8 +149,16 @@ public abstract class AdaptableEvoCard extends CustomCard {
 
     public abstract static class AbstractAdaptation {
     	public int amount;
+    	public int max;
+    	protected AbstractAdaptation(AbstractAdaptation adaptation) {
+    		this(adaptation.amount, adaptation.max);
+	    }
     	public AbstractAdaptation(int amount) {
-    		this.amount = amount;
+    		this(amount, amount);
+	    }
+    	public AbstractAdaptation(int amount, int max) {
+		    this.amount = amount;
+    		this.max = max;
 	    }
 	    public abstract void apply(AbstractPlayer player, AbstractMonster monster);
 	    public abstract String text();
@@ -165,12 +167,12 @@ public abstract class AdaptableEvoCard extends CustomCard {
     }
 
     protected void upgradeAdaptationMaximum(String geneId, int change) {
-    	this.maxAdaptationMap.merge(geneId, change, Integer::sum);
+    	this.adaptationMap.get(geneId).max += change;
 //    	this.adaptationMaximum += change;
     	this.adaptationUpgraded = true;
 	}
 	protected int getAdaptationMaximum() {
-    	return this.maxAdaptationMap.values().stream().reduce(0, Integer::sum);
+    	return this.adaptationMap.values().stream().map(a -> a.max).reduce(0, Integer::sum);
 	}
 
     public static class MaxAdaptationNumber extends DynamicVariable {

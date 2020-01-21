@@ -29,7 +29,7 @@ public class WindUp
                 CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.UNCOMMON, CardTarget.SELF);
         this.magicNumber = this.baseMagicNumber = DRAW_AMT;
-        this.maxAdaptationMap.put(CentaurGene.ID, MAX_ADAPT_AMT);
+        this.adaptationMap.put(CentaurGene.ID, new CentaurGene.Adaptation(0, MAX_ADAPT_AMT));
     }
 
     @Override

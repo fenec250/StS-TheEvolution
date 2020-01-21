@@ -49,7 +49,7 @@ public class BeastGeneV2 extends AbstractGene {
 
 	@Override
 	public AdaptableEvoCard.AbstractAdaptation getAdaptation() {
-		return new BeastAdaptation(1);
+		return new Adaptation(1);
 	}
 
 	private static String buildDescription() {
@@ -64,10 +64,16 @@ public class BeastGeneV2 extends AbstractGene {
 		return dexterityToApply;
 	}
 
-	private static class BeastAdaptation extends AdaptableEvoCard.AbstractAdaptation {
+	public static class Adaptation extends AdaptableEvoCard.AbstractAdaptation {
 
-		BeastAdaptation(int amount) {
+		public Adaptation(int amount) {
 			super(amount);
+		}
+		public Adaptation(int amount, int max) {
+			super(amount, max);
+		}
+		Adaptation(Adaptation adaptation) {
+			super(adaptation);
 		}
 
 		@Override
@@ -87,7 +93,7 @@ public class BeastGeneV2 extends AbstractGene {
 
 		@Override
 		public AdaptableEvoCard.AbstractAdaptation makeCopy() {
-			return new BeastAdaptation(this.amount);
+			return new Adaptation(this);
 		}
 	}
 }

@@ -50,7 +50,7 @@ public class CentaurGene extends AbstractGene {
 
 	@Override
 	public AdaptableEvoCard.AbstractAdaptation getAdaptation() {
-		return new CentaurAdaptation(1);
+		return new Adaptation(1);
 	}
 
 	private static String buildDescription() {
@@ -65,10 +65,16 @@ public class CentaurGene extends AbstractGene {
 		return strengthToApply;
 	}
 
-	private static class CentaurAdaptation extends AdaptableEvoCard.AbstractAdaptation {
+	public static class Adaptation extends AdaptableEvoCard.AbstractAdaptation {
 
-		CentaurAdaptation(int amount) {
+		public Adaptation(int amount) {
 			super(amount);
+		}
+		public Adaptation(int amount, int max) {
+			super(amount, max);
+		}
+		Adaptation(Adaptation adaptation) {
+			super(adaptation);
 		}
 
 		@Override
@@ -88,7 +94,7 @@ public class CentaurGene extends AbstractGene {
 
 		@Override
 		public AdaptableEvoCard.AbstractAdaptation makeCopy() {
-			return new CentaurAdaptation(this.amount);
+			return new Adaptation(this);
 		}
 	}
 }

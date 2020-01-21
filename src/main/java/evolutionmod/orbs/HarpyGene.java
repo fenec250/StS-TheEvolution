@@ -45,7 +45,7 @@ public class HarpyGene extends AbstractGene {
 
 	@Override
 	public AdaptableEvoCard.AbstractAdaptation getAdaptation() {
-		return new HarpyAdaptation(1);
+		return new Adaptation(1);
 	}
 
 	@Override
@@ -62,10 +62,16 @@ public class HarpyGene extends AbstractGene {
 		return description;
 	}
 
-	private static class HarpyAdaptation extends AdaptableEvoCard.AbstractAdaptation {
+	public static class Adaptation extends AdaptableEvoCard.AbstractAdaptation {
 
-		HarpyAdaptation(int amount) {
+		public Adaptation(int amount) {
 			super(amount);
+		}
+		public Adaptation(int amount, int max) {
+			super(amount, max);
+		}
+		Adaptation(Adaptation adaptation) {
+			super(adaptation);
 		}
 
 		@Override
@@ -85,7 +91,7 @@ public class HarpyGene extends AbstractGene {
 
 		@Override
 		public AdaptableEvoCard.AbstractAdaptation makeCopy() {
-			return new HarpyAdaptation(this.amount);
+			return new Adaptation(this);
 		}
 	}
 }

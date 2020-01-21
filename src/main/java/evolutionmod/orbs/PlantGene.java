@@ -8,10 +8,8 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.OrbStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
-import com.megacrit.cardcrawl.powers.ThornsPower;
 import evolutionmod.cards.AdaptableEvoCard;
 import evolutionmod.powers.BramblesPower;
-import evolutionmod.powers.LoseThornsPower;
 
 public class PlantGene extends AbstractGene {
 	public static final String ID = "evolutionmod:PlantGene";
@@ -49,7 +47,7 @@ public class PlantGene extends AbstractGene {
 
 	@Override
 	public AdaptableEvoCard.AbstractAdaptation getAdaptation() {
-		return new PlantAdaptation(1);
+		return new Adaptation(1);
 	}
 
 	@Override
@@ -62,7 +60,7 @@ public class PlantGene extends AbstractGene {
 	}
 
 	private static int thornsPerGene() {
-		int thorns = 1;
+		int thorns = 2;
 		if (AbstractDungeon.player.hasPower("TODO Plant Form")) {
 			thorns += AbstractDungeon.player.getPower("TODO Plant Form").amount;
 		}
@@ -70,17 +68,23 @@ public class PlantGene extends AbstractGene {
 	}
 
 	private static int blockPerGene() {
-		int block = 2;
+		int block = 0;
 		if (AbstractDungeon.player.hasPower("TODO Plant Form")) {
 			block += AbstractDungeon.player.getPower("TODO Plant Form").amount;
 		}
 		return block;
 	}
 
-	private static class PlantAdaptation extends AdaptableEvoCard.AbstractAdaptation {
+	public static class Adaptation extends AdaptableEvoCard.AbstractAdaptation {
 
-		PlantAdaptation(int amount) {
+		public Adaptation(int amount) {
 			super(amount);
+		}
+		public Adaptation(int amount, int max) {
+			super(amount, max);
+		}
+		Adaptation(Adaptation adaptation) {
+			super(adaptation);
 		}
 
 		@Override
@@ -100,7 +104,7 @@ public class PlantGene extends AbstractGene {
 
 		@Override
 		public AdaptableEvoCard.AbstractAdaptation makeCopy() {
-			return new PlantAdaptation(this.amount);
+			return new Adaptation(this);
 		}
 	}
 }

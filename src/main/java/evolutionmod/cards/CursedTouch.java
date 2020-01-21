@@ -1,11 +1,8 @@
 package evolutionmod.cards;
 
-import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
-import com.megacrit.cardcrawl.actions.common.DrawCardAction;
-import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -16,7 +13,6 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.WeakPower;
 import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.GhostGene;
-import evolutionmod.orbs.LymeanGene;
 import evolutionmod.patches.AbstractCardEnum;
 
 public class CursedTouch
@@ -41,7 +37,7 @@ public class CursedTouch
                 CardRarity.COMMON, CardTarget.ENEMY);
         this.damage = this.baseDamage = DAMAGE_AMT;
         this.magicNumber = this.baseMagicNumber = WEAK_AMT;
-        this.maxAdaptationMap.put(GhostGene.ID, MAX_ADAPT_AMT);
+        this.adaptationMap.put(GhostGene.ID, new GhostGene.Adaptation(0, WEAK_AMT));
     }
 
     @Override

@@ -1,13 +1,11 @@
 package evolutionmod.orbs;
 
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.OrbStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
-import com.megacrit.cardcrawl.powers.PoisonPower;
 import evolutionmod.actions.LizardGeneAction;
 import evolutionmod.cards.AdaptableEvoCard;
 import evolutionmod.powers.LizardFormPower;
@@ -45,7 +43,7 @@ public class LizardGene extends AbstractGene {
 
 	@Override
 	public AdaptableEvoCard.AbstractAdaptation getAdaptation() {
-		return new LizardAdaptation(1);
+		return new Adaptation(1);
 	}
 
 	@Override
@@ -64,10 +62,16 @@ public class LizardGene extends AbstractGene {
 		return poison;
 	}
 
-	private static class LizardAdaptation extends AdaptableEvoCard.AbstractAdaptation {
+	public static class Adaptation extends AdaptableEvoCard.AbstractAdaptation {
 
-		LizardAdaptation(int amount) {
+		public Adaptation(int amount) {
 			super(amount);
+		}
+		public Adaptation(int amount, int max) {
+			super(amount, max);
+		}
+		Adaptation(Adaptation adaptation) {
+			super(adaptation);
 		}
 
 		@Override
@@ -87,7 +91,7 @@ public class LizardGene extends AbstractGene {
 
 		@Override
 		public AdaptableEvoCard.AbstractAdaptation makeCopy() {
-			return new LizardAdaptation(this.amount);
+			return new Adaptation(this);
 		}
 	}
 }

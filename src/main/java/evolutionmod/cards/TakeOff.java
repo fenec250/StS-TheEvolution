@@ -31,7 +31,7 @@ public class TakeOff
                 CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.UNCOMMON, CardTarget.SELF);
         this.block = this.baseBlock = BLOCK_AMT;
-        this.maxAdaptationMap.put(HarpyGene.ID, MAX_ADAPT_AMT);
+        this.adaptationMap.put(HarpyGene.ID, new HarpyGene.Adaptation(0, MAX_ADAPT_AMT));
         this.magicNumber = this.baseMagicNumber = DRAW_AMT;
     }
 

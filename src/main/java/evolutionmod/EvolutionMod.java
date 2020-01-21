@@ -114,8 +114,9 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
         BaseMod.addCard(new Hivemind());
         BaseMod.addCard(new HeightenedSenses());
         //6 powers
-        BaseMod.addCard(new AquaticForm());
-        BaseMod.addCard(new MagicForm());
+//        BaseMod.addCard(new AquaticForm());
+//        BaseMod.addCard(new MagicForm());
+        BaseMod.addCard(new Grow());
 
         //Rares.
         //4 attacks

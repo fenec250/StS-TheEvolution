@@ -7,7 +7,8 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import evolutionmod.orbs.AbstractGene;
-import evolutionmod.orbs.LymeanGene;
+import evolutionmod.orbs.LavafolkGene;
+import evolutionmod.orbs.LymeanGeneV2;
 import evolutionmod.patches.AbstractCardEnum;
 
 public class Purify
@@ -29,7 +30,7 @@ public class Purify
                 CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.UNCOMMON, CardTarget.SELF);
         this.magicNumber = this.baseMagicNumber = MAX_EXHAUST_AMT;
-        this.maxAdaptationMap.put(LymeanGene.ID, MAX_ADAPT_AMT);
+        this.adaptationMap.put(LymeanGeneV2.ID, new LymeanGeneV2.Adaptation(0, MAX_ADAPT_AMT));
     }
 
     @Override
@@ -49,7 +50,7 @@ public class Purify
         if (!this.upgraded) {
             this.upgradeName();
             this.upgradeMagicNumber(UPGRADE_MAX_EXHAUST_AMT);
-            this.upgradeAdaptationMaximum(LymeanGene.ID, UPGRADE_MAX_ADAPT_AMT);
+            this.upgradeAdaptationMaximum(LymeanGeneV2.ID, UPGRADE_MAX_ADAPT_AMT);
         }
     }
 }

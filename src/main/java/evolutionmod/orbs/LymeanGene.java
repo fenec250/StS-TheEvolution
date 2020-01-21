@@ -58,7 +58,7 @@ public class LymeanGene extends AbstractGene {
 
 	@Override
 	public AdaptableEvoCard.AbstractAdaptation getAdaptation() {
-		return new LymeanAdaptation(1);
+		return new Adaptation(1);
 	}
 
 	@Override
@@ -89,10 +89,16 @@ public class LymeanGene extends AbstractGene {
 //		return exhaust;
 //	}
 
-	private static class LymeanAdaptation extends AdaptableEvoCard.AbstractAdaptation {
+	public static class Adaptation extends AdaptableEvoCard.AbstractAdaptation {
 
-		LymeanAdaptation(int amount) {
+		public Adaptation(int amount) {
 			super(amount);
+		}
+		public Adaptation(int amount, int max) {
+			super(amount, max);
+		}
+		Adaptation(Adaptation adaptation) {
+			super(adaptation);
 		}
 
 		@Override
@@ -112,7 +118,7 @@ public class LymeanGene extends AbstractGene {
 
 		@Override
 		public AdaptableEvoCard.AbstractAdaptation makeCopy() {
-			return new LymeanAdaptation(this.amount);
+			return new Adaptation(this);
 		}
 	}
 }

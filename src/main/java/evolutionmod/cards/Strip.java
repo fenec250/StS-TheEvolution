@@ -32,7 +32,7 @@ public class Strip
                 CardType.ATTACK, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.UNCOMMON, CardTarget.ENEMY);
         this.damage = this.baseDamage = DAMAGE_AMT;
-        this.maxAdaptationMap.put(SuccubusGene.ID, MAX_ADAPT_AMT);
+        this.adaptationMap.put(SuccubusGene.ID, new SuccubusGene.Adaptation(0, MAX_ADAPT_AMT));
     }
 
     @Override

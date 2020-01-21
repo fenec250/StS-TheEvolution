@@ -12,6 +12,7 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.PoisonPower;
 import evolutionmod.orbs.AbstractGene;
+import evolutionmod.orbs.LavafolkGene;
 import evolutionmod.orbs.LizardGene;
 import evolutionmod.orbs.SuccubusGene;
 import evolutionmod.patches.AbstractCardEnum;
@@ -38,7 +39,7 @@ public class PoisonFangs
                 CardRarity.UNCOMMON, CardTarget.ENEMY);
         this.damage = this.baseDamage = DAMAGE_AMT;
         this.magicNumber = this.baseMagicNumber = POISON_AMT;
-        this.maxAdaptationMap.put(LizardGene.ID, MAX_ADAPT_AMT);
+        this.adaptationMap.put(LizardGene.ID, new LavafolkGene.Adaptation(0, MAX_ADAPT_AMT));
     }
 
     @Override

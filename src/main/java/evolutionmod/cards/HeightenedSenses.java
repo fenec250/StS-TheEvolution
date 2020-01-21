@@ -18,7 +18,7 @@ public class HeightenedSenses
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = "evolutionmod/images/cards/BeastForm.png";
-    private static final int COST = 1;
+    private static final int COST = 0;
     private static final int DRAW_AMT = 3;
     private static final int UPGRADED_DRAW_AMT = 1;
     private static final int MAX_ADAPT_AMT = 2;
@@ -29,7 +29,7 @@ public class HeightenedSenses
                 CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.UNCOMMON, CardTarget.SELF);
         this.magicNumber = this.baseMagicNumber = DRAW_AMT;
-        this.maxAdaptationMap.put(BeastGeneV2.ID, MAX_ADAPT_AMT);
+        this.adaptationMap.put(BeastGeneV2.ID, new BeastGeneV2.Adaptation(0, MAX_ADAPT_AMT));
     }
 
     @Override

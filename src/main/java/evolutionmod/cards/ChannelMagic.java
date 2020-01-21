@@ -31,7 +31,7 @@ public class ChannelMagic
                 CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.UNCOMMON, CardTarget.ENEMY);
         this.magicNumber = this.baseMagicNumber = FORM_AMT;
-        this.maxAdaptationMap.put(LavafolkGene.ID, MAX_ADAPT_AMT);
+        this.adaptationMap.put(LavafolkGene.ID, new LavafolkGene.Adaptation(0, this.magicNumber));
     }
 
     @Override

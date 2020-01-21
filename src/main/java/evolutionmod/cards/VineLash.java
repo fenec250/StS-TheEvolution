@@ -35,7 +35,7 @@ public class VineLash
                 CardRarity.UNCOMMON, CardTarget.ENEMY);
         this.damage = this.baseDamage = 0;
         this.magicNumber = this.baseMagicNumber = THORN_AMT;
-        this.maxAdaptationMap.put(PlantGene.ID, MAX_ADAPT_AMT);
+        this.adaptationMap.put(PlantGene.ID, new PlantGene.Adaptation(0, MAX_ADAPT_AMT));
     }
 
     @Override

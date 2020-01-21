@@ -43,7 +43,7 @@ public class MerfolkGene extends AbstractGene {
 
 	@Override
 	public AdaptableEvoCard.AbstractAdaptation getAdaptation() {
-		return new MerfolkAdaptation(1);
+		return new Adaptation(1);
 	}
 
 	@Override
@@ -71,10 +71,16 @@ public class MerfolkGene extends AbstractGene {
 		return block;
 	}
 
-	private static class MerfolkAdaptation extends AdaptableEvoCard.AbstractAdaptation {
+	public static class Adaptation extends AdaptableEvoCard.AbstractAdaptation {
 
-		MerfolkAdaptation(int amount) {
+		public Adaptation(int amount) {
 			super(amount);
+		}
+		public Adaptation(int amount, int max) {
+			super(amount, max);
+		}
+		Adaptation(Adaptation adaptation) {
+			super(adaptation);
 		}
 
 		@Override
@@ -94,7 +100,7 @@ public class MerfolkGene extends AbstractGene {
 
 		@Override
 		public AdaptableEvoCard.AbstractAdaptation makeCopy() {
-			return new MerfolkAdaptation(this.amount);
+			return new Adaptation(this);
 		}
 	}
 }

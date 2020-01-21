@@ -2,19 +2,14 @@ package evolutionmod.actions;
 
 import basemod.BaseMod;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.EmptyDeckShuffleAction;
-import com.megacrit.cardcrawl.actions.utility.QueueCardAction;
+import com.megacrit.cardcrawl.actions.utility.NewQueueCardAction;
 import com.megacrit.cardcrawl.actions.utility.UnlimboAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.CardQueueItem;
-import com.megacrit.cardcrawl.cards.red.PerfectedStrike;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.DoubleTapPower;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -64,7 +59,7 @@ public class RushAction extends AbstractGameAction {
 			if (card.cost > 0) {
 				card.freeToPlayOnce = true;
 			}
-			AbstractDungeon.player.limbo.group.add(card);
+			AbstractDungeon.player.limbo.addToBottom(card);
 			card.current_y = -200.0F * Settings.scale;
 			card.target_x = (float) Settings.WIDTH / 2.0F + 200.0F * Settings.scale;
 			card.target_y = (float) Settings.HEIGHT / 2.0F;
@@ -77,8 +72,11 @@ public class RushAction extends AbstractGameAction {
 				card.calculateCardDamage(monster);
 			}
 			card.applyPowers();
-			AbstractDungeon.actionManager.addToTop(new QueueCardAction(card, this.target));
-			AbstractDungeon.actionManager.addToTop(new UnlimboAction(card));
+			this.addToTop(new NewQueueCardAction(card, this.target, false, true));
+//			AbstractDungeon.actionManager.addCardQueueItem(new CardQueueItem(card, (AbstractMonster) this.target));
+			if (!playFake) {
+				AbstractDungeon.actionManager.addToTop(new UnlimboAction(card));
+			}
 		});
 		this.isDone = true;
 		this.tickDuration();

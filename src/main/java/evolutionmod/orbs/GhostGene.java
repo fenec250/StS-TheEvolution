@@ -7,7 +7,6 @@ import com.megacrit.cardcrawl.localization.OrbStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import evolutionmod.actions.GhostGeneAction;
-import evolutionmod.actions.SuccubusGeneAction;
 import evolutionmod.cards.AdaptableEvoCard;
 
 public class GhostGene extends AbstractGene {
@@ -42,7 +41,7 @@ public class GhostGene extends AbstractGene {
 
 	@Override
 	public AdaptableEvoCard.AbstractAdaptation getAdaptation() {
-		return new GhostAdaptation(1);
+		return new Adaptation(1);
 	}
 
 	@Override
@@ -62,10 +61,16 @@ public class GhostGene extends AbstractGene {
 		return damage;
 	}
 
-	private static class GhostAdaptation extends AdaptableEvoCard.AbstractAdaptation {
+	public static class Adaptation extends AdaptableEvoCard.AbstractAdaptation {
 
-		GhostAdaptation(int amount) {
+		public Adaptation(int amount) {
 			super(amount);
+		}
+		public Adaptation(int amount, int max) {
+			super(amount, max);
+		}
+		Adaptation(Adaptation adaptation) {
+			super(adaptation);
 		}
 
 		@Override
@@ -85,7 +90,7 @@ public class GhostGene extends AbstractGene {
 
 		@Override
 		public AdaptableEvoCard.AbstractAdaptation makeCopy() {
-			return new GhostAdaptation(this.amount);
+			return new Adaptation(this);
 		}
 	}
 }
