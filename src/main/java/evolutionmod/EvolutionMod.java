@@ -86,6 +86,7 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
         BaseMod.addCard(new HoofKick());
         BaseMod.addCard(new TalonStrike());
         BaseMod.addCard(new WaterBolt());
+        BaseMod.addCard(new WaveCrash());
         BaseMod.addCard(new FlameStrike());
         BaseMod.addCard(new GatherFood());
         BaseMod.addCard(new DrainMana());

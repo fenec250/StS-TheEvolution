@@ -33,6 +33,10 @@
   },
 
 
+  "evolutionmod:AdaptationPower": {
+    "NAME": "Adaptation",
+    "DESCRIPTIONS": ["The next ", " basic Strike or Defend you play will Adapt with your next Gene."]
+  },
   "evolutionmod:MarkPower": {
     "NAME": "Mark",
     "DESCRIPTIONS": ["Genes and adaptations that target random enemies will target this enemy first"]
@@ -43,11 +47,11 @@
   },
   "evolutionmod:BramblesPower": {
     "NAME": "Brambles",
-    "DESCRIPTIONS": ["When recieving Attack damage deal ", " damages back"]
+    "DESCRIPTIONS": ["When recieving Attack damage deal ", " damages back. This power is removed at the start of your turn."]
   },
-  "evolutionmod:LoseThornsPower": {
-    "NAME": "Thorns Down",
-    "DESCRIPTIONS": ["At the beggining of your turn lose ", " Thorn and remove this"]
+  "evolutionmod:ChargePower": {
+    "NAME": "Charge",
+    "DESCRIPTIONS": ["Add ", " additional damage to attacks. This power is removed at the end of your turn."]
   },
   "evolutionmod:LoseLavafolkFormPower": {
     "NAME": "Lavafolk form Down",

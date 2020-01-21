@@ -1,7 +1,9 @@
 package evolutionmod.cards;
 
 import basemod.helpers.BaseModCardTags;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
+import com.megacrit.cardcrawl.cards.blue.Defend_Blue;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -9,6 +11,7 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import evolutionmod.orbs.AbstractGene;
 import evolutionmod.patches.AbstractCardEnum;
+import evolutionmod.powers.AdaptationPower;
 
 public class DefendEvo
         extends AdaptableEvoCard {
@@ -28,20 +31,25 @@ public class DefendEvo
                 CardRarity.BASIC, CardTarget.SELF);
         this.block = this.baseBlock = BLOCK_AMT;
         this.tags.add(BaseModCardTags.BASIC_DEFEND);
+        this.tags.add(CardTags.STARTER_DEFEND);
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, this.block));
+        addToBot(new GainBlockAction(p, p, this.block));
+        if (p.hasPower(AdaptationPower.POWER_ID)) {
+            addToTop(new ApplyPowerAction(p, p, new AdaptationPower(p, -1), -1));
+            p.orbs.stream()
+                    .filter(o -> this.canAdaptWith(o) > 0)
+                    .findAny()
+                    .ifPresent(o -> this.tryAdaptingWith(o, true));
+        }
         this.useAdaptations(p, m);
     }
 
     @Override
     public int canAdaptWith(AbstractAdaptation adaptation) {
-        if (!this.adaptationMap.containsKey(adaptation.getGeneId())) {
-            return 1;
-        }
-        return 0;
+        return adaptation.amount;
     }
 
     @Override

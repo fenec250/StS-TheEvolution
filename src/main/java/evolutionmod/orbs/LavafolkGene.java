@@ -16,7 +16,7 @@ public class LavafolkGene extends AbstractGene {
 	public static final OrbStrings orbStrings = CardCrawlGame.languagePack.getOrbString(ID);
 	public static final String NAME = orbStrings.NAME;
 	public static final String[] DESCRIPTION = orbStrings.DESCRIPTION;
-	public static final String IMG_PATH = "evolutionmod/images/cards/strike.png";
+	public static final String IMG_PATH = "evolutionmod/images/orbs/LavafolkGene.png";
 
 	public LavafolkGene() {
 		super(ID, NAME, buildDescription(), IMG_PATH);

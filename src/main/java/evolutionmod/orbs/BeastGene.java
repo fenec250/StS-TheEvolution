@@ -19,7 +19,7 @@ public class BeastGene extends AbstractGene {
 	public static final String IMG_PATH = "evolutionmod/images/orbs/BeastGene.png";
 
 	public BeastGene() {
-		super(ID, NAME, "first", IMG_PATH);
+		super(ID, NAME, buildDescription(), IMG_PATH);
 	}
 
 	@Override

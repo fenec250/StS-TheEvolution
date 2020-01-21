@@ -23,7 +23,7 @@ public class ShadowShift
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-    public static final String IMG_PATH = "evolutionmod/images/cards/PlantForm.png";
+    public static final String IMG_PATH = "evolutionmod/images/cards/GhostForm.png";
     private static final int COST = 2;
     private static final int BLOCK_AMT = 4;
     private static final int UPGRADE_BLOCK_AMT = 2;

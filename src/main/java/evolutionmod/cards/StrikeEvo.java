@@ -2,6 +2,7 @@ package evolutionmod.cards;
 
 import basemod.helpers.BaseModCardTags;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -11,6 +12,7 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import evolutionmod.orbs.AbstractGene;
 import evolutionmod.patches.AbstractCardEnum;
+import evolutionmod.powers.AdaptationPower;
 
 import java.util.stream.Collectors;
 
@@ -32,6 +34,7 @@ public class StrikeEvo
                 CardRarity.BASIC, CardTarget.ENEMY);
         this.damage = this.baseDamage = DAMAGE_AMT;
         this.tags.add(BaseModCardTags.BASIC_STRIKE);
+        this.tags.add(CardTags.STARTER_STRIKE);
         this.tags.add(CardTags.STRIKE);
     }
 
@@ -40,39 +43,20 @@ public class StrikeEvo
         AbstractDungeon.actionManager.addToBottom(new DamageAction(
                 m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
                 AbstractGameAction.AttackEffect.BLUNT_HEAVY));
+        if (p.hasPower(AdaptationPower.POWER_ID)) {
+            addToTop(new ApplyPowerAction(p, p, new AdaptationPower(p, -1), -1));
+            p.orbs.stream()
+                    .filter(o -> this.canAdaptWith(o) > 0)
+                    .findAny()
+                    .ifPresent(o -> this.tryAdaptingWith(o, true));
+        }
         this.useAdaptations(p, m);
     }
 
     @Override
     public int canAdaptWith(AbstractAdaptation adaptation) {
-        if (!this.adaptationMap.containsKey(adaptation.getGeneId())) {
-            return 1;
-        }
-        return 0;
+        return adaptation.amount;
     }
-//    public int addAdaptation(AbstractAdaptation adaptation) {
-//    }
-//
-//    @Override
-//    public void selfAdapt(AbstractPlayer player) {
-//        player.orbs.stream()
-//                .filter(o -> o instanceof AbstractGene)
-//                .map (o -> (AbstractGene) o)
-////                .filter(o -> !this.adaptationMap.containsKey(o.ID))
-//                .map(AbstractGene::getAdaptation)
-//                .forEach(g -> {
-//                    if this::addAdaptation
-//                });
-//        getFilteredGenes(
-//                player,
-//                )
-//                .stream()
-//                .map(AbstractGene::getAdaptation)
-//                .forEach(g -> {
-//                    g.amount = 1;
-//                    this.addAdaptation(g);
-//                });
-//    }
 
     @Override
     public void upgrade() {

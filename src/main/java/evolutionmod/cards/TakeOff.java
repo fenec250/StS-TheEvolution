@@ -18,13 +18,13 @@ public class TakeOff
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-    public static final String IMG_PATH = "evolutionmod/images/cards/strike.png";
+    public static final String IMG_PATH = "evolutionmod/images/cards/HarpyForm.png";
     private static final int COST = 1;
     private static final int BLOCK_AMT = 6;
     private static final int UPGRADE_BLOCK_AMT = 3;
     private static final int MAX_ADAPT_AMT = 2;
-    private static final int UPGRADE_MAX_ADAPT_AMT = 1;
     private static final int DRAW_AMT = 1;
+    private static final int UPGRADE_DRAW_AMT = 1;
 
     public TakeOff() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -51,7 +51,7 @@ public class TakeOff
         if (!this.upgraded) {
             this.upgradeName();
             this.upgradeBlock(UPGRADE_BLOCK_AMT);
-            this.upgradeAdaptationMaximum(HarpyGene.ID, UPGRADE_MAX_ADAPT_AMT);
+            this.upgradeMagicNumber(UPGRADE_DRAW_AMT);
         }
     }
 }

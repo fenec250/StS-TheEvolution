@@ -96,7 +96,18 @@ public abstract class AdaptableEvoCard extends CustomCard {
 		    this.isNameAdapted = true;
 	    }
 	    this.adaptationDescription = " NL " + this.adaptationMap.values().stream()
-			    .map(a -> a.text() + (a.amount > 1 ? "x" + a.amount : "") + ", ")
+			    .map(a -> {
+					StringBuilder stringBuilder = new StringBuilder(a.text());
+					stringBuilder.append(": ");
+					int i = 0;
+					for (; i < a.amount; ++i) {
+						stringBuilder.append('x');
+					}
+					for (; i < a.max; ++i) {
+						stringBuilder.append('-');
+					}
+					return stringBuilder;
+				})
 			    .reduce(new StringBuilder(), StringBuilder::append, StringBuilder::append);
 
 	    this.rawDescription = this.initialRawDescription + this.adaptationDescription;

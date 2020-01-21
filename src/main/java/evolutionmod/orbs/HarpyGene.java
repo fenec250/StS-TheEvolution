@@ -14,7 +14,7 @@ public class HarpyGene extends AbstractGene {
 	public static final OrbStrings orbStrings = CardCrawlGame.languagePack.getOrbString(ID);
 	public static final String NAME = orbStrings.NAME;
 	public static final String[] DESCRIPTION = orbStrings.DESCRIPTION;
-	public static final String IMG_PATH = "evolutionmod/images/cards/strike.png";
+	public static final String IMG_PATH = "evolutionmod/images/orbs/HarpyGene.png";
 
 	public HarpyGene() {
 		super(ID, NAME, buildDescription(), IMG_PATH);
@@ -37,10 +37,10 @@ public class HarpyGene extends AbstractGene {
 
 	public static void apply(AbstractPlayer p, AbstractMonster m, int times) {
 		AbstractDungeon.actionManager.addToBottom(new DrawCardAction(p, times));
-		if (p.hasPower("TODO Harpy Form")) {
-			int swiftness = p.getPower("TODO Harpy Form").amount;
+//		if (p.hasPower("TODO Harpy Form")) {
+//			int swiftness = p.getPower("TODO Harpy Form").amount;
 //			AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new SwiftnessPower(p, swiftness), swiftness));
-		}
+//		}
 	}
 
 	@Override

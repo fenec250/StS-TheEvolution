@@ -11,8 +11,9 @@
   },
   "evolutionmod:Adaptation": {
     "NAME": "Adaptation",
-    "DESCRIPTION": "Adapt a basic πStrike or Defend with your two rightmost  Genes, ignoring duplicates. NL Retain.",
-    "UPGRADE_DESCRIPTION": "Adapt a basic Strike or Defend with your two rightmost Genes, ignoring duplicates. NL Reduce its cost by 1 this turn. NL Retain."
+    "DESCRIPTION": "Gain !B! Block. NL The next !M! basic πStrike or Defend you play will Adapt with your next Gene.",
+//    "DESCRIPTION": "Adapt a basic πStrike or Defend with your two rightmost  Genes, ignoring duplicates. NL Retain.",
+    "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:Evolution": {
     "NAME": "Evolution",
@@ -68,6 +69,11 @@
   "evolutionmod:WaterBolt": {
     "NAME": "Water bolt",
     "DESCRIPTION": "Deal !D! damage NL Apply !M! Weak NL Evolve a [#5252FF]Merfolk[] gene",
+    "UPGRADE_DESCRIPTION": ""
+  },
+  "evolutionmod:WaveCrash": {
+    "NAME": "Wave Crash",
+    "DESCRIPTION": "Deal !D! damage to all enemies. NL Evolve a [#5252FF]Merfolk[] gene",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:Dive": {

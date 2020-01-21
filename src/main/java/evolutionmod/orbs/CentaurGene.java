@@ -10,6 +10,7 @@ import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.powers.LoseStrengthPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 import evolutionmod.cards.AdaptableEvoCard;
+import evolutionmod.powers.ChargePower;
 
 public class CentaurGene extends AbstractGene {
 	public static final String ID = "evolutionmod:CentaurGene";
@@ -19,7 +20,7 @@ public class CentaurGene extends AbstractGene {
 	public static final String IMG_PATH = "evolutionmod/images/orbs/CentaurGene.png";
 
 	public CentaurGene() {
-		super(ID, NAME, "first", IMG_PATH);
+		super(ID, NAME, buildDescription(), IMG_PATH);
 	}
 
 	@Override
@@ -39,8 +40,9 @@ public class CentaurGene extends AbstractGene {
 
 	public static void apply(AbstractPlayer p, AbstractMonster m, int times) {
 		int strengthToApply = strengthToApply() * times;
-		AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new StrengthPower(p, strengthToApply), strengthToApply));
-		AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new LoseStrengthPower(p, strengthToApply), strengthToApply));
+		AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new ChargePower(p, strengthToApply), strengthToApply));
+//		AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new StrengthPower(p, strengthToApply), strengthToApply));
+//		AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new LoseStrengthPower(p, strengthToApply), strengthToApply));
 	}
 
 	@Override

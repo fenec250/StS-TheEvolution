@@ -19,10 +19,9 @@ public class Hivemind
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = "evolutionmod/images/cards/strike.png";
     private static final int COST = 1;
-    private static final int DRONES_AMT = 1;
+    private static final int DRONES_AMT = 2;
     private static final int UPGRADE_DRONES_AMT = 1;
     private static final int MAX_ADAPT_AMT = 2;
-    private static final int UPGRADE_MAX_ADAPT_AMT = 1;
 
     public Hivemind() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -47,7 +46,6 @@ public class Hivemind
         if (!this.upgraded) {
             this.upgradeName();
             this.upgradeMagicNumber(UPGRADE_DRONES_AMT);
-            this.upgradeAdaptationMaximum(InsectGene.ID, UPGRADE_MAX_ADAPT_AMT);
         }
     }
 }
