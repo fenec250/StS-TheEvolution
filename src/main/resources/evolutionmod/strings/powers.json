@@ -64,5 +64,9 @@
   "evolutionmod:PoisonCoatedPower": {
     "NAME": "Poison Coated",
     "DESCRIPTIONS": ["Whenever an Attack deals unblocked damage this turn, apply ", " Poison."]
+  },
+  "evolutionmod:SymbiotesPower": {
+    "NAME": "Symbiotes",
+    "DESCRIPTIONS": ["Gain ", " Brambles and ", " Block the first time you play a Drone each turn "]
   }
 }

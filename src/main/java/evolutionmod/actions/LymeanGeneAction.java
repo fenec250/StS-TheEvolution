@@ -34,7 +34,7 @@ public class LymeanGeneAction extends AbstractGameAction {
 					.findAny()
 					.orElse(AbstractDungeon.getRandomMonster());
 		}
-		AbstractDungeon.actionManager.addToTop(new HealAction(this.target, this.source, this.heal));
+		AbstractDungeon.actionManager.addToTop(new HealAction(this.target, this.source, this.heal, Settings.ACTION_DUR_XFAST));
 		AbstractDungeon.actionManager.addToTop(new GainBlockAction(this.source, this.source, this.block));
 
 		this.isDone = true;

@@ -34,7 +34,7 @@ public class Hivemind
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(new Drone(), this.magicNumber));
+        AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(Drone.createDroneWithInteractions(p), this.magicNumber));
         p.orbs.stream()
                 .filter(o -> this.canAdaptWith(o) > 0)
                 .findAny()

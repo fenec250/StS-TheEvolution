@@ -37,7 +37,7 @@ public class InsectGene extends AbstractGene {
 	}
 
 	public static void apply(AbstractPlayer p, AbstractMonster m, int times) {
-		AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(new Drone(), times));
+		AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(Drone.createDroneWithInteractions(p), times));
 	}
 
 	@Override

@@ -105,6 +105,8 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
         BaseMod.addCard(new VineLash());
         BaseMod.addCard(new PoisonFangs());
         BaseMod.addCard(new CursedTouch());
+        //exhaust
+        BaseMod.addCard(new BlackCat());
         //18 skills
         BaseMod.addCard(new TakeOff());
         BaseMod.addCard(new Dive());
@@ -113,10 +115,16 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
         BaseMod.addCard(new Purify());
         BaseMod.addCard(new Hivemind());
         BaseMod.addCard(new HeightenedSenses());
+        //exhaust
+        BaseMod.addCard(new Salamander());
+        BaseMod.addCard(new SirenSong());
+        BaseMod.addCard(new Toxin());
         //6 powers
 //        BaseMod.addCard(new AquaticForm());
 //        BaseMod.addCard(new MagicForm());
         BaseMod.addCard(new Grow());
+        BaseMod.addCard(new Symbiotes());
+        BaseMod.addCard(new Blessing());
 
         //Rares.
         //4 attacks

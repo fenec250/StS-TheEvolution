@@ -33,11 +33,15 @@ public class Drone
         this.damage = this.baseDamage = DAMAGE_AMT;
         this.exhaust = true;
         this.isEthereal = true;
-        AbstractPlayer player = AbstractDungeon.player;
+    }
+
+    public static Drone createDroneWithInteractions(AbstractPlayer player) {
+        Drone drone = new Drone();
         if (player != null && player.hasPower(MatureEggPower.POWER_ID)) {
-            this.upgrade();
+            drone.upgrade();
             AbstractDungeon.actionManager.addToTop(new ReducePowerAction(player, player, MatureEggPower.POWER_ID, 1));
         }
+        return drone;
     }
 
     @Override
@@ -49,12 +53,6 @@ public class Drone
                 m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
                 AbstractGameAction.AttackEffect.BLUNT_HEAVY));
         this.useAdaptations(p, m);
-    }
-
-    @Override
-    public void applyPowers() {
-        super.applyPowers();
-        // if player has InsectForm, add its amount to damage.
     }
 
     @Override

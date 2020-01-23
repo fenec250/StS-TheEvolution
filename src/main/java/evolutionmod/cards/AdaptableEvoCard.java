@@ -104,6 +104,15 @@ public abstract class AdaptableEvoCard extends CustomCard {
     }
 
 	@Override
+	public void use(AbstractPlayer p, AbstractMonster m) {
+		p.orbs.stream()
+				.filter(o -> this.canAdaptWith(o) > 0)
+				.collect(Collectors.toList())
+				.forEach(o -> this.tryAdaptingWith(o, true));
+		this.useAdaptations(p, m);
+	}
+
+	@Override
 	public AbstractCard makeCopy() {
 		AdaptableEvoCard card = (AdaptableEvoCard) super.makeCopy();
 		card.adaptationMap = this.adaptationMap.entrySet().stream().collect(

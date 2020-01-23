@@ -11,7 +11,7 @@
   },
   "evolutionmod:Adaptation": {
     "NAME": "Adaptation",
-    "DESCRIPTION": "Adapt a basic Strike or Defend with your two rightmost  Genes, ignoring duplicates. NL Retain.",
+    "DESCRIPTION": "Adapt a basic πStrike or Defend with your two rightmost  Genes, ignoring duplicates. NL Retain.",
     "UPGRADE_DESCRIPTION": "Adapt a basic Strike or Defend with your two rightmost Genes, ignoring duplicates. NL Reduce its cost by 1 this turn. NL Retain."
   },
   "evolutionmod:Evolution": {
@@ -189,6 +189,36 @@
     "NAME": "Drain Curse",
     "DESCRIPTION": "Deal !D! damage. NL Remove all but 1 Weak from the ennemy. NL Gain twice that many Block. NL Evolve a Ghost gene.",
     "UPGRADE_DESCRIPTION": "Deal !D! damage. NL Draw a random Strike from your deck and play a copy on the same target. NL Evolve a [#B06060]Beast[] gene."
+  },
+  "evolutionmod:SirenSong": {
+    "NAME": "Siren Song",
+    "DESCRIPTION": "Apply !M! Vulnerable to all enemies. NL Evolve a Merfolk gene and a Succubus gene. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": ""
+  },
+  "evolutionmod:BlackCat": {
+    "NAME": "Black Cat",
+    "DESCRIPTION": "Deal !D! damage to all enemies twice. NL Apply !M! Weak to all enemies. NL Evolve a Beast gene and a Ghost gene. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": ""
+  },
+  "evolutionmod:Salamander": {
+    "NAME": "Salamander",
+    "DESCRIPTION": "Heal !M! HP. NL Evolve a Lavafolk gene and a Lizard gene. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": ""
+  },
+  "evolutionmod:Toxin": {
+    "NAME": "Toxin",
+    "DESCRIPTION": "Apply !M! Poison. NL Evolve a Plant gene and a Lizard gene. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": ""
+  },
+  "evolutionmod:Blessing": {
+    "NAME": "Benediction",
+    "DESCRIPTION": "Exhaust a random Curse from your deck. NL Gain !M! Artifact NL Evolve a Lymean gene and a Ghost gene. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "Innate. NL Exhaust a random Curse from your deck. NL Gain !M! Artifact NL Evolve a Lymean gene and a Ghost gene. NL Exhaust."
+  },
+  "evolutionmod:Symbiotes": {
+    "NAME": "Symbiotes",
+    "DESCRIPTION": "Gain !M! Brambles and twice as much Block the first time you play a Drone each turn. NL Evolve a Plant gene and an Insect gene. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:ShiftingStrike": {
     "NAME": "Shifting strike",
