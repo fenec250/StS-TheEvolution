@@ -20,8 +20,8 @@ public class MatureEggPower extends AbstractPower {
         this.name = NAME;
         this.ID = POWER_ID;
         this.owner = owner;
-        this.region128 = new TextureAtlas.AtlasRegion(new Texture("evolutionmod/images/powers/ebb power 84.png"), 0, 0, 84, 84);
-        this.region48 = new TextureAtlas.AtlasRegion(new Texture("evolutionmod/images/powers/ebb power 32.png"), 0, 0, 32, 32);
+        this.region128 = new TextureAtlas.AtlasRegion(new Texture("evolutionmod/images/powers/insect power 84.png"), 0, 0, 84, 84);
+        this.region48 = new TextureAtlas.AtlasRegion(new Texture("evolutionmod/images/powers/insect power 32.png"), 0, 0, 32, 32);
         this.type = PowerType.BUFF;
         this.amount = initialAmount;
         this.updateDescription();
@@ -39,6 +39,7 @@ public class MatureEggPower extends AbstractPower {
 //        this.flashWithoutSound();
 //    }
 
+    @Override
     public void stackPower(int stackAmount) {
         this.fontScale = 8.0F;
         this.amount += stackAmount;

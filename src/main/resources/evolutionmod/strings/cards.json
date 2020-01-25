@@ -53,12 +53,12 @@
   },
   "evolutionmod:TalonStrike": {
     "NAME": "Talon strike",
-    "DESCRIPTION": "Deal !D! damage NL Evolve a [#FFFF80]Harpy[] gene",
+    "DESCRIPTION": "Deal !D! damage NL Evolve a Harpy gene",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:TakeOff": {
     "NAME": "Take Off",
-    "DESCRIPTION": "Gain !B! block NL draw 1 card NL Adapt this with a [#FFFF80]Harpy[] gene up to !evolutionmod:MA! times.",
+    "DESCRIPTION": "Gain !B! block. NL Draw !M! card. NL Adapt this with a [#FFFF80]Harpy[] gene up to !evolutionmod:MA! times.",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:FeatherStorm": {
@@ -103,7 +103,7 @@
   },
   "evolutionmod:FlameStrike": {
     "NAME": "Flame Strike",
-    "DESCRIPTION": "Deal !D! damage to all enemies. NL Evolve a [#FF9050]Lavafolk[] gene.",
+    "DESCRIPTION": "Deal !D! damage to all enemies. NL Evolve a Lavafolk gene.",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:Fireballs": {
@@ -153,7 +153,7 @@
   },
   "evolutionmod:ClawSlash": {
     "NAME": "Claw slash",
-    "DESCRIPTION": "Deal !D! damage twice. NL Evolve a [#B06060]Beast[] gene.",
+    "DESCRIPTION": "Deal !D! damage twice. NL Evolve a Beast gene.",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:HeightenedSenses": {

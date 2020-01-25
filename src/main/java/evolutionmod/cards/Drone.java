@@ -10,6 +10,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.powers.AbstractPower;
 import evolutionmod.patches.AbstractCardEnum;
 import evolutionmod.powers.MatureEggPower;
 
@@ -39,7 +40,10 @@ public class Drone
         Drone drone = new Drone();
         if (player != null && player.hasPower(MatureEggPower.POWER_ID)) {
             drone.upgrade();
-            AbstractDungeon.actionManager.addToTop(new ReducePowerAction(player, player, MatureEggPower.POWER_ID, 1));
+            AbstractPower eggs = player.getPower(MatureEggPower.POWER_ID);
+            if (eggs.amount > 0) {
+                eggs.stackPower(-1);
+            }
         }
         return drone;
     }

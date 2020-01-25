@@ -161,9 +161,15 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
         BaseMod.addKeyword("Rage", keywordRage, "Whenever you play an Attack this turn, gain this amount of Block.");
 
         String[] keywordCentaur = {"centaur"};
-        BaseMod.addKeyword("[#B06050]Centaur gene[]", keywordCentaur, "An orb which gives 1 Strength at the start of your turn until the end of your turn.");
+        BaseMod.addKeyword("[#B06050]Centaur gene[]", keywordCentaur, "Orb: at the start of your turn, increase the damage from your attacks by 1  until the end of your turn.");
         String[] keywordPlant = {"plant"};
-        BaseMod.addKeyword("[#60B040]Plant gene[]", keywordPlant, "An orb which gives 1 Brambles and 2 Block at the start of your turn.");
+        BaseMod.addKeyword( "[#60B040]Plant gene[]", keywordPlant, "Orb: gain 1 Brambles and 2 Block at the start of your turn.");
+        String[] keywordHarpy = {"harpy"};
+        BaseMod.addKeyword( "[#FFFF80]Harpy gene[]", keywordHarpy, "Orb: draw 1 card at the start of your turn.");
+        String[] keywordLavafolk = {"lavafolk"};
+        BaseMod.addKeyword( "[#FF9050]Lavafolk gene[]", keywordLavafolk, "Orb: deal 3 damage to a random enemy at the end of your turn.");
+        String[] keywordBeast = {"beast"};
+        BaseMod.addKeyword( "[#B06060]Beast gene[]", keywordBeast, "Orb: give 1 rage at the start of your turn.");
 //        String[] keywordTempo = {"mist"};
 //        BaseMod.addKeyword(keywordTempo, "At 10 Mist you gain 1 Intangible");
 //        String[] keywordStep = {"step", "steps"};
