@@ -58,6 +58,8 @@ public class Blessing
         if (!this.upgraded) {
             this.upgradeName();
             this.isInnate = true;
+            this.rawDescription = UPGRADE_DESCRIPTION;
+            this.initializeDescription();
         }
     }
 }

@@ -7,8 +7,8 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import evolutionmod.orbs.GhostGene;
-import evolutionmod.orbs.LymeanGeneV2;
+import evolutionmod.orbs.InsectGene;
+import evolutionmod.orbs.PlantGene;
 import evolutionmod.patches.AbstractCardEnum;
 import evolutionmod.powers.SymbiotesPower;
 
@@ -34,8 +34,8 @@ public class Symbiotes
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         addToBot(new ApplyPowerAction(p, p, new SymbiotesPower(p, this.magicNumber), this.magicNumber));
-        addToBot(new ChannelAction(new LymeanGeneV2()));
-        addToBot(new ChannelAction(new GhostGene()));
+        addToBot(new ChannelAction(new PlantGene()));
+        addToBot(new ChannelAction(new InsectGene()));
     }
 
     @Override

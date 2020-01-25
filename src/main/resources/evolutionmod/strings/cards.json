@@ -193,8 +193,8 @@
   },
   "evolutionmod:DrainCurse": {
     "NAME": "Drain Curse",
-    "DESCRIPTION": "Deal !D! damage. NL Remove all but 1 Weak from the ennemy. NL Gain twice that many Block. NL Evolve a Ghost gene.",
-    "UPGRADE_DESCRIPTION": "Deal !D! damage. NL Draw a random Strike from your deck and play a copy on the same target. NL Evolve a [#B06060]Beast[] gene."
+    "DESCRIPTION": "Remove all but 1 Weak from the enemy. NL Gain !M! times that much Block. NL Evolve a Ghost gene.",
+    "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:SirenSong": {
     "NAME": "Siren Song",
@@ -206,24 +206,24 @@
     "DESCRIPTION": "Deal !D! damage to all enemies twice. NL Apply !M! Weak to all enemies. NL Evolve a Beast gene and a Ghost gene. NL Exhaust.",
     "UPGRADE_DESCRIPTION": ""
   },
-  "evolutionmod:Salamander": {
-    "NAME": "Salamander",
-    "DESCRIPTION": "Heal !M! HP. NL Evolve a Lavafolk gene and a Lizard gene. NL Exhaust.",
-    "UPGRADE_DESCRIPTION": ""
-  },
   "evolutionmod:Toxin": {
     "NAME": "Toxin",
     "DESCRIPTION": "Apply !M! Poison. NL Evolve a Plant gene and a Lizard gene. NL Exhaust.",
     "UPGRADE_DESCRIPTION": ""
   },
+  "evolutionmod:Salamander": {
+    "NAME": "Salamander",
+    "DESCRIPTION": "Heal !M! HP. NL Evolve a Lavafolk gene and a Lizard gene.",
+    "UPGRADE_DESCRIPTION": ""
+  },
   "evolutionmod:Blessing": {
     "NAME": "Benediction",
-    "DESCRIPTION": "Exhaust a random Curse from your deck. NL Gain !M! Artifact NL Evolve a Lymean gene and a Ghost gene. NL Exhaust.",
-    "UPGRADE_DESCRIPTION": "Innate. NL Exhaust a random Curse from your deck. NL Gain !M! Artifact NL Evolve a Lymean gene and a Ghost gene. NL Exhaust."
+    "DESCRIPTION": "Exhaust a random Curse from your deck. NL Gain !M! Artifact NL Evolve a Lymean gene and a Ghost gene.",
+    "UPGRADE_DESCRIPTION": "Innate. NL Exhaust a random Curse from your deck. NL Gain !M! Artifact NL Evolve a Lymean gene and a Ghost gene."
   },
   "evolutionmod:Symbiotes": {
     "NAME": "Symbiotes",
-    "DESCRIPTION": "Gain !M! Brambles and twice as much Block the first time you play a Drone each turn. NL Evolve a Plant gene and an Insect gene. NL Exhaust.",
+    "DESCRIPTION": "Gain !M! Brambles and twice as much Block the first time you play a Drone each turn. NL Evolve a Plant gene and an Insect gene.",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:ShiftingStrike": {
@@ -267,7 +267,7 @@
   "evolutionmod:Drone": {
     "NAME": "Drone",
     "DESCRIPTION": "Deal !D! damage. NL Exhaust. Ethereal.",
-    "UPGRADE_DESCRIPTION": "Gain !B! Block. NL Deal !D! damage."
+    "UPGRADE_DESCRIPTION": "Gain !B! Block. NL Deal !D! damage. NL Exhaust. Ethereal."
   }
 //  "evolutionmod:Offbeat": {
 //    "NAME": "Offbeat",

@@ -88,9 +88,16 @@ public class Evolution
 		for (int i = 0; i < this.magicNumber; ++i) {
 			AbstractGene gene = genesPool.get(AbstractDungeon.cardRng.random(genesPool.size() - 1));
 			genes.add(gene);
-			description.append(gene.coloredName(false)).append(" ");
 		}
-		this.rawDescription = description.toString();
+		resetDescription();
+	}
+	public void resetDescription() {
+		this.rawDescription = this.upgraded
+				? DESCRIPTION
+				: UPGRADE_DESCRIPTION;
+		rawDescription += genes.stream()
+				.map(g -> new StringBuilder(g.coloredName(false)).append(" "))
+				.reduce(new StringBuilder(), StringBuilder::append).toString();
 		initializeDescription();
 	}
 
@@ -103,8 +110,9 @@ public class Evolution
 	public void upgrade() {
 		if (!this.upgraded) {
 			this.upgradeName();
+			this.upgraded = true;
 			this.rawDescription = UPGRADE_DESCRIPTION;
-			this.initializeDescription();
+			this.resetDescription();
 //			this.upgradeMagicNumber(UPGRADE_GENE_AMT);
 		}
 	}

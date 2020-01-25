@@ -39,7 +39,7 @@ public class LavafolkGene extends AbstractGene {
 
 	public static void apply(AbstractPlayer p, AbstractMonster m, int times) {
 		for (int i = 0; i < times; ++i) {
-			AbstractDungeon.actionManager.addToBottom(new LavafolkGeneAction(p, damagePerGene()));
+			AbstractDungeon.actionManager.addToBottom(new LavafolkGeneAction(p, m, damagePerGene()));
 		}
 	}
 

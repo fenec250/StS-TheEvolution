@@ -27,10 +27,11 @@ public class Salamander
 
     public Salamander() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
-                CardType.ATTACK, AbstractCardEnum.EVOLUTION_BLUE,
+                CardType.POWER, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.UNCOMMON, CardTarget.ALL_ENEMY);
         this.magicNumber = this.baseMagicNumber = HEAL_AMT;
         this.isMultiDamage = true;
+        this.tags.add(CardTags.HEALING);
     }
 
     @Override

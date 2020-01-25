@@ -140,6 +140,7 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
         BaseMod.addCard(new Incubate());
         BaseMod.addCard(new Aegis());
         BaseMod.addCard(new PoisonSpit());
+        BaseMod.addCard(new DrainCurse());
         //6 powers
     }
 

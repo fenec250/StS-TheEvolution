@@ -10,12 +10,13 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.WeakPower;
 import evolutionmod.powers.MarkPower;
 
-public class GhostGeneAction extends AbstractGameAction {
+public class GhostGeneAction extends AbstractHalfTargetedAction {
 
 	private int block;
 	private int weak;
 
 	public GhostGeneAction(AbstractPlayer player, AbstractMonster monster, int block, int weak) {
+		super(player, monster);
 		this.source = player;
 		this.target = monster;
 		this.block = block;
@@ -25,15 +26,9 @@ public class GhostGeneAction extends AbstractGameAction {
 	}
 
 	public void update() {
-		if ((AbstractDungeon.getMonsters().areMonstersBasicallyDead())) {
+		if (!updateTarget()) {
 			this.isDone = true;
 			return;
-		}
-		if (this.target == null) {
-			this.target = AbstractDungeon.getMonsters().monsters.stream()
-					.filter(m -> m.hasPower(MarkPower.POWER_ID) && !m.isDeadOrEscaped())
-					.findAny()
-					.orElse(AbstractDungeon.getRandomMonster());
 		}
 		AbstractDungeon.actionManager.addToTop(
 				new ApplyPowerAction(this.target, this.source, new WeakPower(this.target, this.weak, false), this.weak));

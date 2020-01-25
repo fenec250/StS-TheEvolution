@@ -6,14 +6,9 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import evolutionmod.orbs.AbstractGene;
-import evolutionmod.orbs.GhostGene;
 import evolutionmod.orbs.MerfolkGene;
 import evolutionmod.patches.AbstractCardEnum;
-
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public class Dive
         extends AdaptableEvoCard {
@@ -52,7 +47,7 @@ public class Dive
         if (!this.upgraded) {
             this.upgradeName();
             this.upgradeBlock(UPGRADE_BLOCK_AMT);
-            this.upgradeAdaptationMaximum(GhostGene.ID, UPGRADE_MAX_ADAPT_AMT);
+            this.upgradeAdaptationMaximum(MerfolkGene.ID, UPGRADE_MAX_ADAPT_AMT);
         }
     }
 }
