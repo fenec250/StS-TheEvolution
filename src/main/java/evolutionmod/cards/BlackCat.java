@@ -12,7 +12,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.WeakPower;
-import evolutionmod.orbs.BeastGeneV2;
+import evolutionmod.orbs.BeastGene;
 import evolutionmod.orbs.GhostGene;
 import evolutionmod.patches.AbstractCardEnum;
 
@@ -54,7 +54,7 @@ public class BlackCat
                 .forEach(mo -> addToBot(new ApplyPowerAction(mo, p,
                         new WeakPower(mo, this.magicNumber, false), this.magicNumber)));
 
-        AbstractDungeon.actionManager.addToBottom(new ChannelAction(new BeastGeneV2()));
+        AbstractDungeon.actionManager.addToBottom(new ChannelAction(new BeastGene()));
         AbstractDungeon.actionManager.addToBottom(new ChannelAction(new GhostGene()));
     }
 

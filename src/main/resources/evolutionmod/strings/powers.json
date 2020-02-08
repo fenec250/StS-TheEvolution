@@ -1,8 +1,8 @@
 {
-//  "evolutionmod:CentaurFormPower": {
-//    "NAME": "Centaur form",
-//    "DESCRIPTIONS": ["The first time you gain Strength each turn gain ", " Strength until the end of the turn."]
-//  },
+  "evolutionmod:GodFormPower": {
+    "NAME": "God form",
+    "DESCRIPTIONS": ["Increase the effect of your genes and adaptations by "]
+  },
 //  "evolutionmod:PlantFormPower": {
 //    "NAME": "Plant form",
 //    "DESCRIPTIONS": ["Increase the Block gained by Plant Genes and adaptation by "]
@@ -72,5 +72,9 @@
   "evolutionmod:SymbiotesPower": {
     "NAME": "Symbiotes",
     "DESCRIPTIONS": ["Gain ", " Brambles and ", " Block the first time you play a Drone each turn "]
+  },
+  "evolutionmod:StrenghtenPower": {
+    "NAME": "Strenghten",
+    "DESCRIPTIONS": ["The first attack you play each turn deals 50% more damage. Lasts for ", " more times."]
   }
 }

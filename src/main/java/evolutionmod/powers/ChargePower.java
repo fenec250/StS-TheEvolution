@@ -1,19 +1,15 @@
 package evolutionmod.powers;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.DamageAction;
+import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
-import com.megacrit.cardcrawl.cards.DamageInfo;
+import com.megacrit.cardcrawl.actions.utility.UseCardAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
-import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.powers.StormPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
-import com.megacrit.cardcrawl.rooms.AbstractRoom;
 
 public class ChargePower extends StrengthPower {
     public static final String POWER_ID = "evolutionmod:ChargePower";
@@ -39,6 +35,7 @@ public class ChargePower extends StrengthPower {
         description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1];
     }
 
+    @Override
     public void stackPower(int stackAmount) {
         this.fontScale = 8.0F;
         this.amount += stackAmount;
@@ -48,10 +45,11 @@ public class ChargePower extends StrengthPower {
     }
 
     @Override
-    public void atEndOfTurn(boolean isPlayer) {
-        super.atEndOfTurn(isPlayer);
-        this.flashWithoutSound();
-        AbstractDungeon.actionManager.addToBottom(
-                new ApplyPowerAction(this.owner, this.owner, new ChargePower(this.owner, -this.amount), -this.amount));
+    public void onUseCard(AbstractCard card, UseCardAction action) {
+        if (card.type == AbstractCard.CardType.ATTACK && this.amount > 0) {
+            this.flashWithoutSound();
+            int amountToRemove = this.amount == 1 ? 1 : this.amount/2;
+            addToBot(new ReducePowerAction(this.owner, this.owner, this, amountToRemove));
+        }
     }
 }

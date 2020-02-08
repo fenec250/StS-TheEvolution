@@ -7,7 +7,7 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import evolutionmod.actions.HeightenedSensesAction;
 import evolutionmod.orbs.AbstractGene;
-import evolutionmod.orbs.BeastGeneV2;
+import evolutionmod.orbs.BeastGene;
 import evolutionmod.patches.AbstractCardEnum;
 
 public class HeightenedSenses
@@ -29,7 +29,7 @@ public class HeightenedSenses
                 CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.UNCOMMON, CardTarget.SELF);
         this.magicNumber = this.baseMagicNumber = DRAW_AMT;
-        this.adaptationMap.put(BeastGeneV2.ID, new BeastGeneV2.Adaptation(0, MAX_ADAPT_AMT));
+        this.adaptationMap.put(BeastGene.ID, new BeastGene.Adaptation(0, MAX_ADAPT_AMT));
     }
 
     @Override
@@ -48,7 +48,7 @@ public class HeightenedSenses
         if (!this.upgraded) {
             this.upgradeName();
             this.upgradeMagicNumber(UPGRADED_DRAW_AMT);
-            this.upgradeAdaptationMaximum(BeastGeneV2.ID, UPGRADE_MAX_ADAPT_AMT);
+            this.upgradeAdaptationMaximum(BeastGene.ID, UPGRADE_MAX_ADAPT_AMT);
         }
     }
 }

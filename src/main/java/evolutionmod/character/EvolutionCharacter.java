@@ -166,9 +166,7 @@ public class EvolutionCharacter extends CustomPlayer {
         retVal.add(StrikeEvo.ID);
         retVal.add(StrikeEvo.ID);
         retVal.add(StrikeEvo.ID);
-        retVal.add(StrikeEvo.ID);
 
-        retVal.add(DefendEvo.ID);
         retVal.add(DefendEvo.ID);
         retVal.add(DefendEvo.ID);
         retVal.add(DefendEvo.ID);

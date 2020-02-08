@@ -36,7 +36,7 @@ public class GhostGene extends AbstractGene {
 	}
 
 	public static void apply(AbstractPlayer p, AbstractMonster m, int times) {
-		AbstractDungeon.actionManager.addToBottom(new GhostGeneAction(p, m, blockPerGene() * times, times));
+		AbstractDungeon.actionManager.addToBottom(new GhostGeneAction(p, m, times));
 	}
 
 	@Override
@@ -50,15 +50,15 @@ public class GhostGene extends AbstractGene {
 	}
 
 	private static String buildDescription() {
-		return DESCRIPTION[0] + 1 + DESCRIPTION[1] + blockPerGene() + DESCRIPTION[2];
+		return DESCRIPTION[0] + weakPerGene() + DESCRIPTION[1];
 	}
 
-	private static int blockPerGene() {
-		int damage = 1;
+	private static int weakPerGene() {
+		int weak = 1;
 		if (AbstractDungeon.player.hasPower("evolutionmod:GhostForm")) {
-			damage += AbstractDungeon.player.getPower("evolutionmod:GhostForm").amount;
+			weak += AbstractDungeon.player.getPower("evolutionmod:GhostForm").amount;
 		}
-		return damage;
+		return weak;
 	}
 
 	public static class Adaptation extends AdaptableEvoCard.AbstractAdaptation {

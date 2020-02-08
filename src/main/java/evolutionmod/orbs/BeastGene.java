@@ -7,8 +7,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.OrbStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
-import com.megacrit.cardcrawl.powers.DexterityPower;
-import com.megacrit.cardcrawl.powers.LoseDexterityPower;
+import com.megacrit.cardcrawl.powers.RagePower;
 import evolutionmod.cards.AdaptableEvoCard;
 
 public class BeastGene extends AbstractGene {
@@ -38,9 +37,8 @@ public class BeastGene extends AbstractGene {
 	}
 
 	public static void apply(AbstractPlayer p, AbstractMonster m, int times) {
-		int strengthToApply = dexterityToApply() * times;
-		AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new DexterityPower(p, strengthToApply), strengthToApply));
-		AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new LoseDexterityPower(p, strengthToApply), strengthToApply));
+		int rageToApply = rageToApply() * times;
+		AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new RagePower(p, rageToApply), rageToApply));
 	}
 
 	@Override
@@ -55,10 +53,10 @@ public class BeastGene extends AbstractGene {
 	}
 
 	private static String buildDescription() {
-		return DESCRIPTION[0] + dexterityToApply() + DESCRIPTION[1];
+		return DESCRIPTION[0] + rageToApply() + DESCRIPTION[1];
 	}
 
-	private static int dexterityToApply() {
+	private static int rageToApply() {
 		int dexterityToApply = 1;
 		if (AbstractDungeon.player.hasPower("evolution:BeastForm")) {
 			dexterityToApply += AbstractDungeon.player.getPower("evolution:BeastForm").amount;
@@ -85,7 +83,7 @@ public class BeastGene extends AbstractGene {
 
 		@Override
 		public String text() {
-			return "Beast";
+			return "Beast" + (this.amount > 1 ? "x" + this.amount : "");
 		}
 
 		@Override

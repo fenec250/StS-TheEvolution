@@ -36,7 +36,7 @@ public class SuccubusGene extends AbstractGene {
 	}
 
 	public static void apply(AbstractPlayer p, AbstractMonster m, int times) {
-		AbstractDungeon.actionManager.addToBottom(new SuccubusGeneAction(p, m, damagePerGene() * times, times));
+		AbstractDungeon.actionManager.addToBottom(new SuccubusGeneAction(p, m, times));
 	}
 
 	@Override
@@ -50,7 +50,7 @@ public class SuccubusGene extends AbstractGene {
 	}
 
 	private static String buildDescription() {
-		return DESCRIPTION[0] + 1 + DESCRIPTION[1] + damagePerGene() + DESCRIPTION[2];
+		return DESCRIPTION[0] + 1 + DESCRIPTION[1];
 	}
 
 	private static int damagePerGene() {

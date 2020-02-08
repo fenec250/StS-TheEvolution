@@ -12,12 +12,12 @@ import evolutionmod.powers.BramblesPower;
 
 public class ThornDamageAction extends AbstractGameAction {
 
-	private int power;
+	private int baseDamage;
 
-	public ThornDamageAction(AbstractPlayer player, AbstractMonster monster, int power) {
+	public ThornDamageAction(AbstractPlayer player, AbstractMonster monster, int baseDamage) {
 		this.source = player;
 		this.target = monster;
-		this.power = power;
+		this.baseDamage = baseDamage;
 		this.duration = this.startDuration = Settings.ACTION_DUR_FAST;
 		this.actionType = ActionType.DAMAGE;
 	}
@@ -27,12 +27,12 @@ public class ThornDamageAction extends AbstractGameAction {
 			this.isDone = true;
 			return;
 		}
-		int damage = 0;
+		int damage = baseDamage;
 		if (this.source.hasPower(ThornsPower.POWER_ID)) {
-			damage += this.source.getPower(ThornsPower.POWER_ID).amount * power;
+			damage += this.source.getPower(ThornsPower.POWER_ID).amount;
 		}
 		if (this.source.hasPower(BramblesPower.POWER_ID)) {
-			damage += this.source.getPower(BramblesPower.POWER_ID).amount * power;
+			damage += this.source.getPower(BramblesPower.POWER_ID).amount;
 		}
 		AbstractDungeon.actionManager.addToTop(new DamageAction(
 				this.target, new DamageInfo(this.source, damage,

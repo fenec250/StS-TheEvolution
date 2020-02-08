@@ -21,6 +21,7 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.localization.RelicStrings;
 import evolutionmod.cards.*;
 import evolutionmod.character.EvolutionCharacter;
+import evolutionmod.orbs.MerfolkGene;
 import evolutionmod.patches.AbstractCardEnum;
 import evolutionmod.patches.EvolutionEnum;
 import evolutionmod.relics.TorisGift;
@@ -70,6 +71,7 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
     @Override
     public void receiveEditCards() {
         BaseMod.addDynamicVariable(new AdaptableEvoCard.MaxAdaptationNumber());
+        BaseMod.addDynamicVariable(new DrainCurse.BlockAmount());
 
         //Vex quote: i shoot for 18 commons, 10 damage 6 block 2 other as a "blueprint" and modify if anything jumps out at me
         //Basic. 2 attacks, 2 skills
@@ -120,12 +122,12 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
         BaseMod.addCard(new Salamander());
         BaseMod.addCard(new SirenSong());
         BaseMod.addCard(new Toxin());
+        BaseMod.addCard(new Strenghten());
         //6 powers
-//        BaseMod.addCard(new AquaticForm());
-//        BaseMod.addCard(new MagicForm());
         BaseMod.addCard(new Grow());
         BaseMod.addCard(new Symbiotes());
         BaseMod.addCard(new Blessing());
+        BaseMod.addCard(new ThickHide());
 
         //Rares.
         //4 attacks
@@ -142,6 +144,7 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
         BaseMod.addCard(new PoisonSpit());
         BaseMod.addCard(new DrainCurse());
         //6 powers
+//        BaseMod.addCard(new GodForm());
     }
 
     @Override
@@ -152,24 +155,28 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
     @Override
     public void receiveEditKeywords() {
         String[] keywordAdapt = {"adapt"};
-        BaseMod.addKeyword(keywordAdapt, "Consume a channeled Gene. Add its effect to the card until the end of the combat.");
+        BaseMod.addKeyword(keywordAdapt, "Consume a channeled Gene. Add its effect to the card until the end of the combat. Shuffle this card in your draw pile.");
         String[] keywordBrambles = {"brambles"};
         BaseMod.addKeyword("Brambles", keywordBrambles, "Consume a channeled Gene. Add its effect to the card until the end of the combat.");
         String[] keywordDrone = {"drone", "drones"};
         BaseMod.addKeyword("Drone", keywordDrone, "Drones are 0 cost attacks which Exhaust.");
         String[] keywordRage = {"rage"};
         BaseMod.addKeyword("Rage", keywordRage, "Whenever you play an Attack this turn, gain this amount of Block.");
+        String[] keywordCharge = {"charge"};
+        BaseMod.addKeyword("Charge", keywordCharge, "Increase the damage of your next hit then reduces by half.");
 
         String[] keywordCentaur = {"centaur"};
         BaseMod.addKeyword("[#B06050]Centaur gene[]", keywordCentaur, "Orb: at the start of your turn, increase the damage from your attacks by 1  until the end of your turn.");
         String[] keywordPlant = {"plant"};
-        BaseMod.addKeyword( "[#60B040]Plant gene[]", keywordPlant, "Orb: gain 1 Brambles and 2 Block at the start of your turn.");
+        BaseMod.addKeyword( "[#60B040]Plant gene[]", keywordPlant, "Orb: gain 2 Brambles at the start of your turn.");
         String[] keywordHarpy = {"harpy"};
         BaseMod.addKeyword( "[#FFFF80]Harpy gene[]", keywordHarpy, "Orb: draw 1 card at the start of your turn.");
         String[] keywordLavafolk = {"lavafolk"};
         BaseMod.addKeyword( "[#FF9050]Lavafolk gene[]", keywordLavafolk, "Orb: deal 3 damage to a random enemy at the end of your turn.");
         String[] keywordBeast = {"beast"};
-        BaseMod.addKeyword( "[#B06060]Beast gene[]", keywordBeast, "Orb: give 1 rage at the start of your turn.");
+        BaseMod.addKeyword( "[#B06060]Beast gene[]", keywordBeast, "Orb: gain 1 rage at the start of your turn.");
+        String[] keywordMerfolk = {MerfolkGene.NAME.toLowerCase(), "merfolk"};
+        BaseMod.addKeyword(MerfolkGene.coloredName(false), keywordMerfolk, "Orb: gain 3 Block at the end of your turn.");
 //        String[] keywordTempo = {"mist"};
 //        BaseMod.addKeyword(keywordTempo, "At 10 Mist you gain 1 Intangible");
 //        String[] keywordStep = {"step", "steps"};

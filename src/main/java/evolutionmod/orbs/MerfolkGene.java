@@ -47,7 +47,11 @@ public class MerfolkGene extends AbstractGene {
 	}
 
 	@Override
-	public String coloredName(boolean plural) {
+	public String getColoredName(boolean plural) {
+		return coloredName(plural);
+	}
+
+	public static String coloredName(boolean plural) {
 		return plural
 		? "[#5252FF]Merfolk genes[]"
 		: "[#5252FF]Merfolk gene[]";

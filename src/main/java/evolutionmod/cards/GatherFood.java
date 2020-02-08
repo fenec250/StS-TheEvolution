@@ -3,6 +3,7 @@ package evolutionmod.cards;
 import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
+import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -24,14 +25,17 @@ public class GatherFood
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = "evolutionmod/images/cards/InsectAtt.png";
     private static final int COST = 1;
-    private static final int DAMAGE_AMT = 9;
-    private static final int UPGRADE_DAMAGE_AMT = 3;
+    private static final int DAMAGE_AMT = 6;
+    private static final int UPGRADE_DAMAGE_AMT = 1;
+    private static final int DRONE_AMT = 1;
+    private static final int UPGRADE_DRONE_AMT = 1;
 
     public GatherFood() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.ATTACK, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.COMMON, CardTarget.ENEMY);
         this.damage = this.baseDamage = DAMAGE_AMT;
+        this.magicNumber = this.baseMagicNumber = DRONE_AMT;
     }
 
     @Override
@@ -39,6 +43,7 @@ public class GatherFood
         AbstractDungeon.actionManager.addToBottom(new DamageAction(
                 m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
                 AbstractGameAction.AttackEffect.BLUNT_HEAVY));
+        AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(Drone.createDroneWithInteractions(p), this.magicNumber));
         AbstractDungeon.actionManager.addToBottom(new ChannelAction(new InsectGene()));
     }
 
@@ -52,6 +57,7 @@ public class GatherFood
         if (!this.upgraded) {
             this.upgradeName();
             this.upgradeDamage(UPGRADE_DAMAGE_AMT);
+            this.upgradeMagicNumber(UPGRADE_DRONE_AMT);
         }
     }
 }

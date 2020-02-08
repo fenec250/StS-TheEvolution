@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 public abstract class AdaptableEvoCard extends CustomCard {
 
 	protected Map<String, AbstractAdaptation> adaptationMap;
-//	protected int adaptationMaximum = -1;
 	protected boolean adaptationUpgraded = false;
 	protected String initialRawDescription;
 	private String adaptationDescription;
@@ -73,10 +72,11 @@ public abstract class AdaptableEvoCard extends CustomCard {
     public int tryAdaptingWith(AbstractAdaptation adaptation) {
 	    int adaptAmount = this.canAdaptWith(adaptation);
 	    if (adaptAmount > 0) {
-	    	addAdaptation(adaptation);
+		    addAdaptation(adaptation);
+		    this.shuffleBackIntoDrawPile = true;
 	    }
 	    return adaptAmount;
-	}
+    }
 
     private void addAdaptation(AbstractAdaptation adaptation) {
     	if (this.adaptationMap.containsKey(adaptation.getGeneId())) {
@@ -106,7 +106,8 @@ public abstract class AdaptableEvoCard extends CustomCard {
 					for (; i < a.max; ++i) {
 						stringBuilder.append('-');
 					}
-					return stringBuilder;
+				    stringBuilder.append(' ');
+				    return stringBuilder;
 				})
 			    .reduce(new StringBuilder(), StringBuilder::append, StringBuilder::append);
 
@@ -131,6 +132,12 @@ public abstract class AdaptableEvoCard extends CustomCard {
 		card.initialRawDescription = this.initialRawDescription;
 		card.isNameAdapted = this.isNameAdapted;
 		return card;
+	}
+
+	@Override
+	public void triggerWhenDrawn() {
+		super.triggerWhenDrawn();
+		this.shuffleBackIntoDrawPile = false;
 	}
 
 	protected void useAdaptations(AbstractPlayer p, AbstractMonster m) {

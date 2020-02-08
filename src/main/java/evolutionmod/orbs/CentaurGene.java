@@ -7,8 +7,6 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.OrbStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
-import com.megacrit.cardcrawl.powers.LoseStrengthPower;
-import com.megacrit.cardcrawl.powers.StrengthPower;
 import evolutionmod.cards.AdaptableEvoCard;
 import evolutionmod.powers.ChargePower;
 
@@ -39,10 +37,8 @@ public class CentaurGene extends AbstractGene {
 	}
 
 	public static void apply(AbstractPlayer p, AbstractMonster m, int times) {
-		int strengthToApply = strengthToApply() * times;
-		AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new ChargePower(p, strengthToApply), strengthToApply));
-//		AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new StrengthPower(p, strengthToApply), strengthToApply));
-//		AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new LoseStrengthPower(p, strengthToApply), strengthToApply));
+		int chargeToApply = chargeToApply() * times;
+		AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new ChargePower(p, chargeToApply), chargeToApply));
 	}
 
 	@Override
@@ -56,15 +52,15 @@ public class CentaurGene extends AbstractGene {
 	}
 
 	private static String buildDescription() {
-		return DESCRIPTION[0] + strengthToApply() + DESCRIPTION[1];
+		return DESCRIPTION[0] + chargeToApply() + DESCRIPTION[1];
 	}
 
-	private static int strengthToApply() {
-		int strengthToApply = 1;
-		if (AbstractDungeon.player.hasPower("evolution:CentaurForm")) {
-			strengthToApply += AbstractDungeon.player.getPower("evolution:CentaurForm").amount;
-		}
-		return strengthToApply;
+	private static int chargeToApply() {
+		int chargeToApply = 2;
+//		if (AbstractDungeon.player.hasPower("evolution:CentaurForm")) {
+//			chargeToApply += AbstractDungeon.player.getPower("evolution:CentaurForm").amount;
+//		}
+		return chargeToApply;
 	}
 
 	public static class Adaptation extends AdaptableEvoCard.AbstractAdaptation {

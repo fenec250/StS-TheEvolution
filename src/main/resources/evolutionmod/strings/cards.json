@@ -12,7 +12,6 @@
   "evolutionmod:Adaptation": {
     "NAME": "Adaptation",
     "DESCRIPTION": "Gain !B! Block. NL The next !M! basic πStrike or Defend you play will Adapt with your next Gene.",
-//    "DESCRIPTION": "Adapt a basic πStrike or Defend with your two rightmost  Genes, ignoring duplicates. NL Retain.",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:Evolution": {
@@ -43,7 +42,7 @@
   },
   "evolutionmod:VineLash": {
     "NAME": "Vine lash",
-    "DESCRIPTION": "Gain !M! Brambles. Adapt this with a [#60B040]Plant[] gene up to !evolutionmod:MA! times. Deal damage equal to your your Thorns and Brambles.",
+    "DESCRIPTION": "Adapt this with a [#60B040]Plant[] gene up to !evolutionmod:MA! times. Deal !D! damage plus your Thorns and Brambles.",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:Constrict": {
@@ -68,7 +67,7 @@
   },
   "evolutionmod:WaterBolt": {
     "NAME": "Water bolt",
-    "DESCRIPTION": "Deal !D! damage NL Apply !M! Weak NL Evolve a [#5252FF]Merfolk[] gene",
+    "DESCRIPTION": "Deal !D! damage NL Apply !M! Weak NL Evolve a Merfolk gene",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:WaveCrash": {
@@ -138,7 +137,7 @@
   },
   "evolutionmod:GatherFood": {
     "NAME": "Gather Food",
-    "DESCRIPTION": "Deal !D! damage. NL Evolve an [#A0A020]Insect[] gene.",
+    "DESCRIPTION": "Deal !D! damage. NL Add !M! Drone to your hand. NL Evolve an [#A0A020]Insect[] gene.",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:Hivemind": {
@@ -193,7 +192,7 @@
   },
   "evolutionmod:DrainCurse": {
     "NAME": "Drain Curse",
-    "DESCRIPTION": "Remove all but 1 Weak from the enemy. NL Gain !M! times that much Block. NL Evolve a Ghost gene.",
+    "DESCRIPTION": "Remove all but 1 Weak from the enemy. NL Gain !M! times that much Block (total: !evolutionmod:DrainCurseAmount!). NL Evolve a Ghost gene.",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:SirenSong": {
@@ -209,6 +208,16 @@
   "evolutionmod:Toxin": {
     "NAME": "Toxin",
     "DESCRIPTION": "Apply !M! Poison. NL Evolve a Plant gene and a Lizard gene. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": ""
+  },
+  "evolutionmod:ThickHide": {
+    "NAME": "Thick Hide",
+    "DESCRIPTION": "Gain !M! Plated armor. NL Evolve a Beast gene and a Centaur gene.",
+    "UPGRADE_DESCRIPTION": ""
+  },
+  "evolutionmod:Strenghten": {
+    "NAME": "Strenghten",
+    "DESCRIPTION": "The first attack you play each deals 50% more damage. Lasts for !M! attacks.",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:Salamander": {
@@ -248,21 +257,26 @@
     "DESCRIPTION": "Gain !M! Orb slots.",
     "UPGRADE_DESCRIPTION": ""
   },
-  "evolutionmod:AquaticForm": {
-    "NAME": "Aquatic form",
-    "DESCRIPTION": "Increase the Block and Poison of Merfolk and Lizard Genes by !M!",
+  "evolutionmod:GodForm": {
+    "NAME": "GodForm",
+    "DESCRIPTION": "Increase the effect of your genes and adaptations by !M!.",
     "UPGRADE_DESCRIPTION": ""
   },
-  "evolutionmod:MagicForm": {
-    "NAME": "Magic form",
-    "DESCRIPTION": "Increase the damage and Block of Lavafolk and Lymean Genes by !M!",
-    "UPGRADE_DESCRIPTION": ""
-  },
-  "evolutionmod:StrengthForm": {
-    "NAME": "Strength form",
-    "DESCRIPTION": "Increase the effect of Centaur and Beast Genes by !M!",
-    "UPGRADE_DESCRIPTION": ""
-  },
+//  "evolutionmod:AquaticForm": {
+//    "NAME": "Aquatic form",
+//    "DESCRIPTION": "Increase the Block and Poison of Merfolk and Lizard Genes by !M!",
+//    "UPGRADE_DESCRIPTION": ""
+//  },
+//  "evolutionmod:MagicForm": {
+//    "NAME": "Magic form",
+//    "DESCRIPTION": "Increase the damage and Block of Lavafolk and Lymean Genes by !M!",
+//    "UPGRADE_DESCRIPTION": ""
+//  },
+//  "evolutionmod:StrengthForm": {
+//    "NAME": "Strength form",
+//    "DESCRIPTION": "Increase the effect of Centaur and Beast Genes by !M!",
+//    "UPGRADE_DESCRIPTION": ""
+//  },
 
   "evolutionmod:Drone": {
     "NAME": "Drone",

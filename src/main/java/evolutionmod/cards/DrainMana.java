@@ -12,7 +12,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import evolutionmod.orbs.LymeanGeneV2;
+import evolutionmod.orbs.LymeanGene;
 import evolutionmod.patches.AbstractCardEnum;
 
 public class DrainMana
@@ -43,7 +43,7 @@ public class DrainMana
                 m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
                 AbstractGameAction.AttackEffect.BLUNT_HEAVY));
         AbstractDungeon.actionManager.addToBottom(new DrawCardAction(p, this.magicNumber));
-        AbstractDungeon.actionManager.addToBottom(new ChannelAction(new LymeanGeneV2()));
+        AbstractDungeon.actionManager.addToBottom(new ChannelAction(new LymeanGene()));
     }
 
     @Override

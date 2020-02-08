@@ -39,7 +39,7 @@ public class PoisonFangs
                 CardRarity.UNCOMMON, CardTarget.ENEMY);
         this.damage = this.baseDamage = DAMAGE_AMT;
         this.magicNumber = this.baseMagicNumber = POISON_AMT;
-        this.adaptationMap.put(LizardGene.ID, new LavafolkGene.Adaptation(0, MAX_ADAPT_AMT));
+        this.adaptationMap.put(LizardGene.ID, new LizardGene.Adaptation(0, MAX_ADAPT_AMT));
     }
 
     @Override

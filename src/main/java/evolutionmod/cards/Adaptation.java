@@ -54,14 +54,6 @@ public class Adaptation
 			this.upgradeName();
 			this.upgradeMagicNumber(UPGRADE_ADAPT_AMT);
 			this.upgradeBlock(UPGRADE_BLOCK_AMT);
-//			this.rawDescription = UPGRADE_DESCRIPTION;
-			initializeDescription();
 		}
-	}
-
-	@Override
-	public void triggerOnEndOfTurnForPlayingCard() {
-		super.triggerOnEndOfTurnForPlayingCard();
-		this.retain = true;
 	}
 }

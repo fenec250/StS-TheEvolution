@@ -1,13 +1,12 @@
 package evolutionmod.orbs;
 
-import com.megacrit.cardcrawl.actions.common.GainBlockAction;
-import com.megacrit.cardcrawl.actions.common.HealAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.OrbStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
+import evolutionmod.actions.LymeanGeneAction;
 import evolutionmod.cards.AdaptableEvoCard;
 import evolutionmod.powers.LymeanFormPower;
 
@@ -39,21 +38,7 @@ public class LymeanGene extends AbstractGene {
 
 	public static void apply(AbstractPlayer p, AbstractMonster m, int times) {
 		AbstractDungeon.actionManager.addToTop(
-				new HealAction(p, p, healPerGene() * times));
-		AbstractDungeon.actionManager.addToTop(new GainBlockAction(p, p, blockPerGene() * times));
-//		CardGroup cards = new CardGroup(p.hand, CardGroup.CardGroupType.UNSPECIFIED);
-//		if (p.hasPower("LymeanForm")) {
-//			p.drawPile.group.stream().limit(amount).forEach(cards::addToTop);
-//		}
-//		cards.group = new ArrayList<>(cards.group.stream()
-//				.filter(card -> card.type == AbstractCard.CardType.STATUS)
-//				.collect(Collectors.toList()));
-//		for (int i = 0; i < times && !cards.isEmpty(); ++i) {
-//			AbstractCard card = cards.getRandomCard(AbstractDungeon.cardRng);
-//			cards.removeCard(card);
-//			AbstractDungeon.actionManager.addToBottom(new ExhaustSpecificCardAction(card, cards, true));
-//		}
-//		AbstractDungeon.cardRng.random(cards.size() - 1);
+				new LymeanGeneAction(p, null, blockPerGene() * times, healPerGene() * times));
 	}
 
 	@Override
@@ -69,25 +54,20 @@ public class LymeanGene extends AbstractGene {
 
 	private static String buildDescription() {
 //		return DESCRIPTION[0] + healPerGene() + DESCRIPTION[1] + exhaustPerGene() + DESCRIPTION[2];
-		return DESCRIPTION[0] + healPerGene() + DESCRIPTION[1] + blockPerGene() + DESCRIPTION[2];
+		return DESCRIPTION[0] + blockPerGene() + DESCRIPTION[1] + healPerGene() + DESCRIPTION[2];
 	}
 
 	private static int healPerGene() {
-		return 1;
+		return 2;
 	}
 
 	private static int blockPerGene() {
-		int block = 1;
+		int block = 5;
 		if (AbstractDungeon.player.hasPower(LymeanFormPower.POWER_ID)) {
 			block += AbstractDungeon.player.getPower(LymeanFormPower.POWER_ID).amount;
 		}
 		return block;
 	}
-//
-//	private static int exhaustPerGene() {
-//		int exhaust = 1;
-//		return exhaust;
-//	}
 
 	public static class Adaptation extends AdaptableEvoCard.AbstractAdaptation {
 

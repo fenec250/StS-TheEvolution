@@ -28,7 +28,7 @@ public abstract class AbstractGene extends CustomOrb {
 	}
 
 	public abstract AdaptableEvoCard.AbstractAdaptation getAdaptation();
-	public String coloredName(boolean plural) {
+	public String getColoredName(boolean plural) {
 		return "#y" + this.name;
 	}
 

@@ -22,13 +22,10 @@
   },
   "evolutionmod:SuccubusGene": {
     "NAME": "Succubus gene",
-    "DESCRIPTION": ["At the start of your turn apply ", " vulnerable and deal ", " damage to a random enemy"]
+    "DESCRIPTION": ["At the start of your turn apply ", " vulnerable to a random enemy"]
+//    "DESCRIPTION": ["At the start of your turn apply ", " vulnerable and deal ", " damage to a random enemy"]
   },
   "evolutionmod:LymeanGene": {
-    "NAME": "Lymean gene",
-    "DESCRIPTION": ["At the start of your turn heal ", " HP and gain ", " Block."]
-  },
-  "evolutionmod:LymeanGeneV2": {
     "NAME": "Lymean gene",
     "DESCRIPTION": ["At the end of your turn gain ", " Block and heal a random enemy for ", " HP."]
   },
@@ -38,10 +35,6 @@
   },
   "evolutionmod:BeastGene": {
     "NAME": "Beast gene",
-    "DESCRIPTION": ["At the start of your turn gain ", " Dexterity until the end of your turn."]
-  },
-  "evolutionmod:BeastGeneV2": {
-    "NAME": "Beast gene",
     "DESCRIPTION": ["At the start of your turn gain ", " Rage until the end of your turn."]
   },
   "evolutionmod:LizardGene": {
@@ -50,7 +43,7 @@
   },
   "evolutionmod:GhostGene": {
     "NAME": "Ghost gene",
-    "DESCRIPTION": ["At the start of your turn apply ", " Weak to a random enemy and gain ", " Block."]
+    "DESCRIPTION": ["At the start of your turn apply ", " Weak to a random enemy."]
   }
 //  "evolutionmod:DancePower": {
 //    "NAME": "Dance",

@@ -9,13 +9,13 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import evolutionmod.orbs.AbstractGene;
-import evolutionmod.orbs.BeastGeneV2;
+import evolutionmod.orbs.BeastGene;
 import evolutionmod.orbs.CentaurGene;
 import evolutionmod.orbs.HarpyGene;
 import evolutionmod.orbs.InsectGene;
 import evolutionmod.orbs.LavafolkGene;
 import evolutionmod.orbs.LizardGene;
-import evolutionmod.orbs.LymeanGeneV2;
+import evolutionmod.orbs.LymeanGene;
 import evolutionmod.orbs.MerfolkGene;
 import evolutionmod.orbs.PlantGene;
 import evolutionmod.orbs.SuccubusGene;
@@ -41,6 +41,7 @@ public class Evolution
 				CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
 				CardRarity.BASIC, CardTarget.SELF);
 		this.magicNumber = this.baseMagicNumber = GENE_AMT;
+		this.genes = new ArrayList<AbstractGene>();
 	}
 
 	@Override
@@ -71,20 +72,12 @@ public class Evolution
 		genesPool.add(new HarpyGene());
 		genesPool.add(new LavafolkGene());
 		genesPool.add(new SuccubusGene());
-		genesPool.add(new LymeanGeneV2());
+		genesPool.add(new LymeanGene());
 		genesPool.add(new InsectGene());
-		genesPool.add(new BeastGeneV2());
+		genesPool.add(new BeastGene());
 		genesPool.add(new LizardGene());
-//		if (this.upgraded) {
-//			Set<String> exclude =
-//			AbstractDungeon.player.orbs.stream()
-//					.map(o -> o.ID)
-//					.collect(Collectors.toSet());
-//			genesPool.removeIf(gene -> exclude.contains(gene.ID));
-//		}
-		StringBuilder description = new StringBuilder(DESCRIPTION + " NL ");
 
-		this.genes = new ArrayList<AbstractGene>();
+		this.genes.clear();
 		for (int i = 0; i < this.magicNumber; ++i) {
 			AbstractGene gene = genesPool.get(AbstractDungeon.cardRng.random(genesPool.size() - 1));
 			genes.add(gene);
@@ -92,12 +85,16 @@ public class Evolution
 		resetDescription();
 	}
 	public void resetDescription() {
-		this.rawDescription = this.upgraded
+		StringBuilder description = new StringBuilder(
+				this.upgraded
 				? DESCRIPTION
-				: UPGRADE_DESCRIPTION;
-		rawDescription += genes.stream()
-				.map(g -> new StringBuilder(g.coloredName(false)).append(" "))
-				.reduce(new StringBuilder(), StringBuilder::append).toString();
+				: UPGRADE_DESCRIPTION);
+		description.append(" NL ");
+		description.append(
+				genes.stream()
+						.map(g -> new StringBuilder(g.getColoredName(false)).append(" "))
+						.reduce(new StringBuilder(), StringBuilder::append).toString());
+		this.rawDescription = description.toString();
 		initializeDescription();
 	}
 

@@ -3,18 +3,17 @@ package evolutionmod.cards;
 import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
-import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
+import com.megacrit.cardcrawl.cards.colorless.Violence;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import evolutionmod.actions.RushAction;
-import evolutionmod.orbs.BeastGeneV2;
-import evolutionmod.orbs.CentaurGene;
+import evolutionmod.orbs.BeastGene;
 import evolutionmod.patches.AbstractCardEnum;
 
 public class Rush
@@ -42,7 +41,8 @@ public class Rush
                 m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
                 AbstractGameAction.AttackEffect.BLUNT_HEAVY));
         AbstractDungeon.actionManager.addToBottom(new RushAction(p, m, this.upgraded));
-        AbstractDungeon.actionManager.addToBottom(new ChannelAction(new BeastGeneV2()));
+        AbstractDungeon.actionManager.addToBottom(new ChannelAction(new BeastGene()));
+//        Violence
     }
 
     @Override

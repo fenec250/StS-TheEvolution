@@ -8,13 +8,13 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.RelicStrings;
 import evolutionmod.orbs.AbstractGene;
-import evolutionmod.orbs.BeastGeneV2;
+import evolutionmod.orbs.BeastGene;
 import evolutionmod.orbs.CentaurGene;
 import evolutionmod.orbs.HarpyGene;
 import evolutionmod.orbs.InsectGene;
 import evolutionmod.orbs.LavafolkGene;
 import evolutionmod.orbs.LizardGene;
-import evolutionmod.orbs.LymeanGeneV2;
+import evolutionmod.orbs.LymeanGene;
 import evolutionmod.orbs.MerfolkGene;
 import evolutionmod.orbs.PlantGene;
 import evolutionmod.orbs.SuccubusGene;
@@ -56,9 +56,9 @@ public class TorisGift extends CustomRelic {
         genesPool.add(new HarpyGene());
         genesPool.add(new LavafolkGene());
         genesPool.add(new SuccubusGene());
-        genesPool.add(new LymeanGeneV2());
+        genesPool.add(new LymeanGene());
         genesPool.add(new InsectGene());
-        genesPool.add(new BeastGeneV2());
+        genesPool.add(new BeastGene());
         genesPool.add(new LizardGene());
 
         for (int i = 0; i < GENE_AMT; ++i) {
