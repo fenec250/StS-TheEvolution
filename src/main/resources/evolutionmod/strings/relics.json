@@ -2,7 +2,7 @@
   "evolutionmod:TorisGift": {
     "NAME": "Tori's gift",
     "FLAVOR": "A gift from your mentor.",
-    "DESCRIPTIONS": ["Start each combat with an additional Orb slot and two random #yGenes."]
+    "DESCRIPTIONS": ["Start each combat with an additional Orb slot and a random #yGene."]
   }
 //  "mysticmod:BlessedBook": {
 //    "NAME": "Blessed Book",

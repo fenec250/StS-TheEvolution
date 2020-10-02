@@ -1,6 +1,8 @@
 package evolutionmod.orbs;
 
+import basemod.helpers.TooltipInfo;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -9,16 +11,22 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.powers.RagePower;
 import evolutionmod.cards.AdaptableEvoCard;
+import evolutionmod.powers.PotencyPower;
+
+import java.util.List;
 
 public class BeastGene extends AbstractGene {
 	public static final String ID = "evolutionmod:BeastGene";
 	public static final OrbStrings orbStrings = CardCrawlGame.languagePack.getOrbString(ID);
 	public static final String NAME = orbStrings.NAME;
+	public static final String COLOR = "[#B06060]";
 	public static final String[] DESCRIPTION = orbStrings.DESCRIPTION;
 	public static final String IMG_PATH = "evolutionmod/images/orbs/BeastGene.png";
+	public static final int BLOCK = 1;
+	public static final int RAGE = 2;
 
 	public BeastGene() {
-		super(ID, NAME, buildDescription(), IMG_PATH);
+		super(ID, NAME, getDescription(), IMG_PATH, COLOR);
 	}
 
 	@Override
@@ -37,14 +45,27 @@ public class BeastGene extends AbstractGene {
 	}
 
 	public static void apply(AbstractPlayer p, AbstractMonster m, int times) {
-		int rageToApply = rageToApply() * times;
-		AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new RagePower(p, rageToApply), rageToApply));
+		int block = block();
+		if (block > 0) {
+			AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, block));
+		}
+		int rage = rage() * times;
+		AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new RagePower(p, rage)));
 	}
 
 	@Override
 	public void updateDescription() {
 //		super.updateDescription();
-		this.description = "#yPassive and #yEvoke: " + buildDescription();
+		this.description = "#yPassive and #yEvoke: " + getDescription();
+	}
+
+	public static List<TooltipInfo> addTooltip(List<TooltipInfo> tooltips, String rawDescription) {
+		if (rawDescription.contains("Beast")) {
+			tooltips.add(new TooltipInfo(
+					COLOR + NAME + "[]",
+					getDescription()));
+		}
+		return tooltips;
 	}
 
 	@Override
@@ -52,16 +73,22 @@ public class BeastGene extends AbstractGene {
 		return new Adaptation(1);
 	}
 
-	private static String buildDescription() {
-		return DESCRIPTION[0] + rageToApply() + DESCRIPTION[1];
+	public static String getDescription() {
+		return DESCRIPTION[0] + block() + DESCRIPTION[1] + rage() + DESCRIPTION[2];
 	}
 
-	private static int rageToApply() {
-		int dexterityToApply = 1;
-		if (AbstractDungeon.player.hasPower("evolution:BeastForm")) {
-			dexterityToApply += AbstractDungeon.player.getPower("evolution:BeastForm").amount;
+	private static int block() {
+		int block = BLOCK;
+		if (CardCrawlGame.isInARun()) {
+			if (AbstractDungeon.player.hasPower(PotencyPower.POWER_ID)) {
+				block += AbstractDungeon.player.getPower(PotencyPower.POWER_ID).amount;
+			}
 		}
-		return dexterityToApply;
+		return block;
+	}
+
+	private static int rage() {
+		return RAGE;
 	}
 
 	public static class Adaptation extends AdaptableEvoCard.AbstractAdaptation {

@@ -1,5 +1,6 @@
 package evolutionmod.orbs;
 
+import basemod.helpers.TooltipInfo;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -7,18 +8,23 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.OrbStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
+import com.megacrit.cardcrawl.powers.watcher.VigorPower;
 import evolutionmod.cards.AdaptableEvoCard;
-import evolutionmod.powers.ChargePower;
+import evolutionmod.powers.PotencyPower;
+
+import java.util.List;
 
 public class CentaurGene extends AbstractGene {
 	public static final String ID = "evolutionmod:CentaurGene";
 	public static final OrbStrings orbStrings = CardCrawlGame.languagePack.getOrbString(ID);
 	public static final String NAME = orbStrings.NAME;
+	public static final String COLOR = "[#B06050]";
 	public static final String[] DESCRIPTION = orbStrings.DESCRIPTION;
 	public static final String IMG_PATH = "evolutionmod/images/orbs/CentaurGene.png";
+	public static final int VIGOR = 3;
 
 	public CentaurGene() {
-		super(ID, NAME, buildDescription(), IMG_PATH);
+		super(ID, NAME, getDescription(), IMG_PATH, COLOR);
 	}
 
 	@Override
@@ -37,13 +43,25 @@ public class CentaurGene extends AbstractGene {
 	}
 
 	public static void apply(AbstractPlayer p, AbstractMonster m, int times) {
-		int chargeToApply = chargeToApply() * times;
-		AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new ChargePower(p, chargeToApply), chargeToApply));
+		int chargeToApply = vigor() * times;
+		if (chargeToApply > 0) {
+//			AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new ChargePower(p, chargeToApply)));
+			AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new VigorPower(p, chargeToApply)));
+		}
 	}
 
 	@Override
 	public void updateDescription() {
-		this.description = "#yPassive and #yEvoke: " + buildDescription();
+		this.description = "#yPassive and #yEvoke: " + getDescription();
+	}
+
+	public static List<TooltipInfo> addTooltip(List<TooltipInfo> tooltips, String rawDescription) {
+		if (rawDescription.contains("Lavafolk")) {
+			tooltips.add(new TooltipInfo(
+					COLOR + NAME + "[]",
+					getDescription()));
+		}
+		return tooltips;
 	}
 
 	@Override
@@ -51,16 +69,18 @@ public class CentaurGene extends AbstractGene {
 		return new Adaptation(1);
 	}
 
-	private static String buildDescription() {
-		return DESCRIPTION[0] + chargeToApply() + DESCRIPTION[1];
+	public static String getDescription() {
+		return DESCRIPTION[0] + vigor() + DESCRIPTION[1];
 	}
 
-	private static int chargeToApply() {
-		int chargeToApply = 2;
-//		if (AbstractDungeon.player.hasPower("evolution:CentaurForm")) {
-//			chargeToApply += AbstractDungeon.player.getPower("evolution:CentaurForm").amount;
-//		}
-		return chargeToApply;
+	private static int vigor() {
+		int vigor = VIGOR;
+		if (CardCrawlGame.isInARun()) {
+			if (AbstractDungeon.player.hasPower(PotencyPower.POWER_ID)) {
+				vigor += AbstractDungeon.player.getPower(PotencyPower.POWER_ID).amount;
+			}
+		}
+		return vigor;
 	}
 
 	public static class Adaptation extends AdaptableEvoCard.AbstractAdaptation {

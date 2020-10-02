@@ -1,21 +1,22 @@
 package evolutionmod.cards;
 
 import basemod.abstracts.CustomCard;
+import com.evacipated.cardcrawl.mod.stslib.actions.common.RefundAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import evolutionmod.actions.SeduceAction;
+import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.SuccubusGene;
 import evolutionmod.patches.AbstractCardEnum;
 
 public class Seduce
-        extends CustomCard {
+        extends BaseEvoCard {
     public static final String ID = "evolutionmod:Seduce";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -23,7 +24,7 @@ public class Seduce
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = "evolutionmod/images/cards/strike.png";
     private static final int COST = 2;
-    private static final int DAMAGE_AMT = 10;
+    private static final int DAMAGE_AMT = 9;
     private static final int UPGRADE_DAMAGE_AMT = 3;
 
     public Seduce() {
@@ -36,10 +37,14 @@ public class Seduce
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
 //        HeavyBlade;
-        AbstractDungeon.actionManager.addToBottom(new SeduceAction(
+        addToBot(new SeduceAction(
                 p, m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
                 AbstractGameAction.AttackEffect.BLUNT_HEAVY));
-        AbstractDungeon.actionManager.addToBottom(new ChannelAction(new SuccubusGene()));
+        if (!AbstractGene.isPlayerInThisForm(SuccubusGene.ID)) {
+            addToBot(new ChannelAction(new SuccubusGene()));
+        } else {
+            addToBot(new RefundAction(this, 1));
+        }
     }
 
     @Override

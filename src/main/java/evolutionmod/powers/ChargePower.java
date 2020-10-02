@@ -32,7 +32,7 @@ public class ChargePower extends StrengthPower {
 
     @Override
     public void updateDescription() {
-        description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1];
+        description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1] + "(" + (this.amount == 1 ? 1 : this.amount/2) + ")" + DESCRIPTIONS[2];
     }
 
     @Override

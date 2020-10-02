@@ -1,5 +1,6 @@
 package evolutionmod.orbs;
 
+import basemod.helpers.TooltipInfo;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -10,15 +11,18 @@ import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import evolutionmod.cards.AdaptableEvoCard;
 import evolutionmod.cards.Drone;
 
+import java.util.List;
+
 public class InsectGene extends AbstractGene {
 	public static final String ID = "evolutionmod:InsectGene";
 	public static final OrbStrings orbStrings = CardCrawlGame.languagePack.getOrbString(ID);
 	public static final String NAME = orbStrings.NAME;
+	public static final String COLOR = "[#A0A020]";
 	public static final String[] DESCRIPTION = orbStrings.DESCRIPTION;
 	public static final String IMG_PATH = "evolutionmod/images/orbs/InsectGene.png";
 
 	public InsectGene() {
-		super(ID, NAME, buildDescription(), IMG_PATH);
+		super(ID, NAME, getDescription(), IMG_PATH, COLOR);
 	}
 
 	@Override
@@ -48,10 +52,19 @@ public class InsectGene extends AbstractGene {
 	@Override
 	public void updateDescription() {
 //		super.updateDescription();
-		this.description = "#yPassive: " + buildDescription();
+		this.description = "#yPassive: " + getDescription();
 	}
 
-	private static String buildDescription() {
+	public static List<TooltipInfo> addTooltip(List<TooltipInfo> tooltips, String rawDescription) {
+		if (rawDescription.contains("Insect")) {
+			tooltips.add(new TooltipInfo(
+					COLOR + NAME + "[]",
+					getDescription()));
+		}
+		return tooltips;
+	}
+
+	public static String getDescription() {
 		return DESCRIPTION[0];
 	}
 

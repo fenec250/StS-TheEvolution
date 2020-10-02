@@ -18,8 +18,6 @@ public class DrownPower extends AbstractPower {
     public static final String NAME = cardStrings.NAME;
     public static final String[] DESCRIPTIONS = cardStrings.DESCRIPTIONS;
 
-//    boolean decay;
-//
     public DrownPower(AbstractCreature owner, int initialAmount) {
         this.name = NAME;
         this.ID = POWER_ID;
@@ -51,7 +49,7 @@ public class DrownPower extends AbstractPower {
     public void atStartOfTurn() {
         if (AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT && !AbstractDungeon.getMonsters().areMonstersBasicallyDead()) {
             this.flashWithoutSound();
-            int damage = AbstractDungeon.player.currentBlock * this.amount / 2;
+            int damage = AbstractDungeon.player.currentBlock * this.amount;
             AbstractDungeon.actionManager.addToBottom(
                     new DamageAction(
                             this.owner,
@@ -59,6 +57,4 @@ public class DrownPower extends AbstractPower {
             AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(this.owner, this.owner, POWER_ID));
         }
     }
-
-//            this.decay = false;
 }

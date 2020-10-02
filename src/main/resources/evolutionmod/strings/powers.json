@@ -3,13 +3,9 @@
     "NAME": "God form",
     "DESCRIPTIONS": ["Increase the effect of your genes and adaptations by "]
   },
-//  "evolutionmod:PlantFormPower": {
-//    "NAME": "Plant form",
-//    "DESCRIPTIONS": ["Increase the Block gained by Plant Genes and adaptation by "]
-//  },
-  "evolutionmod:MerfolkFormPower": {
-    "NAME": "Merfolk form",
-    "DESCRIPTIONS": ["Increase the Block gained by Merfolk Genes and adaptation by "]
+  "evolutionmod:StormChaserPower": {
+    "NAME": "Storm Chaser",
+    "DESCRIPTIONS": ["At the end of your turn gain ", " Block for each card in hand."]
 //  },
 //  "evolutionmod:HarpyFormPower": {
 //    "NAME": "Harpy form",
@@ -31,6 +27,14 @@
     "NAME": "Lizard form",
     "DESCRIPTIONS": ["Increase the Poison applied by Lizard Genes and adaptations by "]
   },
+  "evolutionmod:PotencyPower": {
+    "NAME": "Potency",
+    "DESCRIPTIONS": ["Increase the first effect of most Genes and adaptations by "]
+  },
+  "evolutionmod:RemovePotencyPower": {
+    "NAME": "Remove Potency",
+    "DESCRIPTIONS": ["Reduce your Potency by ", " at the start of your next turn."]
+  },
 
 
   "evolutionmod:AdaptationPower": {
@@ -51,7 +55,7 @@
   },
   "evolutionmod:ChargePower": {
     "NAME": "Charge",
-    "DESCRIPTIONS": ["Add ", " additional damage to attacks. This power is removed at the end of your turn."]
+    "DESCRIPTIONS": ["deal ", " additional damage with attacks. This power is reduced by half", " each time an Attack is played"]
   },
   "evolutionmod:LoseLavafolkFormPower": {
     "NAME": "Lavafolk form Down",

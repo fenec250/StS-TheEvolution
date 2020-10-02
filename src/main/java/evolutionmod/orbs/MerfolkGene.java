@@ -1,5 +1,6 @@
 package evolutionmod.orbs;
 
+import basemod.helpers.TooltipInfo;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -8,17 +9,21 @@ import com.megacrit.cardcrawl.localization.OrbStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import evolutionmod.cards.AdaptableEvoCard;
-import evolutionmod.powers.MerfolkFormPower;
+import evolutionmod.powers.PotencyPower;
+
+import java.util.List;
 
 public class MerfolkGene extends AbstractGene {
 	public static final String ID = "evolutionmod:MerfolkGene";
 	public static final OrbStrings orbStrings = CardCrawlGame.languagePack.getOrbString(ID);
 	public static final String NAME = orbStrings.NAME;
+	public static final String COLOR = "[#5252FF]";
 	public static final String[] DESCRIPTION = orbStrings.DESCRIPTION;
 	public static final String IMG_PATH = "evolutionmod/images/cards/strike.png";
+	public static final int BLOCK = 3;
 
 	public MerfolkGene() {
-		super(ID, NAME, buildDescription(), IMG_PATH);
+		super(ID, NAME, getDescription(), IMG_PATH, COLOR);
 	}
 
 	@Override
@@ -37,8 +42,12 @@ public class MerfolkGene extends AbstractGene {
 	}
 
 	public static void apply(AbstractPlayer p, AbstractMonster m, int times) {
-		int blockAmount = blockPerGene() * times;
-		AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, blockAmount));
+		int block = blockPerGene();
+		if (block > 0) {
+			for (int i = 0; i < times; ++i) {
+				AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, block));
+			}
+		}
 	}
 
 	@Override
@@ -47,30 +56,39 @@ public class MerfolkGene extends AbstractGene {
 	}
 
 	@Override
-	public String getColoredName(boolean plural) {
-		return coloredName(plural);
+	public String colorize(String string) {
+		return colorString();
 	}
 
-	public static String coloredName(boolean plural) {
-		return plural
-		? "[#5252FF]Merfolk genes[]"
-		: "[#5252FF]Merfolk gene[]";
+	public static String colorString() {
+		return "[#5252FF]";
 	}
 
 	@Override
 	public void updateDescription() {
 //		super.updateDescription();
-		this.description = "#yPassive: " + buildDescription();
+		this.description = "#yPassive: " + getDescription();
 	}
 
-	private static String buildDescription() {
+	public static List<TooltipInfo> addTooltip(List<TooltipInfo> tooltips, String rawDescription) {
+		if (rawDescription.contains("Merfolk")) {
+			tooltips.add(new TooltipInfo(
+					COLOR + NAME + "[]",
+					getDescription()));
+		}
+		return tooltips;
+	}
+
+	public static String getDescription() {
 		return DESCRIPTION[0] + blockPerGene() + DESCRIPTION[1];
 	}
 
 	private static int blockPerGene() {
-		int block = 3;
-		if (AbstractDungeon.player.hasPower(MerfolkFormPower.POWER_ID)) {
-			block += AbstractDungeon.player.getPower(MerfolkFormPower.POWER_ID).amount;
+		int block = BLOCK;
+		if (CardCrawlGame.isInARun()) {
+			if (AbstractDungeon.player.hasPower(PotencyPower.POWER_ID)) {
+				block += AbstractDungeon.player.getPower(PotencyPower.POWER_ID).amount;
+			}
 		}
 		return block;
 	}

@@ -1,24 +1,29 @@
 package evolutionmod.orbs;
 
+import basemod.helpers.TooltipInfo;
+import com.megacrit.cardcrawl.actions.utility.ScryAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.OrbStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
-import evolutionmod.actions.LymeanGeneAction;
 import evolutionmod.cards.AdaptableEvoCard;
-import evolutionmod.powers.LymeanFormPower;
+import evolutionmod.powers.PotencyPower;
+
+import java.util.List;
 
 public class LymeanGene extends AbstractGene {
 	public static final String ID = "evolutionmod:LymeanGene";
 	public static final OrbStrings orbStrings = CardCrawlGame.languagePack.getOrbString(ID);
 	public static final String NAME = orbStrings.NAME;
+	public static final String COLOR = "[#50FFFF]";
 	public static final String[] DESCRIPTION = orbStrings.DESCRIPTION;
 	public static final String IMG_PATH = "evolutionmod/images/cards/strike.png";
+	public static final int SCRY = 2;
 
 	public LymeanGene() {
-		super(ID, NAME, buildDescription(), IMG_PATH);
+		super(ID, NAME, getDescription(), IMG_PATH, COLOR);
 	}
 
 	@Override
@@ -37,8 +42,14 @@ public class LymeanGene extends AbstractGene {
 	}
 
 	public static void apply(AbstractPlayer p, AbstractMonster m, int times) {
-		AbstractDungeon.actionManager.addToTop(
-				new LymeanGeneAction(p, null, blockPerGene() * times, healPerGene() * times));
+		int scry = scry();
+		if (scry > 0) {
+			for (int i = 0; i < times; ++i) {
+//				AbstractDungeon.actionManager.addToTop(
+//						new LymeanGeneAction(p, null, blockPerGene() * times, healPerGene() * times));
+				AbstractDungeon.actionManager.addToBottom(new ScryAction(scry));
+			}
+		}
 	}
 
 	@Override
@@ -49,24 +60,43 @@ public class LymeanGene extends AbstractGene {
 	@Override
 	public void updateDescription() {
 //		super.updateDescription();
-		this.description = "#yPassive: " + buildDescription();
+		this.description = "#yPassive: " + getDescription();
 	}
 
-	private static String buildDescription() {
-//		return DESCRIPTION[0] + healPerGene() + DESCRIPTION[1] + exhaustPerGene() + DESCRIPTION[2];
-		return DESCRIPTION[0] + blockPerGene() + DESCRIPTION[1] + healPerGene() + DESCRIPTION[2];
-	}
-
-	private static int healPerGene() {
-		return 2;
-	}
-
-	private static int blockPerGene() {
-		int block = 5;
-		if (AbstractDungeon.player.hasPower(LymeanFormPower.POWER_ID)) {
-			block += AbstractDungeon.player.getPower(LymeanFormPower.POWER_ID).amount;
+	public static List<TooltipInfo> addTooltip(List<TooltipInfo> tooltips, String rawDescription) {
+		if (rawDescription.contains("Lymean")) {
+			tooltips.add(new TooltipInfo(
+					COLOR + NAME + "[]",
+					getDescription()));
 		}
-		return block;
+		return tooltips;
+	}
+
+	public static String getDescription() {
+//		return DESCRIPTION[0] + blockPerGene() + DESCRIPTION[1] + healPerGene() + DESCRIPTION[2];
+		return DESCRIPTION[0] + scry();
+	}
+
+//	private static int healPerGene() {
+//		return 2;
+//	}
+//
+//	private static int blockPerGene() {
+//		int block = 5;
+//		if (AbstractDungeon.player.hasPower(PotencyPower.POWER_ID)) {
+//			block += AbstractDungeon.player.getPower(PotencyPower.POWER_ID).amount;
+//		}
+//		return block;
+//	}
+
+	private static int scry() {
+		int scry = SCRY;
+		if (CardCrawlGame.isInARun()) {
+			if (AbstractDungeon.player.hasPower(PotencyPower.POWER_ID)) {
+				scry += AbstractDungeon.player.getPower(PotencyPower.POWER_ID).amount;
+			}
+		}
+		return scry;
 	}
 
 	public static class Adaptation extends AdaptableEvoCard.AbstractAdaptation {

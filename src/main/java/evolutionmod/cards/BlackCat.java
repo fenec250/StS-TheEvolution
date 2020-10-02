@@ -12,12 +12,13 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.WeakPower;
+import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.BeastGene;
-import evolutionmod.orbs.GhostGene;
+import evolutionmod.orbs.ShadowGene;
 import evolutionmod.patches.AbstractCardEnum;
 
 public class BlackCat
-        extends CustomCard {
+        extends BaseEvoCard {
     public static final String ID = "evolutionmod:BlackCat";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -25,10 +26,9 @@ public class BlackCat
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = "evolutionmod/images/cards/BlackCat.png";
     private static final int COST = 1;
-    private static final int DAMAGE_AMT = 4;
-    private static final int UPGRADE_DAMAGE_AMT = 2;
-    private static final int WEAK_AMT = 1;
-    private static final int UPGRADE_WEAK_AMT = 1;
+    private static final int DAMAGE_AMT = 6;
+    private static final int UPGRADE_DAMAGE_AMT = 3;
+    private static final int WEAK_AMT = 2;
 
     public BlackCat() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -44,18 +44,24 @@ public class BlackCat
     public void use(AbstractPlayer p, AbstractMonster m) {
         AbstractDungeon.actionManager.addToBottom(new DamageAllEnemiesAction(p, this.multiDamage,
                 this.damageTypeForTurn,
-                AbstractGameAction.AttackEffect.BLUNT_HEAVY));
-        AbstractDungeon.actionManager.addToBottom(new DamageAllEnemiesAction(p, this.multiDamage,
-                this.damageTypeForTurn,
-                AbstractGameAction.AttackEffect.BLUNT_HEAVY));
+                AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
+        if (AbstractGene.isPlayerInThisForm(BeastGene.ID)) {
+            AbstractDungeon.actionManager.addToBottom(new DamageAllEnemiesAction(p, this.multiDamage,
+                    this.damageTypeForTurn,
+                    AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
+        } else {
+            AbstractDungeon.actionManager.addToBottom(new ChannelAction(new BeastGene()));
+        }
 
-        AbstractDungeon.getMonsters().monsters.stream()
-                .filter(mo -> !mo.isDeadOrEscaped())
-                .forEach(mo -> addToBot(new ApplyPowerAction(mo, p,
-                        new WeakPower(mo, this.magicNumber, false), this.magicNumber)));
+        if (AbstractGene.isPlayerInThisForm(ShadowGene.ID)) {
+            AbstractDungeon.getMonsters().monsters.stream()
+                    .filter(mo -> !mo.isDeadOrEscaped())
+                    .forEach(mo -> addToBot(new ApplyPowerAction(mo, p,
+                            new WeakPower(mo, this.magicNumber, false), this.magicNumber)));
+        } else {
+            AbstractDungeon.actionManager.addToBottom(new ChannelAction(new ShadowGene()));
+        }
 
-        AbstractDungeon.actionManager.addToBottom(new ChannelAction(new BeastGene()));
-        AbstractDungeon.actionManager.addToBottom(new ChannelAction(new GhostGene()));
     }
 
     @Override
@@ -68,7 +74,6 @@ public class BlackCat
         if (!this.upgraded) {
             this.upgradeName();
             this.upgradeDamage(UPGRADE_DAMAGE_AMT);
-            this.upgradeMagicNumber(UPGRADE_WEAK_AMT);
         }
     }
 }

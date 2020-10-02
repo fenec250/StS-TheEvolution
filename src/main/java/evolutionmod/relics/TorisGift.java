@@ -30,7 +30,7 @@ public class TorisGift extends CustomRelic {
     private static final Texture IMG = new Texture(IMG_PATH);
     public static final String OUTLINE_PATH = "evolutionmod/images/relics/spellbook_p.png";
     private static final Texture OUTLINE = new Texture(OUTLINE_PATH);
-    private static final int GENE_AMT = 2;
+    private static final int GENE_AMT = 1;
     private static final int SLOT_AMT = 1;
 //    private static final int MAX_EXHAUST_AMT = 2;
 //    private static final int UPGRADE_MAX_EXHAUST_AMT = 1;

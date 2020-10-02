@@ -1,6 +1,7 @@
 package evolutionmod.cards;
 
 import basemod.abstracts.CustomCard;
+import com.evacipated.cardcrawl.mod.stslib.actions.common.RefundAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
@@ -11,11 +12,12 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.BeastGene;
 import evolutionmod.patches.AbstractCardEnum;
 
 public class ClawSlash
-        extends CustomCard {
+        extends BaseEvoCard {
     public static final String ID = "evolutionmod:ClawSlash";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -23,8 +25,8 @@ public class ClawSlash
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = "evolutionmod/images/cards/BeastForm.png";
     private static final int COST = 1;
-    private static final int DAMAGE_AMT = 4;
-    private static final int UPGRADE_DAMAGE_AMT = 2;
+    private static final int DAMAGE_AMT = 7;
+    private static final int UPGRADE_DAMAGE_AMT = 3;
 
     public ClawSlash() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -37,11 +39,13 @@ public class ClawSlash
     public void use(AbstractPlayer p, AbstractMonster m) {
         AbstractDungeon.actionManager.addToBottom(new DamageAction(
                 m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
-                AbstractGameAction.AttackEffect.BLUNT_HEAVY));
-        AbstractDungeon.actionManager.addToBottom(new DamageAction(
-                m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
-                AbstractGameAction.AttackEffect.BLUNT_HEAVY));
-        AbstractDungeon.actionManager.addToBottom(new ChannelAction(new BeastGene()));
+                AbstractGameAction.AttackEffect.SLASH_VERTICAL));
+        if (AbstractGene.isPlayerInThisForm(BeastGene.ID)) {
+            addToBot(new RefundAction(this, 1));
+//            addToBot(new GainEnergyAction(Math.min(1, this.cost)));
+        } else {
+            AbstractDungeon.actionManager.addToBottom(new ChannelAction(new BeastGene()));
+        }
     }
 
     @Override

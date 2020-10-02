@@ -1,5 +1,6 @@
 package evolutionmod.orbs;
 
+import basemod.helpers.TooltipInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -8,16 +9,22 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import evolutionmod.actions.SuccubusGeneAction;
 import evolutionmod.cards.AdaptableEvoCard;
+import evolutionmod.powers.PotencyPower;
+
+import java.util.List;
 
 public class SuccubusGene extends AbstractGene {
 	public static final String ID = "evolutionmod:SuccubusGene";
 	public static final OrbStrings orbStrings = CardCrawlGame.languagePack.getOrbString(ID);
 	public static final String NAME = orbStrings.NAME;
+	public static final String COLOR = "[#F04040]";
 	public static final String[] DESCRIPTION = orbStrings.DESCRIPTION;
 	public static final String IMG_PATH = "evolutionmod/images/cards/strike.png";
+	public static final int DAMAGE = 1;
+	public static final int VULNERABLE = 2;
 
 	public SuccubusGene() {
-		super(ID, NAME, buildDescription(), IMG_PATH);
+		super(ID, NAME, getDescription(), IMG_PATH, COLOR);
 	}
 
 	@Override
@@ -36,7 +43,11 @@ public class SuccubusGene extends AbstractGene {
 	}
 
 	public static void apply(AbstractPlayer p, AbstractMonster m, int times) {
-		AbstractDungeon.actionManager.addToBottom(new SuccubusGeneAction(p, m, times));
+		int damage = damage();
+		int vulnerable = vulnerable();
+		for (int i = 0; i < times; ++i) {
+			AbstractDungeon.actionManager.addToBottom(new SuccubusGeneAction(p, m, damage, vulnerable));
+		}
 	}
 
 	@Override
@@ -46,19 +57,34 @@ public class SuccubusGene extends AbstractGene {
 
 	@Override
 	public void updateDescription() {
-		this.description = "#yPassive and #yEvoke: " + buildDescription();
+		this.description = "#yPassive and #yEvoke: " + getDescription();
 	}
 
-	private static String buildDescription() {
-		return DESCRIPTION[0] + 1 + DESCRIPTION[1];
-	}
-
-	private static int damagePerGene() {
-		int damage = 1;
-		if (AbstractDungeon.player.hasPower("evolution:SuccubusForm")) {
-			damage += AbstractDungeon.player.getPower("evolution:SuccubusForm").amount;
+	public static List<TooltipInfo> addTooltip(List<TooltipInfo> tooltips, String rawDescription) {
+		if (rawDescription.contains("Succubus")) {
+			tooltips.add(new TooltipInfo(
+					COLOR + NAME + "[]",
+					getDescription()));
 		}
-		return damage;
+		return tooltips;
+	}
+
+	public static String getDescription() {
+		return DESCRIPTION[0] + damage() + DESCRIPTION[1] + vulnerable() + DESCRIPTION[1];
+	}
+
+	private static int damage() {
+		int damage = DAMAGE;
+		if (CardCrawlGame.isInARun()) {
+			if (AbstractDungeon.player.hasPower(PotencyPower.POWER_ID)) {
+				damage += AbstractDungeon.player.getPower(PotencyPower.POWER_ID).amount;
+			}
+		}
+		return damage > 0 ? damage : 0;
+	}
+
+	private static int vulnerable() {
+		return VULNERABLE;
 	}
 
 	public static class Adaptation extends AdaptableEvoCard.AbstractAdaptation {

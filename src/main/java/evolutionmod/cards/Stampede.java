@@ -16,7 +16,7 @@ import evolutionmod.orbs.CentaurGene;
 import evolutionmod.patches.AbstractCardEnum;
 
 public class Stampede
-        extends CustomCard {
+        extends BaseEvoCard {
     public static final String ID = "evolutionmod:Stampede";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -24,7 +24,7 @@ public class Stampede
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = "evolutionmod/images/cards/CentaurForm.png";
     private static final int COST = 2;
-    private static final int DAMAGE_AMT = 7;
+    private static final int DAMAGE_AMT = 6;
     private static final int UPGRADE_DAMAGE_AMT = 2;
 
     public Stampede() {

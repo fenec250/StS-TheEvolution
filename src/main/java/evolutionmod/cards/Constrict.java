@@ -17,14 +17,14 @@ import evolutionmod.patches.AbstractCardEnum;
 import evolutionmod.powers.BramblesPower;
 
 public class Constrict
-        extends CustomCard {
+        extends BaseEvoCard {
     public static final String ID = "evolutionmod:Constrict";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = "evolutionmod/images/cards/PlantForm.png";
-    private static final int COST = 2;
+    private static final int COST = 1;
     private static final int BLOCK_AMT = 10;
     private static final int UPGRADE_BLOCK_AMT = 2;
 

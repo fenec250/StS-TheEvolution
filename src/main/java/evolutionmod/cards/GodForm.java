@@ -11,7 +11,7 @@ import evolutionmod.patches.AbstractCardEnum;
 import evolutionmod.powers.GodFormPower;
 
 public class GodForm
-        extends CustomCard {
+        extends BaseEvoCard {
     public static final String ID = "evolutionmod:GodForm";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;

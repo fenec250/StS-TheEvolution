@@ -47,7 +47,7 @@ public class AdaptationAction extends AbstractGameAction {
 				this.tickDuration();
 				return;
 			}
-			AbstractDungeon.gridSelectScreen.open(group, 1, true, "potato");
+			AbstractDungeon.gridSelectScreen.open(group, 1, true, "setGene");
 			started = true;
 			this.tickDuration();
 		} else {

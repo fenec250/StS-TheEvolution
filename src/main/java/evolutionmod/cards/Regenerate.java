@@ -17,7 +17,7 @@ import evolutionmod.patches.AbstractCardEnum;
 import evolutionmod.powers.BramblesPower;
 
 public class Regenerate
-        extends CustomCard {
+        extends BaseEvoCard {
     public static final String ID = "evolutionmod:Regenerate";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;

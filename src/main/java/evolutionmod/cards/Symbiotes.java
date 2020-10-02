@@ -1,19 +1,21 @@
 package evolutionmod.cards;
 
 import basemod.abstracts.CustomCard;
+import com.evacipated.cardcrawl.mod.stslib.actions.common.RefundAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.InsectGene;
 import evolutionmod.orbs.PlantGene;
 import evolutionmod.patches.AbstractCardEnum;
 import evolutionmod.powers.SymbiotesPower;
 
 public class Symbiotes
-        extends CustomCard {
+        extends BaseEvoCard {
     public static final String ID = "evolutionmod:Symbiotes";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -34,15 +36,21 @@ public class Symbiotes
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         addToBot(new ApplyPowerAction(p, p, new SymbiotesPower(p, this.magicNumber), this.magicNumber));
-        addToBot(new ChannelAction(new PlantGene()));
-        addToBot(new ChannelAction(new InsectGene()));
+
+        if (!AbstractGene.isPlayerInThisForm(InsectGene.ID)) {
+            addToBot(new ChannelAction(new InsectGene()));
+        } else if (!AbstractGene.isPlayerInThisForm(PlantGene.ID)) {
+            addToBot(new ChannelAction(new PlantGene()));
+        } else {
+            addToBot(new RefundAction(this, 1));
+        }
     }
 
     @Override
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.isInnate = true;
+//            this.isInnate = true;
             this.upgradeMagicNumber(UPGRADE_SYMBIOTES_AMT);
         }
     }

@@ -1,5 +1,6 @@
 package evolutionmod.orbs;
 
+import basemod.helpers.TooltipInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -9,17 +10,22 @@ import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import evolutionmod.actions.LavafolkGeneAction;
 import evolutionmod.cards.AdaptableEvoCard;
 import evolutionmod.powers.EruptionPower;
-import evolutionmod.powers.LavafolkFormPower;
+import evolutionmod.powers.PotencyPower;
+
+import java.util.List;
 
 public class LavafolkGene extends AbstractGene {
 	public static final String ID = "evolutionmod:LavafolkGene";
 	public static final OrbStrings orbStrings = CardCrawlGame.languagePack.getOrbString(ID);
 	public static final String NAME = orbStrings.NAME;
+	public static final String COLOR = "[#FF9050]";
 	public static final String[] DESCRIPTION = orbStrings.DESCRIPTION;
 	public static final String IMG_PATH = "evolutionmod/images/orbs/LavafolkGene.png";
+	public static final int DAMAGE = 2;
+	public static final int STRIKE_NB = 2;
 
 	public LavafolkGene() {
-		super(ID, NAME, buildDescription(), IMG_PATH);
+		super(ID, NAME, getDescription(), IMG_PATH, COLOR);
 	}
 
 	@Override
@@ -38,8 +44,11 @@ public class LavafolkGene extends AbstractGene {
 	}
 
 	public static void apply(AbstractPlayer p, AbstractMonster m, int times) {
-		for (int i = 0; i < times; ++i) {
-			AbstractDungeon.actionManager.addToBottom(new LavafolkGeneAction(p, m, damagePerGene()));
+		int damage = damage();
+		if (damage > 0) {
+			for (int i = 0; i < strikeNb() * times; ++i) {
+				AbstractDungeon.actionManager.addToBottom(new LavafolkGeneAction(p, m, damage));
+			}
 		}
 	}
 
@@ -55,22 +64,29 @@ public class LavafolkGene extends AbstractGene {
 	@Override
 	public void updateDescription() {
 //		super.updateDescription();
-		this.description = "#yPassive: " + buildDescription();
+		this.description = "#yEnd #yof #yTurn and #yEvoke: " + getDescription();
 	}
 
-	private static String buildDescription() {
-		return DESCRIPTION[0] + damagePerGene() + DESCRIPTION[1];
+	public static String getDescription() {
+		int strikes = strikeNb();
+		return DESCRIPTION[0] + damage() + DESCRIPTION[1] + (strikes > 1 ? " " + strikes + DESCRIPTION[2] + DESCRIPTION[3] : DESCRIPTION[3]);
 	}
 
-	private static int damagePerGene() {
-		int damage = 3;
-		if (AbstractDungeon.player.hasPower(LavafolkFormPower.POWER_ID)) {
-			damage += AbstractDungeon.player.getPower(LavafolkFormPower.POWER_ID).amount;
-		}
-		if (AbstractDungeon.player.hasPower(EruptionPower.POWER_ID)) {
-			damage *= 2;
+	private static int damage() {
+		int damage = DAMAGE;
+		if (CardCrawlGame.isInARun()) {
+			if (AbstractDungeon.player.hasPower(PotencyPower.POWER_ID)) {
+				damage += AbstractDungeon.player.getPower(PotencyPower.POWER_ID).amount;
+			}
+			if (AbstractDungeon.player.hasPower(EruptionPower.POWER_ID)) {
+				damage *= 2;
+			}
 		}
 		return damage;
+	}
+
+	private static int strikeNb() {
+		return STRIKE_NB;
 	}
 
 	public static class Adaptation extends AdaptableEvoCard.AbstractAdaptation {

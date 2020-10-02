@@ -11,7 +11,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.ArtifactPower;
-import evolutionmod.orbs.GhostGene;
+import evolutionmod.orbs.ShadowGene;
 import evolutionmod.orbs.LymeanGene;
 import evolutionmod.patches.AbstractCardEnum;
 
@@ -19,7 +19,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class Blessing
-        extends CustomCard {
+        extends BaseEvoCard {
     public static final String ID = "evolutionmod:Blessing";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -50,7 +50,7 @@ public class Blessing
 
         addToBot(new ApplyPowerAction(p, p, new ArtifactPower(p, this.magicNumber), this.magicNumber));
         addToBot(new ChannelAction(new LymeanGene()));
-        addToBot(new ChannelAction(new GhostGene()));
+        addToBot(new ChannelAction(new ShadowGene()));
     }
 
     @Override

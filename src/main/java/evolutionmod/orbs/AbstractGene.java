@@ -7,29 +7,35 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import evolutionmod.cards.AdaptableEvoCard;
 
 public abstract class AbstractGene extends CustomOrb {
-//	public static final String ID = "evolutionmod:Strike_Melody";
-//	public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
-//	public static final String NAME = cardStrings.NAME;
-//	public static final String DESCRIPTION = cardStrings.DESCRIPTION;
-//	public static final String EVOKE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-//	public static final String IMG_PATH = "evolutionmod/images/cards/strike.png";
 
-	public AbstractGene(String id, String name, String description, String imgPath) {
+	private String colorString;
+	public AbstractGene(String id, String name, String description, String imgPath, String color) {
 		super(id, name, 1, 1, description, description, imgPath);
+		this.colorString = color;
 	}
 
 	@Override
 	public void onEvoke() {
-//		if (AbstractDungeon.player.hasPower("TODO Tanid form")) {
-//			this.apply(AbstractDungeon.player, null, AbstractDungeon.player.getPower("TODO Tanid form").amount);
-//		}
 		onStartOfTurn();
 		onEndOfTurn();
 	}
 
 	public abstract AdaptableEvoCard.AbstractAdaptation getAdaptation();
-	public String getColoredName(boolean plural) {
-		return "#y" + this.name;
+	public String getColoredName() {
+		return colorize(this.name);
+	}
+	public String colorize(String string) {
+		return colorString + string + "[]";
+	}
+//
+//	public static boolean isPlayerInThisForm() {
+//		return AbstractDungeon.player.orbs.stream()
+//				.anyMatch((orb) -> (orb.getClass() == THIS.class));
+//	}
+
+	public static boolean isPlayerInThisForm(String orbId) {
+		return AbstractDungeon.player.orbs.stream()
+				.anyMatch((orb) -> orb != null && orb.ID != null && orb.ID.equals(orbId));
 	}
 
 //	public abstract class GeneAdaptation {

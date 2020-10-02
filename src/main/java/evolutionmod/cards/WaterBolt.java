@@ -17,7 +17,7 @@ import evolutionmod.orbs.MerfolkGene;
 import evolutionmod.patches.AbstractCardEnum;
 
 public class WaterBolt
-        extends CustomCard {
+        extends BaseEvoCard {
     public static final String ID = "evolutionmod:WaterBolt";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;

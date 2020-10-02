@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ShiftingPower
-        extends CustomCard {
+        extends BaseEvoCard {
     public static final String ID = "evolutionmod:ShiftingPower";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;

@@ -13,7 +13,7 @@ import evolutionmod.patches.AbstractCardEnum;
 import evolutionmod.powers.MatureEggPower;
 
 public class Incubate
-        extends CustomCard {
+        extends BaseEvoCard {
     public static final String ID = "evolutionmod:Incubate";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;

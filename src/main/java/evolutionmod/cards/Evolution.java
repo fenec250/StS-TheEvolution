@@ -24,7 +24,7 @@ import evolutionmod.patches.AbstractCardEnum;
 import java.util.ArrayList;
 
 public class Evolution
-		extends CustomCard {
+		extends BaseEvoCard {
 	public static final String ID = "evolutionmod:Evolution";
 	public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;
@@ -87,12 +87,12 @@ public class Evolution
 	public void resetDescription() {
 		StringBuilder description = new StringBuilder(
 				this.upgraded
-				? DESCRIPTION
-				: UPGRADE_DESCRIPTION);
+				? UPGRADE_DESCRIPTION
+				: DESCRIPTION);
 		description.append(" NL ");
 		description.append(
 				genes.stream()
-						.map(g -> new StringBuilder(g.getColoredName(false)).append(" "))
+						.map(g -> new StringBuilder(g.getColoredName()).append(g.name).append(" "))
 						.reduce(new StringBuilder(), StringBuilder::append).toString());
 		this.rawDescription = description.toString();
 		initializeDescription();

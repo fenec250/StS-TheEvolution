@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ShiftingStrike
-        extends CustomCard {
+        extends BaseEvoCard {
     public static final String ID = "evolutionmod:ShiftingStrike";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;

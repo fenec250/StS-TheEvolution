@@ -14,7 +14,7 @@ import evolutionmod.orbs.LizardGene;
 import evolutionmod.patches.AbstractCardEnum;
 
 public class Salamander
-        extends CustomCard {
+        extends BaseEvoCard {
     public static final String ID = "evolutionmod:Salamander";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;

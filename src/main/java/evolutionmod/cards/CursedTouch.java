@@ -10,10 +10,12 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.powers.WeakPower;
-import evolutionmod.orbs.AbstractGene;
-import evolutionmod.orbs.GhostGene;
+import evolutionmod.orbs.ShadowGene;
 import evolutionmod.patches.AbstractCardEnum;
+
+import java.util.stream.Collectors;
 
 public class CursedTouch
         extends AdaptableEvoCard {
@@ -28,8 +30,8 @@ public class CursedTouch
     private static final int UPGRADE_DAMAGE_AMT = 2;
     private static final int WEAK_AMT = 2;
     private static final int UPGRADE_WEAK_AMT = 1;
-    private static final int MAX_ADAPT_AMT = 2;
-    private static final int UPGRADE_MAX_ADAPT_AMT = 1;
+//    private static final int MAX_ADAPT_AMT = 2;
+//    private static final int UPGRADE_MAX_ADAPT_AMT = 1;
 
     public CursedTouch() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -37,7 +39,7 @@ public class CursedTouch
                 CardRarity.UNCOMMON, CardTarget.ENEMY);
         this.damage = this.baseDamage = DAMAGE_AMT;
         this.magicNumber = this.baseMagicNumber = WEAK_AMT;
-        this.adaptationMap.put(GhostGene.ID, new GhostGene.Adaptation(0, WEAK_AMT));
+//        this.adaptationMap.put(ShadowGene.ID, new ShadowGene.Adaptation(0, WEAK_AMT));
     }
 
     @Override
@@ -47,7 +49,17 @@ public class CursedTouch
                 AbstractGameAction.AttackEffect.BLUNT_HEAVY));
         AbstractDungeon.actionManager.addToBottom(
                 new ApplyPowerAction(m, p, new WeakPower(m, this.magicNumber, false), this.magicNumber));
-        super.use(p, m);
+//        super.use(p, m);
+        p.orbs.stream()
+                .filter(o -> this.canAdaptWith(o) > 0)
+                .findAny()
+                .ifPresent(o -> this.tryAdaptingWith(o, true));
+        this.useAdaptations(p, m);
+    }
+
+    @Override
+    protected int canAdaptWith(AbstractAdaptation adaptation) {
+        return ShadowGene.ID.equals(adaptation.getGeneId()) ? adaptation.amount : 0;
     }
 
     @Override
@@ -61,7 +73,7 @@ public class CursedTouch
             this.upgradeName();
             this.upgradeDamage(UPGRADE_DAMAGE_AMT);
             this.upgradeMagicNumber(UPGRADE_WEAK_AMT);
-            this.upgradeAdaptationMaximum(GhostGene.ID, UPGRADE_MAX_ADAPT_AMT);
+//            this.upgradeAdaptationMaximum(ShadowGene.ID, UPGRADE_MAX_ADAPT_AMT);
         }
     }
 }

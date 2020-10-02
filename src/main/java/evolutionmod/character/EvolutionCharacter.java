@@ -17,9 +17,10 @@ import com.megacrit.cardcrawl.helpers.ScreenShake;
 import com.megacrit.cardcrawl.localization.CharacterStrings;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
-import evolutionmod.cards.Adaptation;
+import evolutionmod.cards.LoyalCompanion;
 import evolutionmod.cards.DefendEvo;
 import evolutionmod.cards.Evolution;
+import evolutionmod.cards.LoyalWarrior;
 import evolutionmod.cards.StrikeEvo;
 import evolutionmod.patches.AbstractCardEnum;
 import evolutionmod.patches.EvolutionEnum;
@@ -119,7 +120,7 @@ public class EvolutionCharacter extends CustomPlayer {
 
     @Override
     public AbstractCard getStartCardForEvent() {
-        return new Adaptation();
+        return new LoyalCompanion();
     }
 
     @Override
@@ -162,18 +163,18 @@ public class EvolutionCharacter extends CustomPlayer {
     @Override
     public ArrayList<String> getStartingDeck() {
         ArrayList<String> retVal = new ArrayList<>();
+        retVal.add(LoyalWarrior.ID);
         retVal.add(StrikeEvo.ID);
         retVal.add(StrikeEvo.ID);
         retVal.add(StrikeEvo.ID);
         retVal.add(StrikeEvo.ID);
 
+        retVal.add(LoyalCompanion.ID);
         retVal.add(DefendEvo.ID);
         retVal.add(DefendEvo.ID);
         retVal.add(DefendEvo.ID);
         retVal.add(DefendEvo.ID);
 
-        retVal.add(Adaptation.ID);
-        retVal.add(Evolution.ID);
         return retVal;
     }
 

@@ -11,11 +11,12 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.HarpyGene;
 import evolutionmod.patches.AbstractCardEnum;
 
 public class TalonStrike
-        extends CustomCard {
+        extends BaseEvoCard {
     public static final String ID = "evolutionmod:TalonStrike";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -39,7 +40,14 @@ public class TalonStrike
         AbstractDungeon.actionManager.addToBottom(new DamageAction(
                 m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
                 AbstractGameAction.AttackEffect.BLUNT_HEAVY));
-        AbstractDungeon.actionManager.addToBottom(new ChannelAction(new HarpyGene()));
+
+        if (AbstractGene.isPlayerInThisForm(HarpyGene.ID)) {
+            AbstractDungeon.actionManager.addToBottom(new DamageAction(
+                    m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
+                    AbstractGameAction.AttackEffect.BLUNT_HEAVY));
+        } else {
+            AbstractDungeon.actionManager.addToBottom(new ChannelAction(new HarpyGene()));
+        }
     }
 
     @Override

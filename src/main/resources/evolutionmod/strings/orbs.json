@@ -1,49 +1,48 @@
 {
   "evolutionmod:CentaurGene": {
-    "NAME": "Centaur gene",
-    "DESCRIPTION": ["At the start of your turn gain ", " Strength until the end of your turn"]
+    "NAME": "Centaur",
+    "DESCRIPTION": ["At the start of your turn gain ", " Charge"]
   },
   "evolutionmod:PlantGene": {
-    "NAME": "Plant gene",
-    "DESCRIPTION": ["At the start of your turn gain ", " Brambles and ", " Block."]
-//    "DESCRIPTION": ["At the start of your turn apply ", " Poison and ", " Weak to a random enemy NL Doesn't target enemies with Artifact"]
+    "NAME": "Plant",
+    "DESCRIPTION": ["At the start of your turn gain ", " Block and ", " Brambles."]
   },
   "evolutionmod:MerfolkGene": {
-    "NAME": "Merfolk gene",
+    "NAME": "Merfolk",
     "DESCRIPTION": ["At the end of your turn gain ", " Block"]
   },
   "evolutionmod:HarpyGene": {
-    "NAME": "Harpy gene",
-    "DESCRIPTION": ["At the start of your turn draw a card", " and gain ", " Swiftness"]
+    "NAME": "Harpy",
+    "DESCRIPTION": ["At the start of your turn draw ", "a card.", " cards."]
   },
   "evolutionmod:LavafolkGene": {
-    "NAME": "Lavafolk gene",
-    "DESCRIPTION": ["At the end of your turn deal ", " damage to a random enemy"]
+    "NAME": "Lavafolk",
+    "DESCRIPTION": ["At the end of your turn deal ", " damage to a random enemy", " twice", "."]
   },
   "evolutionmod:SuccubusGene": {
-    "NAME": "Succubus gene",
-    "DESCRIPTION": ["At the start of your turn apply ", " vulnerable to a random enemy"]
-//    "DESCRIPTION": ["At the start of your turn apply ", " vulnerable and deal ", " damage to a random enemy"]
+    "NAME": "Succubus",
+    "DESCRIPTION": ["At the start of your turn deal ", " damage and apply ", " vulnerable to a random enemy"]
   },
   "evolutionmod:LymeanGene": {
-    "NAME": "Lymean gene",
-    "DESCRIPTION": ["At the end of your turn gain ", " Block and heal a random enemy for ", " HP."]
+    "NAME": "Lymean",
+//    "DESCRIPTION": ["At the end of your turn gain ", " Block and heal a random enemy for ", " HP."]
+    "DESCRIPTION": ["At the start of your turn Scry "]
   },
   "evolutionmod:InsectGene": {
-    "NAME": "Insect gene",
-    "DESCRIPTION": ["At the end of your turn shuffle a Drone in your draw pile."]
+    "NAME": "Insect",
+    "DESCRIPTION": ["At the start of your turn add a Drone to your hand."]
   },
   "evolutionmod:BeastGene": {
-    "NAME": "Beast gene",
-    "DESCRIPTION": ["At the start of your turn gain ", " Rage until the end of your turn."]
+    "NAME": "Beast",
+    "DESCRIPTION": ["At the start of your turn gain ", " Block and ", " Rage."]
   },
   "evolutionmod:LizardGene": {
-    "NAME": "Lizard gene",
-    "DESCRIPTION": ["At the start of your turn apply ", " Poison to a random enemy"]
+    "NAME": "Lizard",
+    "DESCRIPTION": ["At the start of your turn deal ", " damage and apply ", " Poison to a random enemy"]
   },
-  "evolutionmod:GhostGene": {
-    "NAME": "Ghost gene",
-    "DESCRIPTION": ["At the start of your turn apply ", " Weak to a random enemy."]
+  "evolutionmod:ShadowGene": {
+    "NAME": "Shadow",
+    "DESCRIPTION": ["At the start of your turn deal ", " damage and apply ", " Weak to a random enemy."]
   }
 //  "evolutionmod:DancePower": {
 //    "NAME": "Dance",

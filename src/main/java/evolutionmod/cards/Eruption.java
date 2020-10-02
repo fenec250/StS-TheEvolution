@@ -2,21 +2,19 @@ package evolutionmod.cards;
 
 import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.LavafolkGene;
 import evolutionmod.patches.AbstractCardEnum;
-import evolutionmod.powers.EruptionPower;
 
 public class Eruption
-        extends CustomCard {
+        extends BaseEvoCard {
     public static final String ID = "evolutionmod:Eruption";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -24,9 +22,9 @@ public class Eruption
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = "evolutionmod/images/cards/LavafolkAtt.png";
     private static final int COST = 2;
-    private static final int DAMAGE_AMT = 15;
+    private static final int DAMAGE_AMT = 18;
     private static final int UPGRADE_DAMAGE_AMT = 5;
-    private static final int ERUPTION_AMT = 1;
+    private static final int ERUPTION_AMT = 2;
     private static final int UPGRADE_ERUPTION_AMT = 1;
 
     public Eruption() {
@@ -39,13 +37,31 @@ public class Eruption
     }
 
     @Override
+    public boolean canPlay(AbstractCard card) {
+        if (!AbstractGene.isPlayerInThisForm(LavafolkGene.ID)) {
+            return false;
+        }
+        return super.canPlay(card);
+    }
+
+    @Override
+    protected String getCantPlayMessage() {
+        if (!AbstractGene.isPlayerInThisForm(LavafolkGene.ID)) {
+            return "A Lavafolk gene is required to play this card.";
+        }
+        return super.getCantPlayMessage();
+    }
+
+    @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        AbstractDungeon.actionManager.addToBottom(new DamageAllEnemiesAction(p, this.multiDamage,
-                this.damageTypeForTurn,
-                AbstractGameAction.AttackEffect.BLUNT_HEAVY));
-        AbstractDungeon.actionManager.addToBottom(
-                new ApplyPowerAction(p, p, new EruptionPower(p, this.magicNumber), this.magicNumber));
-        AbstractDungeon.actionManager.addToBottom(new ChannelAction(new LavafolkGene()));
+        if (AbstractGene.isPlayerInThisForm(LavafolkGene.ID)) {
+            addToBot(new DamageAllEnemiesAction(p, this.multiDamage,
+                    this.damageTypeForTurn,
+                    AbstractGameAction.AttackEffect.BLUNT_HEAVY));
+            for (int i = 0; i < this.magicNumber; ++i) {
+                addToBot(new ChannelAction(new LavafolkGene()));
+            }
+        }
     }
 
     @Override

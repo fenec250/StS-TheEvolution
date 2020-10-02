@@ -10,10 +10,10 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import evolutionmod.patches.AbstractCardEnum;
 import evolutionmod.powers.LizardFormPower;
-import evolutionmod.powers.MerfolkFormPower;
+import evolutionmod.powers.PotencyPower;
 
 public class AquaticForm
-        extends CustomCard {
+        extends BaseEvoCard {
     public static final String ID = "evolutionmod:AquaticForm";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -34,7 +34,7 @@ public class AquaticForm
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
-                new MerfolkFormPower(p, this.magicNumber)));
+                new PotencyPower(p, this.magicNumber)));
         AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
                 new LizardFormPower(p, this.magicNumber)));
     }

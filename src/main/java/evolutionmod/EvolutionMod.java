@@ -21,7 +21,17 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.localization.RelicStrings;
 import evolutionmod.cards.*;
 import evolutionmod.character.EvolutionCharacter;
+import evolutionmod.orbs.BeastGene;
+import evolutionmod.orbs.CentaurGene;
+import evolutionmod.orbs.HarpyGene;
+import evolutionmod.orbs.InsectGene;
+import evolutionmod.orbs.LavafolkGene;
+import evolutionmod.orbs.LizardGene;
+import evolutionmod.orbs.LymeanGene;
 import evolutionmod.orbs.MerfolkGene;
+import evolutionmod.orbs.PlantGene;
+import evolutionmod.orbs.ShadowGene;
+import evolutionmod.orbs.SuccubusGene;
 import evolutionmod.patches.AbstractCardEnum;
 import evolutionmod.patches.EvolutionEnum;
 import evolutionmod.relics.TorisGift;
@@ -72,11 +82,12 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
     public void receiveEditCards() {
         BaseMod.addDynamicVariable(new AdaptableEvoCard.MaxAdaptationNumber());
         BaseMod.addDynamicVariable(new DrainCurse.BlockAmount());
+//        BaseMod.addDynamicVariable(new Shadowbolt.ExtraDamage());
 
         //Vex quote: i shoot for 18 commons, 10 damage 6 block 2 other as a "blueprint" and modify if anything jumps out at me
         //Basic. 2 attacks, 2 skills
-        BaseMod.addCard(new Adaptation());
-        BaseMod.addCard(new Evolution());
+        BaseMod.addCard(new LoyalCompanion());
+        BaseMod.addCard(new LoyalWarrior());
         BaseMod.addCard(new DefendEvo());
         BaseMod.addCard(new StrikeEvo());
 
@@ -85,49 +96,61 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
 //
         //Commons
         //10 attacks
-        BaseMod.addCard(new HoofKick());
         BaseMod.addCard(new TalonStrike());
-        BaseMod.addCard(new WaterBolt());
-        BaseMod.addCard(new WaveCrash());
         BaseMod.addCard(new FlameStrike());
-        BaseMod.addCard(new GatherFood());
-        BaseMod.addCard(new DrainMana());
         BaseMod.addCard(new ClawSlash());
+        BaseMod.addCard(new Shadowbolt());
+        BaseMod.addCard(new PoisonFangs());
+
+//        BaseMod.addCard(new WaterBolt());
+//        BaseMod.addCard(new WaveCrash());
+//        BaseMod.addCard(new GatherFood());
         BaseMod.addCard(new ShiftingStrike());
+        BaseMod.addCard(new ChimeraStrike());
+        BaseMod.addCard(new CrystalShard());
         //8 skills
+        BaseMod.addCard(new DrainMana());
         BaseMod.addCard(new Charm());
         BaseMod.addCard(new Brambles());
-        BaseMod.addCard(new Regenerate());
+        BaseMod.addCard(new Dive());
+        BaseMod.addCard(new Hatch());
+//        BaseMod.addCard(new Regenerate());
+        BaseMod.addCard(new ChannelMagic());
+//        BaseMod.addCard(new ShiftingPower());
+        BaseMod.addCard(new ChimeraDefense());
         BaseMod.addCard(new ShiftingGuard());
-        BaseMod.addCard(new ShiftingPower());
-        BaseMod.addCard(new ShadowShift());
+        BaseMod.addCard(new CrystalBlock());
+//        BaseMod.addCard(new ShadowShift());
 
         //Uncommons
         //11 attacks
+        BaseMod.addCard(new Kick());
+        BaseMod.addCard(new Phoenix());
+        BaseMod.addCard(new SpiderBite());
         BaseMod.addCard(new Strip());
-        BaseMod.addCard(new VineLash());
-        BaseMod.addCard(new PoisonFangs());
+//        BaseMod.addCard(new VineLash());
         BaseMod.addCard(new CursedTouch());
         //exhaust
         BaseMod.addCard(new BlackCat());
         //18 skills
-        BaseMod.addCard(new TakeOff());
-        BaseMod.addCard(new Dive());
+        BaseMod.addCard(new Strenghten());
+        BaseMod.addCard(new Firebloom());
+
         BaseMod.addCard(new WindUp());
 //        BaseMod.addCard(new ChannelMagic());
         BaseMod.addCard(new Purify());
-        BaseMod.addCard(new Hivemind());
         BaseMod.addCard(new HeightenedSenses());
         //exhaust
         BaseMod.addCard(new Salamander());
         BaseMod.addCard(new SirenSong());
         BaseMod.addCard(new Toxin());
-        BaseMod.addCard(new Strenghten());
         //6 powers
         BaseMod.addCard(new Grow());
         BaseMod.addCard(new Symbiotes());
         BaseMod.addCard(new Blessing());
         BaseMod.addCard(new ThickHide());
+        BaseMod.addCard(new HardWorker());
+        BaseMod.addCard(new CurrentsDancer());
 
         //Rares.
         //4 attacks
@@ -135,16 +158,17 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
         BaseMod.addCard(new Seduce());
         BaseMod.addCard(new FeatherStorm());
         BaseMod.addCard(new Eruption());
-        BaseMod.addCard(new Rush());
+//        BaseMod.addCard(new Rush());
         //8 skills
         BaseMod.addCard(new Drown());
-        BaseMod.addCard(new Constrict());
-        BaseMod.addCard(new Incubate());
+//        BaseMod.addCard(new Constrict());
+//        BaseMod.addCard(new Incubate());
         BaseMod.addCard(new Aegis());
         BaseMod.addCard(new PoisonSpit());
-        BaseMod.addCard(new DrainCurse());
+//        BaseMod.addCard(new DrainCurse());
         //6 powers
 //        BaseMod.addCard(new GodForm());
+        BaseMod.addCard(new DarkDesires());
     }
 
     @Override
@@ -156,31 +180,63 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
     public void receiveEditKeywords() {
         String[] keywordAdapt = {"adapt"};
         BaseMod.addKeyword(keywordAdapt, "Consume a channeled Gene. Add its effect to the card until the end of the combat. Shuffle this card in your draw pile.");
-        String[] keywordBrambles = {"brambles"};
-        BaseMod.addKeyword("Brambles", keywordBrambles, "Consume a channeled Gene. Add its effect to the card until the end of the combat.");
-        String[] keywordDrone = {"drone", "drones"};
-        BaseMod.addKeyword("Drone", keywordDrone, "Drones are 0 cost attacks which Exhaust.");
-        String[] keywordRage = {"rage"};
-        BaseMod.addKeyword("Rage", keywordRage, "Whenever you play an Attack this turn, gain this amount of Block.");
-        String[] keywordCharge = {"charge"};
-        BaseMod.addKeyword("Charge", keywordCharge, "Increase the damage of your next hit then reduces by half.");
+        String[] keywordForm = {"form"};
+        BaseMod.addKeyword(keywordForm, "Trigger the following effect if you have a Gene of this type, otherwise Channel one.");
+        String[] keywordTrait = {"trait"};
+        BaseMod.addKeyword(keywordTrait, "Trigger the following effect if you have a Gene of this type.");
+        String[] keywordPotency = {"potency"};
+        BaseMod.addKeyword("Potency", keywordPotency, "Increase the first effect of your genes and their Adaptations.");
 
-        String[] keywordCentaur = {"centaur"};
-        BaseMod.addKeyword("[#B06050]Centaur gene[]", keywordCentaur, "Orb: at the start of your turn, increase the damage from your attacks by 1  until the end of your turn.");
-        String[] keywordPlant = {"plant"};
-        BaseMod.addKeyword( "[#60B040]Plant gene[]", keywordPlant, "Orb: gain 2 Brambles at the start of your turn.");
-        String[] keywordHarpy = {"harpy"};
-        BaseMod.addKeyword( "[#FFFF80]Harpy gene[]", keywordHarpy, "Orb: draw 1 card at the start of your turn.");
-        String[] keywordLavafolk = {"lavafolk"};
-        BaseMod.addKeyword( "[#FF9050]Lavafolk gene[]", keywordLavafolk, "Orb: deal 3 damage to a random enemy at the end of your turn.");
-        String[] keywordBeast = {"beast"};
-        BaseMod.addKeyword( "[#B06060]Beast gene[]", keywordBeast, "Orb: gain 1 rage at the start of your turn.");
-        String[] keywordMerfolk = {MerfolkGene.NAME.toLowerCase(), "merfolk"};
-        BaseMod.addKeyword(MerfolkGene.coloredName(false), keywordMerfolk, "Orb: gain 3 Block at the end of your turn.");
-//        String[] keywordTempo = {"mist"};
-//        BaseMod.addKeyword(keywordTempo, "At 10 Mist you gain 1 Intangible");
-//        String[] keywordStep = {"step", "steps"};
-//        BaseMod.addKeyword(keywordStep, "Steps are the number of consecutive dances you played.");
+        String[] keywordBrambles = {"brambles", "bramble"};
+        BaseMod.addKeyword("Bramble", keywordBrambles,
+                "Whenever you are attacked this turn, deal this amount of damage back");
+        String[] keywordDrone = {"drone", "drones"};
+        BaseMod.addKeyword("Drone", keywordDrone,
+                "Drones are 0 cost attacks which benefit from Potency, are Ethereal and Exhaust when played.");
+        String[] keywordRage = {"rage", "beast"};
+        BaseMod.addKeyword("Rage", keywordRage,
+                "Whenever you play an Attack this turn, gain this amount of Block.");
+//        String[] keywordCharge = {"charge", "centaur"};
+//        BaseMod.addKeyword("Charge", keywordCharge,
+//                "Increase the damage of your next hit then reduces by half.");
+        String[] keywordCharge = {"vigor", "centaur"};
+        BaseMod.addKeyword("Vigor", keywordCharge,
+                "Increase the damage of your next hit then reduces by half.");
+
+//        String[] keywordCentaur = {CentaurGene.NAME.toLowerCase(), "centaur"};
+//        BaseMod.addKeyword(CentaurGene.COLOR + " gene[]", keywordCentaur,
+//                "Orb: at the start of your turn, gain 3 Vigor.");
+////                "Orb: at the start of your turn, gain 3 Charge.");
+//        String[] keywordPlant = {PlantGene.NAME.toLowerCase(), PlantGene.COLOR + "Plant[]", "plant", "[#60B040]plant[]"};
+//        BaseMod.addKeyword( PlantGene.COLOR + PlantGene.NAME + " gene[]", keywordPlant,
+//                "Orb: gain 1 Block and 3 Brambles at the start of your turn.");
+//        String[] keywordHarpy = {HarpyGene.NAME.toLowerCase(), "harpy"};
+//        BaseMod.addKeyword( HarpyGene.COLOR + HarpyGene.NAME + " gene[]", keywordHarpy,
+//                "Orb: draw a card at the start of your turn.");
+//        String[] keywordLavafolk = {LavafolkGene.NAME.toLowerCase(), "lavafolk"};
+//        BaseMod.addKeyword( LavafolkGene.COLOR + LavafolkGene.NAME + " gene[]", keywordLavafolk,
+//                "Orb: deal 2 damage to a random enemy twice at the end of your turn.");
+//        String[] keywordBeast = {BeastGene.NAME.toLowerCase(), "beast", BeastGene.COLOR + "beast"};
+//        BaseMod.addKeyword( BeastGene.COLOR + BeastGene.NAME + " gene[]", keywordBeast,
+//                "Orb: gain 1 block and 2 rage at the start of your turn.");
+//        String[] keywordMerfolk = {MerfolkGene.NAME.toLowerCase(), "merfolk"};
+//        BaseMod.addKeyword(MerfolkGene.COLOR + MerfolkGene.NAME + " gene", keywordMerfolk,
+//                "Orb: gain 4 Block at the end of your turn.");
+//        String[] keywordLymean = {LymeanGene.NAME.toLowerCase(), "lymean"};
+//        BaseMod.addKeyword(LymeanGene.COLOR + LymeanGene.NAME + " gene", keywordLymean,
+//                "Orb: Scry 2 at the start of your turn.");
+//        String[] keywordShadow = {ShadowGene.NAME.toLowerCase(), "shadow"};
+//        BaseMod.addKeyword(ShadowGene.COLOR + ShadowGene.NAME + " gene", keywordShadow,
+//                "Orb: deal 1 damage and apply 2 Weak at the start of your turn.");
+//        String[] keywordSuccubus = {SuccubusGene.NAME.toLowerCase(), "succubus"};
+//        BaseMod.addKeyword(SuccubusGene.COLOR + SuccubusGene.NAME + " gene", keywordSuccubus,
+//                "Orb: deal 1 damage and apply 2 Vulnerable at the start of your turn.");
+//        String[] keywordInsect = {InsectGene.NAME.toLowerCase(), "insect"};
+//        BaseMod.addKeyword(InsectGene.COLOR + InsectGene.NAME + " gene", keywordInsect,
+//                "Orb: deal 1 damage and apply 2 Weak at the start of your turn.");
+//        String[] keywordLizard = {LizardGene.NAME.toLowerCase(), "lizard"};
+//        BaseMod.addKeyword(LizardGene.COLOR + LizardGene.NAME + " gene", keywordLizard,
+//                "Orb: deal 1 damage and apply 3 Poison at the start of your turn.");
 
 //        String[] keywordCantrips = {"cantrip", "cantrips"};
 //        BaseMod.addKeyword(keywordCantrips, "Considered a [#5299DC]Spell[] so long as you've played fewer than 3 [#5299DC]Spells[] this turn.");

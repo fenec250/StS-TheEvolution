@@ -1,5 +1,6 @@
 package evolutionmod.cards;
 
+import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -21,26 +22,35 @@ public class HeightenedSenses
     private static final int COST = 0;
     private static final int DRAW_AMT = 3;
     private static final int UPGRADED_DRAW_AMT = 1;
-    private static final int MAX_ADAPT_AMT = 2;
-    private static final int UPGRADE_MAX_ADAPT_AMT = 1;
+//    private static final int MAX_ADAPT_AMT = 2;
+//    private static final int UPGRADE_MAX_ADAPT_AMT = 1;
 
     public HeightenedSenses() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.UNCOMMON, CardTarget.SELF);
         this.magicNumber = this.baseMagicNumber = DRAW_AMT;
-        this.adaptationMap.put(BeastGene.ID, new BeastGene.Adaptation(0, MAX_ADAPT_AMT));
+//        this.adaptationMap.put(BeastGene.ID, new BeastGene.Adaptation(0, MAX_ADAPT_AMT));
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         // TODO: Check to do like ScrapeFollowUpAction
         AbstractDungeon.actionManager.addToBottom(new HeightenedSensesAction(p, this.magicNumber));
-        p.orbs.stream()
-                .filter(o -> this.canAdaptWith(o) > 0)
-                .findAny()
-                .ifPresent(o -> this.tryAdaptingWith((AbstractGene) o, true));
+        if (!AbstractGene.isPlayerInThisForm(BeastGene.ID)) {
+            addToBot(new ChannelAction(new BeastGene()));
+        } else {
+            p.orbs.stream()
+                    .filter(o -> this.canAdaptWith(o) > 0)
+                    .findAny()
+                    .ifPresent(o -> this.tryAdaptingWith(o, true));
+        }
         this.useAdaptations(p, m);
+    }
+
+    @Override
+    public int canAdaptWith(AbstractAdaptation adaptation) {
+        return adaptation.getGeneId().equals(BeastGene.ID) ? adaptation.amount : 0;
     }
 
     @Override
@@ -48,7 +58,7 @@ public class HeightenedSenses
         if (!this.upgraded) {
             this.upgradeName();
             this.upgradeMagicNumber(UPGRADED_DRAW_AMT);
-            this.upgradeAdaptationMaximum(BeastGene.ID, UPGRADE_MAX_ADAPT_AMT);
+//            this.upgradeAdaptationMaximum(BeastGene.ID, UPGRADE_MAX_ADAPT_AMT);
         }
     }
 }

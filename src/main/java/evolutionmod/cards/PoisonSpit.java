@@ -12,6 +12,7 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.ConstrictedPower;
 import com.megacrit.cardcrawl.powers.ThornsPower;
+import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.LizardGene;
 import evolutionmod.orbs.PlantGene;
 import evolutionmod.patches.AbstractCardEnum;
@@ -19,7 +20,7 @@ import evolutionmod.powers.BramblesPower;
 import evolutionmod.powers.PoisonCoatedPower;
 
 public class PoisonSpit
-        extends CustomCard {
+        extends BaseEvoCard {
     public static final String ID = "evolutionmod:PoisonSpit";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -39,20 +40,16 @@ public class PoisonSpit
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        int constricted = 0;
-        if (constricted > 0) {
-            final int finalConstricted = constricted;
-            if (!this.upgraded) {
-            } else {
-                AbstractDungeon.getMonsters().monsters.forEach(mo ->
-                        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(
-                                mo, p, new ConstrictedPower(mo, p, finalConstricted), finalConstricted, true))
-                );
-            }
+        int poison = this.magicNumber;
+        if (!upgraded && AbstractGene.isPlayerInThisForm(LizardGene.ID)) {
+            poison += UPGRADE_ENVENOM_AMT;
         }
         AbstractDungeon.actionManager.addToBottom(
-                new ApplyPowerAction(p, p, new PoisonCoatedPower(p, this.magicNumber), this.magicNumber));
-        AbstractDungeon.actionManager.addToBottom(new ChannelAction(new LizardGene()));
+                new ApplyPowerAction(p, p, new PoisonCoatedPower(p, poison)));
+
+        if (upgraded || !AbstractGene.isPlayerInThisForm(LizardGene.ID)) {
+            AbstractDungeon.actionManager.addToBottom(new ChannelAction(new LizardGene()));
+        }
     }
 
     @Override

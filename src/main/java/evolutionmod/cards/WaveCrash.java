@@ -14,7 +14,7 @@ import evolutionmod.orbs.MerfolkGene;
 import evolutionmod.patches.AbstractCardEnum;
 
 public class WaveCrash
-        extends CustomCard {
+        extends BaseEvoCard {
     public static final String ID = "evolutionmod:WaveCrash";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;

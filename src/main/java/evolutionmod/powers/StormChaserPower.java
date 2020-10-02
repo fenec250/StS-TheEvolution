@@ -9,13 +9,13 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
-public class MerfolkFormPower extends AbstractPower {
-    public static final String POWER_ID = "evolutionmod:MerfolkFormPower";
+public class StormChaserPower extends AbstractPower {
+    public static final String POWER_ID = "evolutionmod:StormChaserPower";
     public static final PowerStrings cardStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
     public static final String NAME = cardStrings.NAME;
     public static final String[] DESCRIPTIONS = cardStrings.DESCRIPTIONS;
 
-    public MerfolkFormPower(AbstractCreature owner, int initialAmount) {
+    public StormChaserPower(AbstractCreature owner, int initialAmount) {
         this.name = NAME;
         this.ID = POWER_ID;
         this.owner = owner;

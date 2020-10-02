@@ -42,20 +42,23 @@ public class StrikeEvo
     public void use(AbstractPlayer p, AbstractMonster m) {
         AbstractDungeon.actionManager.addToBottom(new DamageAction(
                 m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
-                AbstractGameAction.AttackEffect.BLUNT_HEAVY));
-        if (p.hasPower(AdaptationPower.POWER_ID)) {
-            addToTop(new ApplyPowerAction(p, p, new AdaptationPower(p, -1), -1));
-            p.orbs.stream()
-                    .filter(o -> this.canAdaptWith(o) > 0)
-                    .findAny()
-                    .ifPresent(o -> this.tryAdaptingWith(o, true));
-        }
-        this.useAdaptations(p, m);
+                AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
+//        if (p.hasPower(AdaptationPower.POWER_ID)) {
+//            addToTop(new ApplyPowerAction(p, p, new AdaptationPower(p, -1), -1));
+//            p.orbs.stream()
+//                    .filter(o -> this.canAdaptWith(o) > 0)
+//                    .findAny()
+//                    .ifPresent(o -> this.tryAdaptingWith(o, true));
+//        }
+//        this.useAdaptations(p, m);
     }
 
     @Override
+//    public int canAdaptWith(AbstractAdaptation adaptation) {
+//        return adaptation.amount;
+//    }
     public int canAdaptWith(AbstractAdaptation adaptation) {
-        return adaptation.amount;
+        return 0;
     }
 
     @Override

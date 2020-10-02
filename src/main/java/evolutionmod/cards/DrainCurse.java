@@ -13,11 +13,11 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.WeakPower;
-import evolutionmod.orbs.GhostGene;
+import evolutionmod.orbs.ShadowGene;
 import evolutionmod.patches.AbstractCardEnum;
 
 public class DrainCurse
-        extends CustomCard {
+        extends BaseEvoCard {
     public static final String ID = "evolutionmod:DrainCurse";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -49,7 +49,7 @@ public class DrainCurse
                 AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, drainAmount * this.magicNumber + this.block));
             }
         }
-        AbstractDungeon.actionManager.addToBottom(new ChannelAction(new GhostGene()));
+        AbstractDungeon.actionManager.addToBottom(new ChannelAction(new ShadowGene()));
     }
 
     private int calculateExtraBlock(AbstractMonster mo) {

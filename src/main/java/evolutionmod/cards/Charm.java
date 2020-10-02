@@ -11,11 +11,14 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.GainStrengthPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
+import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.SuccubusGene;
 import evolutionmod.patches.AbstractCardEnum;
+import evolutionmod.powers.PotencyPower;
+import evolutionmod.powers.RemovePotencyPower;
 
 public class Charm
-        extends CustomCard {
+        extends BaseEvoCard {
     public static final String ID = "evolutionmod:Charm";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -39,7 +42,12 @@ public class Charm
         if (m != null && !m.hasPower("Artifact")) {
             AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(m, p, new GainStrengthPower(m, this.magicNumber), this.magicNumber));
         }
-        AbstractDungeon.actionManager.addToBottom(new ChannelAction(new SuccubusGene()));
+        if (AbstractGene.isPlayerInThisForm(SuccubusGene.ID)) {
+            addToBot(new ApplyPowerAction(p, p, new PotencyPower(p, this.magicNumber)));
+            addToBot(new ApplyPowerAction(p, p, new RemovePotencyPower(p, this.magicNumber)));
+        } else {
+            AbstractDungeon.actionManager.addToBottom(new ChannelAction(new SuccubusGene()));
+        }
     }
 
     @Override

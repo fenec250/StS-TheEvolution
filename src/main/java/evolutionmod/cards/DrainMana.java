@@ -1,22 +1,21 @@
 package evolutionmod.cards;
 
 import basemod.abstracts.CustomCard;
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
+import com.megacrit.cardcrawl.actions.utility.ScryAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.LymeanGene;
 import evolutionmod.patches.AbstractCardEnum;
 
 public class DrainMana
-        extends CustomCard {
+        extends BaseEvoCard {
     public static final String ID = "evolutionmod:DrainMana";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -24,26 +23,25 @@ public class DrainMana
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = "evolutionmod/images/cards/strike.png";
     private static final int COST = 1;
-    private static final int DAMAGE_AMT = 4;
-    private static final int UPGRADE_DAMAGE_AMT = 1;
     private static final int DRAW_AMT = 2;
     private static final int UPGRADE_DRAW_AMT = 1;
+    private static final int LYMEAN_SCRY_AMT = 3;
 
     public DrainMana() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
-                CardType.ATTACK, AbstractCardEnum.EVOLUTION_BLUE,
-                CardRarity.COMMON, CardTarget.ENEMY);
-        this.damage = this.baseDamage = DAMAGE_AMT;
+                CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
+                CardRarity.COMMON, CardTarget.NONE);
         this.magicNumber = this.baseMagicNumber = DRAW_AMT;
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        AbstractDungeon.actionManager.addToBottom(new DamageAction(
-                m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
-                AbstractGameAction.AttackEffect.BLUNT_HEAVY));
         AbstractDungeon.actionManager.addToBottom(new DrawCardAction(p, this.magicNumber));
-        AbstractDungeon.actionManager.addToBottom(new ChannelAction(new LymeanGene()));
+        if (AbstractGene.isPlayerInThisForm(LymeanGene.ID)) {
+            addToBot(new ScryAction(LYMEAN_SCRY_AMT));
+        } else {
+            addToBot(new ChannelAction(new LymeanGene()));
+        }
     }
 
     @Override
@@ -55,7 +53,6 @@ public class DrainMana
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeDamage(UPGRADE_DAMAGE_AMT);
             this.upgradeMagicNumber(UPGRADE_DRAW_AMT);
         }
     }

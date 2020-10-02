@@ -2,53 +2,59 @@ package evolutionmod.cards;
 
 import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.powers.SadisticPower;
+import evolutionmod.orbs.AbstractGene;
+import evolutionmod.orbs.ShadowGene;
+import evolutionmod.orbs.SuccubusGene;
 import evolutionmod.patches.AbstractCardEnum;
-import evolutionmod.powers.LavafolkFormPower;
-import evolutionmod.powers.LymeanFormPower;
 
-public class MagicForm
-        extends CustomCard {
-    public static final String ID = "evolutionmod:MagicForm";
+public class DarkDesires
+        extends BaseEvoCard {
+    public static final String ID = "evolutionmod:DarkDesires";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-    public static final String IMG_PATH = "evolutionmod/images/cards/LavafolkForm.png";
+    public static final String IMG_PATH = "evolutionmod/images/cards/strike.png";
     private static final int COST = 1;
-    private static final int POWERS_AMT = 1;
-    private static final int UPGRADE_POWERS_AMT = 1;
+    private static final int POWER_AMT = 3;
+    private static final int UPGRADE_POWER_AMT = 2;
+    private static final int FORMS_POWER_AMOUNT = 1;
 
-    public MagicForm() {
+    public DarkDesires() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.POWER, AbstractCardEnum.EVOLUTION_BLUE,
-                CardRarity.UNCOMMON, CardTarget.SELF);
-        this.magicNumber = this.baseMagicNumber = POWERS_AMT;
+                CardRarity.RARE, CardTarget.SELF);
+        this.magicNumber = this.baseMagicNumber = POWER_AMT;
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
-                new LavafolkFormPower(p, this.magicNumber)));
-        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
-                new LymeanFormPower(p, this.magicNumber)));
+        addToBot(new ApplyPowerAction(p, p, new SadisticPower(p, this.magicNumber)));
+
+        if (!AbstractGene.isPlayerInThisForm(SuccubusGene.ID)) {
+            addToBot(new ChannelAction(new SuccubusGene()));
+        } else {
+            addToBot(new ChannelAction(new ShadowGene()));
+        }
     }
 
     @Override
     public AbstractCard makeCopy() {
-        return new MagicForm();
+        return new DarkDesires();
     }
 
     @Override
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeMagicNumber(UPGRADE_POWERS_AMT);
+            this.upgradeMagicNumber(UPGRADE_POWER_AMT);
         }
     }
 }

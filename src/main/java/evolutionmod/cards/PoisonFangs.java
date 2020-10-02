@@ -1,9 +1,10 @@
 package evolutionmod.cards;
 
+import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
-import com.megacrit.cardcrawl.actions.common.RemoveAllBlockAction;
+import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -12,13 +13,11 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.PoisonPower;
 import evolutionmod.orbs.AbstractGene;
-import evolutionmod.orbs.LavafolkGene;
 import evolutionmod.orbs.LizardGene;
-import evolutionmod.orbs.SuccubusGene;
 import evolutionmod.patches.AbstractCardEnum;
 
 public class PoisonFangs
-        extends AdaptableEvoCard {
+        extends BaseEvoCard {
     public static final String ID = "evolutionmod:PoisonFangs";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -26,34 +25,29 @@ public class PoisonFangs
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = "evolutionmod/images/cards/strike.png";
     private static final int COST = 1;
-    private static final int DAMAGE_AMT = 3;
-    private static final int UPGRADE_DAMAGE_AMT = 1;
-    private static final int POISON_AMT = 4;
-    private static final int UPGRADE_POISON_AMT = 2;
-    private static final int MAX_ADAPT_AMT = 2;
-    private static final int UPGRADE_MAX_ADAPT_AMT = 1;
+    private static final int DAMAGE_AMT = 7;
+    private static final int UPGRADE_DAMAGE_AMT = 3;
+    private static final int LIZARD_POISON_AMT = 3;
 
     public PoisonFangs() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.ATTACK, AbstractCardEnum.EVOLUTION_BLUE,
-                CardRarity.UNCOMMON, CardTarget.ENEMY);
+                CardRarity.COMMON, CardTarget.ENEMY);
         this.damage = this.baseDamage = DAMAGE_AMT;
-        this.magicNumber = this.baseMagicNumber = POISON_AMT;
-        this.adaptationMap.put(LizardGene.ID, new LizardGene.Adaptation(0, MAX_ADAPT_AMT));
+        this.magicNumber = this.baseMagicNumber = LIZARD_POISON_AMT;
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         AbstractDungeon.actionManager.addToBottom(new DamageAction(
                 m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
-                AbstractGameAction.AttackEffect.BLUNT_HEAVY));
-        p.orbs.stream()
-                .filter(o -> this.canAdaptWith(o) > 0)
-                .findAny()
-                .ifPresent(o -> this.tryAdaptingWith((AbstractGene) o, true));
-        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(
-                m, p, new PoisonPower(m, p, this.magicNumber), this.magicNumber));
-        this.useAdaptations(p, m);
+                AbstractGameAction.AttackEffect.BLUNT_LIGHT));
+        if (AbstractGene.isPlayerInThisForm(LizardGene.ID)) {
+            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(
+                    m, p, new PoisonPower(m, p, this.magicNumber), this.magicNumber));
+        } else {
+            AbstractDungeon.actionManager.addToBottom(new ChannelAction(new LizardGene()));
+        }
     }
 
     @Override
@@ -61,8 +55,6 @@ public class PoisonFangs
         if (!this.upgraded) {
             this.upgradeName();
             this.upgradeDamage(UPGRADE_DAMAGE_AMT);
-            this.upgradeMagicNumber(UPGRADE_POISON_AMT);
-            this.upgradeAdaptationMaximum(LizardGene.ID, UPGRADE_MAX_ADAPT_AMT);
         }
     }
 }

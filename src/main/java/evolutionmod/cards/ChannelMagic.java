@@ -1,5 +1,6 @@
 package evolutionmod.cards;
 
+import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -7,12 +8,15 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import evolutionmod.orbs.AbstractGene;
+import evolutionmod.orbs.InsectGene;
 import evolutionmod.orbs.LavafolkGene;
+import evolutionmod.orbs.LymeanGene;
 import evolutionmod.patches.AbstractCardEnum;
-import evolutionmod.powers.MarkPower;
+import evolutionmod.powers.PotencyPower;
+import evolutionmod.powers.RemovePotencyPower;
 
 public class ChannelMagic
-        extends AdaptableEvoCard {
+        extends BaseEvoCard {
     public static final String ID = "evolutionmod:ChannelMagic";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -20,38 +24,37 @@ public class ChannelMagic
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = "evolutionmod/images/cards/strike.png";
     private static final int COST = 1;
-    private static final int MARK_AMT = 1;
-    private static final int UPGRADE_MARK_AMT = 1;
-    private static final int FORM_AMT = 1;
-    private static final int MAX_ADAPT_AMT = 2;
-    private static final int UPGRADE_MAX_ADAPT_AMT = 1;
+    private static final int POTENCY_AMT = 1;
+    private static final int FORM_POTENCY_AMT = 1;
+    private static final int UPGRADE_FORM_POTENCY_AMT = 1;
 
     public ChannelMagic() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
-                CardRarity.UNCOMMON, CardTarget.ENEMY);
-        this.magicNumber = this.baseMagicNumber = FORM_AMT;
-        this.adaptationMap.put(LavafolkGene.ID, new LavafolkGene.Adaptation(0, this.magicNumber));
+                CardRarity.COMMON, CardTarget.SELF);
+        this.magicNumber = this.baseMagicNumber = FORM_POTENCY_AMT;
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
+        int potency = POTENCY_AMT;
+        if (AbstractGene.isPlayerInThisForm(LymeanGene.ID)
+                || AbstractGene.isPlayerInThisForm(InsectGene.ID)
+                || AbstractGene.isPlayerInThisForm(LavafolkGene.ID)
+        ) {
+            potency += this.magicNumber;
+        }
         AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(
-                m, p, new MarkPower(m, this.magicNumber), this.magicNumber
-        ));
-        p.orbs.stream()
-                .filter(o -> this.canAdaptWith(o) > 0)
-                .findAny()
-                .ifPresent(o -> this.tryAdaptingWith((AbstractGene) o, true));
-        this.useAdaptations(p, m);
+                p, p, new PotencyPower(p, potency)));
+        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(
+                p, p, new RemovePotencyPower(p, potency)));
     }
 
     @Override
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeMagicNumber(UPGRADE_MARK_AMT);
-            this.upgradeAdaptationMaximum(LavafolkGene.ID, UPGRADE_MAX_ADAPT_AMT);
+            this.upgradeMagicNumber(UPGRADE_FORM_POTENCY_AMT);
         }
     }
 }

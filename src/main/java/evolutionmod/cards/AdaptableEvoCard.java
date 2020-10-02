@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 
-public abstract class AdaptableEvoCard extends CustomCard {
+public abstract class AdaptableEvoCard extends BaseEvoCard {
 
 	protected Map<String, AbstractAdaptation> adaptationMap;
 	protected boolean adaptationUpgraded = false;
@@ -98,13 +98,9 @@ public abstract class AdaptableEvoCard extends CustomCard {
 	    this.adaptationDescription = " NL " + this.adaptationMap.values().stream()
 			    .map(a -> {
 					StringBuilder stringBuilder = new StringBuilder(a.text());
-					stringBuilder.append(": ");
-					int i = 0;
-					for (; i < a.amount; ++i) {
-						stringBuilder.append('x');
-					}
-					for (; i < a.max; ++i) {
-						stringBuilder.append('-');
+					stringBuilder.append(": ").append(a.amount);
+					if (a.amount < a.max) {
+						stringBuilder.append('/').append(a.max);
 					}
 				    stringBuilder.append(' ');
 				    return stringBuilder;
@@ -142,36 +138,6 @@ public abstract class AdaptableEvoCard extends CustomCard {
 
 	protected void useAdaptations(AbstractPlayer p, AbstractMonster m) {
     	this.adaptationMap.values().forEach(f -> f.apply(p, m));
-    }
-
-    protected boolean consumeOrb(AbstractPlayer player, AbstractOrb orb) {
-	    if (player.orbs.isEmpty()) {
-	    	return false;
-	    }
-	    boolean result = player.orbs.remove(orb);
-	    if (result) {
-		    player.orbs.add(new EmptyOrbSlot(player.orbs.get(0).cX, player.orbs.get(0).cY));
-		    for (int i = 0; i < player.orbs.size(); ++i) {
-			    player.orbs.get(i).setSlot(i, player.maxOrbs);
-		    }
-	    }
-	    return result;
-    }
-
-    protected boolean consumeOrbs(AbstractPlayer player, Collection<AbstractOrb> orbs) {
-	    if (player.orbs.isEmpty()) {
-	    	return false;
-	    }
-	    boolean result = player.orbs.removeAll(orbs);
-	    if (result) {
-		    for (int i = 0; i < orbs.size(); ++i) {
-		    	player.orbs.add(new EmptyOrbSlot(player.orbs.get(0).cX, player.orbs.get(0).cY));
-		    }
-		    for (int i = 0; i < player.orbs.size(); ++i) {
-			    ((AbstractOrb)player.orbs.get(i)).setSlot(i, player.maxOrbs);
-		    }
-	    }
-	    return result;
     }
 
     public abstract static class AbstractAdaptation {

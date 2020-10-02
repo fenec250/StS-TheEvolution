@@ -25,7 +25,8 @@ public class LavafolkGeneAction extends AbstractHalfTargetedAction {
 			return;
 		}
 		AbstractDungeon.actionManager.addToTop(new DamageAction(
-				this.target, new DamageInfo(this.source, this.damage, DamageInfo.DamageType.THORNS), AttackEffect.NONE, true));
+				this.target, new DamageInfo(this.source, this.damage, DamageInfo.DamageType.THORNS),
+				AttackEffect.FIRE, true));
 
 		this.isDone = true;
 
