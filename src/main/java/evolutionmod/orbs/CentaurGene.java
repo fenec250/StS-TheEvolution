@@ -18,7 +18,7 @@ public class CentaurGene extends AbstractGene {
 	public static final String ID = "evolutionmod:CentaurGene";
 	public static final OrbStrings orbStrings = CardCrawlGame.languagePack.getOrbString(ID);
 	public static final String NAME = orbStrings.NAME;
-	public static final String COLOR = "[#B06050]";
+	public static final String COLOR = "[#808080]";
 	public static final String[] DESCRIPTION = orbStrings.DESCRIPTION;
 	public static final String IMG_PATH = "evolutionmod/images/orbs/CentaurGene.png";
 	public static final int VIGOR = 3;
@@ -53,15 +53,6 @@ public class CentaurGene extends AbstractGene {
 	@Override
 	public void updateDescription() {
 		this.description = "#yPassive and #yEvoke: " + getDescription();
-	}
-
-	public static List<TooltipInfo> addTooltip(List<TooltipInfo> tooltips, String rawDescription) {
-		if (rawDescription.contains("Lavafolk")) {
-			tooltips.add(new TooltipInfo(
-					COLOR + NAME + "[]",
-					getDescription()));
-		}
-		return tooltips;
 	}
 
 	@Override

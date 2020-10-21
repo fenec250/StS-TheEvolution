@@ -2,6 +2,8 @@ package evolutionmod.cards;
 
 import basemod.abstracts.CustomCard;
 import basemod.abstracts.CustomSavable;
+import basemod.helpers.TooltipInfo;
+import com.evacipated.cardcrawl.mod.stslib.cards.interfaces.StartupCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
@@ -25,8 +27,11 @@ import evolutionmod.orbs.ShadowGene;
 import evolutionmod.orbs.SuccubusGene;
 import evolutionmod.patches.AbstractCardEnum;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LoyalWarrior
-		extends BaseEvoCard implements CustomSavable<Integer> {
+		extends BaseEvoCard implements CustomSavable<Integer>, StartupCard {
 	public static final String ID = "evolutionmod:LoyalWarrior";
 	public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;
@@ -37,8 +42,6 @@ public class LoyalWarrior
 	private static final int COST = 2;
 	private static final int DAMAGE_AMT = 12;
 	private static final int UPGRADE_DAMAGE_AMT = 3;
-	private static final int STRENGTH_AMT = 1;
-	private static final int UPGRADE_STRENGTH_AMT = 1;
 
 	private int geneIndex;
 	private AbstractGene gene;
@@ -48,7 +51,7 @@ public class LoyalWarrior
 				CardType.ATTACK, AbstractCardEnum.EVOLUTION_BLUE,
 				CardRarity.BASIC, CardTarget.ENEMY);
 		this.damage = this.baseDamage = DAMAGE_AMT;
-		this.magicNumber = this.baseMagicNumber = STRENGTH_AMT;
+		this.magicNumber = this.baseMagicNumber = UPGRADE_DAMAGE_AMT;
 		this.exhaust = true;
 		this.geneIndex = -1;
 		resetGene();
@@ -59,26 +62,31 @@ public class LoyalWarrior
 				CardType.ATTACK, AbstractCardEnum.EVOLUTION_BLUE,
 				CardRarity.BASIC, CardTarget.SELF);
 		this.damage = this.baseDamage = DAMAGE_AMT;
-		this.magicNumber = this.baseMagicNumber = STRENGTH_AMT;
+		this.magicNumber = this.baseMagicNumber = UPGRADE_DAMAGE_AMT;
 		this.exhaust = true;
 		this.geneIndex = geneIndex;
 		resetGene();
 	}
 
 	@Override
-	public void use(AbstractPlayer p, AbstractMonster m) {
-		if (this.geneIndex < 0) {
-			resetGene();
-		}
-		addToBot(new DamageAction(
-				m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
-				AbstractGameAction.AttackEffect.BLUNT_HEAVY));
-
-		if (AbstractGene.isPlayerInThisForm(this.gene.ID)) {
-			addToBot(new ApplyPowerAction(p, p, new StrengthPower(p, this.magicNumber)));
-		} else {
+	public boolean atBattleStartPreDraw() {
+		if (this.upgraded) {
 			addToBot(new ChannelAction(this.gene.makeCopy()));
 		}
+		return false;
+	}
+
+	@Override
+	public void use(AbstractPlayer p, AbstractMonster m) {
+		int damage = this.damage;
+		if (!this.upgraded && AbstractGene.isPlayerInThisForm(this.gene.ID)) {
+			damage += this.magicNumber;
+		} else if (!this.upgraded) {
+			addToBot(new ChannelAction(this.gene.makeCopy()));
+		}
+		addToBot(new DamageAction(
+				m, new DamageInfo(p, damage, this.damageTypeForTurn),
+				AbstractGameAction.AttackEffect.BLUNT_HEAVY));
 	}
 
 
@@ -92,8 +100,22 @@ public class LoyalWarrior
 		if (!this.upgraded) {
 			this.upgradeName();
 			this.upgradeDamage(UPGRADE_DAMAGE_AMT);
-			this.upgradeMagicNumber(UPGRADE_STRENGTH_AMT);
+			this.rawDescription = this.gene == null
+					? DESCRIPTION + EXTENDED_DESCRIPTION[0] + EXTENDED_DESCRIPTION[2]
+						+ EXTENDED_DESCRIPTION[3] + EXTENDED_DESCRIPTION[4]
+					: DESCRIPTION + EXTENDED_DESCRIPTION[2] + this.gene.name + EXTENDED_DESCRIPTION[4];
+			this.initializeDescription();
 		}
+	}
+
+	@Override
+	public List<TooltipInfo> getCustomTooltips() {
+		if (customTooltips == null) {
+			super.getCustomTooltips();
+			customTooltips.add(new TooltipInfo("Randomized form",
+					"The form on this card is selected when the run starts and varies from one run to another."));
+		}
+		return  customTooltips;
 	}
 
 	private void resetGene() {

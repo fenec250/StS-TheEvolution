@@ -1,6 +1,5 @@
 package evolutionmod.cards;
 
-import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
@@ -10,7 +9,6 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.MerfolkGene;
 import evolutionmod.patches.AbstractCardEnum;
 import evolutionmod.powers.DrownPower;
@@ -22,7 +20,7 @@ public class Drown
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-    public static final String IMG_PATH = "evolutionmod/images/cards/strike.png";
+    public static final String IMG_PATH = "evolutionmod/images/cards/MerfolkSkl.png";
     private static final int COST = 2;
     private static final int BLOCK_AMT = 10;
     private static final int UPGRADE_BLOCK_AMT = 4;
@@ -37,13 +35,13 @@ public class Drown
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, this.block));
-        if (AbstractGene.isPlayerInThisForm(MerfolkGene.ID)) {
+//        if (AbstractGene.isPlayerInThisForm(MerfolkGene.ID)) {
             AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(
                     m, p, new DrownPower(m, 1), 1
             ));
-        } else {
+//        } else {
             AbstractDungeon.actionManager.addToBottom(new ChannelAction(new MerfolkGene()));
-        }
+//        }
     }
 
     @Override

@@ -38,7 +38,8 @@ public class Eruption
 
     @Override
     public boolean canPlay(AbstractCard card) {
-        if (!AbstractGene.isPlayerInThisForm(LavafolkGene.ID)) {
+        if (card.cardID.equals(ID)
+            && !AbstractGene.isPlayerInThisForm(LavafolkGene.ID)) {
             return false;
         }
         return super.canPlay(card);

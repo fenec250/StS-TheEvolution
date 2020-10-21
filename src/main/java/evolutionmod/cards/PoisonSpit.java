@@ -26,7 +26,7 @@ public class PoisonSpit
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-    public static final String IMG_PATH = "evolutionmod/images/cards/PlantForm.png";
+    public static final String IMG_PATH = "evolutionmod/images/cards/LizardSkl.png";
     private static final int COST = 0;
     private static final int ENVENOM_AMT = 2;
     private static final int UPGRADE_ENVENOM_AMT = 1;
@@ -62,9 +62,8 @@ public class PoisonSpit
         if (!this.upgraded) {
             this.upgradeName();
             this.upgradeMagicNumber(UPGRADE_ENVENOM_AMT);
-//            this.rawDescription = UPGRADE_DESCRIPTION;
-//            initializeDescription();
-//            this.target = CardTarget.ALL_ENEMY;
+            this.rawDescription = UPGRADE_DESCRIPTION;
+            initializeDescription();
         }
     }
 }

@@ -1,6 +1,5 @@
 package evolutionmod.cards;
 
-import basemod.abstracts.CustomCard;
 import com.evacipated.cardcrawl.mod.stslib.actions.common.RefundAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
@@ -23,7 +22,7 @@ public class ClawSlash
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-    public static final String IMG_PATH = "evolutionmod/images/cards/BeastForm.png";
+    public static final String IMG_PATH = "evolutionmod/images/cards/BeastAtt.png";
     private static final int COST = 1;
     private static final int DAMAGE_AMT = 7;
     private static final int UPGRADE_DAMAGE_AMT = 3;

@@ -2,6 +2,7 @@ package evolutionmod.cards;
 
 import basemod.abstracts.CustomCard;
 import basemod.abstracts.DynamicVariable;
+import basemod.helpers.TooltipInfo;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -12,6 +13,7 @@ import evolutionmod.orbs.AbstractGene;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -21,7 +23,7 @@ public abstract class AdaptableEvoCard extends BaseEvoCard {
 	protected Map<String, AbstractAdaptation> adaptationMap;
 	protected boolean adaptationUpgraded = false;
 	protected String initialRawDescription;
-	private String adaptationDescription;
+	private TooltipInfo adaptationTooltip;
 	private boolean isNameAdapted;
 
     public AdaptableEvoCard(final String id, final String name, final String img, final int cost, final String rawDescription,
@@ -91,24 +93,37 @@ public abstract class AdaptableEvoCard extends BaseEvoCard {
     }
 
     private void updateDescription() {
-    	if (!this.isNameAdapted) {
-		    this.name += "&";
-		    this.isNameAdapted = true;
-	    }
-	    this.adaptationDescription = " NL " + this.adaptationMap.values().stream()
-			    .map(a -> {
-					StringBuilder stringBuilder = new StringBuilder(a.text());
-					stringBuilder.append(": ").append(a.amount);
-					if (a.amount < a.max) {
-						stringBuilder.append('/').append(a.max);
-					}
-				    stringBuilder.append(' ');
-				    return stringBuilder;
-				})
-			    .reduce(new StringBuilder(), StringBuilder::append, StringBuilder::append);
+		int adaptationsCount = this.adaptationMap.values().stream()
+				.mapToInt(abstractAdaptation -> abstractAdaptation.amount)
+				.sum();
+		if (this.adaptationTooltip == null) {
+			this.adaptationTooltip = new TooltipInfo("Adaptations", "None");
+		}
+		if (adaptationsCount > 0) {
+			if (!this.isNameAdapted) {
+				this.name += "&";
+				this.isNameAdapted = true;
+			}
+			String tooltip = this.adaptationMap.values().stream()
+					.map(a -> {
+						StringBuilder stringBuilder = new StringBuilder(a.text());
+						stringBuilder.append(": ").append(a.amount);
+						if (a.amount < a.max) {
+							stringBuilder.append('/').append(a.max);
+						}
+						stringBuilder.append(" NL ");
+						return stringBuilder;
+					})
+					.reduce(new StringBuilder(), StringBuilder::append, StringBuilder::append)
+					.toString();
+			this.adaptationTooltip.description = colorGeneNames(tooltip);
 
-	    this.rawDescription = this.initialRawDescription + this.adaptationDescription;
-	    this.initializeDescription();
+			String adaptationDescription = " NL " + adaptationsCount +
+					(adaptationsCount > 1 ? " Adaptations." : " Adaptation.");
+
+			this.rawDescription = this.initialRawDescription + adaptationDescription;
+			this.initializeDescription();
+		}
     }
 
 	@Override
@@ -127,7 +142,18 @@ public abstract class AdaptableEvoCard extends BaseEvoCard {
 				Collectors.toMap(Map.Entry::getKey, (e) -> e.getValue().makeCopy()));
 		card.initialRawDescription = this.initialRawDescription;
 		card.isNameAdapted = this.isNameAdapted;
+		card.updateDescription();
 		return card;
+	}
+
+	@Override
+	public List<TooltipInfo> getCustomTooltips() {
+		if (this.customTooltips == null) {
+			this.updateDescription();
+			super.getCustomTooltips();
+			this.customTooltips.add(adaptationTooltip);
+		}
+		return this.customTooltips;
 	}
 
 	@Override
@@ -161,7 +187,6 @@ public abstract class AdaptableEvoCard extends BaseEvoCard {
 
     protected void upgradeAdaptationMaximum(String geneId, int change) {
     	this.adaptationMap.get(geneId).max += change;
-//    	this.adaptationMaximum += change;
     	this.adaptationUpgraded = true;
 	}
 	protected int getAdaptationMaximum() {

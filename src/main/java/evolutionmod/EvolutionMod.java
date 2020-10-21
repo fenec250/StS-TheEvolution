@@ -12,6 +12,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.localization.CardStrings;
@@ -19,24 +20,16 @@ import com.megacrit.cardcrawl.localization.CharacterStrings;
 import com.megacrit.cardcrawl.localization.OrbStrings;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.localization.RelicStrings;
+import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import evolutionmod.cards.*;
 import evolutionmod.character.EvolutionCharacter;
-import evolutionmod.orbs.BeastGene;
-import evolutionmod.orbs.CentaurGene;
-import evolutionmod.orbs.HarpyGene;
-import evolutionmod.orbs.InsectGene;
-import evolutionmod.orbs.LavafolkGene;
-import evolutionmod.orbs.LizardGene;
-import evolutionmod.orbs.LymeanGene;
-import evolutionmod.orbs.MerfolkGene;
-import evolutionmod.orbs.PlantGene;
-import evolutionmod.orbs.ShadowGene;
-import evolutionmod.orbs.SuccubusGene;
 import evolutionmod.patches.AbstractCardEnum;
 import evolutionmod.patches.EvolutionEnum;
 import evolutionmod.relics.TorisGift;
 
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 
 @SpireInitializer
 public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscriber, EditKeywordsSubscriber, EditRelicsSubscriber, EditStringsSubscriber, PostInitializeSubscriber {
@@ -83,92 +76,104 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
         BaseMod.addDynamicVariable(new AdaptableEvoCard.MaxAdaptationNumber());
         BaseMod.addDynamicVariable(new DrainCurse.BlockAmount());
 //        BaseMod.addDynamicVariable(new Shadowbolt.ExtraDamage());
-
-        //Vex quote: i shoot for 18 commons, 10 damage 6 block 2 other as a "blueprint" and modify if anything jumps out at me
-        //Basic. 2 attacks, 2 skills
-        BaseMod.addCard(new LoyalCompanion());
-        BaseMod.addCard(new LoyalWarrior());
-        BaseMod.addCard(new DefendEvo());
-        BaseMod.addCard(new StrikeEvo());
+        List<AbstractCard> cards = new ArrayList<>();
+                //Basic. 2 attacks, 2 skills
+        cards.add(new LoyalCompanion());
+        cards.add(new LoyalWarrior());
+        cards.add(new DefendEvo());
+        cards.add(new StrikeEvo());
 
         //Special
-        BaseMod.addCard(new Drone());
-//
-        //Commons
-        //10 attacks
-        BaseMod.addCard(new TalonStrike());
-        BaseMod.addCard(new FlameStrike());
-        BaseMod.addCard(new ClawSlash());
-        BaseMod.addCard(new Shadowbolt());
-        BaseMod.addCard(new PoisonFangs());
+        cards.add(new Drone());
+        cards.add(new Feather());
 
-//        BaseMod.addCard(new WaterBolt());
-//        BaseMod.addCard(new WaveCrash());
-//        BaseMod.addCard(new GatherFood());
-        BaseMod.addCard(new ShiftingStrike());
-        BaseMod.addCard(new ChimeraStrike());
-        BaseMod.addCard(new CrystalShard());
+        //Commons
+        //Vex quote: i shoot for 18 commons, 10 damage 6 block 2 other as a "blueprint" and modify if anything jumps out at me
+        //10 attacks
+        cards.add(new TalonStrike());
+        cards.add(new FlameStrike());
+        cards.add(new ClawSlash());
+        cards.add(new Shadowbolt());
+        cards.add(new PoisonFangs());
+        cards.add(new HeavyKick());
+
+        cards.add(new ShiftingStrike());
+        cards.add(new ChimeraStrike());
+        cards.add(new CrystalShard());
         //8 skills
-        BaseMod.addCard(new DrainMana());
-        BaseMod.addCard(new Charm());
-        BaseMod.addCard(new Brambles());
-        BaseMod.addCard(new Dive());
-        BaseMod.addCard(new Hatch());
-//        BaseMod.addCard(new Regenerate());
-        BaseMod.addCard(new ChannelMagic());
-//        BaseMod.addCard(new ShiftingPower());
-        BaseMod.addCard(new ChimeraDefense());
-        BaseMod.addCard(new ShiftingGuard());
-        BaseMod.addCard(new CrystalBlock());
-//        BaseMod.addCard(new ShadowShift());
+        cards.add(new DrainMana());
+        cards.add(new Charm());
+        cards.add(new Brambles());
+        cards.add(new Dive());
+        cards.add(new Hatch());
+        cards.add(new ChannelMagic());
+
+        cards.add(new ChimeraDefense());
+        cards.add(new ShiftingGuard());
+        cards.add(new CrystalStone());
 
         //Uncommons
         //11 attacks
-        BaseMod.addCard(new Kick());
-        BaseMod.addCard(new Phoenix());
-        BaseMod.addCard(new SpiderBite());
-        BaseMod.addCard(new Strip());
-//        BaseMod.addCard(new VineLash());
-        BaseMod.addCard(new CursedTouch());
+        cards.add(new AggressiveBlow());
+        cards.add(new Phoenix());
+        cards.add(new SpiderBite());
+        cards.add(new CursedTouch());
+        cards.add(new PegasusDescent());
+        cards.add(new NightMare());
         //exhaust
-        BaseMod.addCard(new BlackCat());
+        cards.add(new StripArmor());
+        cards.add(new BlackCat());
         //18 skills
-        BaseMod.addCard(new Strenghten());
-        BaseMod.addCard(new Firebloom());
-
-        BaseMod.addCard(new WindUp());
-//        BaseMod.addCard(new ChannelMagic());
-        BaseMod.addCard(new Purify());
-        BaseMod.addCard(new HeightenedSenses());
+        cards.add(new Firebloom());
+        cards.add(new FireAnts());
+        cards.add(new Aphrodisiac());
+//        cards.add(new WindUp());
+        cards.add(new Pheromones());
+        cards.add(new Regenerate());
+        cards.add(new HeightenedSenses());
+//        cards.add(new TakeOff());
+        cards.add(new DepthsLurker());
+        cards.add(new Omen());
+//        cards.add(new SirenSong());
+        cards.add(new PeaceAndTranquility());
+        cards.add(new ShiftingPower());
         //exhaust
-        BaseMod.addCard(new Salamander());
-        BaseMod.addCard(new SirenSong());
-        BaseMod.addCard(new Toxin());
+        cards.add(new Strenghten());
+        cards.add(new Toxin());
+        cards.add(new Treasure());
+        cards.add(new CrystalDust());
         //6 powers
-        BaseMod.addCard(new Grow());
-        BaseMod.addCard(new Symbiotes());
-        BaseMod.addCard(new Blessing());
-        BaseMod.addCard(new ThickHide());
-        BaseMod.addCard(new HardWorker());
-        BaseMod.addCard(new CurrentsDancer());
+        cards.add(new Symbiotes());
+        cards.add(new ThickHide());
+        cards.add(new HardWorker());
+        cards.add(new CurrentsDancer());
+        cards.add(new Shrink());
 
         //Rares.
         //4 attacks
-        BaseMod.addCard(new Stampede());
-        BaseMod.addCard(new Seduce());
-        BaseMod.addCard(new FeatherStorm());
-        BaseMod.addCard(new Eruption());
-//        BaseMod.addCard(new Rush());
+        cards.add(new Stampede());
+        cards.add(new Seduce());
+        cards.add(new SpikeVolley());
+        cards.add(new Eruption());
+        cards.add(new Frenzy());
+        cards.add(new FeatherStorm());
+//        cards.add(new Rush());
         //8 skills
-        BaseMod.addCard(new Drown());
-//        BaseMod.addCard(new Constrict());
-//        BaseMod.addCard(new Incubate());
-        BaseMod.addCard(new Aegis());
-        BaseMod.addCard(new PoisonSpit());
-//        BaseMod.addCard(new DrainCurse());
+        cards.add(new Drown());
+        cards.add(new Aegis());
+        cards.add(new PoisonSpit());
         //6 powers
-//        BaseMod.addCard(new GodForm());
-        BaseMod.addCard(new DarkDesires());
+        cards.add(new Broodmother());
+        cards.add(new TheNight());
+        cards.add(new Ritual());
+        cards.add(new GodForm());
+        cards.add(new DarkDesires());
+        cards.add(new Grow());
+
+        cards.forEach(c -> {
+            BaseMod.addCard(c);
+            UnlockTracker.unlockCard(c.cardID);
+        });
     }
 
     @Override
@@ -179,13 +184,17 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
     @Override
     public void receiveEditKeywords() {
         String[] keywordAdapt = {"adapt"};
-        BaseMod.addKeyword(keywordAdapt, "Consume a channeled Gene. Add its effect to the card until the end of the combat. Shuffle this card in your draw pile.");
+        BaseMod.addKeyword("Adapt", keywordAdapt, "Consume a channeled Gene. Add its effect to the card until the end of the combat. Shuffle this card in your draw pile.");
         String[] keywordForm = {"form"};
-        BaseMod.addKeyword(keywordForm, "Trigger the following effect if you have a Gene of this type, otherwise Channel one.");
+        BaseMod.addKeyword("Form", keywordForm, "Trigger the following effect if you have a Gene of this type, otherwise Channel one.");
         String[] keywordTrait = {"trait"};
-        BaseMod.addKeyword(keywordTrait, "Trigger the following effect if you have a Gene of this type.");
+        BaseMod.addKeyword("Trait", keywordTrait, "Trigger the following effect if you have a Gene of this type.");
         String[] keywordPotency = {"potency"};
         BaseMod.addKeyword("Potency", keywordPotency, "Increase the first effect of your genes and their Adaptations.");
+        String[] keywordShift = {"shift"};
+        BaseMod.addKeyword("Shift", keywordShift, "Recreate the gene at the back of the orb line.");
+        String[] keywordFate = {"fate"};
+        BaseMod.addKeyword("Fate", keywordFate, "Look at the top X cards of your draw pile. You may discard any of them. Discarded cards may trigger the associated effect.");
 
         String[] keywordBrambles = {"brambles", "bramble"};
         BaseMod.addKeyword("Bramble", keywordBrambles,
@@ -201,7 +210,7 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
 //                "Increase the damage of your next hit then reduces by half.");
         String[] keywordCharge = {"vigor", "centaur"};
         BaseMod.addKeyword("Vigor", keywordCharge,
-                "Increase the damage of your next hit then reduces by half.");
+                "Increases the damage of your next Attack.");
 
 //        String[] keywordCentaur = {CentaurGene.NAME.toLowerCase(), "centaur"};
 //        BaseMod.addKeyword(CentaurGene.COLOR + " gene[]", keywordCentaur,

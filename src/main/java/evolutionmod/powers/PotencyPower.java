@@ -38,4 +38,9 @@ public class PotencyPower extends AbstractPower {
             AbstractDungeon.actionManager.addToTop(new RemoveSpecificPowerAction(this.owner, this.owner, POWER_ID));
         }
     }
+
+    @Override
+    public float modifyBlock(float blockAmount) {
+        return super.modifyBlock(blockAmount);
+    }
 }

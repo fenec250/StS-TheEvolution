@@ -19,7 +19,7 @@ public class ShadowGene extends AbstractGene {
 	public static final String NAME = orbStrings.NAME;
 	public static final String COLOR = "[#8060A0]";
 	public static final String[] DESCRIPTION = orbStrings.DESCRIPTION;
-	public static final String IMG_PATH = "evolutionmod/images/orbs/GhostGene.png";
+	public static final String IMG_PATH = "evolutionmod/images/orbs/ShadowGene.png";
 	public static final int DAMAGE = 1;
 	public static final int WEAK = 2;
 

@@ -34,7 +34,7 @@ public class EvolutionCharacter extends CustomPlayer {
     public static final String MY_CHARACTER_SHOULDER_1 = "evolutionmod/images/char/shoulder.png";
     public static final String MY_CHARACTER_CORPSE = "evolutionmod/images/char/corpse.png";
     public static final String MY_CHARACTER_ANIMATION = "evolutionmod/images/char/idle/Animation.scml";
-    public static final String MY_CHARACTER_PORTRAIT = "evolutionmod/images/cards/CentaurForm.png";
+    public static final String MY_CHARACTER_PORTRAIT = "evolutionmod/images/cards/CentaurSkl.png";
     private static final String ID = "evolutionmod:EvolutionCharacter";
     private static final CharacterStrings characterStrings = CardCrawlGame.languagePack.getCharacterString(ID);
     private static final String[] NAMES = characterStrings.NAMES;

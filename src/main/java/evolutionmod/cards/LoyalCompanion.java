@@ -2,6 +2,8 @@ package evolutionmod.cards;
 
 import basemod.abstracts.CustomCard;
 import basemod.abstracts.CustomSavable;
+import basemod.helpers.TooltipInfo;
+import com.evacipated.cardcrawl.mod.stslib.cards.interfaces.StartupCard;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
@@ -23,20 +25,21 @@ import evolutionmod.orbs.PlantGene;
 import evolutionmod.orbs.SuccubusGene;
 import evolutionmod.patches.AbstractCardEnum;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LoyalCompanion
-		extends BaseEvoCard implements CustomSavable<Integer> {
+		extends BaseEvoCard implements CustomSavable<Integer>, StartupCard {
 	public static final String ID = "evolutionmod:LoyalCompanion";
 	public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;
 	public static final String DESCRIPTION = cardStrings.DESCRIPTION;
 	public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
 	public static final String[] EXTENDED_DESCRIPTION = cardStrings.EXTENDED_DESCRIPTION;
-	public static final String IMG_PATH = "evolutionmod/images/cards/strike.png";
+	public static final String IMG_PATH = "evolutionmod/images/cards/CrystalStone.png";
 	private static final int COST = 2;
 	private static final int BLOCK_AMT = 10;
 	private static final int UPGRADE_BLOCK_AMT = 3;
-	private static final int DEX_AMT = 1;
-	private static final int UPGRADE_DEX_AMT = 1;
 
 	private int geneIndex;
 	private AbstractGene gene;
@@ -46,7 +49,7 @@ public class LoyalCompanion
 				CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
 				CardRarity.BASIC, CardTarget.SELF);
 		this.block = this.baseBlock = BLOCK_AMT;
-		this.magicNumber = this.baseMagicNumber = DEX_AMT;
+		this.magicNumber = this.baseMagicNumber = UPGRADE_BLOCK_AMT;
 		this.exhaust = true;
 		this.geneIndex = -1;
 		resetGene();
@@ -57,21 +60,30 @@ public class LoyalCompanion
 				CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
 				CardRarity.BASIC, CardTarget.SELF);
 		this.block = this.baseBlock = BLOCK_AMT;
-		this.magicNumber = this.baseMagicNumber = DEX_AMT;
+		this.magicNumber = this.baseMagicNumber = UPGRADE_BLOCK_AMT;
 		this.exhaust = true;
 		this.geneIndex = geneIndex;
 		resetGene();
 	}
 
 	@Override
-	public void use(AbstractPlayer p, AbstractMonster m) {
-		addToBot(new GainBlockAction(p, this.block));
-
-		if (AbstractGene.isPlayerInThisForm(this.gene.ID)) {
-			addToBot(new ApplyPowerAction(p, p, new DexterityPower(p, this.magicNumber)));
-		} else {
+	public boolean atBattleStartPreDraw() {
+		if (this.upgraded) {
 			addToBot(new ChannelAction(this.gene.makeCopy()));
 		}
+		return false;
+	}
+
+	@Override
+	public void use(AbstractPlayer p, AbstractMonster m) {
+		int block = this.block;
+
+		if (!this.upgraded && AbstractGene.isPlayerInThisForm(this.gene.ID)) {
+			block += this.magicNumber;
+		} else if (!this.upgraded) {
+			addToBot(new ChannelAction(this.gene.makeCopy()));
+		}
+		addToBot(new GainBlockAction(p, block));
 	}
 
 
@@ -85,8 +97,22 @@ public class LoyalCompanion
 		if (!this.upgraded) {
 			this.upgradeName();
 			this.upgradeBlock(UPGRADE_BLOCK_AMT);
-			this.upgradeMagicNumber(UPGRADE_DEX_AMT);
+			this.rawDescription = this.gene == null
+					? DESCRIPTION + EXTENDED_DESCRIPTION[0] + EXTENDED_DESCRIPTION[2]
+						+ EXTENDED_DESCRIPTION[3] + EXTENDED_DESCRIPTION[4]
+					: DESCRIPTION + EXTENDED_DESCRIPTION[2] + this.gene.name + EXTENDED_DESCRIPTION[4];
+			this.initializeDescription();
 		}
+	}
+
+	@Override
+	public List<TooltipInfo> getCustomTooltips() {
+		if (customTooltips == null) {
+			super.getCustomTooltips();
+			customTooltips.add(new TooltipInfo("Randomized form",
+					"The form on this card is selected when the run starts and varies from one run to another."));
+		}
+		return  customTooltips;
 	}
 
 	private void resetGene() {

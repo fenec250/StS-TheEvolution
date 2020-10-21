@@ -9,41 +9,36 @@
     "DESCRIPTION": "Deal !D! damage.",
     "UPGRADE_DESCRIPTION": ""
   },
-//  "evolutionmod:Adaptation": {
-//    "NAME": "Adaptation",
-//    "DESCRIPTION": "Gain !B! Block. NL The next !M! basic πStrike or Defend you play will Adapt with your next Gene.",
-//    "UPGRADE_DESCRIPTION": ""
-//  },
   "evolutionmod:LoyalCompanion": {
     "NAME": "Loyal Companion",
-    "DESCRIPTION": "Gain !B! Block. NL ",
+    "DESCRIPTION": "Gain !B! Block. NL Exhaust. NL ",
     "UPGRADE_DESCRIPTION": "",
     "EXTENDED_DESCRIPTION": [
-      "Randomized Form: gain !M! Dexterity. NL Exhaust. NL The Form is randomized when this card is created.",
-      " Form: gain !M! Dexterity. NL Exhaust."]
+      "Randomized Form: gain !M! more Block. NL Exhaust.",
+      " Form: gain !M! more Block.", "Startup: Channel a ", "Randomized ", " gene."]
   },
   "evolutionmod:LoyalWarrior": {
     "NAME": "Loyal Warrior",
-    "DESCRIPTION": "Deal !D! damage. NL ",
+    "DESCRIPTION": "Deal !D! damage. NL Exhaust. NL ",
     "UPGRADE_DESCRIPTION": "",
     "EXTENDED_DESCRIPTION": [
-      "Randomized Form: gain !M! Strength. NL Exhaust. NL The Form is randomized when this card is created.",
-      " Form: gain !M! Strength. NL Exhaust."]
+      "Randomized Form: deal !M! more damage. NL Exhaust.",
+      " Form: deal !M! more damage.",  "Startup: Channel a ", "Randomized", " gene."]
   },
-  "evolutionmod:Evolution": {
-    "NAME": "Evolution",
-    "DESCRIPTION": "Evolve !M! Genes randomized when drawn",
-    "UPGRADE_DESCRIPTION": "Evolve !M! randomized when drawn and at the end of your turn. NL Retain."
-  },
+//  "evolutionmod:Evolution": {
+//    "NAME": "Evolution",
+//    "DESCRIPTION": "Evolve !M! Genes randomized when drawn",
+//    "UPGRADE_DESCRIPTION": "Evolve !M! randomized when drawn and at the end of your turn. NL Retain."
+//  },
 
   "evolutionmod:AggressiveBlow": {
     "NAME": "Aggressive Blow",
     "DESCRIPTION": "Deal !D! damage NL Centaur, Beast, Harpy trait: gain [E].",
     "UPGRADE_DESCRIPTION": ""
   },
-  "evolutionmod:Kick": {
-    "NAME": "Kick",
-    "DESCRIPTION": "Deal !D! damage NL Centaur Form: Charge and Strength affect this card !M! times.",
+  "evolutionmod:HeavyKick": {
+    "NAME": "Heavy Kick",
+    "DESCRIPTION": "Deal !D! damage NL Centaur Form: Vigor and Strength affect this card !M! times.",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:WindUp": {
@@ -53,7 +48,7 @@
   },
   "evolutionmod:Stampede": {
     "NAME": "Stampede",
-    "DESCRIPTION": "Deal !D! damage. NL Deal !D! damage to ALL enemies twice. NL Evolve a Centaur gene.",
+    "DESCRIPTION": "Deal !D! damage. NL Deal !D! damage to ALL enemies twice. NL Channel a Centaur gene.",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:Brambles": {
@@ -61,19 +56,9 @@
     "DESCRIPTION": "Gain !B! Block. NL Plant Form: gain !M! Brambles",
     "UPGRADE_DESCRIPTION": ""
   },
-  "evolutionmod:VineLash": {
-    "NAME": "Vine lash",
-    "DESCRIPTION": "Adapt this with a Plant gene up to !evolutionmod:MA! times. Deal !D! damage plus your Thorns and Brambles.",
-    "UPGRADE_DESCRIPTION": ""
-  },
-  "evolutionmod:Constrict": {
-    "NAME": "Constrict",
-    "DESCRIPTION": "Plant Form: apply Constricted equal to your Thorns and Brambles to an enemy.",
-    "UPGRADE_DESCRIPTION": "Plant Form: apply Constricted equal to your Thorns and Brambles to ALL enemies."
-  },
   "evolutionmod:TalonStrike": {
     "NAME": "Talon strike",
-    "DESCRIPTION": "Deal !D! damage NL Harpy Form: hits twice.",
+    "DESCRIPTION": "Deal !D! damage NL Harpy Form: draw a card and discard a card.",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:TakeOff": {
@@ -81,19 +66,9 @@
     "DESCRIPTION": "Gain !B! block. NL Draw !M! card. NL Adapt this with a Harpy gene up to !evolutionmod:MA! times.",
     "UPGRADE_DESCRIPTION": ""
   },
-  "evolutionmod:FeatherStorm": {
-    "NAME": "Feather Storm",
-    "DESCRIPTION": "Deal !D! damage for each 2 cards in your hand NL Harpy Form: draw a card.",
-    "UPGRADE_DESCRIPTION": "Deal !D! damage for each 2 cards in your hand NL Harpy Form: draw !M! cards."
-  },
-  "evolutionmod:WaterBolt": {
-    "NAME": "Water bolt",
-    "DESCRIPTION": "Deal !D! damage NL Apply !M! Weak NL Evolve a Merfolk gene",
-    "UPGRADE_DESCRIPTION": ""
-  },
-  "evolutionmod:WaveCrash": {
-    "NAME": "Wave Crash",
-    "DESCRIPTION": "Deal !D! damage to ALL enemies. NL Evolve a Merfolk gene",
+  "evolutionmod:PegasusDescent": {
+    "NAME": "Pegasus Descent",
+    "DESCRIPTION": "Deal !D! damage for each 2 cards in your hand. NL Harpy Form: Channel a Centaur gene.",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:Dive": {
@@ -103,32 +78,42 @@
   },
   "evolutionmod:Drown": {
     "NAME": "Drown",
-    "DESCRIPTION": "Gain !B! block NL At the end of this turn the enemy will take your block as damage NL Evolve a Merfolk gene",
+    "DESCRIPTION": "Gain !B! block NL At the end of this turn the enemy will take your block as damage NL Channel a Merfolk gene",
     "UPGRADE_DESCRIPTION": ""
+  },
+  "evolutionmod:Broodmother": {
+    "NAME": "Broodmother",
+    "DESCRIPTION": "Each turn the next Drone you create will be Upgraded. NL Channel an Insect gene.",
+    "UPGRADE_DESCRIPTION": "Each turn the next Drone you create will be Upgraded. NL Channel !M! Insect genes."
   },
   "evolutionmod:Charm": {
     "NAME": "Charm",
     "DESCRIPTION": "The enemy loses !M! Strength this turn. NL Succubus Form: gain 1 Potency until your next turn",
     "UPGRADE_DESCRIPTION": ""
   },
-  "evolutionmod:Strip": {
-    "NAME": "Strip",
-    "DESCRIPTION": "Remove ALL Block from the enemy. NL Succubus Form: apply !M! Vulnerable to ALL enemies.",
+  "evolutionmod:StripArmor": {
+    "NAME": "Strip Armor",
+    "DESCRIPTION": "Deal !D! damage. NL Succubus form: Remove all Block from the enemy first. NL Beast Form: add !D! damage.",
     "UPGRADE_DESCRIPTION": "Remove ALL Block from the enemy. NL Succubus Form: apply !M! Vulnerable to ALL enemies and Exhaust."
   },
   "evolutionmod:Seduce": {
     "NAME": "Seduce",
-    "DESCRIPTION": "Deal !D! damage NL Give yourself and the enemy Block equal to the unblocked damage NL Succubus Form: Refund 1.",
+    "DESCRIPTION": "Deal !D! damage NL Give yourself and the enemy Block equal to the unblocked damage. NL Exhaust. NL Succubus Form: you are healed instead.",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:FlameStrike": {
     "NAME": "Flame Strike",
-    "DESCRIPTION": "Deal !D! damage to ALL enemies. NL Lavafolk Form: gain 1 Potency until your next turn.",
-    "UPGRADE_DESCRIPTION": ""
+    "DESCRIPTION": "Deal !D! damage to ALL enemies. NL Lavafolk Form: deal 3 more damage.",
+    "UPGRADE_DESCRIPTION": "Deal !D! damage to ALL enemies. NL Channel a Lavafolk gene."
   },
   "evolutionmod:ChannelMagic": {
     "NAME": "Channel magic",
-    "DESCRIPTION": "Gain 1 Potency until your next turn. NL Lavafolk, Lymean, Insect trait: gain !M! more.",
+    "DESCRIPTION": "Fate 2: if only Skills were discarded gain !M! Potency until your next turn. NL Lymean form: Fate 1 more card. NL Lavafolk form: gain 1 more Potency.",
+    "UPGRADE_DESCRIPTION": "Fate 2: if at least 1 Skill was discarded gain !M! Potency until your next turn. NL Lymean form: Fate 1 more card. NL Lavafolk form: gain 1 more Potency."
+  },
+  "evolutionmod:Aphrodisiac": {
+    "NAME": "Aphrodisiac",
+    "DESCRIPTION": "Succubus Form: apply !M! Vulnerable NL Lizard Form: trigger Poison.",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:Eruption": {
@@ -138,7 +123,7 @@
   },
   "evolutionmod:DrainMana": {
     "NAME": "Drain Mana",
-    "DESCRIPTION": "Draw !M! cards NL Lymean Form: Scry 3.",
+    "DESCRIPTION": "Draw !M! cards NL Lymean Form: Scry !M! first.",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:Purify": {
@@ -151,20 +136,10 @@
     "DESCRIPTION": "Apply Intangible to EVERYONE. NL When you play an attack Exhaust Aegis from your hand.",
     "UPGRADE_DESCRIPTION": "Apply Intangible to EVERYONE. NL When you play an attack Exhaust Aegis from your hand. NL Lymean Form: Gain !B! Block."
   },
-  "evolutionmod:GatherFood": {
-    "NAME": "Gather Food",
-    "DESCRIPTION": "Deal !D! damage. NL Add !M! Drone to your hand. NL Evolve an Insect gene.",
-    "UPGRADE_DESCRIPTION": ""
-  },
   "evolutionmod:Hatch": {
     "NAME": "Hatch",
-    "DESCRIPTION": "Add !M! Drones to your hand. NL Insect Form: gain 1 Potency this turn.",
-    "UPGRADE_DESCRIPTION": ""
-  },
-  "evolutionmod:Incubate": {
-    "NAME": "Incubate",
-    "DESCRIPTION": "Your next !M! Drones will be upgraded. NL Evolve an Insect gene.",
-    "UPGRADE_DESCRIPTION": ""
+    "DESCRIPTION": "Add !M! Drones to your hand. NL Insect Form: add one more.",
+    "UPGRADE_DESCRIPTION": "Add !M! Drones to your hand. NL Channel an Insect gene."
   },
   "evolutionmod:ClawSlash": {
     "NAME": "Claw slash",
@@ -173,22 +148,37 @@
   },
   "evolutionmod:Shadowbolt": {
     "NAME": "Shadowbolt",
-    "DESCRIPTION": "Deal !D! damage. Apply !M! Weak. NL Shadow Form: add damage equal to the initial Weak of the target.",
-    "UPGRADE_DESCRIPTION": ""
+    "DESCRIPTION": "Deal !D! damage. NL Shadow Form: add damage equal to !M! times the Weak of the target.",
+    "UPGRADE_DESCRIPTION": "Deal !D! damage. Add damage equal to !M! times the Weak of the target. NL Channel a Shadow gene."
+  },
+  "evolutionmod:TheNight": {
+    "NAME": "TheNight",
+    "DESCRIPTION": "At the start of each turn do: Shadow Form: add a Shadowbolt to your hand.",
+    "UPGRADE_DESCRIPTION": "At the start of each turn do: Shadow Form: add a Shadowbolt+ to your hand."
   },
   "evolutionmod:HeightenedSenses": {
     "NAME": "Heightened senses",
-    "DESCRIPTION": "Draw !M! cards. NL Discard ALL cards drawn this way which are not Attacks. NL Beast Form: Adapt this with a Beast gene.",
+    "DESCRIPTION": "Draw !M! cards. NL Discard all cards drawn this way that are not Attacks. NL Beast Form: NL Harpy Form: gain 3 Rage.",
+    "UPGRADE_DESCRIPTION": "Draw !M! cards. NL Discard all cards drawn this way that are not Attacks. NL Beast Form: NL Harpy Form: gain 4 Rage."
+  },
+  "evolutionmod:Frenzy": {
+    "NAME": "Frenzy",
+    "DESCRIPTION": "Deal !D! damage increased by !M! per [E] spent on attacks. NL Beast form: gain 2 Rage.",
     "UPGRADE_DESCRIPTION": ""
   },
-  "evolutionmod:Rush": {
-    "NAME": "Rush",
-    "DESCRIPTION": "Deal !D! damage. NL Play a random Strike from your deck on the same target. NL Evolve a Beast gene.",
-    "UPGRADE_DESCRIPTION": "Deal !D! damage. NL Draw a random Strike from your deck and play a copy on the same target. NL Evolve a Beast gene."
+  "evolutionmod:FeatherStorm": {
+    "NAME": "Feather storm",
+    "DESCRIPTION": "Deal !D! damage. Startup: shuffle !M! Feathers into your deck.",
+    "UPGRADE_DESCRIPTION": "Draw !M! cards. NL Discard all cards drawn this way that are not Attacks. NL Beast Form: NL Harpy Form: gain 4 Rage."
   },
+//  "evolutionmod:Rush": {
+//    "NAME": "Rush",
+//    "DESCRIPTION": "Deal !D! damage. NL Play a random Strike from your deck on the same target. NL Channel a Beast gene.",
+//    "UPGRADE_DESCRIPTION": "Deal !D! damage. NL Draw a random Strike from your deck and play a copy on the same target. NL Channel a Beast gene."
+//  },
   "evolutionmod:Regenerate": {
-    "NAME": "Regenerate",
-    "DESCRIPTION": "Gain !B! Block. NL Exhaust a random Status. NL Evolve a Lizard gene.",
+    "NAME": "Antidote",
+    "DESCRIPTION": "Gain !B! Block. NL Fate !M!: Exhaust any Status discarded. NL Lymean form: Channel a Lizard gene.",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:PoisonFangs": {
@@ -199,11 +189,11 @@
   "evolutionmod:PoisonSpit": {
     "NAME": "Poison Spit",
     "DESCRIPTION": "Whenever an Attack deals unblocked damage this turn, apply !M! Poison. NL Lizard Form: apply 1 more.",
-    "UPGRADE_DESCRIPTION": "Whenever an Attack deals unblocked damage this turn, apply !M! Poison. NL Evolve a Lizard gene."
+    "UPGRADE_DESCRIPTION": "Whenever an Attack deals unblocked damage this turn, apply !M! Poison. NL Channel a Lizard gene."
   },
-  "evolutionmod:ShadowShift": {
-    "NAME": "Shadow Shift",
-    "DESCRIPTION": "Discard your hand. NL Gain !B! Block for each card discarded. NL Evolve a Ghost gene.",
+  "evolutionmod:DepthsLurker": {
+    "NAME": "Depths Lurker",
+    "DESCRIPTION": "Discard all 1+ cost cards. NL Gain !B! Block for each card discarded. NL Merfolk Form: channel a Shadow gene.",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:CursedTouch": {
@@ -211,14 +201,14 @@
     "DESCRIPTION": "Deal !D! damage. NL Apply !M! Weak. NL Shadow Form: Adapt this with a Shadow gene.",
     "UPGRADE_DESCRIPTION": ""
   },
-  "evolutionmod:DrainCurse": {
-    "NAME": "Drain Curse",
-    "DESCRIPTION": "Remove ALL but 1 Weak from the enemy. NL Gain !M! times that much Block (total: !evolutionmod:DrainCurseAmount!). NL Evolve a Ghost gene.",
+  "evolutionmod:SpiderBite": {
+    "NAME": "Spider Bite",
+    "DESCRIPTION": "Deal !D! damage. NL Insect Form: add a Drone to your hand. NL Lizard form: apply !M! Poison for each Drone in your hand and Exhaust them.",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:SirenSong": {
     "NAME": "Siren Song",
-    "DESCRIPTION": "Gain !B! Block for each enemy intending to attack. NL Channel a Merfolk gene.",
+    "DESCRIPTION": "Gain !B! Block for each enemy intending to attack. NL Exhaust. NL Channel a Merfolk gene.",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:BlackCat": {
@@ -226,9 +216,19 @@
     "DESCRIPTION": "Deal !D! damage to ALL enemies. NL Beast Form: hits twice. NL Shadow Form: Apply !M! Weak to ALL enemies. NL Exhaust.",
     "UPGRADE_DESCRIPTION": ""
   },
+  "evolutionmod:NightMare": {
+    "NAME": "Night Mare",
+    "DESCRIPTION": "Deal !D! damage. NL Apply Weak equal to the unblocked damage dealt. NL Exhaust. NL Centaur Form: Channel a Shadow gene.",
+    "UPGRADE_DESCRIPTION": ""
+  },
+  "evolutionmod:Omen": {
+    "NAME": "Omen",
+    "DESCRIPTION": "Fate !M!: if a Curse was discarded apply !M! Weak. NL Lymean Form: Fate an additional card. NL Shadow Form: apply 2 Weak.",
+    "UPGRADE_DESCRIPTION": ""
+  },
   "evolutionmod:Toxin": {
     "NAME": "Toxin",
-    "DESCRIPTION": "Plant Form: NL Lizard Form: NL Apply Poison to the enemy equal to !M! % of its maxumum health and Exhaust.",
+    "DESCRIPTION": "Apply 2 Poison. NL Plant Form: NL Lizard Form: NL apply additional Poison equal to !M! % of the enemy's maximum health and Exhaust.",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:ThickHide": {
@@ -237,29 +237,39 @@
     "UPGRADE_DESCRIPTION": "Gain !M! Plated armor. NL Beast Form: channel a Centaur gene."
   },
   "evolutionmod:Strenghten": {
-    "NAME": "Strenghten",
-    "DESCRIPTION": "The first attack you play each deals 50% more damage. Affects !M! attacks. NL Lymean Form: Channel a Centaur gene.",
+    "NAME": "Strengthen",
+    "DESCRIPTION": "Fate 3: gain !M! Vigor for each Attack discarded. NL Exhaust. NL Lymean Form: Fate an additionnal card. NL Centaur Form: gain !M! Vigor.",
     "UPGRADE_DESCRIPTION": ""
+  },
+  "evolutionmod:PeaceAndTranquility": {
+    "NAME": "Read the Water",
+    "DESCRIPTION": "Fate 3: gain !B! Block per Attack discarded. NL Lymean Form: Fate an additionnal card. NL Merfolk Form: gain 2 more Block per Attack.",
+    "UPGRADE_DESCRIPTION": "Fate 3: gain !B! Block per Attack discarded. NL Lymean Form: Fate an additionnal card. NL Channel a Merfolk gene."
   },
   "evolutionmod:Firebloom": {
     "NAME": "Firebloom",
     "DESCRIPTION": "Channel a Lavafolk gene. NL Plant Form: Channel a Lavafolk gene.",
     "UPGRADE_DESCRIPTION": "Channel !M! Lavafolk genes. NL Plant Form: Channel a Lavafolk gene."
   },
+  "evolutionmod:FireAnts": {
+    "NAME": "Fire Ants",
+    "DESCRIPTION": "Evoke up to !M! Lavafolk genes and add a Drone to your hand for each one. NL Insect Form: Channel a Lavafolk gene.",
+    "UPGRADE_DESCRIPTION": "Evoke up to !M! Lavafolk genes and add a Drone to your hand for each one. NL Channel an Insect gene and a Lavafolk gene."
+  },
+  "evolutionmod:Pheromones": {
+    "NAME": "Pheromones",
+    "DESCRIPTION": "Plant Form: Succubus Form: all enemies lose !M! strength this turn.",
+    "UPGRADE_DESCRIPTION": ""
+  },
+  "evolutionmod:SpikeVolley": {
+    "NAME": "Spike Volley",
+    "DESCRIPTION": "Deal !D! damage. NL Plant Form: add damage equal to !M! times your Thorn and Bramble and remove your Bramble.",
+    "UPGRADE_DESCRIPTION": ""
+  },
   "evolutionmod:Phoenix": {
     "NAME": "Phoenix",
     "DESCRIPTION": "Deal !D! damage. NL Harpy Form: Adapt with your Lavafolk genes.",
     "UPGRADE_DESCRIPTION": "Deal !D! damage. Channel a Lavafolk gene. NL Harpy Form: Adapt with your Lavafolk genes."
-  },
-  "evolutionmod:Salamander": {
-    "NAME": "Salamander",
-    "DESCRIPTION": "Heal !M! HP. NL Evolve a Lavafolk gene and a Lizard gene.",
-    "UPGRADE_DESCRIPTION": ""
-  },
-  "evolutionmod:Blessing": {
-    "NAME": "Blessing",
-    "DESCRIPTION": "Exhaust a random Curse from your deck. NL Gain !M! Artifact NL Evolve a Lymean gene and a Shadow gene.",
-    "UPGRADE_DESCRIPTION": "Innate. NL Exhaust a random Curse from your deck. NL Gain !M! Artifact NL Evolve a Lymean gene and a Ghost gene."
   },
   "evolutionmod:Symbiotes": {
     "NAME": "Symbiotes",
@@ -269,27 +279,27 @@
   "evolutionmod:HardWorker": {
     "NAME": "Hard Worker",
     "DESCRIPTION": "Gain !M! Strength. NL Centaur Form: gain 1 Strength.",
-    "UPGRADE_DESCRIPTION": "Gain !M! Strength. NL Centaur Form: gain 1 Strength. NL Insect Form: gain 1 Strength."
+    "UPGRADE_DESCRIPTION": "Gain !M! Strength. NL Centaur Form: NL Insect Form: gain 1 Strength."
   },
   "evolutionmod:CurrentsDancer": {
     "NAME": "Currents Dancer",
     "DESCRIPTION": "Gain !M! Dexterity. NL Harpy Form: gain 1 Dexterity.",
-    "UPGRADE_DESCRIPTION": "Gain !M! Dexterity. NL Harpy Form: gain 1 Dexterity. NL Merfolk Form: gain 1 Dexterity."
-  },
-  "evolutionmod:SpiderBite": {
-    "NAME": "Spider Bite",
-    "DESCRIPTION": "Deal !D! damage. Insect Form: apply 3(4) Poison for each drone in your hand and Exhaust them.",
-    "UPGRADE_DESCRIPTION": ""
+    "UPGRADE_DESCRIPTION": "Gain !M! Dexterity. NL Harpy Form: NL Merfolk Form: gain 1 Dexterity."
   },
   "evolutionmod:ShiftingStrike": {
     "NAME": "Shifting strike",
-    "DESCRIPTION": "Deal !D! damage. NL Trigger your first !M! genes.",
-    "UPGRADE_DESCRIPTION": ""
+    "DESCRIPTION": "Deal !D! damage. NL Trigger your first gene against the enemy. NL Shift your first gene.",
+    "UPGRADE_DESCRIPTION": "Deal !D! damage. NL Trigger your first !M! genes against the enemy and Shift them."
   },
   "evolutionmod:ShiftingGuard": {
     "NAME": "Shifting guard",
-    "DESCRIPTION": "Gain !B! Block. NL Trigger your first !M! genes.",
-    "UPGRADE_DESCRIPTION": ""
+    "DESCRIPTION": "Gain !B! Block. NL Trigger your first gene against the enemy. NL Shift your first gene.",
+    "UPGRADE_DESCRIPTION": "Gain !B! Block. NL Trigger your first !M! genes against the enemy and Shift them."
+  },
+  "evolutionmod:ShiftingPower": {
+    "NAME": "Shifting power",
+    "DESCRIPTION": "Trigger your first gene against the enemy. NL Shift a number of genes equal to your energy.",
+    "UPGRADE_DESCRIPTION": "Trigger your first !M! genes against the enemy. NL Shift a number of genes equal to your energy."
   },
   "evolutionmod:ChimeraStrike": {
     "NAME": "Chimera Strike",
@@ -298,7 +308,7 @@
   },
   "evolutionmod:ChimeraDefense": {
     "NAME": "Chimera Defense",
-    "DESCRIPTION": "Gain !B! block. NL Adapt with your oldest gene.",
+    "DESCRIPTION": "Gain !B! block. NL Target an enemy. NL Adapt with your oldest gene.",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:CrystalShard": {
@@ -306,58 +316,68 @@
     "DESCRIPTION": "Deal !D! damage. NL ",
     "UPGRADE_DESCRIPTION": "",
     "EXTENDED_DESCRIPTION": [
-      "Randomized Form: add !M! damage. NL Randomized Form: draw a card. NL Exhaust. NL The Forms are randomized when this card is created.",
+      "Randomized Form: add !M! damage. NL Randomized Form: draw a card. NL Exhaust.",
       " Form: add !M! damage. NL ", " Form: draw a card. NL Exhaust."]
   },
-  "evolutionmod:CrystalBlock": {
-    "NAME": "Crystal Block",
+  "evolutionmod:CrystalStone": {
+    "NAME": "Crystal Stone",
     "DESCRIPTION": "Gain !B! Block. NL ",
     "UPGRADE_DESCRIPTION": "",
     "EXTENDED_DESCRIPTION": [
-      "Randomized Form: add !M! Block. NL Randomized Form: refund 1 energy. NL Exhaust. NL The Forms are randomized when this card is created.",
+      "Randomized Form: add !M! Block. NL Randomized Form: refund 1 energy. NL Exhaust.",
       " Form: add !M! Block. NL ", " Form: refund 1 energy. NL Exhaust."]
   },
-
-  "evolutionmod:ShiftingPower": {
-    "NAME": "Shifting power",
-    "DESCRIPTION": "Draw a card. NL Trigger your first !M! genes.",
-    "UPGRADE_DESCRIPTION": ""
+  "evolutionmod:CrystalDust": {
+    "NAME": "Crystal Dust",
+    "DESCRIPTION": " Form: draw 2 cards. NL Exhaust. NL Startup: shuffle a copy of this card in your draw pile.",
+    "UPGRADE_DESCRIPTION": " Form: draw 2 cards. NL Exhaust. NL Startup: shuffle !M! copies of this card in your draw pile.",
+    "EXTENDED_DESCRIPTION": ["Randomized"]
+  },
+  "evolutionmod:Treasure": {
+    "NAME": "Treasure",
+    "DESCRIPTION": "Choose a Crystal Stone, Shard or Dust to add to your hand. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "Choose an upgraded Crystal Shard, Block or Dust to add to your hand. NL Exhaust."
   },
 
   "evolutionmod:Grow": {
     "NAME": "Grow",
-    "DESCRIPTION": "Gain !M! Orb slots.",
-    "UPGRADE_DESCRIPTION": ""
+    "DESCRIPTION": "Gain 1 Orb slot. Startup: shuffle a copy of this card in your draw pile",
+    "UPGRADE_DESCRIPTION": "Gain 1 Orb slot. Startup: shuffle !M! copies of this card in your draw pile"
+  },
+  "evolutionmod:Shrink": {
+    "NAME": "Shrink",
+    "DESCRIPTION": "Lose 1 Orb slot. NL At the start of your turn, draw !M! additional card.",
+    "UPGRADE_DESCRIPTION": "Innate. NL Lose 1 Orb slot. NL At the start of your turn, draw !M! additional card."
+  },
+  "evolutionmod:Ritual": {
+    "NAME": "Ritual",
+    "DESCRIPTION": "Permanently Adapt this with your oldest non-adapted gene. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "Permanently Adapt this with your oldest !M! non-adapted genes. NL Exhaust."
   },
   "evolutionmod:GodForm": {
     "NAME": "GodForm",
-    "DESCRIPTION": "Increase the effect of your genes and adaptations by !M!.",
-    "UPGRADE_DESCRIPTION": ""
+    "DESCRIPTION": "At the start of your turn trigger all your genes.",
+    "UPGRADE_DESCRIPTION": "At the start of your turn trigger all your genes !M! times."
   },
   "evolutionmod:DarkDesires": {
     "NAME": "Dark Desires",
     "DESCRIPTION": "Whenever you apply a debuff to an enemy deal !M! damage to it. Succubus Form: channel a Shadow gene.",
     "UPGRADE_DESCRIPTION": ""
   },
-//  "evolutionmod:AquaticForm": {
-//    "NAME": "Aquatic Form",
-//    "DESCRIPTION": "Increase the Block and Poison of Merfolk and Lizard Genes by !M!",
-//    "UPGRADE_DESCRIPTION": ""
-//  },
-//  "evolutionmod:HardWorker": {
-//    "NAME": "Magic Form",
-//    "DESCRIPTION": "Increase the damage and Block of Lavafolk and Lymean Genes by !M!",
-//    "UPGRADE_DESCRIPTION": ""
-//  },
 
   "evolutionmod:Drone": {
     "NAME": "Drone",
-    "DESCRIPTION": "Gain !B! Block. NL Deal !D! damage. NL Gains Block and damage from Potency NL Exhaust. Ethereal.",
+    "DESCRIPTION": "Gain !B! Block. NL Deal !D! damage. NL Gains Block and damage from Potency instead of Strength and Dexterity. NL Exhaust. Ethereal.",
     "UPGRADE_DESCRIPTION": ""
+  },
+  "evolutionmod:Feather": {
+    "NAME": "Feather",
+    "DESCRIPTION": "Draw a card and discard a card. NL Harpy form: return a Feather Storm from your discard pile to your hand.",
+    "UPGRADE_DESCRIPTION": "Draw !M! cards and discard !M! cards. NL Harpy form: return a Feather Storm from your discard pile to your hand."
   }
 //  "evolutionmod:Offbeat": {
 //    "NAME": "Offbeat",
-//    "DESCRIPTION": "Deal !D! damage. NL Tempo !melodyMod:T!: hits twice",
+//    "DESCRIPTION": "Deal !D! damage. NL Tempo !melodyMod:T!: gain [E]",
 //    "UPGRADE_DESCRIPTION": "",
 //    "EXTENDED_DESCRIPTION": ["Deal !D! damage twice"]
 //  },
@@ -366,10 +386,5 @@
 //    "DESCRIPTION": "Deals Y damage X times, where Y is equal to your total [#5299DC]Power and [#FF5252]Poise multiplied by !M!.",
 //    "UPGRADE_DESCRIPTION": "Deals Y damage X+1 times, where Y is equal to your total [#5299DC]Power and [#FF5252]Poise multiplied by !M!.",
 //    "EXTENDED_DESCRIPTION": [" NL ( !D! damage)"]
-//  },
-//  "mysticmodref:Flourish": {
-//    "NAME": "Flourish",
-//    "DESCRIPTION": "Costs [E] less for each stack of [#5299DC]Power and [#FF5252]Poise. Deal !D! damage twice, then double the [#5299DC]Power and [#FF5252]Poise amounts.",
-//    "UPGRADE_DESCRIPTION": ""
 //  }
 }

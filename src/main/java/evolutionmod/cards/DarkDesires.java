@@ -21,11 +21,10 @@ public class DarkDesires
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-    public static final String IMG_PATH = "evolutionmod/images/cards/strike.png";
-    private static final int COST = 1;
-    private static final int POWER_AMT = 3;
+    public static final String IMG_PATH = "evolutionmod/images/cards/SuccubusPower.png";
+    private static final int COST = 2;
+    private static final int POWER_AMT = 5;
     private static final int UPGRADE_POWER_AMT = 2;
-    private static final int FORMS_POWER_AMOUNT = 1;
 
     public DarkDesires() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,

@@ -1,31 +1,7 @@
 {
   "evolutionmod:GodFormPower": {
     "NAME": "God form",
-    "DESCRIPTIONS": ["Increase the effect of your genes and adaptations by "]
-  },
-  "evolutionmod:StormChaserPower": {
-    "NAME": "Storm Chaser",
-    "DESCRIPTIONS": ["At the end of your turn gain ", " Block for each card in hand."]
-//  },
-//  "evolutionmod:HarpyFormPower": {
-//    "NAME": "Harpy form",
-//    "DESCRIPTIONS": ["Harpy genes and adaptations also give this amount of Swiftness"]
-  },
-  "evolutionmod:LavafolkFormPower": {
-    "NAME": "Lavafolk form",
-    "DESCRIPTIONS": ["Increase the damage dealt by Lavafolk Genes and adaptations by "]
-  },
-  "evolutionmod:SuccubusFormPower": {
-    "NAME": "Succubus form",
-    "DESCRIPTIONS": ["Increase the damage dealt by Succubus Genes and adaptations by "]
-  },
-  "evolutionmod:LymeanFormPower": {
-    "NAME": "Lymean form",
-    "DESCRIPTIONS": ["Increase the Block gained by Lymean Genes and adaptations by "]
-  },
-  "evolutionmod:LizardFormPower": {
-    "NAME": "Lizard form",
-    "DESCRIPTIONS": ["Increase the Poison applied by Lizard Genes and adaptations by "]
+    "DESCRIPTIONS": ["At the start of your turn trigger all your genes ", "once.", " times."]
   },
   "evolutionmod:PotencyPower": {
     "NAME": "Potency",
@@ -49,17 +25,25 @@
     "NAME": "Drowning",
     "DESCRIPTIONS": ["At the end of your turn this character will take ", " times ", "your Block as damage"]
   },
+  "evolutionmod:TheNightPower": {
+    "NAME": "The Night",
+    "DESCRIPTIONS": ["At the start of your turn if you have a Shadow gene add ", " a ", " Shadowbolt to your hand, otherwise Channel a Shadow gene."]
+  },
+  "evolutionmod:TheNightPlusPower": {
+    "NAME": "The Night+",
+    "DESCRIPTIONS": ["At the start of your turn if you have a Shadow gene add ", " a ", " Shadowbolt+ to your hand, otherwise Channel a Shadow gene."]
+  },
   "evolutionmod:BramblesPower": {
     "NAME": "Brambles",
     "DESCRIPTIONS": ["When recieving Attack damage deal ", " damages back. This power is removed at the start of your turn."]
   },
+  "evolutionmod:BroodmotherPower": {
+    "NAME": "Broodmother",
+    "DESCRIPTIONS": ["Each turn the next ", " Drone", " you create will be Upgraded."]
+  },
   "evolutionmod:ChargePower": {
     "NAME": "Charge",
     "DESCRIPTIONS": ["deal ", " additional damage with attacks. This power is reduced by half", " each time an Attack is played"]
-  },
-  "evolutionmod:LoseLavafolkFormPower": {
-    "NAME": "Lavafolk form Down",
-    "DESCRIPTIONS": ["At the beggining of your turn lose ", " Lavafolk form and remove this"]
   },
   "evolutionmod:EruptionPower": {
     "NAME": "Eruption",

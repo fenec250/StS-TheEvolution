@@ -12,6 +12,8 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.powers.DexterityPower;
+import com.megacrit.cardcrawl.powers.StrengthPower;
 import evolutionmod.orbs.AbstractGene;
 import evolutionmod.patches.AbstractCardEnum;
 import evolutionmod.powers.MatureEggPower;
@@ -43,9 +45,9 @@ public class Drone
     public static Drone createDroneWithInteractions(AbstractPlayer player) {
         Drone drone = new Drone();
         if (player != null && player.hasPower(MatureEggPower.POWER_ID)) {
-            drone.upgrade();
             AbstractPower eggs = player.getPower(MatureEggPower.POWER_ID);
             if (eggs.amount > 0) {
+                drone.upgrade();
                 eggs.stackPower(-1);
             }
         }
@@ -63,37 +65,73 @@ public class Drone
 
     @Override
     public void applyPowers() {
-//        this.baseDamage = DAMAGE_AMT + (this.upgraded ? UPGRADE_BOTH_AMT : 0);
-//        this.baseBlock = BLOCK_AMT + (this.upgraded ? UPGRADE_BOTH_AMT : 0);
-//
-//        if (AbstractDungeon.player != null) {
-//            AbstractPower potency = AbstractDungeon.player.getPower(PotencyPower.POWER_ID);
-//            if (potency != null) {
-//                this.baseDamage += this.baseDamage >= -potency.amount ? potency.amount : this.baseDamage;
-//                this.baseBlock += this.baseBlock >= -potency.amount ? potency.amount : this.baseBlock;
-//                this.isDamageModified = potency.amount != 0;
-//                this.isBlockModified = potency.amount != 0;
-//            }
-//            super.applyPowers();
-//            if (potency != null) {
-//                this.baseDamage = DAMAGE_AMT + (this.upgraded ? UPGRADE_BOTH_AMT : 0);
-//                this.baseBlock = BLOCK_AMT + (this.upgraded ? UPGRADE_BOTH_AMT : 0);
-//            }
-//        } else {
-//            super.applyPowers();
-//        }
-        calculateDroneDamageAndBlock();
+        this.baseDamage = DAMAGE_AMT + (this.upgraded ? UPGRADE_BOTH_AMT : 0);
+        AbstractPower potency = AbstractDungeon.player.getPower(PotencyPower.POWER_ID);
+        int pot = potency == null ? 0 : potency.amount;
+        AbstractPower str = AbstractDungeon.player.getPower(StrengthPower.POWER_ID);
+        AbstractPower dex = AbstractDungeon.player.getPower(DexterityPower.POWER_ID);
+        int strAmount = 0;
+        if (str != null) {
+            strAmount = str.amount;
+            str.amount = pot;
+        } else {
+            this.baseDamage += pot;
+        }
+        int dexAmount = 0;
+        if (dex != null) {
+            dexAmount = dex.amount;
+            dex.amount = pot;
+        } else {
+            this.baseBlock += pot;
+        }
         super.applyPowers();
-        this.rawDescription = DESCRIPTION;
-        this.initializeDescription();
+        if (str != null) {
+            str.amount = strAmount;
+        } else {
+            this.baseDamage -= pot;
+        }
+        if (dex != null) {
+            dex.amount = dexAmount;
+        } else {
+            this.baseBlock -= pot;
+        }
+        this.isDamageModified = this.baseDamage != this.damage;
+        this.isBlockModified = this.baseBlock != this.block;
     }
 
     @Override
     public void calculateCardDamage(AbstractMonster mo) {
-        calculateDroneDamageAndBlock();
-        this.rawDescription = DESCRIPTION;
-        this.initializeDescription();
+        AbstractPower potency = AbstractDungeon.player.getPower(PotencyPower.POWER_ID);
+        int pot = potency == null ? 0 : potency.amount;
+        AbstractPower str = AbstractDungeon.player.getPower(StrengthPower.POWER_ID);
+        AbstractPower dex = AbstractDungeon.player.getPower(DexterityPower.POWER_ID);
+        int strAmount = 0;
+        if (str != null) {
+            strAmount = str.amount;
+            str.amount = pot;
+        } else {
+            this.baseDamage += pot;
+        }
+        int dexAmount = 0;
+        if (dex != null) {
+            dexAmount = dex.amount;
+            dex.amount = pot;
+        } else {
+            this.baseBlock += pot;
+        }
         super.calculateCardDamage(mo);
+        if (str != null) {
+            str.amount = strAmount;
+        } else {
+            this.baseDamage -= pot;
+        }
+        if (dex != null) {
+            dex.amount = dexAmount;
+        } else {
+            this.baseBlock -= pot;
+        }
+        this.isDamageModified = this.baseDamage != this.damage;
+        this.isBlockModified = this.baseBlock != this.block;
     }
 
     @Override
@@ -102,21 +140,6 @@ public class Drone
             this.upgradeName();
             this.upgradeDamage(UPGRADE_BOTH_AMT);
             this.upgradeBlock(UPGRADE_BOTH_AMT);
-        }
-    }
-
-    private void calculateDroneDamageAndBlock() {
-        this.baseDamage = DAMAGE_AMT + (this.upgraded ? UPGRADE_BOTH_AMT : 0);
-        this.baseBlock = BLOCK_AMT + (this.upgraded ? UPGRADE_BOTH_AMT : 0);
-
-        if (AbstractDungeon.player != null) {
-            AbstractPower potency = AbstractDungeon.player.getPower(PotencyPower.POWER_ID);
-            if (potency != null) {
-                this.baseDamage += potency.amount;
-                this.baseBlock += potency.amount;
-                this.isDamageModified = potency.amount != 0;
-                this.isBlockModified = potency.amount != 0;
-            }
         }
     }
 }

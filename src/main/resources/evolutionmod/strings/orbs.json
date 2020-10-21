@@ -1,7 +1,7 @@
 {
   "evolutionmod:CentaurGene": {
     "NAME": "Centaur",
-    "DESCRIPTION": ["At the start of your turn gain ", " Charge"]
+    "DESCRIPTION": ["At the start of your turn gain ", " Vigor"]
   },
   "evolutionmod:PlantGene": {
     "NAME": "Plant",

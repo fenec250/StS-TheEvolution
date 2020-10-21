@@ -24,10 +24,11 @@ public class Charm
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-    public static final String IMG_PATH = "evolutionmod/images/cards/strike.png";
+    public static final String IMG_PATH = "evolutionmod/images/cards/SuccubusSkl.png";
     private static final int COST = 1;
     private static final int REDUCTION_AMT = 4;
     private static final int UPGRADE_REDUCTION_AMT = 2;
+    private static final int FORM_POTENCY = 1;
 
     public Charm() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -43,8 +44,8 @@ public class Charm
             AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(m, p, new GainStrengthPower(m, this.magicNumber), this.magicNumber));
         }
         if (AbstractGene.isPlayerInThisForm(SuccubusGene.ID)) {
-            addToBot(new ApplyPowerAction(p, p, new PotencyPower(p, this.magicNumber)));
-            addToBot(new ApplyPowerAction(p, p, new RemovePotencyPower(p, this.magicNumber)));
+            addToBot(new ApplyPowerAction(p, p, new PotencyPower(p, FORM_POTENCY)));
+            addToBot(new ApplyPowerAction(p, p, new RemovePotencyPower(p, FORM_POTENCY)));
         } else {
             AbstractDungeon.actionManager.addToBottom(new ChannelAction(new SuccubusGene()));
         }

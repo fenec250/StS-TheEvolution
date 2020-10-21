@@ -21,7 +21,7 @@ public class Symbiotes
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-    public static final String IMG_PATH = "evolutionmod/images/cards/strike.png";
+    public static final String IMG_PATH = "evolutionmod/images/cards/PlantPower.png";
     private static final int COST = 1;
     private static final int SYMBIOTES_AMT = 2;
     private static final int UPGRADE_SYMBIOTES_AMT = 1;

@@ -25,7 +25,7 @@ public class Pheromones
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-    public static final String IMG_PATH = "evolutionmod/images/cards/strike.png";
+    public static final String IMG_PATH = "evolutionmod/images/cards/PlantSkl.png";
     private static final int COST = 0;
     private static final int REDUCTION_AMT = 1;
     private static final int UPGRADE_REDUCTION_AMT = 2;
@@ -33,7 +33,7 @@ public class Pheromones
     public Pheromones() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
-                CardRarity.COMMON, CardTarget.ENEMY);
+                CardRarity.COMMON, CardTarget.ALL_ENEMY);
         this.magicNumber = this.baseMagicNumber = REDUCTION_AMT;
     }
 
@@ -44,10 +44,14 @@ public class Pheromones
         } else if (!AbstractGene.isPlayerInThisForm(SuccubusGene.ID)) {
             AbstractDungeon.actionManager.addToBottom(new ChannelAction(new SuccubusGene()));
         } else {
-            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(m, p, new StrengthPower(m, -this.magicNumber), -this.magicNumber));
-            if (m != null && !m.hasPower("Artifact")) {
-                AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(m, p, new GainStrengthPower(m, this.magicNumber), this.magicNumber));
-            }
+            AbstractDungeon.getMonsters().monsters.stream()
+                    .filter(mo -> !mo.isDeadOrEscaped())
+                    .forEach(mo -> {
+                        addToBot(new ApplyPowerAction(mo, p, new StrengthPower(mo, -this.magicNumber), -this.magicNumber));
+                        if (!mo.hasPower("Artifact")) {
+                            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(mo, p, new GainStrengthPower(mo, this.magicNumber), this.magicNumber));
+                        }
+                    });
         }
     }
 

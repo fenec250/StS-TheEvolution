@@ -61,7 +61,8 @@ public class HeightenedSensesAction extends AbstractGameAction {
 		}
 
 		List<Runnable> actions = player.drawPile.group.stream()
-				.limit(this.amount)
+				.skip(player.drawPile.group.size() - this.amount)
+//				.limit(this.amount)
 				.map(card ->
 				{
 					if (card.type == AbstractCard.CardType.ATTACK) {

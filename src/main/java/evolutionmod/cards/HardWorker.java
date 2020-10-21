@@ -1,6 +1,5 @@
 package evolutionmod.cards;
 
-import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -14,8 +13,6 @@ import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.CentaurGene;
 import evolutionmod.orbs.InsectGene;
 import evolutionmod.patches.AbstractCardEnum;
-import evolutionmod.powers.LavafolkFormPower;
-import evolutionmod.powers.LymeanFormPower;
 
 public class HardWorker
         extends BaseEvoCard {
@@ -24,7 +21,7 @@ public class HardWorker
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-    public static final String IMG_PATH = "evolutionmod/images/cards/CentaurForm.png";
+    public static final String IMG_PATH = "evolutionmod/images/cards/CentaurPower.png";
     private static final int COST = 1;
     private static final int STRENGTH_AMT = 1;
     private static final int UPGRADE_STRENGTH_AMT = 1;
@@ -43,17 +40,11 @@ public class HardWorker
                 new StrengthPower(p, this.magicNumber)));
         if (!AbstractGene.isPlayerInThisForm(CentaurGene.ID)) {
             addToBot(new ChannelAction(new CentaurGene()));
+        } else if (this.upgraded && !AbstractGene.isPlayerInThisForm(InsectGene.ID)){
+        	addToBot(new ChannelAction(new InsectGene()));
         } else {
-            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
-                    new StrengthPower(p, FORMS_STRENGTH_AMT)));
-        }
-        if (this.upgraded) {
-            if (!AbstractGene.isPlayerInThisForm(InsectGene.ID)){
-                addToBot(new ChannelAction(new InsectGene()));
-            } else {
-                AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
-                        new StrengthPower(p, FORMS_STRENGTH_AMT)));
-            }
+        	AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
+					new StrengthPower(p, FORMS_STRENGTH_AMT)));
         }
     }
 

@@ -1,6 +1,5 @@
 package evolutionmod.cards;
 
-import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -9,11 +8,9 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.StrengthPower;
+import com.megacrit.cardcrawl.powers.DexterityPower;
 import evolutionmod.orbs.AbstractGene;
-import evolutionmod.orbs.CentaurGene;
 import evolutionmod.orbs.HarpyGene;
-import evolutionmod.orbs.InsectGene;
 import evolutionmod.orbs.MerfolkGene;
 import evolutionmod.patches.AbstractCardEnum;
 
@@ -24,7 +21,7 @@ public class CurrentsDancer
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-    public static final String IMG_PATH = "evolutionmod/images/cards/CentaurForm.png";
+    public static final String IMG_PATH = "evolutionmod/images/cards/MerfolkPower.png";
     private static final int COST = 1;
     private static final int DEXTERITY_AMT = 1;
     private static final int UPGRADE_DEXTERITY_AMT = 1;
@@ -40,21 +37,17 @@ public class CurrentsDancer
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
-                new StrengthPower(p, this.magicNumber)));
+                new DexterityPower(p, this.magicNumber)));
         if (!AbstractGene.isPlayerInThisForm(HarpyGene.ID)) {
             addToBot(new ChannelAction(new HarpyGene()));
+        } else if (this.upgraded && !AbstractGene.isPlayerInThisForm(MerfolkGene.ID)){
+            addToBot(new ChannelAction(new MerfolkGene()));
         } else {
             AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
-                    new StrengthPower(p, FORMS_DEXTERITY_AMT)));
+                    new DexterityPower(p, FORMS_DEXTERITY_AMT)));
         }
-        if (this.upgraded) {
-            if (!AbstractGene.isPlayerInThisForm(MerfolkGene.ID)){
-                addToBot(new ChannelAction(new MerfolkGene()));
-            } else {
-                AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
-                        new StrengthPower(p, FORMS_DEXTERITY_AMT)));
-            }
-        }
+
+
     }
 
     @Override

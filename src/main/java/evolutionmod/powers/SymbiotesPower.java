@@ -28,7 +28,7 @@ public class SymbiotesPower extends AbstractPower {
         this.owner = owner;
         this.region128 = new TextureAtlas.AtlasRegion(new Texture("evolutionmod/images/powers/ebb power 84.png"), 0, 0, 84, 84);
         this.region48 = new TextureAtlas.AtlasRegion(new Texture("evolutionmod/images/powers/ebb power 32.png"), 0, 0, 32, 32);
-        this.type = PowerType.DEBUFF;
+        this.type = PowerType.BUFF;
         this.amount = initialAmount;
         this.updateDescription();
         triggered = false;
@@ -38,15 +38,15 @@ public class SymbiotesPower extends AbstractPower {
     public void onUseCard(AbstractCard card, UseCardAction action) {
         super.onUseCard(card, action);
         if (!this.triggered && card.cardID.equals(Drone.ID)) {
-            addToBot(new GainBlockAction(this.owner, this.amount * 2));
-            addToBot(new ApplyPowerAction(this.owner, this.owner, new BramblesPower(this.owner, this.amount), this.amount));
+            addToBot(new GainBlockAction(this.owner, this.amount));
+            addToBot(new ApplyPowerAction(this.owner, this.owner, new BramblesPower(this.owner, this.amount)));
             this.triggered = true;
         }
     }
 
     @Override
     public void updateDescription() {
-        description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1] + this.amount * 2 + DESCRIPTIONS[2];
+        description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1] + this.amount + DESCRIPTIONS[2];
     }
 
     public void stackPower(int stackAmount) {

@@ -22,12 +22,12 @@ public class SirenSong
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-    public static final String IMG_PATH = "evolutionmod/images/cards/strike.png";
-    private static final int COST = 0;
-//    private static final int VULNERABLE_AMT = 2;
-//    private static final int UPGRADE_VULNERABLE_AMT = 1;
+    public static final String IMG_PATH = "evolutionmod/images/cards/MerfolkSkl.png";
+    private static final int COST = 1;
+    private static final int UPGRADED_COST = 0;
+    //    private static final int VULNERABLE_AMT = 2;
+    //    private static final int UPGRADE_VULNERABLE_AMT = 1;
     private static final int BLOCK_AMT = 4;
-    private static final int UPGRADE_BLOCK_AMT = 6;
 
     public SirenSong() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -56,7 +56,7 @@ public class SirenSong
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeBaseCost(UPGRADE_BLOCK_AMT);
+            this.upgradeBaseCost(UPGRADED_COST);
 //            this.upgradeMagicNumber(UPGRADE_VULNERABLE_AMT);
         }
     }

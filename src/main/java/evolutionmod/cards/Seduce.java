@@ -1,7 +1,5 @@
 package evolutionmod.cards;
 
-import basemod.abstracts.CustomCard;
-import com.evacipated.cardcrawl.mod.stslib.actions.common.RefundAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -22,7 +20,7 @@ public class Seduce
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-    public static final String IMG_PATH = "evolutionmod/images/cards/strike.png";
+    public static final String IMG_PATH = "evolutionmod/images/cards/SuccubusAtt.png";
     private static final int COST = 2;
     private static final int DAMAGE_AMT = 9;
     private static final int UPGRADE_DAMAGE_AMT = 3;
@@ -32,6 +30,8 @@ public class Seduce
                 CardType.ATTACK, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.RARE, CardTarget.ENEMY);
         this.damage = this.baseDamage = DAMAGE_AMT;
+        this.exhaust = true;
+        this.tags.add(CardTags.HEALING);
     }
 
     @Override
@@ -42,9 +42,7 @@ public class Seduce
                 AbstractGameAction.AttackEffect.BLUNT_HEAVY));
         if (!AbstractGene.isPlayerInThisForm(SuccubusGene.ID)) {
             addToBot(new ChannelAction(new SuccubusGene()));
-        } else {
-            addToBot(new RefundAction(this, 1));
-        }
+        } // else SeduceAction heals
     }
 
     @Override

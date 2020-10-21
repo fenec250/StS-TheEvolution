@@ -22,8 +22,9 @@ public class Toxin
 	public static final String NAME = cardStrings.NAME;
 	public static final String DESCRIPTION = cardStrings.DESCRIPTION;
 	public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-	public static final String IMG_PATH = "evolutionmod/images/cards/strike.png";
+	public static final String IMG_PATH = "evolutionmod/images/cards/PlantSkl.png";
 	private static final int COST = 1;
+	private static final int POISON_FLAT = 2;
 	private static final int POISON_PERCENT_AMT = 10;
 	private static final int UPGRADE_POISON_PERCENT_AMT = 5;
 
@@ -36,15 +37,16 @@ public class Toxin
 
 	@Override
 	public void use(AbstractPlayer p, AbstractMonster m) {
+		int poison = POISON_FLAT;
 		if (!AbstractGene.isPlayerInThisForm(PlantGene.ID)) {
 			addToBot(new ChannelAction(new PlantGene()));
 		} else if (!AbstractGene.isPlayerInThisForm(LizardGene.ID)) {
 			addToBot(new ChannelAction(new LizardGene()));
 		} else {
-			int poison = m.maxHealth * this.magicNumber / 100;
-			addToBot(new ApplyPowerAction(m, p, new PoisonPower(m, p, poison)));
+			poison += m.maxHealth * this.magicNumber / 100;
 			this.exhaust = true;
 		}
+		addToBot(new ApplyPowerAction(m, p, new PoisonPower(m, p, poison)));
 	}
 
 	@Override

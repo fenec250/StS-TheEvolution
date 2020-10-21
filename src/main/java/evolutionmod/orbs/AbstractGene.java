@@ -1,9 +1,8 @@
 package evolutionmod.orbs;
 
 import basemod.abstracts.CustomOrb;
-import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import evolutionmod.cards.AdaptableEvoCard;
 
 public abstract class AbstractGene extends CustomOrb {
@@ -38,6 +37,11 @@ public abstract class AbstractGene extends CustomOrb {
 				.anyMatch((orb) -> orb != null && orb.ID != null && orb.ID.equals(orbId));
 	}
 
+	@Override
+	protected void renderText(SpriteBatch sb) {
+		// disable showing an amount
+//		super.renderText(sb);
+	}
 //	public abstract class GeneAdaptation {
 //		public GeneAdaptation(String geneId, ) {
 //

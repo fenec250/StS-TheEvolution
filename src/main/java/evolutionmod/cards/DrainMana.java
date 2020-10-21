@@ -1,6 +1,5 @@
 package evolutionmod.cards;
 
-import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.actions.utility.ScryAction;
@@ -21,25 +20,25 @@ public class DrainMana
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-    public static final String IMG_PATH = "evolutionmod/images/cards/strike.png";
+    public static final String IMG_PATH = "evolutionmod/images/cards/LymeanSkl.png";
     private static final int COST = 1;
-    private static final int DRAW_AMT = 2;
-    private static final int UPGRADE_DRAW_AMT = 1;
-    private static final int LYMEAN_SCRY_AMT = 3;
+    private static final int DRAW_AND_FORM_SCRY_AMT = 2;
+    private static final int UPGRADE_BOTH_AMT = 1;
 
     public DrainMana() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.COMMON, CardTarget.NONE);
-        this.magicNumber = this.baseMagicNumber = DRAW_AMT;
+        this.magicNumber = this.baseMagicNumber = DRAW_AND_FORM_SCRY_AMT;
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        AbstractDungeon.actionManager.addToBottom(new DrawCardAction(p, this.magicNumber));
         if (AbstractGene.isPlayerInThisForm(LymeanGene.ID)) {
-            addToBot(new ScryAction(LYMEAN_SCRY_AMT));
-        } else {
+            addToBot(new ScryAction(this.magicNumber));
+        }
+        AbstractDungeon.actionManager.addToBottom(new DrawCardAction(p, this.magicNumber));
+        if (!AbstractGene.isPlayerInThisForm(LymeanGene.ID)) {
             addToBot(new ChannelAction(new LymeanGene()));
         }
     }
@@ -53,7 +52,7 @@ public class DrainMana
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeMagicNumber(UPGRADE_DRAW_AMT);
+            this.upgradeMagicNumber(UPGRADE_BOTH_AMT);
         }
     }
 }

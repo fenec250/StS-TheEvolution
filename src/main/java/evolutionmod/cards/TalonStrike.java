@@ -1,8 +1,9 @@
 package evolutionmod.cards;
 
-import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
+import com.megacrit.cardcrawl.actions.common.DiscardAction;
+import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -22,16 +23,18 @@ public class TalonStrike
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-    public static final String IMG_PATH = "evolutionmod/images/cards/HarpyForm.png";
-    private static final int COST = 1;
-    private static final int DAMAGE_AMT = 7;
-    private static final int UPGRADE_DAMAGE_AMT = 3;
+    public static final String IMG_PATH = "evolutionmod/images/cards/HarpyAtt.png";
+    private static final int COST = 0;
+    private static final int DAMAGE_AMT = 3;
+    private static final int UPGRADE_DAMAGE_AMT = 2;
+    private static final int FORM_CHANGE = 1;
 
     public TalonStrike() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.ATTACK, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.COMMON, CardTarget.ENEMY);
         this.damage = this.baseDamage = DAMAGE_AMT;
+        this.magicNumber = this.baseMagicNumber = FORM_CHANGE;
         this.tags.add(CardTags.STRIKE);
     }
 
@@ -42,9 +45,8 @@ public class TalonStrike
                 AbstractGameAction.AttackEffect.BLUNT_HEAVY));
 
         if (AbstractGene.isPlayerInThisForm(HarpyGene.ID)) {
-            AbstractDungeon.actionManager.addToBottom(new DamageAction(
-                    m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
-                    AbstractGameAction.AttackEffect.BLUNT_HEAVY));
+            addToBot(new DrawCardAction(this.magicNumber));
+            addToBot(new DiscardAction(p, p, this.magicNumber, false));
         } else {
             AbstractDungeon.actionManager.addToBottom(new ChannelAction(new HarpyGene()));
         }

@@ -2,7 +2,6 @@ package evolutionmod.powers;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -20,8 +19,8 @@ public class MatureEggPower extends AbstractPower {
         this.name = NAME;
         this.ID = POWER_ID;
         this.owner = owner;
-        this.region128 = new TextureAtlas.AtlasRegion(new Texture("evolutionmod/images/powers/insect power 84.png"), 0, 0, 84, 84);
-        this.region48 = new TextureAtlas.AtlasRegion(new Texture("evolutionmod/images/powers/insect power 32.png"), 0, 0, 32, 32);
+        this.region128 = new TextureAtlas.AtlasRegion(new Texture("evolutionmod/images/powers/InsectPower84.png"), 0, 0, 84, 84);
+        this.region48 = new TextureAtlas.AtlasRegion(new Texture("evolutionmod/images/powers/InsectPower32.png"), 0, 0, 32, 32);
         this.type = PowerType.BUFF;
         this.amount = initialAmount;
         this.updateDescription();

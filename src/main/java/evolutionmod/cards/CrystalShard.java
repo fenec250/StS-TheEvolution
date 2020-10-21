@@ -2,9 +2,11 @@ package evolutionmod.cards;
 
 import basemod.abstracts.CustomCard;
 import basemod.abstracts.CustomSavable;
+import basemod.helpers.TooltipInfo;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
+import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -15,6 +17,7 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.BeastGene;
+import evolutionmod.orbs.CentaurGene;
 import evolutionmod.orbs.HarpyGene;
 import evolutionmod.orbs.InsectGene;
 import evolutionmod.orbs.LavafolkGene;
@@ -25,6 +28,9 @@ import evolutionmod.orbs.PlantGene;
 import evolutionmod.orbs.ShadowGene;
 import evolutionmod.orbs.SuccubusGene;
 import evolutionmod.patches.AbstractCardEnum;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CrystalShard
 		extends BaseEvoCard implements CustomSavable<Integer> {
@@ -58,8 +64,8 @@ public class CrystalShard
 
 	private CrystalShard(int geneIndexes) {
 		super(ID, NAME, IMG_PATH, COST, DESCRIPTION + EXTENDED_DESCRIPTION[0],
-				CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
-				CardRarity.BASIC, CardTarget.SELF);
+				CardType.ATTACK, AbstractCardEnum.EVOLUTION_BLUE,
+				CardRarity.COMMON, CardTarget.ENEMY);
 		this.damage = this.baseDamage= DAMAGE_AMT;
 		this.magicNumber = this.baseMagicNumber = FORM_DAMAGE;
 		this.exhaust = true;
@@ -73,8 +79,6 @@ public class CrystalShard
 
 		if (!AbstractGene.isPlayerInThisForm(this.firstGene.ID)) {
 			addToBot(new ChannelAction(this.firstGene.makeCopy()));
-		} else {
-			damage += this.magicNumber;
 		}
 		addToBot(new DamageAction(
 				m, new DamageInfo(p, damage, this.damageTypeForTurn),
@@ -84,6 +88,38 @@ public class CrystalShard
 		} else {
 			addToBot(new DrawCardAction(p, 1));
 		}
+	}
+
+	@Override
+	public void applyPowers() {
+		this.calculateDamage();
+		super.applyPowers();
+		this.baseDamage = getBaseDamage();
+		this.isDamageModified = this.damage != this.baseDamage;
+	}
+
+	@Override
+	public void calculateCardDamage(AbstractMonster mo) {
+		this.calculateDamage();
+		super.calculateCardDamage(mo);
+		this.baseDamage = getBaseDamage();
+		this.isDamageModified = this.damage != this.baseDamage;
+	}
+
+	public int getBaseDamage() {
+		return DAMAGE_AMT + (this.upgraded ? UPGRADE_DAMAGE_AMT : 0);
+	}
+
+	public void calculateDamage() {
+		this.baseDamage = getBaseDamage();
+		if (AbstractGene.isPlayerInThisForm(this.firstGene.ID)) {
+			this.baseDamage += this.magicNumber;
+		}
+	}
+
+	@Override
+	public void onChoseThisOption() {
+		addToBot(new MakeTempCardInHandAction(this, false));
 	}
 
 	@Override
@@ -100,12 +136,22 @@ public class CrystalShard
 		}
 	}
 
+	@Override
+	public List<TooltipInfo> getCustomTooltips() {
+		if (customTooltips == null) {
+			super.getCustomTooltips();
+			customTooltips.add(new TooltipInfo("Randomized forms",
+					"The forms on this card are selected when the card is created and vary from a card to an other."));
+		}
+		return  customTooltips;
+	}
+
 	private void resetGene() {
 		if (this.genesIndexes < 0) {
 			if (!CardCrawlGame.isInARun() || AbstractDungeon.miscRng == null) {
 				return;
 			}
-			this.genesIndexes = AbstractDungeon.miscRng.random(10 * 10 - 1);
+			this.genesIndexes = AbstractDungeon.miscRng.random(11 * 10 - 1);
 		}
 		AbstractGene[] validGenes = {
 				new PlantGene(),
@@ -117,9 +163,10 @@ public class CrystalShard
 				new InsectGene(),
 				new BeastGene(),
 				new LizardGene(),
+				new CentaurGene(),
 				new ShadowGene()};
-		this.firstGene =  validGenes[this.genesIndexes / 10];
-		this.secondGene = validGenes[this.genesIndexes % 10];
+		this.firstGene =  validGenes[this.genesIndexes / 11];
+		this.secondGene = validGenes[this.genesIndexes / 11 == this.genesIndexes % 10 ? 10 : this.genesIndexes % 10];
 		this.rawDescription = DESCRIPTION
 				+ this.firstGene.getColoredName() + EXTENDED_DESCRIPTION[1]
 				+ this.secondGene.getColoredName() + EXTENDED_DESCRIPTION[2];

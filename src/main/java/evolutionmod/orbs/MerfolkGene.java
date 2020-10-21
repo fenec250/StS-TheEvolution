@@ -19,7 +19,7 @@ public class MerfolkGene extends AbstractGene {
 	public static final String NAME = orbStrings.NAME;
 	public static final String COLOR = "[#5252FF]";
 	public static final String[] DESCRIPTION = orbStrings.DESCRIPTION;
-	public static final String IMG_PATH = "evolutionmod/images/cards/strike.png";
+	public static final String IMG_PATH = "evolutionmod/images/orbs/MermaidGene.png";
 	public static final int BLOCK = 3;
 
 	public MerfolkGene() {
@@ -53,15 +53,6 @@ public class MerfolkGene extends AbstractGene {
 	@Override
 	public AdaptableEvoCard.AbstractAdaptation getAdaptation() {
 		return new Adaptation(1);
-	}
-
-	@Override
-	public String colorize(String string) {
-		return colorString();
-	}
-
-	public static String colorString() {
-		return "[#5252FF]";
 	}
 
 	@Override

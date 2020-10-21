@@ -7,7 +7,9 @@ import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
+import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import evolutionmod.orbs.AbstractGene;
 
 public class GodFormPower extends AbstractPower {
     public static final String POWER_ID = "evolutionmod:GodFormPower";
@@ -27,8 +29,20 @@ public class GodFormPower extends AbstractPower {
     }
 
     @Override
+    public void atStartOfTurn() {
+        AbstractDungeon.player.orbs.forEach(o -> {
+			if (o instanceof AbstractGene) {
+				for (int i = 0; i < this.amount; ++i) {
+					o.onEvoke();
+				}
+			}
+		});
+        super.atStartOfTurn();
+    }
+
+    @Override
     public void updateDescription() {
-        description = DESCRIPTIONS[0] + this.amount;
+        description = DESCRIPTIONS[0] + (this.amount == 1 ? DESCRIPTIONS[1] : this.amount + DESCRIPTIONS[2]);
     }
 
     public void stackPower(int stackAmount) {

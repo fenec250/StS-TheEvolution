@@ -1,6 +1,7 @@
 package evolutionmod.cards;
 
 import basemod.abstracts.CustomCard;
+import com.evacipated.cardcrawl.mod.stslib.actions.defect.EvokeSpecificOrbAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
@@ -52,6 +53,8 @@ public class ShiftingStrike
                 .limit(this.magicNumber)
                 .collect(Collectors.toList());
         triggered.forEach(o -> ((AbstractGene)o).getAdaptation().apply(p, m));
+        consumeOrbs(p, triggered);
+        triggered.forEach(o -> addToBot(new ChannelAction(o)));
 //                .ifPresent(o -> this.addAdaptation((AbstractGene) o));
 //        AbstractDungeon.actionManager.addToBottom(new ChannelAction(new InsectGene()));
     }
@@ -67,6 +70,8 @@ public class ShiftingStrike
             this.upgradeName();
             this.upgradeDamage(UPGRADE_DAMAGE_AMT);
             this.upgradeMagicNumber(UPGRADE_GENE_TRIGGER_AMT);
+            this.rawDescription = UPGRADE_DESCRIPTION;
+            this.initializeDescription();
         }
     }
 }

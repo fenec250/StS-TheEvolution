@@ -1,7 +1,5 @@
 package evolutionmod.cards;
 
-import basemod.abstracts.CustomCard;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -12,8 +10,6 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.InsectGene;
 import evolutionmod.patches.AbstractCardEnum;
-import evolutionmod.powers.PotencyPower;
-import evolutionmod.powers.RemovePotencyPower;
 
 public class Hatch
         extends BaseEvoCard {
@@ -26,7 +22,6 @@ public class Hatch
     private static final int COST = 2;
     private static final int DRONES_AMT = 3;
     private static final int UPGRADE_DRONES_AMT = 1;
-    private static final int POTENCY_AMT = 1;
 
     public Hatch() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -37,12 +32,32 @@ public class Hatch
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(Drone.createDroneWithInteractions(p), this.magicNumber));
-        if (AbstractGene.isPlayerInThisForm(InsectGene.ID)) {
-            addToBot(new ApplyPowerAction(p, p, new PotencyPower(p, POTENCY_AMT)));
-            addToBot(new ApplyPowerAction(p, p, new RemovePotencyPower(p, POTENCY_AMT)));
-        } else {
+        AbstractDungeon.actionManager.addToBottom(
+                new MakeTempCardInHandAction(Drone.createDroneWithInteractions(p), this.magicNumber));
+        if (this.upgraded || !AbstractGene.isPlayerInThisForm(InsectGene.ID)) {
             addToBot(new ChannelAction(new InsectGene()));
+        }
+    }
+
+    @Override
+    public void applyPowers() {
+        calculateDroneAmount();
+        super.applyPowers();
+        this.isMagicNumberModified = this.magicNumber != DRONES_AMT + (this.upgraded ? UPGRADE_DRONES_AMT : 0);
+    }
+
+    @Override
+    public void calculateCardDamage(AbstractMonster mo) {
+        calculateDroneAmount();
+        super.calculateCardDamage(mo);
+        this.isMagicNumberModified = this.magicNumber != DRONES_AMT + (this.upgraded ? UPGRADE_DRONES_AMT : 0);
+    }
+
+    private void calculateDroneAmount() {
+        this.magicNumber = this.baseMagicNumber = DRONES_AMT;
+        if (this.upgraded || AbstractGene.isPlayerInThisForm(InsectGene.ID)) {
+            this.magicNumber += UPGRADE_DRONES_AMT;
+            this.baseMagicNumber += UPGRADE_DRONES_AMT;
         }
     }
 
@@ -51,6 +66,8 @@ public class Hatch
         if (!this.upgraded) {
             this.upgradeName();
             this.upgradeMagicNumber(UPGRADE_DRONES_AMT);
+            this.rawDescription = UPGRADE_DESCRIPTION;
+            this.initializeDescription();
         }
     }
 }

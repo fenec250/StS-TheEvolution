@@ -17,7 +17,7 @@ public abstract class AbstractHalfTargetedAction extends AbstractGameAction {
 		if ((AbstractDungeon.getMonsters().areMonstersBasicallyDead())) {
 			return false;
 		}
-		if (this.target == null) {
+		if (this.target == null || this.target.isDeadOrEscaped()) {
 			this.target = AbstractDungeon.getMonsters().monsters.stream()
 					.filter(m -> m.hasPower(MarkPower.POWER_ID) && !m.isDeadOrEscaped())
 					.findAny()

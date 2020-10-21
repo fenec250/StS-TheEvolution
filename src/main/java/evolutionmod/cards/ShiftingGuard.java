@@ -4,6 +4,7 @@ import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
+import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -25,7 +26,7 @@ public class ShiftingGuard
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-    public static final String IMG_PATH = "evolutionmod/images/cards/strike.png";
+    public static final String IMG_PATH = "evolutionmod/images/cards/CrystalStone.png";
     private static final int COST = 1;
     private static final int BLOCK_AMT = 7;
     private static final int UPGRADE_BLOCK_AMT = 1;
@@ -35,7 +36,7 @@ public class ShiftingGuard
     public ShiftingGuard() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
-                CardRarity.COMMON, CardTarget.SELF);
+                CardRarity.COMMON, CardTarget.ENEMY);
         this.block = this.baseBlock = BLOCK_AMT;
         this.magicNumber = this.baseMagicNumber = GENE_TRIGGER_AMT;
     }
@@ -48,6 +49,8 @@ public class ShiftingGuard
                 .limit(this.magicNumber)
                 .collect(Collectors.toList());
         triggered.forEach(o -> ((AbstractGene)o).getAdaptation().apply(p, m));
+        consumeOrbs(p, triggered);
+        triggered.forEach(o -> addToBot(new ChannelAction(o)));
 //                .ifPresent(o -> this.addAdaptation((AbstractGene) o));
 //        AbstractDungeon.actionManager.addToBottom(new ChannelAction(new InsectGene()));
     }
@@ -63,6 +66,8 @@ public class ShiftingGuard
             this.upgradeName();
             this.upgradeBlock(UPGRADE_BLOCK_AMT);
             this.upgradeMagicNumber(UPGRADE_GENE_TRIGGER_AMT);
+            this.rawDescription = UPGRADE_DESCRIPTION;
+            this.initializeDescription();
         }
     }
 }

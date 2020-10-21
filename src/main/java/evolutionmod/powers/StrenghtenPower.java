@@ -25,8 +25,8 @@ public class StrenghtenPower extends AbstractPower {
         this.ID = POWER_ID;
         this.owner = owner;
         this.usedThisTurn = false;
-        this.region128 = new TextureAtlas.AtlasRegion(new Texture("evolutionmod/images/powers/ebb power 84.png"), 0, 0, 84, 84);
-        this.region48 = new TextureAtlas.AtlasRegion(new Texture("evolutionmod/images/powers/ebb power 32.png"), 0, 0, 32, 32);
+        this.region128 = new TextureAtlas.AtlasRegion(new Texture("evolutionmod/images/powers/LymeanPower84.png"), 0, 0, 84, 84);
+        this.region48 = new TextureAtlas.AtlasRegion(new Texture("evolutionmod/images/powers/LymeanPower32.png"), 0, 0, 32, 32);
         this.type = PowerType.BUFF;
         this.amount = initialAmount;
 //        this.decay = 0;

@@ -3,6 +3,7 @@ package evolutionmod.cards;
 import basemod.abstracts.CustomCard;
 import basemod.helpers.TooltipInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.orbs.EmptyOrbSlot;
 import evolutionmod.orbs.BeastGene;
@@ -24,8 +25,8 @@ import java.util.List;
 
 public abstract class BaseEvoCard extends CustomCard {
 
-	private List<TooltipInfo> customTooltips;
-	private String coloredRawDescription;
+	protected List<TooltipInfo> customTooltips;
+	protected String coloredRawDescription;
 
     public BaseEvoCard(final String id, final String name, final String img, final int cost, final String rawDescription,
 					   final CardType type, final CardColor color,
@@ -87,16 +88,16 @@ public abstract class BaseEvoCard extends CustomCard {
 				.replaceAll(HarpyGene.NAME, HarpyGene.COLOR + HarpyGene.NAME + "[]")
 				.replaceAll(MerfolkGene.NAME, MerfolkGene.COLOR + MerfolkGene.NAME + "[]")
 				.replaceAll(BeastGene.NAME, BeastGene.COLOR + BeastGene.NAME + "[]")
-				.replaceAll(CentaurGene.NAME, CentaurGene.COLOR + CentaurGene.NAME + "[]");
+				.replaceAll(SuccubusGene.NAME, SuccubusGene.COLOR + SuccubusGene.NAME + "[]");
 	}
 
-	protected boolean consumeOrb(AbstractPlayer player, AbstractOrb orb) {
+	protected static boolean consumeOrb(AbstractPlayer player, AbstractOrb orb) {
 	    if (player.orbs.isEmpty()) {
 	    	return false;
 	    }
 	    boolean result = player.orbs.remove(orb);
 	    if (result) {
-		    player.orbs.add(new EmptyOrbSlot(player.orbs.get(0).cX, player.orbs.get(0).cY));
+			player.orbs.add(new EmptyOrbSlot(player.drawX, player.drawY));
 		    for (int i = 0; i < player.orbs.size(); ++i) {
 			    player.orbs.get(i).setSlot(i, player.maxOrbs);
 		    }
@@ -104,14 +105,14 @@ public abstract class BaseEvoCard extends CustomCard {
 	    return result;
     }
 
-    protected boolean consumeOrbs(AbstractPlayer player, Collection<AbstractOrb> orbs) {
+    protected static boolean consumeOrbs(AbstractPlayer player, Collection<AbstractOrb> orbs) {
 	    if (player.orbs.isEmpty()) {
 	    	return false;
 	    }
 	    boolean result = player.orbs.removeAll(orbs);
 	    if (result) {
 		    for (int i = 0; i < orbs.size(); ++i) {
-		    	player.orbs.add(new EmptyOrbSlot(player.orbs.get(0).cX, player.orbs.get(0).cY));
+		    	player.orbs.add(new EmptyOrbSlot(player.drawX, player.drawY));
 		    }
 		    for (int i = 0; i < player.orbs.size(); ++i) {
 			    ((AbstractOrb)player.orbs.get(i)).setSlot(i, player.maxOrbs);

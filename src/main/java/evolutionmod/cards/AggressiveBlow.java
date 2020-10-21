@@ -24,7 +24,7 @@ public class AggressiveBlow
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-    public static final String IMG_PATH = "evolutionmod/images/cards/BeastForm.png";
+    public static final String IMG_PATH = "evolutionmod/images/cards/CentaurAtt.png";
     private static final int COST = 0;
     private static final int DAMAGE_AMT = 4;
     private static final int UPGRADE_DAMAGE_AMT = 2;
@@ -32,7 +32,7 @@ public class AggressiveBlow
     public AggressiveBlow() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.ATTACK, AbstractCardEnum.EVOLUTION_BLUE,
-                CardRarity.COMMON, CardTarget.ENEMY);
+                CardRarity.UNCOMMON, CardTarget.ENEMY);
         this.damage = this.baseDamage = DAMAGE_AMT;
     }
 

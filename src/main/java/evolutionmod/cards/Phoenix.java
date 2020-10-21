@@ -9,11 +9,15 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import evolutionmod.actions.DelayedAction;
 import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.HarpyGene;
 import evolutionmod.orbs.LavafolkGene;
 import evolutionmod.patches.AbstractCardEnum;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Phoenix
         extends AdaptableEvoCard {
@@ -22,7 +26,7 @@ public class Phoenix
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-    public static final String IMG_PATH = "evolutionmod/images/cards/strike.png";
+    public static final String IMG_PATH = "evolutionmod/images/cards/LavafolkAtt.png";
     private static final int COST = 1;
     private static final int DAMAGE_AMT = 8;
 
@@ -43,16 +47,20 @@ public class Phoenix
         }
         if (!AbstractGene.isPlayerInThisForm(HarpyGene.ID)) {
             addToBot(new ChannelAction(new HarpyGene()));
+            this.useAdaptations(p, m);
         } else {
             addToBot(new DelayedAction(() -> {
-                p.orbs.stream()
+                List<AbstractOrb> genes = p.orbs.stream()
                         .filter(o -> this.canAdaptWith(o) > 0)
-                        .findAny()
-                        .ifPresent(o -> this.tryAdaptingWith(o, true));
+//                        .findAny()
+//                        .ifPresent(o -> this.tryAdaptingWith(o, true));
+                        .collect(Collectors.toList());
+                genes.forEach(o -> this.tryAdaptingWith(o, true));
+                this.useAdaptations(p, m);
                 return null;
             }, true));
         }
-        this.useAdaptations(p, m);
+//        this.useAdaptations(p, m);
     }
 
     @Override

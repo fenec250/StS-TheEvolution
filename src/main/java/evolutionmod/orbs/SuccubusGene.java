@@ -19,9 +19,9 @@ public class SuccubusGene extends AbstractGene {
 	public static final String NAME = orbStrings.NAME;
 	public static final String COLOR = "[#F04040]";
 	public static final String[] DESCRIPTION = orbStrings.DESCRIPTION;
-	public static final String IMG_PATH = "evolutionmod/images/cards/strike.png";
-	public static final int DAMAGE = 1;
-	public static final int VULNERABLE = 2;
+	public static final String IMG_PATH = "evolutionmod/images/orbs/SuccubusGene.png";
+	public static final int DAMAGE = 2;
+	public static final int VULNERABLE = 1;
 
 	public SuccubusGene() {
 		super(ID, NAME, getDescription(), IMG_PATH, COLOR);
