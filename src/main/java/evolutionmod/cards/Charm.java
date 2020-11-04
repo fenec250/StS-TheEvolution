@@ -16,6 +16,7 @@ import evolutionmod.orbs.SuccubusGene;
 import evolutionmod.patches.AbstractCardEnum;
 import evolutionmod.powers.PotencyPower;
 import evolutionmod.powers.RemovePotencyPower;
+import evolutionmod.powers.SubmissionPower;
 
 public class Charm
         extends BaseEvoCard {
@@ -44,8 +45,9 @@ public class Charm
             AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(m, p, new GainStrengthPower(m, this.magicNumber), this.magicNumber));
         }
         if (AbstractGene.isPlayerInThisForm(SuccubusGene.ID)) {
-            addToBot(new ApplyPowerAction(p, p, new PotencyPower(p, FORM_POTENCY)));
-            addToBot(new ApplyPowerAction(p, p, new RemovePotencyPower(p, FORM_POTENCY)));
+            addToBot(new ApplyPowerAction(m, p, new SubmissionPower(m, 2 + (upgraded ? 1 : 0))));
+//            addToBot(new ApplyPowerAction(p, p, new PotencyPower(p, FORM_POTENCY)));
+//            addToBot(new ApplyPowerAction(p, p, new RemovePotencyPower(p, FORM_POTENCY)));
         } else {
             AbstractDungeon.actionManager.addToBottom(new ChannelAction(new SuccubusGene()));
         }
@@ -61,6 +63,8 @@ public class Charm
         if (!this.upgraded) {
             this.upgradeName();
             this.upgradeMagicNumber(UPGRADE_REDUCTION_AMT);
+            this.rawDescription = UPGRADE_DESCRIPTION;
+            this.initializeDescription();
         }
     }
 }

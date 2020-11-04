@@ -17,6 +17,7 @@ import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.LizardGene;
 import evolutionmod.orbs.SuccubusGene;
 import evolutionmod.patches.AbstractCardEnum;
+import evolutionmod.powers.SubmissionPower;
 
 public class Aphrodisiac
         extends BaseEvoCard {
@@ -27,8 +28,8 @@ public class Aphrodisiac
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = "evolutionmod/images/cards/LizardSkl.png";
     private static final int COST = 1;
-    private static final int VULNERABLE_AMT = 1;
-    private static final int UPGRADE_VULNERABLE_AMT = 3;
+    private static final int VULNERABLE_AMT = 2;
+    private static final int UPGRADE_VULNERABLE_AMT = 1;
 
     public Aphrodisiac() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -42,7 +43,8 @@ public class Aphrodisiac
         if (!AbstractGene.isPlayerInThisForm(SuccubusGene.ID)) {
             addToBot(new ChannelAction(new SuccubusGene()));
         } else {
-            addToBot(new ApplyPowerAction(m, p, new VulnerablePower(m, this.magicNumber, false)));
+            addToBot(new ApplyPowerAction(m, p, new SubmissionPower(m, this.magicNumber)));
+//            addToBot(new ApplyPowerAction(m, p, new VulnerablePower(m, this.magicNumber, false)));
         }
         if (!AbstractGene.isPlayerInThisForm(LizardGene.ID)) {
             addToBot(new ChannelAction(new LizardGene()));
@@ -52,11 +54,10 @@ public class Aphrodisiac
                     .findAny()
                     .ifPresent(AbstractPower::atStartOfTurn);
         }
-        AbstractCard status = p.hand.getRandomCard(CardType.STATUS, true);
-        if (status != null) {
-            AbstractDungeon.actionManager.addToBottom(new ExhaustSpecificCardAction(status, p.hand));
-        }
-        AbstractDungeon.actionManager.addToBottom(new ChannelAction(new LizardGene()));
+//        AbstractCard status = p.hand.getRandomCard(CardType.STATUS, true);
+//        if (status != null) {
+//            AbstractDungeon.actionManager.addToBottom(new ExhaustSpecificCardAction(status, p.hand));
+//        }
     }
 
     @Override

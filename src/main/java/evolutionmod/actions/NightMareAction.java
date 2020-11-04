@@ -30,10 +30,10 @@ public class NightMareAction extends AbstractGameAction {
 		this.tickDuration();
 		if (this.isDone) {
 			this.target.damage(this.info);
-			if (this.target.lastDamageTaken > 0) {
+			if (this.target.lastDamageTaken/2 > 0) {
 				if (!target.isDying) {
 					AbstractDungeon.actionManager.addToTop(new ApplyPowerAction(this.target, this.source,
-									new WeakPower(this.target, this.target.lastDamageTaken, false)));
+									new WeakPower(this.target, this.target.lastDamageTaken/2, false)));
 				}
 			}
 		}

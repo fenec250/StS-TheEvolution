@@ -129,13 +129,13 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
         cards.add(new Aphrodisiac());
 //        cards.add(new WindUp());
         cards.add(new Pheromones());
-        cards.add(new Regenerate());
+        cards.add(new Antidote());
         cards.add(new HeightenedSenses());
 //        cards.add(new TakeOff());
         cards.add(new DepthsLurker());
         cards.add(new Omen());
 //        cards.add(new SirenSong());
-        cards.add(new PeaceAndTranquility());
+        cards.add(new CalmTheWaters());
         cards.add(new ShiftingPower());
         //exhaust
         cards.add(new Strenghten());
@@ -160,7 +160,8 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
 //        cards.add(new Rush());
         //8 skills
         cards.add(new Drown());
-        cards.add(new Aegis());
+//        cards.add(new Aegis());
+        cards.add(new Aegis2());
         cards.add(new PoisonSpit());
         //6 powers
         cards.add(new Broodmother());
@@ -189,22 +190,25 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
         BaseMod.addKeyword("Form", keywordForm, "Trigger the following effect if you have a Gene of this type, otherwise Channel one.");
         String[] keywordTrait = {"trait"};
         BaseMod.addKeyword("Trait", keywordTrait, "Trigger the following effect if you have a Gene of this type.");
-        String[] keywordPotency = {"potency"};
-        BaseMod.addKeyword("Potency", keywordPotency, "Increase the first effect of your genes and their Adaptations.");
+//        String[] keywordPotency = {"potency"};
+//        BaseMod.addKeyword("Potency", keywordPotency, "Increase the first effect of your genes and their Adaptations.");
         String[] keywordShift = {"shift"};
         BaseMod.addKeyword("Shift", keywordShift, "Recreate the gene at the back of the orb line.");
         String[] keywordFate = {"fate"};
-        BaseMod.addKeyword("Fate", keywordFate, "Look at the top X cards of your draw pile. You may discard any of them. Discarded cards may trigger the associated effect.");
-
+//        BaseMod.addKeyword("Fate", keywordFate, "Look at the top X cards of your draw pile. You may discard any of them. Discarded cards may trigger the associated effect.");
+        BaseMod.addKeyword("Fate", keywordFate, "Look random cards from your deck matching X. You may discard any of them. Place the remaining ones on top of your deck. Counts as Scrying.");
         String[] keywordBrambles = {"brambles", "bramble"};
         BaseMod.addKeyword("Bramble", keywordBrambles,
                 "Whenever you are attacked this turn, deal this amount of damage back");
         String[] keywordDrone = {"drone", "drones"};
         BaseMod.addKeyword("Drone", keywordDrone,
                 "Drones are 0 cost attacks which benefit from Potency, are Ethereal and Exhaust when played.");
-        String[] keywordRage = {"rage", "beast"};
+        String[] keywordRage = {"rage"};
         BaseMod.addKeyword("Rage", keywordRage,
                 "Whenever you play an Attack this turn, gain this amount of Block.");
+        String[] keywordSubmission = {"submission"};
+        BaseMod.addKeyword("Submission", keywordSubmission,
+                "Until the end of the turn attacks deal additional damage to the target and reduce Submission.");
 //        String[] keywordCharge = {"charge", "centaur"};
 //        BaseMod.addKeyword("Charge", keywordCharge,
 //                "Increase the damage of your next hit then reduces by half.");

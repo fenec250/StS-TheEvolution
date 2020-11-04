@@ -22,13 +22,14 @@ public class StripArmor
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
+    public static final String[] EXTENDED_DESCRIPTION = cardStrings.EXTENDED_DESCRIPTION;
     public static final String IMG_PATH = "evolutionmod/images/cards/SuccubusAtt.png";
     private static final int COST = 1;
     private static final int DAMAGE_AMT = 5;
     private static final int UPGRADE_DAMAGE_AMT = 2;
 
     public StripArmor() {
-        super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
+        super(ID, NAME, IMG_PATH, COST, DESCRIPTION + DAMAGE_AMT + EXTENDED_DESCRIPTION[0],
                 CardType.ATTACK, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.UNCOMMON, CardTarget.ENEMY);
         this.damage = this.baseDamage = DAMAGE_AMT;
@@ -73,7 +74,7 @@ public class StripArmor
     	supercall.run();
 //		magicNumber = mn;
     	this.baseDamage = DAMAGE_AMT + (this.upgraded ? UPGRADE_DAMAGE_AMT : 0);
-		this.isDamageModified = this.damage != DAMAGE_AMT;
+		this.isDamageModified = this.damage != this.baseDamage;
 	}
 
     @Override
@@ -82,6 +83,8 @@ public class StripArmor
             this.upgradeName();
             this.upgradeDamage(UPGRADE_DAMAGE_AMT);
             this.upgradeMagicNumber(UPGRADE_DAMAGE_AMT);
+            this.rawDescription= DESCRIPTION + this.baseDamage + EXTENDED_DESCRIPTION[0];
+            this.initializeDescription();
         }
     }
 }

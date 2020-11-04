@@ -44,7 +44,7 @@ public class CrystalDust
 	private static final int COST = 0;
 	private static final int COPIES_AMT = 1;
 	private static final int UPGRADE_COPIES_AMT = 1;
-	private static final int FORM_DRAW = 2;
+	private static final int FORM_DRAW = 1;
 
 	private int geneIndex;
 	private AbstractGene gene;

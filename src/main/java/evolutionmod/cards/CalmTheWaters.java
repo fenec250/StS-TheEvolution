@@ -1,6 +1,5 @@
 package evolutionmod.cards;
 
-import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -9,61 +8,57 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import evolutionmod.actions.CalmTheWatersAction;
 import evolutionmod.actions.FateAction;
 import evolutionmod.orbs.AbstractGene;
-import evolutionmod.orbs.LizardGene;
 import evolutionmod.orbs.LymeanGene;
+import evolutionmod.orbs.MerfolkGene;
 import evolutionmod.patches.AbstractCardEnum;
 
-public class Regenerate
+public class CalmTheWaters
         extends BaseEvoCard {
-    public static final String ID = "evolutionmod:Regenerate";
-//    public static final String ID = "evolutionmod:Antidote";
+    public static final String ID = "evolutionmod:CalmTheWaters";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-    public static final String IMG_PATH = "evolutionmod/images/cards/LizardSkl.png";
+    public static final String[] EXTENDED_DESCRIPTION = cardStrings.EXTENDED_DESCRIPTION;
+    public static final String IMG_PATH = "evolutionmod/images/cards/LymeanSkl.png";
     private static final int COST = 1;
-    private static final int BLOCK_AMT = 7;
-    private static final int UPGRADE_BLOCK_AMT = 2;
     private static final int FATE_AMT = 2;
-    private static final int UPGRADE_FATE_AMT = 1;
+    private static final int LYMEAN_FATE_AMT = 1;
+    private static final int BLOCK_AMT = 3;
+    private static final int UPGRADE_BLOCK_AMT = 3;
 
-    public Regenerate() {
-        super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
+    public CalmTheWaters() {
+        super(ID, NAME, IMG_PATH, COST, DESCRIPTION + UPGRADE_BLOCK_AMT + EXTENDED_DESCRIPTION[0],
                 CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
-                CardRarity.UNCOMMON, CardTarget.SELF);
-        this.block = this.baseBlock = BLOCK_AMT;
+                CardRarity.UNCOMMON, CardTarget.NONE);
         this.magicNumber = this.baseMagicNumber = FATE_AMT;
+        this.block = this.baseBlock = BLOCK_AMT;
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, this.block));
-        addToBot(new FateAction(this.magicNumber, l -> {
-            l.forEach(c -> {
-                if (c.type == CardType.STATUS) {
-                    AbstractDungeon.player.drawPile.moveToExhaustPile(c);
-                } else {
-                    AbstractDungeon.player.drawPile.moveToDiscardPile(c);
-                }
-            });
-        }));
-        AbstractCard status = p.hand.getRandomCard(CardType.STATUS, true);
-        if (status != null) {
-            AbstractDungeon.actionManager.addToBottom(new ExhaustSpecificCardAction(status, p.hand));
-        }
+        int fate = this.magicNumber;
+        int block = this.block;
         if (!AbstractGene.isPlayerInThisForm(LymeanGene.ID)) {
             addToBot(new ChannelAction(new LymeanGene()));
         } else {
-            addToBot(new ChannelAction(new LizardGene()));
+            fate += LYMEAN_FATE_AMT;
         }
+        if (this.upgraded || !AbstractGene.isPlayerInThisForm(MerfolkGene.ID)) {
+            addToBot(new ChannelAction(new MerfolkGene()));
+        } else {
+            block += UPGRADE_BLOCK_AMT;
+        }
+        addToTop(new GainBlockAction(p, block));
+        addToBot(new CalmTheWatersAction(fate));
     }
 
     @Override
     public AbstractCard makeCopy() {
-        return new Regenerate();
+        return new CalmTheWaters();
     }
 
     @Override
@@ -71,7 +66,8 @@ public class Regenerate
         if (!this.upgraded) {
             this.upgradeName();
             this.upgradeBlock(UPGRADE_BLOCK_AMT);
-            this.upgradeMagicNumber(UPGRADE_FATE_AMT);
+            this.rawDescription = UPGRADE_DESCRIPTION;
+            this.initializeDescription();
         }
     }
 }

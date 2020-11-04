@@ -27,8 +27,8 @@ public class BlackCat
     public static final String IMG_PATH = "evolutionmod/images/cards/BlackCat.png";
     private static final int COST = 1;
     private static final int DAMAGE_AMT = 5;
-    private static final int UPGRADE_DAMAGE_AMT = 3;
-    private static final int WEAK_AMT = 2;
+    private static final int UPGRADE_DAMAGE_AMT = 2;
+    private static final int WEAK_AMT = 1;
 
     public BlackCat() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,

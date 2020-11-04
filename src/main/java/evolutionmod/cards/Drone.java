@@ -16,6 +16,7 @@ import com.megacrit.cardcrawl.powers.DexterityPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 import evolutionmod.orbs.AbstractGene;
 import evolutionmod.patches.AbstractCardEnum;
+import evolutionmod.powers.BroodPower;
 import evolutionmod.powers.MatureEggPower;
 import evolutionmod.powers.PotencyPower;
 
@@ -66,7 +67,8 @@ public class Drone
     @Override
     public void applyPowers() {
         this.baseDamage = DAMAGE_AMT + (this.upgraded ? UPGRADE_BOTH_AMT : 0);
-        AbstractPower potency = AbstractDungeon.player.getPower(PotencyPower.POWER_ID);
+//        AbstractPower potency = AbstractDungeon.player.getPower(PotencyPower.POWER_ID);
+        AbstractPower potency = AbstractDungeon.player.getPower(BroodPower.POWER_ID);
         int pot = potency == null ? 0 : potency.amount;
         AbstractPower str = AbstractDungeon.player.getPower(StrengthPower.POWER_ID);
         AbstractPower dex = AbstractDungeon.player.getPower(DexterityPower.POWER_ID);

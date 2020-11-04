@@ -37,7 +37,7 @@ public class Ritual
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = "evolutionmod/images/cards/LymeanSkl.png";
-    private static final int COST = 2;
+    private static final int COST = 1;
     private static final int ADAPT_MAX_AMT = 1;
     private static final int ADAPT_AMT = 1;
     private static final int UPGRADE_ADAPT_AMT = 1;
@@ -48,6 +48,7 @@ public class Ritual
                 CardRarity.RARE, CardTarget.SELF);
         this.tags.add(CardTags.HEALING);
         this.exhaust = true;
+        this.isEthereal = true;
         this.magicNumber = this.baseMagicNumber = ADAPT_AMT;
         this.adaptationMap.put(HarpyGene.ID, new HarpyGene.Adaptation(0, ADAPT_MAX_AMT));
         this.adaptationMap.put(MerfolkGene.ID, new MerfolkGene.Adaptation(0, ADAPT_MAX_AMT));
@@ -83,9 +84,10 @@ public class Ritual
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeMagicNumber(UPGRADE_ADAPT_AMT);
-            this.rawDescription = UPGRADE_DESCRIPTION;
-            this.initializeDescription();
+            this.isEthereal = false;
+//            this.upgradeMagicNumber(UPGRADE_ADAPT_AMT);
+            this.initialRawDescription = UPGRADE_DESCRIPTION;
+            this.updateDescription();
         }
     }
 
@@ -107,5 +109,6 @@ public class Ritual
         for (int i = 0; i < adaptations.size(); ++i) {
             adaptations.get(i).amount = (integer >> i) & 1;
         }
+        this.initializeDescription();
     }
 }

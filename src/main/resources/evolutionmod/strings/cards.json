@@ -88,13 +88,15 @@
   },
   "evolutionmod:Charm": {
     "NAME": "Charm",
-    "DESCRIPTION": "The enemy loses !M! Strength this turn. NL Succubus Form: gain 1 Potency until your next turn",
-    "UPGRADE_DESCRIPTION": ""
+//    "DESCRIPTION": "The enemy loses !M! Strength this turn. NL Succubus Form: gain 1 Potency until your next turn",
+    "DESCRIPTION": "The enemy loses !M! Strength this turn. NL Succubus Form: Apply 2 Submission.",
+    "UPGRADE_DESCRIPTION": "The enemy loses !M! Strength this turn. NL Succubus Form: Apply 3 Submission."
   },
   "evolutionmod:StripArmor": {
     "NAME": "Strip Armor",
-    "DESCRIPTION": "Deal !D! damage. NL Succubus form: Remove all Block from the enemy first. NL Beast Form: add !D! damage.",
-    "UPGRADE_DESCRIPTION": "Remove ALL Block from the enemy. NL Succubus Form: apply !M! Vulnerable to ALL enemies and Exhaust."
+    "DESCRIPTION": "Deal !D! damage. NL Succubus form: Remove all Block from the enemy first. NL Beast Form: add ",
+    "UPGRADE_DESCRIPTION": "",
+    "EXTENDED_DESCRIPTION": [" damage."]
   },
   "evolutionmod:Seduce": {
     "NAME": "Seduce",
@@ -108,12 +110,13 @@
   },
   "evolutionmod:ChannelMagic": {
     "NAME": "Channel magic",
-    "DESCRIPTION": "Fate 2: if only Skills were discarded gain !M! Potency until your next turn. NL Lymean form: Fate 1 more card. NL Lavafolk form: gain 1 more Potency.",
-    "UPGRADE_DESCRIPTION": "Fate 2: if at least 1 Skill was discarded gain !M! Potency until your next turn. NL Lymean form: Fate 1 more card. NL Lavafolk form: gain 1 more Potency."
+    "DESCRIPTION": "Lymean form: Fate a Power. NL Lavafolk form: Fate an Attack.",
+    "UPGRADE_DESCRIPTION": "Lymean form: Fate a Power. NL Lavafolk form: Fate an Attack for each of your Lavafolk gene."
   },
   "evolutionmod:Aphrodisiac": {
     "NAME": "Aphrodisiac",
-    "DESCRIPTION": "Succubus Form: apply !M! Vulnerable NL Lizard Form: trigger Poison.",
+//    "DESCRIPTION": "Succubus Form: apply !M! Vulnerable NL Lizard Form: trigger Poison.",
+    "DESCRIPTION": "Succubus Form: apply !M! Submission NL Lizard Form: trigger Poison.",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:Eruption": {
@@ -135,6 +138,11 @@
     "NAME": "Aegis",
     "DESCRIPTION": "Apply Intangible to EVERYONE. NL When you play an attack Exhaust Aegis from your hand.",
     "UPGRADE_DESCRIPTION": "Apply Intangible to EVERYONE. NL When you play an attack Exhaust Aegis from your hand. NL Lymean Form: Gain !B! Block."
+  },
+  "evolutionmod:Aegis2": {
+    "NAME": "Aegis",
+    "DESCRIPTION": "Whenever you Scry, gain !M! Block. NL Lymean form: gain !B! Block.",
+    "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:Hatch": {
     "NAME": "Hatch",
@@ -176,9 +184,9 @@
 //    "DESCRIPTION": "Deal !D! damage. NL Play a random Strike from your deck on the same target. NL Channel a Beast gene.",
 //    "UPGRADE_DESCRIPTION": "Deal !D! damage. NL Draw a random Strike from your deck and play a copy on the same target. NL Channel a Beast gene."
 //  },
-  "evolutionmod:Regenerate": {
+  "evolutionmod:Antidote": {
     "NAME": "Antidote",
-    "DESCRIPTION": "Gain !B! Block. NL Fate !M!: Exhaust any Status discarded. NL Lymean form: Channel a Lizard gene.",
+    "DESCRIPTION": "Gain !B! Block. Exhaust up to !M! random Status from your draw pile. NL Lymean form: Channel a Lizard gene.",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:PoisonFangs": {
@@ -203,7 +211,9 @@
   },
   "evolutionmod:SpiderBite": {
     "NAME": "Spider Bite",
-    "DESCRIPTION": "Deal !D! damage. NL Insect Form: add a Drone to your hand. NL Lizard form: apply !M! Poison for each Drone in your hand and Exhaust them.",
+//    "DESCRIPTION": "Deal !D! damage. NL Insect Form: add a Drone to your hand. NL Lizard form: apply !M! Poison for each Drone in your hand and Exhaust them.",
+//    "DESCRIPTION": "Deal !D! damage. NL Lizard form: Adapt this with an Insect gene then apply !M! Poison for each Drone in your hand and Exhaust them.",
+    "DESCRIPTION": "Deal !D! damage. NL Add !M! damage for each Drone in your Exhaust pile. NL Insect Form: Exhaust all Drones from your hand.",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:SirenSong": {
@@ -218,13 +228,13 @@
   },
   "evolutionmod:NightMare": {
     "NAME": "Night Mare",
-    "DESCRIPTION": "Deal !D! damage. NL Apply Weak equal to the unblocked damage dealt. NL Exhaust. NL Centaur Form: Channel a Shadow gene.",
+    "DESCRIPTION": "Deal !D! damage. NL Apply Weak equal to half the unblocked damage dealt. NL Exhaust. NL Centaur Form: Channel a Shadow gene.",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:Omen": {
     "NAME": "Omen",
-    "DESCRIPTION": "Fate !M!: if a Curse was discarded apply !M! Weak. NL Lymean Form: Fate an additional card. NL Shadow Form: apply 2 Weak.",
-    "UPGRADE_DESCRIPTION": ""
+    "DESCRIPTION": "Fate !M! cards. NL Lymean Form: Fate an additional card. NL Shadow Form: apply 1 Weak for each card discarded.",
+    "UPGRADE_DESCRIPTION": "Fate !M! cards. NL Apply 1 Weak for each card discarded. NL Channel a Shadow gene. NL Lymean Form: Fate an additional card."
   },
   "evolutionmod:Toxin": {
     "NAME": "Toxin",
@@ -238,13 +248,15 @@
   },
   "evolutionmod:Strenghten": {
     "NAME": "Strengthen",
-    "DESCRIPTION": "Fate 3: gain !M! Vigor for each Attack discarded. NL Exhaust. NL Lymean Form: Fate an additionnal card. NL Centaur Form: gain !M! Vigor.",
+//    "DESCRIPTION": "Fate 3: gain !M! Vigor for each Attack discarded. NL Exhaust. NL Lymean Form: Fate an additionnal card. NL Centaur Form: gain !M! Vigor.",
+    "DESCRIPTION": "Gain !M! Vigor. NL Centaur form: NL Lymean form: NL double your Vigor.",
     "UPGRADE_DESCRIPTION": ""
   },
-  "evolutionmod:PeaceAndTranquility": {
-    "NAME": "Read the Water",
-    "DESCRIPTION": "Fate 3: gain !B! Block per Attack discarded. NL Lymean Form: Fate an additionnal card. NL Merfolk Form: gain 2 more Block per Attack.",
-    "UPGRADE_DESCRIPTION": "Fate 3: gain !B! Block per Attack discarded. NL Lymean Form: Fate an additionnal card. NL Channel a Merfolk gene."
+  "evolutionmod:CalmTheWaters": {
+    "NAME": "Calm the Waters",
+    "DESCRIPTION": "Gain !B! Block. NL Fate !M! Skills. NL Lymean Form: Fate an additionnal Skill. NL Merfolk Form: gain ",
+    "UPGRADE_DESCRIPTION": "Gain !B! Block. NL Fate !M! Skills. NL Channel a Merfolk gene. NL Lymean Form: Fate an additionnal Skill.",
+    "EXTENDED_DESCRIPTION": [" more Block."]
   },
   "evolutionmod:Firebloom": {
     "NAME": "Firebloom",
@@ -253,7 +265,7 @@
   },
   "evolutionmod:FireAnts": {
     "NAME": "Fire Ants",
-    "DESCRIPTION": "Evoke up to !M! Lavafolk genes and add a Drone to your hand for each one. NL Insect Form: Channel a Lavafolk gene.",
+    "DESCRIPTION": "Evoke up to !M! Lavafolk genes and add a Drone to your hand for each one. NL Insect Form: Evoke one more. NL NL Lavafolk form: Evoke one more.",
     "UPGRADE_DESCRIPTION": "Evoke up to !M! Lavafolk genes and add a Drone to your hand for each one. NL Channel an Insect gene and a Lavafolk gene."
   },
   "evolutionmod:Pheromones": {
@@ -273,7 +285,7 @@
   },
   "evolutionmod:Symbiotes": {
     "NAME": "Symbiotes",
-    "DESCRIPTION": "Gain !M! Brambles and twice as much Block the first time you play a Drone each turn. NL Insect Form: Plant Form: Refund 1.",
+    "DESCRIPTION": "Gain !M! Brambles and Block the first time you play a Drone each turn. NL Insect Form: Plant Form: Refund 1.",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:HardWorker": {
@@ -329,8 +341,10 @@
   },
   "evolutionmod:CrystalDust": {
     "NAME": "Crystal Dust",
-    "DESCRIPTION": " Form: draw 2 cards. NL Exhaust. NL Startup: shuffle a copy of this card in your draw pile.",
-    "UPGRADE_DESCRIPTION": " Form: draw 2 cards. NL Exhaust. NL Startup: shuffle !M! copies of this card in your draw pile.",
+    "DESCRIPTION": " Form: draw a card. NL Exhaust. NL Startup: shuffle a copy of this card in your draw pile.",
+//    "DESCRIPTION": " Form: draw 2 cards. NL Exhaust. NL Startup: shuffle a copy of this card in your draw pile.",
+    "UPGRADE_DESCRIPTION": " Form: draw a card. NL Exhaust. NL Startup: shuffle !M! copies of this card in your draw pile.",
+//    "UPGRADE_DESCRIPTION": " Form: draw 2 cards. NL Exhaust. NL Startup: shuffle !M! copies of this card in your draw pile.",
     "EXTENDED_DESCRIPTION": ["Randomized"]
   },
   "evolutionmod:Treasure": {
@@ -351,8 +365,8 @@
   },
   "evolutionmod:Ritual": {
     "NAME": "Ritual",
-    "DESCRIPTION": "Permanently Adapt this with your oldest non-adapted gene. NL Exhaust.",
-    "UPGRADE_DESCRIPTION": "Permanently Adapt this with your oldest !M! non-adapted genes. NL Exhaust."
+    "DESCRIPTION": "Permanently Adapt this with your oldest non-adapted gene. NL Exhaust. NL Ethereal",
+    "UPGRADE_DESCRIPTION": "Permanently Adapt this with your oldest non-adapted genes. NL Exhaust."
   },
   "evolutionmod:GodForm": {
     "NAME": "GodForm",
@@ -367,7 +381,8 @@
 
   "evolutionmod:Drone": {
     "NAME": "Drone",
-    "DESCRIPTION": "Gain !B! Block. NL Deal !D! damage. NL Gains Block and damage from Potency instead of Strength and Dexterity. NL Exhaust. Ethereal.",
+//    "DESCRIPTION": "Gain !B! Block. NL Deal !D! damage. NL Gains Block and damage from Potency instead of Strength and Dexterity. NL Exhaust. Ethereal.",
+    "DESCRIPTION": "Gain !B! Block. NL Deal !D! damage. NL Does not scale with Strength or Dexterity. NL Exhaust. Ethereal.",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:Feather": {

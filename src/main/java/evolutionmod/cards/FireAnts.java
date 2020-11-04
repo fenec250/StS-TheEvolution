@@ -7,11 +7,13 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.InsectGene;
 import evolutionmod.orbs.LavafolkGene;
 import evolutionmod.patches.AbstractCardEnum;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class FireAnts
@@ -23,8 +25,8 @@ public class FireAnts
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = "evolutionmod/images/cards/LavafolkSkl.png";
     private static final int COST = 1;
-    private static final int EVOKE_AMT = 2;
-    private static final int UPGRADE_EVOKE_AMT = 1;
+    private static final int EVOKE_AMT = 1;
+    private static final int UPGRADE_EVOKE_AMT = 2;
 
     public FireAnts() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -36,21 +38,27 @@ public class FireAnts
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
 
+        int maxEvoke = this.magicNumber;
+        if (this.upgraded || !AbstractGene.isPlayerInThisForm(InsectGene.ID)) {
+            addToBot(new ChannelAction(new InsectGene()));
+        } else {
+            maxEvoke += 1;
+        }
+        if (this.upgraded || AbstractGene.isPlayerInThisForm(InsectGene.ID)) {
+            addToBot(new ChannelAction(new LavafolkGene()));
+        } else {
+            maxEvoke += 1;
+        }
         p.orbs.stream()
-                .filter(o -> o.ID.equals(LavafolkGene.ID))
-                .limit(this.magicNumber)
-//                .collect(Collectors.toList())
+                .filter(o -> LavafolkGene.ID.equals(o.ID))
+                .limit(maxEvoke)
+                .collect(Collectors.toList()) // dissociate from initial list before evoking
+//        toEvoke
                 .forEach(o -> {
                     addToBot(new EvokeSpecificOrbAction(o));
                     addToBot(new MakeTempCardInHandAction(Drone.createDroneWithInteractions(p)));
                 });
 //                .collect(Collectors.toList());
-        if (this.upgraded || !AbstractGene.isPlayerInThisForm(InsectGene.ID)) {
-            addToBot(new ChannelAction(new InsectGene()));
-        }
-        if (this.upgraded || AbstractGene.isPlayerInThisForm(InsectGene.ID)) {
-            addToBot(new ChannelAction(new LavafolkGene()));
-        }
     }
 
     @Override

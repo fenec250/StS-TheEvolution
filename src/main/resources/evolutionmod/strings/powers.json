@@ -41,9 +41,13 @@
     "NAME": "Broodmother",
     "DESCRIPTIONS": ["Each turn the next ", " Drone", " you create will be Upgraded."]
   },
-  "evolutionmod:ChargePower": {
-    "NAME": "Charge",
-    "DESCRIPTIONS": ["deal ", " additional damage with attacks. This power is reduced by half", " each time an Attack is played"]
+  "evolutionmod:BroodPower": {
+    "NAME": "Brood Power",
+    "DESCRIPTIONS": ["Your Drones deal ", " more damage and apply ", " more Block."]
+  },
+  "evolutionmod:SubmissionPower": {
+    "NAME": "Submission",
+    "DESCRIPTIONS": ["Takes ", " more damage from attacks. Reduces by 1 for each hit. Removed at the end of the turn."]
   },
   "evolutionmod:EruptionPower": {
     "NAME": "Eruption",

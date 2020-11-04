@@ -92,7 +92,7 @@ public abstract class AdaptableEvoCard extends BaseEvoCard {
 	    updateDescription();
     }
 
-    private void updateDescription() {
+    protected void updateDescription() {
 		int adaptationsCount = this.adaptationMap.values().stream()
 				.mapToInt(abstractAdaptation -> abstractAdaptation.amount)
 				.sum();
