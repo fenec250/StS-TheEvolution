@@ -9,7 +9,6 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.LavafolkGene;
 import evolutionmod.patches.AbstractCardEnum;
 
@@ -22,8 +21,8 @@ public class FlameStrike
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = "evolutionmod/images/cards/LavafolkAtt.png";
     private static final int COST = 2;
-    private static final int DAMAGE_AMT = 11;
-    private static final int UPGRADE_DAMAGE_AMT = 3;
+    private static final int DAMAGE_AMT = 10;
+    private static final int UPGRADE_DAMAGE_AMT = 4;
 
     public FlameStrike() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -39,31 +38,29 @@ public class FlameStrike
         AbstractDungeon.actionManager.addToBottom(new DamageAllEnemiesAction(p, this.multiDamage,
                 this.damageTypeForTurn,
                 AbstractGameAction.AttackEffect.BLUNT_HEAVY));
-		if (this.upgraded || !AbstractGene.isPlayerInThisForm(LavafolkGene.ID)) {
-            AbstractDungeon.actionManager.addToBottom(new ChannelAction(new LavafolkGene()));
-        }
+        AbstractDungeon.actionManager.addToBottom(new ChannelAction(new LavafolkGene()));
     }
 
-    @Override
-    public void applyPowers() {
-        calculateBaseDamage();
-        super.applyPowers();
-		this.isDamageModified = this.damage != DAMAGE_AMT + (this.upgraded ? UPGRADE_DAMAGE_AMT : 0);
-    }
-
-    @Override
-    public void calculateCardDamage(AbstractMonster mo) {
-        calculateBaseDamage();
-		super.calculateCardDamage(mo);
-		this.isDamageModified = this.damage != DAMAGE_AMT + (this.upgraded ? UPGRADE_DAMAGE_AMT : 0);
-    }
-
-    private void calculateBaseDamage() {
-		this.baseDamage = DAMAGE_AMT;
-		if (this.upgraded || AbstractGene.isPlayerInThisForm(LavafolkGene.ID)) {
-            this.baseDamage += UPGRADE_DAMAGE_AMT;
-        }
-    }
+//    @Override
+//    public void applyPowers() {
+//        calculateBaseDamage();
+//        super.applyPowers();
+//		this.isDamageModified = this.damage != DAMAGE_AMT + (this.upgraded ? UPGRADE_DAMAGE_AMT : 0);
+//    }
+//
+//    @Override
+//    public void calculateCardDamage(AbstractMonster mo) {
+//        calculateBaseDamage();
+//		super.calculateCardDamage(mo);
+//		this.isDamageModified = this.damage != DAMAGE_AMT + (this.upgraded ? UPGRADE_DAMAGE_AMT : 0);
+//    }
+//
+//    private void calculateBaseDamage() {
+//		this.baseDamage = DAMAGE_AMT;
+//		if (this.upgraded || BaseEvoCard.isPlayerInThisForm(LavafolkGene.ID)) {
+//            this.baseDamage += UPGRADE_DAMAGE_AMT;
+//        }
+//    }
 
     @Override
     public AbstractCard makeCopy() {
@@ -75,8 +72,6 @@ public class FlameStrike
         if (!this.upgraded) {
             this.upgradeName();
             this.upgradeDamage(UPGRADE_DAMAGE_AMT);
-            this.rawDescription = UPGRADE_DESCRIPTION;
-            this.initializeDescription();
         }
     }
 }

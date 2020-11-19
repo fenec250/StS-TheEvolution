@@ -69,7 +69,8 @@ public class LizardGene extends AbstractGene {
 	}
 
 	public static String getDescription() {
-		return DESCRIPTION[0] + damage() + DESCRIPTION[1] + poison() + DESCRIPTION[2];
+		return DESCRIPTION[0] + poison() + DESCRIPTION[1];
+//		return DESCRIPTION[0] + damage() + DESCRIPTION[1] + poison() + DESCRIPTION[2];
 	}
 
 	private static int damage() {

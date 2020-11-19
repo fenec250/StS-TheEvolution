@@ -83,14 +83,17 @@
   },
   "evolutionmod:Broodmother": {
     "NAME": "Broodmother",
-    "DESCRIPTION": "Each turn the next Drone you create will be Upgraded. NL Channel an Insect gene.",
-    "UPGRADE_DESCRIPTION": "Each turn the next Drone you create will be Upgraded. NL Channel !M! Insect genes."
+    "DESCRIPTION": "Your Drones deal !M! more damage and apply !M! more Block. NL Channel an Insect gene.",
+    "UPGRADE_DESCRIPTION": "Your Drones deal !M! more damage and apply !M! more Block. NL Channel 2 Insect genes."
+//    "DESCRIPTION": "Each turn the next Drone you create will be Upgraded. NL Channel an Insect gene.",
+//    "UPGRADE_DESCRIPTION": "Each turn the next Drone you create will be Upgraded. NL Channel !M! Insect genes."
   },
   "evolutionmod:Charm": {
     "NAME": "Charm",
 //    "DESCRIPTION": "The enemy loses !M! Strength this turn. NL Succubus Form: gain 1 Potency until your next turn",
-    "DESCRIPTION": "The enemy loses !M! Strength this turn. NL Succubus Form: Apply 2 Submission.",
-    "UPGRADE_DESCRIPTION": "The enemy loses !M! Strength this turn. NL Succubus Form: Apply 3 Submission."
+//    "DESCRIPTION": "The enemy loses !M! Strength this turn. NL Succubus Form: Apply 2 Submission.",
+    "DESCRIPTION": "The enemy loses !M! Strength this turn. NL Succubus Form: inflict 2 more strength loss.",
+    "UPGRADE_DESCRIPTION": "The enemy loses !M! Strength this turn. NL Succubus Form: inflict 3 more strength loss."
   },
   "evolutionmod:StripArmor": {
     "NAME": "Strip Armor",
@@ -105,7 +108,7 @@
   },
   "evolutionmod:FlameStrike": {
     "NAME": "Flame Strike",
-    "DESCRIPTION": "Deal !D! damage to ALL enemies. NL Lavafolk Form: deal 3 more damage.",
+    "DESCRIPTION": "Deal !D! damage to ALL enemies. NL Channel a Lavafolk gene.",
     "UPGRADE_DESCRIPTION": "Deal !D! damage to ALL enemies. NL Channel a Lavafolk gene."
   },
   "evolutionmod:ChannelMagic": {
@@ -115,8 +118,8 @@
   },
   "evolutionmod:Aphrodisiac": {
     "NAME": "Aphrodisiac",
-//    "DESCRIPTION": "Succubus Form: apply !M! Vulnerable NL Lizard Form: trigger Poison.",
-    "DESCRIPTION": "Succubus Form: apply !M! Submission NL Lizard Form: trigger Poison.",
+    "DESCRIPTION": "Apply 2 Lust at the start of the next !M! turns. Succubus Form: apply !M! Lust. NL Lizard Form: trigger Poison.",
+//    "DESCRIPTION": "Succubus Form: apply !M! Submission NL Lizard Form: trigger Poison.",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:Eruption": {
@@ -172,7 +175,7 @@
   "evolutionmod:Frenzy": {
     "NAME": "Frenzy",
     "DESCRIPTION": "Deal !D! damage increased by !M! per [E] spent on attacks. NL Beast form: gain 2 Rage.",
-    "UPGRADE_DESCRIPTION": ""
+    "UPGRADE_DESCRIPTION": "Deal !D! damage increased by !M! per [E] spent on attacks. NL Beast form: gain 3 Rage."
   },
   "evolutionmod:FeatherStorm": {
     "NAME": "Feather storm",
@@ -249,7 +252,8 @@
   "evolutionmod:Strenghten": {
     "NAME": "Strengthen",
 //    "DESCRIPTION": "Fate 3: gain !M! Vigor for each Attack discarded. NL Exhaust. NL Lymean Form: Fate an additionnal card. NL Centaur Form: gain !M! Vigor.",
-    "DESCRIPTION": "Gain !M! Vigor. NL Centaur form: NL Lymean form: NL double your Vigor.",
+//    "DESCRIPTION": "Gain !M! Vigor. NL Centaur form: NL Lymean form: NL double your Vigor.",
+    "DESCRIPTION": "Gain !M! Vigor. NL Centaur form: NL Lymean form: NL Adapt with a Centaur gene.",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:CalmTheWaters": {
@@ -265,12 +269,13 @@
   },
   "evolutionmod:FireAnts": {
     "NAME": "Fire Ants",
-    "DESCRIPTION": "Evoke up to !M! Lavafolk genes and add a Drone to your hand for each one. NL Insect Form: Evoke one more. NL NL Lavafolk form: Evoke one more.",
+    "DESCRIPTION": "Evoke up to !M! Lavafolk genes and add a Drone to your hand for each one. NL Insect Form: Evoke one more. NL Lavafolk form: Evoke one more.",
+//    "DESCRIPTION": "Add a Drone to your hand. Repeat for each Lavafolk gene you have, up to !M!. NL Insect Form: channel a Lavafolk gene.",
     "UPGRADE_DESCRIPTION": "Evoke up to !M! Lavafolk genes and add a Drone to your hand for each one. NL Channel an Insect gene and a Lavafolk gene."
   },
   "evolutionmod:Pheromones": {
     "NAME": "Pheromones",
-    "DESCRIPTION": "Plant Form: Succubus Form: all enemies lose !M! strength this turn.",
+    "DESCRIPTION": "Plant Form: Succubus Form: apply !M! Lust to ALL enemies.",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:SpikeVolley": {
@@ -289,9 +294,9 @@
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:HardWorker": {
-    "NAME": "Hard Worker",
+    "NAME": "Battleborn",
     "DESCRIPTION": "Gain !M! Strength. NL Centaur Form: gain 1 Strength.",
-    "UPGRADE_DESCRIPTION": "Gain !M! Strength. NL Centaur Form: NL Insect Form: gain 1 Strength."
+    "UPGRADE_DESCRIPTION": "Gain !M! Strength. NL Centaur Form: NL Beast Form: gain 1 Strength."
   },
   "evolutionmod:CurrentsDancer": {
     "NAME": "Currents Dancer",
@@ -341,11 +346,17 @@
   },
   "evolutionmod:CrystalDust": {
     "NAME": "Crystal Dust",
-    "DESCRIPTION": " Form: draw a card. NL Exhaust. NL Startup: shuffle a copy of this card in your draw pile.",
-//    "DESCRIPTION": " Form: draw 2 cards. NL Exhaust. NL Startup: shuffle a copy of this card in your draw pile.",
-    "UPGRADE_DESCRIPTION": " Form: draw a card. NL Exhaust. NL Startup: shuffle !M! copies of this card in your draw pile.",
-//    "UPGRADE_DESCRIPTION": " Form: draw 2 cards. NL Exhaust. NL Startup: shuffle !M! copies of this card in your draw pile.",
+//    "DESCRIPTION": " Form: draw a card. NL Exhaust. NL Startup: shuffle a copy of this card in your draw pile.",
+    "DESCRIPTION": " Form: draw 2 cards. NL Exhaust. NL Startup: shuffle a copy of this card in your draw pile.",
+//    "UPGRADE_DESCRIPTION": " Form: draw a card. NL Exhaust. NL Startup: shuffle !M! copies of this card in your draw pile.",
+    "UPGRADE_DESCRIPTION": " Form: draw 2 cards. NL Exhaust. NL Startup: shuffle !M! copies of this card in your draw pile.",
     "EXTENDED_DESCRIPTION": ["Randomized"]
+  },
+  "evolutionmod:Mastery": {
+    "NAME": "Randomized Mastery",
+    "DESCRIPTION": "When you channel a Randomized gene, trigger its effect.",
+    "UPGRADE_DESCRIPTION": "",
+    "EXTENDED_DESCRIPTION": ["When you channel a ", " gene, trigger its effect.", " Mastery"]
   },
   "evolutionmod:Treasure": {
     "NAME": "Treasure",
@@ -370,8 +381,10 @@
   },
   "evolutionmod:GodForm": {
     "NAME": "GodForm",
-    "DESCRIPTION": "At the start of your turn trigger all your genes.",
-    "UPGRADE_DESCRIPTION": "At the start of your turn trigger all your genes !M! times."
+    "DESCRIPTION": "The first !M! Form that channel a gene also apply their conditional effect.",
+//    "DESCRIPTION": "All Form effects activate. NL The first !M! genes you channel each turn trigger immediately.",
+//    "DESCRIPTION": "At the start of your turn trigger all your genes.",
+    "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:DarkDesires": {
     "NAME": "Dark Desires",

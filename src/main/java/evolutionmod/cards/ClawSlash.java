@@ -11,7 +11,6 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.BeastGene;
 import evolutionmod.patches.AbstractCardEnum;
 
@@ -39,12 +38,7 @@ public class ClawSlash
         AbstractDungeon.actionManager.addToBottom(new DamageAction(
                 m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
                 AbstractGameAction.AttackEffect.SLASH_VERTICAL));
-        if (AbstractGene.isPlayerInThisForm(BeastGene.ID)) {
-            addToBot(new RefundAction(this, 1));
-//            addToBot(new GainEnergyAction(Math.min(1, this.cost)));
-        } else {
-            AbstractDungeon.actionManager.addToBottom(new ChannelAction(new BeastGene()));
-        }
+        BaseEvoCard.formEffect(BeastGene.ID, () -> addToBot(new RefundAction(this, 1)));
     }
 
     @Override

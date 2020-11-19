@@ -1,6 +1,5 @@
 package evolutionmod.cards;
 
-import basemod.abstracts.CustomCard;
 import basemod.abstracts.CustomSavable;
 import basemod.helpers.TooltipInfo;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -29,7 +28,6 @@ import evolutionmod.orbs.ShadowGene;
 import evolutionmod.orbs.SuccubusGene;
 import evolutionmod.patches.AbstractCardEnum;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CrystalShard
@@ -77,17 +75,11 @@ public class CrystalShard
 	public void use(AbstractPlayer p, AbstractMonster m) {
 		int damage = this.damage;
 
-		if (!AbstractGene.isPlayerInThisForm(this.firstGene.ID)) {
-			addToBot(new ChannelAction(this.firstGene.makeCopy()));
-		}
+		BaseEvoCard.formEffect(this.firstGene.ID); // effect applied in calculateDamage
 		addToBot(new DamageAction(
 				m, new DamageInfo(p, damage, this.damageTypeForTurn),
 				AbstractGameAction.AttackEffect.BLUNT_HEAVY));
-		if (!AbstractGene.isPlayerInThisForm(this.secondGene.ID)) {
-			addToBot(new ChannelAction(this.secondGene.makeCopy()));
-		} else {
-			addToBot(new DrawCardAction(p, 1));
-		}
+		BaseEvoCard.formEffect(this.secondGene.ID, () -> addToBot(new DrawCardAction(p, 1)));
 	}
 
 	@Override
@@ -112,7 +104,7 @@ public class CrystalShard
 
 	public void calculateDamage() {
 		this.baseDamage = getBaseDamage();
-		if (AbstractGene.isPlayerInThisForm(this.firstGene.ID)) {
+		if (BaseEvoCard.isPlayerInThisForm(this.firstGene.ID)) {
 			this.baseDamage += this.magicNumber;
 		}
 	}

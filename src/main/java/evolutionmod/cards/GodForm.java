@@ -16,9 +16,9 @@ public class GodForm extends BaseEvoCard {
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-    public static final String IMG_PATH = "evolutionmod/images/cards/strike.png";
+    public static final String IMG_PATH = "evolutionmod/images/cards/GodForm.png";
     private static final int COST = 3;
-    private static final int OMNI_AMT = 1;
+    private static final int OMNI_AMT = 2;
     private static final int UPGRADE_OMNI_AMT = 1;
 
     public GodForm() {
@@ -43,8 +43,8 @@ public class GodForm extends BaseEvoCard {
         if (!this.upgraded) {
             this.upgradeName();
             this.upgradeMagicNumber(UPGRADE_OMNI_AMT);
-            this.rawDescription = UPGRADE_DESCRIPTION;
-            this.initializeDescription();
+//            this.rawDescription = UPGRADE_DESCRIPTION;
+//            this.initializeDescription();
         }
     }
 }

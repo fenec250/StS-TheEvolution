@@ -45,10 +45,10 @@ public class BeastGene extends AbstractGene {
 	}
 
 	public static void apply(AbstractPlayer p, AbstractMonster m, int times) {
-		int block = block();
-		if (block > 0) {
-			AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, block));
-		}
+//		int block = block();
+//		if (block > 0) {
+//			AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, block));
+//		}
 		int rage = rage() * times;
 		AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new RagePower(p, rage)));
 	}
@@ -74,7 +74,8 @@ public class BeastGene extends AbstractGene {
 	}
 
 	public static String getDescription() {
-		return DESCRIPTION[0] + block() + DESCRIPTION[1] + rage() + DESCRIPTION[2];
+		return DESCRIPTION[0] + rage() + DESCRIPTION[2];
+//		return DESCRIPTION[0] + block() + DESCRIPTION[1] + rage() + DESCRIPTION[2];
 	}
 
 	private static int block() {

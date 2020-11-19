@@ -1,6 +1,5 @@
 package evolutionmod.cards;
 
-import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
@@ -9,7 +8,6 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.LavafolkGene;
 import evolutionmod.patches.AbstractCardEnum;
 
@@ -39,7 +37,7 @@ public class Eruption
     @Override
     public boolean canPlay(AbstractCard card) {
         if (card.cardID.equals(ID)
-            && !AbstractGene.isPlayerInThisForm(LavafolkGene.ID)) {
+            && !BaseEvoCard.isPlayerInThisForm(LavafolkGene.ID)) {
             return false;
         }
         return super.canPlay(card);
@@ -47,7 +45,7 @@ public class Eruption
 
     @Override
     protected String getCantPlayMessage() {
-        if (!AbstractGene.isPlayerInThisForm(LavafolkGene.ID)) {
+        if (!BaseEvoCard.isPlayerInThisForm(LavafolkGene.ID)) {
             return "A Lavafolk gene is required to play this card.";
         }
         return super.getCantPlayMessage();
@@ -55,7 +53,7 @@ public class Eruption
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        if (AbstractGene.isPlayerInThisForm(LavafolkGene.ID)) {
+        if (BaseEvoCard.isPlayerInThisForm(LavafolkGene.ID)) {
             addToBot(new DamageAllEnemiesAction(p, this.multiDamage,
                     this.damageTypeForTurn,
                     AbstractGameAction.AttackEffect.BLUNT_HEAVY));

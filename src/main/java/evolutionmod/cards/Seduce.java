@@ -9,7 +9,6 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import evolutionmod.actions.SeduceAction;
-import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.SuccubusGene;
 import evolutionmod.patches.AbstractCardEnum;
 
@@ -36,13 +35,10 @@ public class Seduce
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-//        HeavyBlade;
+        boolean inForm = formEffect(SuccubusGene.ID);
         addToBot(new SeduceAction(
-                p, m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
+                p, m, inForm, new DamageInfo(p, this.damage, this.damageTypeForTurn),
                 AbstractGameAction.AttackEffect.BLUNT_HEAVY));
-        if (!AbstractGene.isPlayerInThisForm(SuccubusGene.ID)) {
-            addToBot(new ChannelAction(new SuccubusGene()));
-        } // else SeduceAction heals
     }
 
     @Override

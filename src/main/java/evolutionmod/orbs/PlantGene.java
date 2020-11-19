@@ -46,12 +46,12 @@ public class PlantGene extends AbstractGene {
 
 	public static void apply(AbstractPlayer p, AbstractMonster m, int times) {
 		int thorns = bramble() * times;
-		int block = block();
-		if (block > 0) {
-			for (int i = 0; i < times; ++i) {
-				AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, block));
-			}
-		}
+//		int block = block();
+//		if (block > 0) {
+//			for (int i = 0; i < times; ++i) {
+//				AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, block));
+//			}
+//		}
 		AbstractDungeon.actionManager.addToTop(
 				new ApplyPowerAction(p, p, new BramblesPower(p, thorns), thorns));
 	}
@@ -76,7 +76,8 @@ public class PlantGene extends AbstractGene {
 	}
 
 	public static String getDescription() {
-		return DESCRIPTION[0] + block() + DESCRIPTION[1] + bramble() + DESCRIPTION[2];
+		return DESCRIPTION[0] + bramble() + DESCRIPTION[2];
+//		return DESCRIPTION[0] + block() + DESCRIPTION[1] + bramble() + DESCRIPTION[2];
 	}
 
 	private static int block() {

@@ -1,19 +1,13 @@
 package evolutionmod.actions;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.common.HealAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
-import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.LockOnPower;
-import com.megacrit.cardcrawl.powers.VulnerablePower;
-import evolutionmod.orbs.AbstractGene;
+import evolutionmod.cards.BaseEvoCard;
 import evolutionmod.orbs.SuccubusGene;
 
 public class SeduceAction extends AbstractGameAction {
@@ -21,7 +15,7 @@ public class SeduceAction extends AbstractGameAction {
 	private DamageInfo info;
 	private boolean healSelf;
 
-	public SeduceAction(AbstractCreature source, AbstractCreature target, DamageInfo info, AttackEffect effect) {
+	public SeduceAction(AbstractCreature source, AbstractCreature target, boolean healSelf, DamageInfo info, AttackEffect effect) {
 		this.source = source;
 		this.target = target;
 		this.info = info;
@@ -29,7 +23,7 @@ public class SeduceAction extends AbstractGameAction {
 		this.actionType = ActionType.DAMAGE;
 		this.attackEffect = effect;
 		this.duration = this.startDuration = Settings.ACTION_DUR_FAST;
-		this.healSelf = AbstractGene.isPlayerInThisForm(SuccubusGene.ID);
+		this.healSelf = healSelf;
 	}
 
 	public void update() {

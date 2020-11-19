@@ -1,6 +1,5 @@
 package evolutionmod.cards;
 
-import com.evacipated.cardcrawl.mod.stslib.actions.common.RefundAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
@@ -13,7 +12,6 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.RagePower;
-import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.BeastGene;
 import evolutionmod.patches.AbstractCardEnum;
 
@@ -30,6 +28,7 @@ public class Frenzy
     private static final int FRENZY_AMT = 3;
     private static final int RAGE_AMT = 2;
     private static final int UPGRADE_FRENZY_AMT = 2;
+    private static final int UPGRADE_RAGE_AMT = 1;
 
     public Frenzy() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -44,16 +43,14 @@ public class Frenzy
         AbstractDungeon.actionManager.addToBottom(new DamageAction(
                 m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
                 AbstractGameAction.AttackEffect.SLASH_VERTICAL));
-        if (AbstractGene.isPlayerInThisForm(BeastGene.ID)) {
-            addToBot(new ApplyPowerAction(p, p, new RagePower(p, RAGE_AMT)));
-        } else {
-            addToBot(new ChannelAction(new BeastGene()));
-        }
+        int rageAmount = RAGE_AMT + (this.upgraded ? UPGRADE_RAGE_AMT : 0);
+        formEffect(BeastGene.ID, () -> addToBot(new ApplyPowerAction(p, p,
+                    new RagePower(p, rageAmount))));
     }
 
     @Override
     public void applyPowers() {
-        this.baseDamage = DAMAGE_AMT + (this.upgraded ? UPGRADE_FRENZY_AMT : 0);
+        this.baseDamage = DAMAGE_AMT;
         int energy = AbstractDungeon.actionManager.cardsPlayedThisTurn.stream()
                 .filter(c -> c.type == CardType.ATTACK
                         && c != this)
@@ -63,13 +60,13 @@ public class Frenzy
 
         super.applyPowers();
 
-        this.baseDamage = DAMAGE_AMT + (this.upgraded ? UPGRADE_FRENZY_AMT : 0);
+        this.baseDamage = DAMAGE_AMT;
         this.isDamageModified = this.baseDamage != this.damage;
     }
 
     @Override
     public void calculateCardDamage(AbstractMonster mo) {
-        this.baseDamage = DAMAGE_AMT + (this.upgraded ? UPGRADE_FRENZY_AMT : 0);
+        this.baseDamage = DAMAGE_AMT;
         int energy = AbstractDungeon.actionManager.cardsPlayedThisTurn.stream()
                 .filter(c -> c.type == CardType.ATTACK
                         && c != this)
@@ -79,7 +76,7 @@ public class Frenzy
 
         super.calculateCardDamage(mo);
 
-        this.baseDamage = DAMAGE_AMT + (this.upgraded ? UPGRADE_FRENZY_AMT : 0);
+        this.baseDamage = DAMAGE_AMT;
         this.isDamageModified = this.baseDamage != this.damage;
     }
 
@@ -92,8 +89,9 @@ public class Frenzy
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-//            this.upgradeDamage(UPGRADE_DAMAGE_AMT);
             this.upgradeMagicNumber(UPGRADE_FRENZY_AMT);
+            this.rawDescription = UPGRADE_DESCRIPTION;
+            this.initializeDescription();
         }
     }
 }

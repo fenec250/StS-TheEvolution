@@ -7,13 +7,10 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.orbs.AbstractOrb;
-import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.InsectGene;
 import evolutionmod.orbs.LavafolkGene;
 import evolutionmod.patches.AbstractCardEnum;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class FireAnts
@@ -39,26 +36,27 @@ public class FireAnts
     public void use(AbstractPlayer p, AbstractMonster m) {
 
         int maxEvoke = this.magicNumber;
-        if (this.upgraded || !AbstractGene.isPlayerInThisForm(InsectGene.ID)) {
-            addToBot(new ChannelAction(new InsectGene()));
-        } else {
+        if (!this.upgraded && BaseEvoCard.isPlayerInThisForm(InsectGene.ID)) {
             maxEvoke += 1;
         }
-        if (this.upgraded || AbstractGene.isPlayerInThisForm(InsectGene.ID)) {
-            addToBot(new ChannelAction(new LavafolkGene()));
-        } else {
+        if (!this.upgraded && BaseEvoCard.isPlayerInThisForm(LavafolkGene.ID)) {
             maxEvoke += 1;
         }
         p.orbs.stream()
                 .filter(o -> LavafolkGene.ID.equals(o.ID))
                 .limit(maxEvoke)
                 .collect(Collectors.toList()) // dissociate from initial list before evoking
-//        toEvoke
                 .forEach(o -> {
                     addToBot(new EvokeSpecificOrbAction(o));
                     addToBot(new MakeTempCardInHandAction(Drone.createDroneWithInteractions(p)));
                 });
-//                .collect(Collectors.toList());
+        if (upgraded){
+            addToBot(new ChannelAction(new InsectGene()));
+            addToBot(new ChannelAction(new LavafolkGene()));
+        } else {
+            formEffect(InsectGene.ID);
+            formEffect(LavafolkGene.ID);
+        }
     }
 
     @Override

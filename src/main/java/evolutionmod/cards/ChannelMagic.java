@@ -1,21 +1,14 @@
 package evolutionmod.cards;
 
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import evolutionmod.actions.ChannelMagicAction;
-import evolutionmod.actions.FateAction;
-import evolutionmod.orbs.AbstractGene;
-import evolutionmod.orbs.InsectGene;
 import evolutionmod.orbs.LavafolkGene;
 import evolutionmod.orbs.LymeanGene;
 import evolutionmod.patches.AbstractCardEnum;
-import evolutionmod.powers.PotencyPower;
-import evolutionmod.powers.RemovePotencyPower;
 
 public class ChannelMagic
         extends BaseEvoCard {
@@ -35,18 +28,8 @@ public class ChannelMagic
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        boolean fatePower = false;
-        boolean fateAttack = false;
-        if (!AbstractGene.isPlayerInThisForm(LavafolkGene.ID)) {
-            addToBot(new ChannelAction(new LavafolkGene()));
-        } else {
-            fateAttack = true;
-        }
-        if (!AbstractGene.isPlayerInThisForm(LymeanGene.ID)) {
-            addToBot(new ChannelAction(new LymeanGene()));
-        } else {
-            fatePower = true;
-        }
+        boolean fateAttack = BaseEvoCard.formEffect(LavafolkGene.ID);
+        boolean fatePower = BaseEvoCard.formEffect(LymeanGene.ID);
         addToBot(new ChannelMagicAction(fatePower, fateAttack, this.upgraded));
     }
 

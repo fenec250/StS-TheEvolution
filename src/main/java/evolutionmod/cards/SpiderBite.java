@@ -10,7 +10,6 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.InsectGene;
 import evolutionmod.patches.AbstractCardEnum;
 
@@ -43,13 +42,9 @@ public class SpiderBite
                 AbstractGameAction.AttackEffect.BLUNT_LIGHT));
 
 
-		if (!AbstractGene.isPlayerInThisForm(InsectGene.ID)) {
-			AbstractDungeon.actionManager.addToBottom(new ChannelAction(new InsectGene()));
-		} else {
-			p.hand.group.stream()
+		formEffect(InsectGene.ID, () -> p.hand.group.stream()
 					.filter(card -> Drone.ID.equals(card.cardID))
-					.forEach(card -> addToBot(new ExhaustSpecificCardAction(card, p.hand, true)));
-		}
+					.forEach(card -> addToBot(new ExhaustSpecificCardAction(card, p.hand, true))));
 
 //		if (!AbstractGene.isPlayerInThisForm(LizardGene.ID)) {
 //			AbstractDungeon.actionManager.addToBottom(new ChannelAction(new LizardGene()));
@@ -92,7 +87,7 @@ public class SpiderBite
 		this.baseDamage += this.magicNumber * AbstractDungeon.player.exhaustPile.group.stream()
 				.filter(card -> Drone.ID.equals(card.cardID))
 				.count();
-		if (AbstractGene.isPlayerInThisForm(InsectGene.ID)) {
+		if (BaseEvoCard.isPlayerInThisForm(InsectGene.ID)) {
 			this.baseDamage += this.magicNumber * AbstractDungeon.player.hand.group.stream()
 							.filter(card -> Drone.ID.equals(card.cardID))
 							.count();

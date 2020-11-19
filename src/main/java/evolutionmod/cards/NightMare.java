@@ -1,8 +1,6 @@
 package evolutionmod.cards;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -11,10 +9,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.WeakPower;
 import evolutionmod.actions.NightMareAction;
-import evolutionmod.orbs.AbstractGene;
-import evolutionmod.orbs.BeastGene;
 import evolutionmod.orbs.CentaurGene;
 import evolutionmod.orbs.ShadowGene;
 import evolutionmod.patches.AbstractCardEnum;
@@ -44,11 +39,8 @@ public class NightMare
         addToBot(new NightMareAction(
                 p, m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
                 AbstractGameAction.AttackEffect.BLUNT_HEAVY));
-        if (!AbstractGene.isPlayerInThisForm(CentaurGene.ID)) {
-            AbstractDungeon.actionManager.addToBottom(new ChannelAction(new CentaurGene()));
-        } else {
-            AbstractDungeon.actionManager.addToBottom(new ChannelAction(new ShadowGene()));
-        }
+        formEffect(CentaurGene.ID, () ->
+                AbstractDungeon.actionManager.addToBottom(new ChannelAction(new ShadowGene())));
     }
 
     @Override

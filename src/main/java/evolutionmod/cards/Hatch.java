@@ -7,7 +7,6 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.InsectGene;
 import evolutionmod.patches.AbstractCardEnum;
 
@@ -34,8 +33,10 @@ public class Hatch
     public void use(AbstractPlayer p, AbstractMonster m) {
         AbstractDungeon.actionManager.addToBottom(
                 new MakeTempCardInHandAction(Drone.createDroneWithInteractions(p), this.magicNumber));
-        if (this.upgraded || !AbstractGene.isPlayerInThisForm(InsectGene.ID)) {
+        if (this.upgraded) {
             addToBot(new ChannelAction(new InsectGene()));
+        } else {
+            formEffect(InsectGene.ID, () -> addToBot(new ChannelAction(new InsectGene())));
         }
     }
 
@@ -55,7 +56,7 @@ public class Hatch
 
     private void calculateDroneAmount() {
         this.magicNumber = this.baseMagicNumber = DRONES_AMT;
-        if (this.upgraded || AbstractGene.isPlayerInThisForm(InsectGene.ID)) {
+        if (this.upgraded || BaseEvoCard.isPlayerInThisForm(InsectGene.ID)) {
             this.magicNumber += UPGRADE_DRONES_AMT;
             this.baseMagicNumber += UPGRADE_DRONES_AMT;
         }

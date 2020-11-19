@@ -10,7 +10,6 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.BeastGene;
 import evolutionmod.orbs.SuccubusGene;
 import evolutionmod.patches.AbstractCardEnum;
@@ -39,14 +38,8 @@ public class StripArmor
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
 
-        if (!AbstractGene.isPlayerInThisForm(SuccubusGene.ID)) {
-			addToBot(new ChannelAction(new SuccubusGene()));
-		} else {
-			AbstractDungeon.actionManager.addToBottom(new RemoveAllBlockAction(m, p));
-        }
-        if (!AbstractGene.isPlayerInThisForm(BeastGene.ID)) {
-			addToBot(new ChannelAction(new BeastGene()));
-		}
+        formEffect(SuccubusGene.ID, () -> addToBot(new RemoveAllBlockAction(m, p)));
+        formEffect(BeastGene.ID);
 		AbstractDungeon.actionManager.addToBottom(new DamageAction(
 				m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
 				AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
@@ -66,7 +59,7 @@ public class StripArmor
     	this.baseDamage = DAMAGE_AMT + (this.upgraded ? UPGRADE_DAMAGE_AMT : 0);
 //    	this.baseMagicNumber = DAMAGE_AMT + (this.upgraded ? UPGRADE_DAMAGE_AMT : 0);
 //		int mn = magicNumber;
-		if (AbstractGene.isPlayerInThisForm(BeastGene.ID)) {
+		if (BaseEvoCard.isPlayerInThisForm(BeastGene.ID)) {
 			this.baseDamage += this.magicNumber;
 //			magicNumber = 0;
 //			this.isMagicNumberModified = true;

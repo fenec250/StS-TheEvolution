@@ -1,0 +1,13 @@
+
+Evolution.png
+size: 256,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+character
+  rotate: false
+  xy: 1, 1
+  size: 196, 302
+  orig: 196, 302
+  offset: 0, 150
+  index: -1

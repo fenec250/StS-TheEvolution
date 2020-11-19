@@ -67,6 +67,7 @@ public class Drone
     @Override
     public void applyPowers() {
         this.baseDamage = DAMAGE_AMT + (this.upgraded ? UPGRADE_BOTH_AMT : 0);
+        this.baseBlock = BLOCK_AMT + (this.upgraded ? UPGRADE_BOTH_AMT : 0);
 //        AbstractPower potency = AbstractDungeon.player.getPower(PotencyPower.POWER_ID);
         AbstractPower potency = AbstractDungeon.player.getPower(BroodPower.POWER_ID);
         int pot = potency == null ? 0 : potency.amount;
@@ -103,7 +104,10 @@ public class Drone
 
     @Override
     public void calculateCardDamage(AbstractMonster mo) {
-        AbstractPower potency = AbstractDungeon.player.getPower(PotencyPower.POWER_ID);
+        this.baseDamage = DAMAGE_AMT + (this.upgraded ? UPGRADE_BOTH_AMT : 0);
+        this.baseBlock = BLOCK_AMT + (this.upgraded ? UPGRADE_BOTH_AMT : 0);
+//        AbstractPower potency = AbstractDungeon.player.getPower(PotencyPower.POWER_ID);
+        AbstractPower potency = AbstractDungeon.player.getPower(BroodPower.POWER_ID);
         int pot = potency == null ? 0 : potency.amount;
         AbstractPower str = AbstractDungeon.player.getPower(StrengthPower.POWER_ID);
         AbstractPower dex = AbstractDungeon.player.getPower(DexterityPower.POWER_ID);

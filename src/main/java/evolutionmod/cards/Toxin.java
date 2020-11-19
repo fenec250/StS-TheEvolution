@@ -1,16 +1,13 @@
 package evolutionmod.cards;
 
-import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.PoisonPower;
-import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.LizardGene;
 import evolutionmod.orbs.PlantGene;
 import evolutionmod.patches.AbstractCardEnum;
@@ -38,14 +35,13 @@ public class Toxin
 	@Override
 	public void use(AbstractPlayer p, AbstractMonster m) {
 		int poison = POISON_FLAT;
-		if (!AbstractGene.isPlayerInThisForm(PlantGene.ID)) {
-			addToBot(new ChannelAction(new PlantGene()));
-		} else if (!AbstractGene.isPlayerInThisForm(LizardGene.ID)) {
-			addToBot(new ChannelAction(new LizardGene()));
-		} else {
-			poison += m.maxHealth * this.magicNumber / 100;
-			this.exhaust = true;
-		}
+		boolean inForm = formEffect(LizardGene.ID);
+		if (inForm) {
+			inForm = formEffect(PlantGene.ID);
+			if (inForm) {
+				poison += m.maxHealth * this.magicNumber / 100;
+				this.exhaust = true;
+		}}
 		addToBot(new ApplyPowerAction(m, p, new PoisonPower(m, p, poison)));
 	}
 

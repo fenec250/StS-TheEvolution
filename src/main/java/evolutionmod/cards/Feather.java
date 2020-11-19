@@ -10,9 +10,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.HarpyGene;
-import evolutionmod.patches.AbstractCardEnum;
 
 public class Feather
         extends BaseEvoCard {
@@ -38,12 +36,9 @@ public class Feather
 
         addToBot(new DrawCardAction(this.magicNumber));
         addToBot(new DiscardAction(p, p, this.magicNumber, false));
-        if (!AbstractGene.isPlayerInThisForm(HarpyGene.ID)) {
-            AbstractDungeon.actionManager.addToBottom(new ChannelAction(new HarpyGene()));
-        } else {
-            addToBot(new MoveCardsAction(p.hand, p.discardPile,
-                    c -> c.cardID.equals(FeatherStorm.ID), 1));
-        }
+        formEffect(HarpyGene.ID, () ->
+                addToBot(new MoveCardsAction(p.hand, p.discardPile,
+                    c -> c.cardID.equals(FeatherStorm.ID), 1)));
     }
 
     @Override
@@ -56,6 +51,8 @@ public class Feather
         if (!this.upgraded) {
             this.upgradeName();
             this.upgradeMagicNumber(UPGRADE_FORM_CHANGE);
+            this.rawDescription = UPGRADE_DESCRIPTION;
+            this.initializeDescription();
         }
     }
 }

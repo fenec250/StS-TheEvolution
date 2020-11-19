@@ -2,10 +2,8 @@ package evolutionmod.cards;
 
 import basemod.abstracts.CustomSavable;
 import basemod.helpers.TooltipInfo;
-import com.evacipated.cardcrawl.mod.stslib.actions.common.RefundAction;
 import com.evacipated.cardcrawl.mod.stslib.cards.interfaces.StartupCard;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
-import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInDrawPileAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
@@ -29,7 +27,6 @@ import evolutionmod.orbs.ShadowGene;
 import evolutionmod.orbs.SuccubusGene;
 import evolutionmod.patches.AbstractCardEnum;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CrystalDust
@@ -44,7 +41,7 @@ public class CrystalDust
 	private static final int COST = 0;
 	private static final int COPIES_AMT = 1;
 	private static final int UPGRADE_COPIES_AMT = 1;
-	private static final int FORM_DRAW = 1;
+	private static final int FORM_DRAW = 2;
 
 	private int geneIndex;
 	private AbstractGene gene;
@@ -71,11 +68,7 @@ public class CrystalDust
 
 	@Override
 	public void use(AbstractPlayer p, AbstractMonster m) {
-		if (!AbstractGene.isPlayerInThisForm(this.gene.ID)) {
-			addToBot(new ChannelAction(this.gene.makeCopy()));
-		} else {
-			addToBot(new DrawCardAction(FORM_DRAW));
-		}
+		BaseEvoCard.formEffect(this.gene.ID, () -> addToBot(new DrawCardAction(FORM_DRAW)));
 	}
 
 	@Override
@@ -111,7 +104,7 @@ public class CrystalDust
 		if (customTooltips == null) {
 			super.getCustomTooltips();
 			customTooltips.add(new TooltipInfo("Randomized form",
-					"The form on this card are selected when the card is created and vary from a card to an other."));
+					"The form on this card is selected when the card is created and vary from a card to an other."));
 		}
 		return  customTooltips;
 	}
@@ -135,7 +128,7 @@ public class CrystalDust
 				new LizardGene(),
 				new CentaurGene(),
 				new ShadowGene()};
-		this.gene =  validGenes[this.geneIndex];
+		this.gene = validGenes[this.geneIndex];
 		this.rawDescription = this.gene.name + DESCRIPTION;
 		initializeDescription();
 	}

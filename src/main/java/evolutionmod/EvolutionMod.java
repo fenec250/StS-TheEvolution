@@ -114,7 +114,7 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
 
         //Uncommons
         //11 attacks
-        cards.add(new AggressiveBlow());
+//        cards.add(new AggressiveBlow());
         cards.add(new Phoenix());
         cards.add(new SpiderBite());
         cards.add(new CursedTouch());
@@ -144,10 +144,11 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
         cards.add(new CrystalDust());
         //6 powers
         cards.add(new Symbiotes());
-        cards.add(new ThickHide());
+//        cards.add(new ThickHide());
         cards.add(new HardWorker());
         cards.add(new CurrentsDancer());
         cards.add(new Shrink());
+        cards.add(new Mastery());
 
         //Rares.
         //4 attacks

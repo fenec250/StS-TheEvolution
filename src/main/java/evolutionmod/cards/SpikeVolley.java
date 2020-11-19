@@ -13,10 +13,7 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.ThornsPower;
-import com.megacrit.cardcrawl.powers.WeakPower;
-import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.PlantGene;
-import evolutionmod.orbs.ShadowGene;
 import evolutionmod.patches.AbstractCardEnum;
 import evolutionmod.powers.BramblesPower;
 
@@ -49,14 +46,12 @@ public class SpikeVolley
 //        this.calculateCardDamage(m);
         addToBot(new DamageAction(m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
                 AbstractGameAction.AttackEffect.SLASH_VERTICAL));
-        if (!AbstractGene.isPlayerInThisForm(PlantGene.ID)) {
-            addToBot(new ChannelAction(new PlantGene()));
-        } else {
+       formEffect(PlantGene.ID, () -> {
             AbstractPower brambles = p.getPower(BramblesPower.POWER_ID);
             if (brambles != null) {
                 addToBot(new ApplyPowerAction(p, p, new BramblesPower(p, -1 * brambles.amount)));
             }
-        }
+        });
     }
 
     @Override
@@ -81,7 +76,7 @@ public class SpikeVolley
 
     public void calculateDamage() {
         this.baseDamage = getBaseDamage();
-        if (AbstractGene.isPlayerInThisForm(PlantGene.ID)) {
+        if (BaseEvoCard.isPlayerInThisForm(PlantGene.ID)) {
             AbstractPower thorns = AbstractDungeon.player.getPower(ThornsPower.POWER_ID);
             if (thorns != null) {
                 this.baseDamage += thorns.amount * this.magicNumber;

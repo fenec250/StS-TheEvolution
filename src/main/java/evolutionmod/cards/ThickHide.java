@@ -1,6 +1,5 @@
 package evolutionmod.cards;
 
-import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -9,7 +8,6 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.PlatedArmorPower;
-import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.BeastGene;
 import evolutionmod.orbs.CentaurGene;
 import evolutionmod.patches.AbstractCardEnum;
@@ -39,10 +37,10 @@ public class ThickHide
         addToBot(new ApplyPowerAction(p, p,
                 new PlatedArmorPower(p, this.magicNumber)));
 
-        if (!AbstractGene.isPlayerInThisForm(BeastGene.ID)) {
+        if (!BaseEvoCard.isPlayerInThisForm(BeastGene.ID)) {
             addToBot(new ChannelAction(new BeastGene()));
         } else {
-            if (!this.upgraded && AbstractGene.isPlayerInThisForm(CentaurGene.ID)) {
+            if (!this.upgraded && BaseEvoCard.isPlayerInThisForm(CentaurGene.ID)) {
                 addToBot(new ApplyPowerAction(p, p,
                         new PlatedArmorPower(p, UPGRADE_PLATED_ARMOR_AMT)));
             } else {

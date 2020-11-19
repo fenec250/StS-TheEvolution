@@ -43,10 +43,10 @@ public class ShadowGene extends AbstractGene {
 	}
 
 	public static void apply(AbstractPlayer p, AbstractMonster m, int times) {
-		int damage = damage();
+//		int damage = damage();
 		int weak = weak();
 		for (int i = 0; i < times; ++i) {
-			AbstractDungeon.actionManager.addToBottom(new ShadowGeneAction(p, m, damage, weak));
+			AbstractDungeon.actionManager.addToBottom(new ShadowGeneAction(p, m, weak));
 		}
 	}
 
@@ -70,7 +70,8 @@ public class ShadowGene extends AbstractGene {
 	}
 
 	public static String getDescription() {
-		return DESCRIPTION[0] + damage() + DESCRIPTION[1] + weak() + DESCRIPTION[2];
+		return DESCRIPTION[0] + weak() + DESCRIPTION[1];
+//		return DESCRIPTION[0] + damage() + DESCRIPTION[1] + weak() + DESCRIPTION[2];
 	}
 
 	private static int damage() {

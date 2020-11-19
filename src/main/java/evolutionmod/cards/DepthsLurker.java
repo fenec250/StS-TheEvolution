@@ -8,7 +8,6 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import evolutionmod.actions.DepthsLurkerAction;
-import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.MerfolkGene;
 import evolutionmod.orbs.ShadowGene;
 import evolutionmod.patches.AbstractCardEnum;
@@ -36,11 +35,7 @@ public class DepthsLurker
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         AbstractDungeon.actionManager.addToBottom(new DepthsLurkerAction(p, this.block));
-        if (!AbstractGene.isPlayerInThisForm(MerfolkGene.ID)) {
-            AbstractDungeon.actionManager.addToBottom(new ChannelAction(new MerfolkGene()));
-        } else {
-            AbstractDungeon.actionManager.addToBottom(new ChannelAction(new ShadowGene()));
-        }
+        BaseEvoCard.formEffect(MerfolkGene.ID, () -> addToBot(new ChannelAction(new ShadowGene())));
     }
 
     @Override

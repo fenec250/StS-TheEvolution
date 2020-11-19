@@ -12,7 +12,6 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.WeakPower;
-import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.ShadowGene;
 import evolutionmod.patches.AbstractCardEnum;
 
@@ -45,8 +44,10 @@ public class Shadowbolt
         AbstractDungeon.actionManager.addToBottom(new DamageAction(
                 m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
                 AbstractGameAction.AttackEffect.SLASH_VERTICAL));
-        if (!this.upgraded && !AbstractGene.isPlayerInThisForm(ShadowGene.ID)) {
-            AbstractDungeon.actionManager.addToBottom(new ChannelAction(new ShadowGene()));
+        if (this.upgraded) {
+            addToBot(new ChannelAction(new ShadowGene()));
+        } else {
+            formEffect(ShadowGene.ID);
         }
 //        addToBot(new ApplyPowerAction(m, p, new WeakPower(m, this.magicNumber, false), this.magicNumber));
     }
@@ -61,7 +62,7 @@ public class Shadowbolt
     public void calculateCardDamage(AbstractMonster mo) {
         this.baseDamage = DAMAGE_AMT + (this.upgraded ? UPGRADE_DAMAGE_AMT : 0);
         if (mo != null &&
-                (this.upgraded || AbstractGene.isPlayerInThisForm(ShadowGene.ID))) {
+                (this.upgraded || BaseEvoCard.isPlayerInThisForm(ShadowGene.ID))) {
             AbstractPower weak = mo.getPower(WeakPower.POWER_ID);
             if (weak != null) {
                 this.baseDamage += weak.amount * this.magicNumber;

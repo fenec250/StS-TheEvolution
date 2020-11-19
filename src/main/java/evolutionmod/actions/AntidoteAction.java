@@ -42,7 +42,7 @@ public class AntidoteAction extends AbstractGameAction {
 				this.isDone = true;
 				return;
 			}
-			List<AbstractCard> statuses = new ArrayList<AbstractCard>();
+			CardGroup statuses = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
 			CardGroup drawPile = AbstractDungeon.player.drawPile;
 			for (int i = 0; i < Math.min(this.amount, drawPile.size()); ++i) {
 				AbstractCard card = drawPile.getRandomCard(AbstractCard.CardType.STATUS, true);
@@ -53,11 +53,12 @@ public class AntidoteAction extends AbstractGameAction {
 					}
 					break;
 				}
-				statuses.add(card);
+				statuses.addToTop(card);
+				drawPile.removeCard(card);
 			}
 
-			statuses.forEach(c ->
-					addToTop(new ExhaustSpecificCardAction(c, AbstractDungeon.player.drawPile)));
+			statuses.group.forEach(c ->
+					addToTop(new ExhaustSpecificCardAction(c, statuses)));
 
 			this.tickDuration();
 		}

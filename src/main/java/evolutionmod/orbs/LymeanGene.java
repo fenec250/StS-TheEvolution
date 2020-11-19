@@ -44,11 +44,12 @@ public class LymeanGene extends AbstractGene {
 	public static void apply(AbstractPlayer p, AbstractMonster m, int times) {
 		int scry = scry();
 		if (scry > 0) {
-			for (int i = 0; i < times; ++i) {
-//				AbstractDungeon.actionManager.addToTop(
-//						new LymeanGeneAction(p, null, blockPerGene() * times, healPerGene() * times));
-				AbstractDungeon.actionManager.addToBottom(new ScryAction(scry));
-			}
+//			for (int i = 0; i < times; ++i) {
+////				AbstractDungeon.actionManager.addToTop(
+////						new LymeanGeneAction(p, null, blockPerGene() * times, healPerGene() * times));
+//				AbstractDungeon.actionManager.addToBottom(new ScryAction(scry));
+//			}
+			AbstractDungeon.actionManager.addToBottom(new ScryAction(scry * times));
 		}
 	}
 

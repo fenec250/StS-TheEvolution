@@ -1,6 +1,5 @@
 package evolutionmod.cards;
 
-import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
@@ -12,7 +11,6 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.IntangiblePlayerPower;
-import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.LymeanGene;
 import evolutionmod.patches.AbstractCardEnum;
 
@@ -42,11 +40,7 @@ public class Aegis
                         mo, p, new IntangiblePlayerPower(mo, 1), 1
                 )));
         if (this.upgraded) {
-            if (!AbstractGene.isPlayerInThisForm(LymeanGene.ID)) {
-                addToBot(new ChannelAction(new LymeanGene()));
-            } else {
-                addToBot(new GainBlockAction(p, this.block));
-            }
+        	formEffect(LymeanGene.ID, () -> addToBot(new GainBlockAction(p, this.block)));
         }
     }
 

@@ -5,12 +5,9 @@ import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import evolutionmod.actions.CalmTheWatersAction;
-import evolutionmod.actions.FateAction;
-import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.LymeanGene;
 import evolutionmod.orbs.MerfolkGene;
 import evolutionmod.patches.AbstractCardEnum;
@@ -42,15 +39,17 @@ public class CalmTheWaters
     public void use(AbstractPlayer p, AbstractMonster m) {
         int fate = this.magicNumber;
         int block = this.block;
-        if (!AbstractGene.isPlayerInThisForm(LymeanGene.ID)) {
-            addToBot(new ChannelAction(new LymeanGene()));
-        } else {
+        boolean inForm = BaseEvoCard.formEffect(LymeanGene.ID);
+        if (inForm) {
             fate += LYMEAN_FATE_AMT;
         }
-        if (this.upgraded || !AbstractGene.isPlayerInThisForm(MerfolkGene.ID)) {
+        if (this.upgraded) {
             addToBot(new ChannelAction(new MerfolkGene()));
         } else {
-            block += UPGRADE_BLOCK_AMT;
+            inForm = BaseEvoCard.formEffect(MerfolkGene.ID);
+            if (inForm) {
+                block += UPGRADE_BLOCK_AMT;
+            }
         }
         addToTop(new GainBlockAction(p, block));
         addToBot(new CalmTheWatersAction(fate));

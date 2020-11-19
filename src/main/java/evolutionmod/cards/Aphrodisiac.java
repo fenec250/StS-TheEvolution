@@ -1,23 +1,20 @@
 package evolutionmod.cards;
 
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
-import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.PoisonPower;
 import com.megacrit.cardcrawl.powers.VulnerablePower;
-import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.LizardGene;
 import evolutionmod.orbs.SuccubusGene;
 import evolutionmod.patches.AbstractCardEnum;
-import evolutionmod.powers.SubmissionPower;
+import evolutionmod.powers.AphrodisiacPower;
+import evolutionmod.powers.LustPower;
 
 public class Aphrodisiac
         extends BaseEvoCard {
@@ -40,20 +37,14 @@ public class Aphrodisiac
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        if (!AbstractGene.isPlayerInThisForm(SuccubusGene.ID)) {
-            addToBot(new ChannelAction(new SuccubusGene()));
-        } else {
-            addToBot(new ApplyPowerAction(m, p, new SubmissionPower(m, this.magicNumber)));
-//            addToBot(new ApplyPowerAction(m, p, new VulnerablePower(m, this.magicNumber, false)));
-        }
-        if (!AbstractGene.isPlayerInThisForm(LizardGene.ID)) {
-            addToBot(new ChannelAction(new LizardGene()));
-        } else {
+        addToBot(new ApplyPowerAction(m, p, new AphrodisiacPower(m, this.magicNumber)));
+        BaseEvoCard.formEffect(SuccubusGene.ID,
+                () -> addToBot(new ApplyPowerAction(m, p, new LustPower(m, this.magicNumber))));
+        BaseEvoCard.formEffect(LizardGene.ID, () ->
             m.powers.stream()
                     .filter(pow -> pow.ID.equals(PoisonPower.POWER_ID))
                     .findAny()
-                    .ifPresent(AbstractPower::atStartOfTurn);
-        }
+                    .ifPresent(AbstractPower::atStartOfTurn));
 //        AbstractCard status = p.hand.getRandomCard(CardType.STATUS, true);
 //        if (status != null) {
 //            AbstractDungeon.actionManager.addToBottom(new ExhaustSpecificCardAction(status, p.hand));

@@ -38,10 +38,10 @@ public class CrystalStone
 	public static final String[] EXTENDED_DESCRIPTION = cardStrings.EXTENDED_DESCRIPTION;
 	public static final String IMG_PATH = "evolutionmod/images/cards/CrystalStone.png";
 	private static final int COST = 2;
-	private static final int BLOCK_AMT = 9;
+	private static final int BLOCK_AMT = 10;
 	private static final int UPGRADE_BLOCK_AMT = 3;
-	private static final int FORM_BLOCK = 3;
-	private static final int UPGRADE_FORM_BLOCK = 2;
+	private static final int FORM_BLOCK = 4;
+	private static final int UPGRADE_FORM_BLOCK = 1;
 
 	private int genesIndexes;
 	private AbstractGene firstGene; // firstIndex = genesIndex / 10
@@ -73,17 +73,9 @@ public class CrystalStone
 	public void use(AbstractPlayer p, AbstractMonster m) {
 		int block = this.block;
 
-		if (!AbstractGene.isPlayerInThisForm(this.firstGene.ID)) {
-			addToBot(new ChannelAction(this.firstGene.makeCopy()));
-		} else {
-			block += this.magicNumber;
-		}
+		BaseEvoCard.formEffect(this.firstGene.ID);
 		addToBot(new GainBlockAction(p, block));
-		if (!AbstractGene.isPlayerInThisForm(this.secondGene.ID)) {
-			addToBot(new ChannelAction(this.secondGene.makeCopy()));
-		} else {
-			addToBot(new RefundAction(this, 1));
-		}
+		BaseEvoCard.formEffect(this.secondGene.ID, () -> addToBot(new RefundAction(this, 1)));
 	}
 
 	@Override
@@ -98,7 +90,7 @@ public class CrystalStone
 	public void calculateCardDamage(AbstractMonster mo) {
 		this.calculateDamage();
 		super.calculateCardDamage(mo);
-		this.baseDamage = getBaseBlock();
+		this.baseBlock = getBaseBlock();
 		this.isBlockModified = this.block != this.baseBlock;
 	}
 
@@ -108,7 +100,7 @@ public class CrystalStone
 
 	public void calculateDamage() {
 		this.baseBlock = getBaseBlock();
-		if (AbstractGene.isPlayerInThisForm(this.firstGene.ID)) {
+		if (BaseEvoCard.isPlayerInThisForm(this.firstGene.ID)) {
 			this.baseBlock += this.magicNumber;
 		}
 	}

@@ -1,6 +1,5 @@
 package evolutionmod.cards;
 
-import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
@@ -12,7 +11,6 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.WeakPower;
-import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.BeastGene;
 import evolutionmod.orbs.ShadowGene;
 import evolutionmod.patches.AbstractCardEnum;
@@ -45,23 +43,14 @@ public class BlackCat
         AbstractDungeon.actionManager.addToBottom(new DamageAllEnemiesAction(p, this.multiDamage,
                 this.damageTypeForTurn,
                 AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
-        if (AbstractGene.isPlayerInThisForm(BeastGene.ID)) {
-            AbstractDungeon.actionManager.addToBottom(new DamageAllEnemiesAction(p, this.multiDamage,
+        BaseEvoCard.formEffect(BeastGene.ID, () -> AbstractDungeon.actionManager.addToBottom(new DamageAllEnemiesAction(p, this.multiDamage,
                     this.damageTypeForTurn,
-                    AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
-        } else {
-            AbstractDungeon.actionManager.addToBottom(new ChannelAction(new BeastGene()));
-        }
+                    AbstractGameAction.AttackEffect.SLASH_DIAGONAL)));
 
-        if (AbstractGene.isPlayerInThisForm(ShadowGene.ID)) {
-            AbstractDungeon.getMonsters().monsters.stream()
+        BaseEvoCard.formEffect(ShadowGene.ID, () -> AbstractDungeon.getMonsters().monsters.stream()
                     .filter(mo -> !mo.isDeadOrEscaped())
                     .forEach(mo -> addToBot(new ApplyPowerAction(mo, p,
-                            new WeakPower(mo, this.magicNumber, false), this.magicNumber)));
-        } else {
-            AbstractDungeon.actionManager.addToBottom(new ChannelAction(new ShadowGene()));
-        }
-
+                            new WeakPower(mo, this.magicNumber, false), this.magicNumber))));
     }
 
     @Override

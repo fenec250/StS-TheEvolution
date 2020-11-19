@@ -1,6 +1,5 @@
 package evolutionmod.cards;
 
-import basemod.helpers.TooltipInfo;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
@@ -10,13 +9,9 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.PlantGene;
 import evolutionmod.patches.AbstractCardEnum;
 import evolutionmod.powers.BramblesPower;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Brambles
         extends BaseEvoCard {
@@ -43,12 +38,9 @@ public class Brambles
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, this.block));
-        if (AbstractGene.isPlayerInThisForm(PlantGene.ID)) {
-            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(
-                    p, p, new BramblesPower(p, this.magicNumber), this.magicNumber));
-        } else {
-            AbstractDungeon.actionManager.addToBottom(new ChannelAction(new PlantGene()));
-        }
+        BaseEvoCard.formEffect(PlantGene.ID, () ->
+                AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(
+                    p, p, new BramblesPower(p, this.magicNumber), this.magicNumber)));
     }
 
     @Override

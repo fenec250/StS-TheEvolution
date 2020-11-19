@@ -1,6 +1,8 @@
 package evolutionmod.character;
 
 import basemod.abstracts.CustomPlayer;
+import basemod.animations.AbstractAnimation;
+import basemod.animations.SpineAnimation;
 import basemod.animations.SpriterAnimation;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -33,7 +35,7 @@ public class EvolutionCharacter extends CustomPlayer {
     public static final String MY_CHARACTER_SHOULDER_2 = "evolutionmod/images/char/shoulder2.png";
     public static final String MY_CHARACTER_SHOULDER_1 = "evolutionmod/images/char/shoulder.png";
     public static final String MY_CHARACTER_CORPSE = "evolutionmod/images/char/corpse.png";
-    public static final String MY_CHARACTER_ANIMATION = "evolutionmod/images/char/idle/Animation.scml";
+//    public static final String MY_CHARACTER_ANIMATION = "evolutionmod/images/char/idle/Animation.scml";
     public static final String MY_CHARACTER_PORTRAIT = "evolutionmod/images/cards/CentaurSkl.png";
     private static final String ID = "evolutionmod:EvolutionCharacter";
     private static final CharacterStrings characterStrings = CardCrawlGame.languagePack.getCharacterString(ID);
@@ -57,8 +59,12 @@ public class EvolutionCharacter extends CustomPlayer {
     };
 
     public EvolutionCharacter(String name) {
-        super(name, EvolutionEnum.EVOLUTION_CLASS, orbTextures, "evolutionmod/images/char/orb/vfx.png", null, new SpriterAnimation(MY_CHARACTER_ANIMATION));
-
+//        super(name, EvolutionEnum.EVOLUTION_CLASS, orbTextures, "evolutionmod/images/char/orb/vfx.png", null, new SpriterAnimation(MY_CHARACTER_ANIMATION));
+        super(name, EvolutionEnum.EVOLUTION_CLASS, orbTextures,
+                "evolutionmod/images/char/orb/vfx.png", null,
+                new SpineAnimation("evolutionmod/images/char/idle/Evolution.atlas",
+                        "evolutionmod/images/char/idle/Evolution.json", 0.33f));
+//        new SpineAnimation()
         this.dialogX = this.drawX + DIALOG_X_ADJUSTMENT * Settings.scale;
         this.dialogY = this.drawY + DIALOG_Y_ADJUSTMENT * Settings.scale;
 

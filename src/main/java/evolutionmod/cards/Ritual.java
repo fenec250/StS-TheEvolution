@@ -74,7 +74,11 @@ public class Ritual
                         AbstractDungeon.player.masterDeck.group.stream()
                                 .filter(c -> c.uuid.equals(this.uuid))
                                 .findAny()
-                                .ifPresent(c -> ((Ritual)c).adaptationMap.get(o.ID).amount = adapted);
+                                .ifPresent(c -> {
+                                    Ritual ritual = (Ritual) c;
+                                    ritual.adaptationMap.get(o.ID).amount = adapted;
+                                    ritual.updateDescription();
+                                });
                     }
                 });
         this.useAdaptations(p, m);

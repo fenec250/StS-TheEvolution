@@ -11,7 +11,6 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import evolutionmod.actions.DelayedAction;
-import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.HarpyGene;
 import evolutionmod.orbs.LavafolkGene;
 import evolutionmod.patches.AbstractCardEnum;
@@ -45,8 +44,8 @@ public class Phoenix
         if (this.upgraded) {
             addToBot(new ChannelAction(new LavafolkGene()));
         }
-        if (!AbstractGene.isPlayerInThisForm(HarpyGene.ID)) {
-            addToBot(new ChannelAction(new HarpyGene()));
+        boolean inForm = formEffect(HarpyGene.ID);
+        if (!inForm) {
             this.useAdaptations(p, m);
         } else {
             addToBot(new DelayedAction(() -> {
@@ -56,10 +55,10 @@ public class Phoenix
 //                        .ifPresent(o -> this.tryAdaptingWith(o, true));
                         .collect(Collectors.toList());
                 genes.forEach(o -> this.tryAdaptingWith(o, true));
-                this.useAdaptations(p, m);
-                return null;
-            }, true));
-        }
+				this.useAdaptations(p, m);
+				return null;
+			}, true));
+		}
 //        this.useAdaptations(p, m);
     }
 

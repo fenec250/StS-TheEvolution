@@ -11,14 +11,15 @@ import com.megacrit.cardcrawl.powers.WeakPower;
 
 public class ShadowGeneAction extends AbstractHalfTargetedAction {
 
-	private int damage;
+//	private int damage;
 	private int weak;
 
-	public ShadowGeneAction(AbstractPlayer player, AbstractMonster monster, int damage, int weak) {
+	public ShadowGeneAction(AbstractPlayer player, AbstractMonster monster, int weak) {
+//	public ShadowGeneAction(AbstractPlayer player, AbstractMonster monster, int damage, int weak) {
 		super(player, monster);
 		this.source = player;
 		this.target = monster;
-		this.damage = damage;
+//		this.damage = damage;
 		this.weak = weak;
 		this.duration = this.startDuration = Settings.ACTION_DUR_FAST;
 		this.actionType = ActionType.DEBUFF;
@@ -29,11 +30,11 @@ public class ShadowGeneAction extends AbstractHalfTargetedAction {
 			this.isDone = true;
 			return;
 		}
-		if (damage > 0) {
-			AbstractDungeon.actionManager.addToTop(new DamageAction(
-					this.target, new DamageInfo(this.source, this.damage, DamageInfo.DamageType.THORNS),
-					AttackEffect.NONE, true));
-		}
+//		if (damage > 0) {
+//			AbstractDungeon.actionManager.addToTop(new DamageAction(
+//					this.target, new DamageInfo(this.source, this.damage, DamageInfo.DamageType.THORNS),
+//					AttackEffect.NONE, true));
+//		}
 		AbstractDungeon.actionManager.addToTop(
 				new ApplyPowerAction(this.target, this.source, new WeakPower(this.target, this.weak, false), this.weak));
 

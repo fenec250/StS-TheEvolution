@@ -1,13 +1,11 @@
 package evolutionmod.cards;
 
-import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.LavafolkGene;
 import evolutionmod.orbs.PlantGene;
 import evolutionmod.patches.AbstractCardEnum;
@@ -36,11 +34,7 @@ public class Firebloom
         for (int i = 0; i < this.magicNumber; ++i) {
             addToBot(new ChannelAction(new LavafolkGene()));
         }
-        if (AbstractGene.isPlayerInThisForm(PlantGene.ID)) {
-            addToBot(new ChannelAction(new LavafolkGene()));
-        } else {
-            addToBot(new ChannelAction(new PlantGene()));
-        }
+        formEffect(PlantGene.ID, () -> addToBot(new ChannelAction(new PlantGene())));
     }
 
     @Override

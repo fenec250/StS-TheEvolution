@@ -9,7 +9,6 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.RagePower;
 import evolutionmod.actions.HeightenedSensesAction;
-import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.BeastGene;
 import evolutionmod.orbs.HarpyGene;
 import evolutionmod.patches.AbstractCardEnum;
@@ -21,7 +20,7 @@ public class HeightenedSenses
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-    public static final String IMG_PATH = "evolutionmod/images/cards/BeastSkl.png";
+    public static final String IMG_PATH = "evolutionmod/images/cards/HeightenedSenses.png";
     private static final int COST = 1;
     private static final int DRAW_AMT = 3;
     private static final int UPGRADED_DRAW_AMT = 1;
@@ -39,14 +38,10 @@ public class HeightenedSenses
     public void use(AbstractPlayer p, AbstractMonster m) {
         // TODO: Check to do like ScrapeFollowUpAction
         AbstractDungeon.actionManager.addToBottom(new HeightenedSensesAction(p, this.magicNumber));
-        if (!AbstractGene.isPlayerInThisForm(BeastGene.ID)) {
-            addToBot(new ChannelAction(new BeastGene()));
-        } else if (!AbstractGene.isPlayerInThisForm(HarpyGene.ID)) {
-            addToBot(new ChannelAction(new HarpyGene()));
-        } else {
+        formEffect(BeastGene.ID, () -> formEffect(HarpyGene.ID, () -> {
             int rage = this.upgraded ? FORM_RAGE_AMT + UPGRADE_FORM_RAGE_AMT : FORM_RAGE_AMT;
             addToBot(new ApplyPowerAction(p, p, new RagePower(p, rage)));
-        }
+        }));
     }
 
     @Override

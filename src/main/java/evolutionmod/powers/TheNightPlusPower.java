@@ -10,9 +10,8 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import evolutionmod.cards.BaseEvoCard;
 import evolutionmod.cards.Shadowbolt;
-import evolutionmod.cards.TheNight;
-import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.ShadowGene;
 
 public class TheNightPlusPower extends AbstractPower {
@@ -51,7 +50,7 @@ public class TheNightPlusPower extends AbstractPower {
     @Override
     public void atStartOfTurn() {
         super.atStartOfTurn();
-        if (!(AbstractGene.isPlayerInThisForm(ShadowGene.ID)
+        if (!(BaseEvoCard.isPlayerInThisForm(ShadowGene.ID)
 				|| AbstractDungeon.player.hasPower(TheNightPower.POWER_ID))) {
             addToBot(new ChannelAction(new ShadowGene()));
 			Shadowbolt shadowbolt = new Shadowbolt();

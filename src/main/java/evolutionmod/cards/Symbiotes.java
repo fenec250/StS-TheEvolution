@@ -1,6 +1,5 @@
 package evolutionmod.cards;
 
-import basemod.abstracts.CustomCard;
 import com.evacipated.cardcrawl.mod.stslib.actions.common.RefundAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
@@ -8,7 +7,6 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.InsectGene;
 import evolutionmod.orbs.PlantGene;
 import evolutionmod.patches.AbstractCardEnum;
@@ -37,13 +35,8 @@ public class Symbiotes
     public void use(AbstractPlayer p, AbstractMonster m) {
         addToBot(new ApplyPowerAction(p, p, new SymbiotesPower(p, this.magicNumber), this.magicNumber));
 
-        if (!AbstractGene.isPlayerInThisForm(InsectGene.ID)) {
-            addToBot(new ChannelAction(new InsectGene()));
-        } else if (!AbstractGene.isPlayerInThisForm(PlantGene.ID)) {
-            addToBot(new ChannelAction(new PlantGene()));
-        } else {
-            addToBot(new RefundAction(this, 1));
-        }
+        formEffect(InsectGene.ID, () -> formEffect(PlantGene.ID, () ->
+                addToBot(new RefundAction(this, 1))));
     }
 
     @Override

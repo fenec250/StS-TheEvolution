@@ -163,7 +163,9 @@ public abstract class AdaptableEvoCard extends BaseEvoCard {
 	}
 
 	protected void useAdaptations(AbstractPlayer p, AbstractMonster m) {
-    	this.adaptationMap.values().forEach(f -> f.apply(p, m));
+    	this.adaptationMap.values().stream()
+				.filter(adaptation -> adaptation.amount > 0)
+				.forEach(adaptation -> adaptation.apply(p, m));
     }
 
     public abstract static class AbstractAdaptation {

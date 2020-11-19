@@ -26,28 +26,10 @@ public abstract class AbstractGene extends CustomOrb {
 	public String colorize(String string) {
 		return colorString + string + "[]";
 	}
-//
-//	public static boolean isPlayerInThisForm() {
-//		return AbstractDungeon.player.orbs.stream()
-//				.anyMatch((orb) -> (orb.getClass() == THIS.class));
-//	}
-
-	public static boolean isPlayerInThisForm(String orbId) {
-		return AbstractDungeon.player.orbs.stream()
-				.anyMatch((orb) -> orb != null && orb.ID != null && orb.ID.equals(orbId));
-	}
 
 	@Override
 	protected void renderText(SpriteBatch sb) {
 		// disable showing an amount
-//		super.renderText(sb);
+		// super.renderText(sb);
 	}
-//	public abstract class GeneAdaptation {
-//		public GeneAdaptation(String geneId, ) {
-//
-//		}
-//
-//		public abstract void apply(AbstractPlayer p, AbstractMonster m, int times);
-//
-//	}
 }

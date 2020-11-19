@@ -1,11 +1,9 @@
 package evolutionmod.cards;
 
-import basemod.abstracts.CustomCard;
 import basemod.abstracts.CustomSavable;
 import basemod.helpers.TooltipInfo;
 import com.evacipated.cardcrawl.mod.stslib.cards.interfaces.StartupCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -15,7 +13,6 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.StrengthPower;
 import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.BeastGene;
 import evolutionmod.orbs.HarpyGene;
@@ -27,7 +24,6 @@ import evolutionmod.orbs.ShadowGene;
 import evolutionmod.orbs.SuccubusGene;
 import evolutionmod.patches.AbstractCardEnum;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LoyalWarrior
@@ -41,7 +37,7 @@ public class LoyalWarrior
 	public static final String IMG_PATH = "evolutionmod/images/cards/strike.png";
 	private static final int COST = 2;
 	private static final int DAMAGE_AMT = 12;
-	private static final int UPGRADE_DAMAGE_AMT = 3;
+	private static final int UPGRADE_DAMAGE_AMT = 4;
 
 	private int geneIndex;
 	private AbstractGene gene;
@@ -72,6 +68,7 @@ public class LoyalWarrior
 	public boolean atBattleStartPreDraw() {
 		if (this.upgraded) {
 			addToBot(new ChannelAction(this.gene.makeCopy()));
+			this.gene.onStartOfTurn();
 		}
 		return false;
 	}
@@ -79,10 +76,11 @@ public class LoyalWarrior
 	@Override
 	public void use(AbstractPlayer p, AbstractMonster m) {
 		int damage = this.damage;
-		if (!this.upgraded && AbstractGene.isPlayerInThisForm(this.gene.ID)) {
-			damage += this.magicNumber;
-		} else if (!this.upgraded) {
-			addToBot(new ChannelAction(this.gene.makeCopy()));
+		if (!this.upgraded) {
+			boolean inForm = BaseEvoCard.formEffect(this.gene.ID);
+			if (inForm) {
+				damage += this.magicNumber;
+			}
 		}
 		addToBot(new DamageAction(
 				m, new DamageInfo(p, damage, this.damageTypeForTurn),

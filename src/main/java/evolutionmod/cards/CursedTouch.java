@@ -11,13 +11,9 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.powers.WeakPower;
-import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.ShadowGene;
 import evolutionmod.patches.AbstractCardEnum;
-
-import java.util.stream.Collectors;
 
 public class CursedTouch
         extends AdaptableEvoCard {
@@ -52,14 +48,11 @@ public class CursedTouch
         AbstractDungeon.actionManager.addToBottom(
                 new ApplyPowerAction(m, p, new WeakPower(m, this.magicNumber, false), this.magicNumber));
 //        super.use(p, m);
-        if (!AbstractGene.isPlayerInThisForm(ShadowGene.ID)) {
-            addToBot(new ChannelAction(new ShadowGene()));
-        } else {
-            p.orbs.stream()
+        BaseEvoCard.formEffect(ShadowGene.ID, () ->
+                p.orbs.stream()
                     .filter(o -> this.canAdaptWith(o) > 0)
                     .findAny()
-                    .ifPresent(o -> this.tryAdaptingWith(o, true));
-        }
+                    .ifPresent(o -> this.tryAdaptingWith(o, true)));
         this.useAdaptations(p, m);
     }
 

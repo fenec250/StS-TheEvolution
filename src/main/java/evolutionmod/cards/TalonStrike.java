@@ -12,7 +12,6 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.HarpyGene;
 import evolutionmod.patches.AbstractCardEnum;
 
@@ -44,12 +43,10 @@ public class TalonStrike
                 m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
                 AbstractGameAction.AttackEffect.BLUNT_HEAVY));
 
-        if (AbstractGene.isPlayerInThisForm(HarpyGene.ID)) {
+        formEffect(HarpyGene.ID, () -> {
             addToBot(new DrawCardAction(this.magicNumber));
             addToBot(new DiscardAction(p, p, this.magicNumber, false));
-        } else {
-            AbstractDungeon.actionManager.addToBottom(new ChannelAction(new HarpyGene()));
-        }
+        });
     }
 
     @Override

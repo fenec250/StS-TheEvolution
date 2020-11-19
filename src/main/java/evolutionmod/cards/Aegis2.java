@@ -1,18 +1,14 @@
 package evolutionmod.cards;
 
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.IntangiblePlayerPower;
 import com.megacrit.cardcrawl.powers.watcher.NirvanaPower;
-import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.LymeanGene;
 import evolutionmod.patches.AbstractCardEnum;
 
@@ -41,11 +37,7 @@ public class Aegis2
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         addToBot(new ApplyPowerAction(p, p, new NirvanaPower(p, this.magicNumber), this.magicNumber));
-        if (!AbstractGene.isPlayerInThisForm(LymeanGene.ID)) {
-            addToBot(new ChannelAction(new LymeanGene()));
-        } else {
-            addToBot(new GainBlockAction(p, this.block));
-        }
+        BaseEvoCard.formEffect(LymeanGene.ID, () -> addToBot(new GainBlockAction(p, this.block)));
     }
 
 //    @Override

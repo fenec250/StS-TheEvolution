@@ -17,11 +17,11 @@
   },
   "evolutionmod:LavafolkGene": {
     "NAME": "Lavafolk",
-    "DESCRIPTION": ["At the end of your turn deal ", " damage to a random enemy", " twice", "."]
+    "DESCRIPTION": ["At the end of your turn deal ", " damage to a random enemy", " times", "."]
   },
   "evolutionmod:SuccubusGene": {
     "NAME": "Succubus",
-    "DESCRIPTION": ["At the start of your turn deal ", " damage and apply ", " vulnerable to a random enemy"]
+    "DESCRIPTION": ["At the start of your turn apply ", " Lust and ", " vulnerable to a random enemy"]
   },
   "evolutionmod:LymeanGene": {
     "NAME": "Lymean",
@@ -38,11 +38,13 @@
   },
   "evolutionmod:LizardGene": {
     "NAME": "Lizard",
-    "DESCRIPTION": ["At the start of your turn deal ", " damage and apply ", " Poison to a random enemy"]
+    "DESCRIPTION": ["At the start of your turn apply ", " Poison to a random enemy"]
+//    "DESCRIPTION": ["At the start of your turn deal ", " damage and apply ", " Poison to a random enemy"]
   },
   "evolutionmod:ShadowGene": {
     "NAME": "Shadow",
-    "DESCRIPTION": ["At the start of your turn deal ", " damage and apply ", " Weak to a random enemy."]
+    "DESCRIPTION": ["At the start of your turn apply ", " Weak to a random enemy."]
+//    "DESCRIPTION": ["At the start of your turn deal ", " damage and apply ", " Weak to a random enemy."]
   }
 //  "evolutionmod:DancePower": {
 //    "NAME": "Dance",

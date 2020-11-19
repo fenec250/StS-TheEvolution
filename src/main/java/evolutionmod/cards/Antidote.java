@@ -1,6 +1,5 @@
 package evolutionmod.cards;
 
-import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -10,8 +9,6 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import evolutionmod.actions.AntidoteAction;
-import evolutionmod.actions.FateAction;
-import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.LizardGene;
 import evolutionmod.orbs.LymeanGene;
 import evolutionmod.patches.AbstractCardEnum;
@@ -42,11 +39,7 @@ public class Antidote
     public void use(AbstractPlayer p, AbstractMonster m) {
         AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, this.block));
         addToBot(new AntidoteAction(this.magicNumber));
-        if (!AbstractGene.isPlayerInThisForm(LymeanGene.ID)) {
-            addToBot(new ChannelAction(new LymeanGene()));
-        } else {
-            addToBot(new ChannelAction(new LizardGene()));
-        }
+        BaseEvoCard.formEffect(LymeanGene.ID, () -> addToBot(new ChannelAction(new LizardGene())));
     }
 
     @Override

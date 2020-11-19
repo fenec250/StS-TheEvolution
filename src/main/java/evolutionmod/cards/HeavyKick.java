@@ -13,7 +13,6 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 import com.megacrit.cardcrawl.powers.watcher.VigorPower;
-import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.CentaurGene;
 import evolutionmod.patches.AbstractCardEnum;
 
@@ -43,9 +42,7 @@ public class HeavyKick
         AbstractDungeon.actionManager.addToBottom(new DamageAction(
                 m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
                 AbstractGameAction.AttackEffect.BLUNT_HEAVY));
-        if (!AbstractGene.isPlayerInThisForm(CentaurGene.ID)) {
-        	addToBot(new ChannelAction(new CentaurGene()));
-		}
+        formEffect(CentaurGene.ID);
     }
 
     @Override
@@ -64,7 +61,7 @@ public class HeavyKick
 
     private void calculateBaseDamage() {
         this.damage = this.baseDamage = DAMAGE_AMT;
-        if (AbstractGene.isPlayerInThisForm(CentaurGene.ID)) {
+        if (BaseEvoCard.isPlayerInThisForm(CentaurGene.ID)) {
             AbstractPower strength = AbstractDungeon.player.getPower(StrengthPower.POWER_ID);
             AbstractPower vigor = AbstractDungeon.player.getPower(VigorPower.POWER_ID);
 

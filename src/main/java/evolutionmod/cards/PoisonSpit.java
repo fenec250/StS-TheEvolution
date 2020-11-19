@@ -1,8 +1,6 @@
 package evolutionmod.cards;
 
-import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -10,13 +8,8 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.ConstrictedPower;
-import com.megacrit.cardcrawl.powers.ThornsPower;
-import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.LizardGene;
-import evolutionmod.orbs.PlantGene;
 import evolutionmod.patches.AbstractCardEnum;
-import evolutionmod.powers.BramblesPower;
 import evolutionmod.powers.PoisonCoatedPower;
 
 public class PoisonSpit
@@ -41,15 +34,16 @@ public class PoisonSpit
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         int poison = this.magicNumber;
-        if (!upgraded && AbstractGene.isPlayerInThisForm(LizardGene.ID)) {
-            poison += UPGRADE_ENVENOM_AMT;
+        if (!upgraded) {
+            boolean inForm = formEffect(LizardGene.ID);
+            if (inForm) {
+                poison += UPGRADE_ENVENOM_AMT;
+            }
+        } else {
+            addToBot(new ChannelAction(new LizardGene()));
         }
-        AbstractDungeon.actionManager.addToBottom(
-                new ApplyPowerAction(p, p, new PoisonCoatedPower(p, poison)));
+        addToBot(new ApplyPowerAction(p, p, new PoisonCoatedPower(p, poison)));
 
-        if (upgraded || !AbstractGene.isPlayerInThisForm(LizardGene.ID)) {
-            AbstractDungeon.actionManager.addToBottom(new ChannelAction(new LizardGene()));
-        }
     }
 
     @Override

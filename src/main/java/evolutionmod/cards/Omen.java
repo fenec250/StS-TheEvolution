@@ -2,13 +2,11 @@ package evolutionmod.cards;
 
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.green.Choke;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import evolutionmod.actions.OmenAction;
-import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.LymeanGene;
 import evolutionmod.orbs.ShadowGene;
 import evolutionmod.patches.AbstractCardEnum;
@@ -36,16 +34,17 @@ public class Omen
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         int fate = this.magicNumber;
-        if (!AbstractGene.isPlayerInThisForm(LymeanGene.ID)) {
-            addToBot(new ChannelAction(new LymeanGene()));
-        } else {
+        boolean inForm = formEffect(LymeanGene.ID);
+        if (inForm) {
             fate += LYMEAN_FATE_AMT;
         }
-        if (this.upgraded || !AbstractGene.isPlayerInThisForm(ShadowGene.ID)) {
+        if (this.upgraded) {
             addToBot(new ChannelAction(new ShadowGene()));
+        } else {
+            formEffect(ShadowGene.ID);
         }
 
-        boolean applyWeak = this.upgraded || AbstractGene.isPlayerInThisForm(ShadowGene.ID);
+        boolean applyWeak = this.upgraded || BaseEvoCard.isPlayerInThisForm(ShadowGene.ID);
         addToBot(new OmenAction(fate, m, applyWeak));
     }
 

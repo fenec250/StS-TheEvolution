@@ -8,6 +8,7 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.VulnerablePower;
+import evolutionmod.powers.LustPower;
 
 public class SuccubusGeneAction extends AbstractHalfTargetedAction {
 
@@ -30,9 +31,11 @@ public class SuccubusGeneAction extends AbstractHalfTargetedAction {
 			return;
 		}
 		if (damage > 0) {
-			AbstractDungeon.actionManager.addToTop(new DamageAction(
-					this.target, new DamageInfo(this.source, this.damage, DamageInfo.DamageType.THORNS),
-					AttackEffect.FIRE, true));
+			AbstractDungeon.actionManager.addToTop(new ApplyPowerAction(
+					this.target, this.source, new LustPower(this.target, this.damage)));
+//			AbstractDungeon.actionManager.addToTop(new DamageAction(
+//					this.target, new DamageInfo(this.source, this.damage, DamageInfo.DamageType.THORNS),
+//					AttackEffect.FIRE, true));
 		}
 		AbstractDungeon.actionManager.addToTop(
 				new ApplyPowerAction(this.target, this.source, new VulnerablePower(this.target, this.vulnerable, false), this.vulnerable));

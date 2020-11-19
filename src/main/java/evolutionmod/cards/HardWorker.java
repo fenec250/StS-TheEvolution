@@ -9,7 +9,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.StrengthPower;
-import evolutionmod.orbs.AbstractGene;
+import evolutionmod.orbs.BeastGene;
 import evolutionmod.orbs.CentaurGene;
 import evolutionmod.orbs.InsectGene;
 import evolutionmod.patches.AbstractCardEnum;
@@ -38,14 +38,16 @@ public class HardWorker
     public void use(AbstractPlayer p, AbstractMonster m) {
         AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
                 new StrengthPower(p, this.magicNumber)));
-        if (!AbstractGene.isPlayerInThisForm(CentaurGene.ID)) {
-            addToBot(new ChannelAction(new CentaurGene()));
-        } else if (this.upgraded && !AbstractGene.isPlayerInThisForm(InsectGene.ID)){
-        	addToBot(new ChannelAction(new InsectGene()));
-        } else {
-        	AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
-					new StrengthPower(p, FORMS_STRENGTH_AMT)));
-        }
+        formEffect(CentaurGene.ID, () -> {
+            if (!this.upgraded) {
+                AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
+                        new StrengthPower(p, FORMS_STRENGTH_AMT)));
+            } else {
+                formEffect(BeastGene.ID, () ->
+                        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
+                                new StrengthPower(p, FORMS_STRENGTH_AMT))));
+            }
+        });
     }
 
     @Override

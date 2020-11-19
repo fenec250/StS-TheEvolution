@@ -1,6 +1,5 @@
 package evolutionmod.cards;
 
-import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
@@ -12,7 +11,6 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.PoisonPower;
-import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.LizardGene;
 import evolutionmod.patches.AbstractCardEnum;
 
@@ -43,12 +41,8 @@ public class PoisonFangs
         AbstractDungeon.actionManager.addToBottom(new DamageAction(
                 m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
                 AbstractGameAction.AttackEffect.BLUNT_LIGHT));
-        if (AbstractGene.isPlayerInThisForm(LizardGene.ID)) {
-            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(
-                    m, p, new PoisonPower(m, p, this.magicNumber), this.magicNumber));
-        } else {
-            AbstractDungeon.actionManager.addToBottom(new ChannelAction(new LizardGene()));
-        }
+        formEffect(LizardGene.ID, () -> addToBot(new ApplyPowerAction(
+                    m, p, new PoisonPower(m, p, this.magicNumber), this.magicNumber)));
     }
 
     @Override

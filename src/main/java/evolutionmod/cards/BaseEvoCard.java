@@ -2,10 +2,12 @@ package evolutionmod.cards;
 
 import basemod.abstracts.CustomCard;
 import basemod.helpers.TooltipInfo;
+import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
-import com.megacrit.cardcrawl.helpers.CardLibrary;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.orbs.EmptyOrbSlot;
+import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.BeastGene;
 import evolutionmod.orbs.CentaurGene;
 import evolutionmod.orbs.HarpyGene;
@@ -17,10 +19,12 @@ import evolutionmod.orbs.MerfolkGene;
 import evolutionmod.orbs.PlantGene;
 import evolutionmod.orbs.ShadowGene;
 import evolutionmod.orbs.SuccubusGene;
+import evolutionmod.powers.GodFormPower;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.IntSupplier;
 
 
 public abstract class BaseEvoCard extends CustomCard {
@@ -36,6 +40,7 @@ public abstract class BaseEvoCard extends CustomCard {
 //        this.coloredRawDescription = ""; This gets initialized by initializeDescription() during the superclass constructor
     }
 
+
 //	@Override
 //	public AbstractCard makeCopy() {
 //		BaseEvoCard card = (BaseEvoCard) super.makeCopy();
@@ -43,7 +48,6 @@ public abstract class BaseEvoCard extends CustomCard {
 //				Collectors.toMap(Map.Entry::getKey, (e) -> e.getValue().makeCopy()));
 //		return card;
 //	}
-
 	@Override
 	public void initializeDescription() {
     	if (coloredRawDescription == null || !coloredRawDescription.equals(this.rawDescription)) {
@@ -120,4 +124,58 @@ public abstract class BaseEvoCard extends CustomCard {
 	    }
 	    return result;
     }
+
+	public static boolean isPlayerInThisForm(String orbId) {
+    	return GodFormPower.canBypassRequirement()
+				|| AbstractDungeon.player.orbs.stream()
+					.anyMatch((orb) -> orb != null && orb.ID != null && orb.ID.equals(orbId));
+	}
+
+	public static void formEffect(String geneId, Runnable action) {
+		boolean hasGene = AbstractDungeon.player.orbs.stream()
+				.anyMatch((orb) -> orb != null && orb.ID != null && orb.ID.equals(geneId));
+		if (hasGene) {
+			action.run();
+		} else {
+			AbstractGene gene = getGene(geneId);
+			if (gene != null) {
+				AbstractDungeon.actionManager.addToBottom(new ChannelAction(gene));
+			}
+			boolean bypass = GodFormPower.bypassFormRequirementOnce();
+			if (bypass) {
+				action.run();
+			}
+		}
+    }
+
+	public static boolean formEffect(String geneId) {
+		boolean hasGene = AbstractDungeon.player.orbs.stream()
+				.anyMatch((orb) -> orb != null && orb.ID != null && orb.ID.equals(geneId));
+		if (hasGene) {
+			return true;
+		} else {
+			AbstractGene gene = getGene(geneId);
+			if (gene != null) {
+				AbstractDungeon.actionManager.addToBottom(new ChannelAction(gene));
+			}
+			return GodFormPower.bypassFormRequirementOnce();
+		}
+	}
+
+    public static AbstractGene getGene(String geneId) {
+    	switch (geneId){
+			case LavafolkGene.ID: return new LavafolkGene();
+			case ShadowGene.ID: return new ShadowGene();
+			case InsectGene.ID: return new InsectGene();
+			case HarpyGene.ID: return new HarpyGene();
+			case MerfolkGene.ID: return new MerfolkGene();
+			case CentaurGene.ID: return new CentaurGene();
+			case BeastGene.ID: return new BeastGene();
+			case PlantGene.ID: return new PlantGene();
+			case LymeanGene.ID: return new LymeanGene();
+			case SuccubusGene.ID: return new SuccubusGene();
+			case LizardGene.ID: return new LizardGene();
+		}
+    	return null;
+	}
 }

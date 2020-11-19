@@ -1,7 +1,8 @@
 {
   "evolutionmod:GodFormPower": {
     "NAME": "God form",
-    "DESCRIPTIONS": ["At the start of your turn trigger all your genes ", "once.", " times."]
+    "DESCRIPTIONS": ["The first ", " genes you channel each turn trigger immediately."]
+//    "DESCRIPTIONS": ["At the start of your turn trigger all your genes ", "once.", " times."]
   },
   "evolutionmod:PotencyPower": {
     "NAME": "Potency",
@@ -20,6 +21,11 @@
   "evolutionmod:MarkPower": {
     "NAME": "Mark",
     "DESCRIPTIONS": ["Genes and adaptations that target random enemies will target this enemy first"]
+  },
+  "evolutionmod:MasteryPower": {
+    "NAME": "Undefined Mastery",
+    "DESCRIPTIONS": [" Mastery",
+      "When you channel a ", " gene, trigger its effect.", " gene, trigger its effect ", " times."]
   },
   "evolutionmod:DrownPower": {
     "NAME": "Drowning",
@@ -45,9 +51,13 @@
     "NAME": "Brood Power",
     "DESCRIPTIONS": ["Your Drones deal ", " more damage and apply ", " more Block."]
   },
-  "evolutionmod:SubmissionPower": {
-    "NAME": "Submission",
-    "DESCRIPTIONS": ["Takes ", " more damage from attacks. Reduces by 1 for each hit. Removed at the end of the turn."]
+  "evolutionmod:LustPower": {
+    "NAME": "Lust",
+    "DESCRIPTIONS": ["Reduce damage dealt by ", ". Removed after attacking."]
+  },
+  "evolutionmod:AphrodisiacPower": {
+    "NAME": "Aphrodisiac",
+    "DESCRIPTIONS": ["Gain 2 Lust per turn. Reduce by 1 each turn."]
   },
   "evolutionmod:EruptionPower": {
     "NAME": "Eruption",

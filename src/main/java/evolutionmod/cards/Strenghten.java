@@ -5,21 +5,15 @@ import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.watcher.VigorPower;
-import evolutionmod.actions.FateAction;
-import evolutionmod.actions.StrenghtenAction;
-import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.CentaurGene;
 import evolutionmod.orbs.LymeanGene;
 import evolutionmod.patches.AbstractCardEnum;
-import evolutionmod.powers.StrenghtenPower;
 
 public class Strenghten
-        extends BaseEvoCard {
+        extends AdaptableEvoCard {
     public static final String ID = "evolutionmod:Strenghten";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -42,16 +36,20 @@ public class Strenghten
         addToBot(new ApplyPowerAction(p, p,
                 new VigorPower(p, this.magicNumber)));
 
-        if (!AbstractGene.isPlayerInThisForm(CentaurGene.ID)) {
-            addToBot(new ChannelAction(new CentaurGene()));
-        } else {
-            if (!AbstractGene.isPlayerInThisForm(LymeanGene.ID)) {
-                addToBot(new ChannelAction(new LymeanGene()));
-            } else {
-                addToBot(new StrenghtenAction(p));
+        formEffect(CentaurGene.ID, () -> formEffect(LymeanGene.ID, () -> {
+//                addToBot(new StrenghtenAction(p));
 //                this.exhaust = true;
-            }
-        }
+                p.orbs.stream()
+                        .filter(o -> this.canAdaptWith(o) > 0)
+                        .findAny()
+                        .ifPresent(o -> this.tryAdaptingWith(o, true));
+            }));
+        this.useAdaptations(p, m);
+    }
+
+    @Override
+    public int canAdaptWith(AbstractAdaptation adaptation) {
+        return adaptation.getGeneId().equals(CentaurGene.ID) ? 1 : 0;
     }
 
     @Override

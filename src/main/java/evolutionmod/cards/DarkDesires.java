@@ -1,6 +1,5 @@
 package evolutionmod.cards;
 
-import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -9,7 +8,6 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.SadisticPower;
-import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.ShadowGene;
 import evolutionmod.orbs.SuccubusGene;
 import evolutionmod.patches.AbstractCardEnum;
@@ -37,11 +35,7 @@ public class DarkDesires
     public void use(AbstractPlayer p, AbstractMonster m) {
         addToBot(new ApplyPowerAction(p, p, new SadisticPower(p, this.magicNumber)));
 
-        if (!AbstractGene.isPlayerInThisForm(SuccubusGene.ID)) {
-            addToBot(new ChannelAction(new SuccubusGene()));
-        } else {
-            addToBot(new ChannelAction(new ShadowGene()));
-        }
+        BaseEvoCard.formEffect(SuccubusGene.ID, () -> addToBot(new ChannelAction(new ShadowGene())));
     }
 
     @Override

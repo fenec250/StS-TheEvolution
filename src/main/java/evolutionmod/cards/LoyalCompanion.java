@@ -1,10 +1,8 @@
 package evolutionmod.cards;
 
-import basemod.abstracts.CustomCard;
 import basemod.abstracts.CustomSavable;
 import basemod.helpers.TooltipInfo;
 import com.evacipated.cardcrawl.mod.stslib.cards.interfaces.StartupCard;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -13,7 +11,6 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.DexterityPower;
 import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.HarpyGene;
 import evolutionmod.orbs.InsectGene;
@@ -25,7 +22,6 @@ import evolutionmod.orbs.PlantGene;
 import evolutionmod.orbs.SuccubusGene;
 import evolutionmod.patches.AbstractCardEnum;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LoyalCompanion
@@ -39,7 +35,7 @@ public class LoyalCompanion
 	public static final String IMG_PATH = "evolutionmod/images/cards/CrystalStone.png";
 	private static final int COST = 2;
 	private static final int BLOCK_AMT = 10;
-	private static final int UPGRADE_BLOCK_AMT = 3;
+	private static final int UPGRADE_BLOCK_AMT = 4;
 
 	private int geneIndex;
 	private AbstractGene gene;
@@ -70,6 +66,7 @@ public class LoyalCompanion
 	public boolean atBattleStartPreDraw() {
 		if (this.upgraded) {
 			addToBot(new ChannelAction(this.gene.makeCopy()));
+			this.gene.onStartOfTurn();
 		}
 		return false;
 	}
@@ -78,10 +75,11 @@ public class LoyalCompanion
 	public void use(AbstractPlayer p, AbstractMonster m) {
 		int block = this.block;
 
-		if (!this.upgraded && AbstractGene.isPlayerInThisForm(this.gene.ID)) {
-			block += this.magicNumber;
-		} else if (!this.upgraded) {
-			addToBot(new ChannelAction(this.gene.makeCopy()));
+		if (!this.upgraded) {
+			boolean inForm = formEffect(this.gene.ID);
+			if (inForm) {
+				block += this.magicNumber;
+			}
 		}
 		addToBot(new GainBlockAction(p, block));
 	}

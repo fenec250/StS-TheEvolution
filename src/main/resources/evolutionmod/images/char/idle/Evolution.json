@@ -1,0 +1,34 @@
+{
+  "skeleton": {
+    "width": 195.6,
+    "height": 302.1,
+    "fps": 24,
+    "hash": " ",
+    "name": "Armature"
+  },
+  "bones": [
+    {
+      "name": "root"
+    }
+  ],
+  "slots": [
+    {
+      "name": "character",
+      "bone": "root",
+      "attachment": "character"
+    }
+  ],
+  "skins": {
+    "default": {
+      "character": {
+        "character": {
+          "name": "character",
+          "width": 196,
+          "height": 302,
+          "scaleX": 0.2949,
+          "scaleY": 0.2949
+        }
+      }
+    }
+  }
+}

@@ -9,7 +9,6 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.LymeanGene;
 import evolutionmod.patches.AbstractCardEnum;
 
@@ -34,13 +33,8 @@ public class DrainMana
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        if (AbstractGene.isPlayerInThisForm(LymeanGene.ID)) {
-            addToBot(new ScryAction(this.magicNumber));
-        }
+        BaseEvoCard.formEffect(LymeanGene.ID, () -> addToBot(new ScryAction(this.magicNumber)));
         AbstractDungeon.actionManager.addToBottom(new DrawCardAction(p, this.magicNumber));
-        if (!AbstractGene.isPlayerInThisForm(LymeanGene.ID)) {
-            addToBot(new ChannelAction(new LymeanGene()));
-        }
     }
 
     @Override

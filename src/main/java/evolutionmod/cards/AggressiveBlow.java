@@ -1,6 +1,5 @@
 package evolutionmod.cards;
 
-import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
@@ -11,7 +10,6 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.BeastGene;
 import evolutionmod.orbs.CentaurGene;
 import evolutionmod.orbs.HarpyGene;
@@ -41,9 +39,9 @@ public class AggressiveBlow
         AbstractDungeon.actionManager.addToBottom(new DamageAction(
                 m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
                 AbstractGameAction.AttackEffect.SLASH_VERTICAL));
-        if (AbstractGene.isPlayerInThisForm(BeastGene.ID)
-                || AbstractGene.isPlayerInThisForm(HarpyGene.ID)
-                || AbstractGene.isPlayerInThisForm(CentaurGene.ID)) {
+        if (BaseEvoCard.isPlayerInThisForm(BeastGene.ID)
+                || BaseEvoCard.isPlayerInThisForm(HarpyGene.ID)
+                || BaseEvoCard.isPlayerInThisForm(CentaurGene.ID)) {
             addToBot(new GainEnergyAction(1));
         }
     }

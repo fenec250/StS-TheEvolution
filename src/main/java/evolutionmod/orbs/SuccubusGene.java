@@ -20,7 +20,7 @@ public class SuccubusGene extends AbstractGene {
 	public static final String COLOR = "[#F04040]";
 	public static final String[] DESCRIPTION = orbStrings.DESCRIPTION;
 	public static final String IMG_PATH = "evolutionmod/images/orbs/SuccubusGene.png";
-	public static final int DAMAGE = 2;
+	public static final int LUST = 1;
 	public static final int VULNERABLE = 1;
 
 	public SuccubusGene() {
@@ -70,11 +70,11 @@ public class SuccubusGene extends AbstractGene {
 	}
 
 	public static String getDescription() {
-		return DESCRIPTION[0] + damage() + DESCRIPTION[1] + vulnerable() + DESCRIPTION[1];
+		return DESCRIPTION[0] + damage() + DESCRIPTION[1] + vulnerable() + DESCRIPTION[2];
 	}
 
 	private static int damage() {
-		int damage = DAMAGE;
+		int damage = LUST;
 		if (CardCrawlGame.isInARun()) {
 			if (AbstractDungeon.player.hasPower(PotencyPower.POWER_ID)) {
 				damage += AbstractDungeon.player.getPower(PotencyPower.POWER_ID).amount;

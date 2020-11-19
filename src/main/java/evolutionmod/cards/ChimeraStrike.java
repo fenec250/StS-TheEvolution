@@ -19,7 +19,7 @@ public class ChimeraStrike
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = "evolutionmod/images/cards/strike.png";
     private static final int COST = 1;
-    private static final int DAMAGE_AMT = 9;
+    private static final int DAMAGE_AMT = 7;
     private static final int UPGRADE_DAMAGE_AMT = 3;
 
     public ChimeraStrike() {
