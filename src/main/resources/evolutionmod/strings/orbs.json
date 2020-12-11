@@ -1,11 +1,12 @@
 {
   "evolutionmod:CentaurGene": {
     "NAME": "Centaur",
-    "DESCRIPTION": ["At the start of your turn gain ", " Vigor"]
+    "DESCRIPTION": ["At the start of your turn gain ", " #yVigor"]
   },
   "evolutionmod:PlantGene": {
     "NAME": "Plant",
-    "DESCRIPTION": ["At the start of your turn gain ", " Block and ", " Brambles."]
+    "DESCRIPTION": ["At the start of your turn gain ", " Block and ", " #yGrowth."]
+//    "DESCRIPTION": ["At the start of your turn gain ", " Block and ", " #yBrambles."]
   },
   "evolutionmod:MerfolkGene": {
     "NAME": "Merfolk",
@@ -21,29 +22,29 @@
   },
   "evolutionmod:SuccubusGene": {
     "NAME": "Succubus",
-    "DESCRIPTION": ["At the start of your turn apply ", " Lust and ", " vulnerable to a random enemy"]
+    "DESCRIPTION": ["At the start of your turn apply ", " #yLust and ", " #yVulnerable to a random enemy"]
   },
   "evolutionmod:LymeanGene": {
     "NAME": "Lymean",
 //    "DESCRIPTION": ["At the end of your turn gain ", " Block and heal a random enemy for ", " HP."]
-    "DESCRIPTION": ["At the start of your turn Scry "]
+    "DESCRIPTION": ["At the start of your turn #yScry "]
   },
   "evolutionmod:InsectGene": {
     "NAME": "Insect",
-    "DESCRIPTION": ["At the start of your turn add a Drone to your hand."]
+    "DESCRIPTION": ["At the start of your turn add a #yDrone to your hand."]
   },
   "evolutionmod:BeastGene": {
     "NAME": "Beast",
-    "DESCRIPTION": ["At the start of your turn gain ", " Block and ", " Rage."]
+    "DESCRIPTION": ["At the start of your turn gain ", " Block and ", " #yRage."]
   },
   "evolutionmod:LizardGene": {
     "NAME": "Lizard",
-    "DESCRIPTION": ["At the start of your turn apply ", " Poison to a random enemy"]
+    "DESCRIPTION": ["At the start of your turn apply ", " #yPoison to a random enemy"]
 //    "DESCRIPTION": ["At the start of your turn deal ", " damage and apply ", " Poison to a random enemy"]
   },
   "evolutionmod:ShadowGene": {
     "NAME": "Shadow",
-    "DESCRIPTION": ["At the start of your turn apply ", " Weak to a random enemy."]
+    "DESCRIPTION": ["At the start of your turn apply ", " #yWeak to a random enemy."]
 //    "DESCRIPTION": ["At the start of your turn deal ", " damage and apply ", " Weak to a random enemy."]
   }
 //  "evolutionmod:DancePower": {

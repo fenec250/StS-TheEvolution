@@ -40,10 +40,10 @@ public class CrystalShard
 	public static final String[] EXTENDED_DESCRIPTION = cardStrings.EXTENDED_DESCRIPTION;
 	public static final String IMG_PATH = "evolutionmod/images/cards/strike.png";
 	private static final int COST = 1;
-	private static final int DAMAGE_AMT = 8;
+	private static final int DAMAGE_AMT = 9;
 	private static final int UPGRADE_DAMAGE_AMT = 2;
 	private static final int FORM_DAMAGE = 4;
-	private static final int UPGRADE_FORM_DAMAGE = 2;
+	private static final int UPGRADE_FORM_DAMAGE = 1;
 
 	private int genesIndexes;
 	private AbstractGene firstGene; // firstIndex = genesIndex / 10

@@ -2,14 +2,21 @@ package evolutionmod.powers;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
+import com.megacrit.cardcrawl.actions.defect.ChannelAction;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
+import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
+import evolutionmod.orbs.LavafolkGene;
+
+import java.util.stream.Collectors;
 
 public class EruptionPower extends AbstractPower {
     public static final String POWER_ID = "evolutionmod:EruptionPower";
@@ -30,7 +37,9 @@ public class EruptionPower extends AbstractPower {
 
     @Override
     public void updateDescription() {
-        description = DESCRIPTIONS[0];
+        description = (this.amount == 1
+                ? DESCRIPTIONS[0]
+                : DESCRIPTIONS[1] + this.amount + DESCRIPTIONS[2]);
     }
 
     public void stackPower(int stackAmount) {
@@ -44,8 +53,22 @@ public class EruptionPower extends AbstractPower {
     public void atStartOfTurn() {
         if (AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT && !AbstractDungeon.getMonsters().areMonstersBasicallyDead()) {
             this.flashWithoutSound();
-            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(
-                    this.owner, this.owner, new EruptionPower(this.owner, -1), -1));
+            for (int i = 0; i < this.amount; ++i) {
+                addToBot(new ChannelAction(new LavafolkGene()));
+            }
+            addToBot(new AbstractGameAction() {
+                @Override
+                public void update() {
+                    if (owner.isPlayer) {
+                        ((AbstractPlayer) owner).orbs.stream()
+                                .filter(o -> LavafolkGene.ID.equals(o.ID))
+                                .forEach(AbstractOrb::onEvoke);
+                    }
+                    this.isDone = true;
+                }
+            });
+//            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(
+//                    this.owner, this.owner, new EruptionPower(this.owner, -1), -1));
         }
     }
 }

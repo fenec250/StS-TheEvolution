@@ -43,10 +43,9 @@ public class CentaurGene extends AbstractGene {
 	}
 
 	public static void apply(AbstractPlayer p, AbstractMonster m, int times) {
-		int chargeToApply = vigor() * times;
-		if (chargeToApply > 0) {
-//			AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new ChargePower(p, chargeToApply)));
-			AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new VigorPower(p, chargeToApply)));
+		int vigorToApply = vigor() * times;
+		if (vigorToApply > 0) {
+			AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new VigorPower(p, vigorToApply)));
 		}
 	}
 

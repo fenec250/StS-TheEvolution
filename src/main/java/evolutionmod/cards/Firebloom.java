@@ -34,7 +34,7 @@ public class Firebloom
         for (int i = 0; i < this.magicNumber; ++i) {
             addToBot(new ChannelAction(new LavafolkGene()));
         }
-        formEffect(PlantGene.ID, () -> addToBot(new ChannelAction(new PlantGene())));
+        formEffect(PlantGene.ID, () -> addToBot(new ChannelAction(new LavafolkGene())));
     }
 
     @Override

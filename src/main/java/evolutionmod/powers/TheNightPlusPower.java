@@ -50,15 +50,13 @@ public class TheNightPlusPower extends AbstractPower {
     @Override
     public void atStartOfTurn() {
         super.atStartOfTurn();
+        Shadowbolt shadowbolt = new Shadowbolt();
+        shadowbolt.upgrade();
         if (!(BaseEvoCard.isPlayerInThisForm(ShadowGene.ID)
 				|| AbstractDungeon.player.hasPower(TheNightPower.POWER_ID))) {
             addToBot(new ChannelAction(new ShadowGene()));
-			Shadowbolt shadowbolt = new Shadowbolt();
-			shadowbolt.upgrade();
 			addToBot(new MakeTempCardInHandAction(shadowbolt, this.amount - 1));
 		} else {
-            Shadowbolt shadowbolt = new Shadowbolt();
-            shadowbolt.upgrade();
             addToBot(new MakeTempCardInHandAction(shadowbolt, this.amount));
         }
     }

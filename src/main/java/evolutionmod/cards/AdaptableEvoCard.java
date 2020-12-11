@@ -3,9 +3,13 @@ package evolutionmod.cards;
 import basemod.abstracts.CustomCard;
 import basemod.abstracts.DynamicVariable;
 import basemod.helpers.TooltipInfo;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.blue.GeneticAlgorithm;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.helpers.GetAllInBattleInstances;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.orbs.EmptyOrbSlot;
@@ -59,39 +63,6 @@ public abstract class AdaptableEvoCard extends BaseEvoCard {
 		return adaptation.amount;
 	}
 
-    public int tryAdaptingWith(AbstractOrb orb, boolean consumeOrbIfAdapted) {
-		if (canAdaptWith(orb) == 0) {
-			return 0;
-		}
-		AbstractGene gene = (AbstractGene) orb;
-	    int adaptAmount = this.tryAdaptingWith(gene.getAdaptation());
-	    if (consumeOrbIfAdapted && adaptAmount > 0) {
-		    consumeOrb(AbstractDungeon.player, gene);
-	    }
-	    return adaptAmount;
-    }
-
-    public int tryAdaptingWith(AbstractAdaptation adaptation) {
-	    int adaptAmount = this.canAdaptWith(adaptation);
-	    if (adaptAmount > 0) {
-		    addAdaptation(adaptation);
-		    this.shuffleBackIntoDrawPile = true;
-	    }
-	    return adaptAmount;
-    }
-
-    private void addAdaptation(AbstractAdaptation adaptation) {
-    	if (this.adaptationMap.containsKey(adaptation.getGeneId())) {
-    		this.adaptationMap.get(adaptation.getGeneId()).amount += adaptation.amount;
-    		if (this.adaptationMap.get(adaptation.getGeneId()).amount <= 0) {
-			    this.adaptationMap.remove(adaptation.getGeneId());
-		    }
-	    } else {
-    		this.adaptationMap.put(adaptation.getGeneId(), adaptation);
-	    }
-	    updateDescription();
-    }
-
     protected void updateDescription() {
 		int adaptationsCount = this.adaptationMap.values().stream()
 				.mapToInt(abstractAdaptation -> abstractAdaptation.amount)
@@ -122,22 +93,23 @@ public abstract class AdaptableEvoCard extends BaseEvoCard {
 					(adaptationsCount > 1 ? " Adaptations." : " Adaptation.");
 
 			this.rawDescription = this.initialRawDescription + adaptationDescription;
-			this.initializeDescription();
 		}
-    }
+		this.initializeDescription();
+	}
 
 	@Override
 	public void use(AbstractPlayer p, AbstractMonster m) {
-		p.orbs.stream()
-				.filter(o -> this.canAdaptWith(o) > 0)
-				.collect(Collectors.toList())
-				.forEach(o -> this.tryAdaptingWith(o, true));
+//		p.orbs.stream()
+//				.filter(o -> this.canAdaptWith(o) > 0)
+//				.collect(Collectors.toList())
+//				.forEach(o -> this.tryAdaptingWith(o, true));
+		this.adapt(99);
 		this.useAdaptations(p, m);
 	}
 
 	@Override
-	public AbstractCard makeCopy() {
-		AdaptableEvoCard card = (AdaptableEvoCard) super.makeCopy();
+	public AbstractCard makeStatEquivalentCopy() {
+		AdaptableEvoCard card = (AdaptableEvoCard) super.makeStatEquivalentCopy();
 		card.adaptationMap = this.adaptationMap.entrySet().stream().collect(
 				Collectors.toMap(Map.Entry::getKey, (e) -> e.getValue().makeCopy()));
 		card.initialRawDescription = this.initialRawDescription;
@@ -162,10 +134,63 @@ public abstract class AdaptableEvoCard extends BaseEvoCard {
 		this.shuffleBackIntoDrawPile = false;
 	}
 
+	protected void adapt(int max) {
+		addToBot(new AbstractGameAction() {
+			@Override
+			public void update() {
+				AbstractDungeon.player.orbs.stream()
+						.filter(o -> canAdaptWith(o) > 0)
+						.limit(max)
+						.collect(Collectors.toList())
+						.forEach(o -> tryAdaptingWith(o));
+				this.isDone = true;
+			}
+		});
+	}
+
+	private int tryAdaptingWith(AbstractOrb orb) {
+		if (canAdaptWith(orb) == 0) {
+			return 0;
+		}
+		AbstractGene gene = (AbstractGene) orb;
+		AbstractAdaptation adaptation = gene.getAdaptation();
+		int adaptAmount = this.canAdaptWith(adaptation);
+		if (adaptAmount > 0) {
+			addAdaptation(adaptation);
+			this.shuffleBackIntoDrawPile = true;
+			consumeOrb(AbstractDungeon.player, gene);
+		}
+		return adaptAmount;
+	}
+
+	protected void addAdaptation(AbstractAdaptation adaptation) {
+		GetAllInBattleInstances.get(uuid)
+				.stream()
+				.map(c -> (AdaptableEvoCard) c)
+				.forEach(card -> {
+							if (card.adaptationMap.containsKey(adaptation.getGeneId())) {
+								card.adaptationMap.get(adaptation.getGeneId()).amount += adaptation.amount;
+								if (card.adaptationMap.get(adaptation.getGeneId()).amount <= 0) {
+									card.adaptationMap.remove(adaptation.getGeneId());
+								}
+							} else {
+								card.adaptationMap.put(adaptation.getGeneId(), adaptation);
+							}
+							card.updateDescription();
+						}
+				);
+	}
+
 	protected void useAdaptations(AbstractPlayer p, AbstractMonster m) {
-    	this.adaptationMap.values().stream()
-				.filter(adaptation -> adaptation.amount > 0)
-				.forEach(adaptation -> adaptation.apply(p, m));
+		addToBot(new AbstractGameAction() {
+			@Override
+			public void update() {
+				adaptationMap.values().stream()
+						.filter(adaptation -> adaptation.amount > 0)
+						.forEach(adaptation -> adaptation.apply(p, m));
+				this.isDone = true;
+			}
+		});
     }
 
     public abstract static class AbstractAdaptation {

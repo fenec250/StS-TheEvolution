@@ -23,7 +23,7 @@ public class NightMare
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = "evolutionmod/images/cards/CentaurAtt.png";
     private static final int COST = 1;
-    private static final int DAMAGE_AMT = 8;
+    private static final int DAMAGE_AMT = 5;
     private static final int UPGRADE_DAMAGE_AMT = 3;
 
     public NightMare() {
@@ -31,7 +31,7 @@ public class NightMare
                 CardType.ATTACK, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.UNCOMMON, CardTarget.ENEMY);
         this.damage = this.baseDamage = DAMAGE_AMT;
-        this.exhaust = true;
+//        this.exhaust = true;
     }
 
     @Override

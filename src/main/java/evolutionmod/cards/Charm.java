@@ -39,7 +39,8 @@ public class Charm
         int amount = this.magicNumber;
         boolean inForm = BaseEvoCard.formEffect(SuccubusGene.ID);
         if (inForm) {
-            amount  += 2 + (upgraded ? 1 : 0);
+            amount  += 2;
+//            amount  += 2 + (upgraded ? 1 : 0);
         }
 //            addToBot(new ApplyPowerAction(m, p, new LustPower(m, 2 + (upgraded ? 1 : 0))));
 //            addToBot(new ApplyPowerAction(p, p, new PotencyPower(p, FORM_POTENCY)));
@@ -62,8 +63,8 @@ public class Charm
         if (!this.upgraded) {
             this.upgradeName();
             this.upgradeMagicNumber(UPGRADE_REDUCTION_AMT);
-            this.rawDescription = UPGRADE_DESCRIPTION;
-            this.initializeDescription();
+//            this.rawDescription = UPGRADE_DESCRIPTION;
+//            this.initializeDescription();
         }
     }
 }

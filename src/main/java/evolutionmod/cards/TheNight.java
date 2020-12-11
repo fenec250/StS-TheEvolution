@@ -27,14 +27,15 @@ public class TheNight extends BaseEvoCard {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.POWER, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.RARE, CardTarget.SELF);
+        this.magicNumber = this.baseMagicNumber = NIGHT_AMT;
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         if (!upgraded) {
-            this.addToBot(new ApplyPowerAction(p, p, new TheNightPower(p, NIGHT_AMT)));
+            this.addToBot(new ApplyPowerAction(p, p, new TheNightPower(p, this.magicNumber)));
         } else {
-            this.addToBot(new ApplyPowerAction(p, p, new TheNightPlusPower(p, NIGHT_AMT)));
+            this.addToBot(new ApplyPowerAction(p, p, new TheNightPlusPower(p, this.magicNumber)));
         }
     }
 

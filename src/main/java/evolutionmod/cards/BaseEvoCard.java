@@ -32,9 +32,9 @@ public abstract class BaseEvoCard extends CustomCard {
 	protected List<TooltipInfo> customTooltips;
 	protected String coloredRawDescription;
 
-    public BaseEvoCard(final String id, final String name, final String img, final int cost, final String rawDescription,
-					   final CardType type, final CardColor color,
-					   final CardRarity rarity, final CardTarget target) {
+    public BaseEvoCard(
+    		final String id, final String name, final String img, final int cost, final String rawDescription,
+			final CardType type, final CardColor color, final CardRarity rarity, final CardTarget target) {
         super(id, name, img, cost, rawDescription, type, color, rarity, target);
         this.customTooltips = null;
 //        this.coloredRawDescription = ""; This gets initialized by initializeDescription() during the superclass constructor

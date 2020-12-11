@@ -48,11 +48,12 @@ public class CursedTouch
         AbstractDungeon.actionManager.addToBottom(
                 new ApplyPowerAction(m, p, new WeakPower(m, this.magicNumber, false), this.magicNumber));
 //        super.use(p, m);
-        BaseEvoCard.formEffect(ShadowGene.ID, () ->
-                p.orbs.stream()
-                    .filter(o -> this.canAdaptWith(o) > 0)
-                    .findAny()
-                    .ifPresent(o -> this.tryAdaptingWith(o, true)));
+//        BaseEvoCard.formEffect(ShadowGene.ID, () ->
+//                p.orbs.stream()
+//                    .filter(o -> this.canAdaptWith(o) > 0)
+//                    .findAny()
+//                    .ifPresent(o -> this.tryAdaptingWith(o, true)));
+        this.adapt(1);
         this.useAdaptations(p, m);
     }
 

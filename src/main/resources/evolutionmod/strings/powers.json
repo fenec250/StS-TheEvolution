@@ -8,9 +8,9 @@
     "NAME": "Potency",
     "DESCRIPTIONS": ["Increase the first effect of most Genes and adaptations by "]
   },
-  "evolutionmod:RemovePotencyPower": {
-    "NAME": "Remove Potency",
-    "DESCRIPTIONS": ["Reduce your Potency by ", " at the start of your next turn."]
+  "evolutionmod:HumanityPower": {
+    "NAME": "Humanity",
+    "DESCRIPTIONS": ["When you channel a gene Evoke it.", "When you channel a gene Evoke it ", " times."]
   },
 
 
@@ -43,6 +43,10 @@
     "NAME": "Brambles",
     "DESCRIPTIONS": ["When recieving Attack damage deal ", " damages back. This power is removed at the start of your turn."]
   },
+  "evolutionmod:GrowthPower": {
+    "NAME": "Growth",
+    "DESCRIPTIONS": ["Upon reaching 3 stacks gain 1 Energy."]
+  },
   "evolutionmod:BroodmotherPower": {
     "NAME": "Broodmother",
     "DESCRIPTIONS": ["Each turn the next ", " Drone", " you create will be Upgraded."]
@@ -50,6 +54,10 @@
   "evolutionmod:BroodPower": {
     "NAME": "Brood Power",
     "DESCRIPTIONS": ["Your Drones deal ", " more damage and apply ", " more Block."]
+  },
+  "evolutionmod:SalamanderPower": {
+    "NAME": "Salamander",
+    "DESCRIPTIONS": ["Your Lizard genes also deal ", " damage and your Lavafolk genes deal ", " more damage."]
   },
   "evolutionmod:LustPower": {
     "NAME": "Lust",
@@ -61,7 +69,8 @@
   },
   "evolutionmod:EruptionPower": {
     "NAME": "Eruption",
-    "DESCRIPTIONS": ["Your Lavafolk genes and adaptations deal double damage. Reduces by 1 at the beginning of your turn."]
+    "DESCRIPTIONS": ["At the start of your turn Channel a Lavafolk gene and trigger your Lavafolk genes.",
+      "At the start of your turn Channel ", " Lavafolk genes and trigger your Lavafolk genes."]
   },
   "evolutionmod:MatureEggPower": {
     "NAME": "Mature eggs",

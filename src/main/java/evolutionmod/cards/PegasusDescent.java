@@ -35,8 +35,11 @@ public class PegasusDescent
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        int cards = p.hand.size() / 2;
-        for (int i = 0; i < cards; ++i) {
+        int hits = 1 + p.hand.group.stream()
+                .mapToInt(card -> card.cost == -1 ? this.energyOnUse : card.costForTurn)
+                .filter(cost -> cost > 0)
+                .sum() / 3;
+        for (int i = 0; i < hits; ++i) {
             AbstractDungeon.actionManager.addToBottom(new DamageAction(
                     m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
                     AbstractGameAction.AttackEffect.BLUNT_LIGHT));

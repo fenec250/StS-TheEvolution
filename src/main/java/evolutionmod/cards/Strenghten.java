@@ -36,20 +36,21 @@ public class Strenghten
         addToBot(new ApplyPowerAction(p, p,
                 new VigorPower(p, this.magicNumber)));
 
-        formEffect(CentaurGene.ID, () -> formEffect(LymeanGene.ID, () -> {
+        formEffect(CentaurGene.ID, () -> formEffect(LymeanGene.ID, () -> this.adapt(1)));
+//        formEffect(CentaurGene.ID, () -> formEffect(LymeanGene.ID, () -> {
 //                addToBot(new StrenghtenAction(p));
 //                this.exhaust = true;
-                p.orbs.stream()
-                        .filter(o -> this.canAdaptWith(o) > 0)
-                        .findAny()
-                        .ifPresent(o -> this.tryAdaptingWith(o, true));
-            }));
+//                p.orbs.stream()
+//                        .filter(o -> this.canAdaptWith(o) > 0)
+//                        .findAny()
+//                        .ifPresent(o -> this.tryAdaptingWith(o, true));
+//            }));
         this.useAdaptations(p, m);
     }
 
     @Override
     public int canAdaptWith(AbstractAdaptation adaptation) {
-        return adaptation.getGeneId().equals(CentaurGene.ID) ? 1 : 0;
+        return adaptation.getGeneId().equals(CentaurGene.ID) && adaptation.amount >= 1 ? 1 : 0;
     }
 
     @Override

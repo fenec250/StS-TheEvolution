@@ -2,8 +2,11 @@ package evolutionmod.cards;
 
 import basemod.abstracts.CustomSavable;
 import basemod.helpers.TooltipInfo;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
+import com.megacrit.cardcrawl.actions.defect.ChannelAction;
+import com.megacrit.cardcrawl.actions.defect.IncreaseMaxOrbAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -36,8 +39,8 @@ public class Mastery
 	public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
 	public static final String[] EXTENDED_DESCRIPTION = cardStrings.EXTENDED_DESCRIPTION;
 	public static final String IMG_PATH = "evolutionmod/images/cards/CrystalDust.png";
-	private static final int COST = 2;
-	private static final int UPGRADED_COST = 1;
+	private static final int COST = 1;
+	private static final int UPGRADED_COST = 0;
 	private static final int FORM_TRIGGER = 1;
 
 	private int geneIndex;
@@ -65,6 +68,18 @@ public class Mastery
 	@Override
 	public void use(AbstractPlayer p, AbstractMonster m) {
 		addToBot(new ApplyPowerAction(p, p, new MasteryPower(p, this.magicNumber, gene.ID, gene.getColoredName())));
+		addToBot(new AbstractGameAction() {
+			@Override
+			public void update() {
+				if (upgraded) {
+					addToBot(new IncreaseMaxOrbAction(1));
+					addToBot(new ChannelAction(gene.makeCopy()));
+				} else {
+					formEffect(gene.ID, () -> addToBot(new IncreaseMaxOrbAction(1)));
+				}
+				this.isDone = true;
+			}
+		});
 	}
 
 	@Override
@@ -81,7 +96,10 @@ public class Mastery
 	public void upgrade() {
 		if (!this.upgraded) {
 			this.upgradeName();
-			this.upgradeBaseCost(UPGRADED_COST);
+			this.rawDescription = UPGRADE_DESCRIPTION;
+			this.initializeDescription();
+			this.resetGene();
+//			this.upgradeBaseCost(UPGRADED_COST);
 		}
 	}
 
@@ -92,7 +110,7 @@ public class Mastery
 			customTooltips.add(new TooltipInfo("Randomized form",
 					"The form on this card is selected when the card is created and vary from a card to an other."));
 		}
-		return  customTooltips;
+		return customTooltips;
 	}
 
 	private void resetGene() {
@@ -115,8 +133,12 @@ public class Mastery
 				new CentaurGene(),
 				new ShadowGene()};
 		this.gene = validGenes[this.geneIndex];
-		this.rawDescription = EXTENDED_DESCRIPTION[0] + this.gene.name + EXTENDED_DESCRIPTION[1];
-		this.name = this.gene.getColoredName() + EXTENDED_DESCRIPTION[2];
+		this.rawDescription = EXTENDED_DESCRIPTION[0]
+				+ this.gene.name + EXTENDED_DESCRIPTION[1]
+				+ (!this.upgraded
+				? this.gene.name + EXTENDED_DESCRIPTION[2]
+				: EXTENDED_DESCRIPTION[3] + this.gene.name + EXTENDED_DESCRIPTION[4]);
+		this.name = this.gene.getColoredName() + EXTENDED_DESCRIPTION[5];
 		initializeDescription();
 	}
 

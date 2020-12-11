@@ -7,58 +7,46 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.PlatedArmorPower;
-import evolutionmod.orbs.BeastGene;
-import evolutionmod.orbs.CentaurGene;
+import evolutionmod.orbs.LavafolkGene;
+import evolutionmod.orbs.LizardGene;
 import evolutionmod.patches.AbstractCardEnum;
+import evolutionmod.powers.SalamanderPower;
 
-public class ThickHide
-        extends BaseEvoCard {
-    public static final String ID = "evolutionmod:ThickHide";
+public class Salamander extends BaseEvoCard {
+    public static final String ID = "evolutionmod:Salamander";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-    public static final String IMG_PATH = "evolutionmod/images/cards/CentaurPower.png";
+    public static final String IMG_PATH = "evolutionmod/images/cards/LavafolkPower.png";
     private static final int COST = 1;
-    private static final int PLATED_ARMOR_AMT = 2;
-    private static final int UPGRADE_PLATED_ARMOR_AMT = 1;
+    private static final int SALAMANDER_AMT = 1;
 
-    public ThickHide() {
+    public Salamander() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.POWER, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.UNCOMMON, CardTarget.SELF);
-        this.magicNumber = this.baseMagicNumber = PLATED_ARMOR_AMT;
+        this.magicNumber = this.baseMagicNumber = SALAMANDER_AMT;
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-
-        addToBot(new ApplyPowerAction(p, p,
-                new PlatedArmorPower(p, this.magicNumber)));
-
-        if (!BaseEvoCard.isPlayerInThisForm(BeastGene.ID)) {
-            addToBot(new ChannelAction(new BeastGene()));
-        } else {
-            if (!this.upgraded && BaseEvoCard.isPlayerInThisForm(CentaurGene.ID)) {
-                addToBot(new ApplyPowerAction(p, p,
-                        new PlatedArmorPower(p, UPGRADE_PLATED_ARMOR_AMT)));
-            } else {
-                addToBot(new ChannelAction(new CentaurGene()));
-            }
+        this.addToBot(new ApplyPowerAction(p, p, new SalamanderPower(p, this.magicNumber)));
+        if (this.upgraded) {
+            addToBot(new ChannelAction(new LizardGene()));
+            addToBot(new ChannelAction(new LavafolkGene()));
         }
     }
 
     @Override
     public AbstractCard makeCopy() {
-        return new ThickHide();
+        return new Salamander();
     }
 
     @Override
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeMagicNumber(UPGRADE_PLATED_ARMOR_AMT);
             this.rawDescription = UPGRADE_DESCRIPTION;
             this.initializeDescription();
         }

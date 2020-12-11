@@ -51,8 +51,8 @@ public class TheNightPower extends AbstractPower {
     public void atStartOfTurn() {
         super.atStartOfTurn();
         boolean inForm = BaseEvoCard.formEffect(ShadowGene.ID);
-        int shadowbolts = this.amount - (inForm ? 0 : 1);
+        int cards = this.amount - (inForm ? 0 : 1);
         Shadowbolt shadowbolt = new Shadowbolt();
-        addToBot(new MakeTempCardInHandAction(shadowbolt, shadowbolts));
+        addToBot(new MakeTempCardInHandAction(shadowbolt, cards));
     }
 }

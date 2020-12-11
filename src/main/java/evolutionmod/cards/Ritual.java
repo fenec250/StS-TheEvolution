@@ -65,23 +65,27 @@ public class Ritual
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        p.orbs.stream()
-                .filter(o -> this.canAdaptWith(o) > 0)
-                .findAny()
-                .ifPresent(o -> {
-                    int adapted = this.tryAdaptingWith((AbstractGene) o, true);
-                    if (adapted > 0) {
-                        AbstractDungeon.player.masterDeck.group.stream()
-                                .filter(c -> c.uuid.equals(this.uuid))
-                                .findAny()
-                                .ifPresent(c -> {
-                                    Ritual ritual = (Ritual) c;
-                                    ritual.adaptationMap.get(o.ID).amount = adapted;
-                                    ritual.updateDescription();
-                                });
-                    }
-                });
+//        p.orbs.stream()
+//                .filter(o -> this.canAdaptWith(o) > 0)
+//                .findAny()
+//                .ifPresent(o -> {
+//                    int adapted = this.tryAdaptingWith((AbstractGene) o, true);
+//                });
+        this.adapt(1);
         this.useAdaptations(p, m);
+    }
+
+    @Override
+    protected void addAdaptation(AbstractAdaptation adaptation) {
+        super.addAdaptation(adaptation);
+        AbstractDungeon.player.masterDeck.group.stream()
+                .filter(c -> c.uuid.equals(this.uuid))
+                .findAny()
+                .ifPresent(c -> {
+                    Ritual ritual = (Ritual) c;
+                    ritual.adaptationMap.get(adaptation.getGeneId()).amount = adaptation.amount;
+                    ritual.updateDescription();
+                });
     }
 
     @Override
@@ -113,6 +117,6 @@ public class Ritual
         for (int i = 0; i < adaptations.size(); ++i) {
             adaptations.get(i).amount = (integer >> i) & 1;
         }
-        this.initializeDescription();
+        this.updateDescription();
     }
 }

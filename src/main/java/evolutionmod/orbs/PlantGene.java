@@ -3,6 +3,7 @@ package evolutionmod.orbs;
 import basemod.helpers.TooltipInfo;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
+import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -11,6 +12,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import evolutionmod.cards.AdaptableEvoCard;
 import evolutionmod.powers.BramblesPower;
+import evolutionmod.powers.GrowthPower;
 import evolutionmod.powers.PotencyPower;
 
 import java.util.List;
@@ -24,6 +26,7 @@ public class PlantGene extends AbstractGene {
 	public static final String IMG_PATH = "evolutionmod/images/orbs/PlantGene.png";
 	public static final int BLOCK = 1;
 	public static final int BRAMBLE = 3;
+	public static final int GROWTH = 2;
 
 	public PlantGene() {
 		super(ID, NAME, getDescription(), IMG_PATH, COLOR);
@@ -45,7 +48,8 @@ public class PlantGene extends AbstractGene {
 	}
 
 	public static void apply(AbstractPlayer p, AbstractMonster m, int times) {
-		int thorns = bramble() * times;
+		int growth = growth() * times;
+//		int thorns = bramble() * times;
 //		int block = block();
 //		if (block > 0) {
 //			for (int i = 0; i < times; ++i) {
@@ -53,7 +57,9 @@ public class PlantGene extends AbstractGene {
 //			}
 //		}
 		AbstractDungeon.actionManager.addToTop(
-				new ApplyPowerAction(p, p, new BramblesPower(p, thorns), thorns));
+//				new GainEnergyAction(times));
+				new ApplyPowerAction(p, p, new GrowthPower(p, growth)));
+//				new ApplyPowerAction(p, p, new BramblesPower(p, thorns)));
 	}
 
 	@Override
@@ -92,6 +98,10 @@ public class PlantGene extends AbstractGene {
 
 	private static int bramble() {
 		return BRAMBLE;
+	}
+
+	private static int growth() {
+		return GROWTH;
 	}
 
 	public static class Adaptation extends AdaptableEvoCard.AbstractAdaptation {

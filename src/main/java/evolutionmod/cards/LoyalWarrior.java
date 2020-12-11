@@ -68,23 +68,39 @@ public class LoyalWarrior
 	public boolean atBattleStartPreDraw() {
 		if (this.upgraded) {
 			addToBot(new ChannelAction(this.gene.makeCopy()));
-			this.gene.onStartOfTurn();
+			this.gene.onEvoke();
 		}
 		return false;
 	}
 
 	@Override
 	public void use(AbstractPlayer p, AbstractMonster m) {
-		int damage = this.damage;
 		if (!this.upgraded) {
-			boolean inForm = BaseEvoCard.formEffect(this.gene.ID);
-			if (inForm) {
-				damage += this.magicNumber;
-			}
+			BaseEvoCard.formEffect(this.gene.ID);
 		}
 		addToBot(new DamageAction(
 				m, new DamageInfo(p, damage, this.damageTypeForTurn),
 				AbstractGameAction.AttackEffect.BLUNT_HEAVY));
+	}
+
+	@Override
+	public void applyPowers() {
+		alterDamageAround(super::applyPowers);
+	}
+
+	@Override
+	public void calculateCardDamage(AbstractMonster mo) {
+		alterDamageAround(() -> super.calculateCardDamage(mo));
+	}
+
+	private void alterDamageAround(Runnable supercall) {
+		this.baseDamage = DAMAGE_AMT + (upgraded ? UPGRADE_DAMAGE_AMT : 0);
+		if (!this.upgraded && this.gene != null && BaseEvoCard.isPlayerInThisForm(this.gene.ID)) {
+			this.baseDamage += this.magicNumber;
+		}
+		supercall.run();
+		this.baseDamage = DAMAGE_AMT + (upgraded ? UPGRADE_DAMAGE_AMT : 0);
+		this.isDamageModified = this.damage != this.baseDamage;
 	}
 
 

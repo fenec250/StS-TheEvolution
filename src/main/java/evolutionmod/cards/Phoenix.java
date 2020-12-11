@@ -45,21 +45,22 @@ public class Phoenix
             addToBot(new ChannelAction(new LavafolkGene()));
         }
         boolean inForm = formEffect(HarpyGene.ID);
-        if (!inForm) {
-            this.useAdaptations(p, m);
-        } else {
-            addToBot(new DelayedAction(() -> {
-                List<AbstractOrb> genes = p.orbs.stream()
-                        .filter(o -> this.canAdaptWith(o) > 0)
-//                        .findAny()
-//                        .ifPresent(o -> this.tryAdaptingWith(o, true));
-                        .collect(Collectors.toList());
-                genes.forEach(o -> this.tryAdaptingWith(o, true));
-				this.useAdaptations(p, m);
-				return null;
-			}, true));
-		}
-//        this.useAdaptations(p, m);
+//        if (!inForm) {
+//            this.useAdaptations(p, m);
+//        } else {
+//            addToBot(new DelayedAction(() -> {
+//                List<AbstractOrb> genes = p.orbs.stream()
+//                        .filter(o -> this.canAdaptWith(o) > 0)
+////                        .findAny()
+////                        .ifPresent(o -> this.tryAdaptingWith(o, true));
+//                        .collect(Collectors.toList());
+//                genes.forEach(o -> this.tryAdaptingWith(o, true));
+//				this.useAdaptations(p, m);
+//				return null;
+//			}, true));
+//		}
+        this.adapt(1);
+        this.useAdaptations(p, m);
     }
 
     @Override

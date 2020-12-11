@@ -1,7 +1,6 @@
 package evolutionmod.cards;
 
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -11,12 +10,11 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 import evolutionmod.orbs.BeastGene;
 import evolutionmod.orbs.CentaurGene;
-import evolutionmod.orbs.InsectGene;
 import evolutionmod.patches.AbstractCardEnum;
 
-public class HardWorker
+public class Battleborn
         extends BaseEvoCard {
-    public static final String ID = "evolutionmod:HardWorker";
+    public static final String ID = "evolutionmod:Battleborn";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -27,7 +25,7 @@ public class HardWorker
     private static final int UPGRADE_STRENGTH_AMT = 1;
     private static final int FORMS_STRENGTH_AMT = 1;
 
-    public HardWorker() {
+    public Battleborn() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.POWER, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.UNCOMMON, CardTarget.SELF);
@@ -52,7 +50,7 @@ public class HardWorker
 
     @Override
     public AbstractCard makeCopy() {
-        return new HardWorker();
+        return new Battleborn();
     }
 
     @Override

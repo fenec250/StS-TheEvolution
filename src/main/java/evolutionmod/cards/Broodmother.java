@@ -40,9 +40,9 @@ public class Broodmother extends BaseEvoCard {
 //        addToBot(new ApplyPowerAction(p, p, new MatureEggPower(p, BROODMOTHER_AMT)));
         addToBot(new ChannelAction(new InsectGene()));
 //        for (int i = 0; i < this.magicNumber; ++i) {
-        if (this.upgraded) {
-            addToBot(new ChannelAction(new InsectGene()));
-        }
+//        if (this.upgraded) {
+//            addToBot(new ChannelAction(new InsectGene()));
+//        }
     }
 
     @Override
@@ -55,8 +55,8 @@ public class Broodmother extends BaseEvoCard {
         if (!this.upgraded) {
             this.upgradeName();
             this.upgradeMagicNumber(UPGRADE_BROOD_POWER_AMT);
-            this.rawDescription = UPGRADE_DESCRIPTION;
-            this.initializeDescription();
+//            this.rawDescription = UPGRADE_DESCRIPTION;
+//            this.initializeDescription();
         }
     }
 }

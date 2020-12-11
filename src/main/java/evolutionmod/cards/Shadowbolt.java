@@ -68,8 +68,8 @@ public class Shadowbolt
                 this.baseDamage += weak.amount * this.magicNumber;
             }
         }
-        this.rawDescription = DESCRIPTION;
-        this.initializeDescription();
+//        this.rawDescription = DESCRIPTION;
+//        this.initializeDescription();
         super.calculateCardDamage(mo);
         this.baseDamage = DAMAGE_AMT + (this.upgraded ? UPGRADE_DAMAGE_AMT : 0);
         this.isDamageModified = this.baseDamage != this.damage;
@@ -102,6 +102,8 @@ public class Shadowbolt
         if (!this.upgraded) {
             this.upgradeName();
             this.upgradeDamage(UPGRADE_DAMAGE_AMT);
+            this.rawDescription = UPGRADE_DESCRIPTION;
+            this.initializeDescription();
         }
     }
 

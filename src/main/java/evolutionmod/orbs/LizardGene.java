@@ -10,6 +10,7 @@ import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import evolutionmod.actions.LizardGeneAction;
 import evolutionmod.cards.AdaptableEvoCard;
 import evolutionmod.powers.PotencyPower;
+import evolutionmod.powers.SalamanderPower;
 
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class LizardGene extends AbstractGene {
 	public static final String COLOR = "[#80E080]";
 	public static final String[] DESCRIPTION = orbStrings.DESCRIPTION;
 	public static final String IMG_PATH = "evolutionmod/images/orbs/LizardGene.png";
-	public static final int DAMAGE = 1;
+	public static final int DAMAGE = 0;
 	public static final int POISON = 3;
 
 	public LizardGene() {
@@ -75,11 +76,7 @@ public class LizardGene extends AbstractGene {
 
 	private static int damage() {
 		int damage = DAMAGE;
-		if (CardCrawlGame.isInARun()) {
-			if (AbstractDungeon.player.hasPower(PotencyPower.POWER_ID)) {
-				damage += AbstractDungeon.player.getPower(PotencyPower.POWER_ID).amount;
-			}
-		}
+		damage += SalamanderPower.getLizardDamage();
 		return damage;
 	}
 

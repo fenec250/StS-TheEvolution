@@ -10,7 +10,9 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.powers.watcher.VigorPower;
 import evolutionmod.orbs.AbstractGene;
+import evolutionmod.orbs.CentaurGene;
 import evolutionmod.patches.AbstractCardEnum;
 import evolutionmod.powers.AdaptationPower;
 
@@ -36,6 +38,7 @@ public class StrikeEvo
         this.tags.add(BaseModCardTags.BASIC_STRIKE);
         this.tags.add(CardTags.STARTER_STRIKE);
         this.tags.add(CardTags.STRIKE);
+//        this.adaptationMap.put(CentaurGene.ID, new CentaurGene.Adaptation(1));
     }
 
     @Override
@@ -51,6 +54,7 @@ public class StrikeEvo
 //                    .ifPresent(o -> this.tryAdaptingWith(o, true));
 //        }
 //        this.useAdaptations(p, m);
+//        addToBot(new ApplyPowerAction(p, p, new VigorPower(p, 3)));
     }
 
     @Override

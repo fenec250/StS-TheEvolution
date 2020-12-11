@@ -21,13 +21,13 @@ public class DarkDesires
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = "evolutionmod/images/cards/SuccubusPower.png";
     private static final int COST = 2;
-    private static final int POWER_AMT = 5;
+    private static final int POWER_AMT = 4;
     private static final int UPGRADE_POWER_AMT = 2;
 
     public DarkDesires() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.POWER, AbstractCardEnum.EVOLUTION_BLUE,
-                CardRarity.RARE, CardTarget.SELF);
+                CardRarity.UNCOMMON, CardTarget.SELF);
         this.magicNumber = this.baseMagicNumber = POWER_AMT;
     }
 

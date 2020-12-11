@@ -19,7 +19,8 @@ import evolutionmod.orbs.HarpyGene;
 import evolutionmod.patches.AbstractCardEnum;
 
 public class FeatherStorm
-        extends BaseEvoCard implements StartupCard {
+        extends BaseEvoCard {
+//        extends BaseEvoCard implements StartupCard {
     public static final String ID = "evolutionmod:FeatherStorm";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -32,12 +33,15 @@ public class FeatherStorm
     private static final int FEATHER_AMT = 2;
     private static final int UPGRADE_FEATHER_AMT = 1;
 
+    private boolean shouldSpawnFeathers;
+
     public FeatherStorm() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.ATTACK, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.RARE, CardTarget.ENEMY);
         this.damage = this.baseDamage = DAMAGE;
         this.magicNumber = this.baseMagicNumber = FEATHER_AMT;
+        this.shouldSpawnFeathers = true;
     }
 
     @Override
@@ -45,17 +49,28 @@ public class FeatherStorm
         AbstractDungeon.actionManager.addToBottom(new DamageAction(
                 m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
                 AbstractGameAction.AttackEffect.SLASH_VERTICAL));
+        if (this.shouldSpawnFeathers) {
+            addToBot(new MakeTempCardInDrawPileAction(new Feather(), this.magicNumber, true, true));
+            this.shouldSpawnFeathers = false;
+        }
     }
 
-    @Override
-    public boolean atBattleStartPreDraw() {
-        addToBot(new MakeTempCardInDrawPileAction(new Feather(), this.magicNumber, true, true));
-        return false;
-    }
+//    @Override
+//    public boolean atBattleStartPreDraw() {
+//        addToBot(new MakeTempCardInDrawPileAction(new Feather(), this.magicNumber, true, true));
+//        return false;
+//    }
 
     @Override
     public AbstractCard makeCopy() {
         return new FeatherStorm();
+    }
+
+    @Override
+    public AbstractCard makeStatEquivalentCopy() {
+        FeatherStorm copy = (FeatherStorm) super.makeStatEquivalentCopy();
+        copy.shouldSpawnFeathers = this.shouldSpawnFeathers;
+        return copy;
     }
 
     @Override

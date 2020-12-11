@@ -1,8 +1,10 @@
 package evolutionmod.cards;
 
+import basemod.ReflectionHacks;
 import basemod.abstracts.CustomSavable;
 import basemod.helpers.TooltipInfo;
 import com.evacipated.cardcrawl.mod.stslib.cards.interfaces.StartupCard;
+import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInDrawPileAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
@@ -13,6 +15,10 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
+import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndAddToDiscardEffect;
+import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndAddToDrawPileEffect;
+import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndAddToHandEffect;
 import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.BeastGene;
 import evolutionmod.orbs.CentaurGene;
@@ -143,4 +149,17 @@ public class CrystalDust
 		this.geneIndex = integer;
 		resetGene();
 	}
+//	@SpirePatch(clz = ShowCardAndAddToDiscardEffect.class, method = "update")
+//	@SpirePatch(clz = ShowCardAndAddToHandEffect.class, method = "update")
+//	@SpirePatch(clz = ShowCardAndAddToDrawPileEffect.class, method = "update")
+//	public static class InDraw
+//	{
+//		public static void Prefix(AbstractGameEffect __instance)
+//		{
+//			if (__instance.duration == (float)ReflectionHacks.getPrivateStatic(__instance.getClass(), "EFFECT_DUR"))
+//			{
+////				jedi.onGenerateCardMidcombat((AbstractCard) ReflectionHacks.getPrivate(__instance, __instance.getClass(), "card"));
+//			}
+//		}
+//	}
 }

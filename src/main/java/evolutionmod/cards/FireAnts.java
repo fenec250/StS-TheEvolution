@@ -23,7 +23,7 @@ public class FireAnts
     public static final String IMG_PATH = "evolutionmod/images/cards/LavafolkSkl.png";
     private static final int COST = 1;
     private static final int EVOKE_AMT = 1;
-    private static final int UPGRADE_EVOKE_AMT = 2;
+    private static final int UPGRADE_EVOKE_AMT = 1;
 
     public FireAnts() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -37,26 +37,30 @@ public class FireAnts
 
         int maxEvoke = this.magicNumber;
         if (!this.upgraded && BaseEvoCard.isPlayerInThisForm(InsectGene.ID)) {
-            maxEvoke += 1;
+            maxEvoke += UPGRADE_EVOKE_AMT;
         }
-        if (!this.upgraded && BaseEvoCard.isPlayerInThisForm(LavafolkGene.ID)) {
-            maxEvoke += 1;
+//        p.orbs.stream()
+//                .filter(o -> LavafolkGene.ID.equals(o.ID))
+//                .limit(maxEvoke)
+//                .collect(Collectors.toList()) // dissociate from initial list before evoking
+//                .forEach(o -> {
+//                    addToBot(new EvokeSpecificOrbAction(o));
+//                    addToBot(new MakeTempCardInHandAction(Drone.createDroneWithInteractions(p)));
+//                });
+        for(int i = 0; i < this.magicNumber; ++i) {
+            if (isPlayerInThisForm(LavafolkGene.ID)) {
+                addToBot(new MakeTempCardInHandAction(new DroneFire()));
+            } else {
+                addToBot(new MakeTempCardInHandAction(new Drone()));
+            }
         }
-        p.orbs.stream()
-                .filter(o -> LavafolkGene.ID.equals(o.ID))
-                .limit(maxEvoke)
-                .collect(Collectors.toList()) // dissociate from initial list before evoking
-                .forEach(o -> {
-                    addToBot(new EvokeSpecificOrbAction(o));
-                    addToBot(new MakeTempCardInHandAction(Drone.createDroneWithInteractions(p)));
-                });
         if (upgraded){
+//            addToBot(new ChannelAction(new LavafolkGene()));
             addToBot(new ChannelAction(new InsectGene()));
-            addToBot(new ChannelAction(new LavafolkGene()));
         } else {
             formEffect(InsectGene.ID);
-            formEffect(LavafolkGene.ID);
         }
+        formEffect(LavafolkGene.ID);
     }
 
     @Override

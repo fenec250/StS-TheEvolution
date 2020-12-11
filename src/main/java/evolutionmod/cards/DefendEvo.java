@@ -1,17 +1,18 @@
 package evolutionmod.cards;
 
 import basemod.helpers.BaseModCardTags;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
-import com.megacrit.cardcrawl.cards.blue.Defend_Blue;
+import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import evolutionmod.orbs.AbstractGene;
+import evolutionmod.actions.FateAction;
+import evolutionmod.orbs.LymeanGene;
 import evolutionmod.patches.AbstractCardEnum;
-import evolutionmod.powers.AdaptationPower;
+import evolutionmod.powers.EruptionPower;
 
 public class DefendEvo
         extends AdaptableEvoCard {
@@ -45,6 +46,21 @@ public class DefendEvo
 //                    .ifPresent(o -> this.tryAdaptingWith(o, true));
 //        }
 //        this.useAdaptations(p, m);
+//        addToBot(new FateAction(2));
+//        addToBot(new FateAction(2));
+//        addToBot(new AbstractGameAction() {
+//            @Override
+//            public void update() {
+//                addToBot(new FateAction(2));
+//                this.isDone = true;
+//            }
+//        });
+//        addToBot(new FateAction(2));
+//        addToBot(new ChannelAction(new LymeanGene()));
+//        addToBot(new ChannelAction(new LymeanGene()));
+//        addToBot(new ChannelAction(new LymeanGene()));
+//        addToBot(new ChannelAction(new LymeanGene()));
+//        addToBot(new ApplyPowerAction(p, p, new EruptionPower(p, 1)));
     }
 
     @Override

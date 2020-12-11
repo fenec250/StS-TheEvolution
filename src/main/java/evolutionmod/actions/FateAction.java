@@ -3,6 +3,7 @@ package evolutionmod.actions;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.common.HealAction;
+import com.megacrit.cardcrawl.actions.utility.ScryAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -13,71 +14,68 @@ import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 public class FateAction extends AbstractGameAction {
 
 	private static final UIStrings uiStrings;
 	public static final String[] TEXT;
-	private float startingDuration;
-	private Consumer<List<AbstractCard>> selectionConsumer;
 
-	public FateAction(int numCards, Consumer<List<AbstractCard>> selectionConsumer) {
+	public FateAction(int numCards) {
 		this.amount = numCards;
-		this.selectionConsumer = selectionConsumer;
 
 		this.actionType = ActionType.CARD_MANIPULATION;
-		this.startingDuration = Settings.ACTION_DUR_FAST;
-		this.duration = this.startingDuration;
 	}
 
 	public void update() {
 		// copied from ScryAction
 		if (AbstractDungeon.getMonsters().areMonstersBasicallyDead()) {
-			this.isDone = true;
+		} else if (this.amount <= 0) {
+			addToTop(new TriggerScryEffectsAction());
 		} else {
-//			Iterator var1;
-			if (this.duration == this.startingDuration) {
-//				var1 = AbstractDungeon.player.powers.iterator();
-//				while(var1.hasNext()) {
-//					AbstractPower p = (AbstractPower)var1.next();
-//					p.onScry();
-//				}
+//			Optional<AbstractGameAction> next = AbstractDungeon.actionManager.actions.stream()
+//					.filter(a -> !a.isDone)
+//					.filter(a -> a instanceof FateAction)
+//					.findAny();
+//			next.ifPresent(c -> {
+//				c.amount += this.amount;
+//				this.amount = 0;
+//			});
 
-				if (AbstractDungeon.player.drawPile.isEmpty()) {
-					this.isDone = true;
-					return;
-				}
-
-				CardGroup tmpGroup = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
-				if (this.amount != -1) {
-					for(int i = 0; i < Math.min(this.amount, AbstractDungeon.player.drawPile.size()); ++i) {
-						tmpGroup.addToTop((AbstractCard)AbstractDungeon.player.drawPile.group.get(AbstractDungeon.player.drawPile.size() - i - 1));
-					}
+			List<AbstractGameAction> fates = AbstractDungeon.actionManager.actions.stream()
+					.filter(a -> !a.isDone)
+					.filter(a -> a instanceof FateAction)
+					.collect(Collectors.toList());
+			int total = this.amount + fates.stream()
+					.mapToInt(a -> a.amount)
+					.sum();
+//			if (total != this.amount) {
+				fates.forEach(a -> a.amount = 0);
+//				addToBot(new FateAction(total));
+//			} else {
+				CardGroup drawPile = AbstractDungeon.player.drawPile;
+				if (drawPile.isEmpty()) {
+					addToTop(new ScryAction(total));
 				} else {
-					Iterator var5 = AbstractDungeon.player.drawPile.group.iterator();
-
-					while(var5.hasNext()) {
-						AbstractCard c = (AbstractCard)var5.next();
-						tmpGroup.addToBottom(c);
+					CardGroup fateGroup = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
+					for (int i = Math.min(total, drawPile.size()); i > 0; --i) {
+						AbstractCard card = drawPile.getRandomCard(true);
+						fateGroup.addToTop((AbstractCard) card);
+						drawPile.removeCard(card);
 					}
+					List<AbstractCard> copy = new ArrayList<>(fateGroup.group);
+					copy.forEach(c -> fateGroup.moveToDeck(c, false));
+					addToTop(new ScryAction(copy.size()));
 				}
-
-				AbstractDungeon.gridSelectScreen.open(tmpGroup, this.amount, true, TEXT[0]);
-			} else if (!AbstractDungeon.gridSelectScreen.selectedCards.isEmpty()) {
-				selectionConsumer.accept(AbstractDungeon.gridSelectScreen.selectedCards);
-				AbstractDungeon.gridSelectScreen.selectedCards.clear();
-			}
-//			var1 = AbstractDungeon.player.discardPile.group.iterator();
-//			while(var1.hasNext()) {
-//				AbstractCard c = (AbstractCard)var1.next();
-//				c.triggerOnScry();
 //			}
-
-			this.tickDuration();
 		}
+
+		this.isDone = true;
 	}
 
 	static {

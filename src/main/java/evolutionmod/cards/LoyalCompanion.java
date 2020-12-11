@@ -66,7 +66,7 @@ public class LoyalCompanion
 	public boolean atBattleStartPreDraw() {
 		if (this.upgraded) {
 			addToBot(new ChannelAction(this.gene.makeCopy()));
-			this.gene.onStartOfTurn();
+			this.gene.onEvoke();
 		}
 		return false;
 	}
@@ -74,16 +74,26 @@ public class LoyalCompanion
 	@Override
 	public void use(AbstractPlayer p, AbstractMonster m) {
 		int block = this.block;
-
 		if (!this.upgraded) {
-			boolean inForm = formEffect(this.gene.ID);
-			if (inForm) {
-				block += this.magicNumber;
-			}
+			formEffect(this.gene.ID);
 		}
 		addToBot(new GainBlockAction(p, block));
 	}
 
+	@Override
+	protected void applyPowersToBlock() {
+		alterBlockAround(() -> super.applyPowersToBlock());
+	}
+
+	private void alterBlockAround(Runnable supercall) {
+		this.baseBlock = BLOCK_AMT + (upgraded ? UPGRADE_BLOCK_AMT : 0);
+		if (!this.upgraded && this.gene != null && isPlayerInThisForm(this.gene.ID)) {
+			this.baseBlock += this.magicNumber;
+		}
+		supercall.run();
+		this.baseBlock = BLOCK_AMT + (upgraded ? UPGRADE_BLOCK_AMT : 0);
+		this.isBlockModified = this.block != this.baseBlock;
+	}
 
 	@Override
 	public AbstractCard makeCopy() {

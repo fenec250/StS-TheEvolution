@@ -1,6 +1,5 @@
 package evolutionmod.orbs;
 
-import basemod.helpers.TooltipInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -9,10 +8,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import evolutionmod.actions.LavafolkGeneAction;
 import evolutionmod.cards.AdaptableEvoCard;
-import evolutionmod.powers.EruptionPower;
-import evolutionmod.powers.PotencyPower;
-
-import java.util.List;
+import evolutionmod.powers.SalamanderPower;
 
 public class LavafolkGene extends AbstractGene {
 	public static final String ID = "evolutionmod:LavafolkGene";
@@ -74,14 +70,7 @@ public class LavafolkGene extends AbstractGene {
 
 	private static int damage() {
 		int damage = DAMAGE;
-		if (CardCrawlGame.isInARun()) {
-			if (AbstractDungeon.player.hasPower(PotencyPower.POWER_ID)) {
-				damage += AbstractDungeon.player.getPower(PotencyPower.POWER_ID).amount;
-			}
-			if (AbstractDungeon.player.hasPower(EruptionPower.POWER_ID)) {
-				damage *= 2;
-			}
-		}
+		damage += SalamanderPower.getLavafolkExtraDamage();
 		return damage;
 	}
 

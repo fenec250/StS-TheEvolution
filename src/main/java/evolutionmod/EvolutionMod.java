@@ -85,15 +85,18 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
 
         //Special
         cards.add(new Drone());
+        cards.add(new DroneGuard());
+        cards.add(new DroneFire());
+        cards.add(new DroneMantis());
         cards.add(new Feather());
 
         //Commons
         //Vex quote: i shoot for 18 commons, 10 damage 6 block 2 other as a "blueprint" and modify if anything jumps out at me
         //10 attacks
-        cards.add(new TalonStrike());
-        cards.add(new FlameStrike());
         cards.add(new ClawSlash());
         cards.add(new Shadowbolt());
+        cards.add(new TalonStrike());
+        cards.add(new FlameStrike());
         cards.add(new PoisonFangs());
         cards.add(new HeavyKick());
 
@@ -101,12 +104,12 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
         cards.add(new ChimeraStrike());
         cards.add(new CrystalShard());
         //8 skills
+//        cards.add(new Brambles());
+        cards.add(new Barkskin());
         cards.add(new DrainMana());
-        cards.add(new Charm());
-        cards.add(new Brambles());
         cards.add(new Dive());
+        cards.add(new Charm());
         cards.add(new Hatch());
-        cards.add(new ChannelMagic());
 
         cards.add(new ChimeraDefense());
         cards.add(new ShiftingGuard());
@@ -115,61 +118,65 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
         //Uncommons
         //11 attacks
 //        cards.add(new AggressiveBlow());
+        cards.add(new StripArmor());
+        cards.add(new NightMare());
         cards.add(new Phoenix());
+        cards.add(new PegasusDescent());
         cards.add(new SpiderBite());
         cards.add(new CursedTouch());
-        cards.add(new PegasusDescent());
-        cards.add(new NightMare());
-        //exhaust
-        cards.add(new StripArmor());
         cards.add(new BlackCat());
-        //18 skills
-        cards.add(new Firebloom());
-        cards.add(new FireAnts());
-        cards.add(new Aphrodisiac());
-//        cards.add(new WindUp());
-        cards.add(new Pheromones());
-        cards.add(new Antidote());
-        cards.add(new HeightenedSenses());
-//        cards.add(new TakeOff());
-        cards.add(new DepthsLurker());
-        cards.add(new Omen());
-//        cards.add(new SirenSong());
-        cards.add(new CalmTheWaters());
-        cards.add(new ShiftingPower());
         //exhaust
+        //18 skills
         cards.add(new Strenghten());
+        cards.add(new Firebloom());
+//        cards.add(new ChannelMagic());
+        cards.add(new LeafBird());
+        cards.add(new Pheromones());
+        cards.add(new Aphrodisiac());
+        cards.add(new HeightenedSenses());
+        cards.add(new DepthsLurker());
+        cards.add(new VenomGlands());
+        cards.add(new Antidote());
+        cards.add(new CalmTheWaters());
+        cards.add(new FireAnts());
+//        cards.add(new Omen());
+        cards.add(new SeaSerpent());
+        cards.add(new ShiftingPower());
+        cards.add(new Adaptation());
+        //exhaust
         cards.add(new Toxin());
         cards.add(new Treasure());
         cards.add(new CrystalDust());
         //6 powers
-        cards.add(new Symbiotes());
-//        cards.add(new ThickHide());
-        cards.add(new HardWorker());
+        cards.add(new Battleborn());
         cards.add(new CurrentsDancer());
-        cards.add(new Shrink());
+        cards.add(new Symbiotes());
+        cards.add(new Salamander());
+        cards.add(new DarkDesires());
         cards.add(new Mastery());
+        cards.add(new Shrink());
 
         //Rares.
         //4 attacks
         cards.add(new Stampede());
         cards.add(new Seduce());
-        cards.add(new SpikeVolley());
+//        cards.add(new SpikeVolley());
+        cards.add(new Photosynthesis());
         cards.add(new Eruption());
         cards.add(new Frenzy());
         cards.add(new FeatherStorm());
 //        cards.add(new Rush());
         //8 skills
         cards.add(new Drown());
+        cards.add(new Ritual());
 //        cards.add(new Aegis());
-        cards.add(new Aegis2());
-        cards.add(new PoisonSpit());
+//        cards.add(new PoisonSpit());
         //6 powers
+        cards.add(new Aegis2());
         cards.add(new Broodmother());
         cards.add(new TheNight());
-        cards.add(new Ritual());
         cards.add(new GodForm());
-        cards.add(new DarkDesires());
+        cards.add(new Humanity());
         cards.add(new Grow());
 
         cards.forEach(c -> {
@@ -207,9 +214,9 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
         String[] keywordRage = {"rage"};
         BaseMod.addKeyword("Rage", keywordRage,
                 "Whenever you play an Attack this turn, gain this amount of Block.");
-        String[] keywordSubmission = {"submission"};
-        BaseMod.addKeyword("Submission", keywordSubmission,
-                "Until the end of the turn attacks deal additional damage to the target and reduce Submission.");
+        String[] keywordSubmission = {"lust"};
+        BaseMod.addKeyword("Lust", keywordSubmission,
+                "Reduce damage dealt by this amount. Removed after attacking.");
 //        String[] keywordCharge = {"charge", "centaur"};
 //        BaseMod.addKeyword("Charge", keywordCharge,
 //                "Increase the damage of your next hit then reduces by half.");
