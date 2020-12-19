@@ -21,7 +21,7 @@ public class NightMare
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-    public static final String IMG_PATH = "evolutionmod/images/cards/CentaurAtt.png";
+    public static final String IMG_PATH = "evolutionmod/images/cards/Nightmare.png";
     private static final int COST = 1;
     private static final int DAMAGE_AMT = 5;
     private static final int UPGRADE_DAMAGE_AMT = 3;
@@ -55,4 +55,13 @@ public class NightMare
             this.upgradeDamage(UPGRADE_DAMAGE_AMT);
         }
     }
+
+	@Override
+	public void triggerOnGlowCheck() {
+		if (isPlayerInThisForm(CentaurGene.ID)) {
+			this.glowColor = GOLD_BORDER_GLOW_COLOR.cpy();
+		} else {
+			this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
+		}
+	}
 }

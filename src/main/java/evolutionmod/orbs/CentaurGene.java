@@ -18,7 +18,7 @@ public class CentaurGene extends AbstractGene {
 	public static final String ID = "evolutionmod:CentaurGene";
 	public static final OrbStrings orbStrings = CardCrawlGame.languagePack.getOrbString(ID);
 	public static final String NAME = orbStrings.NAME;
-	public static final String COLOR = "[#808080]";
+	public static final String COLOR = "[#888888]";
 	public static final String[] DESCRIPTION = orbStrings.DESCRIPTION;
 	public static final String IMG_PATH = "evolutionmod/images/orbs/CentaurGene.png";
 	public static final int VIGOR = 3;
@@ -50,13 +50,17 @@ public class CentaurGene extends AbstractGene {
 	}
 
 	@Override
-	public void updateDescription() {
-		this.description = "#yPassive and #yEvoke: " + getDescription();
+	public AdaptableEvoCard.AbstractAdaptation getAdaptation() {
+		return new Adaptation(1);
 	}
 
 	@Override
-	public AdaptableEvoCard.AbstractAdaptation getAdaptation() {
-		return new Adaptation(1);
+	public void updateDescription() {
+		this.description = getOrbDescription();
+	}
+
+	public static String getOrbDescription() {
+		return "At the #bstart #bof #byour #bturn and when #yEvoked: NL " + getDescription();
 	}
 
 	public static String getDescription() {

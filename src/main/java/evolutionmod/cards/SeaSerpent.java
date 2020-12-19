@@ -2,6 +2,7 @@ package evolutionmod.cards;
 
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -18,7 +19,7 @@ public class SeaSerpent
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-    public static final String IMG_PATH = "evolutionmod/images/cards/MerfolkSkl.png";
+    public static final String IMG_PATH = "evolutionmod/images/cards/SeaSerpent.png";
     private static final int COST = 2;
     private static final int BLOCK_AMT = 12;
     private static final int UPGRADE_BLOCK_AMT = 1;
@@ -26,7 +27,7 @@ public class SeaSerpent
     public SeaSerpent() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
-                CardRarity.COMMON, CardTarget.SELF);
+                CardRarity.UNCOMMON, CardTarget.SELF);
         this.block = this.baseBlock = BLOCK_AMT;
     }
 
@@ -48,6 +49,15 @@ public class SeaSerpent
             this.upgradeBlock(UPGRADE_BLOCK_AMT);
             this.rawDescription = UPGRADE_DESCRIPTION;
             this.initializeDescription();
+        }
+    }
+
+    @Override
+    public void triggerOnGlowCheck() {
+        if (!upgraded && isPlayerInThisForm(LizardGene.ID)) {
+            this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
+        } else {
+            this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
         }
     }
 }

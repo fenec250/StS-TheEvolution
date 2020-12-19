@@ -37,7 +37,7 @@
         <dependency>
             <groupId>com.evacipated.cardcrawl</groupId>
             <artifactId>BaseMod</artifactId>
-            <version>5.17.0</version>
+            <version>5.27.0</version>
             <scope>system</scope>
             <systemPath>${sts.path}/mods/BaseMod.jar</systemPath>
         </dependency>

@@ -74,36 +74,6 @@ public class HeavyKick
         }
     }
 
-//    @Override
-//    public void calculateDamageDisplay(AbstractMonster mo) {
-//        if (AbstractGene.isPlayerInThisForm(CentaurGene.ID)) {
-//            AbstractPower charge = AbstractDungeon.player.getPower(ChargePower.POWER_ID);
-//            AbstractPower strength = AbstractDungeon.player.getPower(StrengthPower.POWER_ID);
-//
-//            if (charge != null) {
-//                this.damage += charge.amount * (this.magicNumber - 1);
-//                this.baseDamage += charge.amount * (this.magicNumber - 1);
-//            }
-//            if (strength != null) {
-//                this.damage += strength.amount * (this.magicNumber - 1);
-//                this.baseDamage += strength.amount * (this.magicNumber - 1);
-//            }
-//
-//            super.calculateDamageDisplay(mo);
-//
-//            if (charge != null) {
-//                this.damage -= charge.amount * (this.magicNumber - 1);
-//                this.baseDamage -= charge.amount * (this.magicNumber - 1);
-//            }
-//            if (strength != null) {
-//                this.damage -= strength.amount * (this.magicNumber - 1);
-//                this.baseDamage -= strength.amount * (this.magicNumber - 1);
-//            }
-//        } else {
-//            super.calculateDamageDisplay(mo);
-//        }
-//    }
-
     @Override
     public AbstractCard makeCopy() {
         return new HeavyKick();
@@ -114,6 +84,15 @@ public class HeavyKick
         if (!this.upgraded) {
             this.upgradeName();
             this.upgradeMagicNumber(UPGRADE_SCALING_AMOUNT);
+        }
+    }
+
+    @Override
+    public void triggerOnGlowCheck() {
+        if (isPlayerInThisForm(CentaurGene.ID)) {
+            this.glowColor = GOLD_BORDER_GLOW_COLOR.cpy();
+        } else {
+            this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
         }
     }
 }

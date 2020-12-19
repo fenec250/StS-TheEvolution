@@ -1,5 +1,6 @@
 package evolutionmod.orbs;
 
+import basemod.BaseMod;
 import basemod.helpers.TooltipInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -11,6 +12,8 @@ import evolutionmod.actions.SuccubusGeneAction;
 import evolutionmod.cards.AdaptableEvoCard;
 import evolutionmod.powers.PotencyPower;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class SuccubusGene extends AbstractGene {
@@ -20,8 +23,8 @@ public class SuccubusGene extends AbstractGene {
 	public static final String COLOR = "[#F04040]";
 	public static final String[] DESCRIPTION = orbStrings.DESCRIPTION;
 	public static final String IMG_PATH = "evolutionmod/images/orbs/SuccubusGene.png";
-	public static final int LUST = 1;
-	public static final int VULNERABLE = 1;
+	public static final int LUST = 2;
+	public static final int VULNERABLE = 0;
 
 	public SuccubusGene() {
 		super(ID, NAME, getDescription(), IMG_PATH, COLOR);
@@ -30,7 +33,12 @@ public class SuccubusGene extends AbstractGene {
 	@Override
 	public void onStartOfTurn() {
 		super.onStartOfTurn();
-		apply(AbstractDungeon.player, null, 1);
+		apply(AbstractDungeon.player, null, 1, false);
+	}
+
+	@Override
+	public void onEvoke() {
+		apply(AbstractDungeon.player, null, 1, true);
 	}
 
 	@Override
@@ -42,11 +50,15 @@ public class SuccubusGene extends AbstractGene {
 	public void playChannelSFX() {
 	}
 
-	public static void apply(AbstractPlayer p, AbstractMonster m, int times) {
+	public static void apply(AbstractPlayer p, AbstractMonster m, int times, boolean addToTop) {
 		int damage = damage();
 		int vulnerable = vulnerable();
 		for (int i = 0; i < times; ++i) {
-			AbstractDungeon.actionManager.addToBottom(new SuccubusGeneAction(p, m, damage, vulnerable));
+			if (addToTop) {
+				AbstractDungeon.actionManager.addToTop(new SuccubusGeneAction(p, m, damage, vulnerable));
+			} else {
+				AbstractDungeon.actionManager.addToBottom(new SuccubusGeneAction(p, m, damage, vulnerable));
+			}
 		}
 	}
 
@@ -57,20 +69,16 @@ public class SuccubusGene extends AbstractGene {
 
 	@Override
 	public void updateDescription() {
-		this.description = "#yPassive and #yEvoke: " + getDescription();
+//		super.updateDescription();
+		this.description = getOrbDescription();
 	}
 
-	public static List<TooltipInfo> addTooltip(List<TooltipInfo> tooltips, String rawDescription) {
-		if (rawDescription.contains("Succubus")) {
-			tooltips.add(new TooltipInfo(
-					COLOR + NAME + "[]",
-					getDescription()));
-		}
-		return tooltips;
+	public static String getOrbDescription() {
+		return "At the #bstart #bof #byour #bturn and when #yEvoked: NL " + getDescription();
 	}
 
 	public static String getDescription() {
-		return DESCRIPTION[0] + damage() + DESCRIPTION[1] + vulnerable() + DESCRIPTION[2];
+		return DESCRIPTION[0] + damage() + DESCRIPTION[1];
 	}
 
 	private static int damage() {
@@ -101,7 +109,7 @@ public class SuccubusGene extends AbstractGene {
 
 		@Override
 		public void apply(AbstractPlayer p, AbstractMonster m) {
-			SuccubusGene.apply(p, m, this.amount);
+			SuccubusGene.apply(p, m, this.amount, true);
 		}
 
 		@Override

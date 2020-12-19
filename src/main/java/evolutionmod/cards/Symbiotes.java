@@ -3,11 +3,13 @@ package evolutionmod.cards;
 import com.evacipated.cardcrawl.mod.stslib.actions.common.RefundAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import evolutionmod.orbs.InsectGene;
+import evolutionmod.orbs.LizardGene;
 import evolutionmod.orbs.PlantGene;
 import evolutionmod.patches.AbstractCardEnum;
 import evolutionmod.powers.SymbiotesPower;
@@ -29,6 +31,7 @@ public class Symbiotes
                 CardType.POWER, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.UNCOMMON, CardTarget.SELF);
         this.magicNumber = this.baseMagicNumber = SYMBIOTES_AMT;
+        this.cardsToPreview = new Drone();
     }
 
     @Override
@@ -45,6 +48,15 @@ public class Symbiotes
             this.upgradeName();
 //            this.isInnate = true;
             this.upgradeMagicNumber(UPGRADE_SYMBIOTES_AMT);
+        }
+    }
+
+    @Override
+    public void triggerOnGlowCheck() {
+        if (isPlayerInThisForm(InsectGene.ID) && isPlayerInThisForm(LizardGene.ID)) {
+            this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
+        } else {
+            this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
         }
     }
 }

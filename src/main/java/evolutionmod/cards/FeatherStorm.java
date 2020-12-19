@@ -81,4 +81,13 @@ public class FeatherStorm
             this.upgradeMagicNumber(UPGRADE_FEATHER_AMT);
         }
     }
+
+    @Override
+    public void triggerOnGlowCheck() {
+        if (this.shouldSpawnFeathers) {
+            this.glowColor = GOLD_BORDER_GLOW_COLOR.cpy();
+        } else {
+            this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
+        }
+    }
 }

@@ -53,16 +53,11 @@ public class InsectGene extends AbstractGene {
 	@Override
 	public void updateDescription() {
 //		super.updateDescription();
-		this.description = "#yPassive: " + getDescription();
+		this.description = getOrbDescription();
 	}
 
-	public static List<TooltipInfo> addTooltip(List<TooltipInfo> tooltips, String rawDescription) {
-		if (rawDescription.contains("Insect")) {
-			tooltips.add(new TooltipInfo(
-					COLOR + NAME + "[]",
-					getDescription()));
-		}
-		return tooltips;
+	public static String getOrbDescription() {
+		return "At the #bstart #bof #byour #bturn and when #yEvoked: NL " + getDescription();
 	}
 
 	public static String getDescription() {

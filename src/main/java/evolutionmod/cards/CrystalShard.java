@@ -50,7 +50,7 @@ public class CrystalShard
 	private AbstractGene secondGene; // secoIndex = genesIndex % 10
 
 	public CrystalShard() {
-		super(ID, NAME, IMG_PATH, COST, DESCRIPTION + EXTENDED_DESCRIPTION[0],
+		super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
 				CardType.ATTACK, AbstractCardEnum.EVOLUTION_BLUE,
 				CardRarity.COMMON, CardTarget.ENEMY);
 		this.damage = this.baseDamage = DAMAGE_AMT;
@@ -61,7 +61,7 @@ public class CrystalShard
 	}
 
 	private CrystalShard(int geneIndexes) {
-		super(ID, NAME, IMG_PATH, COST, DESCRIPTION + EXTENDED_DESCRIPTION[0],
+		super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
 				CardType.ATTACK, AbstractCardEnum.EVOLUTION_BLUE,
 				CardRarity.COMMON, CardTarget.ENEMY);
 		this.damage = this.baseDamage= DAMAGE_AMT;
@@ -75,7 +75,7 @@ public class CrystalShard
 	public void use(AbstractPlayer p, AbstractMonster m) {
 		int damage = this.damage;
 
-		BaseEvoCard.formEffect(this.firstGene.ID); // effect applied in calculateDamage
+		BaseEvoCard.formEffect(this.firstGene.ID); // effect applied in calculateBlock
 		addToBot(new DamageAction(
 				m, new DamageInfo(p, damage, this.damageTypeForTurn),
 				AbstractGameAction.AttackEffect.BLUNT_HEAVY));
@@ -129,6 +129,15 @@ public class CrystalShard
 	}
 
 	@Override
+	public void triggerOnGlowCheck() {
+		if (isPlayerInThisForm(secondGene.ID) && isPlayerInThisForm(firstGene.ID)) {
+			this.glowColor = GOLD_BORDER_GLOW_COLOR.cpy();
+		} else {
+			this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
+		}
+	}
+
+	@Override
 	public List<TooltipInfo> getCustomTooltips() {
 		if (customTooltips == null) {
 			super.getCustomTooltips();
@@ -159,9 +168,9 @@ public class CrystalShard
 				new ShadowGene()};
 		this.firstGene =  validGenes[this.genesIndexes / 11];
 		this.secondGene = validGenes[this.genesIndexes / 11 == this.genesIndexes % 10 ? 10 : this.genesIndexes % 10];
-		this.rawDescription = DESCRIPTION
-				+ this.firstGene.getColoredName() + EXTENDED_DESCRIPTION[1]
-				+ this.secondGene.getColoredName() + EXTENDED_DESCRIPTION[2];
+		this.rawDescription = EXTENDED_DESCRIPTION[0]
+				+ this.firstGene.ID + EXTENDED_DESCRIPTION[1]
+				+ this.secondGene.ID + EXTENDED_DESCRIPTION[2];
 		initializeDescription();
 	}
 

@@ -31,6 +31,7 @@ public class Broodmother extends BaseEvoCard {
                 CardType.POWER, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.RARE, CardTarget.SELF);
         this.magicNumber = this.baseMagicNumber = BROOD_POWER_AMT;
+        this.cardsToPreview = new Drone();
     }
 
     @Override

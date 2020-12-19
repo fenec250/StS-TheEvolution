@@ -56,16 +56,7 @@ public class BeastGene extends AbstractGene {
 	@Override
 	public void updateDescription() {
 //		super.updateDescription();
-		this.description = "#yPassive and #yEvoke: " + getDescription();
-	}
-
-	public static List<TooltipInfo> addTooltip(List<TooltipInfo> tooltips, String rawDescription) {
-		if (rawDescription.contains("Beast")) {
-			tooltips.add(new TooltipInfo(
-					COLOR + NAME + "[]",
-					getDescription()));
-		}
-		return tooltips;
+		this.description = getOrbDescription();
 	}
 
 	@Override
@@ -73,9 +64,12 @@ public class BeastGene extends AbstractGene {
 		return new Adaptation(1);
 	}
 
+	public static String getOrbDescription() {
+		return "At the #bstart #bof #byour #bturn and when #yEvoked: NL " + getDescription();
+	}
+
 	public static String getDescription() {
-		return DESCRIPTION[0] + rage() + DESCRIPTION[2];
-//		return DESCRIPTION[0] + block() + DESCRIPTION[1] + rage() + DESCRIPTION[2];
+		return DESCRIPTION[0] + rage() + DESCRIPTION[1];
 	}
 
 	private static int block() {

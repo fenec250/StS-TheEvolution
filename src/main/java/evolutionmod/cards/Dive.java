@@ -62,6 +62,17 @@ public class Dive
         if (!this.upgraded) {
             this.upgradeName();
             this.upgradeBlock(UPGRADE_BLOCK_AMT);
+            this.rawDescription = UPGRADE_DESCRIPTION;
+            this.initializeDescription();
         }
     }
+
+	@Override
+	public void triggerOnGlowCheck() {
+		if (!upgraded && isPlayerInThisForm(MerfolkGene.ID)) {
+			this.glowColor = GOLD_BORDER_GLOW_COLOR.cpy();
+		} else {
+			this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
+		}
+	}
 }

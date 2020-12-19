@@ -67,7 +67,7 @@ public class Mastery
 
 	@Override
 	public void use(AbstractPlayer p, AbstractMonster m) {
-		addToBot(new ApplyPowerAction(p, p, new MasteryPower(p, this.magicNumber, gene.ID, gene.getColoredName())));
+		addToBot(new ApplyPowerAction(p, p, new MasteryPower(p, this.magicNumber, gene.ID)));
 		addToBot(new AbstractGameAction() {
 			@Override
 			public void update() {
@@ -104,6 +104,16 @@ public class Mastery
 	}
 
 	@Override
+	public void triggerOnGlowCheck() {
+		AbstractPlayer player = AbstractDungeon.player;
+		if (isPlayerInThisForm(this.gene.ID) && player.orbs.size() <= player.maxOrbs) {
+			this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
+		} else {
+			this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
+		}
+	}
+
+	@Override
 	public List<TooltipInfo> getCustomTooltips() {
 		if (customTooltips == null) {
 			super.getCustomTooltips();
@@ -134,11 +144,11 @@ public class Mastery
 				new ShadowGene()};
 		this.gene = validGenes[this.geneIndex];
 		this.rawDescription = EXTENDED_DESCRIPTION[0]
-				+ this.gene.name + EXTENDED_DESCRIPTION[1]
+				+ this.gene.ID + EXTENDED_DESCRIPTION[1]
 				+ (!this.upgraded
-				? this.gene.name + EXTENDED_DESCRIPTION[2]
-				: EXTENDED_DESCRIPTION[3] + this.gene.name + EXTENDED_DESCRIPTION[4]);
-		this.name = this.gene.getColoredName() + EXTENDED_DESCRIPTION[5];
+				? this.gene.ID + EXTENDED_DESCRIPTION[2]
+				: EXTENDED_DESCRIPTION[3] + this.gene.ID + EXTENDED_DESCRIPTION[4]);
+		this.name = replaceGeneIds(this.gene.ID + EXTENDED_DESCRIPTION[5]);
 		initializeDescription();
 	}
 

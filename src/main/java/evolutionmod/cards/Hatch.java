@@ -1,5 +1,6 @@
 package evolutionmod.cards;
 
+import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -28,44 +29,21 @@ public class Hatch
                 CardRarity.COMMON, CardTarget.SELF);
         this.block = this.baseBlock = BLOCK_AMT;
         this.magicNumber = this.baseMagicNumber = DRONES_AMT;
+        this.cardsToPreview = new Drone();
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        int drones = 1;
-        if (upgraded || isPlayerInThisForm(InsectGene.ID)) {
-            drones += 1;
-        }
+        int drones = this.magicNumber;
         addToBot(new MakeTempCardInHandAction(Drone.createDroneWithInteractions(p), drones));
-        addToBot(new MakeTempCardInHandAction(new DroneGuard(), this.magicNumber));
+//        addToBot(new MakeTempCardInHandAction(new DroneGuard(), this.magicNumber));
         if (this.upgraded) {
             addToBot(new ChannelAction(new InsectGene()));
+            addToBot(new GainBlockAction(p, this.block));
         } else {
-            formEffect(InsectGene.ID);
+            formEffect(InsectGene.ID, () -> addToBot(new GainBlockAction(p, this.block)));
         }
     }
-
-//    @Override
-//    public void applyPowers() {
-//        calculateDroneAmount();
-//        super.applyPowers();
-//        this.isMagicNumberModified = this.magicNumber != DRONES_AMT + (this.upgraded ? UPGRADE_DRONES_AMT : 0);
-//    }
-//
-//    @Override
-//    public void calculateCardDamage(AbstractMonster mo) {
-//        calculateDroneAmount();
-//        super.calculateCardDamage(mo);
-//        this.isMagicNumberModified = this.magicNumber != DRONES_AMT + (this.upgraded ? UPGRADE_DRONES_AMT : 0);
-//    }
-//
-//    private void calculateDroneAmount() {
-//        this.magicNumber = this.baseMagicNumber = DRONES_AMT;
-//        if (this.upgraded || BaseEvoCard.isPlayerInThisForm(InsectGene.ID)) {
-//            this.magicNumber += UPGRADE_DRONES_AMT;
-//            this.baseMagicNumber += UPGRADE_DRONES_AMT;
-//        }
-//    }
 
     @Override
     public void upgrade() {
@@ -74,6 +52,15 @@ public class Hatch
 //            this.upgradeMagicNumber(UPGRADE_DRONES_AMT);
             this.rawDescription = UPGRADE_DESCRIPTION;
             this.initializeDescription();
+        }
+    }
+
+    @Override
+    public void triggerOnGlowCheck() {
+        if (isPlayerInThisForm(InsectGene.ID)) {
+            this.glowColor = GOLD_BORDER_GLOW_COLOR.cpy();
+        } else {
+            this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
         }
     }
 }

@@ -24,7 +24,7 @@ public class Treasure extends BaseEvoCard {
 	public Treasure() {
 		super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
 				CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
-				CardRarity.COMMON, CardTarget.SELF);
+				CardRarity.UNCOMMON, CardTarget.SELF);
 		this.exhaust = true;
 	}
 
@@ -54,6 +54,8 @@ public class Treasure extends BaseEvoCard {
 	public void upgrade() {
 		if (!this.upgraded) {
 			this.upgradeName();
+			this.rawDescription = UPGRADE_DESCRIPTION;
+			this.initializeDescription();
 		}
 	}
 }

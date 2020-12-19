@@ -1,75 +1,51 @@
 {
   "evolutionmod:CentaurGene": {
     "NAME": "Centaur",
-    "DESCRIPTION": ["At the start of your turn gain ", " #yVigor"]
+    "DESCRIPTION": ["Increase the damage of your next Attack by #b", "."]
   },
   "evolutionmod:PlantGene": {
     "NAME": "Plant",
-    "DESCRIPTION": ["At the start of your turn gain ", " Block and ", " #yGrowth."]
-//    "DESCRIPTION": ["At the start of your turn gain ", " Block and ", " #yBrambles."]
+    "DESCRIPTION": ["Gain #b", " #yGrowth. Upon reaching 3 Growth gain 1 Energy and reduce Growth by 3."]
   },
   "evolutionmod:MerfolkGene": {
     "NAME": "Merfolk",
-    "DESCRIPTION": ["At the end of your turn gain ", " Block"]
+    "DESCRIPTION": ["Gain #b", " #yBlock."]
   },
   "evolutionmod:HarpyGene": {
     "NAME": "Harpy",
-    "DESCRIPTION": ["At the start of your turn draw ", "a card.", " cards."]
+    "DESCRIPTION": ["Draw #b", "a card.", " cards."]
   },
   "evolutionmod:LavafolkGene": {
     "NAME": "Lavafolk",
-    "DESCRIPTION": ["At the end of your turn deal ", " damage to a random enemy", " times", "."]
+    "DESCRIPTION": ["Deal #b", " damage to a random enemy", " #b", " times", "."]
   },
   "evolutionmod:SuccubusGene": {
     "NAME": "Succubus",
-    "DESCRIPTION": ["At the start of your turn apply ", " #yLust and ", " #yVulnerable to a random enemy"]
+    "DESCRIPTION": ["Apply #b", " #yLust to a random enemy. Lust reduces the base damage of its next attack."]
+//    "DESCRIPTION": ["Apply ", " #yLust and ", " #yVulnerable to a random enemy"]
   },
   "evolutionmod:LymeanGene": {
     "NAME": "Lymean",
-//    "DESCRIPTION": ["At the end of your turn gain ", " Block and heal a random enemy for ", " HP."]
-    "DESCRIPTION": ["At the start of your turn #yScry "]
+    "DESCRIPTION": ["#yFate #b", " random cards from your draw pile. #yFate puts these cards on top of your draw pile and Scry them."]
   },
   "evolutionmod:InsectGene": {
     "NAME": "Insect",
-    "DESCRIPTION": ["At the start of your turn add a #yDrone to your hand."]
+    "DESCRIPTION": ["Add a #yDrone to your hand. #yDrones are 0-cost Attacks with Exhaust and Ethereal."]
   },
   "evolutionmod:BeastGene": {
     "NAME": "Beast",
-    "DESCRIPTION": ["At the start of your turn gain ", " Block and ", " #yRage."]
+    "DESCRIPTION": ["Whenever you play an Attack this turn, gain #b", " #yBlock."]
   },
   "evolutionmod:LizardGene": {
     "NAME": "Lizard",
-    "DESCRIPTION": ["At the start of your turn apply ", " #yPoison to a random enemy"]
+    "DESCRIPTION": ["Apply #b", " #yPoison", " and deal #b", " damage", " to a random enemy."]
+//    "DESCRIPTION": ["Apply #b", " #yPoison to a random enemy. #yPoison deals damage equal to its amount and reduces by 1 at the end of your turn"]
 //    "DESCRIPTION": ["At the start of your turn deal ", " damage and apply ", " Poison to a random enemy"]
   },
   "evolutionmod:ShadowGene": {
     "NAME": "Shadow",
-    "DESCRIPTION": ["At the start of your turn apply ", " #yWeak to a random enemy."]
-//    "DESCRIPTION": ["At the start of your turn deal ", " damage and apply ", " Weak to a random enemy."]
+    "DESCRIPTION": ["Apply ", " #yWeak to a random enemy."]
   }
-//  "evolutionmod:DancePower": {
-//    "NAME": "Dance",
-//    "DESCRIPTIONS": ["The next card played is free if it is a Dance less than ", ". You played ", " steps in this dance"]
-//  },
-//
-//
-//  "evolutionmod:BeatOfLifePower": {
-//    "NAME": "Beat of Life",
-//    "DESCRIPTIONS": ["When you gain Rhythm, gain ", "as much block.", " times as much block."]
-//  },
-//  "evolutionmod:ChoreographyPower": {
-//    "NAME": "Choreography",
-//    "DESCRIPTIONS": ["At the beggining of your turn, dance "]
-//  },
-//  "evolutionmod:HotPower": {
-//    "NAME": "Hot",
-//    "DESCRIPTIONS": ["When you Dance, deal ", " damage times the number of Steps to all enemies"]
-//  },
-//  "evolutionmod:RefrainPower": {
-//    "NAME": "Refrain",
-//    "DESCRIPTIONS": ["Gain ", " Rhythm at the start of your turn."]
-//  },
-//
 //
 //  "mystighjcmod:ArtesPlayedPower": {
 //    "NAME": "[#FF5252]Poise[]",

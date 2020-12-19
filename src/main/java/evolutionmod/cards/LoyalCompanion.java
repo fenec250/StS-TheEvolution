@@ -108,8 +108,17 @@ public class LoyalCompanion
 			this.rawDescription = this.gene == null
 					? DESCRIPTION + EXTENDED_DESCRIPTION[0] + EXTENDED_DESCRIPTION[2]
 						+ EXTENDED_DESCRIPTION[3] + EXTENDED_DESCRIPTION[4]
-					: DESCRIPTION + EXTENDED_DESCRIPTION[2] + this.gene.name + EXTENDED_DESCRIPTION[4];
+					: DESCRIPTION + EXTENDED_DESCRIPTION[2] + this.gene.ID + EXTENDED_DESCRIPTION[4];
 			this.initializeDescription();
+		}
+	}
+
+	@Override
+	public void triggerOnGlowCheck() {
+		if (isPlayerInThisForm(gene.ID) && !upgraded) {
+			this.glowColor = GOLD_BORDER_GLOW_COLOR.cpy();
+		} else {
+			this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
 		}
 	}
 
@@ -140,7 +149,7 @@ public class LoyalCompanion
 				new InsectGene(),
 				new LizardGene()};
 		this.gene = validGenes[this.geneIndex];
-		this.rawDescription = DESCRIPTION + this.gene.getColoredName() + EXTENDED_DESCRIPTION[1];
+		this.rawDescription = DESCRIPTION + this.gene.ID + EXTENDED_DESCRIPTION[1];
 		initializeDescription();
 	}
 

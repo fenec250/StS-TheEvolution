@@ -53,7 +53,7 @@ public class CrystalDust
 	private AbstractGene gene;
 
 	public CrystalDust() {
-		super(ID, NAME, IMG_PATH, COST, EXTENDED_DESCRIPTION[0] + DESCRIPTION,
+		super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
 				CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
 				CardRarity.UNCOMMON, CardTarget.SELF);
 		this.magicNumber = this.baseMagicNumber = COPIES_AMT;
@@ -63,7 +63,7 @@ public class CrystalDust
 	}
 
 	private CrystalDust(int geneIndex) {
-		super(ID, NAME, IMG_PATH, COST, EXTENDED_DESCRIPTION[0] + DESCRIPTION,
+		super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
 				CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
 				CardRarity.UNCOMMON, CardTarget.SELF);
 		this.magicNumber = this.baseMagicNumber = COPIES_AMT;
@@ -99,9 +99,18 @@ public class CrystalDust
 			this.upgradeName();
 			this.upgradeMagicNumber(UPGRADE_COPIES_AMT);
 			this.rawDescription = this.gene == null
-					? EXTENDED_DESCRIPTION[0] + UPGRADE_DESCRIPTION
-					: this.gene.name + UPGRADE_DESCRIPTION;
+					? UPGRADE_DESCRIPTION
+					: this.gene.ID + EXTENDED_DESCRIPTION[1];
 			this.initializeDescription();
+		}
+	}
+
+	@Override
+	public void triggerOnGlowCheck() {
+		if (isPlayerInThisForm(gene.ID)) {
+			this.glowColor = GOLD_BORDER_GLOW_COLOR.cpy();
+		} else {
+			this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
 		}
 	}
 
@@ -135,7 +144,7 @@ public class CrystalDust
 				new CentaurGene(),
 				new ShadowGene()};
 		this.gene = validGenes[this.geneIndex];
-		this.rawDescription = this.gene.name + DESCRIPTION;
+		this.rawDescription = this.gene.ID + (this.upgraded ? EXTENDED_DESCRIPTION[1] : EXTENDED_DESCRIPTION[0]);
 		initializeDescription();
 	}
 

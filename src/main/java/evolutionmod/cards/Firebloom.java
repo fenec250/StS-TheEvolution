@@ -52,6 +52,15 @@ public class Firebloom
     }
 
     @Override
+    public void triggerOnGlowCheck() {
+        if (isPlayerInThisForm(PlantGene.ID)) {
+            this.glowColor = GOLD_BORDER_GLOW_COLOR.cpy();
+        } else {
+            this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
+        }
+    }
+
+    @Override
     public void initializeDescription() {
         this.rawDescription = this.magicNumber > 1 ? UPGRADE_DESCRIPTION : DESCRIPTION;
         super.initializeDescription();

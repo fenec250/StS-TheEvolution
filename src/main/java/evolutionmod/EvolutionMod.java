@@ -34,14 +34,15 @@ import java.util.List;
 @SpireInitializer
 public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscriber, EditKeywordsSubscriber, EditRelicsSubscriber, EditStringsSubscriber, PostInitializeSubscriber {
 
-    private static final Color melodyLime = CardHelper.getColor(191, 255, 1); //0xbfff00
-    private static final String attackCard = "evolutionmod/images/512/bg_attack_mystic.png"; //TODO: change these images
-    private static final String skillCard = "evolutionmod/images/512/bg_skill_mystic.png";
-    private static final String powerCard = "evolutionmod/images/512/bg_power_mystic.png";
+    private static final Color melodyLime = CardHelper.getColor(53, 140, 127); // 0x358c7e
+//    private static final Color melodyLime = CardHelper.getColor(191, 255, 1); //0xbfff00
+    private static final String attackCard = "evolutionmod/images/512/bg_attack_evo.png";
+    private static final String skillCard = "evolutionmod/images/512/bg_skill_evo.png";
+    private static final String powerCard = "evolutionmod/images/512/bg_power_evo.png";
     private static final String energyOrb = "evolutionmod/images/512/evolution_orb.png";
-    private static final String attackCardPortrait = "evolutionmod/images/1024/bg_attack_mystic.png";
-    private static final String skillCardPortrait = "evolutionmod/images/1024/bg_skill_mystic.png";
-    private static final String powerCardPortrait = "evolutionmod/images/1024/bg_power_mystic.png";
+    private static final String attackCardPortrait = "evolutionmod/images/1024/bg_attack_evo.png";
+    private static final String skillCardPortrait = "evolutionmod/images/1024/bg_skill_evo.png";
+    private static final String powerCardPortrait = "evolutionmod/images/1024/bg_power_evo.png";
     private static final String energyOrbPortrait = "evolutionmod/images/1024/evolution_orb.png";
     private static final String charButton = "evolutionmod/images/charSelect/button.png";
     private static final String charPortrait = "evolutionmod/images/charSelect/portrait.png";
@@ -85,9 +86,9 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
 
         //Special
         cards.add(new Drone());
-        cards.add(new DroneGuard());
-        cards.add(new DroneFire());
-        cards.add(new DroneMantis());
+//        cards.add(new DroneGuard());
+//        cards.add(new DroneFire());
+//        cards.add(new DroneMantis());
         cards.add(new Feather());
 
         //Commons
@@ -161,6 +162,7 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
         cards.add(new Stampede());
         cards.add(new Seduce());
 //        cards.add(new SpikeVolley());
+        cards.add(new Stalker());
         cards.add(new Photosynthesis());
         cards.add(new Eruption());
         cards.add(new Frenzy());
@@ -204,10 +206,13 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
         BaseMod.addKeyword("Shift", keywordShift, "Recreate the gene at the back of the orb line.");
         String[] keywordFate = {"fate"};
 //        BaseMod.addKeyword("Fate", keywordFate, "Look at the top X cards of your draw pile. You may discard any of them. Discarded cards may trigger the associated effect.");
-        BaseMod.addKeyword("Fate", keywordFate, "Look random cards from your deck matching X. You may discard any of them. Place the remaining ones on top of your deck. Counts as Scrying.");
+        BaseMod.addKeyword("Fate X", keywordFate, "Put random cards from your draw pile matching X on top of your draw pile, then Scry them.");
         String[] keywordBrambles = {"brambles", "bramble"};
         BaseMod.addKeyword("Bramble", keywordBrambles,
                 "Whenever you are attacked this turn, deal this amount of damage back");
+        String[] keywordGrowth = {"growth", "Plant"};
+        BaseMod.addKeyword("Growth", keywordGrowth,
+                "Upon reaching 3 Growth gain 1 Energy and reduce Growth by 3.");
         String[] keywordDrone = {"drone", "drones"};
         BaseMod.addKeyword("Drone", keywordDrone,
                 "Drones are 0 cost attacks which benefit from Potency, are Ethereal and Exhaust when played.");
@@ -216,48 +221,13 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
                 "Whenever you play an Attack this turn, gain this amount of Block.");
         String[] keywordSubmission = {"lust"};
         BaseMod.addKeyword("Lust", keywordSubmission,
-                "Reduce damage dealt by this amount. Removed after attacking.");
+                "Reduce the base damage of the next attack by this amount.");
 //        String[] keywordCharge = {"charge", "centaur"};
 //        BaseMod.addKeyword("Charge", keywordCharge,
 //                "Increase the damage of your next hit then reduces by half.");
         String[] keywordCharge = {"vigor", "centaur"};
         BaseMod.addKeyword("Vigor", keywordCharge,
                 "Increases the damage of your next Attack.");
-
-//        String[] keywordCentaur = {CentaurGene.NAME.toLowerCase(), "centaur"};
-//        BaseMod.addKeyword(CentaurGene.COLOR + " gene[]", keywordCentaur,
-//                "Orb: at the start of your turn, gain 3 Vigor.");
-////                "Orb: at the start of your turn, gain 3 Charge.");
-//        String[] keywordPlant = {PlantGene.NAME.toLowerCase(), PlantGene.COLOR + "Plant[]", "plant", "[#60B040]plant[]"};
-//        BaseMod.addKeyword( PlantGene.COLOR + PlantGene.NAME + " gene[]", keywordPlant,
-//                "Orb: gain 1 Block and 3 Brambles at the start of your turn.");
-//        String[] keywordHarpy = {HarpyGene.NAME.toLowerCase(), "harpy"};
-//        BaseMod.addKeyword( HarpyGene.COLOR + HarpyGene.NAME + " gene[]", keywordHarpy,
-//                "Orb: draw a card at the start of your turn.");
-//        String[] keywordLavafolk = {LavafolkGene.NAME.toLowerCase(), "lavafolk"};
-//        BaseMod.addKeyword( LavafolkGene.COLOR + LavafolkGene.NAME + " gene[]", keywordLavafolk,
-//                "Orb: deal 2 damage to a random enemy twice at the end of your turn.");
-//        String[] keywordBeast = {BeastGene.NAME.toLowerCase(), "beast", BeastGene.COLOR + "beast"};
-//        BaseMod.addKeyword( BeastGene.COLOR + BeastGene.NAME + " gene[]", keywordBeast,
-//                "Orb: gain 1 block and 2 rage at the start of your turn.");
-//        String[] keywordMerfolk = {MerfolkGene.NAME.toLowerCase(), "merfolk"};
-//        BaseMod.addKeyword(MerfolkGene.COLOR + MerfolkGene.NAME + " gene", keywordMerfolk,
-//                "Orb: gain 4 Block at the end of your turn.");
-//        String[] keywordLymean = {LymeanGene.NAME.toLowerCase(), "lymean"};
-//        BaseMod.addKeyword(LymeanGene.COLOR + LymeanGene.NAME + " gene", keywordLymean,
-//                "Orb: Scry 2 at the start of your turn.");
-//        String[] keywordShadow = {ShadowGene.NAME.toLowerCase(), "shadow"};
-//        BaseMod.addKeyword(ShadowGene.COLOR + ShadowGene.NAME + " gene", keywordShadow,
-//                "Orb: deal 1 damage and apply 2 Weak at the start of your turn.");
-//        String[] keywordSuccubus = {SuccubusGene.NAME.toLowerCase(), "succubus"};
-//        BaseMod.addKeyword(SuccubusGene.COLOR + SuccubusGene.NAME + " gene", keywordSuccubus,
-//                "Orb: deal 1 damage and apply 2 Vulnerable at the start of your turn.");
-//        String[] keywordInsect = {InsectGene.NAME.toLowerCase(), "insect"};
-//        BaseMod.addKeyword(InsectGene.COLOR + InsectGene.NAME + " gene", keywordInsect,
-//                "Orb: deal 1 damage and apply 2 Weak at the start of your turn.");
-//        String[] keywordLizard = {LizardGene.NAME.toLowerCase(), "lizard"};
-//        BaseMod.addKeyword(LizardGene.COLOR + LizardGene.NAME + " gene", keywordLizard,
-//                "Orb: deal 1 damage and apply 3 Poison at the start of your turn.");
 
 //        String[] keywordCantrips = {"cantrip", "cantrips"};
 //        BaseMod.addKeyword(keywordCantrips, "Considered a [#5299DC]Spell[] so long as you've played fewer than 3 [#5299DC]Spells[] this turn.");

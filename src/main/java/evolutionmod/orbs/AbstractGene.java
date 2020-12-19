@@ -10,7 +10,7 @@ public abstract class AbstractGene extends CustomOrb {
 	private boolean showOrbText;
 
 	public AbstractGene(String id, String name, String description, String imgPath, String color) {
-		this(id, name, description, imgPath, color, true);
+		this(id, name, description, imgPath, color, false);
 	}
 
 	public AbstractGene(String id, String name, String description, String imgPath, String color, boolean showOrbText) {
@@ -27,12 +27,6 @@ public abstract class AbstractGene extends CustomOrb {
 	}
 
 	public abstract AdaptableEvoCard.AbstractAdaptation getAdaptation();
-	public String getColoredName() {
-		return colorize(this.name);
-	}
-	public String colorize(String string) {
-		return colorString + string + "[]";
-	}
 
 	@Override
 	protected void renderText(SpriteBatch sb) {

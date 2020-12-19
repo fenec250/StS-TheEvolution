@@ -14,6 +14,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.RagePower;
 import evolutionmod.orbs.BeastGene;
 import evolutionmod.orbs.HarpyGene;
+import evolutionmod.orbs.PlantGene;
 import evolutionmod.patches.AbstractCardEnum;
 
 import java.util.Iterator;
@@ -58,6 +59,15 @@ public class HeightenedSenses
             this.upgradeMagicNumber(UPGRADED_DRAW_AMT);
             this.rawDescription = UPGRADE_DESCRIPTION;
             this.initializeDescription();
+        }
+    }
+
+    @Override
+    public void triggerOnGlowCheck() {
+        if (isPlayerInThisForm(HarpyGene.ID) && isPlayerInThisForm(BeastGene.ID)) {
+            this.glowColor = GOLD_BORDER_GLOW_COLOR.cpy();
+        } else {
+            this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
         }
     }
 

@@ -60,12 +60,16 @@ public class LavafolkGene extends AbstractGene {
 	@Override
 	public void updateDescription() {
 //		super.updateDescription();
-		this.description = "#yEnd #yof #yTurn and #yEvoke: " + getDescription();
+		this.description = getOrbDescription();
+	}
+
+	public static String getOrbDescription() {
+		return "At the #rend #rof #ryour #rturn and when #yEvoked: NL " + getDescription();
 	}
 
 	public static String getDescription() {
 		int strikes = strikeNb();
-		return DESCRIPTION[0] + damage() + DESCRIPTION[1] + (strikes > 1 ? " " + strikes + DESCRIPTION[2] + DESCRIPTION[3] : DESCRIPTION[3]);
+		return DESCRIPTION[0] + damage() + DESCRIPTION[1] + (strikes > 1 ? DESCRIPTION[2] + strikes + DESCRIPTION[3] + DESCRIPTION[4] : DESCRIPTION[4]);
 	}
 
 	private static int damage() {

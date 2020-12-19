@@ -51,7 +51,8 @@ public class HumanityPower extends AbstractPower {
     @Override
     public void onChannel(AbstractOrb orb) {
         if (orb instanceof AbstractGene){
-            this.addToBot(new EvokeSpecificOrbAction(orb));
+            this.addToTop(new EvokeSpecificOrbAction(orb));
+//            this.addToBot(new EvokeSpecificOrbAction(orb));
             for(int i = 1; i < this.amount; ++i) {
                 orb.onEvoke();
             }

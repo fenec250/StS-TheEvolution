@@ -1,16 +1,20 @@
 package evolutionmod.cards;
 
 import com.evacipated.cardcrawl.mod.stslib.actions.defect.EvokeSpecificOrbAction;
+import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import evolutionmod.orbs.InsectGene;
 import evolutionmod.orbs.LavafolkGene;
 import evolutionmod.patches.AbstractCardEnum;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class FireAnts
@@ -29,16 +33,12 @@ public class FireAnts
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.UNCOMMON, CardTarget.SELF);
-        this.magicNumber = this.baseMagicNumber = EVOKE_AMT;
+//        this.magicNumber = this.baseMagicNumber = EVOKE_AMT;
+        this.cardsToPreview = new Drone();
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-
-        int maxEvoke = this.magicNumber;
-        if (!this.upgraded && BaseEvoCard.isPlayerInThisForm(InsectGene.ID)) {
-            maxEvoke += UPGRADE_EVOKE_AMT;
-        }
 //        p.orbs.stream()
 //                .filter(o -> LavafolkGene.ID.equals(o.ID))
 //                .limit(maxEvoke)
@@ -47,29 +47,48 @@ public class FireAnts
 //                    addToBot(new EvokeSpecificOrbAction(o));
 //                    addToBot(new MakeTempCardInHandAction(Drone.createDroneWithInteractions(p)));
 //                });
-        for(int i = 0; i < this.magicNumber; ++i) {
-            if (isPlayerInThisForm(LavafolkGene.ID)) {
-                addToBot(new MakeTempCardInHandAction(new DroneFire()));
-            } else {
-                addToBot(new MakeTempCardInHandAction(new Drone()));
-            }
-        }
-        if (upgraded){
-//            addToBot(new ChannelAction(new LavafolkGene()));
-            addToBot(new ChannelAction(new InsectGene()));
+
+//        for(int i = 0; i < this.magicNumber; ++i) {
+//            if (isPlayerInThisForm(LavafolkGene.ID)) {
+//                addToBot(new MakeTempCardInHandAction(new DroneFire()));
+//            } else {
+//                addToBot(new MakeTempCardInHandAction(new Drone()));
+//            }
+//        }
+        LavafolkGene orb = new LavafolkGene();
+        addToBot(new ChannelAction(orb));
+        List<AbstractCard> drones = p.hand.group.stream()
+                .filter(card -> Drone.ID.equals(card.cardID))
+                .collect(Collectors.toList());
+        drones.forEach(card -> {
+            addToBot(new ExhaustSpecificCardAction(card, p.hand, true));
+            orb.onEvoke();
+        });
+        if (!this.upgraded) {
+            formEffect(InsectGene.ID, () -> addToBot(new MakeTempCardInHandAction(new Drone())));
         } else {
-            formEffect(InsectGene.ID);
+            addToBot(new MakeTempCardInHandAction(new Drone()));
+            addToBot(new ChannelAction(new InsectGene()));
         }
-        formEffect(LavafolkGene.ID);
     }
 
     @Override
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeMagicNumber(UPGRADE_EVOKE_AMT);
+//            this.upgradeMagicNumber(UPGRADE_EVOKE_AMT);
             this.rawDescription = UPGRADE_DESCRIPTION;
             this.initializeDescription();
+        }
+    }
+
+    @Override
+    public void triggerOnGlowCheck() {
+        if (isPlayerInThisForm(InsectGene.ID)) {
+//                || AbstractDungeon.player.hand.group.stream().anyMatch(c -> c instanceof AbstractDrone)) {
+            this.glowColor = GOLD_BORDER_GLOW_COLOR.cpy();
+        } else {
+            this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
         }
     }
 }

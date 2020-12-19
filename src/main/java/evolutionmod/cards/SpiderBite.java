@@ -33,6 +33,7 @@ public class SpiderBite
                 CardRarity.UNCOMMON, CardTarget.ENEMY);
         this.damage = this.baseDamage = DAMAGE_AMT;
         this.magicNumber = this.baseMagicNumber = SPIDER_DAMAGE_AMT;
+		this.cardsToPreview = new Drone();
     }
 
     @Override

@@ -94,4 +94,13 @@ public class Frenzy
             this.initializeDescription();
         }
     }
+
+    @Override
+    public void triggerOnGlowCheck() {
+        if (isPlayerInThisForm(BeastGene.ID)) {
+            this.glowColor = GOLD_BORDER_GLOW_COLOR.cpy();
+        } else {
+            this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
+        }
+    }
 }

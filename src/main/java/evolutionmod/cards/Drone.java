@@ -2,13 +2,14 @@ package evolutionmod.cards;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
+import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import evolutionmod.patches.AbstractCardEnum;
 import evolutionmod.powers.MatureEggPower;
 
 public class Drone
@@ -20,14 +21,17 @@ public class Drone
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = "evolutionmod/images/cards/InsectAtt.png";
     private static final int COST = 0;
-    private static final int DAMAGE_AMT = 4;
-    private static final int UPGRADE_DAMAGE_AMT = 3;
+    private static final int DAMAGE_AMT = 3;
+    private static final int UPGRADE_DAMAGE_AMT = 2;
+    private static final int BLOCK_AMT = 1;
+    private static final int UPGRADE_BLOCK_AMT = 2;
 
     public Drone() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
-                CardType.ATTACK, CardColor.COLORLESS,
+                CardType.ATTACK, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.SPECIAL, CardTarget.ENEMY);
         this.damage = this.baseDamage = DAMAGE_AMT;
+        this.block = this.baseBlock = BLOCK_AMT;
         this.exhaust = true;
         this.isEthereal = true;
     }
@@ -46,7 +50,8 @@ public class Drone
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        AbstractDungeon.actionManager.addToBottom(new DamageAction(
+        addToBot(new GainBlockAction(m, this.block));
+        addToBot(new DamageAction(
                 m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
                 AbstractGameAction.AttackEffect.BLUNT_HEAVY));
     }
@@ -54,6 +59,11 @@ public class Drone
     @Override
     public void applyPowers() {
         applyBroodPowerAround(() -> removeStrAround(super::applyPowers));
+    }
+
+    @Override
+    protected void applyPowersToBlock() {
+        removeDexAround(() -> super.applyPowersToBlock());
     }
 
     @Override
@@ -66,6 +76,7 @@ public class Drone
         if (!this.upgraded) {
             this.upgradeName();
             this.upgradeDamage(UPGRADE_DAMAGE_AMT);
+            this.upgradeBlock(UPGRADE_BLOCK_AMT);
         }
     }
 }

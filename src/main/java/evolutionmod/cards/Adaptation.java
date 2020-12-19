@@ -6,7 +6,6 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.relics.ChemicalX;
-import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 import evolutionmod.patches.AbstractCardEnum;
 
 public class Adaptation
@@ -66,7 +65,8 @@ public class Adaptation
         if (!this.upgraded) {
             this.upgradeName();
             this.rawDescription = UPGRADE_DESCRIPTION;
-            this.initializeDescription();
+            this.initialRawDescription = UPGRADE_DESCRIPTION;
+            this.updateDescription();
         }
     }
 }

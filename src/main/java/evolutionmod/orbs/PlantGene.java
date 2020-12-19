@@ -1,9 +1,6 @@
 package evolutionmod.orbs;
 
-import basemod.helpers.TooltipInfo;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.GainBlockAction;
-import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -11,11 +8,7 @@ import com.megacrit.cardcrawl.localization.OrbStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import evolutionmod.cards.AdaptableEvoCard;
-import evolutionmod.powers.BramblesPower;
 import evolutionmod.powers.GrowthPower;
-import evolutionmod.powers.PotencyPower;
-
-import java.util.List;
 
 public class PlantGene extends AbstractGene {
 	public static final String ID = "evolutionmod:PlantGene";
@@ -24,8 +17,6 @@ public class PlantGene extends AbstractGene {
 	public static final String COLOR = "[#60B040]";
 	public static final String[] DESCRIPTION = orbStrings.DESCRIPTION;
 	public static final String IMG_PATH = "evolutionmod/images/orbs/PlantGene.png";
-	public static final int BLOCK = 1;
-	public static final int BRAMBLE = 3;
 	public static final int GROWTH = 2;
 
 	public PlantGene() {
@@ -35,7 +26,12 @@ public class PlantGene extends AbstractGene {
 	@Override
 	public void onStartOfTurn() {
 		super.onStartOfTurn();
-		apply(AbstractDungeon.player, null, 1);
+		apply(AbstractDungeon.player, null, 1, false);
+	}
+
+	@Override
+	public void onEvoke() {
+		apply(AbstractDungeon.player, null, 1, true);
 	}
 
 	@Override
@@ -47,19 +43,15 @@ public class PlantGene extends AbstractGene {
 	public void playChannelSFX() {
 	}
 
-	public static void apply(AbstractPlayer p, AbstractMonster m, int times) {
+	public static void apply(AbstractPlayer p, AbstractMonster m, int times, boolean addToTop) {
 		int growth = growth() * times;
-//		int thorns = bramble() * times;
-//		int block = block();
-//		if (block > 0) {
-//			for (int i = 0; i < times; ++i) {
-//				AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, block));
-//			}
-//		}
-		AbstractDungeon.actionManager.addToTop(
-//				new GainEnergyAction(times));
-				new ApplyPowerAction(p, p, new GrowthPower(p, growth)));
-//				new ApplyPowerAction(p, p, new BramblesPower(p, thorns)));
+		if (addToTop) {
+			AbstractDungeon.actionManager.addToTop(
+					new ApplyPowerAction(p, p, new GrowthPower(p, growth)));
+		} else {
+			AbstractDungeon.actionManager.addToBottom(
+					new ApplyPowerAction(p, p, new GrowthPower(p, growth)));
+		}
 	}
 
 	@Override
@@ -69,35 +61,16 @@ public class PlantGene extends AbstractGene {
 
 	@Override
 	public void updateDescription() {
-		this.description = "#yPassive and #yEvoke: " + getDescription();
+		this.description = getOrbDescription();
 	}
 
-	public static List<TooltipInfo> addTooltip(List<TooltipInfo> tooltips, String rawDescription) {
-		if (rawDescription.contains("Plant")) {
-			tooltips.add(new TooltipInfo(
-					COLOR + NAME + "[]",
-					getDescription()));
-		}
-		return tooltips;
+	public static String getOrbDescription() {
+		return "At the #bstart #bof #byour #bturn and when #yEvoked: NL " + getDescription();
 	}
 
 	public static String getDescription() {
-		return DESCRIPTION[0] + bramble() + DESCRIPTION[2];
+		return DESCRIPTION[0] + growth() + DESCRIPTION[1];
 //		return DESCRIPTION[0] + block() + DESCRIPTION[1] + bramble() + DESCRIPTION[2];
-	}
-
-	private static int block() {
-		int block = BLOCK;
-		if (CardCrawlGame.isInARun()) {
-			if (AbstractDungeon.player.hasPower(PotencyPower.POWER_ID)) {
-				block += AbstractDungeon.player.getPower(PotencyPower.POWER_ID).amount;
-			}
-		}
-		return block > 0 ? block : 0;
-	}
-
-	private static int bramble() {
-		return BRAMBLE;
 	}
 
 	private static int growth() {
@@ -118,7 +91,7 @@ public class PlantGene extends AbstractGene {
 
 		@Override
 		public void apply(AbstractPlayer p, AbstractMonster m) {
-			PlantGene.apply(p, m, this.amount);
+			PlantGene.apply(p, m, this.amount, true);
 		}
 
 		@Override

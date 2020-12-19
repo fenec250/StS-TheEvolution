@@ -3,7 +3,9 @@ package evolutionmod.cards;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
+import com.megacrit.cardcrawl.cards.purple.FollowUp;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -45,22 +47,10 @@ public class Phoenix
             addToBot(new ChannelAction(new LavafolkGene()));
         }
         boolean inForm = formEffect(HarpyGene.ID);
-//        if (!inForm) {
-//            this.useAdaptations(p, m);
-//        } else {
-//            addToBot(new DelayedAction(() -> {
-//                List<AbstractOrb> genes = p.orbs.stream()
-//                        .filter(o -> this.canAdaptWith(o) > 0)
-////                        .findAny()
-////                        .ifPresent(o -> this.tryAdaptingWith(o, true));
-//                        .collect(Collectors.toList());
-//                genes.forEach(o -> this.tryAdaptingWith(o, true));
-//				this.useAdaptations(p, m);
-//				return null;
-//			}, true));
-//		}
-        this.adapt(1);
-        this.useAdaptations(p, m);
+        if (inForm) {
+            this.adapt(99);
+        }
+        this.useAdaptations(p, null);
     }
 
     @Override
@@ -73,7 +63,20 @@ public class Phoenix
         if (!this.upgraded) {
             this.upgradeName();
             this.rawDescription = UPGRADE_DESCRIPTION;
-            this.initializeDescription();
+            this.initialRawDescription = UPGRADE_DESCRIPTION;
+            this.updateDescription();
+        }
+    }
+
+    @Override
+    public void triggerOnGlowCheck() {
+        if (isPlayerInThisForm(HarpyGene.ID) && (this.upgraded ||
+                AbstractDungeon.player.orbs.stream()
+                        .anyMatch((orb) -> orb != null && orb.ID != null && orb.ID.equals(LavafolkGene.ID))
+        )) {
+            this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
+        } else {
+            this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
         }
     }
 }

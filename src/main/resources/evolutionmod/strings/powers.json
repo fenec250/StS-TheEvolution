@@ -33,11 +33,11 @@
   },
   "evolutionmod:TheNightPower": {
     "NAME": "The Night",
-    "DESCRIPTIONS": ["At the start of your turn if you have a Shadow gene add ", " a ", " Shadowbolt to your hand, otherwise Channel a Shadow gene."]
+    "DESCRIPTIONS": ["At the start of your turn if you have a Shadow gene add ", "a", " Shadowbolt to your hand, otherwise Channel a Shadow gene."]
   },
   "evolutionmod:TheNightPlusPower": {
     "NAME": "The Night+",
-    "DESCRIPTIONS": ["At the start of your turn if you have a Shadow gene add ", " a ", " Shadowbolt+ to your hand, otherwise Channel a Shadow gene."]
+    "DESCRIPTIONS": ["At the start of your turn if you have a Shadow gene add ", "a", " Shadowbolt+ to your hand, otherwise Channel a Shadow gene."]
   },
   "evolutionmod:BramblesPower": {
     "NAME": "Brambles",
@@ -45,7 +45,7 @@
   },
   "evolutionmod:GrowthPower": {
     "NAME": "Growth",
-    "DESCRIPTIONS": ["Upon reaching 3 stacks gain 1 Energy."]
+    "DESCRIPTIONS": ["Upon reaching 3 stacks gain 1 Energy and reduce Growth by 3."]
   },
   "evolutionmod:BroodmotherPower": {
     "NAME": "Broodmother",

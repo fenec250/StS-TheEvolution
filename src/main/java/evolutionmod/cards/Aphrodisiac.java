@@ -64,4 +64,13 @@ public class Aphrodisiac
             this.upgradeMagicNumber(UPGRADE_VULNERABLE_AMT);
         }
     }
+
+    @Override
+    public void triggerOnGlowCheck() {
+        if (isPlayerInThisForm(LizardGene.ID) && isPlayerInThisForm(SuccubusGene.ID)) {
+            this.glowColor = GOLD_BORDER_GLOW_COLOR.cpy();
+        } else {
+            this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
+        }
+    }
 }

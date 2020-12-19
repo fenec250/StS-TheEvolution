@@ -17,10 +17,9 @@ public class ShadowGene extends AbstractGene {
 	public static final String ID = "evolutionmod:ShadowGene";
 	public static final OrbStrings orbStrings = CardCrawlGame.languagePack.getOrbString(ID);
 	public static final String NAME = orbStrings.NAME;
-	public static final String COLOR = "[#8060A0]";
+	public static final String COLOR = "[#8868A8]";
 	public static final String[] DESCRIPTION = orbStrings.DESCRIPTION;
 	public static final String IMG_PATH = "evolutionmod/images/orbs/ShadowGene.png";
-	public static final int DAMAGE = 1;
 	public static final int WEAK = 2;
 
 	public ShadowGene() {
@@ -57,16 +56,12 @@ public class ShadowGene extends AbstractGene {
 
 	@Override
 	public void updateDescription() {
-		this.description = "#yPassive and #yEvoke: " + getDescription();
+//		super.updateDescription();
+		this.description = getOrbDescription();
 	}
 
-	public static List<TooltipInfo> addTooltip(List<TooltipInfo> tooltips, String rawDescription) {
-		if (rawDescription.contains("Shadow")) {
-			tooltips.add(new TooltipInfo(
-					COLOR + NAME + "[]",
-					getDescription()));
-		}
-		return tooltips;
+	public static String getOrbDescription() {
+		return "At the #bstart #bof #byour #bturn and when #yEvoked: NL " + getDescription();
 	}
 
 	public static String getDescription() {
@@ -74,15 +69,6 @@ public class ShadowGene extends AbstractGene {
 //		return DESCRIPTION[0] + damage() + DESCRIPTION[1] + weak() + DESCRIPTION[2];
 	}
 
-	private static int damage() {
-		int damage = DAMAGE;
-		if (CardCrawlGame.isInARun()) {
-			if (AbstractDungeon.player.hasPower(PotencyPower.POWER_ID)) {
-				damage += AbstractDungeon.player.getPower(PotencyPower.POWER_ID).amount;
-			}
-		}
-		return damage > 0 ? damage : 0;
-	}
 	private static int weak() {
 		return WEAK;
 	}

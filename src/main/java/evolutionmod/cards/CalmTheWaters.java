@@ -39,20 +39,32 @@ public class CalmTheWaters
     public void use(AbstractPlayer p, AbstractMonster m) {
         int fate = this.magicNumber;
         int block = this.block;
+        if (this.upgraded) {
+            addToBot(new ChannelAction(new MerfolkGene()));
+        } else {
+            BaseEvoCard.formEffect(MerfolkGene.ID);
+        }
         boolean inForm = BaseEvoCard.formEffect(LymeanGene.ID);
         if (inForm) {
             fate += LYMEAN_FATE_AMT;
         }
-        if (this.upgraded) {
-            addToBot(new ChannelAction(new MerfolkGene()));
-        } else {
-            inForm = BaseEvoCard.formEffect(MerfolkGene.ID);
-            if (inForm) {
-                block += UPGRADE_BLOCK_AMT;
-            }
-        }
         addToTop(new GainBlockAction(p, block));
         addToBot(new CalmTheWatersAction(fate));
+    }
+
+    @Override
+    protected void applyPowersToBlock() {
+        alterBlockAround(() -> super.applyPowersToBlock());
+    }
+
+    private void alterBlockAround(Runnable supercall) {
+        this.baseBlock = BLOCK_AMT + (upgraded ? UPGRADE_BLOCK_AMT : 0);
+        if (!this.upgraded && isPlayerInThisForm(MerfolkGene.ID)) {
+            this.baseBlock += UPGRADE_BLOCK_AMT;
+        }
+        supercall.run();
+        this.baseBlock = BLOCK_AMT + (upgraded ? UPGRADE_BLOCK_AMT : 0);
+        this.isBlockModified = this.block != this.baseBlock;
     }
 
     @Override
@@ -67,6 +79,15 @@ public class CalmTheWaters
             this.upgradeBlock(UPGRADE_BLOCK_AMT);
             this.rawDescription = UPGRADE_DESCRIPTION;
             this.initializeDescription();
+        }
+    }
+
+    @Override
+    public void triggerOnGlowCheck() {
+        if (isPlayerInThisForm(LymeanGene.ID) && (upgraded || isPlayerInThisForm(MerfolkGene.ID))) {
+            this.glowColor = GOLD_BORDER_GLOW_COLOR.cpy();
+        } else {
+            this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
         }
     }
 }

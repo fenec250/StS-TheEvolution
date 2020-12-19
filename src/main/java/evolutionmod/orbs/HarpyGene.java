@@ -28,7 +28,12 @@ public class HarpyGene extends AbstractGene {
 	@Override
 	public void onStartOfTurn() {
 		super.onStartOfTurn();
-		apply(AbstractDungeon.player, null, 1);
+		apply(AbstractDungeon.player, null, 1, false);
+	}
+
+	@Override
+	public void onEvoke() {
+		apply(AbstractDungeon.player, null, 1, true);
 	}
 
 	@Override
@@ -40,8 +45,12 @@ public class HarpyGene extends AbstractGene {
 	public void playChannelSFX() {
 	}
 
-	public static void apply(AbstractPlayer p, AbstractMonster m, int times) {
-		AbstractDungeon.actionManager.addToBottom(new DrawCardAction(p, times));
+	public static void apply(AbstractPlayer p, AbstractMonster m, int times, boolean addtotop) {
+		if (addtotop) {
+			AbstractDungeon.actionManager.addToTop(new DrawCardAction(p, times));
+		} else {
+			AbstractDungeon.actionManager.addToBottom(new DrawCardAction(p, times));
+		}
 	}
 
 	@Override
@@ -52,7 +61,7 @@ public class HarpyGene extends AbstractGene {
 	@Override
 	public void updateDescription() {
 //		super.updateDescription();
-		this.description = "#yPassive: " + getDescription();
+		this.description = getOrbDescription();
 	}
 
 	public static List<TooltipInfo> addTooltip(List<TooltipInfo> tooltips, String rawDescription) {
@@ -62,6 +71,10 @@ public class HarpyGene extends AbstractGene {
 					getDescription()));
 		}
 		return tooltips;
+	}
+
+	public static String getOrbDescription() {
+		return "At the #bstart #bof #byour #bturn and when #yEvoked: NL " + getDescription();
 	}
 
 	public static String getDescription() {
@@ -88,7 +101,7 @@ public class HarpyGene extends AbstractGene {
 
 		@Override
 		public void apply(AbstractPlayer p, AbstractMonster m) {
-			HarpyGene.apply(p, m, this.amount);
+			HarpyGene.apply(p, m, this.amount, true);
 		}
 
 		@Override

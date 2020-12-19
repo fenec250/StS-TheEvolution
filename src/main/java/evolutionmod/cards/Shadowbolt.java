@@ -24,8 +24,8 @@ public class Shadowbolt
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = "evolutionmod/images/cards/ShadowAtt.png";
     private static final int COST = 2;
-    private static final int DAMAGE_AMT = 12;
-    private static final int UPGRADE_DAMAGE_AMT = 4;
+    private static final int DAMAGE_AMT = 16;
+//    private static final int UPGRADE_DAMAGE_AMT = 4;
     private static final int WEAK_DAMAGE_AMT = 2;
 
     public Shadowbolt() {
@@ -54,13 +54,13 @@ public class Shadowbolt
 
     @Override
     public void applyPowers() {
-        this.baseDamage = DAMAGE_AMT + (this.upgraded ? UPGRADE_DAMAGE_AMT : 0);
+        this.baseDamage = DAMAGE_AMT;// + (this.upgraded ? UPGRADE_DAMAGE_AMT : 0);
         super.applyPowers();
     }
 
     @Override
     public void calculateCardDamage(AbstractMonster mo) {
-        this.baseDamage = DAMAGE_AMT + (this.upgraded ? UPGRADE_DAMAGE_AMT : 0);
+        this.baseDamage = DAMAGE_AMT;// + (this.upgraded ? UPGRADE_DAMAGE_AMT : 0);
         if (mo != null &&
                 (this.upgraded || BaseEvoCard.isPlayerInThisForm(ShadowGene.ID))) {
             AbstractPower weak = mo.getPower(WeakPower.POWER_ID);
@@ -71,7 +71,7 @@ public class Shadowbolt
 //        this.rawDescription = DESCRIPTION;
 //        this.initializeDescription();
         super.calculateCardDamage(mo);
-        this.baseDamage = DAMAGE_AMT + (this.upgraded ? UPGRADE_DAMAGE_AMT : 0);
+        this.baseDamage = DAMAGE_AMT;// + (this.upgraded ? UPGRADE_DAMAGE_AMT : 0);
         this.isDamageModified = this.baseDamage != this.damage;
     }
 
@@ -101,7 +101,7 @@ public class Shadowbolt
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeDamage(UPGRADE_DAMAGE_AMT);
+//            this.upgradeDamage(UPGRADE_DAMAGE_AMT);
             this.rawDescription = UPGRADE_DESCRIPTION;
             this.initializeDescription();
         }

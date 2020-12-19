@@ -59,21 +59,17 @@ public class LymeanGene extends AbstractGene {
 
 	@Override
 	public void updateDescription() {
-		this.description = "#yPassive: " + getDescription();
+//		super.updateDescription();
+		this.description = getOrbDescription();
 	}
 
-	public static List<TooltipInfo> addTooltip(List<TooltipInfo> tooltips, String rawDescription) {
-		if (rawDescription.contains("Lymean")) {
-			tooltips.add(new TooltipInfo(
-					COLOR + NAME + "[]",
-					getDescription()));
-		}
-		return tooltips;
+	public static String getOrbDescription() {
+		return "At the #bstart #bof #byour #bturn and when #yEvoked: NL " + getDescription();
 	}
 
 	public static String getDescription() {
 //		return DESCRIPTION[0] + blockPerGene() + DESCRIPTION[1] + healPerGene() + DESCRIPTION[2];
-		return DESCRIPTION[0] + fate();
+		return DESCRIPTION[0] + fate() + DESCRIPTION[1];
 	}
 
 //	private static int healPerGene() {

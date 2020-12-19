@@ -92,7 +92,7 @@ public class Evolution
 		description.append(" NL ");
 		description.append(
 				genes.stream()
-						.map(g -> new StringBuilder(g.getColoredName()).append(g.name).append(" "))
+						.map(g -> new StringBuilder(g.ID).append(" "))
 						.reduce(new StringBuilder(), StringBuilder::append).toString());
 		this.rawDescription = description.toString();
 		initializeDescription();

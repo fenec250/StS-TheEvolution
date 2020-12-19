@@ -1,21 +1,16 @@
 package evolutionmod.cards;
 
-import basemod.abstracts.CustomCard;
 import basemod.abstracts.DynamicVariable;
 import basemod.helpers.TooltipInfo;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.blue.GeneticAlgorithm;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.GetAllInBattleInstances;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
-import com.megacrit.cardcrawl.orbs.EmptyOrbSlot;
 import evolutionmod.orbs.AbstractGene;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -77,7 +72,7 @@ public abstract class AdaptableEvoCard extends BaseEvoCard {
 			}
 			String tooltip = this.adaptationMap.values().stream()
 					.map(a -> {
-						StringBuilder stringBuilder = new StringBuilder(a.text());
+						StringBuilder stringBuilder = new StringBuilder(a.getGeneId());
 						stringBuilder.append(": ").append(a.amount);
 						if (a.amount < a.max) {
 							stringBuilder.append('/').append(a.max);
@@ -87,7 +82,7 @@ public abstract class AdaptableEvoCard extends BaseEvoCard {
 					})
 					.reduce(new StringBuilder(), StringBuilder::append, StringBuilder::append)
 					.toString();
-			this.adaptationTooltip.description = colorGeneNames(tooltip);
+			this.adaptationTooltip.description = replaceGeneIds(tooltip);
 
 			String adaptationDescription = " NL " + adaptationsCount +
 					(adaptationsCount > 1 ? " Adaptations." : " Adaptation.");

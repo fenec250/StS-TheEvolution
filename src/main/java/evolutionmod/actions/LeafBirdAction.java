@@ -19,18 +19,20 @@ import java.util.function.Supplier;
 public class LeafBirdAction extends AbstractGameAction {
 
 	private int discardAmount;
+	private String message;
 
-	public LeafBirdAction(AbstractCreature player, int discardAmount) {
+	public LeafBirdAction(AbstractCreature player, int discardAmount, String message) {
 		this.setValues(player, player);
 		this.discardAmount = discardAmount;
 		this.duration = this.startDuration = 0.5f;
 		this.actionType = ActionType.SPECIAL;
+		this.message = message;
 	}
 
 	@Override
 	public void update() {
 		if (this.duration == this.startDuration) {
-			AbstractDungeon.handCardSelectScreen.open("Potato", this.discardAmount, true, true);
+			AbstractDungeon.handCardSelectScreen.open(this.message, this.discardAmount, true, true);
 			this.addToBot(new WaitAction(0.25F));
 			this.tickDuration();
 		} else {

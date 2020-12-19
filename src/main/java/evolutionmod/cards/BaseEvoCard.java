@@ -24,7 +24,6 @@ import evolutionmod.powers.GodFormPower;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.function.IntSupplier;
 
 
 public abstract class BaseEvoCard extends CustomCard {
@@ -51,7 +50,7 @@ public abstract class BaseEvoCard extends CustomCard {
 	@Override
 	public void initializeDescription() {
     	if (coloredRawDescription == null || !coloredRawDescription.equals(this.rawDescription)) {
-			this.coloredRawDescription = colorGeneNames(this.rawDescription);
+			this.coloredRawDescription = replaceGeneIds(this.rawDescription);
 			this.rawDescription = this.coloredRawDescription;
 		}
 		super.initializeDescription();
@@ -64,35 +63,35 @@ public abstract class BaseEvoCard extends CustomCard {
 			if (customTooltips == null) {
 				customTooltips = new ArrayList<>();
 			}
-			if (this.rawDescription.contains(LavafolkGene.NAME)) {this.customTooltips.add(new TooltipInfo(LavafolkGene.COLOR + LavafolkGene.NAME + "[]", "Orb: " + LavafolkGene.getDescription()));}
-			if (this.rawDescription.contains(ShadowGene.NAME)) {this.customTooltips.add(new TooltipInfo(ShadowGene.COLOR + ShadowGene.NAME + "[]", "Orb: " + ShadowGene.getDescription()));}
-			if (this.rawDescription.contains(InsectGene.NAME)) {this.customTooltips.add(new TooltipInfo(InsectGene.COLOR + InsectGene.NAME + "[]", "Orb: " + InsectGene.getDescription()));}
-			if (this.rawDescription.contains(HarpyGene.NAME)) {this.customTooltips.add(new TooltipInfo(HarpyGene.COLOR + HarpyGene.NAME + "[]", "Orb: " + HarpyGene.getDescription()));}
-			if (this.rawDescription.contains(MerfolkGene.NAME)) {this.customTooltips.add(new TooltipInfo(MerfolkGene.COLOR + MerfolkGene.NAME + "[]", "Orb: " + MerfolkGene.getDescription()));}
-			if (this.rawDescription.contains(CentaurGene.NAME)) {this.customTooltips.add(new TooltipInfo(CentaurGene.COLOR + CentaurGene.NAME + "[]", "Orb: " + CentaurGene.getDescription()));}
-			if (this.rawDescription.contains(BeastGene.NAME)) {this.customTooltips.add(new TooltipInfo(BeastGene.COLOR + BeastGene.NAME + "[]", "Orb: " + BeastGene.getDescription()));}
-			if (this.rawDescription.contains(PlantGene.NAME)) {this.customTooltips.add(new TooltipInfo(PlantGene.COLOR + PlantGene.NAME + "[]", "Orb: " + PlantGene.getDescription()));}
-			if (this.rawDescription.contains(LymeanGene.NAME)) {this.customTooltips.add(new TooltipInfo(LymeanGene.COLOR + LymeanGene.NAME + "[]", "Orb: " + LymeanGene.getDescription()));}
-			if (this.rawDescription.contains(SuccubusGene.NAME)) {this.customTooltips.add(new TooltipInfo(SuccubusGene.COLOR + SuccubusGene.NAME + "[]", "Orb: " + SuccubusGene.getDescription()));}
-			if (this.rawDescription.contains(LizardGene.NAME)) {this.customTooltips.add(new TooltipInfo(LizardGene.COLOR + LizardGene.NAME + "[]", "Orb: " + LizardGene.getDescription()));}
+			if (this.rawDescription.contains(LavafolkGene.COLOR + LavafolkGene.NAME + "[]")) {this.customTooltips.add(new TooltipInfo(LavafolkGene.COLOR + LavafolkGene.NAME + "[]", "Orb: " + LavafolkGene.getOrbDescription()));}
+			if (this.rawDescription.contains(ShadowGene.COLOR + ShadowGene.NAME + "[]")) {this.customTooltips.add(new TooltipInfo(ShadowGene.COLOR + ShadowGene.NAME + "[]", "Orb: " + ShadowGene.getOrbDescription()));}
+			if (this.rawDescription.contains(InsectGene.COLOR + InsectGene.NAME + "[]")) {this.customTooltips.add(new TooltipInfo(InsectGene.COLOR + InsectGene.NAME + "[]", "Orb: " + InsectGene.getOrbDescription()));}
+			if (this.rawDescription.contains(HarpyGene.COLOR + HarpyGene.NAME + "[]")) {this.customTooltips.add(new TooltipInfo(HarpyGene.COLOR + HarpyGene.NAME + "[]", "Orb: " + HarpyGene.getOrbDescription()));}
+			if (this.rawDescription.contains(MerfolkGene.COLOR + MerfolkGene.NAME + "[]")) {this.customTooltips.add(new TooltipInfo(MerfolkGene.COLOR + MerfolkGene.NAME + "[]", "Orb: " + MerfolkGene.getOrbDescription()));}
+			if (this.rawDescription.contains(CentaurGene.COLOR + CentaurGene.NAME + "[]")) {this.customTooltips.add(new TooltipInfo(CentaurGene.COLOR + CentaurGene.NAME + "[]", "Orb: " + CentaurGene.getOrbDescription()));}
+			if (this.rawDescription.contains(BeastGene.COLOR + BeastGene.NAME + "[]")) {this.customTooltips.add(new TooltipInfo(BeastGene.COLOR + BeastGene.NAME + "[]", "Orb: " + BeastGene.getOrbDescription()));}
+			if (this.rawDescription.contains(PlantGene.COLOR + PlantGene.NAME + "[]")) {this.customTooltips.add(new TooltipInfo(PlantGene.COLOR + PlantGene.NAME + "[]", "Orb: NL " + PlantGene.getOrbDescription()));}
+			if (this.rawDescription.contains(LymeanGene.COLOR + LymeanGene.NAME + "[]")) {this.customTooltips.add(new TooltipInfo(LymeanGene.COLOR + LymeanGene.NAME + "[]", "Orb: " + LymeanGene.getOrbDescription()));}
+			if (this.rawDescription.contains(SuccubusGene.COLOR + SuccubusGene.NAME + "[]")) {this.customTooltips.add(new TooltipInfo(SuccubusGene.COLOR + SuccubusGene.NAME + "[]", "Orb: " + SuccubusGene.getOrbDescription()));}
+			if (this.rawDescription.contains(LizardGene.COLOR + LizardGene.NAME + "[]")) {this.customTooltips.add(new TooltipInfo(LizardGene.COLOR + LizardGene.NAME + "[]", "Orb: " + LizardGene.getOrbDescription()));}
 		}
 		return customTooltips;
 	}
 
-	public static String colorGeneNames(String text) {
+	public static String replaceGeneIds(String text) {
     	return text
 //					.replaceAll("([^\\]])" + LavafolkGene.NAME, "$1" + LavafolkGene.COLOR + LavafolkGene.NAME + "[]")
-				.replaceAll(LavafolkGene.NAME, LavafolkGene.COLOR + LavafolkGene.NAME + "[]")
-				.replaceAll(ShadowGene.NAME, ShadowGene.COLOR + ShadowGene.NAME + "[]")
-				.replaceAll(InsectGene.NAME, InsectGene.COLOR + InsectGene.NAME + "[]")
-				.replaceAll(PlantGene.NAME, PlantGene.COLOR + PlantGene.NAME + "[]")
-				.replaceAll(CentaurGene.NAME, CentaurGene.COLOR + CentaurGene.NAME + "[]")
-				.replaceAll(LymeanGene.NAME, LymeanGene.COLOR + LymeanGene.NAME + "[]")
-				.replaceAll(LizardGene.NAME, LizardGene.COLOR + LizardGene.NAME + "[]")
-				.replaceAll(HarpyGene.NAME, HarpyGene.COLOR + HarpyGene.NAME + "[]")
-				.replaceAll(MerfolkGene.NAME, MerfolkGene.COLOR + MerfolkGene.NAME + "[]")
-				.replaceAll(BeastGene.NAME, BeastGene.COLOR + BeastGene.NAME + "[]")
-				.replaceAll(SuccubusGene.NAME, SuccubusGene.COLOR + SuccubusGene.NAME + "[]");
+				.replaceAll(LavafolkGene.ID, LavafolkGene.COLOR + LavafolkGene.NAME + "[]")
+				.replaceAll(ShadowGene.ID, ShadowGene.COLOR + ShadowGene.NAME + "[]")
+				.replaceAll(InsectGene.ID, InsectGene.COLOR + InsectGene.NAME + "[]")
+				.replaceAll(PlantGene.ID, PlantGene.COLOR + PlantGene.NAME + "[]")
+				.replaceAll(CentaurGene.ID, CentaurGene.COLOR + CentaurGene.NAME + "[]")
+				.replaceAll(LymeanGene.ID, LymeanGene.COLOR + LymeanGene.NAME + "[]")
+				.replaceAll(LizardGene.ID, LizardGene.COLOR + LizardGene.NAME + "[]")
+				.replaceAll(HarpyGene.ID, HarpyGene.COLOR + HarpyGene.NAME + "[]")
+				.replaceAll(MerfolkGene.ID, MerfolkGene.COLOR + MerfolkGene.NAME + "[]")
+				.replaceAll(BeastGene.ID, BeastGene.COLOR + BeastGene.NAME + "[]")
+				.replaceAll(SuccubusGene.ID, SuccubusGene.COLOR + SuccubusGene.NAME + "[]");
 	}
 
 	protected static boolean consumeOrb(AbstractPlayer player, AbstractOrb orb) {

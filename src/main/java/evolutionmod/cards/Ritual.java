@@ -94,8 +94,18 @@ public class Ritual
             this.upgradeName();
             this.isEthereal = false;
 //            this.upgradeMagicNumber(UPGRADE_ADAPT_AMT);
+            this.rawDescription = UPGRADE_DESCRIPTION;
             this.initialRawDescription = UPGRADE_DESCRIPTION;
             this.updateDescription();
+        }
+    }
+
+    @Override
+    public void triggerOnGlowCheck() {
+        if (AbstractDungeon.player.orbs.stream().anyMatch(o -> this.canAdaptWith(o) > 0)) {
+            this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
+        } else {
+            this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
         }
     }
 

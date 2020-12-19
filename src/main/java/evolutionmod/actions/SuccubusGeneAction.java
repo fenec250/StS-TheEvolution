@@ -15,11 +15,11 @@ public class SuccubusGeneAction extends AbstractHalfTargetedAction {
 	private int damage;
 	private int vulnerable;
 
-	public SuccubusGeneAction(AbstractPlayer player, AbstractMonster monster, int damage, int vulnerable) {
+	public SuccubusGeneAction(AbstractPlayer player, AbstractMonster monster, int lust, int vulnerable) {
 		super(player, monster);
 		this.source = player;
 		this.target = monster;
-		this.damage = damage;
+		this.damage = lust;
 		this.vulnerable = vulnerable;
 		this.duration = this.startDuration = Settings.ACTION_DUR_FAST;
 		this.actionType = ActionType.DEBUFF;
@@ -37,8 +37,10 @@ public class SuccubusGeneAction extends AbstractHalfTargetedAction {
 //					this.target, new DamageInfo(this.source, this.damage, DamageInfo.DamageType.THORNS),
 //					AttackEffect.FIRE, true));
 		}
-		AbstractDungeon.actionManager.addToTop(
-				new ApplyPowerAction(this.target, this.source, new VulnerablePower(this.target, this.vulnerable, false), this.vulnerable));
+		if (vulnerable > 0) {
+			AbstractDungeon.actionManager.addToTop(
+					new ApplyPowerAction(this.target, this.source, new VulnerablePower(this.target, this.vulnerable, false), this.vulnerable));
+		}
 
 		this.isDone = true;
 

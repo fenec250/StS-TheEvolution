@@ -5,7 +5,6 @@ import basemod.helpers.TooltipInfo;
 import com.evacipated.cardcrawl.mod.stslib.actions.common.RefundAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
-import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -48,7 +47,7 @@ public class CrystalStone
 	private AbstractGene secondGene; // secoIndex = genesIndex % 10
 
 	public CrystalStone() {
-		super(ID, NAME, IMG_PATH, COST, DESCRIPTION + EXTENDED_DESCRIPTION[0],
+		super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
 				CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
 				CardRarity.COMMON, CardTarget.SELF);
 		this.block = this.baseBlock = BLOCK_AMT;
@@ -59,7 +58,7 @@ public class CrystalStone
 	}
 
 	private CrystalStone(int geneIndexes) {
-		super(ID, NAME, IMG_PATH, COST, DESCRIPTION + EXTENDED_DESCRIPTION[0],
+		super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
 				CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
 				CardRarity.COMMON, CardTarget.SELF);
 		this.block = this.baseBlock = BLOCK_AMT;
@@ -79,17 +78,9 @@ public class CrystalStone
 	}
 
 	@Override
-	public void applyPowers() {
-		this.calculateDamage();
-		super.applyPowers();
-		this.baseBlock = getBaseBlock();
-		this.isBlockModified = this.block != this.baseBlock;
-	}
-
-	@Override
-	public void calculateCardDamage(AbstractMonster mo) {
-		this.calculateDamage();
-		super.calculateCardDamage(mo);
+	protected void applyPowersToBlock() {
+		this.calculateBlock();
+		super.applyPowersToBlock();
 		this.baseBlock = getBaseBlock();
 		this.isBlockModified = this.block != this.baseBlock;
 	}
@@ -98,7 +89,7 @@ public class CrystalStone
 		return BLOCK_AMT + (this.upgraded ? UPGRADE_BLOCK_AMT : 0);
 	}
 
-	public void calculateDamage() {
+	public void calculateBlock() {
 		this.baseBlock = getBaseBlock();
 		if (BaseEvoCard.isPlayerInThisForm(this.firstGene.ID)) {
 			this.baseBlock += this.magicNumber;
@@ -121,6 +112,15 @@ public class CrystalStone
 			this.upgradeName();
 			this.upgradeBlock(UPGRADE_BLOCK_AMT);
 			this.upgradeMagicNumber(UPGRADE_FORM_BLOCK);
+		}
+	}
+
+	@Override
+	public void triggerOnGlowCheck() {
+		if (isPlayerInThisForm(secondGene.ID) && isPlayerInThisForm(firstGene.ID)) {
+			this.glowColor = GOLD_BORDER_GLOW_COLOR.cpy();
+		} else {
+			this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
 		}
 	}
 
@@ -155,9 +155,9 @@ public class CrystalStone
 				new ShadowGene()};
 		this.firstGene =  validGenes[this.genesIndexes / 11];
 		this.secondGene = validGenes[this.genesIndexes / 11 == this.genesIndexes % 10 ? 10 : this.genesIndexes % 10];
-		this.rawDescription = DESCRIPTION
-				+ this.firstGene.getColoredName() + EXTENDED_DESCRIPTION[1]
-				+ this.secondGene.getColoredName() + EXTENDED_DESCRIPTION[2];
+		this.rawDescription = EXTENDED_DESCRIPTION[0]
+				+ this.firstGene.ID + EXTENDED_DESCRIPTION[1]
+				+ this.secondGene.ID + EXTENDED_DESCRIPTION[2];
 		initializeDescription();
 	}
 

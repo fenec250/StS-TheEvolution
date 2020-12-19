@@ -29,6 +29,7 @@ public class VenomGlands
                 CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.UNCOMMON, CardTarget.SELF);
         this.magicNumber = this.baseMagicNumber = ENVENOM_AMT;
+        this.cardsToPreview = new Drone();
     }
 
     @Override
@@ -59,6 +60,15 @@ public class VenomGlands
 //            this.upgradeMagicNumber(UPGRADE_ENVENOM_AMT);
             this.rawDescription = UPGRADE_DESCRIPTION;
             initializeDescription();
+        }
+    }
+
+    @Override
+    public void triggerOnGlowCheck() {
+        if (isPlayerInThisForm(InsectGene.ID) && isPlayerInThisForm(LizardGene.ID)) {
+            this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
+        } else {
+            this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
         }
     }
 }

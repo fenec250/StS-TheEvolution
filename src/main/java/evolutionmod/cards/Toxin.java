@@ -22,6 +22,7 @@ public class Toxin
 	public static final String IMG_PATH = "evolutionmod/images/cards/PlantSkl.png";
 	private static final int COST = 1;
 	private static final int POISON_FLAT = 2;
+	private static final int UPGRADE_POISON_FLAT = 1;
 	private static final int POISON_PERCENT_AMT = 10;
 	private static final int UPGRADE_POISON_PERCENT_AMT = 5;
 
@@ -34,7 +35,7 @@ public class Toxin
 
 	@Override
 	public void use(AbstractPlayer p, AbstractMonster m) {
-		int poison = POISON_FLAT;
+		int poison = POISON_FLAT + (upgraded ? UPGRADE_POISON_FLAT : 0);
 		boolean inForm = formEffect(LizardGene.ID);
 		if (inForm) {
 			inForm = formEffect(PlantGene.ID);
@@ -55,6 +56,17 @@ public class Toxin
 		if (!this.upgraded) {
 			this.upgradeName();
 			this.upgradeMagicNumber(UPGRADE_POISON_PERCENT_AMT);
+			this.rawDescription = UPGRADE_DESCRIPTION;
+			this.initializeDescription();
+		}
+	}
+
+	@Override
+	public void triggerOnGlowCheck() {
+		if (isPlayerInThisForm(PlantGene.ID) && isPlayerInThisForm(LizardGene.ID)) {
+			this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
+		} else {
+			this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
 		}
 	}
 }

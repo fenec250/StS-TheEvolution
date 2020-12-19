@@ -11,6 +11,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import evolutionmod.orbs.HarpyGene;
+import evolutionmod.patches.AbstractCardEnum;
 
 public class Feather
         extends BaseEvoCard {
@@ -26,8 +27,8 @@ public class Feather
 
     public Feather() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
-                CardType.SKILL, CardColor.COLORLESS,
-                CardRarity.COMMON, CardTarget.SELF);
+                CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
+                CardRarity.SPECIAL, CardTarget.SELF);
         this.magicNumber = this.baseMagicNumber = FORM_CHANGE;
     }
 
@@ -53,6 +54,15 @@ public class Feather
             this.upgradeMagicNumber(UPGRADE_FORM_CHANGE);
             this.rawDescription = UPGRADE_DESCRIPTION;
             this.initializeDescription();
+        }
+    }
+
+    @Override
+    public void triggerOnGlowCheck() {
+        if (isPlayerInThisForm(HarpyGene.ID)) {
+            this.glowColor = GOLD_BORDER_GLOW_COLOR.cpy();
+        } else {
+            this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
         }
     }
 }

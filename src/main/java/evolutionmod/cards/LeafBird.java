@@ -1,26 +1,14 @@
 package evolutionmod.cards;
 
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.GameActionManager;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.DrawCardAction;
-import com.megacrit.cardcrawl.actions.defect.ChannelAction;
-import com.megacrit.cardcrawl.actions.unique.GamblingChipAction;
-import com.megacrit.cardcrawl.actions.utility.WaitAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import evolutionmod.actions.LeafBirdAction;
 import evolutionmod.orbs.HarpyGene;
-import evolutionmod.orbs.LavafolkGene;
 import evolutionmod.orbs.PlantGene;
 import evolutionmod.patches.AbstractCardEnum;
-import evolutionmod.powers.GrowthPower;
-
-import java.util.Iterator;
 
 public class LeafBird
         extends BaseEvoCard {
@@ -29,7 +17,8 @@ public class LeafBird
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-    public static final String IMG_PATH = "evolutionmod/images/cards/HarpySkl.png";
+    public static final String[] EXTENDED_DESCRIPTION = cardStrings.EXTENDED_DESCRIPTION;
+    public static final String IMG_PATH = "evolutionmod/images/cards/LeafBird.png";
     private static final int COST = 1;
     private static final int DISCARD_AMT = 2;
     private static final int UPGRADE_DISCARD_AMT = 1;
@@ -43,7 +32,7 @@ public class LeafBird
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new LeafBirdAction(p, this.magicNumber));
+        addToBot(new LeafBirdAction(p, this.magicNumber, EXTENDED_DESCRIPTION[0] + this.magicNumber));
         formEffect(HarpyGene.ID);
         formEffect(PlantGene.ID);
     }
@@ -59,6 +48,15 @@ public class LeafBird
             this.upgradeName();
             this.upgradeMagicNumber(UPGRADE_DISCARD_AMT);
             this.initializeDescription();
+        }
+    }
+
+    @Override
+    public void triggerOnGlowCheck() {
+        if (isPlayerInThisForm(PlantGene.ID) && isPlayerInThisForm(HarpyGene.ID)) {
+            this.glowColor = GOLD_BORDER_GLOW_COLOR.cpy();
+        } else {
+            this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
         }
     }
 }

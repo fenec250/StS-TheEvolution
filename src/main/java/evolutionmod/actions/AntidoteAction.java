@@ -60,7 +60,7 @@ public class AntidoteAction extends AbstractGameAction {
 			statuses.group.forEach(c ->
 					addToTop(new ExhaustSpecificCardAction(c, statuses)));
 
-			this.tickDuration();
+			this.isDone = true;
 		}
 	}
 }

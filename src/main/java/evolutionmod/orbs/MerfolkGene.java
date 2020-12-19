@@ -17,7 +17,7 @@ public class MerfolkGene extends AbstractGene {
 	public static final String ID = "evolutionmod:MerfolkGene";
 	public static final OrbStrings orbStrings = CardCrawlGame.languagePack.getOrbString(ID);
 	public static final String NAME = orbStrings.NAME;
-	public static final String COLOR = "[#5252FF]";
+	public static final String COLOR = "[#5A5AFF]";
 	public static final String[] DESCRIPTION = orbStrings.DESCRIPTION;
 	public static final String IMG_PATH = "evolutionmod/images/orbs/MermaidGene.png";
 	public static final int BLOCK = 3;
@@ -58,16 +58,11 @@ public class MerfolkGene extends AbstractGene {
 	@Override
 	public void updateDescription() {
 //		super.updateDescription();
-		this.description = "#yPassive: " + getDescription();
+		this.description = getOrbDescription();
 	}
 
-	public static List<TooltipInfo> addTooltip(List<TooltipInfo> tooltips, String rawDescription) {
-		if (rawDescription.contains("Merfolk")) {
-			tooltips.add(new TooltipInfo(
-					COLOR + NAME + "[]",
-					getDescription()));
-		}
-		return tooltips;
+	public static String getOrbDescription() {
+		return "At the #rend #rof #ryour #rturn and when #yEvoked: NL " + getDescription();
 	}
 
 	public static String getDescription() {

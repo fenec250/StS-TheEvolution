@@ -10,6 +10,7 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.GainStrengthPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
+import com.megacrit.cardcrawl.powers.VulnerablePower;
 import evolutionmod.orbs.PlantGene;
 import evolutionmod.orbs.SuccubusGene;
 import evolutionmod.patches.AbstractCardEnum;
@@ -30,7 +31,7 @@ public class Pheromones
     public Pheromones() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
-                CardRarity.COMMON, CardTarget.ALL_ENEMY);
+                CardRarity.UNCOMMON, CardTarget.ALL_ENEMY);
         this.magicNumber = this.baseMagicNumber = REDUCTION_AMT;
     }
 
@@ -40,7 +41,8 @@ public class Pheromones
                 AbstractDungeon.getMonsters().monsters.stream()
                     .filter(mo -> !mo.isDeadOrEscaped())
                     .forEach(mo -> {
-                        addToBot(new ApplyPowerAction(mo, p, new LustPower(mo, this.magicNumber)));
+                        addToBot(new ApplyPowerAction(mo, p, new VulnerablePower(mo, this.magicNumber, false)));
+//                        addToBot(new ApplyPowerAction(mo, p, new LustPower(mo, this.magicNumber)));
 //                        addToBot(new ApplyPowerAction(mo, p, new StrengthPower(mo, -this.magicNumber), -this.magicNumber));
 //                        if (!mo.hasPower("Artifact")) {
 //                            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(mo, p, new GainStrengthPower(mo, this.magicNumber), this.magicNumber));
@@ -58,6 +60,15 @@ public class Pheromones
         if (!this.upgraded) {
             this.upgradeName();
             this.upgradeMagicNumber(UPGRADE_REDUCTION_AMT);
+        }
+    }
+
+    @Override
+    public void triggerOnGlowCheck() {
+        if (isPlayerInThisForm(PlantGene.ID) && isPlayerInThisForm(SuccubusGene.ID)) {
+            this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
+        } else {
+            this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
         }
     }
 }
