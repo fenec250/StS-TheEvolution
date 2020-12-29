@@ -63,7 +63,7 @@ public class Toxin
 
 	@Override
 	public void triggerOnGlowCheck() {
-		if (isPlayerInThisForm(PlantGene.ID) && isPlayerInThisForm(LizardGene.ID)) {
+		if (isPlayerInTheseForms(PlantGene.ID, LizardGene.ID)) {
 			this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
 		} else {
 			this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();

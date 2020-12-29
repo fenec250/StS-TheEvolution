@@ -2,16 +2,13 @@ package evolutionmod.powers;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
-import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import evolutionmod.cards.BaseEvoCard;
-import evolutionmod.cards.Shadowbolt;
 import evolutionmod.orbs.ShadowGene;
 
 public class TheNightPower extends AbstractPower {
@@ -33,9 +30,7 @@ public class TheNightPower extends AbstractPower {
 
     @Override
     public void updateDescription() {
-        description = this.amount == 1
-                ? DESCRIPTIONS[0] + DESCRIPTIONS[1] + DESCRIPTIONS[2]
-                : DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[2];
+        description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1];
     }
 
     @Override
@@ -47,12 +42,15 @@ public class TheNightPower extends AbstractPower {
         }
     }
 
-    @Override
-    public void atStartOfTurn() {
-        super.atStartOfTurn();
-        boolean inForm = BaseEvoCard.formEffect(ShadowGene.ID);
-        int cards = this.amount - (inForm ? 0 : 1);
-        Shadowbolt shadowbolt = new Shadowbolt();
-        addToBot(new MakeTempCardInHandAction(shadowbolt, cards));
-    }
+//    @Override
+//    public void atStartOfTurn() {
+//        super.atStartOfTurn();
+//        boolean inForm = BaseEvoCard.formEffect(ShadowGene.ID);
+//        int cards = this.amount - (inForm ? 0 : 1);
+//        if (cards > 0) {
+//            ShadowsPower.reduceThreshold(this.owner, cards);
+//        }
+////        Shadowbolt shadowbolt = new Shadowbolt();
+////        addToBot(new MakeTempCardInHandAction(shadowbolt, cards));
+//    }
 }

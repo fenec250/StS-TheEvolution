@@ -34,8 +34,7 @@ import java.util.List;
 @SpireInitializer
 public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscriber, EditKeywordsSubscriber, EditRelicsSubscriber, EditStringsSubscriber, PostInitializeSubscriber {
 
-    private static final Color melodyLime = CardHelper.getColor(53, 140, 127); // 0x358c7e
-//    private static final Color melodyLime = CardHelper.getColor(191, 255, 1); //0xbfff00
+    private static final Color evo_green = CardHelper.getColor(53, 140, 127); // 0x358c7e
     private static final String attackCard = "evolutionmod/images/512/bg_attack_evo.png";
     private static final String skillCard = "evolutionmod/images/512/bg_skill_evo.png";
     private static final String powerCard = "evolutionmod/images/512/bg_power_evo.png";
@@ -54,7 +53,7 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
         BaseMod.subscribe(this);
 
         BaseMod.addColor(AbstractCardEnum.EVOLUTION_BLUE, //TODO
-                melodyLime, melodyLime, melodyLime, melodyLime, melodyLime, melodyLime, melodyLime,   //Background color, back color, frame color, frame outline color, description box color, glow color
+                evo_green, evo_green, evo_green, evo_green, evo_green, evo_green, evo_green,   //Background color, back color, frame color, frame outline color, description box color, glow color
                 attackCard, skillCard, powerCard, energyOrb,                                                        //attack background image, skill background image, power background image, energy orb image
                 attackCardPortrait, skillCardPortrait, powerCardPortrait, energyOrbPortrait,                        //as above, but for card inspect view
                 miniManaSymbol);                                                                                    //appears in Mystic Purple cards where you type [E]
@@ -118,7 +117,7 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
 
         //Uncommons
         //11 attacks
-//        cards.add(new AggressiveBlow());
+        cards.add(new PlayingRough());
         cards.add(new StripArmor());
         cards.add(new NightMare());
         cards.add(new Phoenix());
@@ -129,18 +128,19 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
         //exhaust
         //18 skills
         cards.add(new Strenghten());
+        cards.add(new Hivemind());
+        cards.add(new VenomGlands());
+        cards.add(new FireAnts());
         cards.add(new Firebloom());
-//        cards.add(new ChannelMagic());
+        cards.add(new ChannelMagic());
         cards.add(new LeafBird());
+//        cards.add(new Omen());
         cards.add(new Pheromones());
         cards.add(new Aphrodisiac());
         cards.add(new HeightenedSenses());
         cards.add(new DepthsLurker());
-        cards.add(new VenomGlands());
         cards.add(new Antidote());
         cards.add(new CalmTheWaters());
-        cards.add(new FireAnts());
-//        cards.add(new Omen());
         cards.add(new SeaSerpent());
         cards.add(new ShiftingPower());
         cards.add(new Adaptation());
@@ -167,12 +167,12 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
         cards.add(new Eruption());
         cards.add(new Frenzy());
         cards.add(new FeatherStorm());
-//        cards.add(new Rush());
         //8 skills
         cards.add(new Drown());
         cards.add(new Ritual());
 //        cards.add(new Aegis());
-//        cards.add(new PoisonSpit());
+        cards.add(new CrystalShaping());
+
         //6 powers
         cards.add(new Aegis2());
         cards.add(new Broodmother());
@@ -194,19 +194,19 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
 
     @Override
     public void receiveEditKeywords() {
-        String[] keywordAdapt = {"adapt"};
-        BaseMod.addKeyword("Adapt", keywordAdapt, "Consume a channeled Gene. Add its effect to the card until the end of the combat. Shuffle this card in your draw pile.");
         String[] keywordForm = {"form"};
         BaseMod.addKeyword("Form", keywordForm, "Trigger the following effect if you have a Gene of this type, otherwise Channel one.");
-        String[] keywordTrait = {"trait"};
-        BaseMod.addKeyword("Trait", keywordTrait, "Trigger the following effect if you have a Gene of this type.");
-//        String[] keywordPotency = {"potency"};
-//        BaseMod.addKeyword("Potency", keywordPotency, "Increase the first effect of your genes and their Adaptations.");
+        String[] keywordAdapt = {"adapt"};
+        BaseMod.addKeyword("Adapt", keywordAdapt, "Consume a channeled Gene. Add its effect to the card until the end of the combat and shuffle this card in your draw pile. NL Adapted effects target the same enemy as the card if possible.");
         String[] keywordShift = {"shift"};
         BaseMod.addKeyword("Shift", keywordShift, "Recreate the gene at the back of the orb line.");
+//        String[] keywordTrait = {"trait"};
+//        BaseMod.addKeyword("Trait", keywordTrait, "Trigger the following effect if you have a Gene of this type.");
+//        String[] keywordPotency = {"potency"};
+//        BaseMod.addKeyword("Potency", keywordPotency, "Increase the first effect of your genes and their Adaptations.");
         String[] keywordFate = {"fate"};
-//        BaseMod.addKeyword("Fate", keywordFate, "Look at the top X cards of your draw pile. You may discard any of them. Discarded cards may trigger the associated effect.");
         BaseMod.addKeyword("Fate X", keywordFate, "Put random cards from your draw pile matching X on top of your draw pile, then Scry them.");
+//        BaseMod.addKeyword("Fate", keywordFate, "Look at the top X cards of your draw pile. You may discard any of them. Discarded cards may trigger the associated effect.");
         String[] keywordBrambles = {"brambles", "bramble"};
         BaseMod.addKeyword("Bramble", keywordBrambles,
                 "Whenever you are attacked this turn, deal this amount of damage back");
@@ -225,9 +225,12 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
 //        String[] keywordCharge = {"charge", "centaur"};
 //        BaseMod.addKeyword("Charge", keywordCharge,
 //                "Increase the damage of your next hit then reduces by half.");
-        String[] keywordCharge = {"vigor", "centaur"};
-        BaseMod.addKeyword("Vigor", keywordCharge,
+        String[] keywordVigor = {"vigor", "centaur"};
+        BaseMod.addKeyword("Vigor", keywordVigor,
                 "Increases the damage of your next Attack.");
+        String[] keywordShadows = {"shadows"};
+        BaseMod.addKeyword("Shadows", keywordShadows,
+                "When #yShadows reaches its threshold it deals 2 damage per stack and applies 1 #yWeak to all enemies. The first threshold is 1.");
 
 //        String[] keywordCantrips = {"cantrip", "cantrips"};
 //        BaseMod.addKeyword(keywordCantrips, "Considered a [#5299DC]Spell[] so long as you've played fewer than 3 [#5299DC]Spells[] this turn.");

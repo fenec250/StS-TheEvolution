@@ -27,7 +27,7 @@ public class Feather
 
     public Feather() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
-                CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
+                CardType.SKILL, CardColor.COLORLESS,
                 CardRarity.SPECIAL, CardTarget.SELF);
         this.magicNumber = this.baseMagicNumber = FORM_CHANGE;
     }

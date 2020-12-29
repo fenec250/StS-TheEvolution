@@ -30,7 +30,7 @@ public class ChimeraDefense
     public void use(AbstractPlayer p, AbstractMonster m) {
         addToBot(new GainBlockAction(p, p, this.block));
         this.adapt(1);
-        this.useAdaptations(p, null);
+        this.useAdaptations(p, m);
     }
 
     @Override

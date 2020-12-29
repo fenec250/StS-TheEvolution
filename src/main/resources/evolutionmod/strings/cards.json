@@ -118,7 +118,8 @@
   },
   "evolutionmod:ChannelMagic": {
     "NAME": "Channel magic",
-    "DESCRIPTION": "evolutionmod:LymeanGene Form: Fate a Power. NL evolutionmod:LavafolkGene form: Fate an Attack.",
+    "DESCRIPTION": "Channel a evolutionmod:LavafolkGene gene. NL Fate !M! cards and trigger the gene for each card discarded. NL evolutionmod:LymeanGene Form: Fate 1 more card.",
+//    "DESCRIPTION": "evolutionmod:LymeanGene Form: Fate a Power. NL evolutionmod:LavafolkGene form: Fate an Attack.",
     "UPGRADE_DESCRIPTION": "evolutionmod:LymeanGene Form: Fate a Power. NL evolutionmod:LavafolkGene form: Fate an Attack for each of your evolutionmod:LavafolkGene gene."
   },
   "evolutionmod:Aphrodisiac": {
@@ -164,12 +165,15 @@
   },
   "evolutionmod:Shadowbolt": {
     "NAME": "Shadowbolt",
-    "DESCRIPTION": "Deal !D! damage. NL evolutionmod:ShadowGene Form: add damage equal to !M! times the Weak of the target.",
-    "UPGRADE_DESCRIPTION": "Deal !D! damage. NL Add damage equal to !M! times the Weak of the target. NL Channel a evolutionmod:ShadowGene gene."
+    "DESCRIPTION": "Deal !D! damage. NL evolutionmod:ShadowGene Form: gain !M! Shadows.",
+//    "DESCRIPTION": "Deal !D! damage. NL evolutionmod:ShadowGene Form: add damage equal to !M! times the Weak of the target.",
+    "UPGRADE_DESCRIPTION": ""
+//    "UPGRADE_DESCRIPTION": "Deal !D! damage. NL Add damage equal to !M! times the Weak of the target. NL Channel a evolutionmod:ShadowGene gene."
   },
   "evolutionmod:TheNight": {
     "NAME": "The Night",
-    "DESCRIPTION": "At the start of each turn do: evolutionmod:ShadowGene Form: add a Shadowbolt to your hand.",
+    "DESCRIPTION": "Increase by !M! the damage dealt by each stack of Shadows. NL Channel a evolutionmod:ShadowGene gene.",
+//    "DESCRIPTION": "At the start of each turn do: evolutionmod:ShadowGene Form: add a Shadowbolt to your hand.",
     "UPGRADE_DESCRIPTION": "At the start of each turn do: evolutionmod:ShadowGene Form: add a Shadowbolt+ to your hand."
   },
   "evolutionmod:HeightenedSenses": {
@@ -184,13 +188,18 @@
     "DESCRIPTION": "Gain !B! Block. NL evolutionmod:LizardGene Form: Channel a evolutionmod:MerfolkGene gene.",
     "UPGRADE_DESCRIPTION": "Gain !B! Block. NL Channel a evolutionmod:LizardGene gene. NL Channel a evolutionmod:MerfolkGene gene."
   },
+  "evolutionmod:SeaWolf": {
+    "NAME": "Sea Wolf",
+    "DESCRIPTION": "Deal !D! damage. NL evolutionmod:BeastGene Form: Refund 1. NL evolutionmod:MerfolkGene Form: gain !B! Block first.",
+    "UPGRADE_DESCRIPTION": ""
+  },
   "evolutionmod:Frenzy": {
     "NAME": "Frenzy",
     "DESCRIPTION": "Deal !D! damage. NL Add !M! damage per [E] spent on attacks this turn. NL evolutionmod:BeastGene Form: gain 2 Rage.",
-    "UPGRADE_DESCRIPTION": "Deal !D! damage. NL Add !M! damage per [E] spent on attacks this turn. NL evolutionmod:BeastGene form: gain 3 Rage."
+    "UPGRADE_DESCRIPTION": "Deal !D! damage. NL Add !M! damage per [E] spent on attacks this turn. NL evolutionmod:BeastGene Form: gain 3 Rage."
   },
   "evolutionmod:FeatherStorm": {
-    "NAME": "Feather storm",
+    "NAME": "Feather Storm",
     "DESCRIPTION": "Deal !D! damage. NL The first time this is played each combat shuffle !M! Feathers into your deck.",
 //    "DESCRIPTION": "Deal !D! damage. Startup: shuffle !M! Feathers into your deck.",
     "UPGRADE_DESCRIPTION": ""
@@ -239,14 +248,20 @@
   },
   "evolutionmod:BlackCat": {
     "NAME": "Black Cat",
-    "DESCRIPTION": "Deal !D! damage to ALL enemies. NL evolutionmod:BeastGene Form: hits twice. NL evolutionmod:ShadowGene Form: Apply !M! Weak to ALL enemies.",
+    "DESCRIPTION": "Deal !D! damage to ALL enemies. NL evolutionmod:BeastGene Form: hits twice. NL evolutionmod:ShadowGene Form: trigger Shadows immediately.",
 //    "DESCRIPTION": "Deal !D! damage to ALL enemies. NL evolutionmod:BeastGene Form: hits twice. NL evolutionmod:ShadowGene Form: Apply !M! Weak to ALL enemies. NL Exhaust.",
-    "UPGRADE_DESCRIPTION": ""
+    "UPGRADE_DESCRIPTION": "",
+    "EXTENDED_DESCRIPTION": ["Trigger Shadows", "Apply #bWeak and deal damage as if the #yShadows threshold was its current amount. NL If you have no Shadows apply 1 #yWeak to ALL enemies instead."]
   },
   "evolutionmod:NightMare": {
     "NAME": "Night Mare",
-    "DESCRIPTION": "Deal !D! damage. NL Apply Weak equal to half the unblocked damage dealt. NL evolutionmod:CentaurGene Form: Channel a evolutionmod:ShadowGene gene.",
+    "DESCRIPTION": "Deal !D! damage. NL Gain Shadows equal to half the unblocked damage dealt. NL evolutionmod:CentaurGene Form: Channel a evolutionmod:ShadowGene gene.",
 //    "DESCRIPTION": "Deal !D! damage. NL Apply Weak equal to half the unblocked damage dealt. NL Exhaust. NL evolutionmod:CentaurGene Form: Channel a evolutionmod:ShadowGene gene.",
+    "UPGRADE_DESCRIPTION": ""
+  },
+  "evolutionmod:PlayingRough": {
+    "NAME": "Playing Rough",
+    "DESCRIPTION": "Deal !D! damage. NL Apply Lust equal to the unblocked damage dealt. NL evolutionmod:SuccubusGene Form: Channel a evolutionmod:CentaurGene gene.",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:Omen": {
@@ -256,20 +271,17 @@
   },
   "evolutionmod:Toxin": {
     "NAME": "Toxin",
-    "DESCRIPTION": "Apply 2 Poison. NL evolutionmod:LizardGene Form: NL evolutionmod:PlantGene Form: NL apply additional Poison equal to !M! % of the enemy's maximum health and Exhaust.",
-    "UPGRADE_DESCRIPTION": "Apply 3 Poison. NL evolutionmod:LizardGene Form: NL evolutionmod:PlantGene Form: NL apply additional Poison equal to !M! % of the enemy's maximum health and Exhaust."
-  },
-  "evolutionmod:ThickHide": {
-    "NAME": "Thick Hide",
-    "DESCRIPTION": "Gain !M! Plated armor. NL evolutionmod:BeastGene Form: NL evolutionmod:CentaurGene Form: gain 1 Plated armor.",
-    "UPGRADE_DESCRIPTION": "Gain !M! Plated armor. NL evolutionmod:BeastGene Form: channel a evolutionmod:CentaurGene gene."
+    "DESCRIPTION": "Apply 2 Poison. NL evolutionmod:LizardGene Form -> NL evolutionmod:PlantGene Form: NL apply additional Poison equal to !M! % of the enemy's maximum health and Exhaust.",
+    "UPGRADE_DESCRIPTION": "Apply 3 Poison. NL evolutionmod:LizardGene Form -> NL evolutionmod:PlantGene Form: NL apply additional Poison equal to !M! % of the enemy's maximum health and Exhaust."
   },
   "evolutionmod:Strenghten": {
     "NAME": "Strengthen",
 //    "DESCRIPTION": "Fate 3: gain !M! Vigor for each Attack discarded. NL Exhaust. NL evolutionmod:LymeanGene Form: Fate an additionnal card. NL evolutionmod:CentaurGene Form: gain !M! Vigor.",
 //    "DESCRIPTION": "Gain !M! Vigor. NL evolutionmod:CentaurGene form: NL evolutionmod:LymeanGene form: NL double your Vigor.",
-    "DESCRIPTION": "Gain !M! Vigor. NL evolutionmod:CentaurGene form: NL evolutionmod:LymeanGene form: NL Adapt with a evolutionmod:CentaurGene gene.",
-    "UPGRADE_DESCRIPTION": ""
+//    "DESCRIPTION": "Gain !M! Vigor. NL evolutionmod:CentaurGene form: NL evolutionmod:LymeanGene form: NL double your Vigor.",
+//    "DESCRIPTION": "Gain !M! Vigor. NL evolutionmod:CentaurGene form: NL evolutionmod:LymeanGene form: NL Adapt with a evolutionmod:CentaurGene gene.",
+    "DESCRIPTION": "Adapt with a evolutionmod:CentaurGene gene. NL evolutionmod:LymeanGene Form: Channel a evolutionmod:CentaurGene first.",
+    "UPGRADE_DESCRIPTION": "Channel a evolutionmod:CentaurGene and Adapt with your oldest one. NL evolutionmod:LymeanGene form: gain !M! Vigor."
   },
   "evolutionmod:CalmTheWaters": {
     "NAME": "Calm the Waters",
@@ -279,8 +291,9 @@
   },
   "evolutionmod:Firebloom": {
     "NAME": "Firebloom",
-    "DESCRIPTION": "Channel a evolutionmod:LavafolkGene gene. NL evolutionmod:PlantGene Form: Channel a evolutionmod:LavafolkGene gene.",
-    "UPGRADE_DESCRIPTION": "Channel !M! evolutionmod:LavafolkGene genes. NL evolutionmod:PlantGene Form: Channel a evolutionmod:LavafolkGene gene."
+    "DESCRIPTION": "Channel a evolutionmod:LavafolkGene gene. NL evolutionmod:PlantGene Form: gain 1 Growth for each evolutionmod:LavafolkGene gene you have.",
+//    "DESCRIPTION": "Channel a evolutionmod:LavafolkGene gene. NL evolutionmod:PlantGene Form: Channel a evolutionmod:LavafolkGene gene.",
+    "UPGRADE_DESCRIPTION": "Channel !M! evolutionmod:LavafolkGene genes. NL evolutionmod:PlantGene Form: gain 1 Growth for each evolutionmod:LavafolkGene gene you have."
   },
   "evolutionmod:FireAnts": {
     "NAME": "Fire Ants",
@@ -297,6 +310,11 @@
     "DESCRIPTION": "evolutionmod:LizardGene Form: Whenever an Attack deals unblocked damage this turn, apply !M! Poison. NL evolutionmod:InsectGene Form: add a Drone to your hand.",
     "UPGRADE_DESCRIPTION": "Whenever an Attack deals unblocked damage this turn, apply !M! Poison. NL evolutionmod:LizardGene form: add a Drone to your hand. NL evolutionmod:InsectGene Form: add a Drone to your hand."
   },
+  "evolutionmod:Hivemind": {
+    "NAME": "Hivemind",
+    "DESCRIPTION": "Fate 1 card for each Drone in your hand. NL evolutionmod:InsectGene Form: add a Drone to your hand first.",
+    "UPGRADE_DESCRIPTION": "Fate 1 card for each Drone in your hand. NL evolutionmod:InsectGene Form: add a Drone to your hand first. NL evolutionmod:LymeanGene Form: add a Drone to your hand first."
+  },
   "evolutionmod:Stalker": {
     "NAME": "Stalker",
     "DESCRIPTION": "Deal !D! damage and apply !M! Poison to all enemies that have Poison. NL Channel a evolutionmod:LizardGene gene.",
@@ -304,8 +322,8 @@
   },
   "evolutionmod:Pheromones": {
     "NAME": "Pheromones",
-    "DESCRIPTION": "evolutionmod:PlantGene Form: NL evolutionmod:SuccubusGene Form: NL apply !M! Vulnerable to ALL enemies.",
-    "UPGRADE_DESCRIPTION": ""
+    "DESCRIPTION": "evolutionmod:PlantGene Form -> NL evolutionmod:SuccubusGene Form: NL apply !M! Vulnerable to ALL enemies.",
+    "UPGRADE_DESCRIPTION": "Apply 1 Vulnerable to ALL enemies. NL evolutionmod:PlantGene Form -> NL evolutionmod:SuccubusGene Form: NL apply !M! more."
   },
   "evolutionmod:LeafBird": {
     "NAME": "Leaf Bird",
@@ -342,12 +360,17 @@
   "evolutionmod:Battleborn": {
     "NAME": "Battleborn",
     "DESCRIPTION": "Gain !M! Strength. NL evolutionmod:CentaurGene Form: gain 1 Strength.",
-    "UPGRADE_DESCRIPTION": "Gain !M! Strength. NL evolutionmod:CentaurGene Form: NL evolutionmod:BeastGene Form: gain 1 Strength."
+    "UPGRADE_DESCRIPTION": "Gain !M! Strength. NL evolutionmod:CentaurGene Form -> NL evolutionmod:BeastGene Form: gain 1 Strength."
   },
   "evolutionmod:CurrentsDancer": {
     "NAME": "Currents Dancer",
     "DESCRIPTION": "Gain !M! Dexterity. NL evolutionmod:HarpyGene Form: gain 1 Dexterity.",
-    "UPGRADE_DESCRIPTION": "Gain !M! Dexterity. NL evolutionmod:HarpyGene Form: NL evolutionmod:MerfolkGene Form: gain 1 Dexterity."
+    "UPGRADE_DESCRIPTION": "Gain !M! Dexterity. NL evolutionmod:HarpyGene Form -> NL evolutionmod:MerfolkGene Form: gain 1 Dexterity."
+  },
+  "evolutionmod:DarkDesires": {
+    "NAME": "Dark Desires",
+    "DESCRIPTION": "Whenever you apply a debuff to an enemy deal !M! damage to it. evolutionmod:SuccubusGene Form: Channel a evolutionmod:ShadowGene gene.",
+    "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:ShiftingStrike": {
     "NAME": "Shifting strike",
@@ -368,7 +391,7 @@
   },
   "evolutionmod:ChimeraStrike": {
     "NAME": "Chimera Strike",
-    "DESCRIPTION": "Deal !D! damage. NL Adapt with your oldest gene. NL Adapted effects target the same enemy if possible.",
+    "DESCRIPTION": "Deal !D! damage. NL Adapt with your oldest gene.",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:ChimeraDefense": {
@@ -416,9 +439,14 @@
   "evolutionmod:Treasure": {
     "NAME": "Treasure",
     "DESCRIPTION": "Choose a Crystal Stone, Shard or Dust to add to your hand. NL Exhaust.",
-    "UPGRADE_DESCRIPTION": "Choose an upgraded Crystal Shard, Block or Dust to add to your hand. NL Exhaust."
+    "UPGRADE_DESCRIPTION": "Choose a Crystal Shard, Block or Dust to add to your hand and upgrade it. NL Exhaust."
   },
-
+  "evolutionmod:CrystalShaping": {
+    "NAME": "CrystalShaping",
+    "DESCRIPTION": "Add a Crystal Stone, Shard or Dust from your exhaust pile into your hand. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "Add a Crystal Stone, Shard or Dust from your exhaust pile into your hand."
+//    "UPGRADE_DESCRIPTION": "Add a !M! Crystal Stone, Shard or Dust from your exhaust pile into your hand."
+  },
   "evolutionmod:Grow": {
     "NAME": "Grow",
     "DESCRIPTION": "Gain 1 Orb slot. Startup: shuffle a copy of this card in your draw pile.",
@@ -431,8 +459,8 @@
   },
   "evolutionmod:Ritual": {
     "NAME": "Ritual",
-    "DESCRIPTION": "Ethereal. NL Permanently Adapt this with your oldest gene not already adapted. NL Exhaust.",
-    "UPGRADE_DESCRIPTION": "Permanently Adapt this with your oldest gene not already adapted. NL Exhaust."
+    "DESCRIPTION": "Permanently Adapt this with your oldest gene not already adapted. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "Permanently Adapt this with your oldest gene not already adapted."
   },
   "evolutionmod:GodForm": {
     "NAME": "Godly Powers",
@@ -446,11 +474,6 @@
 //    "DESCRIPTION": "Evoke all your genes. When you Channel a gene, Evoke it once.",
     "DESCRIPTION": "Ethereal. Evoke all your genes. NL When you Channel a gene, Evoke it !M! times.",
     "UPGRADE_DESCRIPTION": "NL Evoke all your genes. NL When you Channel a gene, Evoke it !M! times."
-  },
-  "evolutionmod:DarkDesires": {
-    "NAME": "Dark Desires",
-    "DESCRIPTION": "Whenever you apply a debuff to an enemy deal !M! damage to it. evolutionmod:SuccubusGene Form: Channel a evolutionmod:ShadowGene gene.",
-    "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:Drone": {
     "NAME": "Drone",

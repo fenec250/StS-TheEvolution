@@ -11,6 +11,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.WeakPower;
 import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.SuccubusGene;
+import evolutionmod.powers.ShadowsPower;
 
 public class NightMareAction extends AbstractGameAction {
 
@@ -32,8 +33,10 @@ public class NightMareAction extends AbstractGameAction {
 			this.target.damage(this.info);
 			if (this.target.lastDamageTaken/2 > 0) {
 				if (!target.isDying) {
-					AbstractDungeon.actionManager.addToTop(new ApplyPowerAction(this.target, this.source,
-									new WeakPower(this.target, this.target.lastDamageTaken/2, false)));
+					AbstractDungeon.actionManager.addToTop(new ApplyPowerAction(this.source, this.source,
+									new ShadowsPower(this.source, this.target.lastDamageTaken/2)));
+//					AbstractDungeon.actionManager.addToTop(new ApplyPowerAction(this.target, this.source,
+//									new WeakPower(this.target, this.target.lastDamageTaken/2, false)));
 				}
 			}
 		}

@@ -27,7 +27,12 @@ public class LavafolkGene extends AbstractGene {
 	@Override
 	public void onEndOfTurn() {
 		super.onEndOfTurn();
-		apply(AbstractDungeon.player, null, 1);
+		apply(AbstractDungeon.player, null, 1, false);
+	}
+
+	@Override
+	public void onEvoke() {
+		apply(AbstractDungeon.player, null, 1, true);
 	}
 
 	@Override
@@ -39,11 +44,15 @@ public class LavafolkGene extends AbstractGene {
 	public void playChannelSFX() {
 	}
 
-	public static void apply(AbstractPlayer p, AbstractMonster m, int times) {
+	public static void apply(AbstractPlayer p, AbstractMonster m, int times, boolean addToTop) {
 		int damage = damage();
 		if (damage > 0) {
 			for (int i = 0; i < strikeNb() * times; ++i) {
-				AbstractDungeon.actionManager.addToBottom(new LavafolkGeneAction(p, m, damage));
+				if (addToTop) {
+					AbstractDungeon.actionManager.addToTop(new LavafolkGeneAction(p, m, damage));
+				} else {
+					AbstractDungeon.actionManager.addToBottom(new LavafolkGeneAction(p, m, damage));
+				}
 			}
 		}
 	}
@@ -96,7 +105,7 @@ public class LavafolkGene extends AbstractGene {
 
 		@Override
 		public void apply(AbstractPlayer p, AbstractMonster m) {
-			LavafolkGene.apply(p, m, this.amount);
+			LavafolkGene.apply(p, m, this.amount, true);
 		}
 
 		@Override

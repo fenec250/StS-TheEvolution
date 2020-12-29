@@ -32,9 +32,9 @@ import java.util.ArrayList;
 
 public class EvolutionCharacter extends CustomPlayer {
     public static final int ENERGY_PER_TURN = 3;
-    public static final String MY_CHARACTER_SHOULDER_2 = "evolutionmod/images/char/shoulder2.png";
-    public static final String MY_CHARACTER_SHOULDER_1 = "evolutionmod/images/char/shoulder.png";
-    public static final String MY_CHARACTER_CORPSE = "evolutionmod/images/char/corpse.png";
+    public static final String MY_CHARACTER_SHOULDER_1 = "evolutionmod/images/char/Campfire1.png";
+    public static final String MY_CHARACTER_SHOULDER_2 = "evolutionmod/images/char/Campfire2.png";
+    public static final String MY_CHARACTER_CORPSE = "evolutionmod/images/char/ded_nila.png";
 //    public static final String MY_CHARACTER_ANIMATION = "evolutionmod/images/char/idle/Animation.scml";
     public static final String MY_CHARACTER_PORTRAIT = "evolutionmod/images/cards/CentaurSkl.png";
     private static final String ID = "evolutionmod:EvolutionCharacter";
@@ -62,9 +62,9 @@ public class EvolutionCharacter extends CustomPlayer {
 //        super(name, EvolutionEnum.EVOLUTION_CLASS, orbTextures, "evolutionmod/images/char/orb/vfx.png", null, new SpriterAnimation(MY_CHARACTER_ANIMATION));
         super(name, EvolutionEnum.EVOLUTION_CLASS, orbTextures,
                 "evolutionmod/images/char/orb/vfx.png", null,
-                new SpineAnimation("evolutionmod/images/char/idle/Evolution.atlas",
-                        "evolutionmod/images/char/idle/Evolution.json", 0.33f));
-//        new SpineAnimation()
+                new SpriterAnimation("evolutionmod/images/char/idle/nila_idle.scml"));
+//                new SpineAnimation("evolutionmod/images/char/idle/Evolution.atlas",
+//                        "evolutionmod/images/char/idle/Evolution.json", 0.33f));
         this.dialogX = this.drawX + DIALOG_X_ADJUSTMENT * Settings.scale;
         this.dialogY = this.drawY + DIALOG_Y_ADJUSTMENT * Settings.scale;
 

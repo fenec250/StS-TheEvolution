@@ -1,8 +1,8 @@
 package evolutionmod.cards;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
-import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -10,10 +10,9 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.AbstractPower;
-import com.megacrit.cardcrawl.powers.WeakPower;
 import evolutionmod.orbs.ShadowGene;
 import evolutionmod.patches.AbstractCardEnum;
+import evolutionmod.powers.ShadowsPower;
 
 public class Shadowbolt
         extends BaseEvoCard {
@@ -23,17 +22,18 @@ public class Shadowbolt
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = "evolutionmod/images/cards/ShadowAtt.png";
-    private static final int COST = 2;
-    private static final int DAMAGE_AMT = 16;
-//    private static final int UPGRADE_DAMAGE_AMT = 4;
-    private static final int WEAK_DAMAGE_AMT = 2;
+    private static final int COST = 1;
+    private static final int DAMAGE_AMT = 8 ;
+    private static final int UPGRADE_DAMAGE_AMT = 1;
+    private static final int SHADOWS_AMT = 1;
+    private static final int UPGRADE_SHADOWS_AMT = 1;
 
     public Shadowbolt() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.ATTACK, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.COMMON, CardTarget.ENEMY);
         this.damage = this.baseDamage = DAMAGE_AMT;
-        this.magicNumber = this.baseMagicNumber = WEAK_DAMAGE_AMT;
+        this.magicNumber = this.baseMagicNumber = SHADOWS_AMT;
     }
 
     @Override
@@ -44,11 +44,13 @@ public class Shadowbolt
         AbstractDungeon.actionManager.addToBottom(new DamageAction(
                 m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
                 AbstractGameAction.AttackEffect.SLASH_VERTICAL));
-        if (this.upgraded) {
-            addToBot(new ChannelAction(new ShadowGene()));
-        } else {
-            formEffect(ShadowGene.ID);
-        }
+        formEffect(ShadowGene.ID, () ->
+                addToBot(new ApplyPowerAction(p, p, new ShadowsPower(p, this.magicNumber))));
+//        if (this.upgraded) {
+//            addToBot(new ChannelAction(new ShadowGene()));
+//        } else {
+//            formEffect(ShadowGene.ID);
+//        }
 //        addToBot(new ApplyPowerAction(m, p, new WeakPower(m, this.magicNumber, false), this.magicNumber));
     }
 
@@ -58,22 +60,22 @@ public class Shadowbolt
         super.applyPowers();
     }
 
-    @Override
-    public void calculateCardDamage(AbstractMonster mo) {
-        this.baseDamage = DAMAGE_AMT;// + (this.upgraded ? UPGRADE_DAMAGE_AMT : 0);
-        if (mo != null &&
-                (this.upgraded || BaseEvoCard.isPlayerInThisForm(ShadowGene.ID))) {
-            AbstractPower weak = mo.getPower(WeakPower.POWER_ID);
-            if (weak != null) {
-                this.baseDamage += weak.amount * this.magicNumber;
-            }
-        }
-//        this.rawDescription = DESCRIPTION;
-//        this.initializeDescription();
-        super.calculateCardDamage(mo);
-        this.baseDamage = DAMAGE_AMT;// + (this.upgraded ? UPGRADE_DAMAGE_AMT : 0);
-        this.isDamageModified = this.baseDamage != this.damage;
-    }
+//    @Override
+//    public void calculateCardDamage(AbstractMonster mo) {
+//        this.baseDamage = DAMAGE_AMT;// + (this.upgraded ? UPGRADE_DAMAGE_AMT : 0);
+//        if (mo != null &&
+//                (this.upgraded || BaseEvoCard.isPlayerInThisForm(ShadowGene.ID))) {
+//            AbstractPower weak = mo.getPower(WeakPower.POWER_ID);
+//            if (weak != null) {
+//                this.baseDamage += weak.amount * this.magicNumber;
+//            }
+//        }
+////        this.rawDescription = DESCRIPTION;
+////        this.initializeDescription();
+//        super.calculateCardDamage(mo);
+//        this.baseDamage = DAMAGE_AMT;// + (this.upgraded ? UPGRADE_DAMAGE_AMT : 0);
+//        this.isDamageModified = this.baseDamage != this.damage;
+//    }
 
     //    @Override
 //    public void calculateDamageDisplay(AbstractMonster mo) {
@@ -101,9 +103,10 @@ public class Shadowbolt
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-//            this.upgradeDamage(UPGRADE_DAMAGE_AMT);
-            this.rawDescription = UPGRADE_DESCRIPTION;
-            this.initializeDescription();
+            this.upgradeDamage(UPGRADE_DAMAGE_AMT);
+            this.upgradeMagicNumber(UPGRADE_SHADOWS_AMT);
+//            this.rawDescription = UPGRADE_DESCRIPTION;
+//            this.initializeDescription();
         }
     }
 

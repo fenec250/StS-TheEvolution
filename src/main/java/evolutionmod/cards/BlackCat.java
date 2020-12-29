@@ -1,19 +1,20 @@
 package evolutionmod.cards;
 
+import basemod.helpers.TooltipInfo;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
-import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.WeakPower;
 import evolutionmod.orbs.BeastGene;
 import evolutionmod.orbs.ShadowGene;
 import evolutionmod.patches.AbstractCardEnum;
+import evolutionmod.powers.ShadowsPower;
+
+import java.util.List;
 
 public class BlackCat
         extends BaseEvoCard {
@@ -22,6 +23,7 @@ public class BlackCat
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
+    public static final String[] EXTENDED_DESCRIPTION = cardStrings.EXTENDED_DESCRIPTION;
     public static final String IMG_PATH = "evolutionmod/images/cards/BlackCat.png";
     private static final int COST = 1;
     private static final int DAMAGE_AMT = 4;
@@ -47,10 +49,18 @@ public class BlackCat
                     this.damageTypeForTurn,
                     AbstractGameAction.AttackEffect.SLASH_DIAGONAL)));
 
-        BaseEvoCard.formEffect(ShadowGene.ID, () -> AbstractDungeon.getMonsters().monsters.stream()
-                    .filter(mo -> !mo.isDeadOrEscaped())
-                    .forEach(mo -> addToBot(new ApplyPowerAction(mo, p,
-                            new WeakPower(mo, this.magicNumber, false), this.magicNumber))));
+        BaseEvoCard.formEffect(ShadowGene.ID, () -> addToBot(new AbstractGameAction() {
+            @Override
+            public void update() {
+//                ShadowsPower.reduceThreshold(p, magicNumber);
+                ShadowsPower.triggerImmediately(p);
+                this.isDone = true;
+            }
+        }));
+//        BaseEvoCard.formEffect(ShadowGene.ID, () -> AbstractDungeon.getMonsters().monsters.stream()
+//                    .filter(mo -> !mo.isDeadOrEscaped())
+//                    .forEach(mo -> addToBot(new ApplyPowerAction(mo, p,
+//                            new WeakPower(mo, this.magicNumber, false), this.magicNumber))));
     }
 
     @Override
@@ -68,10 +78,20 @@ public class BlackCat
 
     @Override
     public void triggerOnGlowCheck() {
-        if (isPlayerInThisForm(BeastGene.ID) && isPlayerInThisForm(ShadowGene.ID)) {
+        if (isPlayerInTheseForms(BeastGene.ID, ShadowGene.ID)) {
             this.glowColor = GOLD_BORDER_GLOW_COLOR.cpy();
         } else {
             this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
         }
+    }
+
+    @Override
+    public List<TooltipInfo> getCustomTooltips() {
+        if (customTooltips == null) {
+            super.getCustomTooltips();
+            customTooltips.add(new TooltipInfo(EXTENDED_DESCRIPTION[0],
+                    EXTENDED_DESCRIPTION[1]));
+        }
+        return  customTooltips;
     }
 }

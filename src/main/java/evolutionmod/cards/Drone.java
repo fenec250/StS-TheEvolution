@@ -28,7 +28,7 @@ public class Drone
 
     public Drone() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
-                CardType.ATTACK, AbstractCardEnum.EVOLUTION_BLUE,
+                CardType.ATTACK, CardColor.COLORLESS,
                 CardRarity.SPECIAL, CardTarget.ENEMY);
         this.damage = this.baseDamage = DAMAGE_AMT;
         this.block = this.baseBlock = BLOCK_AMT;
@@ -50,7 +50,9 @@ public class Drone
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new GainBlockAction(m, this.block));
+        if (this.block > 0) {
+            addToBot(new GainBlockAction(p, this.block));
+        }
         addToBot(new DamageAction(
                 m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
                 AbstractGameAction.AttackEffect.BLUNT_HEAVY));

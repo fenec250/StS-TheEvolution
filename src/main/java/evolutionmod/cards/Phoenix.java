@@ -50,7 +50,7 @@ public class Phoenix
         if (inForm) {
             this.adapt(99);
         }
-        this.useAdaptations(p, null);
+        this.useAdaptations(p, m);
     }
 
     @Override

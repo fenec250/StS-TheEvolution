@@ -87,7 +87,7 @@ public class LoyalCompanion
 
 	private void alterBlockAround(Runnable supercall) {
 		this.baseBlock = BLOCK_AMT + (upgraded ? UPGRADE_BLOCK_AMT : 0);
-		if (!this.upgraded && this.gene != null && isPlayerInThisForm(this.gene.ID)) {
+		if (isPlayerInThisForm(this.gene.ID)) {
 			this.baseBlock += this.magicNumber;
 		}
 		supercall.run();

@@ -33,11 +33,17 @@
   },
   "evolutionmod:TheNightPower": {
     "NAME": "The Night",
-    "DESCRIPTIONS": ["At the start of your turn if you have a Shadow gene add ", "a", " Shadowbolt to your hand, otherwise Channel a Shadow gene."]
+    "DESCRIPTIONS": ["Increase by ", " the damage dealt by each stack of #yShadows."]
+//    "DESCRIPTIONS": ["At the start of your turn if you have Shadow #yForm reduce the #yShadows amount2 by ", " and reduce its damage accordingly. Otherwise Channel a Shadow gene and reduce the amount2 by 1 less."]
+//    "DESCRIPTIONS": ["At the start of your turn if you have a Shadow gene add ", "a", " Shadowbolt to your hand, otherwise Channel a Shadow gene."]
   },
   "evolutionmod:TheNightPlusPower": {
     "NAME": "The Night+",
     "DESCRIPTIONS": ["At the start of your turn if you have a Shadow gene add ", "a", " Shadowbolt+ to your hand, otherwise Channel a Shadow gene."]
+  },
+  "evolutionmod:ShadowsPower": {
+    "NAME": "Shadows",
+    "DESCRIPTIONS": ["Needs ", " more to reach the next threshold, dealing ", " damage per stack and applying 1 Weak to ALL enemies and increasing the threshold to ", "."]
   },
   "evolutionmod:BramblesPower": {
     "NAME": "Brambles",

@@ -23,7 +23,6 @@ public class Strenghten
     public static final String IMG_PATH = "evolutionmod/images/cards/CentaurSkl.png";
     private static final int COST = 1;
     private static final int VIGOR_AMT = 3;
-    private static final int UPGRADE_VIGOR_AMT = 2;
 
     public Strenghten() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -32,12 +31,17 @@ public class Strenghten
         this.magicNumber = this.baseMagicNumber = VIGOR_AMT;
     }
 
-        @Override
+    @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new ApplyPowerAction(p, p,
-                new VigorPower(p, this.magicNumber)));
-
-        formEffect(CentaurGene.ID, () -> formEffect(LymeanGene.ID, () -> this.adapt(1)));
+//        addToBot(new ApplyPowerAction(p, p,
+//                new VigorPower(p, this.magicNumber)));
+        if (!upgraded) {
+            formEffect(LymeanGene.ID, () -> addToBot(new ChannelAction(new CentaurGene())));
+        } else {
+            addToBot(new ChannelAction(new CentaurGene()));
+            formEffect(LymeanGene.ID, () -> addToBot(new ApplyPowerAction(p, p, new VigorPower(p, this.magicNumber))));
+        }
+        this.adapt(1);
 //        formEffect(CentaurGene.ID, () -> formEffect(LymeanGene.ID, () -> {
 //                addToBot(new StrenghtenAction(p));
 //                this.exhaust = true;
@@ -63,13 +67,20 @@ public class Strenghten
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeMagicNumber(UPGRADE_VIGOR_AMT);
+//            this.upgradeMagicNumber(UPGRADE_VIGOR_AMT);
+            this.rawDescription = UPGRADE_DESCRIPTION;
+            this.initializeDescription();
         }
     }
 
     @Override
     public void triggerOnGlowCheck() {
-        if (isPlayerInThisForm(CentaurGene.ID) && isPlayerInThisForm(LymeanGene.ID)) {
+//        if (isPlayerInTheseForms(CentaurGene.ID, LymeanGene.ID)) {
+        if ((isPlayerInThisForm(LymeanGene.ID) && this.upgraded)
+                || isPlayerInTheseForms(CentaurGene.ID, LymeanGene.ID)) {
+//                AbstractDungeon.player.orbs.stream()
+//                        .anyMatch((orb) -> orb != null && orb.ID != null && orb.ID.equals(CentaurGene.ID))
+//        )) {
             this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
         } else {
             this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();

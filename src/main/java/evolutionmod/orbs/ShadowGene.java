@@ -1,17 +1,14 @@
 package evolutionmod.orbs;
 
-import basemod.helpers.TooltipInfo;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.OrbStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
-import evolutionmod.actions.ShadowGeneAction;
 import evolutionmod.cards.AdaptableEvoCard;
-import evolutionmod.powers.PotencyPower;
-
-import java.util.List;
+import evolutionmod.powers.ShadowsPower;
 
 public class ShadowGene extends AbstractGene {
 	public static final String ID = "evolutionmod:ShadowGene";
@@ -21,6 +18,7 @@ public class ShadowGene extends AbstractGene {
 	public static final String[] DESCRIPTION = orbStrings.DESCRIPTION;
 	public static final String IMG_PATH = "evolutionmod/images/orbs/ShadowGene.png";
 	public static final int WEAK = 2;
+	public static final int CREEPING_SHADOWS = 1;
 
 	public ShadowGene() {
 		super(ID, NAME, getDescription(), IMG_PATH, COLOR);
@@ -29,7 +27,13 @@ public class ShadowGene extends AbstractGene {
 	@Override
 	public void onStartOfTurn() {
 		super.onStartOfTurn();
-		apply(AbstractDungeon.player, null, 1);
+		apply(AbstractDungeon.player, null, 1, false);
+	}
+
+	@Override
+	public void onEvoke() {
+		super.onEvoke();
+		apply(AbstractDungeon.player, null, 1, true);
 	}
 
 	@Override
@@ -41,11 +45,17 @@ public class ShadowGene extends AbstractGene {
 	public void playChannelSFX() {
 	}
 
-	public static void apply(AbstractPlayer p, AbstractMonster m, int times) {
+	public static void apply(AbstractPlayer p, AbstractMonster m, int times, boolean addToTop) {
 //		int damage = damage();
-		int weak = weak();
+//		int weak = weak();
+		int shadows = creepingShadows();
 		for (int i = 0; i < times; ++i) {
-			AbstractDungeon.actionManager.addToBottom(new ShadowGeneAction(p, m, weak));
+			if (addToTop) {
+				AbstractDungeon.actionManager.addToTop(new ApplyPowerAction(p, p, new ShadowsPower(p, shadows)));
+			} else {
+//			AbstractDungeon.actionManager.addToBottom(new ShadowGeneAction(p, m, weak));
+				AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new ShadowsPower(p, shadows)));
+			}
 		}
 	}
 
@@ -65,12 +75,17 @@ public class ShadowGene extends AbstractGene {
 	}
 
 	public static String getDescription() {
-		return DESCRIPTION[0] + weak() + DESCRIPTION[1];
+		return DESCRIPTION[0] + creepingShadows() + DESCRIPTION[1];
+//		return DESCRIPTION[0] + weak() + DESCRIPTION[1];
 //		return DESCRIPTION[0] + damage() + DESCRIPTION[1] + weak() + DESCRIPTION[2];
 	}
 
 	private static int weak() {
 		return WEAK;
+	}
+
+	private static int creepingShadows() {
+		return CREEPING_SHADOWS;
 	}
 
 	public static class Adaptation extends AdaptableEvoCard.AbstractAdaptation {
@@ -87,7 +102,7 @@ public class ShadowGene extends AbstractGene {
 
 		@Override
 		public void apply(AbstractPlayer p, AbstractMonster m) {
-			ShadowGene.apply(p, m, this.amount);
+			ShadowGene.apply(p, m, this.amount, true);
 		}
 
 		@Override

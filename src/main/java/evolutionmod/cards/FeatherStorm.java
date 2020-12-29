@@ -42,6 +42,7 @@ public class FeatherStorm
         this.damage = this.baseDamage = DAMAGE;
         this.magicNumber = this.baseMagicNumber = FEATHER_AMT;
         this.shouldSpawnFeathers = true;
+        this.cardsToPreview = new Feather();
     }
 
     @Override

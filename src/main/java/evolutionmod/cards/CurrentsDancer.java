@@ -67,7 +67,8 @@ public class CurrentsDancer
 
 	@Override
 	public void triggerOnGlowCheck() {
-		if (isPlayerInThisForm(HarpyGene.ID) && (!upgraded || isPlayerInThisForm(MerfolkGene.ID))) {
+		if ((isPlayerInThisForm(HarpyGene.ID) && !upgraded)
+				|| isPlayerInTheseForms(HarpyGene.ID, MerfolkGene.ID)) {
 			this.glowColor = GOLD_BORDER_GLOW_COLOR.cpy();
 		} else {
 			this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();

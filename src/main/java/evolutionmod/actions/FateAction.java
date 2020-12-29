@@ -4,6 +4,7 @@ import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.common.HealAction;
 import com.megacrit.cardcrawl.actions.utility.ScryAction;
+import com.megacrit.cardcrawl.actions.utility.WaitAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -71,6 +72,7 @@ public class FateAction extends AbstractGameAction {
 					List<AbstractCard> copy = new ArrayList<>(fateGroup.group);
 					copy.forEach(c -> fateGroup.moveToDeck(c, false));
 					addToTop(new ScryAction(copy.size()));
+					addToTop(new WaitAction(0.2f));
 				}
 //			}
 		}

@@ -21,12 +21,16 @@ public class ChimeraStrike
     private static final int COST = 1;
     private static final int DAMAGE_AMT = 7;
     private static final int UPGRADE_DAMAGE_AMT = 3;
+    private static final int ADAPT_MAX_AMT = 4;
+    private static final int UPGRADE_ADAPT_MAX_AMT = 2;
 
+    private int adaptssss;
     public ChimeraStrike() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.ATTACK, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.COMMON, CardTarget.ENEMY);
         this.damage = this.baseDamage = DAMAGE_AMT;
+        this.magicNumber = this.baseMagicNumber = ADAPT_MAX_AMT;
         this.tags.add(CardTags.STRIKE);
     }
 
@@ -45,7 +49,7 @@ public class ChimeraStrike
 
     @Override
     public int canAdaptWith(AbstractAdaptation adaptation) {
-        return adaptation.amount;
+        return Math.min(adaptation.amount, this.magicNumber - (int) adaptationMap.values().stream().mapToInt(a -> a.amount).count());
     }
 
     @Override

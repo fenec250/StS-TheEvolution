@@ -1,20 +1,16 @@
 package evolutionmod.cards;
 
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.GainStrengthPower;
-import com.megacrit.cardcrawl.powers.StrengthPower;
 import com.megacrit.cardcrawl.powers.VulnerablePower;
 import evolutionmod.orbs.PlantGene;
 import evolutionmod.orbs.SuccubusGene;
 import evolutionmod.patches.AbstractCardEnum;
-import evolutionmod.powers.LustPower;
 
 public class Pheromones
         extends BaseEvoCard {
@@ -37,17 +33,25 @@ public class Pheromones
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        formEffect(PlantGene.ID, () -> formEffect(SuccubusGene.ID, () ->
-                AbstractDungeon.getMonsters().monsters.stream()
+        int vulnerable = (upgraded? 1 : 0);
+        if (isPlayerInTheseForms(PlantGene.ID, SuccubusGene.ID)) {
+            vulnerable += this.magicNumber;
+        }
+        formEffect(PlantGene.ID, () -> formEffect(SuccubusGene.ID));
+
+        final int finalVulnerable = vulnerable;
+        if (finalVulnerable > 0) {
+            AbstractDungeon.getMonsters().monsters.stream()
                     .filter(mo -> !mo.isDeadOrEscaped())
                     .forEach(mo -> {
-                        addToBot(new ApplyPowerAction(mo, p, new VulnerablePower(mo, this.magicNumber, false)));
+                        addToBot(new ApplyPowerAction(mo, p, new VulnerablePower(mo, finalVulnerable, false)));
 //                        addToBot(new ApplyPowerAction(mo, p, new LustPower(mo, this.magicNumber)));
 //                        addToBot(new ApplyPowerAction(mo, p, new StrengthPower(mo, -this.magicNumber), -this.magicNumber));
 //                        if (!mo.hasPower("Artifact")) {
 //                            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(mo, p, new GainStrengthPower(mo, this.magicNumber), this.magicNumber));
 //                        }
-                    })));
+                    });
+        }
     }
 
     @Override
@@ -59,13 +63,15 @@ public class Pheromones
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeMagicNumber(UPGRADE_REDUCTION_AMT);
+//            this.upgradeMagicNumber(UPGRADE_REDUCTION_AMT);
+            this.rawDescription = UPGRADE_DESCRIPTION;
+            this.initializeDescription();
         }
     }
 
     @Override
     public void triggerOnGlowCheck() {
-        if (isPlayerInThisForm(PlantGene.ID) && isPlayerInThisForm(SuccubusGene.ID)) {
+        if (isPlayerInTheseForms(PlantGene.ID, SuccubusGene.ID)) {
             this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
         } else {
             this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();

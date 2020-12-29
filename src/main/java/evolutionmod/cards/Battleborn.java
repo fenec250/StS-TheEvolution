@@ -65,7 +65,8 @@ public class Battleborn
 
     @Override
     public void triggerOnGlowCheck() {
-        if (isPlayerInThisForm(CentaurGene.ID) && (!upgraded || isPlayerInThisForm(BeastGene.ID))) {
+        if ((!upgraded && isPlayerInThisForm(CentaurGene.ID))
+                || isPlayerInTheseForms(CentaurGene.ID, BeastGene.ID)) {
             this.glowColor = GOLD_BORDER_GLOW_COLOR.cpy();
         } else {
             this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();

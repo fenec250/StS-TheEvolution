@@ -44,7 +44,8 @@
   },
   "evolutionmod:ShadowGene": {
     "NAME": "Shadow",
-    "DESCRIPTION": ["Apply ", " #yWeak to a random enemy."]
+//    "DESCRIPTION": ["Apply ", " #yWeak to a random enemy."]
+    "DESCRIPTION": ["Gain ", " #yShadows. When #yShadows reaches its threshold it deals 2 damage per stack and applies 1 #yWeak to all enemies. NL The initial threshold is 1."]
   }
 //
 //  "mystighjcmod:ArtesPlayedPower": {

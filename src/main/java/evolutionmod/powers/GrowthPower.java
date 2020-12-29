@@ -44,9 +44,9 @@ public class GrowthPower extends AbstractPower {
     }
 
     @Override
-    public void update(int slot) {
+    public void onInitialApplication() {
         this.convertToEnergy();
-        super.update(slot);
+        super.onInitialApplication();
     }
 
     public void convertToEnergy() {

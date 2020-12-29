@@ -65,7 +65,7 @@ public class VenomGlands
 
     @Override
     public void triggerOnGlowCheck() {
-        if (isPlayerInThisForm(InsectGene.ID) && isPlayerInThisForm(LizardGene.ID)) {
+        if (isPlayerInTheseForms(InsectGene.ID, LizardGene.ID)) {
             this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
         } else {
             this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();

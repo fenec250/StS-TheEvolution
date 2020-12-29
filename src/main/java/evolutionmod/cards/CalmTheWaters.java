@@ -84,7 +84,8 @@ public class CalmTheWaters
 
     @Override
     public void triggerOnGlowCheck() {
-        if (isPlayerInThisForm(LymeanGene.ID) && (upgraded || isPlayerInThisForm(MerfolkGene.ID))) {
+        if ((isPlayerInThisForm(LymeanGene.ID) && upgraded)
+                || isPlayerInTheseForms(MerfolkGene.ID, LymeanGene.ID)) {
             this.glowColor = GOLD_BORDER_GLOW_COLOR.cpy();
         } else {
             this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();

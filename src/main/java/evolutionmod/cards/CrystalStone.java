@@ -37,9 +37,9 @@ public class CrystalStone
 	public static final String[] EXTENDED_DESCRIPTION = cardStrings.EXTENDED_DESCRIPTION;
 	public static final String IMG_PATH = "evolutionmod/images/cards/CrystalStone.png";
 	private static final int COST = 2;
-	private static final int BLOCK_AMT = 10;
+	private static final int BLOCK_AMT = 11;
 	private static final int UPGRADE_BLOCK_AMT = 3;
-	private static final int FORM_BLOCK = 4;
+	private static final int FORM_BLOCK = 3;
 	private static final int UPGRADE_FORM_BLOCK = 1;
 
 	private int genesIndexes;
@@ -117,7 +117,7 @@ public class CrystalStone
 
 	@Override
 	public void triggerOnGlowCheck() {
-		if (isPlayerInThisForm(secondGene.ID) && isPlayerInThisForm(firstGene.ID)) {
+		if (isPlayerInTheseForms(secondGene.ID, firstGene.ID)) {
 			this.glowColor = GOLD_BORDER_GLOW_COLOR.cpy();
 		} else {
 			this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();

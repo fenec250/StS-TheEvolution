@@ -1,18 +1,12 @@
 package evolutionmod.cards;
 
 import basemod.helpers.BaseModCardTags;
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
-import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import evolutionmod.actions.FateAction;
-import evolutionmod.orbs.LymeanGene;
 import evolutionmod.patches.AbstractCardEnum;
-import evolutionmod.powers.EruptionPower;
 
 public class DefendEvo
         extends AdaptableEvoCard {
@@ -57,10 +51,7 @@ public class DefendEvo
 //        });
 //        addToBot(new FateAction(2));
 //        addToBot(new ChannelAction(new LymeanGene()));
-//        addToBot(new ChannelAction(new LymeanGene()));
-//        addToBot(new ChannelAction(new LymeanGene()));
-//        addToBot(new ChannelAction(new LymeanGene()));
-//        addToBot(new ApplyPowerAction(p, p, new EruptionPower(p, 1)));
+//        ShadowsPower.applyCreepingShadows(p, 1, false);
     }
 
     @Override

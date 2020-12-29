@@ -1,5 +1,6 @@
 package evolutionmod.cards;
 
+import basemod.helpers.TooltipInfo;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -13,6 +14,8 @@ import evolutionmod.powers.GodFormPower;
 import evolutionmod.powers.TheNightPlusPower;
 import evolutionmod.powers.TheNightPower;
 
+import java.util.List;
+
 public class TheNight extends BaseEvoCard {
     public static final String ID = "evolutionmod:TheNight";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
@@ -21,7 +24,8 @@ public class TheNight extends BaseEvoCard {
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = "evolutionmod/images/cards/ShadowPower.png";
     private static final int COST = 2;
-    private static final int NIGHT_AMT = 1;
+    private static final int NIGHT_AMT = 2;
+    private static final int UPGRADE_NIGHT_AMT = 1;
 
     public TheNight() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -32,11 +36,12 @@ public class TheNight extends BaseEvoCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        if (!upgraded) {
+//        if (!upgraded) {
             this.addToBot(new ApplyPowerAction(p, p, new TheNightPower(p, this.magicNumber)));
-        } else {
-            this.addToBot(new ApplyPowerAction(p, p, new TheNightPlusPower(p, this.magicNumber)));
-        }
+            addToBot(new ChannelAction(new ShadowGene()));
+//        } else {
+//            this.addToBot(new ApplyPowerAction(p, p, new TheNightPlusPower(p, this.magicNumber)));
+//        }
     }
 
     @Override
@@ -48,8 +53,19 @@ public class TheNight extends BaseEvoCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.rawDescription = UPGRADE_DESCRIPTION;
-            this.initializeDescription();
+            this.upgradeMagicNumber(UPGRADE_NIGHT_AMT);
+//            this.rawDescription = UPGRADE_DESCRIPTION;
+//            this.initializeDescription();
         }
     }
+
+//    @Override
+//    public List<TooltipInfo> getCustomTooltips() {
+//        if (customTooltips == null) {
+//            super.getCustomTooltips();
+//            customTooltips.add(new TooltipInfo("Quicken Shadows",
+//                    "Reduces the amount2 of Shadows by #b1 and its damage by #b2. NL If you have no Shadows apply 1 Weak to ALL enemies instead."));
+//        }
+//        return  customTooltips;
+//    }
 }

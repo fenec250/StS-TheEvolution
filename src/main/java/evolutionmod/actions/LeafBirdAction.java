@@ -20,13 +20,17 @@ public class LeafBirdAction extends AbstractGameAction {
 
 	private int discardAmount;
 	private String message;
+	private boolean harpyEffect;
+	private boolean plantEffect;
 
-	public LeafBirdAction(AbstractCreature player, int discardAmount, String message) {
+	public LeafBirdAction(AbstractCreature player, int discardAmount, String message, boolean harpyEffect, boolean plantEffect) {
 		this.setValues(player, player);
 		this.discardAmount = discardAmount;
 		this.duration = this.startDuration = 0.5f;
 		this.actionType = ActionType.SPECIAL;
 		this.message = message;
+		this.harpyEffect = harpyEffect;
+		this.plantEffect = plantEffect;
 	}
 
 	@Override
@@ -39,10 +43,10 @@ public class LeafBirdAction extends AbstractGameAction {
 			if (!AbstractDungeon.handCardSelectScreen.wereCardsRetrieved) {
 				if (!AbstractDungeon.handCardSelectScreen.selectedCards.group.isEmpty()) {
 					int size = AbstractDungeon.handCardSelectScreen.selectedCards.group.size();
-					if (BaseEvoCard.isPlayerInThisForm(PlantGene.ID)) {
+					if (harpyEffect) {
 						this.addToTop(new ApplyPowerAction(this.target, this.source, new GrowthPower(this.target, size)));
 					}
-					if (BaseEvoCard.isPlayerInThisForm(HarpyGene.ID)) {
+					if (plantEffect) {
 						this.addToTop(new DrawCardAction(this.source, size));
 					}
 					Iterator var1 = AbstractDungeon.handCardSelectScreen.selectedCards.group.iterator();

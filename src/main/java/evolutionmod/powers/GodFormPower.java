@@ -50,20 +50,15 @@ public class GodFormPower extends AbstractPower {
     }
 
     public static boolean canBypassRequirement() {
-        if (AbstractDungeon.player.hasPower(GodFormPower.POWER_ID)) {
-            GodFormPower g = (GodFormPower)AbstractDungeon.player.getPower(GodFormPower.POWER_ID);
-            return g.amount > g.bypassThisTurn;
-        }
-        return false;
+        return canBypassRequirement(1);
     }
 
-    public static void afterBypassRequirement() {
+    public static boolean canBypassRequirement(int times) {
         if (AbstractDungeon.player.hasPower(GodFormPower.POWER_ID)) {
-            GodFormPower g = (GodFormPower) AbstractDungeon.player.getPower(GodFormPower.POWER_ID);
-            ++g.bypassThisTurn;
-            g.flash();
-            g.updateDescription();
+            GodFormPower g = (GodFormPower)AbstractDungeon.player.getPower(GodFormPower.POWER_ID);
+            return g.amount - times >= g.bypassThisTurn;
         }
+        return times <= 0;
     }
 
     public static boolean bypassFormRequirementOnce() {

@@ -130,7 +130,7 @@ public class CrystalShard
 
 	@Override
 	public void triggerOnGlowCheck() {
-		if (isPlayerInThisForm(secondGene.ID) && isPlayerInThisForm(firstGene.ID)) {
+		if (isPlayerInTheseForms(secondGene.ID, firstGene.ID)) {
 			this.glowColor = GOLD_BORDER_GLOW_COLOR.cpy();
 		} else {
 			this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();

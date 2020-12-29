@@ -84,7 +84,7 @@ public class StripArmor
 
 	@Override
 	public void triggerOnGlowCheck() {
-		if (isPlayerInThisForm(BeastGene.ID) && isPlayerInThisForm(SuccubusGene.ID)) {
+		if (isPlayerInTheseForms(BeastGene.ID, SuccubusGene.ID)) {
 			this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
 		} else {
 			this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();

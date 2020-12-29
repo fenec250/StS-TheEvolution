@@ -32,9 +32,9 @@ public class LeafBird
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new LeafBirdAction(p, this.magicNumber, EXTENDED_DESCRIPTION[0] + this.magicNumber));
-        formEffect(HarpyGene.ID);
-        formEffect(PlantGene.ID);
+        boolean harpy = formEffect(HarpyGene.ID);
+        boolean plant = formEffect(PlantGene.ID);
+        addToBot(new LeafBirdAction(p, this.magicNumber, EXTENDED_DESCRIPTION[0] + this.magicNumber, harpy, plant));
     }
 
     @Override
@@ -53,7 +53,7 @@ public class LeafBird
 
     @Override
     public void triggerOnGlowCheck() {
-        if (isPlayerInThisForm(PlantGene.ID) && isPlayerInThisForm(HarpyGene.ID)) {
+        if (isPlayerInTheseForms(PlantGene.ID, HarpyGene.ID)) {
             this.glowColor = GOLD_BORDER_GLOW_COLOR.cpy();
         } else {
             this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();

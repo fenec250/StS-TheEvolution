@@ -48,7 +48,6 @@ public class Ritual
                 CardRarity.RARE, CardTarget.SELF);
         this.tags.add(CardTags.HEALING);
         this.exhaust = true;
-        this.isEthereal = true;
         this.magicNumber = this.baseMagicNumber = ADAPT_AMT;
         this.adaptationMap.put(HarpyGene.ID, new HarpyGene.Adaptation(0, ADAPT_MAX_AMT));
         this.adaptationMap.put(MerfolkGene.ID, new MerfolkGene.Adaptation(0, ADAPT_MAX_AMT));
@@ -92,7 +91,8 @@ public class Ritual
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.isEthereal = false;
+            this.exhaust = false;
+//            this.isEthereal = false;
 //            this.upgradeMagicNumber(UPGRADE_ADAPT_AMT);
             this.rawDescription = UPGRADE_DESCRIPTION;
             this.initialRawDescription = UPGRADE_DESCRIPTION;

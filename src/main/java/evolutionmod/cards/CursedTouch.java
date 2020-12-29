@@ -53,7 +53,7 @@ public class CursedTouch
 //                    .filter(o -> this.canAdaptWith(o) > 0)
 //                    .findAny()
 //                    .ifPresent(o -> this.tryAdaptingWith(o, true)));
-        this.adapt(1);
+        formEffect(ShadowGene.ID, () -> this.adapt(1));
         this.useAdaptations(p, m);
     }
 

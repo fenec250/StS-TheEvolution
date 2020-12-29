@@ -1,5 +1,7 @@
 package evolutionmod.cards;
 
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -9,6 +11,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import evolutionmod.orbs.LavafolkGene;
 import evolutionmod.orbs.PlantGene;
 import evolutionmod.patches.AbstractCardEnum;
+import evolutionmod.powers.GrowthPower;
 
 public class Firebloom
         extends BaseEvoCard {
@@ -34,7 +37,14 @@ public class Firebloom
         for (int i = 0; i < this.magicNumber; ++i) {
             addToBot(new ChannelAction(new LavafolkGene()));
         }
-        formEffect(PlantGene.ID, () -> addToBot(new ChannelAction(new LavafolkGene())));
+        formEffect(PlantGene.ID, () -> addToBot(new AbstractGameAction() {
+            @Override
+            public void update() {
+                int g = (int)p.orbs.stream().filter(o -> LavafolkGene.ID.equals(o.ID)).count();
+                addToTop(new ApplyPowerAction(p, p, new GrowthPower(p, g)));
+                this.isDone = true;
+            }
+        }));
     }
 
     @Override

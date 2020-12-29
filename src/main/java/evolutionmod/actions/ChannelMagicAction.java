@@ -8,6 +8,7 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.LavafolkGene;
 
 import java.util.ArrayList;
@@ -25,14 +26,11 @@ public class ChannelMagicAction extends AbstractGameAction {
 
 	private float startingDuration;
 	private CardGroup fateGroup;
-	private boolean fatePower;
-	private boolean fateAttack;
-	private boolean upgraded;
+	private LavafolkGene lavafolkGene;
 
-	public ChannelMagicAction(boolean fatePower, boolean fateAttack, boolean upgraded) {
-		this.fatePower = fatePower;
-		this.fateAttack = fateAttack;
-		this.upgraded = upgraded;
+	public ChannelMagicAction(int fateAmount, LavafolkGene lavafolkGene) {
+		this.amount = fateAmount;
+		this.lavafolkGene = lavafolkGene;
 
 		this.actionType = ActionType.CARD_MANIPULATION;
 		this.startingDuration = Settings.ACTION_DUR_FAST;
@@ -46,7 +44,8 @@ public class ChannelMagicAction extends AbstractGameAction {
 		} else {
 //			Iterator var1;
 			if (this.duration == this.startingDuration) {
-				AbstractDungeon.player.powers.forEach(AbstractPower::onScry);
+				addToTop(new TriggerScryEffectsAction());
+//				AbstractDungeon.player.powers.forEach(AbstractPower::onScry);
 //				var1 = AbstractDungeon.player.powers.iterator();
 //				while(var1.hasNext()) {
 //					AbstractPower p = (AbstractPower)var1.next();
@@ -54,34 +53,16 @@ public class ChannelMagicAction extends AbstractGameAction {
 //				}
 
 				if (AbstractDungeon.player.drawPile.isEmpty()
-						|| (!this.fateAttack && !this.fatePower)) {
+						|| amount <= 0) {
 					this.isDone = true;
 					return;
 				}
 				fateGroup = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
 				CardGroup drawPile = AbstractDungeon.player.drawPile;
-				if (this.fatePower) {
-					AbstractCard card = drawPile.getRandomCard(AbstractCard.CardType.POWER, true);
-					if (card != null) {
-						fateGroup.addToTop(card);
-						drawPile.removeCard(card);
-					}
-				}
-				if (this.fateAttack) {
-					int amount = 1;
-					if (upgraded) {
-						amount = Math.max(amount,
-								(int) AbstractDungeon.player.orbs.stream()
-										.filter(o -> LavafolkGene.ID.equals(o.ID)).count());
-					}
-					for (int i = 0; i < Math.min(amount, drawPile.size()); ++i) {
-						AbstractCard card = drawPile.getRandomCard(AbstractCard.CardType.ATTACK, true);
-						if (card == null) {
-							break;
-						}
-						fateGroup.addToTop(card);
-						drawPile.removeCard(card);
-					}
+				for (int i = Math.min(amount, drawPile.size()); i > 0; --i) {
+					AbstractCard card = drawPile.getRandomCard(true);
+					fateGroup.addToTop((AbstractCard) card);
+					drawPile.removeCard(card);
 				}
 				if (fateGroup.isEmpty()) {
 					this.isDone = true;
@@ -93,6 +74,7 @@ public class ChannelMagicAction extends AbstractGameAction {
 				if (!AbstractDungeon.gridSelectScreen.selectedCards.isEmpty()) {
 					AbstractDungeon.gridSelectScreen.selectedCards.forEach(c -> {
 						AbstractDungeon.player.drawPile.moveToDiscardPile(c);
+						lavafolkGene.onEvoke();
 						fateGroup.removeCard(c);
 					});
 					AbstractDungeon.gridSelectScreen.selectedCards.clear();
@@ -100,11 +82,6 @@ public class ChannelMagicAction extends AbstractGameAction {
 				fateGroup.shuffle();
 				List<AbstractCard> copy = new ArrayList<>(fateGroup.group);
 				copy.forEach(c -> fateGroup.moveToDeck(c, false));
-			}
-			Iterator<AbstractCard> var1 = AbstractDungeon.player.discardPile.group.iterator();
-			while(var1.hasNext()) {
-				AbstractCard c = (AbstractCard)var1.next();
-				c.triggerOnScry();
 			}
 
 			this.tickDuration();

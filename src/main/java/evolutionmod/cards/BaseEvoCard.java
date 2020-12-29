@@ -22,6 +22,7 @@ import evolutionmod.orbs.SuccubusGene;
 import evolutionmod.powers.GodFormPower;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -128,6 +129,14 @@ public abstract class BaseEvoCard extends CustomCard {
     	return GodFormPower.canBypassRequirement()
 				|| AbstractDungeon.player.orbs.stream()
 					.anyMatch((orb) -> orb != null && orb.ID != null && orb.ID.equals(orbId));
+	}
+
+	public static boolean isPlayerInTheseForms(String... orbs) {
+    	List orbsList = Arrays.asList(orbs);
+		long count = AbstractDungeon.player.orbs.stream()
+				.filter((orb) -> orb != null && orb.ID != null && orbsList.contains(orb.ID))
+				.count();
+		return GodFormPower.canBypassRequirement(orbsList.size() - (int)count);
 	}
 
 	public static void formEffect(String geneId, Runnable action) {
