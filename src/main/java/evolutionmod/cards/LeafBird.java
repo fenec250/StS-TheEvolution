@@ -1,5 +1,7 @@
 package evolutionmod.cards;
 
+import com.badlogic.gdx.graphics.Color;
+import com.evacipated.cardcrawl.mod.stslib.actions.common.RefundAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -11,7 +13,7 @@ import evolutionmod.orbs.PlantGene;
 import evolutionmod.patches.AbstractCardEnum;
 
 public class LeafBird
-        extends BaseEvoCard {
+        extends BaseEvoCard implements GlowingCard {
     public static final String ID = "evolutionmod:LeafBird";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -22,6 +24,7 @@ public class LeafBird
     private static final int COST = 1;
     private static final int DISCARD_AMT = 2;
     private static final int UPGRADE_DISCARD_AMT = 1;
+    private static final int PLANT_FORM_REFUND_AMT = 1;
 
     public LeafBird() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -32,9 +35,12 @@ public class LeafBird
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        boolean harpy = formEffect(HarpyGene.ID);
-        boolean plant = formEffect(PlantGene.ID);
-        addToBot(new LeafBirdAction(p, this.magicNumber, EXTENDED_DESCRIPTION[0] + this.magicNumber, harpy, plant));
+        boolean harpy = isPlayerInThisForm(HarpyGene.ID);
+//        boolean plant = isPlayerInThisForm(PlantGene.ID);
+        addToBot(new LeafBirdAction(p, this.magicNumber, EXTENDED_DESCRIPTION[(harpy?1:0)] + this.magicNumber, harpy, false));
+//        addToBot(new LeafBirdAction(p, this.magicNumber, EXTENDED_DESCRIPTION[(harpy?1:0)] + this.magicNumber, harpy, plant));
+        formEffect(HarpyGene.ID);
+        formEffect(PlantGene.ID, () -> addToBot(new RefundAction(this, PLANT_FORM_REFUND_AMT)));
     }
 
     @Override
@@ -51,12 +57,27 @@ public class LeafBird
         }
     }
 
-    @Override
-    public void triggerOnGlowCheck() {
-        if (isPlayerInTheseForms(PlantGene.ID, HarpyGene.ID)) {
-            this.glowColor = GOLD_BORDER_GLOW_COLOR.cpy();
-        } else {
-            this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
-        }
-    }
+	@Override
+	public int getNumberOfGlows() {
+		return 2;
+	}
+
+	@Override
+	public boolean isGlowing(int glowIndex) {
+		return true;
+	}
+
+	@Override
+	public Color getGlowColor(int glowIndex) {
+		switch (glowIndex) {
+			case 0:
+				return isPlayerInThisForm(HarpyGene.ID) ? HarpyGene.COLOR.cpy()
+						: BLUE_BORDER_GLOW_COLOR.cpy();
+			case 1:
+				return isPlayerInThisForm(PlantGene.ID, HarpyGene.ID) ? PlantGene.COLOR.cpy()
+						: BLUE_BORDER_GLOW_COLOR.cpy();
+			default:
+				return BLUE_BORDER_GLOW_COLOR.cpy();
+		}
+	}
 }

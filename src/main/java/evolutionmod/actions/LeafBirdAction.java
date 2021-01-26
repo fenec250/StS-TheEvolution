@@ -43,10 +43,10 @@ public class LeafBirdAction extends AbstractGameAction {
 			if (!AbstractDungeon.handCardSelectScreen.wereCardsRetrieved) {
 				if (!AbstractDungeon.handCardSelectScreen.selectedCards.group.isEmpty()) {
 					int size = AbstractDungeon.handCardSelectScreen.selectedCards.group.size();
-					if (harpyEffect) {
+					if (plantEffect) {
 						this.addToTop(new ApplyPowerAction(this.target, this.source, new GrowthPower(this.target, size)));
 					}
-					if (plantEffect) {
+					if (harpyEffect) {
 						this.addToTop(new DrawCardAction(this.source, size));
 					}
 					Iterator var1 = AbstractDungeon.handCardSelectScreen.selectedCards.group.iterator();

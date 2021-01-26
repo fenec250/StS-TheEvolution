@@ -1,31 +1,27 @@
 {
-  "evolutionmod:GodFormPower": {
-    "NAME": "God form",
-    "DESCRIPTIONS": ["The first ", " genes you channel each turn trigger immediately."]
-//    "DESCRIPTIONS": ["At the start of your turn trigger all your genes ", "once.", " times."]
+  "evolutionmod:GodlyPowersPower": {
+    "NAME": "Godly Powers",
+    "DESCRIPTIONS": ["The first ", " Form that Channel a gene also apply their conditional effect. NL ", " left this turn."]
   },
   "evolutionmod:PotencyPower": {
     "NAME": "Potency",
     "DESCRIPTIONS": ["Increase the first effect of most Genes and adaptations by "]
   },
-  "evolutionmod:HumanityPower": {
-    "NAME": "Humanity",
+  "evolutionmod:HumanFormPower": {
+    "NAME": "Human Form",
     "DESCRIPTIONS": ["When you channel a gene Evoke it.", "When you channel a gene Evoke it ", " times."]
   },
 
 
-  "evolutionmod:AdaptationPower": {
-    "NAME": "Adaptation",
-    "DESCRIPTIONS": ["The next ", " basic Strike or Defend you play will Adapt with your next Gene."]
-  },
-  "evolutionmod:MarkPower": {
-    "NAME": "Mark",
-    "DESCRIPTIONS": ["Genes and adaptations that target random enemies will target this enemy first"]
-  },
   "evolutionmod:MasteryPower": {
     "NAME": "Undefined Mastery",
     "DESCRIPTIONS": [" Mastery",
       "When you channel a ", " gene, trigger its effect.", " gene, trigger its effect ", " times."]
+  },
+  "evolutionmod:AbsorptionPower": {
+    "NAME": "Absorption",
+    "DESCRIPTIONS": ["Absorbed ",
+      "At the start of your turn trigger a ", " gene.", " gene ", " times."]
   },
   "evolutionmod:DrownPower": {
     "NAME": "Drowning",
@@ -37,9 +33,9 @@
 //    "DESCRIPTIONS": ["At the start of your turn if you have Shadow #yForm reduce the #yShadows amount2 by ", " and reduce its damage accordingly. Otherwise Channel a Shadow gene and reduce the amount2 by 1 less."]
 //    "DESCRIPTIONS": ["At the start of your turn if you have a Shadow gene add ", "a", " Shadowbolt to your hand, otherwise Channel a Shadow gene."]
   },
-  "evolutionmod:TheNightPlusPower": {
-    "NAME": "The Night+",
-    "DESCRIPTIONS": ["At the start of your turn if you have a Shadow gene add ", "a", " Shadowbolt+ to your hand, otherwise Channel a Shadow gene."]
+  "evolutionmod:CurrentsDancerPower": {
+    "NAME": "Currents Dancer",
+    "DESCRIPTIONS": ["The first time you draw a card after the beginning of your turn gain ", " Block."]
   },
   "evolutionmod:ShadowsPower": {
     "NAME": "Shadows",
@@ -82,16 +78,16 @@
     "NAME": "Mature eggs",
     "DESCRIPTIONS": ["Your next ", " Drones will be upgraded."]
   },
-  "evolutionmod:PoisonCoatedPower": {
-    "NAME": "Poison Coated",
+  "evolutionmod:VenomGlandsPower": {
+    "NAME": "Venom Glands",
     "DESCRIPTIONS": ["Whenever an Attack deals unblocked damage this turn, apply ", " Poison."]
   },
   "evolutionmod:SymbiotesPower": {
     "NAME": "Symbiotes",
     "DESCRIPTIONS": ["Gain ", " Brambles and ", " Block the first time you play a Drone each turn "]
   },
-  "evolutionmod:StrenghtenPower": {
-    "NAME": "Strenghten",
-    "DESCRIPTIONS": ["The first attack you play each turn deals 50% more damage. Lasts for ", " more times."]
+  "evolutionmod:MarkPower": {
+    "NAME": "Mark",
+    "DESCRIPTIONS": ["Gene effects that target random enemies will target this enemy first"]
   }
 }

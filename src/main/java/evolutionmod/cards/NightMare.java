@@ -1,5 +1,6 @@
 package evolutionmod.cards;
 
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -15,7 +16,7 @@ import evolutionmod.orbs.ShadowGene;
 import evolutionmod.patches.AbstractCardEnum;
 
 public class NightMare
-        extends BaseEvoCard {
+        extends BaseEvoCard implements GlowingCard {
     public static final String ID = "evolutionmod:NightMare";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -24,7 +25,7 @@ public class NightMare
     public static final String IMG_PATH = "evolutionmod/images/cards/Nightmare.png";
     private static final int COST = 2;
     private static final int DAMAGE_AMT = 8;
-    private static final int UPGRADE_DAMAGE_AMT = 11;
+    private static final int UPGRADE_DAMAGE_AMT = 3;
 
     public NightMare() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -57,11 +58,17 @@ public class NightMare
     }
 
 	@Override
-	public void triggerOnGlowCheck() {
-		if (isPlayerInThisForm(CentaurGene.ID)) {
-			this.glowColor = GOLD_BORDER_GLOW_COLOR.cpy();
-		} else {
-			this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
-		}
+	public int getNumberOfGlows() {
+		return 2;
+	}
+
+	@Override
+	public boolean isGlowing(int glowIndex) {
+		return isPlayerInThisForm(CentaurGene.ID);
+	}
+
+	@Override
+	public Color getGlowColor(int glowIndex) {
+    	return CentaurGene.COLOR.cpy();
 	}
 }

@@ -10,9 +10,6 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import evolutionmod.orbs.InsectGene;
 import evolutionmod.patches.AbstractCardEnum;
 import evolutionmod.powers.BroodPower;
-import evolutionmod.powers.BroodmotherPower;
-import evolutionmod.powers.GodFormPower;
-import evolutionmod.powers.MatureEggPower;
 
 public class Broodmother extends BaseEvoCard {
     public static final String ID = "evolutionmod:Broodmother";
@@ -23,7 +20,6 @@ public class Broodmother extends BaseEvoCard {
     public static final String IMG_PATH = "evolutionmod/images/cards/Broodmother.png";
     private static final int COST = 2;
     private static final int BROOD_POWER_AMT = 2;
-    private static final int GENES_AMT = 1;
     private static final int UPGRADE_BROOD_POWER_AMT = 1;
 
     public Broodmother() {
@@ -37,13 +33,7 @@ public class Broodmother extends BaseEvoCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         addToBot(new ApplyPowerAction(p, p, new BroodPower(p, this.magicNumber)));
-//        addToBot(new ApplyPowerAction(p, p, new BroodmotherPower(p, BROODMOTHER_AMT)));
-//        addToBot(new ApplyPowerAction(p, p, new MatureEggPower(p, BROODMOTHER_AMT)));
         addToBot(new ChannelAction(new InsectGene()));
-//        for (int i = 0; i < this.magicNumber; ++i) {
-//        if (this.upgraded) {
-//            addToBot(new ChannelAction(new InsectGene()));
-//        }
     }
 
     @Override
@@ -56,8 +46,6 @@ public class Broodmother extends BaseEvoCard {
         if (!this.upgraded) {
             this.upgradeName();
             this.upgradeMagicNumber(UPGRADE_BROOD_POWER_AMT);
-//            this.rawDescription = UPGRADE_DESCRIPTION;
-//            this.initializeDescription();
         }
     }
 }

@@ -13,6 +13,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.powers.EnergizedPower;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 
 public class GrowthPower extends AbstractPower {
@@ -25,8 +26,9 @@ public class GrowthPower extends AbstractPower {
         this.name = NAME;
         this.ID = POWER_ID;
         this.owner = owner;
-        this.region128 = new TextureAtlas.AtlasRegion(new Texture("evolutionmod/images/powers/PlantPower84.png"), 0, 0, 84, 84);
-        this.region48 = new TextureAtlas.AtlasRegion(new Texture("evolutionmod/images/powers/PlantPower32.png"), 0, 0, 32, 32);
+//        this.region128 = new TextureAtlas.AtlasRegion(new Texture("evolutionmod/images/powers/PlantPower84.png"), 0, 0, 84, 84);
+//        this.region48 = new TextureAtlas.AtlasRegion(new Texture("evolutionmod/images/powers/PlantPower32.png"), 0, 0, 32, 32);
+        this.loadRegion("energized_green"); // use Silent Energized icon
         this.type = PowerType.BUFF;
         this.amount = initialAmount;
         this.updateDescription();

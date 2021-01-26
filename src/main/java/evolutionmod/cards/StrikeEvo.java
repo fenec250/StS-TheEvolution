@@ -2,7 +2,6 @@ package evolutionmod.cards;
 
 import basemod.helpers.BaseModCardTags;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -10,13 +9,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.watcher.VigorPower;
-import evolutionmod.orbs.AbstractGene;
-import evolutionmod.orbs.CentaurGene;
 import evolutionmod.patches.AbstractCardEnum;
-import evolutionmod.powers.AdaptationPower;
-
-import java.util.stream.Collectors;
 
 public class StrikeEvo
         extends AdaptableEvoCard {
@@ -25,7 +18,7 @@ public class StrikeEvo
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-    public static final String IMG_PATH = "evolutionmod/images/cards/strike.png";
+    public static final String IMG_PATH = "evolutionmod/images/cards/StrikeEvo.png";
     private static final int COST = 1;
     private static final int DAMAGE_AMT = 6;
     private static final int UPGRADE_DAMAGE_AMT = 3;

@@ -18,6 +18,7 @@ import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.localization.CharacterStrings;
 import com.megacrit.cardcrawl.localization.OrbStrings;
+import com.megacrit.cardcrawl.localization.PotionStrings;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.localization.RelicStrings;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
@@ -25,6 +26,8 @@ import evolutionmod.cards.*;
 import evolutionmod.character.EvolutionCharacter;
 import evolutionmod.patches.AbstractCardEnum;
 import evolutionmod.patches.EvolutionEnum;
+import evolutionmod.potions.EatMe;
+import evolutionmod.potions.Mutagen;
 import evolutionmod.relics.TorisGift;
 
 import java.nio.charset.StandardCharsets;
@@ -32,7 +35,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SpireInitializer
-public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscriber, EditKeywordsSubscriber, EditRelicsSubscriber, EditStringsSubscriber, PostInitializeSubscriber {
+public class EvolutionMod implements
+        EditCardsSubscriber, EditCharactersSubscriber, EditKeywordsSubscriber, EditRelicsSubscriber,
+        EditStringsSubscriber, PostInitializeSubscriber {
 
     private static final Color evo_green = CardHelper.getColor(53, 140, 127); // 0x358c7e
     private static final String attackCard = "evolutionmod/images/512/bg_attack_evo.png";
@@ -69,15 +74,18 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
         Texture badgeImg = new Texture("evolutionmod/images/badge.png");
         settingsPanel = new ModPanel();
         BaseMod.registerModBadge(badgeImg, "The Evolution Mod", "Fenec250", "Adds a new character to the game: The Evolution.", settingsPanel);
+
+        GlowingCard.init(2);
     }
 
     @Override
     public void receiveEditCards() {
         BaseMod.addDynamicVariable(new AdaptableEvoCard.MaxAdaptationNumber());
-        BaseMod.addDynamicVariable(new DrainCurse.BlockAmount());
+//        BaseMod.addDynamicVariable(new PegasusDescent.PegasusHits());
 //        BaseMod.addDynamicVariable(new Shadowbolt.ExtraDamage());
+
         List<AbstractCard> cards = new ArrayList<>();
-                //Basic. 2 attacks, 2 skills
+        //Basic. 2 attacks, 2 skills
         cards.add(new LoyalCompanion());
         cards.add(new LoyalWarrior());
         cards.add(new DefendEvo());
@@ -125,9 +133,10 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
         cards.add(new SpiderBite());
         cards.add(new CursedTouch());
         cards.add(new BlackCat());
+        cards.add(new SeaWolf());
         //exhaust
         //18 skills
-        cards.add(new Strenghten());
+        cards.add(new Strengthen());
         cards.add(new Hivemind());
         cards.add(new VenomGlands());
         cards.add(new FireAnts());
@@ -144,6 +153,7 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
         cards.add(new SeaSerpent());
         cards.add(new ShiftingPower());
         cards.add(new Adaptation());
+        cards.add(new Mutate());
         //exhaust
         cards.add(new Toxin());
         cards.add(new Treasure());
@@ -171,15 +181,16 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
         cards.add(new Drown());
         cards.add(new Ritual());
 //        cards.add(new Aegis());
-        cards.add(new CrystalShaping());
+//        cards.add(new CrystalShaping());
 
         //6 powers
         cards.add(new Aegis2());
         cards.add(new Broodmother());
         cards.add(new TheNight());
-        cards.add(new GodForm());
-        cards.add(new Humanity());
+        cards.add(new GodlyPowers());
+        cards.add(new HumanForm());
         cards.add(new Grow());
+        cards.add(new Absorption());
 
         cards.forEach(c -> {
             BaseMod.addCard(c);
@@ -190,6 +201,12 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
     @Override
     public void receiveEditCharacters() {
         BaseMod.addCharacter(new EvolutionCharacter(CardCrawlGame.playerName), charButton, charPortrait, EvolutionEnum.EVOLUTION_CLASS);
+        BaseMod.addPotion(EatMe.class, Color.BROWN, Color.CLEAR, Color.CLEAR,
+                EatMe.POTION_ID, EvolutionEnum.EVOLUTION_CLASS);
+        BaseMod.addPotion(Mutagen.class, Color.ORANGE, Color.VIOLET, Color.GREEN,
+                Mutagen.POTION_ID, EvolutionEnum.EVOLUTION_CLASS);
+//                CHARGE_POTION_LIQUID, CHARGE_POTION_HYBRID, CHARGE_POTION_SPOTS, ChargePotion.POTION_ID, TheDefault.Enums.THE_DEFAULT);
+
     }
 
     @Override
@@ -244,6 +261,8 @@ public class EvolutionMod implements EditCardsSubscriber, EditCharactersSubscrib
         BaseMod.loadCustomStrings(OrbStrings.class, orbStrings);
         String characterStrings = Gdx.files.internal("evolutionmod/strings/character.json").readString(String.valueOf(StandardCharsets.UTF_8));
         BaseMod.loadCustomStrings(CharacterStrings.class, characterStrings);
+        String potionStrings = Gdx.files.internal("evolutionmod/strings/potions.json").readString(String.valueOf(StandardCharsets.UTF_8));
+        BaseMod.loadCustomStrings(PotionStrings.class, potionStrings);
         String powerStrings = Gdx.files.internal("evolutionmod/strings/powers.json").readString(String.valueOf(StandardCharsets.UTF_8));
         BaseMod.loadCustomStrings(PowerStrings.class, powerStrings);
         String relicStrings = Gdx.files.internal("evolutionmod/strings/relics.json").readString(String.valueOf(StandardCharsets.UTF_8));

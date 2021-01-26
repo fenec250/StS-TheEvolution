@@ -1,7 +1,7 @@
 package evolutionmod.cards;
 
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -13,13 +13,13 @@ import evolutionmod.orbs.PlantGene;
 import evolutionmod.patches.AbstractCardEnum;
 
 public class Toxin
-		extends BaseEvoCard {
+		extends BaseEvoCard implements GlowingCard{
 	public static final String ID = "evolutionmod:Toxin";
 	public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;
 	public static final String DESCRIPTION = cardStrings.DESCRIPTION;
 	public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-	public static final String IMG_PATH = "evolutionmod/images/cards/PlantSkl.png";
+	public static final String IMG_PATH = "evolutionmod/images/cards/Toxin.png";
 	private static final int COST = 1;
 	private static final int POISON_FLAT = 2;
 	private static final int UPGRADE_POISON_FLAT = 1;
@@ -62,11 +62,26 @@ public class Toxin
 	}
 
 	@Override
-	public void triggerOnGlowCheck() {
-		if (isPlayerInTheseForms(PlantGene.ID, LizardGene.ID)) {
-			this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
-		} else {
-			this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
+	public int getNumberOfGlows() {
+		return 2;
+	}
+
+	@Override
+	public boolean isGlowing(int glowIndex) {
+		return true;
+	}
+
+	@Override
+	public Color getGlowColor(int glowIndex) {
+		switch (glowIndex) {
+			case 0:
+				return isPlayerInThisForm(LizardGene.ID) ? LizardGene.COLOR.cpy()
+						: BLUE_BORDER_GLOW_COLOR.cpy();
+			case 1:
+				return isPlayerInThisForm(PlantGene.ID, LizardGene.ID) ? PlantGene.COLOR.cpy()
+						: BLUE_BORDER_GLOW_COLOR.cpy();
+			default:
+				return BLUE_BORDER_GLOW_COLOR.cpy();
 		}
 	}
 }

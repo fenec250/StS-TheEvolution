@@ -1,5 +1,6 @@
 package evolutionmod.cards;
 
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
@@ -13,7 +14,7 @@ import evolutionmod.orbs.LymeanGene;
 import evolutionmod.patches.AbstractCardEnum;
 
 public class Aegis2
-        extends BaseEvoCard {
+        extends BaseEvoCard implements GlowingCard {
     public static final String ID = "evolutionmod:Aegis2";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -65,11 +66,17 @@ public class Aegis2
     }
 
     @Override
-    public void triggerOnGlowCheck() {
-        if (isPlayerInThisForm(LymeanGene.ID)) {
-            this.glowColor = GOLD_BORDER_GLOW_COLOR.cpy();
-        } else {
-            this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
-        }
+    public int getNumberOfGlows() {
+        return 2;
+    }
+
+    @Override
+    public boolean isGlowing(int glowIndex) {
+        return isPlayerInThisForm(LymeanGene.ID);
+    }
+
+    @Override
+    public Color getGlowColor(int glowIndex) {
+        return LymeanGene.COLOR.cpy();
     }
 }

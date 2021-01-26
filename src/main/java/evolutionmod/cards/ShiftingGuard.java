@@ -1,12 +1,8 @@
 package evolutionmod.cards;
 
-import basemod.abstracts.CustomCard;
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -34,7 +30,7 @@ public class ShiftingGuard
     private static final int UPGRADE_GENE_TRIGGER_AMT = 1;
 
     public ShiftingGuard() {
-        super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
+        super(ID, NAME, new RegionName("blue/skill/auto_shields"), COST, DESCRIPTION,
                 CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.COMMON, CardTarget.SELF);
         this.block = this.baseBlock = BLOCK_AMT;

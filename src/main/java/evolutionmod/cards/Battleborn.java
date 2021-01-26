@@ -1,5 +1,6 @@
 package evolutionmod.cards;
 
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -13,7 +14,7 @@ import evolutionmod.orbs.CentaurGene;
 import evolutionmod.patches.AbstractCardEnum;
 
 public class Battleborn
-        extends BaseEvoCard {
+        extends BaseEvoCard implements GlowingCard {
     public static final String ID = "evolutionmod:Battleborn";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -26,7 +27,7 @@ public class Battleborn
     private static final int FORMS_STRENGTH_AMT = 1;
 
     public Battleborn() {
-        super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
+        super(ID, NAME, new RegionName("red/power/inflame"), COST, DESCRIPTION,
                 CardType.POWER, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.UNCOMMON, CardTarget.SELF);
         this.magicNumber = this.baseMagicNumber = STRENGTH_AMT;
@@ -64,12 +65,25 @@ public class Battleborn
     }
 
     @Override
-    public void triggerOnGlowCheck() {
-        if ((!upgraded && isPlayerInThisForm(CentaurGene.ID))
-                || isPlayerInTheseForms(CentaurGene.ID, BeastGene.ID)) {
-            this.glowColor = GOLD_BORDER_GLOW_COLOR.cpy();
-        } else {
-            this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
+    public int getNumberOfGlows() {
+        return upgraded ? 2 : 1;
+    }
+
+    @Override
+    public boolean isGlowing(int glowIndex) {
+        return true;
+    }
+
+    @Override
+    public Color getGlowColor(int glowIndex) {
+        switch (glowIndex) {
+            case 0:
+                return isPlayerInThisForm(CentaurGene.ID) ? CentaurGene.COLOR.cpy()
+                        : BLUE_BORDER_GLOW_COLOR.cpy();
+            case 1:
+            return isPlayerInThisForm(BeastGene.ID, CentaurGene.ID) ? BeastGene.COLOR.cpy()
+                        : BLUE_BORDER_GLOW_COLOR.cpy();
         }
+        return BLUE_BORDER_GLOW_COLOR.cpy();
     }
 }

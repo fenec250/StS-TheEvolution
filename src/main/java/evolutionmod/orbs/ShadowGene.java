@@ -1,5 +1,6 @@
 package evolutionmod.orbs;
 
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -14,14 +15,15 @@ public class ShadowGene extends AbstractGene {
 	public static final String ID = "evolutionmod:ShadowGene";
 	public static final OrbStrings orbStrings = CardCrawlGame.languagePack.getOrbString(ID);
 	public static final String NAME = orbStrings.NAME;
-	public static final String COLOR = "[#8868A8]";
+	public static final String COLOR_STRING = "[#8868A8]";
+	public static final Color COLOR = new Color(0x8868A800);
 	public static final String[] DESCRIPTION = orbStrings.DESCRIPTION;
 	public static final String IMG_PATH = "evolutionmod/images/orbs/ShadowGene.png";
 	public static final int WEAK = 2;
 	public static final int CREEPING_SHADOWS = 1;
 
 	public ShadowGene() {
-		super(ID, NAME, getDescription(), IMG_PATH, COLOR);
+		super(ID, NAME, getDescription(), IMG_PATH);
 	}
 
 	@Override
@@ -32,7 +34,6 @@ public class ShadowGene extends AbstractGene {
 
 	@Override
 	public void onEvoke() {
-		super.onEvoke();
 		apply(AbstractDungeon.player, null, 1, true);
 	}
 

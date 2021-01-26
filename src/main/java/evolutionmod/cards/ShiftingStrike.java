@@ -1,7 +1,5 @@
 package evolutionmod.cards;
 
-import basemod.abstracts.CustomCard;
-import com.evacipated.cardcrawl.mod.stslib.actions.defect.EvokeSpecificOrbAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
@@ -14,7 +12,6 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import evolutionmod.orbs.AbstractGene;
-import evolutionmod.orbs.InsectGene;
 import evolutionmod.patches.AbstractCardEnum;
 
 import java.util.List;
@@ -35,7 +32,7 @@ public class ShiftingStrike
     private static final int UPGRADE_GENE_TRIGGER_AMT = 1;
 
     public ShiftingStrike() {
-        super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
+        super(ID, NAME, new RegionName("green/attack/sucker_punch"), COST, DESCRIPTION,
                 CardType.ATTACK, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.COMMON, CardTarget.ENEMY);
         this.damage = this.baseDamage = DAMAGE_AMT;

@@ -2,6 +2,7 @@ package evolutionmod.cards;
 
 import basemod.abstracts.CustomSavable;
 import basemod.helpers.TooltipInfo;
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
@@ -31,7 +32,7 @@ import evolutionmod.powers.MasteryPower;
 import java.util.List;
 
 public class Mastery
-		extends BaseEvoCard implements CustomSavable<Integer> {
+		extends BaseEvoCard implements CustomSavable<Integer>, GlowingCard {
 	public static final String ID = "evolutionmod:Mastery";
 	public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;
@@ -40,14 +41,13 @@ public class Mastery
 	public static final String[] EXTENDED_DESCRIPTION = cardStrings.EXTENDED_DESCRIPTION;
 	public static final String IMG_PATH = "evolutionmod/images/cards/CrystalDust.png";
 	private static final int COST = 1;
-	private static final int UPGRADED_COST = 0;
 	private static final int FORM_TRIGGER = 1;
 
 	private int geneIndex;
 	private AbstractGene gene;
 
 	public Mastery() {
-		super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
+		super(ID, NAME, new RegionName("purple/power/mental_fortress"), COST, DESCRIPTION,
 				CardType.POWER, AbstractCardEnum.EVOLUTION_BLUE,
 				CardRarity.UNCOMMON, CardTarget.SELF);
 		this.magicNumber = this.baseMagicNumber = FORM_TRIGGER;
@@ -56,7 +56,7 @@ public class Mastery
 	}
 
 	private Mastery(int geneIndex) {
-		super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
+		super(ID, NAME, new RegionName("purple/power/mental_fortress"), COST, DESCRIPTION,
 				CardType.POWER, AbstractCardEnum.EVOLUTION_BLUE,
 				CardRarity.UNCOMMON, CardTarget.SELF);
 		this.magicNumber = this.baseMagicNumber = FORM_TRIGGER;
@@ -104,12 +104,30 @@ public class Mastery
 	}
 
 	@Override
-	public void triggerOnGlowCheck() {
-		AbstractPlayer player = AbstractDungeon.player;
-		if (isPlayerInThisForm(this.gene.ID) && player.orbs.size() <= player.maxOrbs) {
-			this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
-		} else {
-			this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
+	public int getNumberOfGlows() {
+		return upgraded ? 0 : 1;
+	}
+
+	@Override
+	public boolean isGlowing(int glowIndex) {
+		return isPlayerInThisForm(gene.ID);
+	}
+
+	@Override
+	public Color getGlowColor(int glowIndex) {
+		switch (gene.ID) {
+			case HarpyGene.ID: return HarpyGene.COLOR.cpy();
+			case MerfolkGene.ID: return MerfolkGene.COLOR.cpy();
+			case LavafolkGene.ID: return LavafolkGene.COLOR.cpy();
+			case CentaurGene.ID: return CentaurGene.COLOR.cpy();
+			case LizardGene.ID: return LizardGene.COLOR.cpy();
+			case BeastGene.ID: return BeastGene.COLOR.cpy();
+			case PlantGene.ID: return PlantGene.COLOR.cpy();
+			case ShadowGene.ID: return ShadowGene.COLOR.cpy();
+			case LymeanGene.ID: return LymeanGene.COLOR.cpy();
+			case InsectGene.ID: return InsectGene.COLOR.cpy();
+			case SuccubusGene.ID: return SuccubusGene.COLOR.cpy();
+			default: return AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
 		}
 	}
 

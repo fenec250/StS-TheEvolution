@@ -1,5 +1,6 @@
 package evolutionmod.cards;
 
+import com.badlogic.gdx.graphics.Color;
 import com.evacipated.cardcrawl.mod.stslib.actions.common.MoveCardsAction;
 import com.megacrit.cardcrawl.actions.common.DiscardAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
@@ -14,7 +15,7 @@ import evolutionmod.orbs.HarpyGene;
 import evolutionmod.patches.AbstractCardEnum;
 
 public class Feather
-        extends BaseEvoCard {
+        extends BaseEvoCard implements GlowingCard {
     public static final String ID = "evolutionmod:Feather";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -58,11 +59,17 @@ public class Feather
     }
 
     @Override
-    public void triggerOnGlowCheck() {
-        if (isPlayerInThisForm(HarpyGene.ID)) {
-            this.glowColor = GOLD_BORDER_GLOW_COLOR.cpy();
-        } else {
-            this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
-        }
+    public int getNumberOfGlows() {
+        return 1;
+    }
+
+    @Override
+    public boolean isGlowing(int glowIndex) {
+        return isPlayerInThisForm(HarpyGene.ID);
+    }
+
+    @Override
+    public Color getGlowColor(int glowIndex) {
+        return HarpyGene.COLOR.cpy();
     }
 }

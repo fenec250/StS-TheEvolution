@@ -1,5 +1,6 @@
 package evolutionmod.cards;
 
+import com.badlogic.gdx.graphics.Color;
 import com.evacipated.cardcrawl.mod.stslib.actions.common.RefundAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
@@ -15,7 +16,7 @@ import evolutionmod.orbs.BeastGene;
 import evolutionmod.patches.AbstractCardEnum;
 
 public class ClawSlash
-        extends BaseEvoCard {
+        extends BaseEvoCard implements GlowingCard {
     public static final String ID = "evolutionmod:ClawSlash";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -55,11 +56,17 @@ public class ClawSlash
     }
 
     @Override
-    public void triggerOnGlowCheck() {
-        if (isPlayerInThisForm(BeastGene.ID)) {
-            this.glowColor = GOLD_BORDER_GLOW_COLOR.cpy();
-        } else {
-            this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
-        }
+    public int getNumberOfGlows() {
+        return 1;
+    }
+
+    @Override
+    public boolean isGlowing(int glowIndex) {
+        return isPlayerInThisForm(BeastGene.ID);
+    }
+
+    @Override
+    public Color getGlowColor(int glowIndex) {
+        return BeastGene.COLOR.cpy();
     }
 }

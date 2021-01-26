@@ -1,5 +1,6 @@
 package evolutionmod.cards;
 
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
@@ -15,7 +16,7 @@ import evolutionmod.patches.AbstractCardEnum;
 import evolutionmod.powers.ShadowsPower;
 
 public class Shadowbolt
-        extends BaseEvoCard {
+        extends BaseEvoCard implements GlowingCard {
     public static final String ID = "evolutionmod:Shadowbolt";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -25,7 +26,7 @@ public class Shadowbolt
     private static final int COST = 1;
     private static final int DAMAGE_AMT = 8 ;
     private static final int UPGRADE_DAMAGE_AMT = 1;
-    private static final int SHADOWS_AMT = 1;
+    private static final int SHADOWS_AMT = 2;
     private static final int UPGRADE_SHADOWS_AMT = 1;
 
     public Shadowbolt() {
@@ -53,13 +54,13 @@ public class Shadowbolt
 //        }
 //        addToBot(new ApplyPowerAction(m, p, new WeakPower(m, this.magicNumber, false), this.magicNumber));
     }
-
-    @Override
-    public void applyPowers() {
-        this.baseDamage = DAMAGE_AMT;// + (this.upgraded ? UPGRADE_DAMAGE_AMT : 0);
-        super.applyPowers();
-    }
-
+//
+//    @Override
+//    public void applyPowers() {
+//        this.baseDamage = DAMAGE_AMT;// + (this.upgraded ? UPGRADE_DAMAGE_AMT : 0);
+//        super.applyPowers();
+//    }
+//
 //    @Override
 //    public void calculateCardDamage(AbstractMonster mo) {
 //        this.baseDamage = DAMAGE_AMT;// + (this.upgraded ? UPGRADE_DAMAGE_AMT : 0);
@@ -108,6 +109,21 @@ public class Shadowbolt
 //            this.rawDescription = UPGRADE_DESCRIPTION;
 //            this.initializeDescription();
         }
+    }
+
+    @Override
+    public int getNumberOfGlows() {
+        return 1;
+    }
+
+    @Override
+    public boolean isGlowing(int glowIndex) {
+        return isPlayerInThisForm(ShadowGene.ID);
+    }
+
+    @Override
+    public Color getGlowColor(int glowIndex) {
+        return ShadowGene.COLOR.cpy();
     }
 
 //    public static class ExtraDamage extends DynamicVariable {

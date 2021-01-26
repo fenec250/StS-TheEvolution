@@ -2,11 +2,11 @@ package evolutionmod.cards;
 
 import basemod.abstracts.CustomSavable;
 import basemod.helpers.TooltipInfo;
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
-import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -31,7 +31,7 @@ import evolutionmod.patches.AbstractCardEnum;
 import java.util.List;
 
 public class CrystalShard
-		extends BaseEvoCard implements CustomSavable<Integer> {
+		extends BaseEvoCard implements CustomSavable<Integer>, GlowingCard {
 	public static final String ID = "evolutionmod:CrystalShard";
 	public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;
@@ -50,7 +50,7 @@ public class CrystalShard
 	private AbstractGene secondGene; // secoIndex = genesIndex % 10
 
 	public CrystalShard() {
-		super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
+		super(ID, NAME, new RegionName("blue/attack/cold_snap"), COST, DESCRIPTION,
 				CardType.ATTACK, AbstractCardEnum.EVOLUTION_BLUE,
 				CardRarity.COMMON, CardTarget.ENEMY);
 		this.damage = this.baseDamage = DAMAGE_AMT;
@@ -61,7 +61,7 @@ public class CrystalShard
 	}
 
 	private CrystalShard(int geneIndexes) {
-		super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
+		super(ID, NAME, new RegionName("blue/attack/cold_snap"), COST, DESCRIPTION,
 				CardType.ATTACK, AbstractCardEnum.EVOLUTION_BLUE,
 				CardRarity.COMMON, CardTarget.ENEMY);
 		this.damage = this.baseDamage= DAMAGE_AMT;
@@ -75,10 +75,10 @@ public class CrystalShard
 	public void use(AbstractPlayer p, AbstractMonster m) {
 		int damage = this.damage;
 
-		BaseEvoCard.formEffect(this.firstGene.ID); // effect applied in calculateBlock
 		addToBot(new DamageAction(
 				m, new DamageInfo(p, damage, this.damageTypeForTurn),
 				AbstractGameAction.AttackEffect.BLUNT_HEAVY));
+		BaseEvoCard.formEffect(this.firstGene.ID); // effect applied in calculateBlock
 		BaseEvoCard.formEffect(this.secondGene.ID, () -> addToBot(new DrawCardAction(p, 1)));
 	}
 
@@ -129,11 +129,54 @@ public class CrystalShard
 	}
 
 	@Override
-	public void triggerOnGlowCheck() {
-		if (isPlayerInTheseForms(secondGene.ID, firstGene.ID)) {
-			this.glowColor = GOLD_BORDER_GLOW_COLOR.cpy();
-		} else {
-			this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
+	public int getNumberOfGlows() {
+		return 2;
+	}
+
+	@Override
+	public boolean isGlowing(int glowIndex) {
+		return true;
+	}
+
+	@Override
+	public Color getGlowColor(int glowIndex) {
+		switch (glowIndex) {
+			case 0:
+				if (isPlayerInThisForm(firstGene.ID)) {
+					switch (firstGene.ID) {
+						case HarpyGene.ID: return HarpyGene.COLOR.cpy();
+						case MerfolkGene.ID: return MerfolkGene.COLOR.cpy();
+						case LavafolkGene.ID: return LavafolkGene.COLOR.cpy();
+						case CentaurGene.ID: return CentaurGene.COLOR.cpy();
+						case LizardGene.ID: return LizardGene.COLOR.cpy();
+						case BeastGene.ID: return BeastGene.COLOR.cpy();
+						case PlantGene.ID: return PlantGene.COLOR.cpy();
+						case ShadowGene.ID: return ShadowGene.COLOR.cpy();
+						case LymeanGene.ID: return LymeanGene.COLOR.cpy();
+						case InsectGene.ID: return InsectGene.COLOR.cpy();
+						case SuccubusGene.ID: return SuccubusGene.COLOR.cpy();
+					}
+					return AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
+				}
+			case 1:
+				if (isPlayerInThisForm(secondGene.ID, firstGene.ID)) {
+					switch (secondGene.ID) {
+						case HarpyGene.ID: return HarpyGene.COLOR.cpy();
+						case MerfolkGene.ID: return MerfolkGene.COLOR.cpy();
+						case LavafolkGene.ID: return LavafolkGene.COLOR.cpy();
+						case CentaurGene.ID: return CentaurGene.COLOR.cpy();
+						case LizardGene.ID: return LizardGene.COLOR.cpy();
+						case BeastGene.ID: return BeastGene.COLOR.cpy();
+						case PlantGene.ID: return PlantGene.COLOR.cpy();
+						case ShadowGene.ID: return ShadowGene.COLOR.cpy();
+						case LymeanGene.ID: return LymeanGene.COLOR.cpy();
+						case InsectGene.ID: return InsectGene.COLOR.cpy();
+						case SuccubusGene.ID: return SuccubusGene.COLOR.cpy();
+					}
+					return AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
+				}
+			default:
+				return BLUE_BORDER_GLOW_COLOR.cpy();
 		}
 	}
 

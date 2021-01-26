@@ -63,16 +63,14 @@ public class FateAction extends AbstractGameAction {
 				if (drawPile.isEmpty()) {
 					addToTop(new ScryAction(total));
 				} else {
-					CardGroup fateGroup = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
+					List<AbstractCard> copy = new ArrayList<>();
 					for (int i = Math.min(total, drawPile.size()); i > 0; --i) {
 						AbstractCard card = drawPile.getRandomCard(true);
-						fateGroup.addToTop((AbstractCard) card);
-						drawPile.removeCard(card);
+						copy.add(card);
+						drawPile.group.remove(card);
 					}
-					List<AbstractCard> copy = new ArrayList<>(fateGroup.group);
-					copy.forEach(c -> fateGroup.moveToDeck(c, false));
+					copy.forEach(drawPile::addToTop);
 					addToTop(new ScryAction(copy.size()));
-					addToTop(new WaitAction(0.2f));
 				}
 //			}
 		}

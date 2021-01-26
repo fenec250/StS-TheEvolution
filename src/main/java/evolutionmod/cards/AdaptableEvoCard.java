@@ -9,6 +9,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.GetAllInBattleInstances;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
+import evolutionmod.actions.ChooseAdaptationAction;
 import evolutionmod.orbs.AbstractGene;
 
 import java.util.HashMap;
@@ -26,6 +27,15 @@ public abstract class AdaptableEvoCard extends BaseEvoCard {
 	private boolean isNameAdapted;
 
     public AdaptableEvoCard(final String id, final String name, final String img, final int cost, final String rawDescription,
+                            final CardType type, final CardColor color,
+                            final CardRarity rarity, final CardTarget target) {
+        super(id, name, img, cost, rawDescription, type, color, rarity, target);
+	    this.adaptationMap = new HashMap<>();
+	    this.initialRawDescription = rawDescription;
+	    this.isNameAdapted = false;
+    }
+
+    public AdaptableEvoCard(final String id, final String name, final RegionName img, final int cost, final String rawDescription,
                             final CardType type, final CardColor color,
                             final CardRarity rarity, final CardTarget target) {
         super(id, name, img, cost, rawDescription, type, color, rarity, target);
@@ -129,7 +139,7 @@ public abstract class AdaptableEvoCard extends BaseEvoCard {
 		this.shuffleBackIntoDrawPile = false;
 	}
 
-	protected void adapt(int max) {
+	public void adapt(int max) {
 		addToBot(new AbstractGameAction() {
 			@Override
 			public void update() {
@@ -143,7 +153,11 @@ public abstract class AdaptableEvoCard extends BaseEvoCard {
 		});
 	}
 
-	private int tryAdaptingWith(AbstractOrb orb) {
+	public void chooseAndAdapt(int max) {
+		addToBot(new ChooseAdaptationAction(max, this));
+	}
+
+	public int tryAdaptingWith(AbstractOrb orb) {
 		if (canAdaptWith(orb) == 0) {
 			return 0;
 		}
@@ -176,8 +190,20 @@ public abstract class AdaptableEvoCard extends BaseEvoCard {
 				);
 	}
 
-	protected void useAdaptations(AbstractPlayer p, AbstractMonster m) {
+	public void useAdaptations(AbstractPlayer p, AbstractMonster m) {
 		addToBot(new AbstractGameAction() {
+			@Override
+			public void update() {
+				adaptationMap.values().stream()
+						.filter(adaptation -> adaptation.amount > 0)
+						.forEach(adaptation -> adaptation.apply(p, m));
+				this.isDone = true;
+			}
+		});
+    }
+
+	public void useAdaptationsFast(AbstractPlayer p, AbstractMonster m) {
+		addToTop(new AbstractGameAction() {
 			@Override
 			public void update() {
 				adaptationMap.values().stream()

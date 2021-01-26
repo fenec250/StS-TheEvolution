@@ -1,5 +1,6 @@
 package evolutionmod.cards;
 
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -13,7 +14,7 @@ import evolutionmod.orbs.SuccubusGene;
 import evolutionmod.patches.AbstractCardEnum;
 
 public class Seduce
-        extends BaseEvoCard {
+        extends BaseEvoCard implements GlowingCard {
     public static final String ID = "evolutionmod:Seduce";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -35,10 +36,11 @@ public class Seduce
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        boolean inForm = formEffect(SuccubusGene.ID);
+        boolean inForm = isPlayerInThisForm(SuccubusGene.ID);
         addToBot(new SeduceAction(
                 p, m, inForm, new DamageInfo(p, this.damage, this.damageTypeForTurn),
                 AbstractGameAction.AttackEffect.BLUNT_HEAVY));
+        formEffect(SuccubusGene.ID);
     }
 
     @Override
@@ -55,11 +57,17 @@ public class Seduce
     }
 
     @Override
-    public void triggerOnGlowCheck() {
-        if (isPlayerInThisForm(SuccubusGene.ID)) {
-            this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
-        } else {
-            this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
-        }
+    public int getNumberOfGlows() {
+        return 1;
+    }
+
+    @Override
+    public boolean isGlowing(int glowIndex) {
+        return isPlayerInThisForm(SuccubusGene.ID);
+    }
+
+    @Override
+    public Color getGlowColor(int glowIndex) {
+        return SuccubusGene.COLOR.cpy();
     }
 }

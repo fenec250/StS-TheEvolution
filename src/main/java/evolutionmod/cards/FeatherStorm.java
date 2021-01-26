@@ -28,7 +28,7 @@ public class FeatherStorm
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = "evolutionmod/images/cards/HarpyAtt.png";
     private static final int COST = 0;
-    private static final int DAMAGE = 4;
+    private static final int DAMAGE = 6;
     private static final int UPGRADE_DAMAGE = 2;
     private static final int FEATHER_AMT = 2;
     private static final int UPGRADE_FEATHER_AMT = 1;

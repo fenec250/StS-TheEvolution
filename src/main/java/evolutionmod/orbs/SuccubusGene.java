@@ -1,7 +1,6 @@
 package evolutionmod.orbs;
 
-import basemod.BaseMod;
-import basemod.helpers.TooltipInfo;
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -10,24 +9,20 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import evolutionmod.actions.SuccubusGeneAction;
 import evolutionmod.cards.AdaptableEvoCard;
-import evolutionmod.powers.PotencyPower;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public class SuccubusGene extends AbstractGene {
 	public static final String ID = "evolutionmod:SuccubusGene";
 	public static final OrbStrings orbStrings = CardCrawlGame.languagePack.getOrbString(ID);
 	public static final String NAME = orbStrings.NAME;
-	public static final String COLOR = "[#F04040]";
+	public static final String COLOR_STRING = "[#F04040]";
+	public static final Color COLOR = new Color(0xF0404000);
 	public static final String[] DESCRIPTION = orbStrings.DESCRIPTION;
 	public static final String IMG_PATH = "evolutionmod/images/orbs/SuccubusGene.png";
 	public static final int LUST = 2;
 	public static final int VULNERABLE = 0;
 
 	public SuccubusGene() {
-		super(ID, NAME, getDescription(), IMG_PATH, COLOR);
+		super(ID, NAME, getDescription(), IMG_PATH);
 	}
 
 	@Override
@@ -83,11 +78,6 @@ public class SuccubusGene extends AbstractGene {
 
 	private static int damage() {
 		int damage = LUST;
-		if (CardCrawlGame.isInARun()) {
-			if (AbstractDungeon.player.hasPower(PotencyPower.POWER_ID)) {
-				damage += AbstractDungeon.player.getPower(PotencyPower.POWER_ID).amount;
-			}
-		}
 		return damage > 0 ? damage : 0;
 	}
 

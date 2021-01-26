@@ -1,8 +1,8 @@
 package evolutionmod.cards;
 
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
-import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -17,7 +17,7 @@ import evolutionmod.orbs.CentaurGene;
 import evolutionmod.patches.AbstractCardEnum;
 
 public class HeavyKick
-        extends BaseEvoCard {
+        extends BaseEvoCard implements GlowingCard {
     public static final String ID = "evolutionmod:HeavyKick";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -25,54 +25,63 @@ public class HeavyKick
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = "evolutionmod/images/cards/CentaurAtt.png";
     private static final int COST = 2;
-    private static final int DAMAGE_AMT = 12;
-    private static final int SCALING_AMOUNT = 2;
-    private static final int UPGRADE_SCALING_AMOUNT = 1;
+    private static final int DAMAGE_AMT = 6;
+    private static final int UPGRADE_DAMAGE_AMT = 2;
+//    private static final int SCALING_AMOUNT = 2;
+    private static final int HITS_NB = 2;
+    private static final int CENTAUR_HITS_NB = 1;
+//    private static final int UPGRADE_SCALING_AMOUNT = 1;
 
     public HeavyKick() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.ATTACK, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.COMMON, CardTarget.ENEMY);
         this.damage = this.baseDamage = DAMAGE_AMT;
-        this.magicNumber = this.baseMagicNumber = SCALING_AMOUNT;
+        this.magicNumber = this.baseMagicNumber = HITS_NB;
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        AbstractDungeon.actionManager.addToBottom(new DamageAction(
-                m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
-                AbstractGameAction.AttackEffect.BLUNT_HEAVY));
+        int hits = this.magicNumber;
+        if (isPlayerInThisForm(CentaurGene.ID)) {
+            hits += CENTAUR_HITS_NB;
+        }
+        for (int i = 0; i < hits; ++i) {
+            AbstractDungeon.actionManager.addToBottom(new DamageAction(
+                    m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
+                    AbstractGameAction.AttackEffect.BLUNT_HEAVY));
+        }
         formEffect(CentaurGene.ID);
     }
-
-    @Override
-    public void applyPowers() {
-        calculateBaseDamage();
-        super.applyPowers();
-        this.isDamageModified = this.damage != DAMAGE_AMT;
-    }
-
-    @Override
-    public void calculateCardDamage(AbstractMonster mo) {
-        calculateBaseDamage();
-        super.calculateCardDamage(mo);
-        this.isDamageModified = this.damage != DAMAGE_AMT;
-    }
-
-    private void calculateBaseDamage() {
-        this.damage = this.baseDamage = DAMAGE_AMT;
-        if (BaseEvoCard.isPlayerInThisForm(CentaurGene.ID)) {
-            AbstractPower strength = AbstractDungeon.player.getPower(StrengthPower.POWER_ID);
-            AbstractPower vigor = AbstractDungeon.player.getPower(VigorPower.POWER_ID);
-
-            if (strength != null) {
-                this.baseDamage += strength.amount * (this.magicNumber - 1);
-            }
-            if (vigor != null) {
-                this.baseDamage += vigor.amount * (this.magicNumber - 1);
-            }
-        }
-    }
+//
+//    @Override
+//    public void applyPowers() {
+//        calculateBaseDamage();
+//        super.applyPowers();
+//        this.isDamageModified = this.damage != DAMAGE_AMT;
+//    }
+//
+//    @Override
+//    public void calculateCardDamage(AbstractMonster mo) {
+//        calculateBaseDamage();
+//        super.calculateCardDamage(mo);
+//        this.isDamageModified = this.damage != DAMAGE_AMT;
+//    }
+//
+//    private void calculateBaseDamage() {
+//        this.damage = this.baseDamage = DAMAGE_AMT;
+//        if (BaseEvoCard.isPlayerInThisForm(CentaurGene.ID)) {
+//            AbstractPower strength = AbstractDungeon.player.getPower(StrengthPower.POWER_ID);
+//            AbstractPower vigor = AbstractDungeon.player.getPower(VigorPower.POWER_ID);
+//
+//            if (strength != null) {
+//                this.baseDamage += strength.amount * (this.magicNumber - 1);
+//            }
+//            if (vigor != null) {
+//                this.baseDamage += vigor.amount * (this.magicNumber - 1);
+//            }
+//        }
+//    }
 
     @Override
     public AbstractCard makeCopy() {
@@ -83,16 +92,23 @@ public class HeavyKick
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeMagicNumber(UPGRADE_SCALING_AMOUNT);
+            this.upgradeDamage(UPGRADE_DAMAGE_AMT);
+//            this.upgradeMagicNumber(UPGRADE_SCALING_AMOUNT);
         }
     }
 
     @Override
-    public void triggerOnGlowCheck() {
-        if (isPlayerInThisForm(CentaurGene.ID)) {
-            this.glowColor = GOLD_BORDER_GLOW_COLOR.cpy();
-        } else {
-            this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
-        }
+    public int getNumberOfGlows() {
+        return 1;
+    }
+
+    @Override
+    public boolean isGlowing(int glowIndex) {
+        return isPlayerInThisForm(CentaurGene.ID);
+    }
+
+    @Override
+    public Color getGlowColor(int glowIndex) {
+        return CentaurGene.COLOR.cpy();
     }
 }

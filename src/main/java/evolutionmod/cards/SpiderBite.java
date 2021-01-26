@@ -1,26 +1,29 @@
 package evolutionmod.cards;
 
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
-import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
-import com.megacrit.cardcrawl.actions.defect.ChannelAction;
+import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import evolutionmod.orbs.InsectGene;
 import evolutionmod.patches.AbstractCardEnum;
 
+import java.util.stream.Collectors;
+
 public class SpiderBite
-        extends BaseEvoCard {
+        extends BaseEvoCard implements GlowingCard {
     public static final String ID = "evolutionmod:SpiderBite";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-    public static final String IMG_PATH = "evolutionmod/images/cards/InsectAtt.png";
+    public static final String IMG_PATH = "evolutionmod/images/cards/SpiderBite.png";
     private static final int COST = 1;
     private static final int DAMAGE_AMT = 8;
 //    private static final int UPGRADE_DAMAGE_AMT = 1;
@@ -43,9 +46,24 @@ public class SpiderBite
                 AbstractGameAction.AttackEffect.BLUNT_LIGHT));
 
 
-		formEffect(InsectGene.ID, () -> p.hand.group.stream()
-					.filter(card -> Drone.ID.equals(card.cardID))
-					.forEach(card -> addToBot(new ExhaustSpecificCardAction(card, p.hand, true))));
+		formEffect(InsectGene.ID, () -> addToBot(new AbstractGameAction() {
+			@Override
+			public void update() {
+				CardGroup g = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
+				Drone drone = Drone.createDroneWithInteractions(p);
+				drone.target_x = drone.current_x = (float) Settings.WIDTH / 2.0F - 200.0F * Settings.scale;
+				drone.target_y = drone.current_y = (float) Settings.HEIGHT / 2.0F;
+				g.addToTop(drone);
+				drone = Drone.createDroneWithInteractions(p);
+				drone.target_x = drone.current_x = (float) Settings.WIDTH / 2.0F + 200.0F * Settings.scale;
+				drone.target_y = drone.current_y = (float) Settings.HEIGHT / 2.0F;
+				g.addToTop(drone);
+				g.group.stream()
+						.collect(Collectors.toList()) // solidify a list so we can remove from g
+						.forEach(g::moveToExhaustPile);
+				this.isDone = true;
+			}
+		}));
 
 //		if (!AbstractGene.isPlayerInThisForm(LizardGene.ID)) {
 //			AbstractDungeon.actionManager.addToBottom(new ChannelAction(new LizardGene()));
@@ -89,10 +107,11 @@ public class SpiderBite
 				.filter(card -> Drone.ID.equals(card.cardID))
 				.count();
 		if (BaseEvoCard.isPlayerInThisForm(InsectGene.ID)) {
-			this.baseDamage += this.magicNumber * AbstractDungeon.player.hand.group.stream()
-							.filter(card -> card instanceof AbstractDrone)
-//							.filter(card -> Drone.ID.equals(card.cardID))
-							.count();
+			this.baseDamage += 2;
+//			this.baseDamage += this.magicNumber * AbstractDungeon.player.hand.group.stream()
+//							.filter(card -> card instanceof AbstractDrone)
+////							.filter(card -> Drone.ID.equals(card.cardID))
+//							.count();
 //			magicNumber = 0;
 //			this.isMagicNumberModified = true;
 		}
@@ -114,4 +133,19 @@ public class SpiderBite
             this.upgradeMagicNumber(UPGRADE_SPIDER_DAMAGE_AMT);
         }
     }
+
+	@Override
+	public int getNumberOfGlows() {
+		return 1;
+	}
+
+	@Override
+	public boolean isGlowing(int glowIndex) {
+		return isPlayerInThisForm(InsectGene.ID);
+	}
+
+	@Override
+	public Color getGlowColor(int glowIndex) {
+		return InsectGene.COLOR.cpy();
+	}
 }

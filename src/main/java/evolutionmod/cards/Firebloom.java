@@ -1,5 +1,6 @@
 package evolutionmod.cards;
 
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
@@ -14,13 +15,13 @@ import evolutionmod.patches.AbstractCardEnum;
 import evolutionmod.powers.GrowthPower;
 
 public class Firebloom
-        extends BaseEvoCard {
+        extends BaseEvoCard implements GlowingCard {
     public static final String ID = "evolutionmod:Firebloom";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-    public static final String IMG_PATH = "evolutionmod/images/cards/PlantSkl.png";
+    public static final String IMG_PATH = "evolutionmod/images/cards/Firebloom.png";
     private static final int COST = 1;
     private static final int CHANNEL_AMT = 1;
     private static final int UPGRADE_CHANNEL_AMT = 1;
@@ -62,12 +63,18 @@ public class Firebloom
     }
 
     @Override
-    public void triggerOnGlowCheck() {
-        if (isPlayerInThisForm(PlantGene.ID)) {
-            this.glowColor = GOLD_BORDER_GLOW_COLOR.cpy();
-        } else {
-            this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
-        }
+    public int getNumberOfGlows() {
+        return 1;
+    }
+
+    @Override
+    public boolean isGlowing(int glowIndex) {
+        return isPlayerInThisForm(PlantGene.ID);
+    }
+
+    @Override
+    public Color getGlowColor(int glowIndex) {
+        return PlantGene.COLOR.cpy();
     }
 
     @Override

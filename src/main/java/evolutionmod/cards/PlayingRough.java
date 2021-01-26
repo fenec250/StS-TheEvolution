@@ -1,5 +1,6 @@
 package evolutionmod.cards;
 
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -9,14 +10,13 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import evolutionmod.actions.NightMareAction;
+import evolutionmod.actions.PlayingRoughAction;
 import evolutionmod.orbs.CentaurGene;
-import evolutionmod.orbs.ShadowGene;
 import evolutionmod.orbs.SuccubusGene;
 import evolutionmod.patches.AbstractCardEnum;
 
 public class PlayingRough
-        extends BaseEvoCard {
+        extends BaseEvoCard implements GlowingCard {
     public static final String ID = "evolutionmod:PlayingRough";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -24,20 +24,19 @@ public class PlayingRough
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = "evolutionmod/images/cards/Nightmare.png";
     private static final int COST = 2;
-    private static final int DAMAGE_AMT = 8;
-    private static final int UPGRADE_DAMAGE_AMT = 11;
+    private static final int DAMAGE_AMT = 11;
+    private static final int UPGRADE_DAMAGE_AMT = 3;
 
     public PlayingRough() {
-        super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
+		super(ID, NAME, new RegionName("red/attack/uppercut"), COST, DESCRIPTION,
                 CardType.ATTACK, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.UNCOMMON, CardTarget.ENEMY);
         this.damage = this.baseDamage = DAMAGE_AMT;
-//        this.exhaust = true;
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new NightMareAction(
+        addToBot(new PlayingRoughAction(
                 p, m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
                 AbstractGameAction.AttackEffect.BLUNT_HEAVY));
         formEffect(SuccubusGene.ID, () ->
@@ -58,11 +57,17 @@ public class PlayingRough
     }
 
 	@Override
-	public void triggerOnGlowCheck() {
-		if (isPlayerInThisForm(SuccubusGene.ID)) {
-			this.glowColor = GOLD_BORDER_GLOW_COLOR.cpy();
-		} else {
-			this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
-		}
+	public int getNumberOfGlows() {
+		return 1;
+	}
+
+	@Override
+	public boolean isGlowing(int glowIndex) {
+		return isPlayerInThisForm(SuccubusGene.ID);
+	}
+
+	@Override
+	public Color getGlowColor(int glowIndex) {
+		return SuccubusGene.COLOR.cpy();
 	}
 }

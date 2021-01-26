@@ -1,5 +1,6 @@
 package evolutionmod.cards;
 
+import com.badlogic.gdx.graphics.Color;
 import com.evacipated.cardcrawl.mod.stslib.actions.common.RefundAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
@@ -13,7 +14,7 @@ import evolutionmod.orbs.PlantGene;
 import evolutionmod.patches.AbstractCardEnum;
 
 public class Dive
-        extends BaseEvoCard {
+        extends BaseEvoCard implements GlowingCard {
     public static final String ID = "evolutionmod:Dive";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -67,12 +68,18 @@ public class Dive
         }
     }
 
-	@Override
-	public void triggerOnGlowCheck() {
-		if (!upgraded && isPlayerInThisForm(MerfolkGene.ID)) {
-			this.glowColor = GOLD_BORDER_GLOW_COLOR.cpy();
-		} else {
-			this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
-		}
-	}
+    @Override
+    public int getNumberOfGlows() {
+        return upgraded ? 0 : 1;
+    }
+
+    @Override
+    public boolean isGlowing(int glowIndex) {
+        return isPlayerInThisForm(MerfolkGene.ID);
+    }
+
+    @Override
+    public Color getGlowColor(int glowIndex) {
+        return MerfolkGene.COLOR.cpy();
+    }
 }

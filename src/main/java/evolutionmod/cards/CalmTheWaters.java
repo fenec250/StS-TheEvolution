@@ -1,5 +1,6 @@
 package evolutionmod.cards;
 
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -13,14 +14,14 @@ import evolutionmod.orbs.MerfolkGene;
 import evolutionmod.patches.AbstractCardEnum;
 
 public class CalmTheWaters
-        extends BaseEvoCard {
+        extends BaseEvoCard implements GlowingCard {
     public static final String ID = "evolutionmod:CalmTheWaters";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String[] EXTENDED_DESCRIPTION = cardStrings.EXTENDED_DESCRIPTION;
-    public static final String IMG_PATH = "evolutionmod/images/cards/LymeanSkl.png";
+    public static final String IMG_PATH = "evolutionmod/images/cards/CalmTheWaters.png";
     private static final int COST = 1;
     private static final int FATE_AMT = 2;
     private static final int LYMEAN_FATE_AMT = 1;
@@ -83,12 +84,29 @@ public class CalmTheWaters
     }
 
     @Override
-    public void triggerOnGlowCheck() {
-        if ((isPlayerInThisForm(LymeanGene.ID) && upgraded)
-                || isPlayerInTheseForms(MerfolkGene.ID, LymeanGene.ID)) {
-            this.glowColor = GOLD_BORDER_GLOW_COLOR.cpy();
-        } else {
-            this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
+    public int getNumberOfGlows() {
+        return 2;
+    }
+
+    @Override
+    public boolean isGlowing(int glowIndex) {
+        return true;
+    }
+
+    @Override
+    public Color getGlowColor(int glowIndex) {
+        switch (glowIndex) {
+            case 0:
+                return upgraded
+                        ? (isPlayerInThisForm(LymeanGene.ID) ? LymeanGene.COLOR.cpy()
+                            : BLUE_BORDER_GLOW_COLOR.cpy())
+                        : (isPlayerInThisForm(MerfolkGene.ID) ? MerfolkGene.COLOR.cpy()
+                            : BLUE_BORDER_GLOW_COLOR.cpy());
+            case 1:
+                return isPlayerInThisForm(MerfolkGene.ID, LymeanGene.ID) ? MerfolkGene.COLOR.cpy()
+                        : BLUE_BORDER_GLOW_COLOR.cpy();
+            default:
+                return BLUE_BORDER_GLOW_COLOR.cpy();
         }
     }
 }

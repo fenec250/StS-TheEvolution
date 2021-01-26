@@ -9,13 +9,13 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import evolutionmod.patches.AbstractCardEnum;
 
 public class DefendEvo
-        extends AdaptableEvoCard {
+        extends BaseEvoCard {
     public static final String ID = "evolutionmod:DefendEvo";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-    public static final String IMG_PATH = "evolutionmod/images/cards/CrystalDust.png";
+    public static final String IMG_PATH = "evolutionmod/images/cards/DefendEvo.png";
     private static final int COST = 1;
     private static final int BLOCK_AMT = 5;
     private static final int UPGRADE_BLOCK_AMT = 3;
@@ -32,34 +32,6 @@ public class DefendEvo
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         addToBot(new GainBlockAction(p, p, this.block));
-//        if (p.hasPower(AdaptationPower.POWER_ID)) {
-//            addToTop(new ApplyPowerAction(p, p, new AdaptationPower(p, -1), -1));
-//            p.orbs.stream()
-//                    .filter(o -> this.canAdaptWith(o) > 0)
-//                    .findAny()
-//                    .ifPresent(o -> this.tryAdaptingWith(o, true));
-//        }
-//        this.useAdaptations(p, m);
-//        addToBot(new FateAction(2));
-//        addToBot(new FateAction(2));
-//        addToBot(new AbstractGameAction() {
-//            @Override
-//            public void update() {
-//                addToBot(new FateAction(2));
-//                this.isDone = true;
-//            }
-//        });
-//        addToBot(new FateAction(2));
-//        addToBot(new ChannelAction(new LymeanGene()));
-//        ShadowsPower.applyCreepingShadows(p, 1, false);
-    }
-
-    @Override
-//    public int canAdaptWith(AbstractAdaptation adaptation) {
-//        return adaptation.amount;
-//    }
-    public int canAdaptWith(AbstractAdaptation adaptation) {
-        return 0;
     }
 
     @Override

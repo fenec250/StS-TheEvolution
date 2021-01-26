@@ -1,5 +1,6 @@
 package evolutionmod.cards;
 
+import com.badlogic.gdx.graphics.Color;
 import com.evacipated.cardcrawl.mod.stslib.actions.defect.EvokeSpecificOrbAction;
 import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
@@ -18,13 +19,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class FireAnts
-        extends BaseEvoCard {
+        extends BaseEvoCard implements GlowingCard {
     public static final String ID = "evolutionmod:FireAnts";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-    public static final String IMG_PATH = "evolutionmod/images/cards/LavafolkSkl.png";
+    public static final String IMG_PATH = "evolutionmod/images/cards/FireAnts.png";
     private static final int COST = 1;
     private static final int EVOKE_AMT = 1;
     private static final int UPGRADE_EVOKE_AMT = 1;
@@ -83,12 +84,17 @@ public class FireAnts
     }
 
     @Override
-    public void triggerOnGlowCheck() {
-        if (isPlayerInThisForm(InsectGene.ID)) {
-//                || AbstractDungeon.player.hand.group.stream().anyMatch(c -> c instanceof AbstractDrone)) {
-            this.glowColor = GOLD_BORDER_GLOW_COLOR.cpy();
-        } else {
-            this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
-        }
+    public int getNumberOfGlows() {
+        return 1;
+    }
+
+    @Override
+    public boolean isGlowing(int glowIndex) {
+        return isPlayerInThisForm(InsectGene.ID);
+    }
+
+    @Override
+    public Color getGlowColor(int glowIndex) {
+        return InsectGene.COLOR.cpy();
     }
 }

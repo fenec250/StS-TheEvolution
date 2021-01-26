@@ -1,5 +1,6 @@
 package evolutionmod.cards;
 
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -13,7 +14,7 @@ import evolutionmod.patches.AbstractCardEnum;
 import evolutionmod.powers.LustPower;
 
 public class Charm
-        extends BaseEvoCard {
+        extends BaseEvoCard implements GlowingCard {
     public static final String ID = "evolutionmod:Charm";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -39,15 +40,6 @@ public class Charm
         AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(m, p, new LustPower(m, amount), amount));
         formEffect(SuccubusGene.ID, () -> addToBot(new ApplyPowerAction(m, p, new VulnerablePower(
                 m, FORM_VULNERABLE + (upgraded ? UPGRADE_FORM_VULNERABLE : 0), false))));
-//        boolean inForm = BaseEvoCard.formEffect(SuccubusGene.ID);
-//        if (inForm) {
-//            amount  += 2;
-//        }
-
-//        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(m, p, new StrengthPower(m, -amount), -amount));
-//        if (m != null && !m.hasPower("Artifact")) {
-//            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(m, p, new GainStrengthPower(m, amount), amount));
-//        }
     }
 
     @Override
@@ -60,17 +52,21 @@ public class Charm
         if (!this.upgraded) {
             this.upgradeName();
             this.upgradeMagicNumber(UPGRADE_REDUCTION_AMT);
-//            this.rawDescription = UPGRADE_DESCRIPTION;
-//            this.initializeDescription();
         }
     }
 
     @Override
-    public void triggerOnGlowCheck() {
-        if (isPlayerInThisForm(SuccubusGene.ID)) {
-            this.glowColor = GOLD_BORDER_GLOW_COLOR.cpy();
-        } else {
-            this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
-        }
+    public int getNumberOfGlows() {
+        return 1;
+    }
+
+    @Override
+    public boolean isGlowing(int glowIndex) {
+        return isPlayerInThisForm(SuccubusGene.ID);
+    }
+
+    @Override
+    public Color getGlowColor(int glowIndex) {
+        return SuccubusGene.COLOR.cpy();
     }
 }

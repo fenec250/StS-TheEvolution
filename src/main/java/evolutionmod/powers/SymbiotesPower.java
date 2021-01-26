@@ -26,8 +26,8 @@ public class SymbiotesPower extends AbstractPower {
         this.name = NAME;
         this.ID = POWER_ID;
         this.owner = owner;
-        this.region128 = new TextureAtlas.AtlasRegion(new Texture("evolutionmod/images/powers/ebb power 84.png"), 0, 0, 84, 84);
-        this.region48 = new TextureAtlas.AtlasRegion(new Texture("evolutionmod/images/powers/ebb power 32.png"), 0, 0, 32, 32);
+        this.region128 = new TextureAtlas.AtlasRegion(new Texture("evolutionmod/images/powers/SymbiotesPower84.png"), 0, 0, 84, 84);
+        this.region48 = new TextureAtlas.AtlasRegion(new Texture("evolutionmod/images/powers/SymbiotesPower32.png"), 0, 0, 32, 32);
         this.type = PowerType.BUFF;
         this.amount = initialAmount;
         this.updateDescription();

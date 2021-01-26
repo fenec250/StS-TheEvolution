@@ -1,5 +1,6 @@
 package evolutionmod.orbs;
 
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -14,13 +15,14 @@ public class PlantGene extends AbstractGene {
 	public static final String ID = "evolutionmod:PlantGene";
 	public static final OrbStrings orbStrings = CardCrawlGame.languagePack.getOrbString(ID);
 	public static final String NAME = orbStrings.NAME;
-	public static final String COLOR = "[#60B040]";
+	public static final String COLOR_STRING = "[#60B040]";
+	public static final Color COLOR = new Color(0x60B04000);
 	public static final String[] DESCRIPTION = orbStrings.DESCRIPTION;
 	public static final String IMG_PATH = "evolutionmod/images/orbs/PlantGene.png";
 	public static final int GROWTH = 2;
 
 	public PlantGene() {
-		super(ID, NAME, getDescription(), IMG_PATH, COLOR);
+		super(ID, NAME, getDescription(), IMG_PATH);
 	}
 
 	@Override

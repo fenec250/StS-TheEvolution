@@ -1,6 +1,7 @@
 package evolutionmod.cards;
 
 import basemod.helpers.TooltipInfo;
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -17,7 +18,7 @@ import evolutionmod.powers.ShadowsPower;
 import java.util.List;
 
 public class BlackCat
-        extends BaseEvoCard {
+        extends BaseEvoCard implements GlowingCard {
     public static final String ID = "evolutionmod:BlackCat";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -77,11 +78,26 @@ public class BlackCat
     }
 
     @Override
-    public void triggerOnGlowCheck() {
-        if (isPlayerInTheseForms(BeastGene.ID, ShadowGene.ID)) {
-            this.glowColor = GOLD_BORDER_GLOW_COLOR.cpy();
-        } else {
-            this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
+    public int getNumberOfGlows() {
+        return 2;
+    }
+
+    @Override
+    public boolean isGlowing(int glowIndex) {
+        return true;
+    }
+
+    @Override
+    public Color getGlowColor(int glowIndex) {
+        switch (glowIndex) {
+            case 0:
+                return isPlayerInThisForm(BeastGene.ID) ? BeastGene.COLOR.cpy()
+                        : BLUE_BORDER_GLOW_COLOR.cpy();
+            case 1:
+                return isPlayerInThisForm(ShadowGene.ID, BeastGene.ID) ? ShadowGene.COLOR.cpy()
+                        : BLUE_BORDER_GLOW_COLOR.cpy();
+            default:
+                return BLUE_BORDER_GLOW_COLOR.cpy();
         }
     }
 

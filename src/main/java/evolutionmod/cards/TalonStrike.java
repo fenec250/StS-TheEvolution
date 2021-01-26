@@ -1,5 +1,6 @@
 package evolutionmod.cards;
 
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.DiscardAction;
@@ -16,7 +17,7 @@ import evolutionmod.orbs.HarpyGene;
 import evolutionmod.patches.AbstractCardEnum;
 
 public class TalonStrike
-        extends BaseEvoCard {
+        extends BaseEvoCard implements GlowingCard {
     public static final String ID = "evolutionmod:TalonStrike";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -25,7 +26,7 @@ public class TalonStrike
     public static final String IMG_PATH = "evolutionmod/images/cards/HarpyAtt.png";
     private static final int COST = 0;
     private static final int DAMAGE_AMT = 3;
-    private static final int UPGRADE_DAMAGE_AMT = 2;
+    private static final int UPGRADE_DAMAGE_AMT = 3;
     private static final int FORM_CHANGE = 1;
 
     public TalonStrike() {
@@ -63,11 +64,17 @@ public class TalonStrike
     }
 
     @Override
-    public void triggerOnGlowCheck() {
-        if (isPlayerInThisForm(HarpyGene.ID)) {
-            this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
-        } else {
-            this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
-        }
+    public int getNumberOfGlows() {
+        return 1;
+    }
+
+    @Override
+    public boolean isGlowing(int glowIndex) {
+        return isPlayerInThisForm(HarpyGene.ID);
+    }
+
+    @Override
+    public Color getGlowColor(int glowIndex) {
+        return HarpyGene.COLOR.cpy();
     }
 }

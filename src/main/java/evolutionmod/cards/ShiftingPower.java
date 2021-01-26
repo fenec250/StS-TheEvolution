@@ -26,7 +26,7 @@ public class ShiftingPower
     private static final int UPGRADE_GENE_TRIGGER_AMT = 1;
 
     public ShiftingPower() {
-        super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
+        super(ID, NAME, new RegionName("blue/skill/recursion"), COST, DESCRIPTION,
                 CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.UNCOMMON, CardTarget.SELF);
         this.magicNumber = this.baseMagicNumber = GENE_TRIGGER_AMT;

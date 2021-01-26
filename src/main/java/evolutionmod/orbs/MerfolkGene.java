@@ -1,6 +1,6 @@
 package evolutionmod.orbs;
 
-import basemod.helpers.TooltipInfo;
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -9,26 +9,29 @@ import com.megacrit.cardcrawl.localization.OrbStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import evolutionmod.cards.AdaptableEvoCard;
-import evolutionmod.powers.PotencyPower;
-
-import java.util.List;
 
 public class MerfolkGene extends AbstractGene {
 	public static final String ID = "evolutionmod:MerfolkGene";
 	public static final OrbStrings orbStrings = CardCrawlGame.languagePack.getOrbString(ID);
 	public static final String NAME = orbStrings.NAME;
-	public static final String COLOR = "[#5A5AFF]";
+	public static final String COLOR_STRING = "[#5A5AFF]";
+	public static final Color COLOR = new Color(0x5A5AFF00);
 	public static final String[] DESCRIPTION = orbStrings.DESCRIPTION;
 	public static final String IMG_PATH = "evolutionmod/images/orbs/MermaidGene.png";
 	public static final int BLOCK = 3;
 
 	public MerfolkGene() {
-		super(ID, NAME, getDescription(), IMG_PATH, COLOR);
+		super(ID, NAME, getDescription(), IMG_PATH);
 	}
 
 	@Override
 	public void onEndOfTurn() {
 		super.onEndOfTurn();
+		apply(AbstractDungeon.player, null, 1);
+	}
+
+	@Override
+	public void onEvoke() {
 		apply(AbstractDungeon.player, null, 1);
 	}
 
@@ -70,13 +73,7 @@ public class MerfolkGene extends AbstractGene {
 	}
 
 	private static int blockPerGene() {
-		int block = BLOCK;
-		if (CardCrawlGame.isInARun()) {
-			if (AbstractDungeon.player.hasPower(PotencyPower.POWER_ID)) {
-				block += AbstractDungeon.player.getPower(PotencyPower.POWER_ID).amount;
-			}
-		}
-		return block;
+		return BLOCK;
 	}
 
 	public static class Adaptation extends AdaptableEvoCard.AbstractAdaptation {

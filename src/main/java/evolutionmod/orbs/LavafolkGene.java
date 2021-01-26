@@ -1,5 +1,6 @@
 package evolutionmod.orbs;
 
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -14,14 +15,15 @@ public class LavafolkGene extends AbstractGene {
 	public static final String ID = "evolutionmod:LavafolkGene";
 	public static final OrbStrings orbStrings = CardCrawlGame.languagePack.getOrbString(ID);
 	public static final String NAME = orbStrings.NAME;
-	public static final String COLOR = "[#FF9050]";
+	public static final String COLOR_STRING = "[#FF9050]";
+	public static final Color COLOR = new Color(0xFF905000);
 	public static final String[] DESCRIPTION = orbStrings.DESCRIPTION;
 	public static final String IMG_PATH = "evolutionmod/images/orbs/LavafolkGene.png";
 	public static final int DAMAGE = 2;
 	public static final int STRIKE_NB = 2;
 
 	public LavafolkGene() {
-		super(ID, NAME, getDescription(), IMG_PATH, COLOR);
+		super(ID, NAME, getDescription(), IMG_PATH);
 	}
 
 	@Override

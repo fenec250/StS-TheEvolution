@@ -1,8 +1,7 @@
 package evolutionmod.orbs;
 
-import basemod.helpers.TooltipInfo;
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -11,28 +10,30 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.powers.RagePower;
 import evolutionmod.cards.AdaptableEvoCard;
-import evolutionmod.powers.PotencyPower;
-
-import java.util.List;
 
 public class BeastGene extends AbstractGene {
 	public static final String ID = "evolutionmod:BeastGene";
 	public static final OrbStrings orbStrings = CardCrawlGame.languagePack.getOrbString(ID);
 	public static final String NAME = orbStrings.NAME;
-	public static final String COLOR = "[#B06060]";
+	public static final String COLOR_STRING = "[#B06060]";
+	public static final Color COLOR = new Color(0xB0606000);
 	public static final String[] DESCRIPTION = orbStrings.DESCRIPTION;
 	public static final String IMG_PATH = "evolutionmod/images/orbs/BeastGene.png";
-	public static final int BLOCK = 1;
 	public static final int RAGE = 2;
 
 	public BeastGene() {
-		super(ID, NAME, getDescription(), IMG_PATH, COLOR);
+		super(ID, NAME, getDescription(), IMG_PATH);
 	}
 
 	@Override
 	public void onStartOfTurn() {
 		super.onStartOfTurn();
-		apply(AbstractDungeon.player, null, 1);
+		apply(AbstractDungeon.player, null, 1, false);
+	}
+
+	@Override
+	public void onEvoke() {
+		apply(AbstractDungeon.player, null, 1, true);
 	}
 
 	@Override
@@ -44,13 +45,17 @@ public class BeastGene extends AbstractGene {
 	public void playChannelSFX() {
 	}
 
-	public static void apply(AbstractPlayer p, AbstractMonster m, int times) {
+	public static void apply(AbstractPlayer p, AbstractMonster m, int times, boolean addToTop) {
 //		int block = block();
 //		if (block > 0) {
 //			AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, block));
 //		}
 		int rage = rage() * times;
-		AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new RagePower(p, rage)));
+		if (addToTop) {
+			AbstractDungeon.actionManager.addToTop(new ApplyPowerAction(p, p, new RagePower(p, rage)));
+		} else {
+			AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new RagePower(p, rage)));
+		}
 	}
 
 	@Override
@@ -72,16 +77,6 @@ public class BeastGene extends AbstractGene {
 		return DESCRIPTION[0] + rage() + DESCRIPTION[1];
 	}
 
-	private static int block() {
-		int block = BLOCK;
-		if (CardCrawlGame.isInARun()) {
-			if (AbstractDungeon.player.hasPower(PotencyPower.POWER_ID)) {
-				block += AbstractDungeon.player.getPower(PotencyPower.POWER_ID).amount;
-			}
-		}
-		return block;
-	}
-
 	private static int rage() {
 		return RAGE;
 	}
@@ -100,7 +95,7 @@ public class BeastGene extends AbstractGene {
 
 		@Override
 		public void apply(AbstractPlayer p, AbstractMonster m) {
-			BeastGene.apply(p, m, this.amount);
+			BeastGene.apply(p, m, this.amount, true);
 		}
 
 		@Override

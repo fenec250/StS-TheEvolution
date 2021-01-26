@@ -1,8 +1,7 @@
 package evolutionmod.orbs;
 
-import basemod.helpers.TooltipInfo;
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
-import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -12,23 +11,27 @@ import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import evolutionmod.cards.AdaptableEvoCard;
 import evolutionmod.cards.Drone;
 
-import java.util.List;
-
 public class InsectGene extends AbstractGene {
 	public static final String ID = "evolutionmod:InsectGene";
 	public static final OrbStrings orbStrings = CardCrawlGame.languagePack.getOrbString(ID);
 	public static final String NAME = orbStrings.NAME;
-	public static final String COLOR = "[#A0A020]";
+	public static final String COLOR_STRING = "[#A0A020]";
+	public static final Color COLOR = new Color(0xA0A02000);
 	public static final String[] DESCRIPTION = orbStrings.DESCRIPTION;
 	public static final String IMG_PATH = "evolutionmod/images/orbs/InsectGene.png";
 
 	public InsectGene() {
-		super(ID, NAME, getDescription(), IMG_PATH, COLOR);
+		super(ID, NAME, getDescription(), IMG_PATH);
 	}
 
 	@Override
 	public void onStartOfTurn() {
 		super.onStartOfTurn();
+		apply(AbstractDungeon.player, null, 1);
+	}
+
+	@Override
+	public void onEvoke() {
 		apply(AbstractDungeon.player, null, 1);
 	}
 

@@ -2,6 +2,7 @@ package evolutionmod.cards;
 
 import basemod.abstracts.CustomSavable;
 import basemod.helpers.TooltipInfo;
+import com.badlogic.gdx.graphics.Color;
 import com.evacipated.cardcrawl.mod.stslib.cards.interfaces.StartupCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
@@ -15,11 +16,14 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.BeastGene;
+import evolutionmod.orbs.CentaurGene;
 import evolutionmod.orbs.HarpyGene;
+import evolutionmod.orbs.InsectGene;
 import evolutionmod.orbs.LavafolkGene;
 import evolutionmod.orbs.LizardGene;
 import evolutionmod.orbs.LymeanGene;
 import evolutionmod.orbs.MerfolkGene;
+import evolutionmod.orbs.PlantGene;
 import evolutionmod.orbs.ShadowGene;
 import evolutionmod.orbs.SuccubusGene;
 import evolutionmod.patches.AbstractCardEnum;
@@ -27,14 +31,14 @@ import evolutionmod.patches.AbstractCardEnum;
 import java.util.List;
 
 public class LoyalWarrior
-		extends BaseEvoCard implements CustomSavable<Integer>, StartupCard {
+		extends BaseEvoCard implements CustomSavable<Integer>, StartupCard, GlowingCard {
 	public static final String ID = "evolutionmod:LoyalWarrior";
 	public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;
 	public static final String DESCRIPTION = cardStrings.DESCRIPTION;
 	public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
 	public static final String[] EXTENDED_DESCRIPTION = cardStrings.EXTENDED_DESCRIPTION;
-	public static final String IMG_PATH = "evolutionmod/images/cards/strike.png";
+	public static final String IMG_PATH = "evolutionmod/images/cards/LoyalWarrior.png";
 	private static final int COST = 2;
 	private static final int DAMAGE_AMT = 12;
 	private static final int UPGRADE_DAMAGE_AMT = 4;
@@ -123,11 +127,30 @@ public class LoyalWarrior
 	}
 
 	@Override
-	public void triggerOnGlowCheck() {
-		if (isPlayerInThisForm(gene.ID) && !upgraded) {
-			this.glowColor = GOLD_BORDER_GLOW_COLOR.cpy();
-		} else {
-			this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
+	public int getNumberOfGlows() {
+		return upgraded ? 0 : 1;
+	}
+
+	@Override
+	public boolean isGlowing(int glowIndex) {
+		return isPlayerInThisForm(gene.ID);
+	}
+
+	@Override
+	public Color getGlowColor(int glowIndex) {
+		switch (gene.ID) {
+			case HarpyGene.ID: return HarpyGene.COLOR.cpy();
+			case MerfolkGene.ID: return MerfolkGene.COLOR.cpy();
+			case LavafolkGene.ID: return LavafolkGene.COLOR.cpy();
+			case CentaurGene.ID: return CentaurGene.COLOR.cpy();
+			case LizardGene.ID: return LizardGene.COLOR.cpy();
+			case BeastGene.ID: return BeastGene.COLOR.cpy();
+			case PlantGene.ID: return PlantGene.COLOR.cpy();
+			case ShadowGene.ID: return ShadowGene.COLOR.cpy();
+			case LymeanGene.ID: return LymeanGene.COLOR.cpy();
+			case InsectGene.ID: return InsectGene.COLOR.cpy();
+			case SuccubusGene.ID: return SuccubusGene.COLOR.cpy();
+			default: return AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
 		}
 	}
 

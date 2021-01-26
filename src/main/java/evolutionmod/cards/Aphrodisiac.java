@@ -1,5 +1,6 @@
 package evolutionmod.cards;
 
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -17,13 +18,13 @@ import evolutionmod.powers.AphrodisiacPower;
 import evolutionmod.powers.LustPower;
 
 public class Aphrodisiac
-        extends BaseEvoCard {
+        extends BaseEvoCard implements GlowingCard {
     public static final String ID = "evolutionmod:Aphrodisiac";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-    public static final String IMG_PATH = "evolutionmod/images/cards/LizardSkl.png";
+    public static final String IMG_PATH = "evolutionmod/images/cards/Aphrodisiac.png";
     private static final int COST = 1;
     private static final int VULNERABLE_AMT = 2;
     private static final int UPGRADE_VULNERABLE_AMT = 1;
@@ -66,11 +67,26 @@ public class Aphrodisiac
     }
 
     @Override
-    public void triggerOnGlowCheck() {
-        if (isPlayerInTheseForms(LizardGene.ID, SuccubusGene.ID)) {
-            this.glowColor = GOLD_BORDER_GLOW_COLOR.cpy();
-        } else {
-            this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
+    public int getNumberOfGlows() {
+        return 2;
+    }
+
+    @Override
+    public boolean isGlowing(int glowIndex) {
+        return true;
+    }
+
+    @Override
+    public Color getGlowColor(int glowIndex) {
+        switch (glowIndex) {
+            case 0:
+                return isPlayerInThisForm(SuccubusGene.ID) ? SuccubusGene.COLOR.cpy()
+                        : BLUE_BORDER_GLOW_COLOR.cpy();
+            case 1:
+                return isPlayerInThisForm(LizardGene.ID, SuccubusGene.ID) ? LizardGene.COLOR.cpy()
+                        : BLUE_BORDER_GLOW_COLOR.cpy();
+            default:
+                return BLUE_BORDER_GLOW_COLOR.cpy();
         }
     }
 }

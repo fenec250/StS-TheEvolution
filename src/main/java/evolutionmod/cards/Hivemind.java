@@ -1,7 +1,7 @@
 package evolutionmod.cards;
 
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -10,22 +10,18 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import evolutionmod.actions.FateAction;
 import evolutionmod.orbs.InsectGene;
-import evolutionmod.orbs.LizardGene;
 import evolutionmod.orbs.LymeanGene;
 import evolutionmod.patches.AbstractCardEnum;
-import evolutionmod.powers.PoisonCoatedPower;
 
 public class Hivemind
-        extends BaseEvoCard {
+        extends BaseEvoCard implements GlowingCard {
     public static final String ID = "evolutionmod:Hivemind";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-    public static final String IMG_PATH = "evolutionmod/images/cards/LizardSkl.png";
+    public static final String IMG_PATH = "evolutionmod/images/cards/Hivemind.png";
     private static final int COST = 1;
-//    private static final int ENVENOM_AMT = 2;
-//    private static final int UPGRADE_ENVENOM_AMT = 1;
 
     public Hivemind() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -67,12 +63,26 @@ public class Hivemind
     }
 
     @Override
-    public void triggerOnGlowCheck() {
-        if ((!upgraded && isPlayerInThisForm(InsectGene.ID)) ||
-                (upgraded && isPlayerInTheseForms(InsectGene.ID, LymeanGene.ID))) {
-            this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
-        } else {
-            this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
+    public int getNumberOfGlows() {
+        return upgraded ? 2 : 1;
+    }
+
+    @Override
+    public boolean isGlowing(int glowIndex) {
+        return true;
+    }
+
+    @Override
+    public Color getGlowColor(int glowIndex) {
+        switch (glowIndex) {
+            case 0:
+                return isPlayerInThisForm(InsectGene.ID) ? InsectGene.COLOR.cpy()
+                        : BLUE_BORDER_GLOW_COLOR.cpy();
+            case 1:
+                return isPlayerInThisForm(LymeanGene.ID, InsectGene.ID) ? LymeanGene.COLOR.cpy()
+                        : BLUE_BORDER_GLOW_COLOR.cpy();
+            default:
+                return BLUE_BORDER_GLOW_COLOR.cpy();
         }
     }
 }

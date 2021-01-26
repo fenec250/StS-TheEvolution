@@ -1,9 +1,9 @@
 package evolutionmod.cards;
 
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.RemoveAllBlockAction;
-import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -16,20 +16,19 @@ import evolutionmod.orbs.SuccubusGene;
 import evolutionmod.patches.AbstractCardEnum;
 
 public class StripArmor
-        extends BaseEvoCard {
+        extends BaseEvoCard implements GlowingCard {
     public static final String ID = "evolutionmod:StripArmor";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-    public static final String[] EXTENDED_DESCRIPTION = cardStrings.EXTENDED_DESCRIPTION;
     public static final String IMG_PATH = "evolutionmod/images/cards/SuccubusAtt.png";
     private static final int COST = 1;
     private static final int DAMAGE_AMT = 5;
     private static final int UPGRADE_DAMAGE_AMT = 2;
 
     public StripArmor() {
-        super(ID, NAME, IMG_PATH, COST, DESCRIPTION + DAMAGE_AMT + EXTENDED_DESCRIPTION[0],
+		super(ID, NAME, new RegionName("blue/attack/rip_and_tear"), COST, DESCRIPTION,
                 CardType.ATTACK, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.UNCOMMON, CardTarget.ENEMY);
         this.damage = this.baseDamage = DAMAGE_AMT;
@@ -39,11 +38,14 @@ public class StripArmor
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
 
-        formEffect(SuccubusGene.ID, () -> addToBot(new RemoveAllBlockAction(m, p)));
-        formEffect(BeastGene.ID);
+		if (isPlayerInThisForm(SuccubusGene.ID)) {
+			addToBot(new RemoveAllBlockAction(m, p));
+		}
 		AbstractDungeon.actionManager.addToBottom(new DamageAction(
 				m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
 				AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
+		formEffect(SuccubusGene.ID);
+		formEffect(BeastGene.ID);
 	}
 
 	@Override
@@ -77,17 +79,30 @@ public class StripArmor
             this.upgradeName();
             this.upgradeDamage(UPGRADE_DAMAGE_AMT);
             this.upgradeMagicNumber(UPGRADE_DAMAGE_AMT);
-            this.rawDescription= DESCRIPTION + this.baseDamage + EXTENDED_DESCRIPTION[0];
-            this.initializeDescription();
         }
     }
 
 	@Override
-	public void triggerOnGlowCheck() {
-		if (isPlayerInTheseForms(BeastGene.ID, SuccubusGene.ID)) {
-			this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
-		} else {
-			this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
+	public int getNumberOfGlows() {
+		return 2;
+	}
+
+	@Override
+	public boolean isGlowing(int glowIndex) {
+		return true;
+	}
+
+	@Override
+	public Color getGlowColor(int glowIndex) {
+		switch (glowIndex) {
+			case 0:
+				return isPlayerInThisForm(SuccubusGene.ID) ? SuccubusGene.COLOR.cpy()
+						: BLUE_BORDER_GLOW_COLOR.cpy();
+			case 1:
+				return isPlayerInThisForm(BeastGene.ID, SuccubusGene.ID) ? BeastGene.COLOR.cpy()
+						: BLUE_BORDER_GLOW_COLOR.cpy();
+			default:
+				return BLUE_BORDER_GLOW_COLOR.cpy();
 		}
 	}
 }

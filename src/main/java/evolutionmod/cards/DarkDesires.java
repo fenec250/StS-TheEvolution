@@ -1,5 +1,6 @@
 package evolutionmod.cards;
 
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -13,13 +14,13 @@ import evolutionmod.orbs.SuccubusGene;
 import evolutionmod.patches.AbstractCardEnum;
 
 public class DarkDesires
-        extends BaseEvoCard {
+        extends BaseEvoCard implements GlowingCard {
     public static final String ID = "evolutionmod:DarkDesires";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-    public static final String IMG_PATH = "evolutionmod/images/cards/SuccubusPower.png";
+    public static final String IMG_PATH = "evolutionmod/images/cards/DarkDesires.png";
     private static final int COST = 2;
     private static final int POWER_AMT = 4;
     private static final int UPGRADE_POWER_AMT = 2;
@@ -52,11 +53,17 @@ public class DarkDesires
     }
 
     @Override
-    public void triggerOnGlowCheck() {
-        if (isPlayerInThisForm(SuccubusGene.ID)) {
-            this.glowColor = GOLD_BORDER_GLOW_COLOR.cpy();
-        } else {
-            this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
-        }
+    public int getNumberOfGlows() {
+        return 1;
+    }
+
+    @Override
+    public boolean isGlowing(int glowIndex) {
+        return isPlayerInThisForm(SuccubusGene.ID);
+    }
+
+    @Override
+    public Color getGlowColor(int glowIndex) {
+        return SuccubusGene.COLOR.cpy();
     }
 }

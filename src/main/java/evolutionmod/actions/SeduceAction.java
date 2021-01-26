@@ -36,9 +36,9 @@ public class SeduceAction extends AbstractGameAction {
 				} else {
 					AbstractDungeon.actionManager.addToTop(new GainBlockAction(this.source, this.source, this.target.lastDamageTaken));
 				}
-				if (!target.isDying) {
-					AbstractDungeon.actionManager.addToTop(new GainBlockAction(this.target, this.source, this.target.lastDamageTaken));
-				}
+//				if (!target.isDying) {
+//					AbstractDungeon.actionManager.addToTop(new GainBlockAction(this.target, this.source, this.target.lastDamageTaken));
+//				}
 			}
 		}
 	}

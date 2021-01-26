@@ -21,8 +21,8 @@ public class LustPower extends AbstractPower {
         this.name = NAME;
         this.ID = POWER_ID;
         this.owner = owner;
-        this.region128 = new TextureAtlas.AtlasRegion(new Texture("evolutionmod/images/powers/SuccubusPower84.png"), 0, 0, 84, 84);
-        this.region48 = new TextureAtlas.AtlasRegion(new Texture("evolutionmod/images/powers/SuccubusPower32.png"), 0, 0, 32, 32);
+        this.region128 = new TextureAtlas.AtlasRegion(new Texture("evolutionmod/images/powers/LustPower84.png"), 0, 0, 84, 84);
+        this.region48 = new TextureAtlas.AtlasRegion(new Texture("evolutionmod/images/powers/LustPower32.png"), 0, 0, 32, 32);
         this.type = PowerType.DEBUFF;
         this.amount = initialAmount;
         this.updateDescription();
@@ -47,16 +47,6 @@ public class LustPower extends AbstractPower {
                 ? damage - (float)this.amount
                 : damage;
     }
-//
-//    @Override
-//    public int onAttacked(DamageInfo info, int damageAmount) {
-//        if (damageAmount < this.owner.currentHealth && damageAmount > 0
-//                && info.owner != null && info.type == DamageInfo.DamageType.NORMAL) {
-//            this.flash();
-//            addToBot(new ReducePowerAction(this.owner, this.owner, this, this.amount));
-//        }
-//        return damageAmount;
-//    }
 
     @Override
     public void atEndOfTurn(boolean isPlayer) {

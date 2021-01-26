@@ -1,15 +1,13 @@
 package evolutionmod.cards;
 
 import basemod.abstracts.CustomSavable;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.defect.IncreaseMiscAction;
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.BeastGene;
 import evolutionmod.orbs.CentaurGene;
 import evolutionmod.orbs.HarpyGene;
@@ -22,15 +20,12 @@ import evolutionmod.orbs.PlantGene;
 import evolutionmod.orbs.ShadowGene;
 import evolutionmod.orbs.SuccubusGene;
 import evolutionmod.patches.AbstractCardEnum;
-import evolutionmod.powers.PotencyPower;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Ritual
-        extends AdaptableEvoCard implements CustomSavable<Integer> {
+        extends AdaptableEvoCard implements CustomSavable<Integer>, GlowingCard {
     public static final String ID = "evolutionmod:Ritual";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -43,7 +38,7 @@ public class Ritual
     private static final int UPGRADE_ADAPT_AMT = 1;
 
     public Ritual() {
-        super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
+        super(ID, NAME, new RegionName("colorless/skill/transmutation"), COST, DESCRIPTION,
                 CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.RARE, CardTarget.SELF);
         this.tags.add(CardTags.HEALING);
@@ -101,13 +96,46 @@ public class Ritual
     }
 
     @Override
-    public void triggerOnGlowCheck() {
-        if (AbstractDungeon.player.orbs.stream().anyMatch(o -> this.canAdaptWith(o) > 0)) {
-            this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
-        } else {
-            this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
-        }
+    public int getNumberOfGlows() {
+        return 1;
     }
+
+    @Override
+    public boolean isGlowing(int glowIndex) {
+        return AbstractDungeon.player.orbs.stream().anyMatch(o -> this.canAdaptWith(o) > 0);
+    }
+
+    @Override
+    public Color getGlowColor(int glowIndex) {
+        return AbstractDungeon.player.orbs.stream()
+                .filter(o -> this.canAdaptWith(o) > 0)
+                .findFirst()
+                .map(o -> {
+                    switch (o.ID) {
+                        case HarpyGene.ID: return HarpyGene.COLOR.cpy();
+                        case MerfolkGene.ID: return MerfolkGene.COLOR.cpy();
+                        case LavafolkGene.ID: return LavafolkGene.COLOR.cpy();
+                        case CentaurGene.ID: return CentaurGene.COLOR.cpy();
+                        case LizardGene.ID: return LizardGene.COLOR.cpy();
+                        case BeastGene.ID: return BeastGene.COLOR.cpy();
+                        case PlantGene.ID: return PlantGene.COLOR.cpy();
+                        case ShadowGene.ID: return ShadowGene.COLOR.cpy();
+                        case LymeanGene.ID: return LymeanGene.COLOR.cpy();
+                        case InsectGene.ID: return InsectGene.COLOR.cpy();
+                        case SuccubusGene.ID: return SuccubusGene.COLOR.cpy();
+                        default: return AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
+                    }
+                }).orElse(AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy());
+    }
+
+//    @Override
+//    public void triggerOnGlowCheck() {
+//        if (AbstractDungeon.player.orbs.stream().anyMatch(o -> this.canAdaptWith(o) > 0)) {
+//            this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
+//        } else {
+//            this.glowColor = ;
+//        }
+//    }
 
     @Override
     public Integer onSave() {

@@ -1,30 +1,42 @@
 package evolutionmod.cards;
 
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import evolutionmod.orbs.BeastGene;
+import evolutionmod.orbs.CentaurGene;
+import evolutionmod.orbs.HarpyGene;
+import evolutionmod.orbs.InsectGene;
+import evolutionmod.orbs.LavafolkGene;
+import evolutionmod.orbs.LizardGene;
+import evolutionmod.orbs.LymeanGene;
+import evolutionmod.orbs.MerfolkGene;
+import evolutionmod.orbs.PlantGene;
+import evolutionmod.orbs.ShadowGene;
+import evolutionmod.orbs.SuccubusGene;
 import evolutionmod.patches.AbstractCardEnum;
 
 public class ChimeraStrike
-        extends AdaptableEvoCard {
+        extends AdaptableEvoCard implements GlowingCard {
     public static final String ID = "evolutionmod:ChimeraStrike";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-    public static final String IMG_PATH = "evolutionmod/images/cards/strike.png";
+    public static final String IMG_PATH = "evolutionmod/images/cards/ChimeraStrike.png";
     private static final int COST = 1;
     private static final int DAMAGE_AMT = 7;
-    private static final int UPGRADE_DAMAGE_AMT = 3;
+    private static final int UPGRADE_DAMAGE_AMT = 2;
     private static final int ADAPT_MAX_AMT = 4;
     private static final int UPGRADE_ADAPT_MAX_AMT = 2;
 
-    private int adaptssss;
     public ChimeraStrike() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.ATTACK, AbstractCardEnum.EVOLUTION_BLUE,
@@ -49,7 +61,7 @@ public class ChimeraStrike
 
     @Override
     public int canAdaptWith(AbstractAdaptation adaptation) {
-        return Math.min(adaptation.amount, this.magicNumber - (int) adaptationMap.values().stream().mapToInt(a -> a.amount).count());
+        return Math.min(adaptation.amount, this.magicNumber - adaptationMap.values().stream().mapToInt(a -> a.amount).sum());
     }
 
     @Override
@@ -57,6 +69,40 @@ public class ChimeraStrike
         if (!this.upgraded) {
             this.upgradeName();
             this.upgradeDamage(UPGRADE_DAMAGE_AMT);
+            this.upgradeMagicNumber(UPGRADE_ADAPT_MAX_AMT);
         }
+    }
+
+    @Override
+    public int getNumberOfGlows() {
+        return 1;
+    }
+
+    @Override
+    public boolean isGlowing(int glowIndex) {
+        return AbstractDungeon.player.orbs.stream().anyMatch(o -> this.canAdaptWith(o) > 0);
+    }
+
+    @Override
+    public Color getGlowColor(int glowIndex) {
+        return AbstractDungeon.player.orbs.stream()
+                .filter(o -> this.canAdaptWith(o) > 0)
+                .findFirst()
+                .map(o -> {
+                    switch (o.ID) {
+                        case HarpyGene.ID: return HarpyGene.COLOR.cpy();
+                        case MerfolkGene.ID: return MerfolkGene.COLOR.cpy();
+                        case LavafolkGene.ID: return LavafolkGene.COLOR.cpy();
+                        case CentaurGene.ID: return CentaurGene.COLOR.cpy();
+                        case LizardGene.ID: return LizardGene.COLOR.cpy();
+                        case BeastGene.ID: return BeastGene.COLOR.cpy();
+                        case PlantGene.ID: return PlantGene.COLOR.cpy();
+                        case ShadowGene.ID: return ShadowGene.COLOR.cpy();
+                        case LymeanGene.ID: return LymeanGene.COLOR.cpy();
+                        case InsectGene.ID: return InsectGene.COLOR.cpy();
+                        case SuccubusGene.ID: return SuccubusGene.COLOR.cpy();
+                        default: return null;
+                    }
+                }).orElse(AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy());
     }
 }

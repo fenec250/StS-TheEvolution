@@ -3,6 +3,7 @@ package evolutionmod.cards;
 import basemod.ReflectionHacks;
 import basemod.abstracts.CustomSavable;
 import basemod.helpers.TooltipInfo;
+import com.badlogic.gdx.graphics.Color;
 import com.evacipated.cardcrawl.mod.stslib.cards.interfaces.StartupCard;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
@@ -36,7 +37,7 @@ import evolutionmod.patches.AbstractCardEnum;
 import java.util.List;
 
 public class CrystalDust
-		extends BaseEvoCard implements CustomSavable<Integer>, StartupCard {
+		extends BaseEvoCard implements CustomSavable<Integer>, StartupCard, GlowingCard {
 	public static final String ID = "evolutionmod:CrystalDust";
 	public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;
@@ -106,11 +107,30 @@ public class CrystalDust
 	}
 
 	@Override
-	public void triggerOnGlowCheck() {
-		if (isPlayerInThisForm(gene.ID)) {
-			this.glowColor = GOLD_BORDER_GLOW_COLOR.cpy();
-		} else {
-			this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
+	public int getNumberOfGlows() {
+		return 1;
+	}
+
+	@Override
+	public boolean isGlowing(int glowIndex) {
+		return isPlayerInThisForm(gene.ID);
+	}
+
+	@Override
+	public Color getGlowColor(int glowIndex) {
+		switch (gene.ID) {
+			case HarpyGene.ID: return HarpyGene.COLOR.cpy();
+			case MerfolkGene.ID: return MerfolkGene.COLOR.cpy();
+			case LavafolkGene.ID: return LavafolkGene.COLOR.cpy();
+			case CentaurGene.ID: return CentaurGene.COLOR.cpy();
+			case LizardGene.ID: return LizardGene.COLOR.cpy();
+			case BeastGene.ID: return BeastGene.COLOR.cpy();
+			case PlantGene.ID: return PlantGene.COLOR.cpy();
+			case ShadowGene.ID: return ShadowGene.COLOR.cpy();
+			case LymeanGene.ID: return LymeanGene.COLOR.cpy();
+			case InsectGene.ID: return InsectGene.COLOR.cpy();
+			case SuccubusGene.ID: return SuccubusGene.COLOR.cpy();
+			default: return this.glowColor;
 		}
 	}
 

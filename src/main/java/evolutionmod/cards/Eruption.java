@@ -21,7 +21,6 @@ public class Eruption
     public static final String IMG_PATH = "evolutionmod/images/cards/LavafolkPower.png";
     private static final int COST = 2;
     private static final int ERUPTION_AMT = 1;
-//    private static final int UPGRADE_ERUPTION_AMT = 1;
 
     public Eruption() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -48,6 +47,8 @@ public class Eruption
         if (!this.upgraded) {
             this.upgradeName();
 //            this.upgradeMagicNumber(UPGRADE_ERUPTION_AMT);
+            this.rawDescription = UPGRADE_DESCRIPTION;
+            this.initializeDescription();
         }
     }
 }

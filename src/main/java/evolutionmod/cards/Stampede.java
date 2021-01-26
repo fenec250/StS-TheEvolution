@@ -61,13 +61,4 @@ public class Stampede
             this.upgradeDamage(UPGRADE_DAMAGE_AMT);
         }
     }
-
-    @Override
-    public void triggerOnGlowCheck() {
-        if (isPlayerInThisForm(CentaurGene.ID)) {
-            this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
-        } else {
-            this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
-        }
-    }
 }

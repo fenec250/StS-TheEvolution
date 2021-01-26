@@ -8,9 +8,6 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.AbstractPower;
-import evolutionmod.patches.AbstractCardEnum;
-import evolutionmod.powers.MatureEggPower;
 
 public class Drone
         extends AbstractDrone {
@@ -38,13 +35,6 @@ public class Drone
 
     public static Drone createDroneWithInteractions(AbstractPlayer player) {
         Drone drone = new Drone();
-        if (player != null && player.hasPower(MatureEggPower.POWER_ID)) {
-            AbstractPower eggs = player.getPower(MatureEggPower.POWER_ID);
-            if (eggs.amount > 0) {
-                drone.upgrade();
-                eggs.stackPower(-1);
-            }
-        }
         return drone;
     }
 

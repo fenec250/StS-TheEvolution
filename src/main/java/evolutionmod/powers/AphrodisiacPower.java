@@ -21,8 +21,8 @@ public class AphrodisiacPower extends AbstractPower {
         this.name = NAME;
         this.ID = POWER_ID;
         this.owner = owner;
-        this.region128 = new TextureAtlas.AtlasRegion(new Texture("evolutionmod/images/powers/SuccubusPower84.png"), 0, 0, 84, 84);
-        this.region48 = new TextureAtlas.AtlasRegion(new Texture("evolutionmod/images/powers/SuccubusPower32.png"), 0, 0, 32, 32);
+        this.region128 = new TextureAtlas.AtlasRegion(new Texture("evolutionmod/images/powers/AphrodisiacPower84.png"), 0, 0, 84, 84);
+        this.region48 = new TextureAtlas.AtlasRegion(new Texture("evolutionmod/images/powers/AphrodisiacPower32.png"), 0, 0, 32, 32);
         this.type = PowerType.DEBUFF;
         this.amount = initialAmount;
         this.updateDescription();

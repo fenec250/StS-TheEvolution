@@ -1,5 +1,6 @@
 package evolutionmod.cards;
 
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -11,13 +12,13 @@ import evolutionmod.orbs.LymeanGene;
 import evolutionmod.patches.AbstractCardEnum;
 
 public class ChannelMagic
-        extends BaseEvoCard {
+        extends BaseEvoCard implements GlowingCard {
     public static final String ID = "evolutionmod:ChannelMagic";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-    public static final String IMG_PATH = "evolutionmod/images/cards/LymeanSkl.png";
+    public static final String IMG_PATH = "evolutionmod/images/cards/ChannelMagic.png";
     private static final int COST = 1;
     private static final int FATE_AMT = 2;
     private static final int UPGRADE_FATE_AMT = 1;
@@ -35,7 +36,7 @@ public class ChannelMagic
         int fate = this.magicNumber;
         LavafolkGene lavafolkGene = new LavafolkGene();
         addToBot(new ChannelAction(lavafolkGene));
-        if (isPlayerInTheseForms(LymeanGene.ID)) {
+        if (isPlayerInThisForm(LymeanGene.ID)) {
             fate += LYMEAN_FATE_AMT;
         }
         addToBot(new ChannelMagicAction(fate, lavafolkGene));
@@ -50,5 +51,20 @@ public class ChannelMagic
 //            this.rawDescription = UPGRADE_DESCRIPTION;
 //            this.initializeDescription();
         }
+    }
+
+    @Override
+    public int getNumberOfGlows() {
+        return 1;
+    }
+
+    @Override
+    public boolean isGlowing(int glowIndex) {
+        return isPlayerInThisForm(LymeanGene.ID);
+    }
+
+    @Override
+    public Color getGlowColor(int glowIndex) {
+        return LymeanGene.COLOR.cpy();
     }
 }

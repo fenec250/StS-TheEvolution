@@ -70,9 +70,9 @@ public class Stalker
 //    @Override
 //    public void triggerOnGlowCheck() {
 //        if (isPlayerInThisForm(LizardGene.ID)) {
-//            this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
+//            this.getGlowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
 //        } else {
-//            this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
+//            this.getGlowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
 //        }
 //    }
 }

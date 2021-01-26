@@ -47,7 +47,7 @@ public class TorisGift extends CustomRelic {
     @Override
     public void atBattleStart() {
         super.atBattleStart();
-        this.addToBot(new IncreaseMaxOrbAction(SLOT_AMT));
+//        this.addToBot(new IncreaseMaxOrbAction(SLOT_AMT));
 
         ArrayList<AbstractGene> genesPool = new ArrayList<>();
         genesPool.add(new CentaurGene());

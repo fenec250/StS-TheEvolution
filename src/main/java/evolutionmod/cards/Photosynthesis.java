@@ -1,5 +1,6 @@
 package evolutionmod.cards;
 
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
@@ -18,7 +19,7 @@ import evolutionmod.powers.GrowthPower;
 import java.util.stream.Collectors;
 
 public class Photosynthesis
-        extends AdaptableEvoCard {
+        extends AdaptableEvoCard implements GlowingCard {
     public static final String ID = "evolutionmod:Photosynthesis";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -95,11 +96,17 @@ public class Photosynthesis
     }
 
     @Override
-    public void triggerOnGlowCheck() {
-        if (isPlayerInThisForm(PlantGene.ID)) {
-            this.glowColor = GOLD_BORDER_GLOW_COLOR.cpy();
-        } else {
-            this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
-        }
+    public int getNumberOfGlows() {
+        return 1;
+    }
+
+    @Override
+    public boolean isGlowing(int glowIndex) {
+        return isPlayerInThisForm(PlantGene.ID);
+    }
+
+    @Override
+    public Color getGlowColor(int glowIndex) {
+        return PlantGene.COLOR.cpy();
     }
 }

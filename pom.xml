@@ -6,7 +6,7 @@
     <!-- Change These to match your mod -->
     <groupId>phereonmod</groupId>
     <artifactId>EvolutionMod</artifactId>
-    <version>0.0.1</version>
+    <version>0.1.0</version>
     <packaging>jar</packaging>
     <name>TheEvolution</name>
     <description>Slay the Spire mod introducing custom character: The Evolution.</description>
@@ -15,6 +15,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <sts.path>/home/clement/.steam/steam/steamapps/common/SlayTheSpire/</sts.path>
+        <workshop.path>/home/clement/.steam/steam/steamapps/workshop/content/646570/</workshop.path>
     </properties>
 
     <!-- These are the dependencies that were placed in the libs folder.
@@ -37,9 +38,9 @@
         <dependency>
             <groupId>com.evacipated.cardcrawl</groupId>
             <artifactId>BaseMod</artifactId>
-            <version>5.27.0</version>
+            <version>5.29.0</version>
             <scope>system</scope>
-            <systemPath>${sts.path}/mods/BaseMod.jar</systemPath>
+            <systemPath>${workshop.path}/1605833019/BaseMod.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.evacipated.cardcrawl.mod</groupId>

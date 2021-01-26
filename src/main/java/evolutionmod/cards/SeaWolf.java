@@ -1,5 +1,6 @@
 package evolutionmod.cards;
 
+import com.badlogic.gdx.graphics.Color;
 import com.evacipated.cardcrawl.mod.stslib.actions.common.RefundAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
@@ -16,13 +17,13 @@ import evolutionmod.orbs.MerfolkGene;
 import evolutionmod.patches.AbstractCardEnum;
 
 public class SeaWolf
-        extends BaseEvoCard {
+        extends BaseEvoCard implements GlowingCard {
     public static final String ID = "evolutionmod:SeaWolf";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-    public static final String IMG_PATH = "evolutionmod/images/cards/BeastAtt.png";
+    public static final String IMG_PATH = "evolutionmod/images/cards/SeaWolf.png";
     private static final int COST = 1;
     private static final int DAMAGE_AMT = 4;
     private static final int UPGRADE_DAMAGE_AMT = 2;
@@ -63,12 +64,27 @@ public class SeaWolf
         }
     }
 
-    @Override
-    public void triggerOnGlowCheck() {
-        if (isPlayerInTheseForms(BeastGene.ID, MerfolkGene.ID)) {
-            this.glowColor = GOLD_BORDER_GLOW_COLOR.cpy();
-        } else {
-            this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
-        }
-    }
+	@Override
+	public int getNumberOfGlows() {
+		return 2;
+	}
+
+	@Override
+	public boolean isGlowing(int glowIndex) {
+		return true;
+	}
+
+	@Override
+	public Color getGlowColor(int glowIndex) {
+		switch (glowIndex) {
+			case 0:
+				return isPlayerInThisForm(BeastGene.ID) ? BeastGene.COLOR.cpy()
+						: BLUE_BORDER_GLOW_COLOR.cpy();
+			case 1:
+				return isPlayerInThisForm(MerfolkGene.ID, BeastGene.ID) ? MerfolkGene.COLOR.cpy()
+						: BLUE_BORDER_GLOW_COLOR.cpy();
+			default:
+				return BLUE_BORDER_GLOW_COLOR.cpy();
+		}
+	}
 }

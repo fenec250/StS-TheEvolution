@@ -1,19 +1,13 @@
 package evolutionmod.cards;
 
-import com.evacipated.cardcrawl.mod.stslib.actions.common.RefundAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.actions.defect.DecreaseMaxOrbAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.DrawPower;
-import evolutionmod.orbs.AbstractGene;
-import evolutionmod.orbs.InsectGene;
-import evolutionmod.orbs.PlantGene;
 import evolutionmod.patches.AbstractCardEnum;
-import evolutionmod.powers.SymbiotesPower;
 
 public class Shrink
         extends BaseEvoCard {
@@ -22,7 +16,7 @@ public class Shrink
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-    public static final String IMG_PATH = "evolutionmod/images/cards/strike.png";
+    public static final String IMG_PATH = "evolutionmod/images/cards/Shrink.png";
     private static final int COST = 1;
     private static final int LOSE_ORB_AMT = 1;
     private static final int GAIN_DRAW_AMT = 1;

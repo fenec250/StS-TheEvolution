@@ -1,5 +1,6 @@
 package evolutionmod.cards;
 
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
@@ -16,7 +17,7 @@ import evolutionmod.orbs.BeastGene;
 import evolutionmod.patches.AbstractCardEnum;
 
 public class Frenzy
-        extends BaseEvoCard {
+        extends BaseEvoCard implements GlowingCard {
     public static final String ID = "evolutionmod:Frenzy";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -54,7 +55,7 @@ public class Frenzy
         int energy = AbstractDungeon.actionManager.cardsPlayedThisTurn.stream()
                 .filter(c -> c.type == CardType.ATTACK
                         && c != this)
-                .mapToInt(c -> c.cost >= 0 ? c.cost : c.energyOnUse)
+                .mapToInt(c -> c.cost >= 0 ? c.cost : (c.cost == -1 ? c.energyOnUse : 0))
                 .sum();
         this.baseDamage += energy * this.magicNumber;
 
@@ -96,11 +97,17 @@ public class Frenzy
     }
 
     @Override
-    public void triggerOnGlowCheck() {
-        if (isPlayerInThisForm(BeastGene.ID)) {
-            this.glowColor = GOLD_BORDER_GLOW_COLOR.cpy();
-        } else {
-            this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
-        }
+    public int getNumberOfGlows() {
+        return 1;
+    }
+
+    @Override
+    public boolean isGlowing(int glowIndex) {
+        return isPlayerInThisForm(BeastGene.ID);
+    }
+
+    @Override
+    public Color getGlowColor(int glowIndex) {
+        return BeastGene.COLOR.cpy();
     }
 }

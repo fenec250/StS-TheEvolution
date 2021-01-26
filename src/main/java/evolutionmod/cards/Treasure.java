@@ -18,7 +18,7 @@ public class Treasure extends BaseEvoCard {
 	public static final String DESCRIPTION = cardStrings.DESCRIPTION;
 	public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
 	public static final String[] EXTENDED_DESCRIPTION = cardStrings.EXTENDED_DESCRIPTION;
-	public static final String IMG_PATH = "evolutionmod/images/cards/CrystalStone.png";
+	public static final String IMG_PATH = "evolutionmod/images/cards/Treasures.png";
 	private static final int COST = 0;
 
 	public Treasure() {

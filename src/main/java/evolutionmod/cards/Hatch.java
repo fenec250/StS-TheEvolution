@@ -1,5 +1,6 @@
 package evolutionmod.cards;
 
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
@@ -11,7 +12,7 @@ import evolutionmod.orbs.InsectGene;
 import evolutionmod.patches.AbstractCardEnum;
 
 public class Hatch
-        extends BaseEvoCard {
+        extends BaseEvoCard implements GlowingCard {
     public static final String ID = "evolutionmod:Hatch";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -36,7 +37,6 @@ public class Hatch
     public void use(AbstractPlayer p, AbstractMonster m) {
         int drones = this.magicNumber;
         addToBot(new MakeTempCardInHandAction(Drone.createDroneWithInteractions(p), drones));
-//        addToBot(new MakeTempCardInHandAction(new DroneGuard(), this.magicNumber));
         if (this.upgraded) {
             addToBot(new ChannelAction(new InsectGene()));
             addToBot(new GainBlockAction(p, this.block));
@@ -56,11 +56,17 @@ public class Hatch
     }
 
     @Override
-    public void triggerOnGlowCheck() {
-        if (isPlayerInThisForm(InsectGene.ID)) {
-            this.glowColor = GOLD_BORDER_GLOW_COLOR.cpy();
-        } else {
-            this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
-        }
+    public int getNumberOfGlows() {
+        return upgraded ? 0 : 1;
+    }
+
+    @Override
+    public boolean isGlowing(int glowIndex) {
+        return isPlayerInThisForm(InsectGene.ID);
+    }
+
+    @Override
+    public Color getGlowColor(int glowIndex) {
+        return InsectGene.COLOR.cpy();
     }
 }

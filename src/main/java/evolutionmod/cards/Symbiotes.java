@@ -1,27 +1,26 @@
 package evolutionmod.cards;
 
+import com.badlogic.gdx.graphics.Color;
 import com.evacipated.cardcrawl.mod.stslib.actions.common.RefundAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import evolutionmod.orbs.InsectGene;
-import evolutionmod.orbs.LizardGene;
 import evolutionmod.orbs.PlantGene;
 import evolutionmod.patches.AbstractCardEnum;
 import evolutionmod.powers.SymbiotesPower;
 
 public class Symbiotes
-        extends BaseEvoCard {
+        extends BaseEvoCard implements GlowingCard {
     public static final String ID = "evolutionmod:Symbiotes";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-    public static final String IMG_PATH = "evolutionmod/images/cards/PlantPower.png";
+    public static final String IMG_PATH = "evolutionmod/images/cards/Symbiotes.png";
     private static final int COST = 1;
     private static final int SYMBIOTES_AMT = 2;
     private static final int UPGRADE_SYMBIOTES_AMT = 1;
@@ -52,11 +51,26 @@ public class Symbiotes
     }
 
     @Override
-    public void triggerOnGlowCheck() {
-        if (isPlayerInTheseForms(InsectGene.ID, PlantGene.ID)) {
-            this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
-        } else {
-            this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
+    public int getNumberOfGlows() {
+        return 2;
+    }
+
+    @Override
+    public boolean isGlowing(int glowIndex) {
+        return true;
+    }
+
+    @Override
+    public Color getGlowColor(int glowIndex) {
+        switch (glowIndex) {
+            case 0:
+                return isPlayerInThisForm(InsectGene.ID) ? InsectGene.COLOR.cpy()
+                        : BLUE_BORDER_GLOW_COLOR.cpy();
+            case 1:
+                return isPlayerInThisForm(PlantGene.ID, InsectGene.ID) ? PlantGene.COLOR.cpy()
+                        : BLUE_BORDER_GLOW_COLOR.cpy();
+            default:
+                return BLUE_BORDER_GLOW_COLOR.cpy();
         }
     }
 }
