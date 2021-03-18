@@ -24,7 +24,7 @@ public class ShiftingStrike
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-    public static final String IMG_PATH = "evolutionmod/images/cards/strike.png";
+    public static final String IMG_PATH = "evolutionmod/images/cards/ShiftingStrike.png";
     private static final int COST = 1;
     private static final int DAMAGE_AMT = 9;
     private static final int UPGRADE_DAMAGE_AMT = 2;
@@ -32,7 +32,7 @@ public class ShiftingStrike
     private static final int UPGRADE_GENE_TRIGGER_AMT = 1;
 
     public ShiftingStrike() {
-        super(ID, NAME, new RegionName("green/attack/sucker_punch"), COST, DESCRIPTION,
+        super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.ATTACK, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.COMMON, CardTarget.ENEMY);
         this.damage = this.baseDamage = DAMAGE_AMT;

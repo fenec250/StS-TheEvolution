@@ -3,6 +3,10 @@
     "NAME": "Eat Me Cake",
     "DESCRIPTIONS": ["Gain ", " Orb slots."]
   },
+  "evolutionmod:StolenKiss": {
+    "NAME": "Stolen Kiss",
+    "DESCRIPTIONS": ["Apply ", " #yLust to an enemy, reducing the damage of its next attack."]
+  },
   "evolutionmod:Mutagen": {
     "NAME": "Mutagen",
     "DESCRIPTIONS": ["Select up to ", " genes you don't already have and Channel them."]

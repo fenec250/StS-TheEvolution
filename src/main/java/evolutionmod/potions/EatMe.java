@@ -18,7 +18,7 @@ public class EatMe extends AbstractPotion {
 
 	public EatMe() {
 		// The bottle shape and inside is determined by potion size and color. The actual colors are the main DefaultMod.java
-		super(NAME, POTION_ID, PotionRarity.UNCOMMON, PotionSize.H, PotionColor.POISON);
+		super(NAME, POTION_ID, PotionRarity.RARE, PotionSize.H, PotionColor.POISON);
 
 		// Potency is the damage/magic number equivalent of potions.
 		potency = getPotency();

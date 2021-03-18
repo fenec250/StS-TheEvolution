@@ -12,7 +12,7 @@ import evolutionmod.orbs.PlantGene;
 import evolutionmod.patches.AbstractCardEnum;
 
 public class Barkskin
-        extends BaseEvoCard implements GlowingCard {
+        extends BaseEvoCard {
     public static final String ID = "evolutionmod:Barkskin";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -45,17 +45,11 @@ public class Barkskin
     }
 
     @Override
-    public int getNumberOfGlows() {
-        return 1;
-    }
-
-    @Override
-    public boolean isGlowing(int glowIndex) {
-        return isPlayerInThisForm(PlantGene.ID);
-    }
-
-    @Override
-    public Color getGlowColor(int glowIndex) {
-          return PlantGene.COLOR.cpy();
+    public void triggerOnGlowCheck() {
+        if (isPlayerInThisForm(PlantGene.ID)) {
+            this.glowColor = PlantGene.COLOR.cpy();
+        } else {
+            this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
+        }
     }
 }

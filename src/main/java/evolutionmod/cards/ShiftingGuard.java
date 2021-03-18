@@ -22,7 +22,7 @@ public class ShiftingGuard
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-    public static final String IMG_PATH = "evolutionmod/images/cards/CrystalStone.png";
+    public static final String IMG_PATH = "evolutionmod/images/cards/ShiftingGuard.png";
     private static final int COST = 1;
     private static final int BLOCK_AMT = 8;
     private static final int UPGRADE_BLOCK_AMT = 1;
@@ -30,7 +30,7 @@ public class ShiftingGuard
     private static final int UPGRADE_GENE_TRIGGER_AMT = 1;
 
     public ShiftingGuard() {
-        super(ID, NAME, new RegionName("blue/skill/auto_shields"), COST, DESCRIPTION,
+        super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.COMMON, CardTarget.SELF);
         this.block = this.baseBlock = BLOCK_AMT;

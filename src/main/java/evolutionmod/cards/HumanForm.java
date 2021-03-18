@@ -14,6 +14,8 @@ import evolutionmod.powers.HumanFormPower;
 
 import java.util.stream.Collectors;
 
+import static basemod.helpers.BaseModCardTags.FORM;
+
 public class HumanForm extends BaseEvoCard {
     public static final String ID = "evolutionmod:HumanForm";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
@@ -31,6 +33,7 @@ public class HumanForm extends BaseEvoCard {
                 CardType.POWER, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.RARE, CardTarget.SELF);
         this.magicNumber = this.baseMagicNumber = OMNI_AMT;
+        this.tags.add(FORM);
         this.isEthereal = true;
     }
 

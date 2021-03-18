@@ -17,7 +17,7 @@ import evolutionmod.patches.AbstractCardEnum;
 import evolutionmod.powers.CurrentsDancerPower;
 
 public class CurrentsDancer
-        extends BaseEvoCard implements GlowingCard {
+        extends BaseEvoCard {
     public static final String ID = "evolutionmod:CurrentsDancer";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -73,17 +73,9 @@ public class CurrentsDancer
     }
 
 	@Override
-	public int getNumberOfGlows() {
-		return 1;
-	}
-
-	@Override
-	public boolean isGlowing(int glowIndex) {
-		return isPlayerInThisForm(MerfolkGene.ID);
-	}
-
-	@Override
-	public Color getGlowColor(int glowIndex) {
-		return MerfolkGene.COLOR.cpy();
+	public void triggerOnGlowCheck() {
+		if (isPlayerInThisForm(MerfolkGene.ID)) {
+			this.glowColor = MerfolkGene.COLOR.cpy();
+		}
 	}
 }

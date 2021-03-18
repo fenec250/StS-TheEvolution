@@ -9,7 +9,6 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.BeastGene;
 import evolutionmod.orbs.CentaurGene;
 import evolutionmod.orbs.HarpyGene;
@@ -24,7 +23,6 @@ import evolutionmod.orbs.SuccubusGene;
 import evolutionmod.patches.AbstractCardEnum;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,15 +33,15 @@ public class Mutate extends BaseEvoCard {
 	public static final String DESCRIPTION = cardStrings.DESCRIPTION;
 	public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
 	public static final String[] EXTENDED_DESCRIPTION = cardStrings.EXTENDED_DESCRIPTION;
-	public static final String IMG_PATH = "evolutionmod/images/cards/Treasures.png";
+	public static final String IMG_PATH = "evolutionmod/images/cards/Mutate.png";
 	private static final int COST = 0;
 	private static final int GENE_CHOICES = 3;
 
 	public Mutate() {
-		super(ID, NAME, new RegionName("green/skill/corpse_explosion"), COST, DESCRIPTION,
+		super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
 				CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
 				CardRarity.UNCOMMON, CardTarget.SELF);
-		this.magicNumber = this.baseMagicNumber = 3;
+		this.magicNumber = this.baseMagicNumber = GENE_CHOICES;
 	}
 
 	@Override

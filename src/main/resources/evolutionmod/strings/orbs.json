@@ -13,7 +13,7 @@
   },
   "evolutionmod:HarpyGene": {
     "NAME": "Harpy",
-    "DESCRIPTION": ["Draw #b", "a card.", " cards."]
+    "DESCRIPTION": ["Draw ", "a card.", " cards."]
   },
   "evolutionmod:LavafolkGene": {
     "NAME": "Lavafolk",

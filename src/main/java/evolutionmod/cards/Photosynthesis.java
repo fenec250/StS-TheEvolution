@@ -1,6 +1,5 @@
 package evolutionmod.cards;
 
-import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
@@ -8,18 +7,13 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.ThornsPower;
 import com.megacrit.cardcrawl.relics.ChemicalX;
-import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 import evolutionmod.orbs.PlantGene;
 import evolutionmod.patches.AbstractCardEnum;
 import evolutionmod.powers.BramblesPower;
-import evolutionmod.powers.GrowthPower;
-
-import java.util.stream.Collectors;
 
 public class Photosynthesis
-        extends AdaptableEvoCard implements GlowingCard {
+        extends AdaptableEvoCard {
     public static final String ID = "evolutionmod:Photosynthesis";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -96,17 +90,11 @@ public class Photosynthesis
     }
 
     @Override
-    public int getNumberOfGlows() {
-        return 1;
-    }
-
-    @Override
-    public boolean isGlowing(int glowIndex) {
-        return isPlayerInThisForm(PlantGene.ID);
-    }
-
-    @Override
-    public Color getGlowColor(int glowIndex) {
-        return PlantGene.COLOR.cpy();
+    public void triggerOnGlowCheck() {
+        if (isPlayerInThisForm(PlantGene.ID)) {
+            this.glowColor = PlantGene.COLOR.cpy();
+        } else {
+            this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
+        }
     }
 }

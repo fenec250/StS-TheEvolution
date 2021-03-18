@@ -112,9 +112,8 @@ public class EvolutionMod implements
         cards.add(new ChimeraStrike());
         cards.add(new CrystalShard());
         //8 skills
-//        cards.add(new Brambles());
         cards.add(new Barkskin());
-        cards.add(new DrainMana());
+        cards.add(new Visions());
         cards.add(new Dive());
         cards.add(new Charm());
         cards.add(new Hatch());
@@ -164,14 +163,14 @@ public class EvolutionMod implements
         cards.add(new Symbiotes());
         cards.add(new Salamander());
         cards.add(new DarkDesires());
-        cards.add(new Mastery());
+//        cards.add(new Mastery());
+        cards.add(new Mastery2());
         cards.add(new Shrink());
 
         //Rares.
         //4 attacks
         cards.add(new Stampede());
-        cards.add(new Seduce());
-//        cards.add(new SpikeVolley());
+        cards.add(new Lifesteal());
         cards.add(new Stalker());
         cards.add(new Photosynthesis());
         cards.add(new Eruption());
@@ -217,6 +216,8 @@ public class EvolutionMod implements
         BaseMod.addKeyword("Adapt", keywordAdapt, "Consume a channeled Gene. Add its effect to the card until the end of the combat and shuffle this card in your draw pile. NL Adapted effects target the same enemy as the card if possible.");
         String[] keywordShift = {"shift"};
         BaseMod.addKeyword("Shift", keywordShift, "Recreate the gene at the back of the orb line.");
+        String[] keywordRando = {"randomized"};
+        BaseMod.addKeyword("Randomized", keywordRando, "Randomized Forms are selected when the card is created and vary from a card to another.");
 //        String[] keywordTrait = {"trait"};
 //        BaseMod.addKeyword("Trait", keywordTrait, "Trigger the following effect if you have a Gene of this type.");
 //        String[] keywordPotency = {"potency"};

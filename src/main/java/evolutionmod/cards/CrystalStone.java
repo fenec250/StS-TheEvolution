@@ -48,18 +48,13 @@ public class CrystalStone
 	private AbstractGene secondGene; // secoIndex = genesIndex % 10
 
 	public CrystalStone() {
-		super(ID, NAME, new RegionName("blue/skill/charge_battery"), COST, DESCRIPTION,
-				CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
-				CardRarity.COMMON, CardTarget.SELF);
-		this.block = this.baseBlock = BLOCK_AMT;
-		this.magicNumber = this.baseMagicNumber = FORM_BLOCK;
-		this.exhaust = true;
-		this.genesIndexes = -1;
-		resetGene();
+		this((!CardCrawlGame.isInARun() || AbstractDungeon.miscRng == null)
+				? -1
+				: AbstractDungeon.miscRng.random(11 * 10 - 1));
 	}
 
-	private CrystalStone(int geneIndexes) {
-		super(ID, NAME, new RegionName("blue/skill/charge_battery"), COST, DESCRIPTION,
+	public CrystalStone(int geneIndexes) {
+		super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
 				CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
 				CardRarity.COMMON, CardTarget.SELF);
 		this.block = this.baseBlock = BLOCK_AMT;
@@ -123,7 +118,7 @@ public class CrystalStone
 
 	@Override
 	public boolean isGlowing(int glowIndex) {
-		return true;
+		return firstGene != null && secondGene != null;
 	}
 
 	@Override
@@ -144,8 +139,8 @@ public class CrystalStone
 						case InsectGene.ID: return InsectGene.COLOR.cpy();
 						case SuccubusGene.ID: return SuccubusGene.COLOR.cpy();
 					}
-					return AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
 				}
+				return AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
 			case 1:
 				if (isPlayerInThisForm(secondGene.ID, firstGene.ID)) {
 					switch (secondGene.ID) {
@@ -161,44 +156,31 @@ public class CrystalStone
 						case InsectGene.ID: return InsectGene.COLOR.cpy();
 						case SuccubusGene.ID: return SuccubusGene.COLOR.cpy();
 					}
-					return AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
 				}
+				return AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
 			default:
 				return BLUE_BORDER_GLOW_COLOR.cpy();
 		}
 	}
 
-	@Override
-	public List<TooltipInfo> getCustomTooltips() {
-		if (customTooltips == null) {
-			super.getCustomTooltips();
-			customTooltips.add(new TooltipInfo("Randomized forms",
-					"The forms on this card are selected when the card is created and vary from a card to an other."));
-		}
-		return  customTooltips;
-	}
-
 	private void resetGene() {
-		if (this.genesIndexes < 0) {
-			if (!CardCrawlGame.isInARun() || AbstractDungeon.miscRng == null) {
-				return;
-			}
-			this.genesIndexes = AbstractDungeon.miscRng.random(11 * 10 - 1);
+		if (this.genesIndexes < 0 || this.genesIndexes > 11 * 10 - 1) {
+			return;
 		}
-		AbstractGene[] validGenes = {
-				new PlantGene(),
-				new MerfolkGene(),
-				new HarpyGene(),
-				new LavafolkGene(),
-				new SuccubusGene(),
-				new LymeanGene(),
-				new InsectGene(),
-				new BeastGene(),
-				new LizardGene(),
-				new CentaurGene(),
-				new ShadowGene()};
-		this.firstGene =  validGenes[this.genesIndexes / 11];
-		this.secondGene = validGenes[this.genesIndexes / 11 == this.genesIndexes % 10 ? 10 : this.genesIndexes % 10];
+		String[] validGenes = {
+				PlantGene.ID,
+				MerfolkGene.ID,
+				HarpyGene.ID,
+				LavafolkGene.ID,
+				SuccubusGene.ID,
+				LymeanGene.ID,
+				InsectGene.ID,
+				BeastGene.ID,
+				LizardGene.ID,
+				CentaurGene.ID,
+				ShadowGene.ID};
+		this.firstGene =  getGene(validGenes[this.genesIndexes / 11]);
+		this.secondGene = getGene(validGenes[this.genesIndexes % 10 == this.genesIndexes / 11 ? 10 : this.genesIndexes % 10]);
 		this.rawDescription = EXTENDED_DESCRIPTION[0]
 				+ this.firstGene.ID + EXTENDED_DESCRIPTION[1]
 				+ this.secondGene.ID + EXTENDED_DESCRIPTION[2];

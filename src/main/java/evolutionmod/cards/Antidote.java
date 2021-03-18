@@ -24,7 +24,7 @@ import evolutionmod.orbs.SuccubusGene;
 import evolutionmod.patches.AbstractCardEnum;
 
 public class Antidote
-        extends BaseEvoCard implements GlowingCard {
+        extends BaseEvoCard {
     public static final String ID = "evolutionmod:Antidote";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -67,17 +67,11 @@ public class Antidote
     }
 
     @Override
-    public int getNumberOfGlows() {
-        return 1;
-    }
-
-    @Override
-    public boolean isGlowing(int glowIndex) {
-        return isPlayerInThisForm(LymeanGene.ID);
-    }
-
-    @Override
-    public Color getGlowColor(int glowIndex) {
-          return LymeanGene.COLOR.cpy();
+    public void triggerOnGlowCheck() {
+        if (isPlayerInThisForm(LymeanGene.ID)) {
+            this.glowColor = LymeanGene.COLOR.cpy();
+        } else {
+            this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
+        }
     }
 }

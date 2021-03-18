@@ -1,6 +1,5 @@
 package evolutionmod.cards;
 
-import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
@@ -16,7 +15,7 @@ import evolutionmod.patches.AbstractCardEnum;
 import evolutionmod.powers.ShadowsPower;
 
 public class Shadowbolt
-        extends BaseEvoCard implements GlowingCard {
+        extends BaseEvoCard {
     public static final String ID = "evolutionmod:Shadowbolt";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -112,18 +111,12 @@ public class Shadowbolt
     }
 
     @Override
-    public int getNumberOfGlows() {
-        return 1;
-    }
-
-    @Override
-    public boolean isGlowing(int glowIndex) {
-        return isPlayerInThisForm(ShadowGene.ID);
-    }
-
-    @Override
-    public Color getGlowColor(int glowIndex) {
-        return ShadowGene.COLOR.cpy();
+    public void triggerOnGlowCheck() {
+        if (isPlayerInThisForm(ShadowGene.ID)) {
+            this.glowColor = ShadowGene.COLOR.cpy();
+        } else {
+            this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
+        }
     }
 
 //    public static class ExtraDamage extends DynamicVariable {

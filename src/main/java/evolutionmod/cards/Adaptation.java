@@ -32,11 +32,11 @@ public class Adaptation
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-    public static final String IMG_PATH = "evolutionmod/images/cards/strike.png";
+    public static final String IMG_PATH = "evolutionmod/images/cards/Adaptation.png";
     private static final int COST = -1;
 
     public Adaptation() {
-        super(ID, NAME, new RegionName("red/skill/ghostly_armor"), COST, DESCRIPTION,
+        super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.UNCOMMON, CardTarget.SELF);
     }
@@ -77,7 +77,6 @@ public class Adaptation
         if (!this.upgraded) {
             this.upgradeName();
             this.rawDescription = UPGRADE_DESCRIPTION;
-            this.initialRawDescription = UPGRADE_DESCRIPTION;
             this.updateDescription();
         }
     }

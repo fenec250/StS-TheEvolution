@@ -15,7 +15,7 @@ import evolutionmod.orbs.HarpyGene;
 import evolutionmod.patches.AbstractCardEnum;
 
 public class Feather
-        extends BaseEvoCard implements GlowingCard {
+        extends BaseEvoCard {
     public static final String ID = "evolutionmod:Feather";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -59,17 +59,12 @@ public class Feather
     }
 
     @Override
-    public int getNumberOfGlows() {
-        return 1;
-    }
-
-    @Override
-    public boolean isGlowing(int glowIndex) {
-        return isPlayerInThisForm(HarpyGene.ID);
-    }
-
-    @Override
-    public Color getGlowColor(int glowIndex) {
-        return HarpyGene.COLOR.cpy();
+    public void triggerOnGlowCheck() {
+        if (isPlayerInThisForm(HarpyGene.ID)
+            && AbstractDungeon.player.discardPile.group.stream().anyMatch(c -> FeatherStorm.ID.equals(c.cardID))) {
+            this.glowColor = HarpyGene.COLOR.cpy();
+        } else {
+			this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
+		}
     }
 }

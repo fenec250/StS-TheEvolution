@@ -1,10 +1,8 @@
 package evolutionmod.cards;
 
-import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
-import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -16,7 +14,7 @@ import evolutionmod.orbs.LavafolkGene;
 import evolutionmod.patches.AbstractCardEnum;
 
 public class Phoenix
-        extends AdaptableEvoCard implements GlowingCard {
+        extends AdaptableEvoCard {
     public static final String ID = "evolutionmod:Phoenix";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -58,23 +56,16 @@ public class Phoenix
         if (!this.upgraded) {
             this.upgradeName();
             this.rawDescription = UPGRADE_DESCRIPTION;
-            this.initialRawDescription = UPGRADE_DESCRIPTION;
             this.updateDescription();
         }
     }
 
     @Override
-    public int getNumberOfGlows() {
-        return 1;
-    }
-
-    @Override
-    public boolean isGlowing(int glowIndex) {
-        return isPlayerInThisForm(HarpyGene.ID);
-    }
-
-    @Override
-    public Color getGlowColor(int glowIndex) {
-        return HarpyGene.COLOR.cpy();
+    public void triggerOnGlowCheck() {
+        if (isPlayerInThisForm(HarpyGene.ID)) {
+            this.glowColor = HarpyGene.COLOR.cpy();
+        } else {
+            this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
+        }
     }
 }

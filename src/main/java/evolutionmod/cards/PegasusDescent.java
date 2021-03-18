@@ -1,6 +1,5 @@
 package evolutionmod.cards;
 
-import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
@@ -19,7 +18,7 @@ import evolutionmod.orbs.HarpyGene;
 import evolutionmod.patches.AbstractCardEnum;
 
 public class PegasusDescent
-        extends BaseEvoCard implements GlowingCard {
+        extends BaseEvoCard {
     public static final String ID = "evolutionmod:PegasusDescent";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -31,7 +30,6 @@ public class PegasusDescent
     private static final int DAMAGE_AMT = 7;
     private static final int UPGRADE_DAMAGE_AMT = 3;
 
-    private int descriptionHits = 1;
     public PegasusDescent() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.ATTACK, AbstractCardEnum.EVOLUTION_BLUE,
@@ -82,23 +80,17 @@ public class PegasusDescent
     }
 
     @Override
-    public int getNumberOfGlows() {
-        return 1;
-    }
-
-    @Override
-    public boolean isGlowing(int glowIndex) {
-        return isPlayerInThisForm(HarpyGene.ID);
-    }
-
-    @Override
-    public Color getGlowColor(int glowIndex) {
-        return HarpyGene.COLOR.cpy();
+    public void triggerOnGlowCheck() {
+        if (isPlayerInThisForm(HarpyGene.ID)) {
+            this.glowColor = HarpyGene.COLOR.cpy();
+        } else {
+            this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
+        }
     }
 
     private static int getHitsNb(AbstractPlayer player, int currentEnergy, AbstractCard pegasusDescent) {
         return 1 + (player.hand.group.stream()
-                .mapToInt(card -> card.cost == -1 ? EnergyPanel.getCurrentEnergy() : card.costForTurn)
+                .mapToInt(card -> card.cost == -1 ? currentEnergy : card.costForTurn)
                 .filter(cost -> cost > 0)
                 .sum() - (pegasusDescent.cost == -1 ? currentEnergy : pegasusDescent.costForTurn)) / 3;
     }

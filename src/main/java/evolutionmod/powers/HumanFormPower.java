@@ -45,7 +45,7 @@ public class HumanFormPower extends AbstractPower {
         this.fontScale = 8.0F;
         this.amount += stackAmount;
         if (this.amount <= 0) {
-            AbstractDungeon.actionManager.addToTop(new RemoveSpecificPowerAction(this.owner, this.owner, POWER_ID));
+            addToTop(new RemoveSpecificPowerAction(this.owner, this.owner, POWER_ID));
         }
     }
 

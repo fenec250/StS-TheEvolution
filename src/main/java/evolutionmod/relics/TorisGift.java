@@ -2,6 +2,7 @@ package evolutionmod.relics;
 
 import basemod.abstracts.CustomRelic;
 import com.badlogic.gdx.graphics.Texture;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.actions.defect.IncreaseMaxOrbAction;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -64,6 +65,13 @@ public class TorisGift extends CustomRelic {
         for (int i = 0; i < GENE_AMT; ++i) {
             AbstractGene gene = genesPool.get(AbstractDungeon.cardRng.random(genesPool.size() - 1));
             AbstractDungeon.actionManager.addToBottom(new ChannelAction(gene.makeCopy()));
+            addToBot(new AbstractGameAction() {
+                @Override
+                public void update() {
+                    gene.onEvoke();
+                    this.isDone = true;
+                }
+            });
         }
     }
 }

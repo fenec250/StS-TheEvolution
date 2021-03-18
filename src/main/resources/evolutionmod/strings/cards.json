@@ -91,7 +91,7 @@
   },
   "evolutionmod:Broodmother": {
     "NAME": "Broodmother",
-    "DESCRIPTION": "Your Drones deal !M! more damage and apply !M! more Block. NL Channel an evolutionmod:InsectGene gene.",
+    "DESCRIPTION": "Your Drones deal !M! more damage and apply !M! more Block. NL Channel two evolutionmod:InsectGene genes.",
     "UPGRADE_DESCRIPTION": "Your Drones deal !M! more damage and apply !M! more Block. NL Channel 2 evolutionmod:InsectGene genes."
 //    "DESCRIPTION": "Each turn the next Drone you create will be Upgraded. NL Channel an evolutionmod:InsectGene gene.",
 //    "UPGRADE_DESCRIPTION": "Each turn the next Drone you create will be Upgraded. NL Channel !M! evolutionmod:InsectGene genes."
@@ -107,8 +107,13 @@
     "DESCRIPTION": "Deal !D! damage. NL evolutionmod:SuccubusGene form: Remove all Block from the enemy first. NL evolutionmod:BeastGene Form: add !M! damage.",
     "UPGRADE_DESCRIPTION": ""
   },
-  "evolutionmod:Seduce": {
+  "evolutionmod:Seduce": { // Deprecated
     "NAME": "Seduce",
+    "DESCRIPTION": "Deal !D! damage NL Gain Block equal to the unblocked damage. NL Exhaust. NL evolutionmod:SuccubusGene Form: you are healed instead.",
+    "UPGRADE_DESCRIPTION": ""
+  },
+  "evolutionmod:Lifesteal": {
+    "NAME": "Lifesteal",
     "DESCRIPTION": "Deal !D! damage NL Gain Block equal to the unblocked damage. NL Exhaust. NL evolutionmod:SuccubusGene Form: you are healed instead.",
     "UPGRADE_DESCRIPTION": ""
   },
@@ -134,16 +139,17 @@
     "DESCRIPTION": "At the start of your turn Channel a evolutionmod:LavafolkGene gene and trigger your evolutionmod:LavafolkGene genes.",
     "UPGRADE_DESCRIPTION": "At the start of your turn Channel a evolutionmod:LavafolkGene gene and trigger your evolutionmod:LavafolkGene genes. NL Channel a evolutionmod:LavafolkGene gene."
   },
-  "evolutionmod:DrainMana": {
+  "evolutionmod:DrainMana": { // Deprecated!
     "NAME": "Visions",
     "DESCRIPTION": "Fate !M! cards. NL Add a Dazed to your draw pile. NL evolutionmod:LymeanGene Form: Draw a card after Fate.",
 //    "DESCRIPTION": "Draw !M! cards NL evolutionmod:LymeanGene Form: Scry !M! first.",
     "UPGRADE_DESCRIPTION": "Fate !M! cards. NL Draw a card. NL Add a Dazed to your draw pile. NL evolutionmod:LymeanGene Form: Fate 2 more cards."
   },
-  "evolutionmod:Purify": {
-    "NAME": "Purify",
-    "DESCRIPTION": "Exhaust up to !M! cards. NL Adapt this with a evolutionmod:LymeanGene gene up to !evolutionmod:MA! times.",
-    "UPGRADE_DESCRIPTION": ""
+  "evolutionmod:Visions": {
+    "NAME": "Visions",
+    "DESCRIPTION": "Fate !M! cards. NL Add a Dazed to your draw pile. NL evolutionmod:LymeanGene Form: Draw a card after Fate.",
+    //    "DESCRIPTION": "Draw !M! cards NL evolutionmod:LymeanGene Form: Scry !M! first.",
+    "UPGRADE_DESCRIPTION": "Fate !M! cards. NL Draw a card. NL Add a Dazed to your draw pile. NL evolutionmod:LymeanGene Form: Fate 2 more cards."
   },
   "evolutionmod:Aegis": {
     "NAME": "Aegis",
@@ -339,7 +345,7 @@
   },
   "evolutionmod:Photosynthesis": {
     "NAME": "Photosynthesis",
-    "DESCRIPTION": "Gain !B! Block X times. Whenever you are attacked this turn, deal !M! *X damage back. NL evolutionmod:PlantGene Form: Adapt this with a evolutionmod:PlantGene gene.",
+    "DESCRIPTION": "Gain !B! Block X times. Whenever you are attacked this turn, deal !M! * X damage back. NL evolutionmod:PlantGene Form: Adapt this with a evolutionmod:PlantGene gene.",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:Phoenix": {
@@ -435,12 +441,13 @@
       " Form: draw 2 cards. NL Exhaust. NL Startup: shuffle !M! copies of this card in your draw pile."]
   },
   "evolutionmod:Mastery": {
-    "NAME": "Random Mastery",
-    "DESCRIPTION": "When you channel a Randomized gene, trigger its effect. NL Randomized form: gain an Orb slot",
-    "UPGRADE_DESCRIPTION": "When you channel a Randomized gene, trigger its effect. NL Gain an Orb slot and Channel a Randomized orb.",
+    "NAME": "Gene Mastery",
+    "DESCRIPTION": "When you channel an Imprinted gene, trigger its effect. NL Imprinted Form: gain an Orb slot",
+    "UPGRADE_DESCRIPTION": "When you channel an Imprinted gene, trigger its effect. NL Gain an Orb slot and Channel the Imprinted gene.",
     "EXTENDED_DESCRIPTION": [
       "When you Channel a ", " gene, trigger its effect. NL ",
-      " Form: gain an Orb slot.", "Gain an Orb slot and Channel a ", " gene.", " Mastery"]
+      " Form: gain an Orb slot.", "Gain an Orb slot and Channel a ", " gene.",
+      " Mastery", "I need a channeled Gene."]
   },
   "evolutionmod:Treasure": {
     "NAME": "Treasure",
@@ -474,7 +481,7 @@
   "evolutionmod:Ritual": {
     "NAME": "Ritual",
     "DESCRIPTION": "Permanently Adapt this with your oldest gene not already adapted. NL Exhaust.",
-    "UPGRADE_DESCRIPTION": "Permanently Adapt this with your oldest gene not already adapted."
+    "UPGRADE_DESCRIPTION": "Permanently Adapt this with your oldest gene not already adapted. NL Ethereal."
   },
   "evolutionmod:GodlyPowers": {
     "NAME": "Godly Powers",

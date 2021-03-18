@@ -14,7 +14,7 @@ import evolutionmod.patches.AbstractCardEnum;
 import evolutionmod.powers.LustPower;
 
 public class Charm
-        extends BaseEvoCard implements GlowingCard {
+        extends BaseEvoCard {
     public static final String ID = "evolutionmod:Charm";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -25,7 +25,7 @@ public class Charm
     private static final int REDUCTION_AMT = 3;
     private static final int UPGRADE_REDUCTION_AMT = 2;
     private static final int FORM_VULNERABLE = 2;
-    private static final int UPGRADE_FORM_VULNERABLE = 2;
+    private static final int UPGRADE_FORM_VULNERABLE = 1;
 
     public Charm() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -52,21 +52,17 @@ public class Charm
         if (!this.upgraded) {
             this.upgradeName();
             this.upgradeMagicNumber(UPGRADE_REDUCTION_AMT);
+            this.rawDescription = UPGRADE_DESCRIPTION;
+            this.initializeDescription();
         }
     }
 
     @Override
-    public int getNumberOfGlows() {
-        return 1;
-    }
-
-    @Override
-    public boolean isGlowing(int glowIndex) {
-        return isPlayerInThisForm(SuccubusGene.ID);
-    }
-
-    @Override
-    public Color getGlowColor(int glowIndex) {
-        return SuccubusGene.COLOR.cpy();
+    public void triggerOnGlowCheck() {
+        if (isPlayerInThisForm(SuccubusGene.ID)) {
+            this.glowColor = SuccubusGene.COLOR.cpy();
+        } else {
+            this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
+        }
     }
 }

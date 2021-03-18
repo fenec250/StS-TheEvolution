@@ -16,7 +16,7 @@ import evolutionmod.orbs.BeastGene;
 import evolutionmod.patches.AbstractCardEnum;
 
 public class ClawSlash
-        extends BaseEvoCard implements GlowingCard {
+        extends BaseEvoCard {
     public static final String ID = "evolutionmod:ClawSlash";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -56,17 +56,11 @@ public class ClawSlash
     }
 
     @Override
-    public int getNumberOfGlows() {
-        return 1;
-    }
-
-    @Override
-    public boolean isGlowing(int glowIndex) {
-        return isPlayerInThisForm(BeastGene.ID);
-    }
-
-    @Override
-    public Color getGlowColor(int glowIndex) {
-        return BeastGene.COLOR.cpy();
+    public void triggerOnGlowCheck() {
+        if (isPlayerInThisForm(BeastGene.ID)) {
+            this.glowColor = BeastGene.COLOR.cpy();
+        } else {
+            this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
+        }
     }
 }

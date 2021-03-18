@@ -1,25 +1,17 @@
 package evolutionmod.cards;
 
-import basemod.ReflectionHacks;
 import basemod.abstracts.CustomSavable;
 import basemod.helpers.TooltipInfo;
-import com.badlogic.gdx.graphics.Color;
 import com.evacipated.cardcrawl.mod.stslib.cards.interfaces.StartupCard;
-import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInDrawPileAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
-import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
-import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndAddToDiscardEffect;
-import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndAddToDrawPileEffect;
-import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndAddToHandEffect;
 import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.BeastGene;
 import evolutionmod.orbs.CentaurGene;
@@ -37,7 +29,7 @@ import evolutionmod.patches.AbstractCardEnum;
 import java.util.List;
 
 public class CrystalDust
-		extends BaseEvoCard implements CustomSavable<Integer>, StartupCard, GlowingCard {
+		extends BaseEvoCard implements CustomSavable<Integer>, StartupCard {
 	public static final String ID = "evolutionmod:CrystalDust";
 	public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;
@@ -54,16 +46,12 @@ public class CrystalDust
 	private AbstractGene gene;
 
 	public CrystalDust() {
-		super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
-				CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
-				CardRarity.UNCOMMON, CardTarget.SELF);
-		this.magicNumber = this.baseMagicNumber = COPIES_AMT;
-		this.exhaust = true;
-		this.geneIndex = -1;
-		resetGene();
+		this((!CardCrawlGame.isInARun() || AbstractDungeon.miscRng == null)
+				? -1
+				: AbstractDungeon.miscRng.random(11 - 1));
 	}
 
-	private CrystalDust(int geneIndex) {
+	public CrystalDust(int geneIndex) {
 		super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
 				CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
 				CardRarity.UNCOMMON, CardTarget.SELF);
@@ -106,50 +94,31 @@ public class CrystalDust
 		}
 	}
 
-	@Override
-	public int getNumberOfGlows() {
-		return 1;
-	}
 
 	@Override
-	public boolean isGlowing(int glowIndex) {
-		return isPlayerInThisForm(gene.ID);
-	}
-
-	@Override
-	public Color getGlowColor(int glowIndex) {
-		switch (gene.ID) {
-			case HarpyGene.ID: return HarpyGene.COLOR.cpy();
-			case MerfolkGene.ID: return MerfolkGene.COLOR.cpy();
-			case LavafolkGene.ID: return LavafolkGene.COLOR.cpy();
-			case CentaurGene.ID: return CentaurGene.COLOR.cpy();
-			case LizardGene.ID: return LizardGene.COLOR.cpy();
-			case BeastGene.ID: return BeastGene.COLOR.cpy();
-			case PlantGene.ID: return PlantGene.COLOR.cpy();
-			case ShadowGene.ID: return ShadowGene.COLOR.cpy();
-			case LymeanGene.ID: return LymeanGene.COLOR.cpy();
-			case InsectGene.ID: return InsectGene.COLOR.cpy();
-			case SuccubusGene.ID: return SuccubusGene.COLOR.cpy();
-			default: return this.glowColor;
+	public void triggerOnGlowCheck() {
+		if (gene != null && isPlayerInThisForm(gene.ID)) {
+			switch (gene.ID) {
+				case HarpyGene.ID: this.glowColor = HarpyGene.COLOR.cpy(); return;
+				case MerfolkGene.ID: this.glowColor = MerfolkGene.COLOR.cpy(); return;
+				case LavafolkGene.ID: this.glowColor = LavafolkGene.COLOR.cpy(); return;
+				case CentaurGene.ID: this.glowColor = CentaurGene.COLOR.cpy(); return;
+				case LizardGene.ID: this.glowColor = LizardGene.COLOR.cpy(); return;
+				case BeastGene.ID: this.glowColor = BeastGene.COLOR.cpy(); return;
+				case PlantGene.ID: this.glowColor = PlantGene.COLOR.cpy(); return;
+				case ShadowGene.ID: this.glowColor = ShadowGene.COLOR.cpy(); return;
+				case LymeanGene.ID: this.glowColor = LymeanGene.COLOR.cpy(); return;
+				case InsectGene.ID: this.glowColor = InsectGene.COLOR.cpy(); return;
+				case SuccubusGene.ID: this.glowColor = SuccubusGene.COLOR.cpy(); return;
+			}
+		} else {
+			this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
 		}
-	}
-
-	@Override
-	public List<TooltipInfo> getCustomTooltips() {
-		if (customTooltips == null) {
-			super.getCustomTooltips();
-			customTooltips.add(new TooltipInfo("Randomized form",
-					"The form on this card is selected when the card is created and vary from a card to an other."));
-		}
-		return  customTooltips;
 	}
 
 	private void resetGene() {
-		if (this.geneIndex < 0) {
-			if (!CardCrawlGame.isInARun() || AbstractDungeon.miscRng == null) {
-				return;
-			}
-			this.geneIndex = AbstractDungeon.miscRng.random(11 - 1);
+		if (this.geneIndex < 0 || this.geneIndex > 11 - 1) {
+			return;
 		}
 		AbstractGene[] validGenes = {
 				new PlantGene(),

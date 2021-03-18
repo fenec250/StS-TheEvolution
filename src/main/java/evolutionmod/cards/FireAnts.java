@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class FireAnts
-        extends BaseEvoCard implements GlowingCard {
+        extends BaseEvoCard {
     public static final String ID = "evolutionmod:FireAnts";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -40,22 +40,6 @@ public class FireAnts
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-//        p.orbs.stream()
-//                .filter(o -> LavafolkGene.ID.equals(o.ID))
-//                .limit(maxEvoke)
-//                .collect(Collectors.toList()) // dissociate from initial list before evoking
-//                .forEach(o -> {
-//                    addToBot(new EvokeSpecificOrbAction(o));
-//                    addToBot(new MakeTempCardInHandAction(Drone.createDroneWithInteractions(p)));
-//                });
-
-//        for(int i = 0; i < this.magicNumber; ++i) {
-//            if (isPlayerInThisForm(LavafolkGene.ID)) {
-//                addToBot(new MakeTempCardInHandAction(new DroneFire()));
-//            } else {
-//                addToBot(new MakeTempCardInHandAction(new Drone()));
-//            }
-//        }
         LavafolkGene orb = new LavafolkGene();
         addToBot(new ChannelAction(orb));
         List<AbstractCard> drones = p.hand.group.stream()
@@ -84,17 +68,11 @@ public class FireAnts
     }
 
     @Override
-    public int getNumberOfGlows() {
-        return 1;
-    }
-
-    @Override
-    public boolean isGlowing(int glowIndex) {
-        return isPlayerInThisForm(InsectGene.ID);
-    }
-
-    @Override
-    public Color getGlowColor(int glowIndex) {
-        return InsectGene.COLOR.cpy();
+    public void triggerOnGlowCheck() {
+        if (isPlayerInThisForm(InsectGene.ID)) {
+            this.glowColor = InsectGene.COLOR.cpy();
+        } else {
+            this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
+        }
     }
 }

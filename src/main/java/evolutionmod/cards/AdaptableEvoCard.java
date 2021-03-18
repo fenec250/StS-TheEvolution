@@ -22,9 +22,9 @@ public abstract class AdaptableEvoCard extends BaseEvoCard {
 
 	protected Map<String, AbstractAdaptation> adaptationMap;
 	protected boolean adaptationUpgraded = false;
-	protected String initialRawDescription;
+	private String initialRawDescription;
+	private String cachedRawDescription;
 	private TooltipInfo adaptationTooltip;
-	private boolean isNameAdapted;
 
     public AdaptableEvoCard(final String id, final String name, final String img, final int cost, final String rawDescription,
                             final CardType type, final CardColor color,
@@ -32,7 +32,6 @@ public abstract class AdaptableEvoCard extends BaseEvoCard {
         super(id, name, img, cost, rawDescription, type, color, rarity, target);
 	    this.adaptationMap = new HashMap<>();
 	    this.initialRawDescription = rawDescription;
-	    this.isNameAdapted = false;
     }
 
     public AdaptableEvoCard(final String id, final String name, final RegionName img, final int cost, final String rawDescription,
@@ -41,7 +40,6 @@ public abstract class AdaptableEvoCard extends BaseEvoCard {
         super(id, name, img, cost, rawDescription, type, color, rarity, target);
 	    this.adaptationMap = new HashMap<>();
 	    this.initialRawDescription = rawDescription;
-	    this.isNameAdapted = false;
     }
 
 	/**
@@ -76,9 +74,8 @@ public abstract class AdaptableEvoCard extends BaseEvoCard {
 			this.adaptationTooltip = new TooltipInfo("Adaptations", "None");
 		}
 		if (adaptationsCount > 0) {
-			if (!this.isNameAdapted) {
-				this.name += "&";
-				this.isNameAdapted = true;
+			if (!this.rawDescription.equals(this.cachedRawDescription)) {
+				this.initialRawDescription = this.rawDescription;
 			}
 			String tooltip = this.adaptationMap.values().stream()
 					.map(a -> {
@@ -97,7 +94,7 @@ public abstract class AdaptableEvoCard extends BaseEvoCard {
 			String adaptationDescription = " NL " + adaptationsCount +
 					(adaptationsCount > 1 ? " Adaptations." : " Adaptation.");
 
-			this.rawDescription = this.initialRawDescription + adaptationDescription;
+			this.rawDescription = this.cachedRawDescription = this.initialRawDescription + adaptationDescription;
 		}
 		this.initializeDescription();
 	}
@@ -118,7 +115,6 @@ public abstract class AdaptableEvoCard extends BaseEvoCard {
 		card.adaptationMap = this.adaptationMap.entrySet().stream().collect(
 				Collectors.toMap(Map.Entry::getKey, (e) -> e.getValue().makeCopy()));
 		card.initialRawDescription = this.initialRawDescription;
-		card.isNameAdapted = this.isNameAdapted;
 		card.updateDescription();
 		return card;
 	}

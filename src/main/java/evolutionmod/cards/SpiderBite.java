@@ -1,6 +1,5 @@
 package evolutionmod.cards;
 
-import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.CardGroup;
@@ -17,7 +16,7 @@ import evolutionmod.patches.AbstractCardEnum;
 import java.util.stream.Collectors;
 
 public class SpiderBite
-        extends BaseEvoCard implements GlowingCard {
+        extends BaseEvoCard {
     public static final String ID = "evolutionmod:SpiderBite";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -135,17 +134,11 @@ public class SpiderBite
     }
 
 	@Override
-	public int getNumberOfGlows() {
-		return 1;
-	}
-
-	@Override
-	public boolean isGlowing(int glowIndex) {
-		return isPlayerInThisForm(InsectGene.ID);
-	}
-
-	@Override
-	public Color getGlowColor(int glowIndex) {
-		return InsectGene.COLOR.cpy();
+	public void triggerOnGlowCheck() {
+		if (isPlayerInThisForm(InsectGene.ID)) {
+			this.glowColor = InsectGene.COLOR.cpy();
+		} else {
+			this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
+		}
 	}
 }

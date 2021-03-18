@@ -38,7 +38,7 @@ public class CrystalShard
 	public static final String DESCRIPTION = cardStrings.DESCRIPTION;
 	public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
 	public static final String[] EXTENDED_DESCRIPTION = cardStrings.EXTENDED_DESCRIPTION;
-	public static final String IMG_PATH = "evolutionmod/images/cards/strike.png";
+	public static final String IMG_PATH = "evolutionmod/images/cards/CrystalShard.png";
 	private static final int COST = 1;
 	private static final int DAMAGE_AMT = 9;
 	private static final int UPGRADE_DAMAGE_AMT = 2;
@@ -50,18 +50,13 @@ public class CrystalShard
 	private AbstractGene secondGene; // secoIndex = genesIndex % 10
 
 	public CrystalShard() {
-		super(ID, NAME, new RegionName("blue/attack/cold_snap"), COST, DESCRIPTION,
-				CardType.ATTACK, AbstractCardEnum.EVOLUTION_BLUE,
-				CardRarity.COMMON, CardTarget.ENEMY);
-		this.damage = this.baseDamage = DAMAGE_AMT;
-		this.magicNumber = this.baseMagicNumber = FORM_DAMAGE;
-		this.exhaust = true;
-		this.genesIndexes = -1;
-		resetGene();
+		this((!CardCrawlGame.isInARun() || AbstractDungeon.miscRng == null)
+				? -1
+				: AbstractDungeon.miscRng.random(11 * 10 - 1));
 	}
 
-	private CrystalShard(int geneIndexes) {
-		super(ID, NAME, new RegionName("blue/attack/cold_snap"), COST, DESCRIPTION,
+	public CrystalShard(int geneIndexes) {
+		super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
 				CardType.ATTACK, AbstractCardEnum.EVOLUTION_BLUE,
 				CardRarity.COMMON, CardTarget.ENEMY);
 		this.damage = this.baseDamage= DAMAGE_AMT;
@@ -135,7 +130,7 @@ public class CrystalShard
 
 	@Override
 	public boolean isGlowing(int glowIndex) {
-		return true;
+		return firstGene != null && secondGene != null;
 	}
 
 	@Override
@@ -180,37 +175,24 @@ public class CrystalShard
 		}
 	}
 
-	@Override
-	public List<TooltipInfo> getCustomTooltips() {
-		if (customTooltips == null) {
-			super.getCustomTooltips();
-			customTooltips.add(new TooltipInfo("Randomized forms",
-					"The forms on this card are selected when the card is created and vary from a card to an other."));
-		}
-		return  customTooltips;
-	}
-
 	private void resetGene() {
-		if (this.genesIndexes < 0) {
-			if (!CardCrawlGame.isInARun() || AbstractDungeon.miscRng == null) {
-				return;
-			}
-			this.genesIndexes = AbstractDungeon.miscRng.random(11 * 10 - 1);
+		if (this.genesIndexes < 0 || this.genesIndexes > 11 * 10 - 1) {
+			return;
 		}
-		AbstractGene[] validGenes = {
-				new PlantGene(),
-				new MerfolkGene(),
-				new HarpyGene(),
-				new LavafolkGene(),
-				new SuccubusGene(),
-				new LymeanGene(),
-				new InsectGene(),
-				new BeastGene(),
-				new LizardGene(),
-				new CentaurGene(),
-				new ShadowGene()};
-		this.firstGene =  validGenes[this.genesIndexes / 11];
-		this.secondGene = validGenes[this.genesIndexes / 11 == this.genesIndexes % 10 ? 10 : this.genesIndexes % 10];
+		String[] validGenes = {
+				PlantGene.ID,
+				MerfolkGene.ID,
+				HarpyGene.ID,
+				LavafolkGene.ID,
+				SuccubusGene.ID,
+				LymeanGene.ID,
+				InsectGene.ID,
+				BeastGene.ID,
+				LizardGene.ID,
+				CentaurGene.ID,
+				ShadowGene.ID};
+		this.firstGene =  getGene(validGenes[this.genesIndexes / 11]);
+		this.secondGene = getGene(validGenes[this.genesIndexes % 10 == this.genesIndexes / 11 ? 10 : this.genesIndexes % 10]);
 		this.rawDescription = EXTENDED_DESCRIPTION[0]
 				+ this.firstGene.ID + EXTENDED_DESCRIPTION[1]
 				+ this.secondGene.ID + EXTENDED_DESCRIPTION[2];

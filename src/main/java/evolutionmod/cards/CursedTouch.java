@@ -17,7 +17,7 @@ import evolutionmod.orbs.ShadowGene;
 import evolutionmod.patches.AbstractCardEnum;
 
 public class CursedTouch
-        extends AdaptableEvoCard implements GlowingCard {
+        extends AdaptableEvoCard {
     public static final String ID = "evolutionmod:CursedTouch";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -79,17 +79,11 @@ public class CursedTouch
     }
 
     @Override
-    public int getNumberOfGlows() {
-        return 1;
-    }
-
-    @Override
-    public boolean isGlowing(int glowIndex) {
-        return isPlayerInThisForm(ShadowGene.ID);
-    }
-
-    @Override
-    public Color getGlowColor(int glowIndex) {
-        return ShadowGene.COLOR.cpy();
+    public void triggerOnGlowCheck() {
+        if (isPlayerInThisForm(ShadowGene.ID)) {
+            this.glowColor = ShadowGene.COLOR.cpy();
+        } else {
+            this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
+        }
     }
 }
