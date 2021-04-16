@@ -21,7 +21,7 @@ public class Feather
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-    public static final String IMG_PATH = "evolutionmod/images/cards/HarpySkl.png";
+    public static final String IMG_PATH = "evolutionmod/images/cards/Feather.png";
     private static final int COST = 0;
     private static final int FORM_CHANGE = 1;
     private static final int UPGRADE_FORM_CHANGE = 1;

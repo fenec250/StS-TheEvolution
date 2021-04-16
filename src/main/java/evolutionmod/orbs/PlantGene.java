@@ -19,7 +19,7 @@ public class PlantGene extends AbstractGene {
 	public static final Color COLOR = new Color(0x60B04000);
 	public static final String[] DESCRIPTION = orbStrings.DESCRIPTION;
 	public static final String IMG_PATH = "evolutionmod/images/orbs/PlantGene.png";
-	public static final int GROWTH = 2;
+	public static final int GROWTH = 1;
 
 	public PlantGene() {
 		super(ID, NAME, getDescription(), IMG_PATH);

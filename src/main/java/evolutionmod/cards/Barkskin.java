@@ -1,15 +1,15 @@
 package evolutionmod.cards;
 
-import com.badlogic.gdx.graphics.Color;
 import com.evacipated.cardcrawl.mod.stslib.actions.common.RefundAction;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import evolutionmod.orbs.PlantGene;
 import evolutionmod.patches.AbstractCardEnum;
+import evolutionmod.powers.GrowthPower;
 
 public class Barkskin
         extends BaseEvoCard {
@@ -22,6 +22,8 @@ public class Barkskin
     private static final int COST = 2;
     private static final int BLOCK_AMT = 10;
     private static final int UPGRADE_BLOCK_AMT = 3;
+    private static final int GROWTH_AMT = 1;
+    private static final int FORM_GROWTH_AMT = 1;
 
     public Barkskin() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -32,8 +34,9 @@ public class Barkskin
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, this.block));
-        BaseEvoCard.formEffect(PlantGene.ID, () -> addToBot(new RefundAction(this, 1)));
+        addToBot(new GainBlockAction(p, p, this.block));
+        addToBot(new ApplyPowerAction(p, p, new GrowthPower(p, GROWTH_AMT)));
+        BaseEvoCard.formEffect(PlantGene.ID, () -> addToBot(new RefundAction(this, FORM_GROWTH_AMT)));
     }
 
     @Override

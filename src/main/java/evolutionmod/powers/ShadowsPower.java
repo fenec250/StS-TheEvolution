@@ -89,7 +89,7 @@ public class ShadowsPower extends TwoAmountPower {
         }
         while (this.amount >= this.amount2) {
             int[] multiDamage = new int[AbstractDungeon.getMonsters().monsters.size()];
-            Arrays.fill(multiDamage, this.amount2 * stackDamage());
+            Arrays.fill(multiDamage, this.amount * stackDamage());
             AbstractDungeon.getMonsters().monsters.stream()
                     .filter(mo -> !mo.isDeadOrEscaped())
                     .forEach(mo -> {
@@ -99,7 +99,7 @@ public class ShadowsPower extends TwoAmountPower {
             actions.add(new DamageAllEnemiesAction(AbstractDungeon.player, multiDamage,
                     DamageInfo.DamageType.THORNS,
                     AbstractGameAction.AttackEffect.FIRE));
-            this.amount -= amount2;
+            this.amount -= amount;
             this.amount2 += 1;
         }
         while (!actions.empty()) {

@@ -3,11 +3,13 @@ package evolutionmod.relics;
 import basemod.abstracts.CustomRelic;
 import com.badlogic.gdx.graphics.Texture;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.actions.defect.IncreaseMaxOrbAction;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.RelicStrings;
+import evolutionmod.cards.BaseEvoCard;
 import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.BeastGene;
 import evolutionmod.orbs.CentaurGene;
@@ -46,24 +48,28 @@ public class TorisGift extends CustomRelic {
     }
 
     @Override
+//    public void atBattleStartPreDraw() {
     public void atBattleStart() {
         super.atBattleStart();
+        this.flash();
+        this.addToBot(new RelicAboveCreatureAction(AbstractDungeon.player, this));
 //        this.addToBot(new IncreaseMaxOrbAction(SLOT_AMT));
 
-        ArrayList<AbstractGene> genesPool = new ArrayList<>();
-        genesPool.add(new CentaurGene());
-        genesPool.add(new PlantGene());
-        genesPool.add(new MerfolkGene());
-        genesPool.add(new HarpyGene());
-        genesPool.add(new LavafolkGene());
-        genesPool.add(new SuccubusGene());
-        genesPool.add(new LymeanGene());
-        genesPool.add(new InsectGene());
-        genesPool.add(new BeastGene());
-        genesPool.add(new LizardGene());
+        ArrayList<String> genesPool = new ArrayList<>();
+        genesPool.add(CentaurGene.ID);
+        genesPool.add(PlantGene.ID);
+        genesPool.add(MerfolkGene.ID);
+        genesPool.add(HarpyGene.ID);
+        genesPool.add(LavafolkGene.ID);
+        genesPool.add(SuccubusGene.ID);
+        genesPool.add(LymeanGene.ID);
+        genesPool.add(InsectGene.ID);
+        genesPool.add(BeastGene.ID);
+        genesPool.add(LizardGene.ID);
 
         for (int i = 0; i < GENE_AMT; ++i) {
-            AbstractGene gene = genesPool.get(AbstractDungeon.cardRng.random(genesPool.size() - 1));
+            String geneId = genesPool.get(AbstractDungeon.cardRng.random(genesPool.size() - 1));
+            AbstractGene gene = BaseEvoCard.getGene(geneId);
             AbstractDungeon.actionManager.addToBottom(new ChannelAction(gene.makeCopy()));
             addToBot(new AbstractGameAction() {
                 @Override
@@ -73,5 +79,10 @@ public class TorisGift extends CustomRelic {
                 }
             });
         }
+        this.grayscale = true;
+    }
+
+    public void onVictory() {
+        this.grayscale = false;
     }
 }

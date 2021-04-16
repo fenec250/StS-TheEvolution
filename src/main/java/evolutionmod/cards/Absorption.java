@@ -1,14 +1,17 @@
 package evolutionmod.cards;
 
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
+import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 import evolutionmod.orbs.AbstractGene;
 import evolutionmod.orbs.BeastGene;
 import evolutionmod.orbs.CentaurGene;
@@ -28,20 +31,20 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Absorption
-		extends BaseEvoCard {
+		extends BaseEvoCard implements GlowingCard {
 	public static final String ID = "evolutionmod:Absorption";
 	public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;
 	public static final String DESCRIPTION = cardStrings.DESCRIPTION;
 	public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
 	public static final String[] EXTENDED_DESCRIPTION = cardStrings.EXTENDED_DESCRIPTION;
-	public static final String IMG_PATH = "evolutionmod/images/cards/CrystalDust.png";
+	public static final String IMG_PATH = "evolutionmod/images/cards/Absorption.png";
 	private static final int COST = 1;
 	private static final int ABSORB_AMT = 1;
 	private static final int UPGRADE_ABSORB_AMT = 1;
 
 	public Absorption() {
-		super(ID, NAME, new RegionName("red/power/evolve"), COST, DESCRIPTION,
+		super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
 				CardType.POWER, AbstractCardEnum.EVOLUTION_BLUE,
 				CardRarity.RARE, CardTarget.SELF);
 		this.magicNumber = this.baseMagicNumber = ABSORB_AMT;
@@ -81,25 +84,45 @@ public class Absorption
 		}
 	}
 
+
 	@Override
-	public void triggerOnGlowCheck() {
-		if (AbstractDungeon.player.orbs.stream().anyMatch(o -> o instanceof AbstractGene)) {
-			switch (AbstractDungeon.player.orbs.stream()
-					.filter(o -> o instanceof AbstractGene).findFirst().get().ID) {
-				case HarpyGene.ID: this.glowColor = HarpyGene.COLOR.cpy(); return;
-				case MerfolkGene.ID: this.glowColor = MerfolkGene.COLOR.cpy(); return;
-				case LavafolkGene.ID: this.glowColor = LavafolkGene.COLOR.cpy(); return;
-				case CentaurGene.ID: this.glowColor = CentaurGene.COLOR.cpy(); return;
-				case LizardGene.ID: this.glowColor = LizardGene.COLOR.cpy(); return;
-				case BeastGene.ID: this.glowColor = BeastGene.COLOR.cpy(); return;
-				case PlantGene.ID: this.glowColor = PlantGene.COLOR.cpy(); return;
-				case ShadowGene.ID: this.glowColor = ShadowGene.COLOR.cpy(); return;
-				case LymeanGene.ID: this.glowColor = LymeanGene.COLOR.cpy(); return;
-				case InsectGene.ID: this.glowColor = InsectGene.COLOR.cpy(); return;
-				case SuccubusGene.ID: this.glowColor = SuccubusGene.COLOR.cpy(); return;
-			}
-		} else {
-			this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
-		}
+	public int getNumberOfGlows() {
+		return EnergyPanel.getCurrentEnergy();
+	}
+
+	@Override
+	public boolean isGlowing(int glowIndex) {
+		return upgraded
+				? AbstractDungeon.player.orbs.stream()
+				.filter(o -> o instanceof AbstractGene)
+				.skip(glowIndex)
+				.findFirst().isPresent()
+				: AbstractDungeon.player.orbs.stream()
+				.anyMatch(o -> o instanceof AbstractGene);
+	}
+
+	@Override
+	public Color getGlowColor(int glowIndex) {
+		return upgraded
+				? AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy()
+				: AbstractDungeon.player.orbs.stream()
+				.filter(o -> o instanceof AbstractGene)
+				.skip(glowIndex).findFirst()
+				.map(o -> {
+					switch (o.ID) {
+						case HarpyGene.ID: return HarpyGene.COLOR.cpy();
+						case MerfolkGene.ID: return MerfolkGene.COLOR.cpy();
+						case LavafolkGene.ID: return LavafolkGene.COLOR.cpy();
+						case CentaurGene.ID: return CentaurGene.COLOR.cpy();
+						case LizardGene.ID: return LizardGene.COLOR.cpy();
+						case BeastGene.ID: return BeastGene.COLOR.cpy();
+						case PlantGene.ID: return PlantGene.COLOR.cpy();
+						case ShadowGene.ID: return ShadowGene.COLOR.cpy();
+						case LymeanGene.ID: return LymeanGene.COLOR.cpy();
+						case InsectGene.ID: return InsectGene.COLOR.cpy();
+						case SuccubusGene.ID: return SuccubusGene.COLOR.cpy();
+						default: return null;
+					}
+				}).orElse(AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy());
 	}
 }

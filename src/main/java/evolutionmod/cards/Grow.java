@@ -18,13 +18,12 @@ public class Grow
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = "evolutionmod/images/cards/Grow.png";
-//    public static final String IMG_PATH = "blue/power/capacitor";
     private static final int COST = 0;
     private static final int COPY_AMT = 1;
     private static final int UPGRADE_COPY_AMT = 1;
 
     public Grow() {
-        super(ID, NAME, new RegionName("blue/power/capacitor"), COST, DESCRIPTION,
+        super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.POWER, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.RARE, CardTarget.SELF);
         this.magicNumber = this.baseMagicNumber = COPY_AMT;

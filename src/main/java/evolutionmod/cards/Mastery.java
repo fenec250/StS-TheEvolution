@@ -2,7 +2,6 @@ package evolutionmod.cards;
 
 import basemod.abstracts.CustomSavable;
 import basemod.helpers.TooltipInfo;
-import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
@@ -33,7 +32,7 @@ import evolutionmod.powers.MasteryPower;
 import java.util.List;
 import java.util.Optional;
 
-public class Mastery2
+public class Mastery
 		extends BaseEvoCard implements CustomSavable<String> {
 	public static final String ID = "evolutionmod:Mastery";
 	public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
@@ -41,18 +40,18 @@ public class Mastery2
 	public static final String DESCRIPTION = cardStrings.DESCRIPTION;
 	public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
 	public static final String[] EXTENDED_DESCRIPTION = cardStrings.EXTENDED_DESCRIPTION;
-//	public static final String IMG_PATH = "evolutionmod/images/cards/CrystalDust.png";
+	public static final String IMG_PATH = "evolutionmod/images/cards/GeneMastery.png";
 	private static final int COST = 1;
 	private static final int FORM_TRIGGER = 1;
 
 	private AbstractGene gene;
 
-	public Mastery2() {
+	public Mastery() {
 		this(null);
 	}
 
-	private Mastery2(AbstractGene gene) {
-		super(ID, NAME, new RegionName("purple/power/mental_fortress"), COST, DESCRIPTION,
+	private Mastery(AbstractGene gene) {
+		super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
 				CardType.POWER, AbstractCardEnum.EVOLUTION_BLUE,
 				CardRarity.UNCOMMON, CardTarget.SELF);
 		this.magicNumber = this.baseMagicNumber = FORM_TRIGGER;
@@ -83,8 +82,8 @@ public class Mastery2
 				p.masterDeck.group.stream()
 						.filter(c -> c.uuid.equals(this.uuid)).findAny()
 						.ifPresent(c -> {
-							((Mastery2) c).gene = this.gene;
-							((Mastery2) c).resetGene();
+							((Mastery) c).gene = this.gene;
+							((Mastery) c).resetGene();
 						});
 				resetGene();
 			}
@@ -114,7 +113,7 @@ public class Mastery2
 
 	@Override
 	public AbstractCard makeCopy() {
-		return this.gene == null ? new Mastery2() : new Mastery2(this.gene);
+		return this.gene == null ? new Mastery() : new Mastery(this.gene);
 	}
 
 	@Override

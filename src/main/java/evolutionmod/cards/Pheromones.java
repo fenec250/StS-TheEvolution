@@ -20,13 +20,13 @@ public class Pheromones
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-    public static final String IMG_PATH = "evolutionmod/images/cards/PlantSkl.png";
+    public static final String IMG_PATH = "evolutionmod/images/cards/Pheromones.png";
     private static final int COST = 0;
     private static final int FORM_VULNERABLE_AMT = 2;
     private static final int UPGRADE_VULNERABLE_AMT = 1;
 
     public Pheromones() {
-        super(ID, NAME, new RegionName("green/skill/crippling_poison"), COST, DESCRIPTION,
+        super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.UNCOMMON, CardTarget.ALL_ENEMY);
         this.magicNumber = this.baseMagicNumber = FORM_VULNERABLE_AMT;

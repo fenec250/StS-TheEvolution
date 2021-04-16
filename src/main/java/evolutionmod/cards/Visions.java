@@ -20,8 +20,8 @@ public class Visions
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = "evolutionmod/images/cards/LymeanSkl.png";
-    private static final int COST = 1;
-    private static final int FATE_AMT = 4;
+    private static final int COST = 0;
+    private static final int FATE_AMT = 3;
     private static final int DRAW_AMT = 1;
     private static final int DAZED_AMT = 1;
     private static final int UPGRADE_FORM_FATE_AMT = 2;

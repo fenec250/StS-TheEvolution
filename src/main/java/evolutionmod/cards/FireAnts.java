@@ -1,22 +1,16 @@
 package evolutionmod.cards;
 
-import com.badlogic.gdx.graphics.Color;
-import com.evacipated.cardcrawl.mod.stslib.actions.defect.EvokeSpecificOrbAction;
-import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
-import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import evolutionmod.orbs.InsectGene;
 import evolutionmod.orbs.LavafolkGene;
 import evolutionmod.patches.AbstractCardEnum;
-
-import java.util.List;
-import java.util.stream.Collectors;
+import evolutionmod.powers.FireAntsPower;
 
 public class FireAnts
         extends BaseEvoCard {
@@ -42,18 +36,21 @@ public class FireAnts
     public void use(AbstractPlayer p, AbstractMonster m) {
         LavafolkGene orb = new LavafolkGene();
         addToBot(new ChannelAction(orb));
-        List<AbstractCard> drones = p.hand.group.stream()
-                .filter(card -> Drone.ID.equals(card.cardID))
-                .collect(Collectors.toList());
-        drones.forEach(card -> {
-            addToBot(new ExhaustSpecificCardAction(card, p.hand, true));
-            orb.onEvoke();
-        });
+//        List<AbstractCard> drones = p.hand.group.stream()
+//                .filter(card -> Drone.ID.equals(card.cardID))
+//                .collect(Collectors.toList());
+//        drones.forEach(card -> {
+//            addToBot(new ExhaustSpecificCardAction(card, p.hand, true));
+//            orb.onEvoke();
+//        });
         if (!this.upgraded) {
-            formEffect(InsectGene.ID, () -> addToBot(new MakeTempCardInHandAction(new Drone())));
+//            formEffect(InsectGene.ID, () -> addToBot(new MakeTempCardInHandAction(new Drone())));
+            formEffect(InsectGene.ID, () -> addToBot(new ApplyPowerAction(p, p, new FireAntsPower(p, EVOKE_AMT))));
         } else {
-            addToBot(new MakeTempCardInHandAction(new Drone()));
-            addToBot(new ChannelAction(new InsectGene()));
+            addToBot(new ApplyPowerAction(p, p, new FireAntsPower(p, EVOKE_AMT)));
+            formEffect(InsectGene.ID, () -> addToBot(new MakeTempCardInHandAction(new Drone())));
+//            addToBot(new MakeTempCardInHandAction(new Drone()));
+//            addToBot(new ChannelAction(new InsectGene()));
         }
     }
 

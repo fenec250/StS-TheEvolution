@@ -9,9 +9,13 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import evolutionmod.actions.CalmTheWatersAction;
+import evolutionmod.actions.FateAction;
 import evolutionmod.orbs.LymeanGene;
 import evolutionmod.orbs.MerfolkGene;
 import evolutionmod.patches.AbstractCardEnum;
+
+import java.util.HashMap;
+import java.util.function.Predicate;
 
 public class CalmTheWaters
         extends BaseEvoCard implements GlowingCard {
@@ -49,8 +53,13 @@ public class CalmTheWaters
         if (inForm) {
             fate += LYMEAN_FATE_AMT;
         }
-        addToTop(new GainBlockAction(p, block));
-        addToBot(new CalmTheWatersAction(fate));
+        final int finalFate = fate;
+        addToBot(new GainBlockAction(p, block));
+        HashMap<Predicate<AbstractCard>, Integer> selectors = new HashMap<Predicate<AbstractCard>, Integer>() {{
+            put(c -> c.type == CardType.SKILL, finalFate);
+        }};
+        addToBot(new FateAction(selectors));
+//        addToBot(new CalmTheWatersAction(fate));
     }
 
     @Override

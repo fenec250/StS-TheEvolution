@@ -5,7 +5,7 @@
   },
   "evolutionmod:PlantGene": {
     "NAME": "Plant",
-    "DESCRIPTION": ["Gain #b", " #yGrowth. Upon reaching 3 Growth gain 1 Energy and reduce Growth by 3."]
+    "DESCRIPTION": ["Gain #b", " #yGrowth. Upon reaching 2 Growth gain 1 Energy and reduce Growth by 2."]
   },
   "evolutionmod:MerfolkGene": {
     "NAME": "Merfolk",

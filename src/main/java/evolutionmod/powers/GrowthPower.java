@@ -21,6 +21,7 @@ public class GrowthPower extends AbstractPower {
     public static final PowerStrings cardStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
     public static final String NAME = cardStrings.NAME;
     public static final String[] DESCRIPTIONS = cardStrings.DESCRIPTIONS;
+    public static final int ENERGY_THRESHOLD = 2;
 
     public GrowthPower(AbstractCreature owner, int initialAmount) {
         this.name = NAME;
@@ -36,7 +37,7 @@ public class GrowthPower extends AbstractPower {
 
     @Override
     public void updateDescription() {
-        description = DESCRIPTIONS[0];
+        description = DESCRIPTIONS[0] + ENERGY_THRESHOLD + DESCRIPTIONS[1] + ENERGY_THRESHOLD + DESCRIPTIONS[2];
     }
 
     public void stackPower(int stackAmount) {
@@ -52,9 +53,9 @@ public class GrowthPower extends AbstractPower {
     }
 
     public void convertToEnergy() {
-        if (this.amount > 2) {
-            addToBot(new GainEnergyAction(this.amount / 3));
-            this.amount = this.amount % 3;
+        if (this.amount >= ENERGY_THRESHOLD) {
+            addToBot(new GainEnergyAction(this.amount / ENERGY_THRESHOLD));
+            this.amount = this.amount % ENERGY_THRESHOLD;
         }
         if (this.amount <= 0) {
             addToTop(new RemoveSpecificPowerAction(this.owner, this.owner, POWER_ID));

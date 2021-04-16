@@ -3,6 +3,51 @@
     "NAME": "Tori's gift",
     "FLAVOR": "A gift from your mentor.",
     "DESCRIPTIONS": ["Start each combat with a random #yGene and trigger its effect."]
+  },
+  "evolutionmod:NimbleBoots": {
+    "NAME": "Nimble Boots",
+    "FLAVOR": "",
+    "DESCRIPTIONS": ["Whenever you play 5 or more cards in a turn, draw an additional card at the start of your next turn."]
+  },
+  "evolutionmod:PowerFocus": {
+    "NAME": "Power Focus",
+    "FLAVOR": "It tickles!",
+    "DESCRIPTIONS": ["The first Gene you Evoke each turn is evoked twice."]
+  },
+  "evolutionmod:MagicFocus": {
+    "NAME": "Magic Focus",
+    "FLAVOR": "AN_3  loved these.",
+    "DESCRIPTIONS": ["The first Skill you play each combat is played twice."]
+  },
+  "evolutionmod:StrengthFocus": {
+    "NAME": "Strength Focus",
+    "FLAVOR": "I'm not sure if it still works.",
+    "DESCRIPTIONS": ["The first Attack you play each combat is played twice."]
+  },
+  "evolutionmod:Whip": {
+    "NAME": "Whip",
+    "FLAVOR": "I can use this as a weapon?",
+    "DESCRIPTIONS": ["Whenever you apply a debuff to an enemy, they take ", " damage."]
+  },
+  "evolutionmod:OldOutfit": {
+    "NAME": "Old Outfit",
+    "FLAVOR": "My favourite outfit, when I was human.",
+    "DESCRIPTIONS": ["Gain [E] at the start of your turn. The first Gene you Channel each turn is removed."]
+  },
+  "evolutionmod:Tori": {
+    "NAME": "Tori",
+    "FLAVOR": "She's found her way back to you.",
+    "DESCRIPTIONS": ["Start each combat with random genes in all Orb slots."]
+  },
+  "evolutionmod:ScoutMedal": {
+    "NAME": "rare",
+    "FLAVOR": "Always prepared.",
+    "DESCRIPTIONS": ["fate 1 of each type"]
+  },
+  "evolutionmod:Potato2": {
+    "NAME": "boss",
+    "FLAVOR": "She's found her way back to you.",
+    "DESCRIPTIONS": ["first Adapting card placed on top"]
   }
 //  "mysticmod:BlessedBook": {
 //    "NAME": "Blessed Book",

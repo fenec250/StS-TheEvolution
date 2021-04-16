@@ -25,7 +25,7 @@ public class Strengthen
     private static final int VIGOR_AMT = 3;
 
     public Strengthen() {
-        super(ID, NAME, new RegionName("red/skill/flex"), COST, DESCRIPTION,
+        super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.UNCOMMON, CardTarget.SELF);
         this.magicNumber = this.baseMagicNumber = VIGOR_AMT;

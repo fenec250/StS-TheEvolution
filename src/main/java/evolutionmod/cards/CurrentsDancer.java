@@ -2,6 +2,7 @@ package evolutionmod.cards;
 
 import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -27,14 +28,14 @@ public class CurrentsDancer
     private static final int COST = 1;
     private static final int DEXTERITY_AMT = 4;
     private static final int UPGRADE_DEXTERITY_AMT = 2;
-    private static final int FORMS_DEXTERITY_AMT = 1;
+    private static final int FORM_DRAW_AMT = 1;
 
     public CurrentsDancer() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.POWER, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.UNCOMMON, CardTarget.SELF);
         this.magicNumber = this.baseMagicNumber = DEXTERITY_AMT;
-        this.block = this.baseBlock = DEXTERITY_AMT;
+//        this.block = this.baseBlock = DEXTERITY_AMT;
     }
 
     @Override
@@ -53,7 +54,8 @@ public class CurrentsDancer
 //			}
 //		});
 		addToBot(new ApplyPowerAction(p, p, new CurrentsDancerPower(p, this.magicNumber)));
-		formEffect(MerfolkGene.ID, () -> addToBot(new GainBlockAction(p, this.block)));
+		formEffect(MerfolkGene.ID, () -> addToBot(new DrawCardAction(FORM_DRAW_AMT)));
+//		formEffect(MerfolkGene.ID, () -> addToBot(new GainBlockAction(p, this.block)));
 	}
 
     @Override
@@ -66,7 +68,7 @@ public class CurrentsDancer
         if (!this.upgraded) {
             this.upgradeName();
             this.upgradeMagicNumber(UPGRADE_DEXTERITY_AMT);
-            this.upgradeBlock(UPGRADE_DEXTERITY_AMT);
+//            this.upgradeBlock(UPGRADE_DEXTERITY_AMT);
 //            this.rawDescription = UPGRADE_DESCRIPTION;
 //            this.initializeDescription();
         }

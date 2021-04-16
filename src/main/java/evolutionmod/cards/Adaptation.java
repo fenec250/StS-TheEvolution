@@ -88,15 +88,20 @@ public class Adaptation
 
     @Override
     public boolean isGlowing(int glowIndex) {
-        return AbstractDungeon.player.orbs.stream()
-                .filter(o -> this.canAdaptWith(o) > 0)
-                .skip(glowIndex)
-                .findFirst().isPresent();
+        return upgraded
+                ? AbstractDungeon.player.orbs.stream()
+                    .filter(o -> this.canAdaptWith(o) > 0)
+                    .skip(glowIndex)
+                    .findFirst().isPresent()
+                : AbstractDungeon.player.orbs.stream()
+                    .anyMatch(o -> this.canAdaptWith(o) > 0);
     }
 
     @Override
     public Color getGlowColor(int glowIndex) {
-        return AbstractDungeon.player.orbs.stream()
+        return upgraded
+                ? AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy()
+                : AbstractDungeon.player.orbs.stream()
                 .filter(o -> this.canAdaptWith(o) > 0)
                 .skip(glowIndex).findFirst()
                 .map(o -> {

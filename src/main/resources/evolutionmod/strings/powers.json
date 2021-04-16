@@ -39,7 +39,8 @@
   },
   "evolutionmod:ShadowsPower": {
     "NAME": "Shadows",
-    "DESCRIPTIONS": ["Needs ", " more to reach the next threshold, dealing ", " damage per stack and applying 1 Weak to ALL enemies and increasing the threshold to ", "."]
+    "DESCRIPTIONS": ["Needs ", " more to reach the next threshold, consuming Shadows to deal ", " damage per stack, apply 1 Weak to ALL enemies and increase the threshold to ", "."]
+//    "DESCRIPTIONS": ["Needs ", " more to reach the next threshold, dealing ", " damage per stack, applying 1 Weak to ALL enemies and increasing the threshold to ", "."]
   },
   "evolutionmod:BramblesPower": {
     "NAME": "Brambles",
@@ -47,7 +48,7 @@
   },
   "evolutionmod:GrowthPower": {
     "NAME": "Growth",
-    "DESCRIPTIONS": ["Upon reaching 3 stacks gain 1 Energy and reduce Growth by 3."]
+    "DESCRIPTIONS": ["Upon reaching ", " stacks gain 1 Energy and reduce Growth by ", "."]
   },
   "evolutionmod:BroodmotherPower": {
     "NAME": "Broodmother",
@@ -67,12 +68,22 @@
   },
   "evolutionmod:AphrodisiacPower": {
     "NAME": "Aphrodisiac",
-    "DESCRIPTIONS": ["Gain 2 Lust per turn. Reduce by 1 each turn."]
+    "DESCRIPTIONS": ["Gain Lust next turn."]
+//    "DESCRIPTIONS": ["Gain 2 Lust per turn. Reduce by 1 each turn."]
   },
   "evolutionmod:EruptionPower": {
     "NAME": "Eruption",
     "DESCRIPTIONS": ["At the start of your turn Channel a Lavafolk gene and trigger your Lavafolk genes.",
       "At the start of your turn Channel ", " Lavafolk genes and trigger your Lavafolk genes."]
+  },
+  "evolutionmod:ExplosionPower": {
+    "NAME": "Eruption",
+    "DESCRIPTIONS": ["After dealing damage ", " more times deal ", " damage to all enemies."]
+  },
+  "evolutionmod:FireAntsPower": {
+    "NAME": "FireAnts",
+    "DESCRIPTIONS": ["Whenever a Drone is Exhausted this turn trigger your oldest Lavafolk gene.",
+      "Whenever a Drone is Exhausted this turn trigger your ", " oldest Lavafolk genes."]
   },
   "evolutionmod:MatureEggPower": {
     "NAME": "Mature eggs",

@@ -81,7 +81,7 @@
   },
   "evolutionmod:Barkskin": {
     "NAME": "Barkskin",
-    "DESCRIPTION": "Gain !B! Block NL evolutionmod:PlantGene Form: Refund 1.",
+    "DESCRIPTION": "Gain !B! Block. NL Gain 1 Growth. NL evolutionmod:PlantGene Form: Gain 1 Growth.",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:Drown": {
@@ -130,20 +130,20 @@
   },
   "evolutionmod:Aphrodisiac": {
     "NAME": "Aphrodisiac",
-    "DESCRIPTION": "Apply 2 Lust at the start of the next !M! turns. NL evolutionmod:SuccubusGene Form: apply !M! Lust. NL evolutionmod:LizardGene Form: trigger Poison.",
+    "DESCRIPTION": "Apply !M! Lust at the start of next turn. NL evolutionmod:SuccubusGene Form: apply !M! Lust. NL evolutionmod:LizardGene Form: trigger Poison.",
+//    "DESCRIPTION": "Apply 2 Lust at the start of the next !M! turns. NL evolutionmod:SuccubusGene Form: apply !M! Lust. NL evolutionmod:LizardGene Form: trigger Poison.",
 //    "DESCRIPTION": "evolutionmod:SuccubusGene Form: apply !M! Submission NL evolutionmod:LizardGene Form: trigger Poison.",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:Eruption": {
+//    "NAME": "Eruption",
+//    "DESCRIPTION": "At the start of your turn Channel a evolutionmod:LavafolkGene gene and trigger your evolutionmod:LavafolkGene genes.",
+//    "UPGRADE_DESCRIPTION": "At the start of your turn Channel a evolutionmod:LavafolkGene gene and trigger your evolutionmod:LavafolkGene genes. NL Channel a evolutionmod:LavafolkGene gene."
+//  },
+//  "evolutionmod:Explosion": {
     "NAME": "Eruption",
-    "DESCRIPTION": "At the start of your turn Channel a evolutionmod:LavafolkGene gene and trigger your evolutionmod:LavafolkGene genes.",
-    "UPGRADE_DESCRIPTION": "At the start of your turn Channel a evolutionmod:LavafolkGene gene and trigger your evolutionmod:LavafolkGene genes. NL Channel a evolutionmod:LavafolkGene gene."
-  },
-  "evolutionmod:DrainMana": { // Deprecated!
-    "NAME": "Visions",
-    "DESCRIPTION": "Fate !M! cards. NL Add a Dazed to your draw pile. NL evolutionmod:LymeanGene Form: Draw a card after Fate.",
-//    "DESCRIPTION": "Draw !M! cards NL evolutionmod:LymeanGene Form: Scry !M! first.",
-    "UPGRADE_DESCRIPTION": "Fate !M! cards. NL Draw a card. NL Add a Dazed to your draw pile. NL evolutionmod:LymeanGene Form: Fate 2 more cards."
+    "DESCRIPTION": "Every 8 times you deal damage deal !M! damage to ALL enemies.",
+    "UPGRADE_DESCRIPTION": "Every 8 times you deal damage deal !M! damage to ALL enemies. NL Channel a evolutionmod:LavafolkGene gene."
   },
   "evolutionmod:Visions": {
     "NAME": "Visions",
@@ -161,10 +161,11 @@
     "DESCRIPTION": "Whenever you Scry, gain !M! Block. NL evolutionmod:LymeanGene Form: gain !B! Block.",
     "UPGRADE_DESCRIPTION": ""
   },
-  "evolutionmod:AsForetold": {
-    "NAME": "As Foretold",
-    "DESCRIPTION": "Play cards from your draw pile until their cost would exceeds X.",
-    "UPGRADE_DESCRIPTION": "Play cards from your draw pile until their cost would exceeds X. Lymean form: Fate 2 first."
+//  "evolutionmod:AsForetold": {
+  "evolutionmod:TheFutureIsNow": {
+    "NAME": "The Future Is Now",
+    "DESCRIPTION": "Play cards from your draw pile until their cost would exceed X. NL Exhaust. NL evolutionmod:LymeanGene Form: Fate !M! cards first.",
+    "UPGRADE_DESCRIPTION": "Play cards from your draw pile until their cost would exceed X. NL evolutionmod:LymeanGene Form: Fate !M! cards first."
   },
   "evolutionmod:Hatch": {
     "NAME": "Hatch",
@@ -198,6 +199,12 @@
     //    "DESCRIPTION": "Draw !M! cards. NL Discard all cards drawn this way that are not Attacks. NL evolutionmod:BeastGene Form: NL evolutionmod:HarpyGene Form: gain 3 Rage.",
     "UPGRADE_DESCRIPTION": ""
 //    "UPGRADE_DESCRIPTION": "Draw !M! cards. NL Discard all cards drawn this way that are not Attacks. NL evolutionmod:BeastGene Form: NL evolutionmod:HarpyGene Form: gain 4 Rage."
+  },
+  "evolutionmod:MagicVision": {
+    "NAME": "wip",
+    "DESCRIPTION": "Fate !M! Attacks. Next turn gain !M! Rage. NL evolutionmod:Lymean Form: draw 1 more. NL evolutionmod:BeastGene Form: draw 1 more.",
+    "UPGRADE_DESCRIPTION": ""
+    //    "UPGRADE_DESCRIPTION": "Draw !M! cards. NL Discard all cards drawn this way that are not Attacks. NL evolutionmod:BeastGene Form: NL evolutionmod:HarpyGene Form: gain 4 Rage."
   },
   "evolutionmod:SeaSerpent": {
     "NAME": "Sea Serpent",
@@ -258,7 +265,7 @@
   },
   "evolutionmod:BlackCat": {
     "NAME": "Black Cat",
-    "DESCRIPTION": "Deal !D! damage to ALL enemies. NL evolutionmod:BeastGene Form: hits twice. NL evolutionmod:ShadowGene Form: trigger Shadows immediately.",
+    "DESCRIPTION": "Deal !D! damage to ALL enemies. NL evolutionmod:BeastGene Form: deal !M! more damage. NL evolutionmod:ShadowGene Form: trigger Shadows immediately.",
 //    "DESCRIPTION": "Deal !D! damage to ALL enemies. NL evolutionmod:BeastGene Form: hits twice. NL evolutionmod:ShadowGene Form: Apply !M! Weak to ALL enemies. NL Exhaust.",
     "UPGRADE_DESCRIPTION": "",
     "EXTENDED_DESCRIPTION": ["Trigger Shadows", "Apply #bWeak and deal damage as if the #yShadows threshold was its current amount. NL If you have no Shadows apply 1 #yWeak to ALL enemies instead."]
@@ -307,17 +314,28 @@
   },
   "evolutionmod:FireAnts": {
     "NAME": "Fire Ants",
-    "DESCRIPTION": "Channel a evolutionmod:LavafolkGene gene. Exhaust all Drones from your hand and trigger the gene once for each. NL evolutionmod:InsectGene Form: add a Drone to your hand.",
+//    "DESCRIPTION": "Channel a evolutionmod:LavafolkGene gene. Exhaust all Drones from your hand and trigger the gene once for each. NL evolutionmod:InsectGene Form: add a Drone to your hand.",
+    "DESCRIPTION": "Channel a evolutionmod:LavafolkGene gene. NL evolutionmod:InsectGene Form: Whenever a Drone is Exhausted this turn trigger your oldest Lavafolk gene.",
 //    "DESCRIPTION": "Add a Drone to your hand. NL evolutionmod:InsectGene Form: add one more. NL evolutionmod:LavafolkGene form: add Fire Drones instead.",
     //    "DESCRIPTION": "Evoke up to !M! evolutionmod:LavafolkGene genes and add a Drone to your hand for each one. NL Channel a evolutionmod:LavafolkGene gene. NL evolutionmod:InsectGene Form: Evoke one more.",
     //    "DESCRIPTION": "Add a Drone to your hand. Repeat for each evolutionmod:LavafolkGene gene you have, up to !M!. NL evolutionmod:InsectGene Form: channel a evolutionmod:LavafolkGene gene.",
-    "UPGRADE_DESCRIPTION": "Channel a evolutionmod:LavafolkGene gene. Exhaust all Drones from your hand and trigger the gene once for each. NL Channel an evolutionmod:InsectGene gene and add a Drone to your hand."
+    "UPGRADE_DESCRIPTION": "Channel a evolutionmod:LavafolkGene gene. NL Whenever a Drone is Exhausted this turn trigger your oldest Lavafolk gene. NL evolutionmod:InsectGene Form: gain a Drone"
 //    "UPGRADE_DESCRIPTION": "Add 2 Drones to your hand. NL Channel an evolutionmod:InsectGene gene. NL evolutionmod:LavafolkGene form: add Fire Drones instead."
 //    "UPGRADE_DESCRIPTION": "Evoke up to !M! evolutionmod:LavafolkGene genes and add a Drone to your hand for each one. NL Channel a evolutionmod:LavafolkGene gene and an evolutionmod:InsectGene gene."
   },
   "evolutionmod:VenomGlands": {
     "NAME": "Venom Glands",
     "DESCRIPTION": "evolutionmod:LizardGene Form: Whenever an Attack deals unblocked damage this turn, apply !M! Poison. NL evolutionmod:InsectGene Form: add a Drone to your hand.",
+    "UPGRADE_DESCRIPTION": "Whenever an Attack deals unblocked damage this turn, apply !M! Poison. NL evolutionmod:LizardGene form: add a Drone to your hand. NL evolutionmod:InsectGene Form: add a Drone to your hand."
+  },
+  "evolutionmod:LymeanBeast": {
+    "NAME": "Battle Omen",
+    "DESCRIPTION": "Fate Attacks. Gain Rage next turn.",
+    "UPGRADE_DESCRIPTION": "Whenever an Attack deals unblocked damage this turn, apply !M! Poison. NL evolutionmod:LizardGene form: add a Drone to your hand. NL evolutionmod:InsectGene Form: add a Drone to your hand."
+  },
+  "evolutionmod:HarpyInsect": {
+    "NAME": "Worker Bees",
+    "DESCRIPTION": "Exhaust all Drones and draw that many cards.",
     "UPGRADE_DESCRIPTION": "Whenever an Attack deals unblocked damage this turn, apply !M! Poison. NL evolutionmod:LizardGene form: add a Drone to your hand. NL evolutionmod:InsectGene Form: add a Drone to your hand."
   },
   "evolutionmod:Hivemind": {
@@ -370,9 +388,9 @@
   },
   "evolutionmod:CurrentsDancer": {
     "NAME": "Currents Dancer",
-    "DESCRIPTION": "The first time you draw a card after the beginning of your turn gain !M! Block. NL evolutionmod:MerfolkGene Form: gain !B! Block.",
+    "DESCRIPTION": "The first time you draw a card after the beginning of your turn gain !M! Block. NL evolutionmod:MerfolkGene Form: draw a card.",
 //    "DESCRIPTION": "Gain !M! Dexterity. NL evolutionmod:HarpyGene Form: gain 1 Dexterity.",
-    "UPGRADE_DESCRIPTION": "Gain !M! Dexterity. NL evolutionmod:HarpyGene Form -> NL evolutionmod:MerfolkGene Form: gain 1 Dexterity."
+    "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmod:DarkDesires": {
     "NAME": "Dark Desires",
@@ -440,6 +458,22 @@
       " Form: draw 2 cards. NL Exhaust. NL Startup: shuffle a copy of this card in your draw pile.",
       " Form: draw 2 cards. NL Exhaust. NL Startup: shuffle !M! copies of this card in your draw pile."]
   },
+  "evolutionmod:Flash": {
+    "NAME": "Gene Flash",
+    "DESCRIPTION": "Deal !D! damage. NL Evoke the Imprinted gene. NL Exhausts if no gene was Evoked.",
+    "UPGRADE_DESCRIPTION": "",
+    "EXTENDED_DESCRIPTION": [
+      "Deal !D! damage. NL Evoke a ", " gene. NL Exhausts if no gene was Evoked.", " Flash"]
+  },
+  "evolutionmod:Echo": {
+    "NAME": "Gene Echo",
+    "DESCRIPTION": "Trigger the Imprinted gene effect. NL Re-Imprint this card with your oldest Gene.",
+    "UPGRADE_DESCRIPTION": "Trigger the Imprinted gene effect twice. NL Re-Imprint this card with your oldest Gene.",
+    "EXTENDED_DESCRIPTION": [
+      "Trigger the ", " gene effect. NL Re-Imprinted this card with your oldest Gene.",
+      " gene effect twice. NL Re-Imprint this card with your oldest Gene.",
+      " Echo"]
+  },
   "evolutionmod:Mastery": {
     "NAME": "Gene Mastery",
     "DESCRIPTION": "When you channel an Imprinted gene, trigger its effect. NL Imprinted Form: gain an Orb slot",
@@ -506,7 +540,8 @@
   },
   "evolutionmod:Drone": {
     "NAME": "Drone",
-    "DESCRIPTION": "Gain !B! Block. NL Deal !D! damage. NL Does not scale with Strength or Dexterity. NL Exhaust. Ethereal.",
+    "DESCRIPTION": "Deal !D! damage. NL If this is in you hand at the end of your turn gain !B! Block. NL Exhaust. Ethereal.",
+//    "DESCRIPTION": "Gain !B! Block. NL Deal !D! damage. NL Does not scale with Strength or Dexterity. NL Exhaust. Ethereal.",
 //    "DESCRIPTION": "Deal !D! damage. NL Does not scale with Strength. NL Exhaust. Ethereal.",
     "UPGRADE_DESCRIPTION": ""
   },

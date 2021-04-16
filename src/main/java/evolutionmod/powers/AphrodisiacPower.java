@@ -48,7 +48,9 @@ public class AphrodisiacPower extends AbstractPower {
         super.atEndOfTurn(isPlayer);
         if (isPlayer != this.owner.isPlayer || this.amount <= 0) return;
 
-        addToBot(new ApplyPowerAction(this.owner, this.owner, new LustPower(this.owner, LUST_AMOUNT)));
-        this.stackPower(-1);
+//        addToBot(new ApplyPowerAction(this.owner, this.owner, new LustPower(this.owner, LUST_AMOUNT)));
+//        this.stackPower(-1);
+        addToBot(new ApplyPowerAction(this.owner, this.owner, new LustPower(this.owner, this.amount)));
+        this.stackPower(-this.amount);
     }
 }

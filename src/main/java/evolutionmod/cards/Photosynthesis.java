@@ -31,7 +31,6 @@ public class Photosynthesis
                 CardRarity.RARE, CardTarget.SELF);
         this.block = this.baseBlock = BLOCK_AMT;
         this.magicNumber = this.baseMagicNumber = BRAMBLE_AMT;
-//        this.tags.add(CardTags.STRIKE);
     }
 
     @Override

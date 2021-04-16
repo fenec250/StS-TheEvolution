@@ -28,7 +28,16 @@ import evolutionmod.patches.AbstractCardEnum;
 import evolutionmod.patches.EvolutionEnum;
 import evolutionmod.potions.EatMe;
 import evolutionmod.potions.Mutagen;
+import evolutionmod.powers.GrowthPower;
+import evolutionmod.relics.MagicFocus;
+import evolutionmod.relics.NimbleBoots;
+import evolutionmod.relics.OldOutfit;
+import evolutionmod.relics.ScoutMedal;
+import evolutionmod.relics.PowerFocus;
+import evolutionmod.relics.StrengthFocus;
+import evolutionmod.relics.Tori;
 import evolutionmod.relics.TorisGift;
+import evolutionmod.relics.Whip;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -164,7 +173,7 @@ public class EvolutionMod implements
         cards.add(new Salamander());
         cards.add(new DarkDesires());
 //        cards.add(new Mastery());
-        cards.add(new Mastery2());
+        cards.add(new Mastery());
         cards.add(new Shrink());
 
         //Rares.
@@ -172,18 +181,18 @@ public class EvolutionMod implements
         cards.add(new Stampede());
         cards.add(new Lifesteal());
         cards.add(new Stalker());
-        cards.add(new Photosynthesis());
         cards.add(new Eruption());
         cards.add(new Frenzy());
         cards.add(new FeatherStorm());
         //8 skills
         cards.add(new Drown());
         cards.add(new Ritual());
+        cards.add(new Photosynthesis());
+        cards.add(new TheFutureIsNow());
 //        cards.add(new Aegis());
 //        cards.add(new CrystalShaping());
 
         //6 powers
-        cards.add(new Aegis2());
         cards.add(new Broodmother());
         cards.add(new TheNight());
         cards.add(new GodlyPowers());
@@ -230,7 +239,7 @@ public class EvolutionMod implements
                 "Whenever you are attacked this turn, deal this amount of damage back");
         String[] keywordGrowth = {"growth", "Plant"};
         BaseMod.addKeyword("Growth", keywordGrowth,
-                "Upon reaching 3 Growth gain 1 Energy and reduce Growth by 3.");
+                "Upon reaching " + GrowthPower.ENERGY_THRESHOLD + " Growth gain 1 Energy and reduce Growth by " + GrowthPower.ENERGY_THRESHOLD);
         String[] keywordDrone = {"drone", "drones"};
         BaseMod.addKeyword("Drone", keywordDrone,
                 "Drones are 0 cost attacks which benefit from Potency, are Ethereal and Exhaust when played.");
@@ -276,5 +285,27 @@ public class EvolutionMod implements
     public void receiveEditRelics() {
         //starter
         BaseMod.addRelicToCustomPool(new TorisGift(), AbstractCardEnum.EVOLUTION_BLUE);
+        UnlockTracker.markRelicAsSeen(TorisGift.ID);
+        //common
+        BaseMod.addRelicToCustomPool(new NimbleBoots(), AbstractCardEnum.EVOLUTION_BLUE);
+        UnlockTracker.markRelicAsSeen(NimbleBoots.ID);
+        //uncommon
+        BaseMod.addRelicToCustomPool(new PowerFocus(), AbstractCardEnum.EVOLUTION_BLUE);
+        UnlockTracker.markRelicAsSeen(PowerFocus.ID);
+        //rare
+        BaseMod.addRelicToCustomPool(new MagicFocus(), AbstractCardEnum.EVOLUTION_BLUE);
+        UnlockTracker.markRelicAsSeen(MagicFocus.ID);
+        BaseMod.addRelicToCustomPool(new StrengthFocus(), AbstractCardEnum.EVOLUTION_BLUE);
+        UnlockTracker.markRelicAsSeen(StrengthFocus.ID);
+        BaseMod.addRelicToCustomPool(new ScoutMedal(), AbstractCardEnum.EVOLUTION_BLUE);
+        UnlockTracker.markRelicAsSeen(ScoutMedal.ID);
+        //shop
+        BaseMod.addRelicToCustomPool(new Whip(), AbstractCardEnum.EVOLUTION_BLUE);
+        UnlockTracker.markRelicAsSeen(Whip.ID);
+        //boss
+        BaseMod.addRelicToCustomPool(new OldOutfit(), AbstractCardEnum.EVOLUTION_BLUE);
+        UnlockTracker.markRelicAsSeen(OldOutfit.ID);
+        BaseMod.addRelicToCustomPool(new Tori(), AbstractCardEnum.EVOLUTION_BLUE);
+        UnlockTracker.markRelicAsSeen(Tori.ID);
     }
 }
