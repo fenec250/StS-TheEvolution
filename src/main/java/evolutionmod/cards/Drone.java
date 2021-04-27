@@ -10,6 +10,8 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.powers.AbstractPower;
+import evolutionmod.powers.BroodPower;
 
 public class Drone
         extends BaseEvoCard {
@@ -22,8 +24,8 @@ public class Drone
     private static final int COST = 0;
     private static final int DAMAGE_AMT = 3;
     private static final int UPGRADE_DAMAGE_AMT = 2;
-    private static final int BLOCK_AMT = 3;
-    private static final int UPGRADE_BLOCK_AMT = 2;
+    private static final int BLOCK_AMT = 2;
+    private static final int UPGRADE_BLOCK_AMT = 3;
 
     public Drone() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -51,6 +53,33 @@ public class Drone
                     AbstractGameAction.AttackEffect.BLUNT_HEAVY));
         }
     }
+
+    @Override
+	public void applyPowers() {
+		applyBroodPowerAround(super::applyPowers);
+    }
+
+    @Override
+	public void calculateCardDamage(AbstractMonster mo) {
+		applyBroodPowerAround(() -> super.calculateCardDamage(mo));
+    }
+
+    public void applyBroodPowerAround(Runnable supercall) {
+		int baseDamage = this.baseDamage;
+		int baseBlock = this.baseBlock;
+		AbstractPower power = AbstractDungeon.player.getPower(BroodPower.POWER_ID);
+		int pot = power == null ? 0 : power.amount;
+		this.baseDamage += pot;
+		this.baseBlock += pot;
+
+		supercall.run();
+
+		this.baseDamage = baseDamage;
+		this.isDamageModified = this.baseDamage != this.damage;
+
+		this.baseBlock = baseBlock;
+		this.isBlockModified = this.baseBlock != this.block;
+	}
 
     public void triggerOnEndOfTurnForPlayingCard() {
         this.dontTriggerOnUseCard = true;

@@ -36,7 +36,7 @@ public class Barkskin
     public void use(AbstractPlayer p, AbstractMonster m) {
         addToBot(new GainBlockAction(p, p, this.block));
         addToBot(new ApplyPowerAction(p, p, new GrowthPower(p, GROWTH_AMT)));
-        BaseEvoCard.formEffect(PlantGene.ID, () -> addToBot(new RefundAction(this, FORM_GROWTH_AMT)));
+        BaseEvoCard.formEffect(PlantGene.ID, () -> addToBot(new ApplyPowerAction(p, p, new GrowthPower(p, GROWTH_AMT))));
     }
 
     @Override

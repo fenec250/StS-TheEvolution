@@ -66,10 +66,12 @@ public class ExplosionPower extends TwoAmountPower {
             case THORNS:
                 this.amount2 -= 1;
                 while(this.amount2 <= 0) {
-                    this.amount2 += COUNTDOWN_AMT;
-                    int[] multiDamage = new int[AbstractDungeon.getMonsters().monsters.size()];
+					int size = AbstractDungeon.getMonsters().monsters.size();
+                    long targets = AbstractDungeon.getMonsters().monsters.stream().filter(m -> !m.isDeadOrEscaped()).count();
+                    this.amount2 += COUNTDOWN_AMT + targets;
+					int[] multiDamage = new int[size];
                     Arrays.fill(multiDamage, this.amount);
-                    addToTop(new DamageAllEnemiesAction(AbstractDungeon.player, multiDamage,
+                    addToBot(new DamageAllEnemiesAction(AbstractDungeon.player, multiDamage,
                             DamageInfo.DamageType.THORNS,
                             AbstractGameAction.AttackEffect.FIRE));
                 }

@@ -81,7 +81,7 @@
     "DESCRIPTIONS": ["After dealing damage ", " more times deal ", " damage to all enemies."]
   },
   "evolutionmod:FireAntsPower": {
-    "NAME": "FireAnts",
+    "NAME": "Fire Ants",
     "DESCRIPTIONS": ["Whenever a Drone is Exhausted this turn trigger your oldest Lavafolk gene.",
       "Whenever a Drone is Exhausted this turn trigger your ", " oldest Lavafolk genes."]
   },
@@ -95,7 +95,7 @@
   },
   "evolutionmod:SymbiotesPower": {
     "NAME": "Symbiotes",
-    "DESCRIPTIONS": ["Gain ", " Brambles and ", " Block the first time you play a Drone each turn "]
+    "DESCRIPTIONS": ["Whenever Growth produces energy add ", " a Drone to your hand.", " Drones to your hand."]
   },
   "evolutionmod:MarkPower": {
     "NAME": "Mark",

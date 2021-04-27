@@ -39,6 +39,7 @@ public class NimbleBoots extends CustomRelic {
     public void atTurnStartPostDraw() {
         if (this.counter >= CARDS_PLAYED_AMT) {
             this.addToBot(new DrawCardAction(AbstractDungeon.player, CARD_DRAW_AMT));
+            this.flash();
         }
 
         this.counter = 0;

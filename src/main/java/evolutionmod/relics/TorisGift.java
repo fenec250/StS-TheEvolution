@@ -29,9 +29,9 @@ public class TorisGift extends CustomRelic {
     public static final RelicStrings relicStrings = CardCrawlGame.languagePack.getRelicStrings(ID);
     public static final String NAME = relicStrings.NAME;
     public static final String[] DESCRIPTIONS = relicStrings.DESCRIPTIONS;
-    public static final String IMG_PATH = "evolutionmod/images/relics/spellbook.png";
+    public static final String IMG_PATH = "evolutionmod/images/relics/TorisGift.png";
     private static final Texture IMG = new Texture(IMG_PATH);
-    public static final String OUTLINE_PATH = "evolutionmod/images/relics/spellbook_p.png";
+    public static final String OUTLINE_PATH = "evolutionmod/images/relics/TorisGift_p.png";
     private static final Texture OUTLINE = new Texture(OUTLINE_PATH);
     private static final int GENE_AMT = 1;
     private static final int SLOT_AMT = 1;
@@ -68,13 +68,13 @@ public class TorisGift extends CustomRelic {
         genesPool.add(LizardGene.ID);
 
         for (int i = 0; i < GENE_AMT; ++i) {
-            String geneId = genesPool.get(AbstractDungeon.cardRng.random(genesPool.size() - 1));
+            String geneId = genesPool.get(AbstractDungeon.cardRandomRng.random(genesPool.size() - 1));
             AbstractGene gene = BaseEvoCard.getGene(geneId);
             AbstractDungeon.actionManager.addToBottom(new ChannelAction(gene.makeCopy()));
             addToBot(new AbstractGameAction() {
                 @Override
                 public void update() {
-                    gene.onEvoke();
+                    gene.onStartOfTurn();
                     this.isDone = true;
                 }
             });

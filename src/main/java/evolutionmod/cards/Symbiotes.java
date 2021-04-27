@@ -11,6 +11,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import evolutionmod.orbs.InsectGene;
 import evolutionmod.orbs.PlantGene;
 import evolutionmod.patches.AbstractCardEnum;
+import evolutionmod.powers.GrowthPower;
 import evolutionmod.powers.SymbiotesPower;
 
 public class Symbiotes
@@ -22,7 +23,7 @@ public class Symbiotes
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = "evolutionmod/images/cards/Symbiotes.png";
     private static final int COST = 1;
-    private static final int SYMBIOTES_AMT = 2;
+    private static final int SYMBIOTES_AMT = 1;
     private static final int UPGRADE_SYMBIOTES_AMT = 1;
 
     public Symbiotes() {
@@ -37,16 +38,23 @@ public class Symbiotes
     public void use(AbstractPlayer p, AbstractMonster m) {
         addToBot(new ApplyPowerAction(p, p, new SymbiotesPower(p, this.magicNumber), this.magicNumber));
 
-        formEffect(InsectGene.ID, () -> formEffect(PlantGene.ID, () ->
-                addToBot(new RefundAction(this, 1))));
+//        formEffect(InsectGene.ID, () -> formEffect(PlantGene.ID, () ->
+//                addToBot(new RefundAction(this, 1))));
+//        formEffect(InsectGene.ID, () -> addToBot(new ApplyPowerAction(p, p, new GrowthPower(p, 1))));
+
+        if (this.upgraded) {
+            formEffect(PlantGene.ID, () -> addToBot(new ApplyPowerAction(p, p, new GrowthPower(p, 1))));
+        }
     }
 
     @Override
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
+            this.rawDescription = UPGRADE_DESCRIPTION;
+            this.initializeDescription();
 //            this.isInnate = true;
-            this.upgradeMagicNumber(UPGRADE_SYMBIOTES_AMT);
+//            this.upgradeMagicNumber(UPGRADE_SYMBIOTES_AMT);
         }
     }
 

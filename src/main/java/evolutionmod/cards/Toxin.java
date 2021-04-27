@@ -1,5 +1,6 @@
 package evolutionmod.cards;
 
+import basemod.helpers.TooltipInfo;
 import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -11,6 +12,8 @@ import com.megacrit.cardcrawl.powers.PoisonPower;
 import evolutionmod.orbs.LizardGene;
 import evolutionmod.orbs.PlantGene;
 import evolutionmod.patches.AbstractCardEnum;
+
+import java.util.List;
 
 public class Toxin
 		extends BaseEvoCard implements GlowingCard{
@@ -59,6 +62,15 @@ public class Toxin
 			this.rawDescription = UPGRADE_DESCRIPTION;
 			this.initializeDescription();
 		}
+	}
+
+	@Override
+	public List<TooltipInfo> getCustomTooltips() {
+		if (this.customTooltips == null) {
+			super.getCustomTooltips();
+			this.customTooltips.add(new TooltipInfo("Form -> Form", "Channel the second Gene only if the first is present. NL Apply the effect only if both Genes are present."));
+		}
+		return this.customTooltips;
 	}
 
 	@Override

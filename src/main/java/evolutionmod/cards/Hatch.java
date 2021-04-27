@@ -12,7 +12,7 @@ import evolutionmod.orbs.InsectGene;
 import evolutionmod.patches.AbstractCardEnum;
 
 public class Hatch
-        extends BaseEvoCard implements GlowingCard {
+        extends BaseEvoCard {
     public static final String ID = "evolutionmod:Hatch";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -21,7 +21,7 @@ public class Hatch
     public static final String IMG_PATH = "evolutionmod/images/cards/InsectSkl.png";
     private static final int COST = 2;
     private static final int BLOCK_AMT = 4;
-    private static final int DRONES_AMT = 2;
+    private static final int DRONES_AMT = 3;
     private static final int UPGRADE_DRONES_AMT = 1;
 
     public Hatch() {
@@ -37,11 +37,11 @@ public class Hatch
     public void use(AbstractPlayer p, AbstractMonster m) {
         int drones = this.magicNumber;
         addToBot(new MakeTempCardInHandAction(Drone.createDroneWithInteractions(p), drones));
+        addToBot(new ChannelAction(new InsectGene()));
         if (this.upgraded) {
-            addToBot(new ChannelAction(new InsectGene()));
             addToBot(new GainBlockAction(p, this.block));
         } else {
-            formEffect(InsectGene.ID, () -> addToBot(new GainBlockAction(p, this.block)));
+//            formEffect(InsectGene.ID, () -> addToBot(new GainBlockAction(p, this.block)));
         }
     }
 
@@ -55,18 +55,18 @@ public class Hatch
         }
     }
 
-    @Override
-    public int getNumberOfGlows() {
-        return upgraded ? 0 : 1;
-    }
-
-    @Override
-    public boolean isGlowing(int glowIndex) {
-        return isPlayerInThisForm(InsectGene.ID);
-    }
-
-    @Override
-    public Color getGlowColor(int glowIndex) {
-        return InsectGene.COLOR.cpy();
-    }
+//    @Override
+//    public int getNumberOfGlows() {
+//        return upgraded ? 0 : 1;
+//    }
+//
+//    @Override
+//    public boolean isGlowing(int glowIndex) {
+//        return isPlayerInThisForm(InsectGene.ID);
+//    }
+//
+//    @Override
+//    public Color getGlowColor(int glowIndex) {
+//        return InsectGene.COLOR.cpy();
+//    }
 }

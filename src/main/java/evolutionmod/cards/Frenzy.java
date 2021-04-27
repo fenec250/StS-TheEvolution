@@ -24,8 +24,8 @@ public class Frenzy
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = "evolutionmod/images/cards/BeastAtt.png";
-    private static final int COST = 1;
-    private static final int DAMAGE_AMT = 8;
+    private static final int COST = 0;
+    private static final int DAMAGE_AMT = 3;
     private static final int FRENZY_AMT = 3;
     private static final int RAGE_AMT = 2;
     private static final int UPGRADE_FRENZY_AMT = 2;

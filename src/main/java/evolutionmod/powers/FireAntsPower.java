@@ -11,6 +11,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.EnvenomPower;
+import com.megacrit.cardcrawl.powers.FlameBarrierPower;
 import com.megacrit.cardcrawl.powers.LoopPower;
 import evolutionmod.cards.Drone;
 import evolutionmod.orbs.LavafolkGene;
@@ -26,10 +27,12 @@ public class FireAntsPower extends AbstractPower {
         this.name = NAME;
         this.ID = POWER_ID;
         this.type = PowerType.BUFF;
-        this.region128 = new TextureAtlas.AtlasRegion(new Texture("evolutionmod/images/powers/VenomGlandsPower84.png"), 0, 0, 84, 84);
-        this.region48 = new TextureAtlas.AtlasRegion(new Texture("evolutionmod/images/powers/VenomGlandsPower32.png"), 0, 0, 32, 32);
+//        this.region128 = new TextureAtlas.AtlasRegion(new Texture("evolutionmod/images/powers/VenomGlandsPower84.png"), 0, 0, 84, 84);
+//        this.region48 = new TextureAtlas.AtlasRegion(new Texture("evolutionmod/images/powers/VenomGlandsPower32.png"), 0, 0, 32, 32);
+        this.loadRegion("flameBarrier");
         this.owner = owner;
         this.amount = initialAmount;
+        this.updateDescription();
 
     }
 
@@ -55,9 +58,9 @@ public class FireAntsPower extends AbstractPower {
     }
 
     @Override
-    public void onAfterCardPlayed(AbstractCard usedCard) {
-        super.onAfterCardPlayed(usedCard);
-        if (usedCard instanceof Drone) {
+    public void onExhaust(AbstractCard card) {
+        super.onExhaust(card);
+        if (card instanceof Drone) {
             AbstractDungeon.player.orbs.stream()
                     .filter(o -> o instanceof LavafolkGene)
                     .limit(this.amount)

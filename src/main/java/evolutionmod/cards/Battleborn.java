@@ -1,5 +1,6 @@
 package evolutionmod.cards;
 
+import basemod.helpers.TooltipInfo;
 import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -12,6 +13,8 @@ import com.megacrit.cardcrawl.powers.StrengthPower;
 import evolutionmod.orbs.BeastGene;
 import evolutionmod.orbs.CentaurGene;
 import evolutionmod.patches.AbstractCardEnum;
+
+import java.util.List;
 
 public class Battleborn
         extends BaseEvoCard implements GlowingCard {
@@ -60,6 +63,10 @@ public class Battleborn
             this.upgradeName();
             this.upgradeMagicNumber(UPGRADE_STRENGTH_AMT);
             this.rawDescription = UPGRADE_DESCRIPTION;
+            if (customTooltips == null) {
+                customTooltips = this.getCustomTooltips();
+            }
+            this.customTooltips.add(new TooltipInfo("Form -> Form", "Channel the second Gene only if the first is present. NL Apply the effect only if both Genes are present."));
             this.initializeDescription();
         }
     }

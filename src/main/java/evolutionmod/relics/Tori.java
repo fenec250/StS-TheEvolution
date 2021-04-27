@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
+import com.megacrit.cardcrawl.actions.defect.IncreaseMaxOrbAction;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.RelicStrings;
@@ -29,10 +30,12 @@ public class Tori extends CustomRelic {
     public static final RelicStrings relicStrings = CardCrawlGame.languagePack.getRelicStrings(ID);
     public static final String NAME = relicStrings.NAME;
     public static final String[] DESCRIPTIONS = relicStrings.DESCRIPTIONS;
-    public static final String IMG_PATH = "evolutionmod/images/relics/spellbook.png";
+    public static final String IMG_PATH = "evolutionmod/images/relics/Tori.png";
     private static final Texture IMG = new Texture(IMG_PATH);
-    public static final String OUTLINE_PATH = "evolutionmod/images/relics/spellbook_p.png";
+    public static final String OUTLINE_PATH = "evolutionmod/images/relics/Tori_p.png";
     private static final Texture OUTLINE = new Texture(OUTLINE_PATH);
+
+    private static final int ORB_INCREASE = 1;
 //
     public Tori() {
         super(ID, IMG, OUTLINE, RelicTier.BOSS, LandingSound.CLINK);
@@ -49,6 +52,7 @@ public class Tori extends CustomRelic {
 //        super.atBattleStart();
         this.flash();
         addToBot(new RelicAboveCreatureAction(AbstractDungeon.player, this));
+        addToBot(new IncreaseMaxOrbAction(ORB_INCREASE));
 
         addToBot(new AbstractGameAction() {
             @Override

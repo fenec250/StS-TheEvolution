@@ -14,7 +14,7 @@
     "DESCRIPTION": "Gain !B! Block. NL Exhaust. NL ",
     "UPGRADE_DESCRIPTION": "",
     "EXTENDED_DESCRIPTION": [
-      "Randomized Form: gain !M! more Block. NL Exhaust.",
+      "Randomized Form: gain !M! more Block.",
       " Form: gain !M! more Block.", "Startup: Channel a ", "Randomized ", " gene and trigger its effect."]
   },
   "evolutionmod:LoyalWarrior": {
@@ -22,7 +22,7 @@
     "DESCRIPTION": "Deal !D! damage. NL Exhaust. NL ",
     "UPGRADE_DESCRIPTION": "",
     "EXTENDED_DESCRIPTION": [
-      "Randomized Form: deal !M! more damage. NL Exhaust.",
+      "Randomized Form: deal !M! more damage.",
       " Form: deal !M! more damage.",  "Startup: Channel a ", "Randomized", " gene and trigger its effect."]
   },
 //  "evolutionmod:Evolution": {
@@ -92,7 +92,7 @@
   "evolutionmod:Broodmother": {
     "NAME": "Broodmother",
     "DESCRIPTION": "Your Drones deal !M! more damage and apply !M! more Block. NL Channel two evolutionmod:InsectGene genes.",
-    "UPGRADE_DESCRIPTION": "Your Drones deal !M! more damage and apply !M! more Block. NL Channel 2 evolutionmod:InsectGene genes."
+    "UPGRADE_DESCRIPTION": "Your Drones deal !M! more damage and apply !M! more Block. NL Channel two evolutionmod:InsectGene genes."
 //    "DESCRIPTION": "Each turn the next Drone you create will be Upgraded. NL Channel an evolutionmod:InsectGene gene.",
 //    "UPGRADE_DESCRIPTION": "Each turn the next Drone you create will be Upgraded. NL Channel !M! evolutionmod:InsectGene genes."
   },
@@ -169,7 +169,7 @@
   },
   "evolutionmod:Hatch": {
     "NAME": "Hatch",
-    "DESCRIPTION": "Add !M! Drones to your hand. NL evolutionmod:InsectGene Form: gain !B! Block.",
+    "DESCRIPTION": "Add !M! Drones to your hand. NL Channel an evolutionmod:InsectGene.",
     "UPGRADE_DESCRIPTION": "Add !M! Drones to your hand. NL Channel an evolutionmod:InsectGene gene. NL Gain !B! Block."
   },
   "evolutionmod:ClawSlash": {
@@ -249,7 +249,8 @@
   },
   "evolutionmod:DepthsLurker": {
     "NAME": "Depths Lurker",
-    "DESCRIPTION": "Trigger Shadows immediately. NL evolutionmod:ShadowGene Form: gain !M! Shadows first. NL evolutionmod:MerfolkGene Form: gain !B! Block.",
+//    "DESCRIPTION": "Trigger Shadows immediately. NL evolutionmod:ShadowGene Form: gain !M! Shadows first. NL evolutionmod:MerfolkGene Form: gain !B! Block.",
+    "DESCRIPTION": "Trigger Shadows immediately. NL evolutionmod:MerfolkGene Form: gain Block equal to !M! times your Shadows threshold.",
 //    "DESCRIPTION": "Discard all cards costing 1 or more. NL Gain !B! Block for each card discarded. NL evolutionmod:MerfolkGene Form: channel a evolutionmod:ShadowGene gene.",
     "UPGRADE_DESCRIPTION": ""
   },
@@ -272,7 +273,7 @@
   },
   "evolutionmod:NightMare": {
     "NAME": "Night Mare",
-    "DESCRIPTION": "Deal !D! damage. NL Gain Shadows equal to half the unblocked damage dealt. NL evolutionmod:CentaurGene Form: Channel a evolutionmod:ShadowGene gene.",
+    "DESCRIPTION": "Deal !D! damage. NL Gain Shadows equal to half the unblocked damage dealt. NL evolutionmod:ShadowGene Form: Channel a evolutionmod:CentaurGene gene.",
 //    "DESCRIPTION": "Deal !D! damage. NL Apply Weak equal to half the unblocked damage dealt. NL Exhaust. NL evolutionmod:CentaurGene Form: Channel a evolutionmod:ShadowGene gene.",
     "UPGRADE_DESCRIPTION": ""
   },
@@ -297,8 +298,9 @@
 //    "DESCRIPTION": "Gain !M! Vigor. NL evolutionmod:CentaurGene form: NL evolutionmod:LymeanGene form: NL double your Vigor.",
 //    "DESCRIPTION": "Gain !M! Vigor. NL evolutionmod:CentaurGene form: NL evolutionmod:LymeanGene form: NL double your Vigor.",
 //    "DESCRIPTION": "Gain !M! Vigor. NL evolutionmod:CentaurGene form: NL evolutionmod:LymeanGene form: NL Adapt with a evolutionmod:CentaurGene gene.",
-    "DESCRIPTION": "Adapt with a evolutionmod:CentaurGene gene. NL evolutionmod:LymeanGene Form: Channel a evolutionmod:CentaurGene gene first.",
-    "UPGRADE_DESCRIPTION": "Channel a evolutionmod:CentaurGene and Adapt with your oldest one. NL evolutionmod:LymeanGene form: gain !M! Vigor."
+    "DESCRIPTION": "Fate 2 Attacks. NL Your next attack deals additional damage equal to !M! times their cost.",
+//    "DESCRIPTION": "Adapt with a evolutionmod:CentaurGene gene. NL evolutionmod:LymeanGene Form: Channel a evolutionmod:CentaurGene gene first.",
+    "UPGRADE_DESCRIPTION": "Fate 2 Attacks. NL Your next attack deals additional damage equal to !M! times their cost . NL evolutionmod:LymeanGene Form: Fate 1 more Attack."
   },
   "evolutionmod:CalmTheWaters": {
     "NAME": "Calm the Waters",
@@ -373,8 +375,9 @@
   },
   "evolutionmod:Symbiotes": {
     "NAME": "Symbiotes",
-    "DESCRIPTION": "Gain !M! Brambles and Block the first time you play a Drone each turn. NL evolutionmod:InsectGene Form: evolutionmod:PlantGene Form: Refund 1.",
-    "UPGRADE_DESCRIPTION": ""
+    "DESCRIPTION": "Whenever Growth produces energy add a Drone to your hand.",
+//    "DESCRIPTION": "Gain !M! Brambles and Block the first time you play a Drone each turn. NL evolutionmod:InsectGene Form: evolutionmod:PlantGene Form: Refund 1.",
+    "UPGRADE_DESCRIPTION": "Whenever Growth produces energy add a Drone to your hand. NL evolutionmod:PlantGene Form: gain 1 Growth."
   },
   "evolutionmod:Salamander": {
     "NAME": "Salamander",

@@ -144,7 +144,7 @@ public class EvolutionMod implements
         cards.add(new SeaWolf());
         //exhaust
         //18 skills
-        cards.add(new Strengthen());
+        cards.add(new Strengthen2());
         cards.add(new Hivemind());
         cards.add(new VenomGlands());
         cards.add(new FireAnts());
@@ -155,7 +155,7 @@ public class EvolutionMod implements
         cards.add(new Pheromones());
         cards.add(new Aphrodisiac());
         cards.add(new HeightenedSenses());
-        cards.add(new DepthsLurker());
+        cards.add(new DepthsLurker2());
         cards.add(new Antidote());
         cards.add(new CalmTheWaters());
         cards.add(new SeaSerpent());
@@ -172,7 +172,6 @@ public class EvolutionMod implements
         cards.add(new Symbiotes());
         cards.add(new Salamander());
         cards.add(new DarkDesires());
-//        cards.add(new Mastery());
         cards.add(new Mastery());
         cards.add(new Shrink());
 
@@ -234,9 +233,6 @@ public class EvolutionMod implements
         String[] keywordFate = {"fate"};
         BaseMod.addKeyword("Fate X", keywordFate, "Put random cards from your draw pile matching X on top of your draw pile, then Scry them.");
 //        BaseMod.addKeyword("Fate", keywordFate, "Look at the top X cards of your draw pile. You may discard any of them. Discarded cards may trigger the associated effect.");
-        String[] keywordBrambles = {"brambles", "bramble"};
-        BaseMod.addKeyword("Bramble", keywordBrambles,
-                "Whenever you are attacked this turn, deal this amount of damage back");
         String[] keywordGrowth = {"growth", "Plant"};
         BaseMod.addKeyword("Growth", keywordGrowth,
                 "Upon reaching " + GrowthPower.ENERGY_THRESHOLD + " Growth gain 1 Energy and reduce Growth by " + GrowthPower.ENERGY_THRESHOLD);

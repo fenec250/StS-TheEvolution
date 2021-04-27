@@ -19,7 +19,7 @@ public class Broodmother extends BaseEvoCard {
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = "evolutionmod/images/cards/Broodmother.png";
     private static final int COST = 2;
-    private static final int BROOD_POWER_AMT = 1;
+    private static final int BROOD_POWER_AMT = 2;
     private static final int UPGRADE_BROOD_POWER_AMT = 1;
 
     public Broodmother() {

@@ -154,7 +154,7 @@ public class CrystalShard
 					return AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
 				}
 			case 1:
-				if (isPlayerInThisForm(secondGene.ID, firstGene.ID)) {
+				if (isPlayerInTheseForms(secondGene.ID, firstGene.ID)) {
 					switch (secondGene.ID) {
 						case HarpyGene.ID: return HarpyGene.COLOR.cpy();
 						case MerfolkGene.ID: return MerfolkGene.COLOR.cpy();

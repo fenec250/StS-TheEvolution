@@ -2,12 +2,17 @@
   "evolutionmod:TorisGift": {
     "NAME": "Tori's gift",
     "FLAVOR": "A gift from your mentor.",
-    "DESCRIPTIONS": ["Start each combat with a random #yGene and trigger its effect."]
+    "DESCRIPTIONS": ["Start each combat with a random #yGene."]
+  },
+  "evolutionmod:Tori": {
+    "NAME": "Tori",
+    "FLAVOR": "She's found her way back to you.",
+    "DESCRIPTIONS": ["Start each combat with #b1 additional Orb slot and random genes in all Orb slots."]
   },
   "evolutionmod:NimbleBoots": {
     "NAME": "Nimble Boots",
     "FLAVOR": "",
-    "DESCRIPTIONS": ["Whenever you play 5 or more cards in a turn, draw an additional card at the start of your next turn."]
+    "DESCRIPTIONS": ["Whenever you play #b5 or more cards in a turn, draw an additional card at the start of your next turn."]
   },
   "evolutionmod:PowerFocus": {
     "NAME": "Power Focus",
@@ -34,15 +39,10 @@
     "FLAVOR": "My favourite outfit, when I was human.",
     "DESCRIPTIONS": ["Gain [E] at the start of your turn. The first Gene you Channel each turn is removed."]
   },
-  "evolutionmod:Tori": {
-    "NAME": "Tori",
-    "FLAVOR": "She's found her way back to you.",
-    "DESCRIPTIONS": ["Start each combat with random genes in all Orb slots."]
-  },
   "evolutionmod:ScoutMedal": {
-    "NAME": "rare",
+    "NAME": "Scout Medal",
     "FLAVOR": "Always prepared.",
-    "DESCRIPTIONS": ["fate 1 of each type"]
+    "DESCRIPTIONS": ["At the start of the combat Fate #b1 card of each type."]
   },
   "evolutionmod:Potato2": {
     "NAME": "boss",

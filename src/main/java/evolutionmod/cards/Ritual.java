@@ -44,16 +44,16 @@ public class Ritual
         this.exhaust = true;
         this.magicNumber = this.baseMagicNumber = ADAPT_AMT;
         this.adaptationMap.put(HarpyGene.ID, new HarpyGene.Adaptation(0, ADAPT_MAX_AMT));
-        this.adaptationMap.put(MerfolkGene.ID, new MerfolkGene.Adaptation(0, ADAPT_MAX_AMT));
-        this.adaptationMap.put(LavafolkGene.ID, new LavafolkGene.Adaptation(0, ADAPT_MAX_AMT));
-        this.adaptationMap.put(CentaurGene.ID, new CentaurGene.Adaptation(0, ADAPT_MAX_AMT));
-        this.adaptationMap.put(LizardGene.ID, new LizardGene.Adaptation(0, ADAPT_MAX_AMT));
-        this.adaptationMap.put(BeastGene.ID, new BeastGene.Adaptation(0, ADAPT_MAX_AMT));
-        this.adaptationMap.put(PlantGene.ID, new PlantGene.Adaptation(0, ADAPT_MAX_AMT));
-        this.adaptationMap.put(ShadowGene.ID, new ShadowGene.Adaptation(0, ADAPT_MAX_AMT));
         this.adaptationMap.put(LymeanGene.ID, new LymeanGene.Adaptation(0, ADAPT_MAX_AMT));
         this.adaptationMap.put(InsectGene.ID, new InsectGene.Adaptation(0, ADAPT_MAX_AMT));
+        this.adaptationMap.put(PlantGene.ID, new PlantGene.Adaptation(0, ADAPT_MAX_AMT));
+        this.adaptationMap.put(CentaurGene.ID, new CentaurGene.Adaptation(0, ADAPT_MAX_AMT));
+        this.adaptationMap.put(BeastGene.ID, new BeastGene.Adaptation(0, ADAPT_MAX_AMT));
         this.adaptationMap.put(SuccubusGene.ID, new SuccubusGene.Adaptation(0, ADAPT_MAX_AMT));
+        this.adaptationMap.put(LizardGene.ID, new LizardGene.Adaptation(0, ADAPT_MAX_AMT));
+        this.adaptationMap.put(ShadowGene.ID, new ShadowGene.Adaptation(0, ADAPT_MAX_AMT));
+        this.adaptationMap.put(LavafolkGene.ID, new LavafolkGene.Adaptation(0, ADAPT_MAX_AMT));
+        this.adaptationMap.put(MerfolkGene.ID, new MerfolkGene.Adaptation(0, ADAPT_MAX_AMT));
     }
 
     @Override
@@ -115,8 +115,6 @@ public class Ritual
                             default: return null;
                         }
                     }).orElse(AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy());
-        } else if (this.adaptationMap.size() >= 11) {
-            this.glowColor = GOLD_BORDER_GLOW_COLOR.cpy();
         } else {
             this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
         }

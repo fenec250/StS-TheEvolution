@@ -130,6 +130,15 @@ public class ShadowsPower extends TwoAmountPower {
         }
     }
 
+    public static int getThreshold(AbstractCreature p) {
+        AbstractPower power = p.getPower(ShadowsPower.POWER_ID);
+        if (power != null) {
+            return ((TwoAmountPower) power).amount2;
+        } else {
+            return 1;
+        }
+    }
+
 //    public static void reduceThreshold(AbstractCreature p, int magicNumber) {
 //        AbstractPower power = p.getPower(ShadowsPower.POWER_ID);
 //        if (power != null) {
