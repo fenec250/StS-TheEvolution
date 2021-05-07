@@ -47,7 +47,7 @@ public class LoyalWarrior
 	private AbstractGene gene;
 
 	public LoyalWarrior() {
-		super(ID, NAME, IMG_PATH, COST, DESCRIPTION + EXTENDED_DESCRIPTION[0],
+		super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
 				CardType.ATTACK, AbstractCardEnum.EVOLUTION_BLUE,
 				CardRarity.BASIC, CardTarget.ENEMY);
 		this.damage = this.baseDamage = DAMAGE_AMT;
@@ -58,7 +58,7 @@ public class LoyalWarrior
 	}
 
 	private LoyalWarrior(int geneIndex) {
-		super(ID, NAME, IMG_PATH, COST, DESCRIPTION + EXTENDED_DESCRIPTION[0],
+		super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
 				CardType.ATTACK, AbstractCardEnum.EVOLUTION_BLUE,
 				CardRarity.BASIC, CardTarget.SELF);
 		this.damage = this.baseDamage = DAMAGE_AMT;
@@ -118,10 +118,7 @@ public class LoyalWarrior
 		if (!this.upgraded) {
 			this.upgradeName();
 			this.upgradeDamage(UPGRADE_DAMAGE_AMT);
-			this.rawDescription = this.gene == null
-					? DESCRIPTION + EXTENDED_DESCRIPTION[0] + EXTENDED_DESCRIPTION[2]
-						+ EXTENDED_DESCRIPTION[3] + EXTENDED_DESCRIPTION[4]
-					: DESCRIPTION + EXTENDED_DESCRIPTION[2] + this.gene.ID + EXTENDED_DESCRIPTION[4];
+			this.rawDescription = UPGRADE_DESCRIPTION;
 			this.initializeDescription();
 		}
 	}
@@ -181,7 +178,9 @@ public class LoyalWarrior
 				new LizardGene(),
 				new ShadowGene()};
 		this.gene = validGenes[this.geneIndex];
-		this.rawDescription = DESCRIPTION + this.gene.ID + EXTENDED_DESCRIPTION[1];
+		this.rawDescription = EXTENDED_DESCRIPTION[0] + (!upgraded
+				? this.gene.ID + EXTENDED_DESCRIPTION[1]
+				: EXTENDED_DESCRIPTION[2] + this.gene.ID + EXTENDED_DESCRIPTION[3]);
 		initializeDescription();
 	}
 

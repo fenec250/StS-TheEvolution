@@ -15,8 +15,8 @@ import evolutionmod.patches.AbstractCardEnum;
 
 import java.util.List;
 
-public class Toxin
-		extends BaseEvoCard implements GlowingCard{
+public class Toxin2
+		extends AdaptableEvoCard {
 	public static final String ID = "evolutionmod:Toxin";
 	public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;
@@ -29,7 +29,7 @@ public class Toxin
 	private static final int POISON_PERCENT_AMT = 10;
 	private static final int UPGRADE_POISON_PERCENT_AMT = 5;
 
-	public Toxin() {
+	public Toxin2() {
 		super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
 				CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
 				CardRarity.UNCOMMON, CardTarget.ENEMY);
@@ -40,20 +40,18 @@ public class Toxin
 	public void use(AbstractPlayer p, AbstractMonster m) {
 		int poison = POISON_FLAT + (upgraded ? UPGRADE_POISON_FLAT : 0);
 		boolean inForm = formEffect(LizardGene.ID);
-		this.exhaust = false;
 		if (inForm) {
 			inForm = formEffect(PlantGene.ID);
 			if (inForm) {
 				poison += m.maxHealth * this.magicNumber / 100;
 				this.exhaust = true;
-			}
-		}
+		}}
 		addToBot(new ApplyPowerAction(m, p, new PoisonPower(m, p, poison)));
 	}
 
 	@Override
 	public AbstractCard makeCopy() {
-		return new Toxin();
+		return new Toxin2();
 	}
 
 	@Override
@@ -66,36 +64,10 @@ public class Toxin
 		}
 	}
 
-	@Override
-	public List<TooltipInfo> getCustomTooltips() {
-		if (this.customTooltips == null) {
-			super.getCustomTooltips();
-			this.customTooltips.add(new TooltipInfo("Form -> Form", "Channel the second Gene only if the first is present. NL Apply the effect only if both Genes are present."));
-		}
-		return this.customTooltips;
-	}
-
-	@Override
-	public int getNumberOfGlows() {
-		return 2;
-	}
-
-	@Override
-	public boolean isGlowing(int glowIndex) {
-		return true;
-	}
-
-	@Override
-	public Color getGlowColor(int glowIndex) {
-		switch (glowIndex) {
-			case 0:
-				return isPlayerInThisForm(LizardGene.ID) ? LizardGene.COLOR.cpy()
-						: BLUE_BORDER_GLOW_COLOR.cpy();
-			case 1:
-				return isPlayerInThisForm(PlantGene.ID, LizardGene.ID) ? PlantGene.COLOR.cpy()
-						: BLUE_BORDER_GLOW_COLOR.cpy();
-			default:
-				return BLUE_BORDER_GLOW_COLOR.cpy();
+	public void triggerOnGlowCheck() {
+		super.triggerOnGlowCheck();
+		if (isPlayerInThisForm(PlantGene.ID)) {
+			this.glowColor = PlantGene.COLOR.cpy();
 		}
 	}
 }

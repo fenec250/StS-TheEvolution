@@ -42,9 +42,8 @@ public class TheFutureIsNow extends BaseEvoCard {
         }
 
 		formEffect(LymeanGene.ID, () -> addToBot(new FateAction(FORM_FATE_AMT)));
-		if (x > 0) {
-			addToBot(new FutureNowAction(x));
-		}
+		addToBot(new FutureNowAction(x));
+
 		addToBot(new AbstractGameAction() {
             @Override
             public void update() {

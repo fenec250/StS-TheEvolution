@@ -219,9 +219,9 @@ public class EvolutionMod implements
     @Override
     public void receiveEditKeywords() {
         String[] keywordForm = {"form"};
-        BaseMod.addKeyword("Form", keywordForm, "Trigger the following effect if you have a Gene of this type, otherwise Channel one.");
+        BaseMod.addKeyword("evolutionmod", "Form", keywordForm, "Trigger the following effect if you have a Gene of this type, otherwise Channel one.");
         String[] keywordAdapt = {"adapt"};
-        BaseMod.addKeyword("Adapt", keywordAdapt, "Consume a channeled Gene. Add its effect to the card until the end of the combat and shuffle this card in your draw pile. NL Adapted effects target the same enemy as the card if possible.");
+        BaseMod.addKeyword("evolutionmod", "Adapt", keywordAdapt, "Consume a channeled Gene. Add its effect to the card until the end of the combat and shuffle this card in your draw pile. NL Adapted effects target the same enemy as the card if possible.");
         String[] keywordShift = {"shift"};
         BaseMod.addKeyword("Shift", keywordShift, "Recreate the gene at the back of the orb line.");
         String[] keywordRando = {"randomized"};

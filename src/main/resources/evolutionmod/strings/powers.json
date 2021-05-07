@@ -1,7 +1,7 @@
 {
   "evolutionmod:GodlyPowersPower": {
     "NAME": "Godly Powers",
-    "DESCRIPTIONS": ["The first ", " Form that Channel a gene also apply their conditional effect. NL ", " left this turn."]
+    "DESCRIPTIONS": ["The first ", " #yForm that Channel a gene also apply their conditional effect. NL ", " left this turn."]
   },
   "evolutionmod:PotencyPower": {
     "NAME": "Potency",

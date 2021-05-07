@@ -45,7 +45,7 @@ public class LoyalCompanion
 	private AbstractGene gene;
 
 	public LoyalCompanion() {
-		super(ID, NAME, IMG_PATH, COST, DESCRIPTION + EXTENDED_DESCRIPTION[0],
+		super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
 				CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
 				CardRarity.BASIC, CardTarget.SELF);
 		this.block = this.baseBlock = BLOCK_AMT;
@@ -56,7 +56,7 @@ public class LoyalCompanion
 	}
 
 	private LoyalCompanion(int geneIndex) {
-		super(ID, NAME, IMG_PATH, COST, DESCRIPTION + EXTENDED_DESCRIPTION[0],
+		super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
 				CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
 				CardRarity.BASIC, CardTarget.SELF);
 		this.block = this.baseBlock = BLOCK_AMT;
@@ -109,11 +109,9 @@ public class LoyalCompanion
 		if (!this.upgraded) {
 			this.upgradeName();
 			this.upgradeBlock(UPGRADE_BLOCK_AMT);
-			this.rawDescription = this.gene == null
-					? DESCRIPTION + EXTENDED_DESCRIPTION[0] + EXTENDED_DESCRIPTION[2]
-						+ EXTENDED_DESCRIPTION[3] + EXTENDED_DESCRIPTION[4]
-					: DESCRIPTION + EXTENDED_DESCRIPTION[2] + this.gene.ID + EXTENDED_DESCRIPTION[4];
+			this.rawDescription = UPGRADE_DESCRIPTION;
 			this.initializeDescription();
+			this.resetGene();
 		}
 	}
 
@@ -172,7 +170,9 @@ public class LoyalCompanion
 				new InsectGene(),
 				new LizardGene()};
 		this.gene = validGenes[this.geneIndex];
-		this.rawDescription = DESCRIPTION + this.gene.ID + EXTENDED_DESCRIPTION[1];
+		this.rawDescription = EXTENDED_DESCRIPTION[0] + (!upgraded
+				? this.gene.ID + EXTENDED_DESCRIPTION[1]
+				: EXTENDED_DESCRIPTION[2] + this.gene.ID + EXTENDED_DESCRIPTION[3]);
 		initializeDescription();
 	}
 

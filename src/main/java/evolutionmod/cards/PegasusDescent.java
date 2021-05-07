@@ -43,10 +43,10 @@ public class PegasusDescent
             this.addToBot(new VFXAction(new WeightyImpactEffect(m.hb.cX, m.hb.cY)));
         }
         AbstractCard proxy = this;
+        int hits = getHitsNb(p, energyOnUse, proxy);
         addToBot(new AbstractGameAction() {
             @Override
             public void update() {
-                int hits = getHitsNb(p, energyOnUse, proxy);
                 for (int i = 0; i < hits; ++i) {
                     AbstractDungeon.actionManager.addToBottom(new DamageAction(
                             m, new DamageInfo(p, damage, damageTypeForTurn),
