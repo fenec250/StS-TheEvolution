@@ -51,6 +51,16 @@ public class Absorption
 	}
 
 	@Override
+	public boolean canPlay(AbstractCard card) {
+		if (card == this && AbstractDungeon.player.orbs.stream()
+				.noneMatch(o -> o instanceof AbstractGene)) {
+			this.cantUseMessage = EXTENDED_DESCRIPTION[0];
+			return false;
+		}
+		return super.canPlay(card);
+	}
+
+	@Override
 	public void use(AbstractPlayer p, AbstractMonster m) {
 		addToBot(new AbstractGameAction() {
 			@Override
@@ -84,10 +94,9 @@ public class Absorption
 		}
 	}
 
-
 	@Override
 	public int getNumberOfGlows() {
-		return EnergyPanel.getCurrentEnergy();
+		return upgraded ? 2 : 1;
 	}
 
 	@Override
@@ -103,9 +112,7 @@ public class Absorption
 
 	@Override
 	public Color getGlowColor(int glowIndex) {
-		return upgraded
-				? AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy()
-				: AbstractDungeon.player.orbs.stream()
+		return AbstractDungeon.player.orbs.stream()
 				.filter(o -> o instanceof AbstractGene)
 				.skip(glowIndex).findFirst()
 				.map(o -> {

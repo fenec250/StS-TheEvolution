@@ -3,6 +3,7 @@ package evolutionmod.cards;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
+import com.megacrit.cardcrawl.actions.common.SetDontTriggerAction;
 import com.megacrit.cardcrawl.cards.CardQueueItem;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -81,7 +82,12 @@ public class Drone
 		this.isBlockModified = this.baseBlock != this.block;
 	}
 
-    public void triggerOnEndOfTurnForPlayingCard() {
+	@Override
+	public void triggerWhenDrawn() {
+		this.addToBot(new SetDontTriggerAction(this, false));
+	}
+
+	public void triggerOnEndOfTurnForPlayingCard() {
         this.dontTriggerOnUseCard = true;
         this.applyPowersToBlock();
         AbstractDungeon.actionManager.cardQueue.add(new CardQueueItem(this, true));

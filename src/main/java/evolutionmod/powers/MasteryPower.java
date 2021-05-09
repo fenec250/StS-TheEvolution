@@ -9,6 +9,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import evolutionmod.cards.AdaptableEvoCard;
 import evolutionmod.cards.BaseEvoCard;
 import evolutionmod.orbs.AbstractGene;
 
@@ -52,7 +53,9 @@ public class MasteryPower extends AbstractPower {
     @Override
     public void onChannel(AbstractOrb orb) {
         if (orb instanceof AbstractGene && geneId.equals(orb.ID)) {
-            ((AbstractGene) orb).getAdaptation().apply(AbstractDungeon.player, null);
+            AdaptableEvoCard.AbstractAdaptation adaptation = ((AbstractGene) orb).getAdaptation();
+            adaptation.amount = amount;
+            adaptation.apply(AbstractDungeon.player, null);
             this.flash();
         }
     }

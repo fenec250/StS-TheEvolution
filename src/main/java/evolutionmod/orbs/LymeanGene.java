@@ -1,5 +1,6 @@
 package evolutionmod.orbs;
 
+import basemod.helpers.TooltipInfo;
 import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -17,6 +18,7 @@ public class LymeanGene extends AbstractGene {
 	public static final String COLOR_STRING = "[#50FFFF]";
 	public static final Color COLOR = new Color(0x80DFFF00);
 	public static final String[] DESCRIPTION = orbStrings.DESCRIPTION;
+	public static final TooltipInfo TOOLTIP = new TooltipInfo(COLOR_STRING + NAME + "[]", "Orb: " + getOrbDescription());
 	public static final String IMG_PATH = "evolutionmod/images/orbs/LymeanGene.png";
 	public static final int SCRY = 2;
 

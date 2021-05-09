@@ -1,5 +1,6 @@
 package evolutionmod.orbs;
 
+import basemod.helpers.TooltipInfo;
 import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -18,6 +19,7 @@ public class ShadowGene extends AbstractGene {
 	public static final String COLOR_STRING = "[#8868A8]";
 	public static final Color COLOR = new Color(0x8868A800);
 	public static final String[] DESCRIPTION = orbStrings.DESCRIPTION;
+	public static final TooltipInfo TOOLTIP = new TooltipInfo(COLOR_STRING + NAME + "[]", "Orb: " + getOrbDescription());
 	public static final String IMG_PATH = "evolutionmod/images/orbs/ShadowGene.png";
 	public static final int WEAK = 2;
 	public static final int CREEPING_SHADOWS = 1;

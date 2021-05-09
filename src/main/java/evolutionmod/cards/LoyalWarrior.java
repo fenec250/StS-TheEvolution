@@ -79,12 +79,12 @@ public class LoyalWarrior
 
 	@Override
 	public void use(AbstractPlayer p, AbstractMonster m) {
-		if (!this.upgraded) {
-			BaseEvoCard.formEffect(this.gene.ID);
-		}
 		addToBot(new DamageAction(
 				m, new DamageInfo(p, damage, this.damageTypeForTurn),
 				AbstractGameAction.AttackEffect.BLUNT_HEAVY));
+		if (!this.upgraded) {
+			BaseEvoCard.formEffect(this.gene.ID);
+		}
 	}
 
 	@Override

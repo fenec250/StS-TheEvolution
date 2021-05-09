@@ -69,6 +69,6 @@ public class NightMare
 
 	@Override
 	public Color getGlowColor(int glowIndex) {
-    	return CentaurGene.COLOR.cpy();
+    	return ShadowGene.COLOR.cpy();
 	}
 }

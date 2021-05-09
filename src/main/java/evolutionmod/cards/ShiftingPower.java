@@ -1,5 +1,6 @@
 package evolutionmod.cards;
 
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -38,14 +39,28 @@ public class ShiftingPower
                 .filter(o -> o instanceof AbstractGene)
                 .limit(this.magicNumber)
                 .collect(Collectors.toList());
-        triggered.forEach(o -> ((AbstractGene)o).getAdaptation().apply(p, m));
+
+        triggered.forEach(o -> addToBot(new AbstractGameAction() {
+            @Override
+            public void update() {
+                ((AbstractGene)o).getAdaptation().apply(p, m);
+                this.isDone = true;
+            }
+        }));
 
         List<AbstractOrb> shifted = p.orbs.stream()
                 .filter(o -> o instanceof AbstractGene)
                 .limit(this.energyOnUse)
                 .collect(Collectors.toList());
-		consumeOrbs(p, shifted);
-        shifted.forEach(o -> addToBot(new ChannelAction(o)));
+
+        shifted.forEach(o -> addToBot(new AbstractGameAction() {
+            @Override
+            public void update() {
+                consumeOrb(p, o);
+                addToTop(new ChannelAction(o));
+                this.isDone = true;
+            }
+        }));
 //        addToBot(new RefundAction(this, this.energyOnUse, this.energyOnUse));
     }
 

@@ -29,12 +29,12 @@ public class PowerFocus extends CustomRelic {
     @Override
     public void atBattleStart() {
         super.atBattleStart();
-        this.pulse = true;
+        this.beginLongPulse();
     }
 
     @Override
     public void atTurnStart() {
-        this.pulse = true;
+        this.beginLongPulse();
     }
 
     @Override
@@ -42,13 +42,13 @@ public class PowerFocus extends CustomRelic {
         super.onEvokeOrb(ammo);
         if (this.pulse && ammo instanceof AbstractGene) {
             ammo.onEvoke();
-            this.pulse = false;
+            this.stopPulse();
         }
     }
 
     @Override
     public void onVictory() {
         super.onVictory();
-        this.pulse = false;
+        this.stopPulse();
     }
 }

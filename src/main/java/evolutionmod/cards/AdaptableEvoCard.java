@@ -11,6 +11,17 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import evolutionmod.actions.ChooseAdaptationAction;
 import evolutionmod.orbs.AbstractGene;
+import evolutionmod.orbs.BeastGene;
+import evolutionmod.orbs.CentaurGene;
+import evolutionmod.orbs.HarpyGene;
+import evolutionmod.orbs.InsectGene;
+import evolutionmod.orbs.LavafolkGene;
+import evolutionmod.orbs.LizardGene;
+import evolutionmod.orbs.LymeanGene;
+import evolutionmod.orbs.MerfolkGene;
+import evolutionmod.orbs.PlantGene;
+import evolutionmod.orbs.ShadowGene;
+import evolutionmod.orbs.SuccubusGene;
 
 import java.util.HashMap;
 import java.util.List;
@@ -126,6 +137,17 @@ public abstract class AdaptableEvoCard extends BaseEvoCard {
 			super.getCustomTooltips();
 			this.customTooltips.add(adaptationTooltip);
 		}
+		if (adaptationMap.containsKey(LavafolkGene.ID) && adaptationMap.get(LavafolkGene.ID).amount > 0 && !customTooltips.contains(LavafolkGene.TOOLTIP)) customTooltips.add(LavafolkGene.TOOLTIP);
+		if (adaptationMap.containsKey(ShadowGene.ID) && adaptationMap.get(ShadowGene.ID).amount > 0 && !customTooltips.contains(ShadowGene.TOOLTIP)) customTooltips.add(ShadowGene.TOOLTIP);
+		if (adaptationMap.containsKey(InsectGene.ID) && adaptationMap.get(InsectGene.ID).amount > 0 && !customTooltips.contains(InsectGene.TOOLTIP)) customTooltips.add(InsectGene.TOOLTIP);
+		if (adaptationMap.containsKey(HarpyGene.ID) && adaptationMap.get(HarpyGene.ID).amount > 0 && !customTooltips.contains(HarpyGene.TOOLTIP)) customTooltips.add(HarpyGene.TOOLTIP);
+		if (adaptationMap.containsKey(MerfolkGene.ID) && adaptationMap.get(MerfolkGene.ID).amount > 0 && !customTooltips.contains(MerfolkGene.TOOLTIP)) customTooltips.add(MerfolkGene.TOOLTIP);
+		if (adaptationMap.containsKey(CentaurGene.ID) && adaptationMap.get(CentaurGene.ID).amount > 0 && !customTooltips.contains(CentaurGene.TOOLTIP)) customTooltips.add(CentaurGene.TOOLTIP);
+		if (adaptationMap.containsKey(BeastGene.ID) && adaptationMap.get(BeastGene.ID).amount > 0 && !customTooltips.contains(BeastGene.TOOLTIP)) customTooltips.add(BeastGene.TOOLTIP);
+		if (adaptationMap.containsKey(PlantGene.ID) && adaptationMap.get(PlantGene.ID).amount > 0 && !customTooltips.contains(PlantGene.TOOLTIP)) customTooltips.add(PlantGene.TOOLTIP);
+		if (adaptationMap.containsKey(LymeanGene.ID) && adaptationMap.get(LymeanGene.ID).amount > 0 && !customTooltips.contains(LymeanGene.TOOLTIP)) customTooltips.add(LymeanGene.TOOLTIP);
+		if (adaptationMap.containsKey(SuccubusGene.ID) && adaptationMap.get(SuccubusGene.ID).amount > 0 && !customTooltips.contains(SuccubusGene.TOOLTIP)) customTooltips.add(SuccubusGene.TOOLTIP);
+		if (adaptationMap.containsKey(LizardGene.ID) && adaptationMap.get(LizardGene.ID).amount > 0 && !customTooltips.contains(LizardGene.TOOLTIP)) customTooltips.add(LizardGene.TOOLTIP);
 		return this.customTooltips;
 	}
 

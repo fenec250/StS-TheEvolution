@@ -172,7 +172,7 @@
   },
   "evolutionmod:Hatch": {
     "NAME": "Hatch",
-    "DESCRIPTION": "Add !M! Drones to your hand. NL Channel an evolutionmod:InsectGene.",
+    "DESCRIPTION": "Add !M! Drones to your hand. NL Channel an evolutionmod:InsectGene gene.",
     "UPGRADE_DESCRIPTION": "Add !M! Drones to your hand. NL Channel an evolutionmod:InsectGene gene. NL Gain !B! Block."
   },
   "evolutionmod:ClawSlash": {
@@ -380,9 +380,9 @@
   },
   "evolutionmod:Symbiotes": {
     "NAME": "Symbiotes",
-    "DESCRIPTION": "Whenever Growth produces energy add a Drone to your hand.",
+    "DESCRIPTION": "Whenever Growth produces energy add a Drone to your hand. NL evolutionmod:PlantGene evolutionmod:Form: gain 1 Growth.",
 //    "DESCRIPTION": "Gain !M! Brambles and Block the first time you play a Drone each turn. NL evolutionmod:InsectGene evolutionmod:Form: evolutionmod:PlantGene evolutionmod:Form: Refund 1.",
-    "UPGRADE_DESCRIPTION": "Whenever Growth produces energy add a Drone to your hand. NL evolutionmod:PlantGene evolutionmod:Form: gain 1 Growth."
+    "UPGRADE_DESCRIPTION": "Whenever Growth produces energy add a Drone to your hand. NL Gain 1 Growth. NL evolutionmod:PlantGene evolutionmod:Form: gain 1 Growth."
   },
   "evolutionmod:Salamander": {
     "NAME": "Salamander",
@@ -482,14 +482,22 @@
       " gene effect twice. NL Re-Imprint this card with your oldest Gene.",
       " Echo"]
   },
+  "evolutionmod:GeneStrike": {
+    "NAME": "Gene Strike",
+    "DESCRIPTION": "Deal !D! damage. [#F04040]Imprinted[] evolutionmod:Form: deal !M! more damage.",
+    "UPGRADE_DESCRIPTION": "",
+    "EXTENDED_DESCRIPTION": [
+      "Deal !D! damage. ", " evolutionmod:Form: deal !M! more damage.",
+      " Strike"]
+  },
   "evolutionmod:Mastery": {
     "NAME": "Gene Mastery",
-    "DESCRIPTION": "When you channel an Imprinted gene, trigger its effect. NL Imprinted evolutionmod:Form: gain an Orb slot",
-    "UPGRADE_DESCRIPTION": "When you channel an Imprinted gene, trigger its effect. NL Gain an Orb slot and Channel the Imprinted gene.",
+    "DESCRIPTION": "When you channel an [#F04040]Imprinted[] gene, trigger its effect. NL [#F04040]Imprinted[] evolutionmod:Form: gain an Orb slot",
+    "UPGRADE_DESCRIPTION": "When you channel an [#F04040]Imprinted[] gene, trigger its effect. NL Gain an Orb slot and Channel the [#F04040]Imprinted[] gene.",
     "EXTENDED_DESCRIPTION": [
       "When you Channel a ", " gene, trigger its effect. NL ",
       " evolutionmod:Form: gain an Orb slot.", "Gain an Orb slot and Channel a ", " gene.",
-      " Mastery", "I need a channeled Gene."]
+      " Mastery", "I need to channel a Gene first."]
   },
   "evolutionmod:Treasure": {
     "NAME": "Treasure",
@@ -506,9 +514,7 @@
     "NAME": "Absorption",
     "DESCRIPTION": "Consume your oldest gene. NL At the start of your turn trigger its effect.",
     "UPGRADE_DESCRIPTION": "Consume your oldest !M! genes. NL At the start of your turn trigger their effect.",
-    "EXTENDED_DESCRIPTION": [
-      "When you Channel a ", " gene, trigger its effect. NL ",
-      " evolutionmod:Form: gain an Orb slot.", "Gain an Orb slot and Channel a ", " gene.", " Mastery"]
+    "EXTENDED_DESCRIPTION": ["I need to channel a Gene first."]
   },
   "evolutionmod:Grow": {
     "NAME": "Grow",

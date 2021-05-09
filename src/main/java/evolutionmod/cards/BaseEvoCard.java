@@ -64,17 +64,17 @@ public abstract class BaseEvoCard extends CustomCard {
 			if (customTooltips == null) {
 				customTooltips = new ArrayList<>();
 			}
-			if (this.rawDescription.contains(LavafolkGene.COLOR_STRING + LavafolkGene.NAME + "[]")) {this.customTooltips.add(new TooltipInfo(LavafolkGene.COLOR_STRING + LavafolkGene.NAME + "[]", "Orb: " + LavafolkGene.getOrbDescription()));}
-			if (this.rawDescription.contains(ShadowGene.COLOR_STRING + ShadowGene.NAME + "[]")) {this.customTooltips.add(new TooltipInfo(ShadowGene.COLOR_STRING + ShadowGene.NAME + "[]", "Orb: " + ShadowGene.getOrbDescription()));}
-			if (this.rawDescription.contains(InsectGene.COLOR_STRING + InsectGene.NAME + "[]")) {this.customTooltips.add(new TooltipInfo(InsectGene.COLOR_STRING + InsectGene.NAME + "[]", "Orb: " + InsectGene.getOrbDescription()));}
-			if (this.rawDescription.contains(HarpyGene.COLOR_STRING + HarpyGene.NAME + "[]")) {this.customTooltips.add(new TooltipInfo(HarpyGene.COLOR_STRING + HarpyGene.NAME + "[]", "Orb: " + HarpyGene.getOrbDescription()));}
-			if (this.rawDescription.contains(MerfolkGene.COLOR_STRING + MerfolkGene.NAME + "[]")) {this.customTooltips.add(new TooltipInfo(MerfolkGene.COLOR_STRING + MerfolkGene.NAME + "[]", "Orb: " + MerfolkGene.getOrbDescription()));}
-			if (this.rawDescription.contains(CentaurGene.COLOR_STRING + CentaurGene.NAME + "[]")) {this.customTooltips.add(new TooltipInfo(CentaurGene.COLOR_STRING + CentaurGene.NAME + "[]", "Orb: " + CentaurGene.getOrbDescription()));}
-			if (this.rawDescription.contains(BeastGene.COLOR_STRING + BeastGene.NAME + "[]")) {this.customTooltips.add(new TooltipInfo(BeastGene.COLOR_STRING + BeastGene.NAME + "[]", "Orb: " + BeastGene.getOrbDescription()));}
-			if (this.rawDescription.contains(PlantGene.COLOR_STRING + PlantGene.NAME + "[]")) {this.customTooltips.add(new TooltipInfo(PlantGene.COLOR_STRING + PlantGene.NAME + "[]", "Orb: NL " + PlantGene.getOrbDescription()));}
-			if (this.rawDescription.contains(LymeanGene.COLOR_STRING + LymeanGene.NAME + "[]")) {this.customTooltips.add(new TooltipInfo(LymeanGene.COLOR_STRING + LymeanGene.NAME + "[]", "Orb: " + LymeanGene.getOrbDescription()));}
-			if (this.rawDescription.contains(SuccubusGene.COLOR_STRING + SuccubusGene.NAME + "[]")) {this.customTooltips.add(new TooltipInfo(SuccubusGene.COLOR_STRING + SuccubusGene.NAME + "[]", "Orb: " + SuccubusGene.getOrbDescription()));}
-			if (this.rawDescription.contains(LizardGene.COLOR_STRING + LizardGene.NAME + "[]")) {this.customTooltips.add(new TooltipInfo(LizardGene.COLOR_STRING + LizardGene.NAME + "[]", "Orb: " + LizardGene.getOrbDescription()));}
+			if (this.rawDescription.contains(LavafolkGene.COLOR_STRING + LavafolkGene.NAME + "[]")) {this.customTooltips.add(LavafolkGene.TOOLTIP);}
+			if (this.rawDescription.contains(ShadowGene.COLOR_STRING + ShadowGene.NAME + "[]")) {this.customTooltips.add(ShadowGene.TOOLTIP);}
+			if (this.rawDescription.contains(InsectGene.COLOR_STRING + InsectGene.NAME + "[]")) {this.customTooltips.add(InsectGene.TOOLTIP);}
+			if (this.rawDescription.contains(HarpyGene.COLOR_STRING + HarpyGene.NAME + "[]")) {this.customTooltips.add(HarpyGene.TOOLTIP);}
+			if (this.rawDescription.contains(MerfolkGene.COLOR_STRING + MerfolkGene.NAME + "[]")) {this.customTooltips.add(MerfolkGene.TOOLTIP);}
+			if (this.rawDescription.contains(CentaurGene.COLOR_STRING + CentaurGene.NAME + "[]")) {this.customTooltips.add(CentaurGene.TOOLTIP);}
+			if (this.rawDescription.contains(BeastGene.COLOR_STRING + BeastGene.NAME + "[]")) {this.customTooltips.add(BeastGene.TOOLTIP);}
+			if (this.rawDescription.contains(PlantGene.COLOR_STRING + PlantGene.NAME + "[]")) {this.customTooltips.add(PlantGene.TOOLTIP);}
+			if (this.rawDescription.contains(LymeanGene.COLOR_STRING + LymeanGene.NAME + "[]")) {this.customTooltips.add(LymeanGene.TOOLTIP);}
+			if (this.rawDescription.contains(SuccubusGene.COLOR_STRING + SuccubusGene.NAME + "[]")) {this.customTooltips.add(SuccubusGene.TOOLTIP);}
+			if (this.rawDescription.contains(LizardGene.COLOR_STRING + LizardGene.NAME + "[]")) {this.customTooltips.add(LizardGene.TOOLTIP);}
 		}
 		return customTooltips;
 	}

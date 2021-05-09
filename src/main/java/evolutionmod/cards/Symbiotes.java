@@ -24,7 +24,8 @@ public class Symbiotes
     public static final String IMG_PATH = "evolutionmod/images/cards/Symbiotes.png";
     private static final int COST = 1;
     private static final int SYMBIOTES_AMT = 1;
-    private static final int UPGRADE_SYMBIOTES_AMT = 1;
+    private static final int FORM_GROWTH_AMT = 1;
+    private static final int UPGRADE_GROWTH_AMT = 1;
 
     public Symbiotes() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -43,8 +44,12 @@ public class Symbiotes
 //        formEffect(InsectGene.ID, () -> addToBot(new ApplyPowerAction(p, p, new GrowthPower(p, 1))));
 
         if (this.upgraded) {
-            formEffect(PlantGene.ID, () -> addToBot(new ApplyPowerAction(p, p, new GrowthPower(p, 1))));
+            formEffect(PlantGene.ID, () -> addToBot(new ApplyPowerAction(p, p, new GrowthPower(p, FORM_GROWTH_AMT))));
         }
+//        int growth = (this.upgraded ? UPGRADE_GROWTH_AMT : 0) + (isPlayerInTheseForms(PlantGene.ID) ? FORM_GROWTH_AMT : 0);
+//        if (growth > 0) {
+//            formEffect(PlantGene.ID, () -> addToBot(new ApplyPowerAction(p, p, new GrowthPower(p, growth))));
+//        }
     }
 
     @Override
@@ -60,21 +65,21 @@ public class Symbiotes
 
     @Override
     public int getNumberOfGlows() {
-        return 2;
+        return 1;
     }
 
     @Override
     public boolean isGlowing(int glowIndex) {
-        return true;
+        return glowIndex == 0 && upgraded;
     }
 
     @Override
     public Color getGlowColor(int glowIndex) {
         switch (glowIndex) {
             case 0:
-                return isPlayerInThisForm(InsectGene.ID) ? InsectGene.COLOR.cpy()
-                        : BLUE_BORDER_GLOW_COLOR.cpy();
-            case 1:
+//                return isPlayerInThisForm(InsectGene.ID) ? InsectGene.COLOR.cpy()
+//                        : BLUE_BORDER_GLOW_COLOR.cpy();
+//            case 1:
                 return isPlayerInThisForm(PlantGene.ID, InsectGene.ID) ? PlantGene.COLOR.cpy()
                         : BLUE_BORDER_GLOW_COLOR.cpy();
             default:

@@ -1,5 +1,6 @@
 package evolutionmod.cards;
 
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -44,9 +45,16 @@ public class ShiftingGuard
                 .filter(o -> o instanceof AbstractGene)
                 .limit(this.magicNumber)
                 .collect(Collectors.toList());
-        triggered.forEach(o -> ((AbstractGene)o).getAdaptation().apply(p, m));
-        consumeOrbs(p, triggered);
-        triggered.forEach(o -> addToBot(new ChannelAction(o)));
+
+        triggered.forEach(o -> addToBot(new AbstractGameAction() {
+            @Override
+            public void update() {
+                ((AbstractGene)o).getAdaptation().apply(p, m);
+                consumeOrb(p, o);
+                addToTop(new ChannelAction(o));
+                this.isDone = true;
+            }
+        }));
 //                .ifPresent(o -> this.addAdaptation((AbstractGene) o));
 //        AbstractDungeon.actionManager.addToBottom(new ChannelAction(new InsectGene()));
     }

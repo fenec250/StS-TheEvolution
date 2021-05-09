@@ -1,5 +1,6 @@
 package evolutionmod.orbs;
 
+import basemod.helpers.TooltipInfo;
 import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -17,6 +18,7 @@ public class MerfolkGene extends AbstractGene {
 	public static final String COLOR_STRING = "[#5A5AFF]";
 	public static final Color COLOR = new Color(0x5A5AFF00);
 	public static final String[] DESCRIPTION = orbStrings.DESCRIPTION;
+	public static final TooltipInfo TOOLTIP = new TooltipInfo(COLOR_STRING + NAME + "[]", "Orb: " + getOrbDescription());
 	public static final String IMG_PATH = "evolutionmod/images/orbs/MermaidGene.png";
 	public static final int BLOCK = 3;
 
