@@ -1,9 +1,7 @@
 package evolutionmod.cards;
 
-import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
-import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
@@ -37,11 +35,9 @@ public class Hatch
     public void use(AbstractPlayer p, AbstractMonster m) {
         int drones = this.magicNumber;
         addToBot(new MakeTempCardInHandAction(Drone.createDroneWithInteractions(p), drones));
-        addToBot(new ChannelAction(new InsectGene()));
+        addToBot(new InsectGene().getChannelAction());
         if (this.upgraded) {
             addToBot(new GainBlockAction(p, this.block));
-        } else {
-//            formEffect(InsectGene.ID, () -> addToBot(new GainBlockAction(p, this.block)));
         }
     }
 
@@ -54,19 +50,4 @@ public class Hatch
             this.initializeDescription();
         }
     }
-
-//    @Override
-//    public int getNumberOfGlows() {
-//        return upgraded ? 0 : 1;
-//    }
-//
-//    @Override
-//    public boolean isGlowing(int glowIndex) {
-//        return isPlayerInThisForm(InsectGene.ID);
-//    }
-//
-//    @Override
-//    public Color getGlowColor(int glowIndex) {
-//        return InsectGene.COLOR.cpy();
-//    }
 }

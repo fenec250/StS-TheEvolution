@@ -2,7 +2,9 @@ package evolutionmod.orbs;
 
 import basemod.helpers.TooltipInfo;
 import com.badlogic.gdx.graphics.Color;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -11,6 +13,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.powers.RagePower;
 import evolutionmod.cards.AdaptableEvoCard;
+import evolutionmod.powers.BestialRagePower;
 
 public class BeastGene extends AbstractGene {
 	public static final String ID = "evolutionmod:BeastGene";
@@ -35,7 +38,7 @@ public class BeastGene extends AbstractGene {
 
 	@Override
 	public void onEvoke() {
-		apply(AbstractDungeon.player, null, 1, true);
+//		super.onEvoke(); prevent default evoke
 	}
 
 	@Override
@@ -54,9 +57,11 @@ public class BeastGene extends AbstractGene {
 //		}
 		int rage = rage() * times;
 		if (addToTop) {
-			AbstractDungeon.actionManager.addToTop(new ApplyPowerAction(p, p, new RagePower(p, rage)));
+//			AbstractDungeon.actionManager.addToTop(new ApplyPowerAction(p, p, new RagePower(p, rage)));
+			AbstractDungeon.actionManager.addToTop(new ApplyPowerAction(p, p, new BestialRagePower(p, rage)));
 		} else {
-			AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new RagePower(p, rage)));
+//			AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new RagePower(p, rage)));
+			AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new BestialRagePower(p, rage)));
 		}
 	}
 
@@ -67,12 +72,25 @@ public class BeastGene extends AbstractGene {
 	}
 
 	@Override
+	public AbstractGameAction getChannelAction() {
+		AbstractGene gene = this;
+		return new AbstractGameAction() {
+			@Override
+			public void update() {
+				apply(AbstractDungeon.player, null, 1, true);
+				addToTop(new ChannelAction(gene));
+				this.isDone = true;
+			}
+		};
+	}
+
+	@Override
 	public AdaptableEvoCard.AbstractAdaptation getAdaptation() {
 		return new Adaptation(1);
 	}
 
 	public static String getOrbDescription() {
-		return "At the #bstart #bof #byour #bturn and when #yEvoked: NL " + getDescription();
+		return DESCRIPTION[2] + getDescription();
 	}
 
 	public static String getDescription() {

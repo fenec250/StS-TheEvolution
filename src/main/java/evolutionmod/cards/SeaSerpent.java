@@ -36,10 +36,10 @@ public class SeaSerpent
     public void use(AbstractPlayer p, AbstractMonster m) {
         AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, this.block));
         if (!upgraded) {
-            formEffect(LizardGene.ID, () -> addToBot(new ChannelAction(new MerfolkGene())));
+            formEffect(LizardGene.ID, () -> addToBot(new MerfolkGene().getChannelAction()));
         } else {
-            addToBot(new ChannelAction(new LizardGene()));
-            addToBot(new ChannelAction(new MerfolkGene()));
+            addToBot(new LizardGene().getChannelAction());
+            addToBot(new MerfolkGene().getChannelAction());
         }
     }
 

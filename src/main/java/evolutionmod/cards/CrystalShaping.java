@@ -1,6 +1,6 @@
 package evolutionmod.cards;
 
-import com.megacrit.cardcrawl.actions.watcher.ChooseOneAction;
+import com.badlogic.gdx.Gdx;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -10,10 +10,7 @@ import evolutionmod.actions.CrystalShapingAction;
 import evolutionmod.patches.AbstractCardEnum;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class CrystalShaping extends BaseEvoCard {
 	public static final String ID = "evolutionmod:CrystalShaping";
@@ -26,6 +23,15 @@ public class CrystalShaping extends BaseEvoCard {
 	private static final int COST = 0;
 	private static final int EXHUME_AMT = 1;
 
+	private static final List<AbstractCard> previewCards = new ArrayList<AbstractCard>() {{
+		add(new CrystalDust(-1));
+		add(new CrystalShard(-1));
+		add(new CrystalShield(-1));
+	}};
+
+	private float previewTimer = 0f;
+	private int previewIndex = 0;
+
 	public CrystalShaping() {
 		super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
 				CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
@@ -36,15 +42,6 @@ public class CrystalShaping extends BaseEvoCard {
 
 	@Override
 	public void use(AbstractPlayer p, AbstractMonster m) {
-//		ArrayList<AbstractCard> cardChoices = new ArrayList<>(p.exhaustPile.group.stream()
-//				.filter(c -> c.cardID != null
-//		&& (c.cardID.equals(CrystalStone.ID)
-//		|| c.cardID.equals(CrystalShard.ID)
-//		|| c.cardID.equals(CrystalDust.ID)))
-//				.collect(Collectors.toList()));
-//		if (cardChoices.size() > 0) {
-//			this.addToBot(new ChooseOneAction(cardChoices));
-//		}
 		this.addToBot(new CrystalShapingAction(this.magicNumber));
 	}
 
@@ -60,6 +57,22 @@ public class CrystalShaping extends BaseEvoCard {
 			this.exhaust = false;
 			this.rawDescription = UPGRADE_DESCRIPTION;
 			this.initializeDescription();
+		}
+	}
+
+	@Override
+	public void update() {
+		super.update();
+		if (hb.justHovered) {
+			this.previewTimer = -1f;
+		}
+		if (hb.hovered) {
+			this.previewTimer -= Gdx.graphics.getDeltaTime();
+			if (previewTimer < 0) {
+				previewIndex = (previewIndex + 1) % 3;
+				this.cardsToPreview = previewCards.get(previewIndex);
+				previewTimer = 3f;
+			}
 		}
 	}
 }

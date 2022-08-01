@@ -36,7 +36,7 @@ public class Firebloom
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         for (int i = 0; i < this.magicNumber; ++i) {
-            addToBot(new ChannelAction(new LavafolkGene()));
+            addToBot(new LavafolkGene().getChannelAction());
         }
         formEffect(PlantGene.ID, () -> addToBot(new AbstractGameAction() {
             @Override

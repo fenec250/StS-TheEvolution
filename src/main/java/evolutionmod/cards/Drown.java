@@ -35,13 +35,10 @@ public class Drown
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, this.block));
-//        if (AbstractGene.isPlayerInThisForm(MerfolkGene.ID)) {
-            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(
-                    m, p, new DrownPower(m, 1), 1
-            ));
-//        } else {
-            AbstractDungeon.actionManager.addToBottom(new ChannelAction(new MerfolkGene()));
-//        }
+        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(
+                m, p, new DrownPower(m, 1), 1
+        ));
+        AbstractDungeon.actionManager.addToBottom(new MerfolkGene().getChannelAction());
     }
 
     @Override

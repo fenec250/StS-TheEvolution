@@ -1,8 +1,6 @@
 package evolutionmod.character;
 
 import basemod.abstracts.CustomPlayer;
-import basemod.animations.AbstractAnimation;
-import basemod.animations.SpineAnimation;
 import basemod.animations.SpriterAnimation;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -21,7 +19,6 @@ import com.megacrit.cardcrawl.screens.CharSelectInfo;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import evolutionmod.cards.LoyalCompanion;
 import evolutionmod.cards.DefendEvo;
-import evolutionmod.cards.Evolution;
 import evolutionmod.cards.LoyalWarrior;
 import evolutionmod.cards.StrikeEvo;
 import evolutionmod.patches.AbstractCardEnum;

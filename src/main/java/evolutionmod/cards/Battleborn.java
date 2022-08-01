@@ -1,7 +1,6 @@
 package evolutionmod.cards;
 
 import basemod.helpers.TooltipInfo;
-import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -10,14 +9,11 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.StrengthPower;
-import evolutionmod.orbs.BeastGene;
 import evolutionmod.orbs.CentaurGene;
 import evolutionmod.patches.AbstractCardEnum;
 
-import java.util.List;
-
 public class Battleborn
-        extends BaseEvoCard implements GlowingCard {
+        extends BaseEvoCard {
     public static final String ID = "evolutionmod:Battleborn";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -38,18 +34,17 @@ public class Battleborn
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
+        int strength = this.magicNumber;
+        if (isPlayerInTheseForms(CentaurGene.ID) && !this.upgraded) {
+            strength += UPGRADE_STRENGTH_AMT;
+        }
         AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
-                new StrengthPower(p, this.magicNumber)));
-        formEffect(CentaurGene.ID, () -> {
-            if (!this.upgraded) {
-                AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
-                        new StrengthPower(p, FORMS_STRENGTH_AMT)));
-            } else {
-                formEffect(BeastGene.ID, () ->
-                        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
-                                new StrengthPower(p, FORMS_STRENGTH_AMT))));
-            }
-        });
+                new StrengthPower(p, strength)));
+        if (this.upgraded) {
+            addToBot(new CentaurGene().getChannelAction());
+        } else {
+            formEffect(CentaurGene.ID);
+        }
     }
 
     @Override
@@ -72,25 +67,11 @@ public class Battleborn
     }
 
     @Override
-    public int getNumberOfGlows() {
-        return upgraded ? 2 : 1;
-    }
-
-    @Override
-    public boolean isGlowing(int glowIndex) {
-        return true;
-    }
-
-    @Override
-    public Color getGlowColor(int glowIndex) {
-        switch (glowIndex) {
-            case 0:
-                return isPlayerInThisForm(CentaurGene.ID) ? CentaurGene.COLOR.cpy()
-                        : BLUE_BORDER_GLOW_COLOR.cpy();
-            case 1:
-            return isPlayerInThisForm(BeastGene.ID, CentaurGene.ID) ? BeastGene.COLOR.cpy()
-                        : BLUE_BORDER_GLOW_COLOR.cpy();
+    public void triggerOnGlowCheck() {
+        if (!upgraded && isPlayerInThisForm(CentaurGene.ID)) {
+            this.glowColor = CentaurGene.COLOR.cpy();
+        } else {
+            this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
         }
-        return BLUE_BORDER_GLOW_COLOR.cpy();
     }
 }

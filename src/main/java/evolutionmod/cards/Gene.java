@@ -55,7 +55,7 @@ public class Gene extends BaseEvoCard {
 
 	@Override
 	public void use(AbstractPlayer p, AbstractMonster m) {
-		addToBot(new ChannelAction(this.gene.makeCopy()));
+		addToBot(((AbstractGene) this.gene.makeCopy()).getChannelAction());
 		if (upgraded) {
 			addToBot(new AbstractGameAction() {
 				@Override
@@ -69,7 +69,7 @@ public class Gene extends BaseEvoCard {
 
 	@Override
 	public void onChoseThisOption() {
-		addToBot(new ChannelAction(this.gene.makeCopy()));
+		addToBot(((AbstractGene) this.gene.makeCopy()).getChannelAction());
 		if (upgraded) {
 			addToBot(new AbstractGameAction() {
 				@Override

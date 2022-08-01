@@ -2,12 +2,10 @@ package evolutionmod.cards;
 
 import basemod.helpers.TooltipInfo;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.megacrit.cardcrawl.actions.watcher.ChooseOneAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import evolutionmod.patches.AbstractCardEnum;
@@ -26,18 +24,6 @@ public class Treasure extends BaseEvoCard {
 	public static final String IMG_PATH = "evolutionmod/images/cards/Treasures.png";
 	private static final int COST = 0;
 
-	private static final List<AbstractCard> previewCards = new ArrayList<AbstractCard>() {{
-		add(new CrystalDust(-1));
-		add(new CrystalShard(-1));
-		add(new CrystalStone(-1));
-		add(inlineUpgrade(new CrystalDust(-1)));
-		add(inlineUpgrade(new CrystalShard(-1)));
-		add(inlineUpgrade(new CrystalStone(-1)));
-	}};
-
-	private float previewTimer = 0f;
-	private int previewIndex = 0;
-
 	public Treasure() {
 		super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
 				CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
@@ -49,7 +35,7 @@ public class Treasure extends BaseEvoCard {
 	@Override
 	public void use(AbstractPlayer p, AbstractMonster m) {
 		ArrayList<AbstractCard> cardChoices = new ArrayList();
-		cardChoices.add(new CrystalStone());
+		cardChoices.add(new CrystalShield());
 		cardChoices.add(new CrystalShard());
 		cardChoices.add(new CrystalDust());
 		if (this.upgraded) {
@@ -78,6 +64,31 @@ public class Treasure extends BaseEvoCard {
 	}
 
 	@Override
+	public List<TooltipInfo> getCustomTooltips() {
+		if (customTooltips == null) {
+			super.getCustomTooltips();
+			customTooltips.add(new TooltipInfo("Randomized forms",
+					"The forms on the cards are selected when they are created and vary from a card to another."));
+		}
+		return  customTooltips;
+	}
+
+	private float previewTimer = 0f;
+	private int previewIndex = 0;
+	private static final List<AbstractCard> previewCards = new ArrayList<AbstractCard>() {{
+		add(new CrystalShard(-1));
+		add(new CrystalShield(-1));
+		add(new CrystalDust(-1));
+		add(inlineUpgrade(new CrystalDust(-1)));
+		add(inlineUpgrade(new CrystalShard(-1)));
+		add(inlineUpgrade(new CrystalShield(-1)));
+	}};
+	private static AbstractCard inlineUpgrade(AbstractCard card) {
+		card.upgrade();
+		return card;
+	}
+
+	@Override
 	public void update() {
 		super.update();
 		if (hb.justHovered) {
@@ -91,20 +102,5 @@ public class Treasure extends BaseEvoCard {
 				previewTimer = 3f;
 			}
 		}
-	}
-
-	@Override
-	public List<TooltipInfo> getCustomTooltips() {
-		if (customTooltips == null) {
-			super.getCustomTooltips();
-			customTooltips.add(new TooltipInfo("Randomized forms",
-					"The forms on the cards are selected when they are created and vary from a card to another."));
-		}
-		return  customTooltips;
-	}
-
-	private static AbstractCard inlineUpgrade(AbstractCard card) {
-		card.upgrade();
-		return card;
 	}
 }

@@ -38,7 +38,7 @@ public class FlameStrike
         AbstractDungeon.actionManager.addToBottom(new DamageAllEnemiesAction(p, this.multiDamage,
                 this.damageTypeForTurn,
                 AbstractGameAction.AttackEffect.BLUNT_HEAVY));
-        AbstractDungeon.actionManager.addToBottom(new ChannelAction(new LavafolkGene()));
+        AbstractDungeon.actionManager.addToBottom(new LavafolkGene().getChannelAction());
     }
 
 //    @Override

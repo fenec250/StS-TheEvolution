@@ -78,6 +78,8 @@ public class CurrentsDancer
 	public void triggerOnGlowCheck() {
 		if (isPlayerInThisForm(MerfolkGene.ID)) {
 			this.glowColor = MerfolkGene.COLOR.cpy();
+		} else {
+			this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
 		}
 	}
 }

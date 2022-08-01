@@ -3,6 +3,7 @@ package evolutionmod.relics;
 import basemod.abstracts.CustomRelic;
 import com.badlogic.gdx.graphics.Texture;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.RelicStrings;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import evolutionmod.orbs.AbstractGene;
@@ -38,10 +39,10 @@ public class PowerFocus extends CustomRelic {
     }
 
     @Override
-    public void onEvokeOrb(AbstractOrb ammo) {
-        super.onEvokeOrb(ammo);
-        if (this.pulse && ammo instanceof AbstractGene) {
-            ammo.onEvoke();
+    public void onEvokeOrb(AbstractOrb orb) {
+        super.onEvokeOrb(orb);
+        if (this.pulse && orb instanceof AbstractGene) {
+            ((AbstractGene) orb).getAdaptation().apply(AbstractDungeon.player, null);
             this.stopPulse();
         }
     }

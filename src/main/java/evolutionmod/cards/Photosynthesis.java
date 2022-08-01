@@ -60,15 +60,7 @@ public class Photosynthesis
             }
         });
         boolean inForm = formEffect(PlantGene.ID);
-        if (inForm) {
-            adapt(1);
-//            addToBot(new AbstractGameAction() {
-//                @Override
-//                public void update() {
-//                    this.isDone = true;
-//                }
-//            });
-        }
+        adapt(inForm ? 1 : 0); // calling adapt(0) resets shuffleBackIntoDrawPile
         this.useAdaptations(p, m);
     }
 

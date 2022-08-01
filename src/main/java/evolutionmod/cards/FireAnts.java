@@ -35,7 +35,7 @@ public class FireAnts
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         LavafolkGene orb = new LavafolkGene();
-        addToBot(new ChannelAction(orb));
+        addToBot(orb.getChannelAction());
 //        List<AbstractCard> drones = p.hand.group.stream()
 //                .filter(card -> Drone.ID.equals(card.cardID))
 //                .collect(Collectors.toList());

@@ -33,8 +33,8 @@ public class Broodmother extends BaseEvoCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         addToBot(new ApplyPowerAction(p, p, new BroodPower(p, this.magicNumber)));
-        addToBot(new ChannelAction(new InsectGene()));
-        addToBot(new ChannelAction(new InsectGene()));
+        addToBot(new InsectGene().getChannelAction());
+        addToBot(new InsectGene().getChannelAction());
     }
 
     @Override

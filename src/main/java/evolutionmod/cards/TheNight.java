@@ -33,7 +33,7 @@ public class TheNight extends BaseEvoCard {
     public void use(AbstractPlayer p, AbstractMonster m) {
 //        if (!upgraded) {
             this.addToBot(new ApplyPowerAction(p, p, new TheNightPower(p, this.magicNumber)));
-            addToBot(new ChannelAction(new ShadowGene()));
+            addToBot(new ShadowGene().getChannelAction());
 //        } else {
 //            this.addToBot(new ApplyPowerAction(p, p, new TheNightPlusPower(p, this.magicNumber)));
 //        }

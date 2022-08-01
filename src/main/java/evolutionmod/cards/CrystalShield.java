@@ -1,7 +1,6 @@
 package evolutionmod.cards;
 
 import basemod.abstracts.CustomSavable;
-import basemod.helpers.TooltipInfo;
 import com.badlogic.gdx.graphics.Color;
 import com.evacipated.cardcrawl.mod.stslib.actions.common.RefundAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
@@ -26,11 +25,9 @@ import evolutionmod.orbs.ShadowGene;
 import evolutionmod.orbs.SuccubusGene;
 import evolutionmod.patches.AbstractCardEnum;
 
-import java.util.List;
-
-public class CrystalStone
+public class CrystalShield
 		extends BaseEvoCard implements CustomSavable<Integer>, GlowingCard {
-	public static final String ID = "evolutionmod:CrystalStone";
+	public static final String ID = "evolutionmod:CrystalShield";
 	public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;
 	public static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -47,13 +44,13 @@ public class CrystalStone
 	private AbstractGene firstGene; // firstIndex = genesIndex / 10
 	private AbstractGene secondGene; // secoIndex = genesIndex % 10
 
-	public CrystalStone() {
+	public CrystalShield() {
 		this((!CardCrawlGame.isInARun() || AbstractDungeon.miscRng == null)
 				? -1
 				: AbstractDungeon.miscRng.random(11 * 10 - 1));
 	}
 
-	public CrystalStone(int geneIndexes) {
+	public CrystalShield(int geneIndexes) {
 		super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
 				CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
 				CardRarity.COMMON, CardTarget.SELF);
@@ -99,7 +96,7 @@ public class CrystalStone
 
 	@Override
 	public AbstractCard makeCopy() {
-		return this.secondGene == null ? new CrystalStone() : new CrystalStone(this.genesIndexes);
+		return this.secondGene == null ? new CrystalShield() : new CrystalShield(this.genesIndexes);
 	}
 
 	@Override

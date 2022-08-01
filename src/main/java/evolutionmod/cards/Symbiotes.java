@@ -15,7 +15,7 @@ import evolutionmod.powers.GrowthPower;
 import evolutionmod.powers.SymbiotesPower;
 
 public class Symbiotes
-        extends BaseEvoCard implements GlowingCard {
+        extends BaseEvoCard {
     public static final String ID = "evolutionmod:Symbiotes";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -43,13 +43,14 @@ public class Symbiotes
 //                addToBot(new RefundAction(this, 1))));
 //        formEffect(InsectGene.ID, () -> addToBot(new ApplyPowerAction(p, p, new GrowthPower(p, 1))));
 
-        if (this.upgraded) {
-            formEffect(PlantGene.ID, () -> addToBot(new ApplyPowerAction(p, p, new GrowthPower(p, FORM_GROWTH_AMT))));
-        }
-//        int growth = (this.upgraded ? UPGRADE_GROWTH_AMT : 0) + (isPlayerInTheseForms(PlantGene.ID) ? FORM_GROWTH_AMT : 0);
-//        if (growth > 0) {
-//            formEffect(PlantGene.ID, () -> addToBot(new ApplyPowerAction(p, p, new GrowthPower(p, growth))));
+//        if (this.upgraded) {
+//            formEffect(PlantGene.ID, () -> addToBot(new ApplyPowerAction(p, p, new GrowthPower(p, FORM_GROWTH_AMT))));
 //        }
+        int growth = (this.upgraded ? UPGRADE_GROWTH_AMT : 0) + (isPlayerInThisForm(PlantGene.ID) ? FORM_GROWTH_AMT : 0);
+        if (growth > 0) {
+            addToBot(new ApplyPowerAction(p, p, new GrowthPower(p, growth)));
+        }
+        formEffect(PlantGene.ID);
     }
 
     @Override
@@ -64,26 +65,11 @@ public class Symbiotes
     }
 
     @Override
-    public int getNumberOfGlows() {
-        return 1;
-    }
-
-    @Override
-    public boolean isGlowing(int glowIndex) {
-        return glowIndex == 0 && upgraded;
-    }
-
-    @Override
-    public Color getGlowColor(int glowIndex) {
-        switch (glowIndex) {
-            case 0:
-//                return isPlayerInThisForm(InsectGene.ID) ? InsectGene.COLOR.cpy()
-//                        : BLUE_BORDER_GLOW_COLOR.cpy();
-//            case 1:
-                return isPlayerInThisForm(PlantGene.ID, InsectGene.ID) ? PlantGene.COLOR.cpy()
-                        : BLUE_BORDER_GLOW_COLOR.cpy();
-            default:
-                return BLUE_BORDER_GLOW_COLOR.cpy();
+    public void triggerOnGlowCheck() {
+        if (isPlayerInThisForm(PlantGene.ID)) {
+            this.glowColor = PlantGene.COLOR.cpy();
+        } else {
+            this.glowColor = BLUE_BORDER_GLOW_COLOR;
         }
     }
 }

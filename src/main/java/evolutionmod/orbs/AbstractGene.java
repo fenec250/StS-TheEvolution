@@ -2,6 +2,8 @@ package evolutionmod.orbs;
 
 import basemod.abstracts.CustomOrb;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import evolutionmod.cards.AdaptableEvoCard;
 
 public abstract class AbstractGene extends CustomOrb {
@@ -22,6 +24,10 @@ public abstract class AbstractGene extends CustomOrb {
 	public void onEvoke() {
 		onStartOfTurn();
 		onEndOfTurn();
+	}
+
+	public AbstractGameAction getChannelAction() {
+		return new ChannelAction(this);
 	}
 
 	public abstract AdaptableEvoCard.AbstractAdaptation getAdaptation();

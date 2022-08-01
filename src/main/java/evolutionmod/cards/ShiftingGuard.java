@@ -25,7 +25,7 @@ public class ShiftingGuard
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = "evolutionmod/images/cards/ShiftingGuard.png";
     private static final int COST = 1;
-    private static final int BLOCK_AMT = 8;
+    private static final int BLOCK_AMT = 7;
     private static final int UPGRADE_BLOCK_AMT = 1;
     private static final int GENE_TRIGGER_AMT = 1;
     private static final int UPGRADE_GENE_TRIGGER_AMT = 1;
@@ -68,7 +68,7 @@ public class ShiftingGuard
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeBlock(UPGRADE_BLOCK_AMT);
+//            this.upgradeBlock(UPGRADE_BLOCK_AMT);
             this.upgradeMagicNumber(UPGRADE_GENE_TRIGGER_AMT);
             this.rawDescription = UPGRADE_DESCRIPTION;
             this.initializeDescription();

@@ -68,7 +68,7 @@ public class Mutate extends BaseEvoCard {
 				if (!current.contains(ShadowGene.ID)) { available.add(ShadowGene.ID);}
 
 				if (available.size() == 1) {
-					addToTop(new ChannelAction(getGene(available.get(0))));
+					addToTop(getGene(available.get(0)).getChannelAction());
 				} else {
 					while (available.size() > magicNumber) {
 						available.remove(AbstractDungeon.cardRng.random(available.size() - 1));

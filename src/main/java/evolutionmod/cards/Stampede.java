@@ -46,7 +46,7 @@ public class Stampede
         AbstractDungeon.actionManager.addToBottom(new DamageAllEnemiesAction(p, this.multiDamage,
                 this.damageTypeForTurn,
                 AbstractGameAction.AttackEffect.BLUNT_HEAVY));
-        AbstractDungeon.actionManager.addToBottom(new ChannelAction(new CentaurGene()));
+        AbstractDungeon.actionManager.addToBottom(new CentaurGene().getChannelAction());
     }
 
     @Override

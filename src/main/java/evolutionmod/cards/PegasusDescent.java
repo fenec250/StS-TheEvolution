@@ -55,7 +55,7 @@ public class PegasusDescent
                 this.isDone = true;
             }
         });
-        formEffect(HarpyGene.ID, () -> addToBot(new ChannelAction(new CentaurGene())));
+        formEffect(HarpyGene.ID, () -> addToBot(new CentaurGene().getChannelAction()));
     }
 
     @Override

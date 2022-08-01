@@ -96,7 +96,7 @@ public class Mastery
 			@Override
 			public void update() {
 				if (upgraded) {
-					addToTop(new ChannelAction(gene.makeCopy()));
+					addToTop(((AbstractGene)gene.makeCopy()).getChannelAction());
 					addToTop(new IncreaseMaxOrbAction(1));
 				} else {
 					formEffect(gene.ID, () -> addToTop(new IncreaseMaxOrbAction(1)));
@@ -173,9 +173,9 @@ public class Mastery
 					+ (!this.upgraded
 					? gene.ID + EXTENDED_DESCRIPTION[2]
 					: EXTENDED_DESCRIPTION[3] + gene.ID + EXTENDED_DESCRIPTION[4]);
-			this.name = replaceGeneIds(this.gene.ID + EXTENDED_DESCRIPTION[5]);
+			this.name = replaceGeneIds(this.gene.ID + EXTENDED_DESCRIPTION[5] + (upgraded ? "+" : ""));
 		} else {
-			this.name = NAME;
+			this.name = NAME + (upgraded ? "+" : "");
 			this.rawDescription = this.upgraded ? UPGRADE_DESCRIPTION : DESCRIPTION;
 		}
 		initializeDescription();

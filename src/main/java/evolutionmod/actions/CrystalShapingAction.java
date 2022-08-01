@@ -9,10 +9,8 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import evolutionmod.cards.CrystalDust;
 import evolutionmod.cards.CrystalShard;
-import evolutionmod.cards.CrystalStone;
-import evolutionmod.orbs.LavafolkGene;
+import evolutionmod.cards.CrystalShield;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -60,14 +58,14 @@ public class CrystalShapingAction extends AbstractGameAction {
 					return;
 				}
 				others = AbstractDungeon.player.exhaustPile.group.stream()
-						.filter(c -> !c.cardID.equals(CrystalStone.ID)) // TODO: how do we make custom tags again?
+						.filter(c -> !c.cardID.equals(CrystalShield.ID)) // TODO: how do we make custom tags again?
 						.filter(c -> !c.cardID.equals(CrystalShard.ID))
 						.filter(c -> !c.cardID.equals(CrystalDust.ID))
 						.collect(Collectors.toList());
-				if (AbstractDungeon.player.exhaustPile.size() <= others.size()) {
-					this.isDone = true;
-					return;
-				}
+//				if (AbstractDungeon.player.exhaustPile.size() <= others.size()) {
+//					this.isDone = true;
+//					return;
+//				}
 				others.forEach(card -> {
 					AbstractDungeon.player.exhaustPile.removeCard(card);
 					card.stopGlowing();
@@ -84,6 +82,7 @@ public class CrystalShapingAction extends AbstractGameAction {
 							});
 					AbstractDungeon.player.exhaustPile.clear();
 					AbstractDungeon.player.exhaustPile.group.addAll(others);
+					others.clear();
 					this.isDone = true;
 					return;
 				}
@@ -99,6 +98,8 @@ public class CrystalShapingAction extends AbstractGameAction {
 				}
 				AbstractDungeon.player.exhaustPile.group.addAll(others);
 				others.clear();
+				this.isDone = true;
+				return;
 			}
 
 			this.tickDuration();

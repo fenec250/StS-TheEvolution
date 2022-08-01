@@ -51,7 +51,7 @@ public class Stalker
                 addToBot(new ApplyPowerAction(monster, p, new PoisonPower(monster, p, this.magicNumber)));
             }
         }
-        AbstractDungeon.actionManager.addToBottom(new ChannelAction(new LizardGene()));
+        AbstractDungeon.actionManager.addToBottom(new LizardGene().getChannelAction());
     }
 
     @Override

@@ -2,6 +2,7 @@ package evolutionmod.cards;
 
 import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -12,6 +13,7 @@ import evolutionmod.actions.FateAction;
 import evolutionmod.orbs.InsectGene;
 import evolutionmod.orbs.LymeanGene;
 import evolutionmod.patches.AbstractCardEnum;
+import evolutionmod.powers.FatePower;
 
 public class Hivemind
         extends BaseEvoCard implements GlowingCard {
@@ -27,7 +29,6 @@ public class Hivemind
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.UNCOMMON, CardTarget.SELF);
-//        this.magicNumber = this.baseMagicNumber = ENVENOM_AMT;
         this.cardsToPreview = new Drone();
     }
 
@@ -41,7 +42,7 @@ public class Hivemind
             @Override
             public void update() {
                 int count = (int) p.hand.group.stream().filter(card -> Drone.ID.equals(card.cardID)).count();
-                addToTop(new FateAction(count));
+                addToTop(new ApplyPowerAction(p, p, new FatePower(p, count), count));
                 this.isDone = true;
             }
         });

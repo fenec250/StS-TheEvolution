@@ -2,6 +2,9 @@ package evolutionmod.orbs;
 
 import basemod.helpers.TooltipInfo;
 import com.badlogic.gdx.graphics.Color;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -10,6 +13,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import evolutionmod.actions.FateAction;
 import evolutionmod.cards.AdaptableEvoCard;
+import evolutionmod.powers.FatePower;
 
 public class LymeanGene extends AbstractGene {
 	public static final String ID = "evolutionmod:LymeanGene";
@@ -34,8 +38,7 @@ public class LymeanGene extends AbstractGene {
 
 	@Override
 	public void onEvoke() {
-//		super.onEvoke();
-		apply(AbstractDungeon.player, null, 1, true);
+//		super.onEvoke(); prevent default evoke
 	}
 
 	@Override
@@ -48,17 +51,27 @@ public class LymeanGene extends AbstractGene {
 	}
 
 	public static void apply(AbstractPlayer p, AbstractMonster m, int times, boolean addToTop) {
-		int fate = fate();
+		int fate = fate() * times;
 		if (fate > 0) {
-			for (int i = 0; i < times; ++i) {
-				if (addToTop) {
-					AbstractDungeon.actionManager.addToTop(new FateAction(fate));
-					//				AbstractDungeon.actionManager.addToBottom(new TriggerScryEffectsAction());
-				} else {
-					AbstractDungeon.actionManager.addToBottom(new FateAction(fate));
-				}
+			if (addToTop) {
+				AbstractDungeon.actionManager.addToTop(new ApplyPowerAction(p, p, new FatePower(p, fate), fate, true));
+			} else {
+				AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new FatePower(p, fate), fate, true));
 			}
 		}
+	}
+
+	@Override
+	public AbstractGameAction getChannelAction() {
+		AbstractGene gene = this;
+		return new AbstractGameAction() {
+			@Override
+			public void update() {
+				apply(AbstractDungeon.player, null, 1, true);
+				addToTop(new ChannelAction(gene));
+				this.isDone = true;
+			}
+		};
 	}
 
 	@Override
@@ -73,7 +86,7 @@ public class LymeanGene extends AbstractGene {
 	}
 
 	public static String getOrbDescription() {
-		return "At the #bstart #bof #byour #bturn and when #yEvoked: NL " + getDescription();
+		return  DESCRIPTION[2] + getDescription();
 	}
 
 	public static String getDescription() {
@@ -104,7 +117,7 @@ public class LymeanGene extends AbstractGene {
 
 		@Override
 		public String text() {
-			return "Lymean";
+			return NAME;
 		}
 
 		@Override

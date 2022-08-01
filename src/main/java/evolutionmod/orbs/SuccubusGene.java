@@ -71,7 +71,7 @@ public class SuccubusGene extends AbstractGene {
 	}
 
 	public static String getOrbDescription() {
-		return "At the #bstart #bof #byour #bturn and when #yEvoked: NL " + getDescription();
+		return DESCRIPTION[2] + getDescription();
 	}
 
 	public static String getDescription() {

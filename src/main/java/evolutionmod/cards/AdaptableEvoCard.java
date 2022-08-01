@@ -112,10 +112,6 @@ public abstract class AdaptableEvoCard extends BaseEvoCard {
 
 	@Override
 	public void use(AbstractPlayer p, AbstractMonster m) {
-//		p.orbs.stream()
-//				.filter(o -> this.canAdaptWith(o) > 0)
-//				.collect(Collectors.toList())
-//				.forEach(o -> this.tryAdaptingWith(o, true));
 		this.adapt(99);
 		this.useAdaptations(p, m);
 	}
@@ -137,42 +133,42 @@ public abstract class AdaptableEvoCard extends BaseEvoCard {
 			super.getCustomTooltips();
 			this.customTooltips.add(adaptationTooltip);
 		}
-		if (adaptationMap.containsKey(LavafolkGene.ID) && adaptationMap.get(LavafolkGene.ID).amount > 0 && !customTooltips.contains(LavafolkGene.TOOLTIP)) customTooltips.add(LavafolkGene.TOOLTIP);
-		if (adaptationMap.containsKey(ShadowGene.ID) && adaptationMap.get(ShadowGene.ID).amount > 0 && !customTooltips.contains(ShadowGene.TOOLTIP)) customTooltips.add(ShadowGene.TOOLTIP);
-		if (adaptationMap.containsKey(InsectGene.ID) && adaptationMap.get(InsectGene.ID).amount > 0 && !customTooltips.contains(InsectGene.TOOLTIP)) customTooltips.add(InsectGene.TOOLTIP);
-		if (adaptationMap.containsKey(HarpyGene.ID) && adaptationMap.get(HarpyGene.ID).amount > 0 && !customTooltips.contains(HarpyGene.TOOLTIP)) customTooltips.add(HarpyGene.TOOLTIP);
-		if (adaptationMap.containsKey(MerfolkGene.ID) && adaptationMap.get(MerfolkGene.ID).amount > 0 && !customTooltips.contains(MerfolkGene.TOOLTIP)) customTooltips.add(MerfolkGene.TOOLTIP);
-		if (adaptationMap.containsKey(CentaurGene.ID) && adaptationMap.get(CentaurGene.ID).amount > 0 && !customTooltips.contains(CentaurGene.TOOLTIP)) customTooltips.add(CentaurGene.TOOLTIP);
-		if (adaptationMap.containsKey(BeastGene.ID) && adaptationMap.get(BeastGene.ID).amount > 0 && !customTooltips.contains(BeastGene.TOOLTIP)) customTooltips.add(BeastGene.TOOLTIP);
-		if (adaptationMap.containsKey(PlantGene.ID) && adaptationMap.get(PlantGene.ID).amount > 0 && !customTooltips.contains(PlantGene.TOOLTIP)) customTooltips.add(PlantGene.TOOLTIP);
-		if (adaptationMap.containsKey(LymeanGene.ID) && adaptationMap.get(LymeanGene.ID).amount > 0 && !customTooltips.contains(LymeanGene.TOOLTIP)) customTooltips.add(LymeanGene.TOOLTIP);
-		if (adaptationMap.containsKey(SuccubusGene.ID) && adaptationMap.get(SuccubusGene.ID).amount > 0 && !customTooltips.contains(SuccubusGene.TOOLTIP)) customTooltips.add(SuccubusGene.TOOLTIP);
-		if (adaptationMap.containsKey(LizardGene.ID) && adaptationMap.get(LizardGene.ID).amount > 0 && !customTooltips.contains(LizardGene.TOOLTIP)) customTooltips.add(LizardGene.TOOLTIP);
+//		if (adaptationMap.containsKey(LavafolkGene.ID) && adaptationMap.get(LavafolkGene.ID).amount > 0 && !customTooltips.contains(LavafolkGene.TOOLTIP)) customTooltips.add(LavafolkGene.TOOLTIP);
+//		if (adaptationMap.containsKey(ShadowGene.ID) && adaptationMap.get(ShadowGene.ID).amount > 0 && !customTooltips.contains(ShadowGene.TOOLTIP)) customTooltips.add(ShadowGene.TOOLTIP);
+//		if (adaptationMap.containsKey(InsectGene.ID) && adaptationMap.get(InsectGene.ID).amount > 0 && !customTooltips.contains(InsectGene.TOOLTIP)) customTooltips.add(InsectGene.TOOLTIP);
+//		if (adaptationMap.containsKey(HarpyGene.ID) && adaptationMap.get(HarpyGene.ID).amount > 0 && !customTooltips.contains(HarpyGene.TOOLTIP)) customTooltips.add(HarpyGene.TOOLTIP);
+//		if (adaptationMap.containsKey(MerfolkGene.ID) && adaptationMap.get(MerfolkGene.ID).amount > 0 && !customTooltips.contains(MerfolkGene.TOOLTIP)) customTooltips.add(MerfolkGene.TOOLTIP);
+//		if (adaptationMap.containsKey(CentaurGene.ID) && adaptationMap.get(CentaurGene.ID).amount > 0 && !customTooltips.contains(CentaurGene.TOOLTIP)) customTooltips.add(CentaurGene.TOOLTIP);
+//		if (adaptationMap.containsKey(BeastGene.ID) && adaptationMap.get(BeastGene.ID).amount > 0 && !customTooltips.contains(BeastGene.TOOLTIP)) customTooltips.add(BeastGene.TOOLTIP);
+//		if (adaptationMap.containsKey(PlantGene.ID) && adaptationMap.get(PlantGene.ID).amount > 0 && !customTooltips.contains(PlantGene.TOOLTIP)) customTooltips.add(PlantGene.TOOLTIP);
+//		if (adaptationMap.containsKey(LymeanGene.ID) && adaptationMap.get(LymeanGene.ID).amount > 0 && !customTooltips.contains(LymeanGene.TOOLTIP)) customTooltips.add(LymeanGene.TOOLTIP);
+//		if (adaptationMap.containsKey(SuccubusGene.ID) && adaptationMap.get(SuccubusGene.ID).amount > 0 && !customTooltips.contains(SuccubusGene.TOOLTIP)) customTooltips.add(SuccubusGene.TOOLTIP);
+//		if (adaptationMap.containsKey(LizardGene.ID) && adaptationMap.get(LizardGene.ID).amount > 0 && !customTooltips.contains(LizardGene.TOOLTIP)) customTooltips.add(LizardGene.TOOLTIP);
 		return this.customTooltips;
 	}
 
-	@Override
-	public void triggerWhenDrawn() {
-		super.triggerWhenDrawn();
-		this.shuffleBackIntoDrawPile = false;
-	}
-
 	public void adapt(int max) {
-		addToBot(new AbstractGameAction() {
-			@Override
-			public void update() {
-				AbstractDungeon.player.orbs.stream()
-						.filter(o -> canAdaptWith(o) > 0)
-						.limit(max)
-						.collect(Collectors.toList())
-						.forEach(o -> tryAdaptingWith(o));
-				this.isDone = true;
-			}
-		});
+		shuffleBackIntoDrawPile = false;
+		if (max > 0) {
+			addToBot(new AbstractGameAction() {
+				@Override
+				public void update() {
+					AbstractDungeon.player.orbs.stream()
+							.filter(o -> canAdaptWith(o) > 0)
+							.limit(max)
+							.collect(Collectors.toList())
+							.forEach(o -> tryAdaptingWith(o));
+					this.isDone = true;
+				}
+			});
+		}
 	}
 
 	public void chooseAndAdapt(int max) {
-		addToBot(new ChooseAdaptationAction(max, this));
+		shuffleBackIntoDrawPile = false;
+		if (max > 0) {
+			addToBot(new ChooseAdaptationAction(max, this));
+		}
 	}
 
 	public int tryAdaptingWith(AbstractOrb orb) {
@@ -210,18 +206,6 @@ public abstract class AdaptableEvoCard extends BaseEvoCard {
 
 	public void useAdaptations(AbstractPlayer p, AbstractMonster m) {
 		addToBot(new AbstractGameAction() {
-			@Override
-			public void update() {
-				adaptationMap.values().stream()
-						.filter(adaptation -> adaptation.amount > 0)
-						.forEach(adaptation -> adaptation.apply(p, m));
-				this.isDone = true;
-			}
-		});
-    }
-
-	public void useAdaptationsFast(AbstractPlayer p, AbstractMonster m) {
-		addToTop(new AbstractGameAction() {
 			@Override
 			public void update() {
 				adaptationMap.values().stream()

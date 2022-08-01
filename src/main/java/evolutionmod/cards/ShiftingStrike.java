@@ -26,8 +26,8 @@ public class ShiftingStrike
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = "evolutionmod/images/cards/ShiftingStrike.png";
     private static final int COST = 1;
-    private static final int DAMAGE_AMT = 9;
-    private static final int UPGRADE_DAMAGE_AMT = 2;
+    private static final int DAMAGE_AMT = 8;
+    private static final int UPGRADE_DAMAGE_AMT = 1;
     private static final int GENE_TRIGGER_AMT = 1;
     private static final int UPGRADE_GENE_TRIGGER_AMT = 1;
 
@@ -72,7 +72,7 @@ public class ShiftingStrike
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeDamage(UPGRADE_DAMAGE_AMT);
+//            this.upgradeDamage(UPGRADE_DAMAGE_AMT);
             this.upgradeMagicNumber(UPGRADE_GENE_TRIGGER_AMT);
             this.rawDescription = UPGRADE_DESCRIPTION;
             this.initializeDescription();

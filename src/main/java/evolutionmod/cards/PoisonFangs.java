@@ -24,7 +24,7 @@ public class PoisonFangs
     private static final int COST = 1;
     private static final int DAMAGE_AMT = 7;
     private static final int UPGRADE_DAMAGE_AMT = 2;
-    private static final int LIZARD_POISON_AMT = 4;
+    private static final int LIZARD_POISON_AMT = 3;
     private static final int UPGRADE_LIZARD_POISON_AMT = 1;
 
     public PoisonFangs() {

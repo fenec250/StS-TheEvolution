@@ -1,51 +1,52 @@
 {
   "evolutionmod:CentaurGene": {
     "NAME": "Centaur",
-    "DESCRIPTION": ["Increase the damage of your next Attack by #b", "."]
+    "DESCRIPTION": ["Increase the damage of your next Attack by #b", ".", "At the #bstart #bof #byour #bturn and when #yEvoked: NL "]
   },
   "evolutionmod:PlantGene": {
     "NAME": "Plant",
-    "DESCRIPTION": ["Gain #b", " #yGrowth. Upon reaching 2 Growth gain 1 Energy and reduce Growth by 2."]
+    "DESCRIPTION": ["Gain #b", " #yGrowth. Upon reaching 2 Growth gain 1 Energy and reduce Growth by 2.", "At the #bstart #bof #byour #bturn and when #yEvoked: NL "]
   },
   "evolutionmod:MerfolkGene": {
     "NAME": "Merfolk",
-    "DESCRIPTION": ["Gain #b", " #yBlock."]
+    "DESCRIPTION": ["Gain #b", " #yBlock.", "At the #rend #rof #ryour #rturn and when #yEvoked: NL "]
   },
   "evolutionmod:HarpyGene": {
     "NAME": "Harpy",
-    "DESCRIPTION": ["Draw ", "a card.", " cards."]
+    "DESCRIPTION": ["Draw ", "a card.", " cards.", "At the #bstart #bof #byour #bturn and when #yEvoked: NL "]
   },
   "evolutionmod:LavafolkGene": {
     "NAME": "Lavafolk",
-    "DESCRIPTION": ["Deal #b", " damage to a random enemy", " #b", " times", "."]
+    "DESCRIPTION": ["Deal #b", " damage to a random enemy", " #b", " times", ".", "At the #rend #rof #ryour #rturn and when #yEvoked: NL "]
   },
   "evolutionmod:SuccubusGene": {
     "NAME": "Succubus",
-    "DESCRIPTION": ["Apply #b", " #yLust to a random enemy. Lust reduces the base damage of its next attack."]
+    "DESCRIPTION": ["Apply #b", " #yLust to a random enemy. Lust reduces the base damage of its next attack.", "At the #bstart #bof #byour #bturn and when #yEvoked: NL "]
 //    "DESCRIPTION": ["Apply ", " #yLust and ", " #yVulnerable to a random enemy"]
   },
   "evolutionmod:LymeanGene": {
     "NAME": "Lymean",
-    "DESCRIPTION": ["#yFate #b", " random cards from your draw pile. #yFate puts these cards on top of your draw pile and Scry them."]
+//    "DESCRIPTION": ["#yFate #b", " random cards from your draw pile. #yFate puts these cards on top of your draw pile and Scry them."]
+    "DESCRIPTION": ["Gain #b", " #yFate. #yFate makes you #yScry at the start of your turn.", "At the #bstart #bof #byour #bturn and when #yChannelled: NL "]
   },
   "evolutionmod:InsectGene": {
     "NAME": "Insect",
-    "DESCRIPTION": ["Add a #yDrone to your hand. #yDrones are 0-cost Attacks with Exhaust and Ethereal."]
+    "DESCRIPTION": ["Add a #yDrone to your hand. #yDrones are 0-cost Attacks with Exhaust and Ethereal.", "At the #bstart #bof #byour #bturn and when #yEvoked: NL "]
   },
   "evolutionmod:BeastGene": {
     "NAME": "Beast",
-    "DESCRIPTION": ["Whenever you play an Attack this turn, gain #b", " #yBlock."]
+//    "DESCRIPTION": ["Whenever you play an Attack this turn, gain #b", " #yBlock.", "At the #bstart #bof #byour #bturn and when #yChannelled: NL "]
+    "DESCRIPTION": ["Whenever you play an Attack this turn, gain #b", " #yBlock per Energy spent.", "At the #bstart #bof #byour #bturn and when #yChannelled: NL "]
   },
   "evolutionmod:LizardGene": {
     "NAME": "Lizard",
-    "DESCRIPTION": ["Apply #b", " #yPoison", " and deal #b", " damage", " to a random enemy."]
+    "DESCRIPTION": ["Apply #b", " #yPoison", " and deal #b", " damage", " to a random enemy.", "At the #bstart #bof #byour #bturn and when #yEvoked: NL "]
 //    "DESCRIPTION": ["Apply #b", " #yPoison to a random enemy. #yPoison deals damage equal to its amount and reduces by 1 at the end of your turn"]
 //    "DESCRIPTION": ["At the start of your turn deal ", " damage and apply ", " Poison to a random enemy"]
   },
   "evolutionmod:ShadowGene": {
     "NAME": "Shadow",
-//    "DESCRIPTION": ["Apply ", " #yWeak to a random enemy."]
-    "DESCRIPTION": ["Gain ", " #yShadows. When #yShadows reaches its threshold it deals 2 damage per stack and applies 1 #yWeak to all enemies. NL The initial threshold is 1."]
+    "DESCRIPTION": ["Gain ", " #yShadows. When #yShadows reaches its threshold it deals 2 damage per stack and applies 1 #yWeak to all enemies. NL The initial threshold is 1.", "At the #bstart #bof #byour #bturn and when #yEvoked: NL "]
   }
 //
 //  "mystighjcmod:ArtesPlayedPower": {

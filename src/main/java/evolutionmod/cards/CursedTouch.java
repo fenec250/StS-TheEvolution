@@ -54,7 +54,8 @@ public class CursedTouch
 //                    .filter(o -> this.canAdaptWith(o) > 0)
 //                    .findAny()
 //                    .ifPresent(o -> this.tryAdaptingWith(o, true)));
-        formEffect(ShadowGene.ID, () -> this.adapt(1));
+        boolean inForm = formEffect(ShadowGene.ID);
+        adapt(inForm ? 1 : 0); // calling adapt(0) resets shuffleBackIntoDrawPile
         this.useAdaptations(p, m);
     }
 

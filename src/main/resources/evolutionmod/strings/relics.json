@@ -17,7 +17,7 @@
   "evolutionmod:PowerFocus": {
     "NAME": "Power Focus",
     "FLAVOR": "It tickles!",
-    "DESCRIPTIONS": ["The first Gene you Evoke each turn is evoked twice."]
+    "DESCRIPTIONS": ["The first Gene you Evoke each turn triggers its effect an additional time."]
   },
   "evolutionmod:MagicFocus": {
     "NAME": "Magic Focus",
@@ -42,7 +42,7 @@
   "evolutionmod:ScoutMedal": {
     "NAME": "Scout Medal",
     "FLAVOR": "Always prepared.",
-    "DESCRIPTIONS": ["At the start of the combat Fate #b1 card of each type."]
+    "DESCRIPTIONS": ["At the start of the combat Scry #b1 card of each type."]
   },
   "evolutionmod:Potato2": {
     "NAME": "boss",

@@ -34,10 +34,10 @@ public class Salamander extends BaseEvoCard implements GlowingCard {
     public void use(AbstractPlayer p, AbstractMonster m) {
         this.addToBot(new ApplyPowerAction(p, p, new SalamanderPower(p, this.magicNumber)));
         if (this.upgraded) {
-            addToBot(new ChannelAction(new LizardGene()));
-            addToBot(new ChannelAction(new LavafolkGene()));
+            addToBot(new LizardGene().getChannelAction());
+            addToBot(new LavafolkGene().getChannelAction());
         } else {
-            formEffect(LizardGene.ID, () -> addToBot(new ChannelAction(new LavafolkGene())));
+            formEffect(LizardGene.ID, () -> addToBot(new LavafolkGene().getChannelAction()));
         }
     }
 

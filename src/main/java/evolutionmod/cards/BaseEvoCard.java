@@ -2,7 +2,6 @@ package evolutionmod.cards;
 
 import basemod.abstracts.CustomCard;
 import basemod.helpers.TooltipInfo;
-import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
@@ -173,7 +172,7 @@ public abstract class BaseEvoCard extends CustomCard {
 			}
 			AbstractGene gene = getGene(geneId);
 			if (gene != null) {
-				AbstractDungeon.actionManager.addToBottom(new ChannelAction(gene));
+				AbstractDungeon.actionManager.addToBottom(gene.getChannelAction());
 			}
 		}
     }
@@ -186,7 +185,7 @@ public abstract class BaseEvoCard extends CustomCard {
 		} else {
 			AbstractGene gene = getGene(geneId);
 			if (gene != null) {
-				AbstractDungeon.actionManager.addToBottom(new ChannelAction(gene));
+				AbstractDungeon.actionManager.addToBottom(gene.getChannelAction());
 			}
 			return GodlyPowersPower.bypassFormRequirementOnce();
 		}

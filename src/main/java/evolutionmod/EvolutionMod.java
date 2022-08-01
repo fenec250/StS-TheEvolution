@@ -102,16 +102,14 @@ public class EvolutionMod implements
 
         //Special
         cards.add(new Drone());
-//        cards.add(new DroneGuard());
-//        cards.add(new DroneFire());
-//        cards.add(new DroneMantis());
         cards.add(new Feather());
 
         //Commons
         //Vex quote: i shoot for 18 commons, 10 damage 6 block 2 other as a "blueprint" and modify if anything jumps out at me
         //10 attacks
         cards.add(new ClawSlash());
-        cards.add(new Shadowbolt());
+//        cards.add(new Shadowbolt());
+        cards.add(new ShadowWave());
         cards.add(new TalonStrike());
         cards.add(new FlameStrike());
         cards.add(new PoisonFangs());
@@ -120,50 +118,67 @@ public class EvolutionMod implements
         cards.add(new ShiftingStrike());
         cards.add(new ChimeraStrike());
         cards.add(new CrystalShard());
+        cards.add(new GeneBlast());
+//        cards.add(new GeneFlash());
         //8 skills
         cards.add(new Barkskin());
-        cards.add(new Visions());
+//        cards.add(new Visions());
+        cards.add(new Visions2());
         cards.add(new Dive());
         cards.add(new Charm());
         cards.add(new Hatch());
 
         cards.add(new ChimeraDefense());
         cards.add(new ShiftingGuard());
-        cards.add(new CrystalStone());
+        cards.add(new CrystalShield());
 
         //Uncommons
         //11 attacks
         cards.add(new PlayingRough());
-        cards.add(new StripArmor());
-        cards.add(new NightMare());
+//        cards.add(new StripArmor());
+        cards.add(new StripArmor2());
+//        cards.add(new NightMare());
+        cards.add(new NightMare2());
         cards.add(new Phoenix());
         cards.add(new PegasusDescent());
         cards.add(new SpiderBite());
         cards.add(new CursedTouch());
-        cards.add(new BlackCat());
-        cards.add(new SeaWolf());
+//        cards.add(new BlackCat());
+        cards.add(new BlackCat2());
+//        cards.add(new SeaWolf());
+        cards.add(new SeaWolf2());
         //exhaust
         //18 skills
-        cards.add(new Strengthen2());
-        cards.add(new Hivemind());
-        cards.add(new VenomGlands());
+//        cards.add(new Strengthen());
+//        cards.add(new Strengthen2());
+        cards.add(new TrueStrike());
+//        cards.add(new Hivemind());
+        cards.add(new Hivemind2());
+//        cards.add(new VenomGlands());
+        cards.add(new VenomGlands2());
         cards.add(new FireAnts());
-        cards.add(new Firebloom());
-        cards.add(new ChannelMagic());
-        cards.add(new LeafBird());
+//        cards.add(new Firebloom());
+        cards.add(new Firebloom2());
+        cards.add(new SeerSear());
+//        cards.add(new LeafBird());
+        cards.add(new LeafBird2());
 //        cards.add(new Omen());
-        cards.add(new Pheromones());
-        cards.add(new Aphrodisiac());
+//        cards.add(new Pheromones());
+        cards.add(new Pheromones2());
+//        cards.add(new Aphrodisiac());
+        cards.add(new Aphrodisiac2());
         cards.add(new HeightenedSenses());
-        cards.add(new DepthsLurker2());
+//        cards.add(new DepthsLurker2());
+        cards.add(new DepthsLurker3());
         cards.add(new Antidote());
-        cards.add(new CalmTheWaters());
+        cards.add(new ReadTheWaters());
         cards.add(new SeaSerpent());
         cards.add(new ShiftingPower());
         cards.add(new Adaptation());
         cards.add(new Mutate());
         //exhaust
         cards.add(new Toxin());
+        cards.add(new Toxin2());
         cards.add(new Treasure());
         cards.add(new CrystalDust());
         //6 powers
@@ -171,7 +186,8 @@ public class EvolutionMod implements
         cards.add(new CurrentsDancer());
         cards.add(new Symbiotes());
         cards.add(new Salamander());
-        cards.add(new DarkDesires());
+//        cards.add(new DarkDesires());
+        cards.add(new DarkDesires2());
         cards.add(new Mastery());
         cards.add(new Shrink());
 
@@ -183,16 +199,17 @@ public class EvolutionMod implements
         cards.add(new Eruption());
         cards.add(new Frenzy());
         cards.add(new FeatherStorm());
+        cards.add(new SpiderBite2());
         //8 skills
         cards.add(new Drown());
+//        cards.add(new Drown2());
         cards.add(new Ritual());
         cards.add(new Photosynthesis());
         cards.add(new TheFutureIsNow());
-//        cards.add(new Aegis());
-//        cards.add(new CrystalShaping());
+        cards.add(new CrystalShaping());
 
         //6 powers
-        cards.add(new Broodmother());
+//        cards.add(new Broodmother());
         cards.add(new TheNight());
         cards.add(new GodlyPowers());
         cards.add(new HumanForm());
@@ -226,12 +243,8 @@ public class EvolutionMod implements
         BaseMod.addKeyword("Shift", keywordShift, "Recreate the gene at the back of the orb line.");
         String[] keywordRando = {"randomized"};
         BaseMod.addKeyword("Randomized", keywordRando, "Randomized Forms are selected when the card is created and vary from a card to another.");
-//        String[] keywordTrait = {"trait"};
-//        BaseMod.addKeyword("Trait", keywordTrait, "Trigger the following effect if you have a Gene of this type.");
-//        String[] keywordPotency = {"potency"};
-//        BaseMod.addKeyword("Potency", keywordPotency, "Increase the first effect of your genes and their Adaptations.");
         String[] keywordFate = {"fate"};
-        BaseMod.addKeyword("Fate X", keywordFate, "Put random cards from your draw pile matching X on top of your draw pile, then Scry them.");
+        BaseMod.addKeyword("evolutionmod", "Fate", keywordFate, "At the start of next turn, Scry this amount.");
 //        BaseMod.addKeyword("Fate", keywordFate, "Look at the top X cards of your draw pile. You may discard any of them. Discarded cards may trigger the associated effect.");
         String[] keywordGrowth = {"growth", "Plant"};
         BaseMod.addKeyword("Growth", keywordGrowth,
@@ -241,13 +254,10 @@ public class EvolutionMod implements
                 "Drones are 0 cost attacks which benefit from Potency, are Ethereal and Exhaust when played.");
         String[] keywordRage = {"rage"};
         BaseMod.addKeyword("Rage", keywordRage,
-                "Whenever you play an Attack this turn, gain this amount of Block.");
+                "Whenever you play an Attack this turn, gain this amount of Block times its energy cost.");
         String[] keywordSubmission = {"lust"};
         BaseMod.addKeyword("Lust", keywordSubmission,
                 "Reduce the base damage of the next attack by this amount.");
-//        String[] keywordCharge = {"charge", "centaur"};
-//        BaseMod.addKeyword("Charge", keywordCharge,
-//                "Increase the damage of your next hit then reduces by half.");
         String[] keywordVigor = {"vigor", "centaur"};
         BaseMod.addKeyword("Vigor", keywordVigor,
                 "Increases the damage of your next Attack.");

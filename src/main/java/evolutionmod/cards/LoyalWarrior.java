@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.evacipated.cardcrawl.mod.stslib.cards.interfaces.StartupCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
-import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -39,8 +38,8 @@ public class LoyalWarrior
 	public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
 	public static final String[] EXTENDED_DESCRIPTION = cardStrings.EXTENDED_DESCRIPTION;
 	public static final String IMG_PATH = "evolutionmod/images/cards/LoyalWarrior.png";
-	private static final int COST = 2;
-	private static final int DAMAGE_AMT = 12;
+	private static final int COST = 1;
+	private static final int DAMAGE_AMT = 8;
 	private static final int UPGRADE_DAMAGE_AMT = 4;
 
 	private int geneIndex;
@@ -71,8 +70,8 @@ public class LoyalWarrior
 	@Override
 	public boolean atBattleStartPreDraw() {
 		if (this.upgraded) {
-			addToBot(new ChannelAction(this.gene.makeCopy()));
-			this.gene.onEvoke();
+			addToBot(((AbstractGene)this.gene.makeCopy()).getChannelAction());
+			this.gene.getAdaptation().apply(AbstractDungeon.player, null);
 		}
 		return false;
 	}
@@ -120,6 +119,7 @@ public class LoyalWarrior
 			this.upgradeDamage(UPGRADE_DAMAGE_AMT);
 			this.rawDescription = UPGRADE_DESCRIPTION;
 			this.initializeDescription();
+			this.resetGene();
 		}
 	}
 

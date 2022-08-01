@@ -151,10 +151,10 @@ public class CrystalShard
 						case InsectGene.ID: return InsectGene.COLOR.cpy();
 						case SuccubusGene.ID: return SuccubusGene.COLOR.cpy();
 					}
-					return AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
 				}
+				return AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
 			case 1:
-				if (isPlayerInTheseForms(secondGene.ID, firstGene.ID)) {
+				if (isPlayerInThisForm(secondGene.ID, firstGene.ID)) {
 					switch (secondGene.ID) {
 						case HarpyGene.ID: return HarpyGene.COLOR.cpy();
 						case MerfolkGene.ID: return MerfolkGene.COLOR.cpy();
@@ -168,8 +168,8 @@ public class CrystalShard
 						case InsectGene.ID: return InsectGene.COLOR.cpy();
 						case SuccubusGene.ID: return SuccubusGene.COLOR.cpy();
 					}
-					return AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
 				}
+				return AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
 			default:
 				return BLUE_BORDER_GLOW_COLOR.cpy();
 		}

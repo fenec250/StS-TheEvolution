@@ -1,20 +1,17 @@
 package evolutionmod.cards;
 
 import com.badlogic.gdx.graphics.Color;
-import com.evacipated.cardcrawl.mod.stslib.actions.common.RefundAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
-import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import evolutionmod.orbs.MerfolkGene;
-import evolutionmod.orbs.PlantGene;
 import evolutionmod.patches.AbstractCardEnum;
 
 public class Dive
-        extends BaseEvoCard implements GlowingCard {
+        extends BaseEvoCard {
     public static final String ID = "evolutionmod:Dive";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -39,7 +36,7 @@ public class Dive
         if (!upgraded) {
             formEffect(MerfolkGene.ID);
         } else {
-            addToBot(new ChannelAction(new MerfolkGene()));
+            addToBot(new MerfolkGene().getChannelAction());
         }
     }
 
@@ -69,17 +66,11 @@ public class Dive
     }
 
     @Override
-    public int getNumberOfGlows() {
-        return upgraded ? 0 : 1;
-    }
-
-    @Override
-    public boolean isGlowing(int glowIndex) {
-        return isPlayerInThisForm(MerfolkGene.ID);
-    }
-
-    @Override
-    public Color getGlowColor(int glowIndex) {
-        return MerfolkGene.COLOR.cpy();
+    public void triggerOnGlowCheck() {
+        if (!upgraded && isPlayerInThisForm(MerfolkGene.ID)) {
+            this.glowColor = MerfolkGene.COLOR.cpy();
+        } else {
+            this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
+        }
     }
 }

@@ -41,7 +41,7 @@ public class NightMare
                 p, m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
                 AbstractGameAction.AttackEffect.BLUNT_HEAVY));
         formEffect(ShadowGene.ID, () ->
-                AbstractDungeon.actionManager.addToBottom(new ChannelAction(new CentaurGene())));
+                addToBot(new CentaurGene().getChannelAction()));
     }
 
     @Override
@@ -59,7 +59,7 @@ public class NightMare
 
 	@Override
 	public int getNumberOfGlows() {
-		return 2;
+		return 1;
 	}
 
 	@Override

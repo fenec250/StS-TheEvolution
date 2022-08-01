@@ -67,7 +67,7 @@ public class MerfolkGene extends AbstractGene {
 	}
 
 	public static String getOrbDescription() {
-		return "At the #rend #rof #ryour #rturn and when #yEvoked: NL " + getDescription();
+		return DESCRIPTION[2] + getDescription();
 	}
 
 	public static String getDescription() {

@@ -5,7 +5,6 @@ import basemod.helpers.TooltipInfo;
 import com.badlogic.gdx.graphics.Color;
 import com.evacipated.cardcrawl.mod.stslib.cards.interfaces.StartupCard;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
-import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -69,8 +68,8 @@ public class LoyalCompanion
 	@Override
 	public boolean atBattleStartPreDraw() {
 		if (this.upgraded) {
-			addToBot(new ChannelAction(this.gene.makeCopy()));
-			this.gene.onEvoke();
+			addToBot(((AbstractGene) this.gene.makeCopy()).getChannelAction());
+			this.gene.getAdaptation().apply(AbstractDungeon.player, null);
 		}
 		return false;
 	}

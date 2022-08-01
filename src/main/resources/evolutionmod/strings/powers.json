@@ -50,6 +50,14 @@
     "NAME": "Growth",
     "DESCRIPTIONS": ["Upon reaching ", " stacks gain 1 Energy and reduce Growth by ", "."]
   },
+  "evolutionmod:FatePower": {
+    "NAME": "Fate",
+    "DESCRIPTIONS": ["At ths start of next turn, return cards from your discard pile to your draw pile until it has at least ", ", then Scry them."]
+  },
+  "evolutionmod:BestialRage": {
+    "NAME": "Bestial Rage",
+    "DESCRIPTIONS": ["When you play an attack this turn, gain ", " Block per Energy spent."]
+  },
   "evolutionmod:BroodmotherPower": {
     "NAME": "Broodmother",
     "DESCRIPTIONS": ["Each turn the next ", " Drone", " you create will be Upgraded."]
@@ -72,11 +80,6 @@
 //    "DESCRIPTIONS": ["Gain 2 Lust per turn. Reduce by 1 each turn."]
   },
   "evolutionmod:EruptionPower": {
-    "NAME": "Eruption",
-    "DESCRIPTIONS": ["At the start of your turn Channel a Lavafolk gene and trigger your Lavafolk genes.",
-      "At the start of your turn Channel ", " Lavafolk genes and trigger your Lavafolk genes."]
-  },
-  "evolutionmod:ExplosionPower": {
     "NAME": "Eruption",
     "DESCRIPTIONS": ["After dealing damage ", " more times deal ", " damage to all enemies."]
   },

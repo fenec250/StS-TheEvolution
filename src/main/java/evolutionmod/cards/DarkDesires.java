@@ -36,7 +36,7 @@ public class DarkDesires
     public void use(AbstractPlayer p, AbstractMonster m) {
         addToBot(new ApplyPowerAction(p, p, new SadisticPower(p, this.magicNumber)));
 
-        BaseEvoCard.formEffect(SuccubusGene.ID, () -> addToBot(new ChannelAction(new ShadowGene())));
+        BaseEvoCard.formEffect(SuccubusGene.ID, () -> addToBot(new ShadowGene().getChannelAction()));
     }
 
     @Override

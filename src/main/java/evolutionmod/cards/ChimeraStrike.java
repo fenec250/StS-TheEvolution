@@ -47,14 +47,10 @@ public class ChimeraStrike
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        AbstractDungeon.actionManager.addToBottom(new DamageAction(
+        addToBot(new DamageAction(
                 m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
                 AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
         this.adapt(1);
-//        p.orbs.stream()
-//                .filter(o -> this.canAdaptWith(o) > 0)
-//                .findAny()
-//                .ifPresent(o -> this.tryAdaptingWith(o, true));
         this.useAdaptations(p, m);
     }
 

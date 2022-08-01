@@ -49,7 +49,7 @@ public class Antidote
     public void use(AbstractPlayer p, AbstractMonster m) {
         AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, this.block));
         addToBot(new AntidoteAction(this.magicNumber));
-        BaseEvoCard.formEffect(LymeanGene.ID, () -> addToBot(new ChannelAction(new LizardGene())));
+        BaseEvoCard.formEffect(LymeanGene.ID, () -> addToBot(new LizardGene().getChannelAction()));
     }
 
     @Override

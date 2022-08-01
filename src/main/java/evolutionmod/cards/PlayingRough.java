@@ -39,7 +39,7 @@ public class PlayingRough
                 p, m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
                 AbstractGameAction.AttackEffect.BLUNT_HEAVY));
         formEffect(SuccubusGene.ID, () ->
-                AbstractDungeon.actionManager.addToBottom(new ChannelAction(new CentaurGene())));
+                AbstractDungeon.actionManager.addToBottom(new CentaurGene().getChannelAction()));
     }
 
     @Override

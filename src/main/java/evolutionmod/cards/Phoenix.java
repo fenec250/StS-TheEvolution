@@ -23,6 +23,7 @@ public class Phoenix
     public static final String IMG_PATH = "evolutionmod/images/cards/Phoenix.png";
     private static final int COST = 1;
     private static final int DAMAGE_AMT = 6;
+    private static final int UPGRADE_DAMAGE_AMT = 1;
 
     public Phoenix() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -36,13 +37,11 @@ public class Phoenix
         AbstractDungeon.actionManager.addToBottom(new DamageAction(
                 m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
                 AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
-        addToBot(new ChannelAction(new LavafolkGene()));
-        boolean inForm = formEffect(HarpyGene.ID);
-        if (inForm ^ upgraded) {
-            this.adapt(1);
-        } else if (inForm && upgraded) {
-            this.adapt(p.maxOrbs);
+        if (isPlayerInThisForm(HarpyGene.ID)) {
+            addToBot(new LavafolkGene().getChannelAction());
         }
+        this.adapt(upgraded ? p.maxOrbs : 1);
+        formEffect(HarpyGene.ID);
         this.useAdaptations(p, m);
     }
 
@@ -55,6 +54,7 @@ public class Phoenix
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
+            this.upgradeDamage(UPGRADE_DAMAGE_AMT);
             this.rawDescription = UPGRADE_DESCRIPTION;
             this.updateDescription();
         }
