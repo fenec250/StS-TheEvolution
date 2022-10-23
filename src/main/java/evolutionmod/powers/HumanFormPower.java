@@ -52,7 +52,7 @@ public class HumanFormPower extends AbstractPower {
     @Override
     public void onChannel(AbstractOrb orb) {
         if (orb instanceof AbstractGene){
-            for(int i = 1; i < this.amount; ++i) {
+            for(int i = 0; i < this.amount; ++i) {
                 ((AbstractGene) orb).getAdaptation().apply(AbstractDungeon.player, null);
             }
             this.addToTop(new EvokeSpecificOrbAction(orb));

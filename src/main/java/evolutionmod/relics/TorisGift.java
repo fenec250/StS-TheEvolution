@@ -34,10 +34,7 @@ public class TorisGift extends CustomRelic {
     public static final String OUTLINE_PATH = "evolutionmod/images/relics/TorisGift_p.png";
     private static final Texture OUTLINE = new Texture(OUTLINE_PATH);
     private static final int GENE_AMT = 1;
-    private static final int SLOT_AMT = 1;
-//    private static final int MAX_EXHAUST_AMT = 2;
-//    private static final int UPGRADE_MAX_EXHAUST_AMT = 1;
-//
+
     public TorisGift() {
         super(ID, IMG, OUTLINE, RelicTier.STARTER, LandingSound.CLINK);
     }
@@ -48,8 +45,8 @@ public class TorisGift extends CustomRelic {
     }
 
     @Override
-//    public void atBattleStartPreDraw() {
-    public void atBattleStart() {
+    public void atBattleStartPreDraw() {
+//    public void atBattleStart() {
         super.atBattleStart();
         this.flash();
         this.addToBot(new RelicAboveCreatureAction(AbstractDungeon.player, this));
@@ -69,15 +66,14 @@ public class TorisGift extends CustomRelic {
 
         for (int i = 0; i < GENE_AMT; ++i) {
             String geneId = genesPool.get(AbstractDungeon.cardRandomRng.random(genesPool.size() - 1));
-            AbstractGene gene = BaseEvoCard.getGene(geneId);
-            AbstractDungeon.actionManager.addToBottom(new ChannelAction(gene.makeCopy()));
-            addToBot(new AbstractGameAction() {
-                @Override
-                public void update() {
-                    gene.onStartOfTurn();
-                    this.isDone = true;
-                }
-            });
+            AbstractDungeon.actionManager.addToBottom(BaseEvoCard.getGene(geneId).getChannelAction());
+//            addToBot(new AbstractGameAction() {
+//                @Override
+//                public void update() {
+//                    gene.onStartOfTurn();
+//                    this.isDone = true;
+//                }
+//            });
         }
         this.grayscale = true;
     }

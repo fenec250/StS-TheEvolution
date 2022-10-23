@@ -12,6 +12,7 @@ import com.megacrit.cardcrawl.powers.SadisticPower;
 import evolutionmod.orbs.ShadowGene;
 import evolutionmod.orbs.SuccubusGene;
 import evolutionmod.patches.AbstractCardEnum;
+import evolutionmod.powers.DarkDesiresPower;
 
 public class DarkDesires
         extends BaseEvoCard {
@@ -22,8 +23,8 @@ public class DarkDesires
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = "evolutionmod/images/cards/DarkDesires.png";
     private static final int COST = 2;
-    private static final int POWER_AMT = 4;
-    private static final int UPGRADE_POWER_AMT = 2;
+    private static final int POWER_AMT = 2;
+    private static final int UPGRADE_POWER_AMT = 1;
 
     public DarkDesires() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -34,9 +35,8 @@ public class DarkDesires
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new ApplyPowerAction(p, p, new SadisticPower(p, this.magicNumber)));
-
-        BaseEvoCard.formEffect(SuccubusGene.ID, () -> addToBot(new ShadowGene().getChannelAction()));
+        addToBot(new ApplyPowerAction(p, p, new DarkDesiresPower(p, this.magicNumber)));
+        addToBot(new ShadowGene().getChannelAction());
     }
 
     @Override
@@ -49,15 +49,6 @@ public class DarkDesires
         if (!this.upgraded) {
             this.upgradeName();
             this.upgradeMagicNumber(UPGRADE_POWER_AMT);
-        }
-    }
-
-    @Override
-    public void triggerOnGlowCheck() {
-        if (isPlayerInThisForm(SuccubusGene.ID)) {
-            this.glowColor = SuccubusGene.COLOR.cpy();
-        } else {
-            this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
         }
     }
 }

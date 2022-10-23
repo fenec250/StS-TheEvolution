@@ -82,13 +82,4 @@ public class SpiderBite2
             this.upgradeMagicNumber(UPGRADE_SPIDER_DAMAGE_AMT);
         }
     }
-
-	@Override
-	public void triggerOnGlowCheck() {
-		if (isPlayerInThisForm(InsectGene.ID)) {
-			this.glowColor = InsectGene.COLOR.cpy();
-		} else {
-			this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
-		}
-	}
 }

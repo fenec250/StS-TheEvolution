@@ -44,7 +44,12 @@ public class HumanForm extends BaseEvoCard {
                 p.orbs.stream()
                         .filter(o -> o instanceof AbstractGene)
                         .collect(Collectors.toList())
-                        .forEach(o -> addToTop(new EvokeSpecificOrbAction(o)));
+                        .forEach(o -> {
+                            for(int i = 0; i < magicNumber; ++i) {
+                                ((AbstractGene) o).getAdaptation().apply(p, null);
+                            }
+                            addToTop(new EvokeSpecificOrbAction(o));
+                        });
                 this.isDone = true;
             }
         });

@@ -1,7 +1,5 @@
 package evolutionmod.cards;
 
-import com.badlogic.gdx.graphics.Color;
-import com.evacipated.cardcrawl.mod.stslib.actions.common.RefundAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
@@ -27,15 +25,14 @@ public class SeaWolf2
     public static final String IMG_PATH = "evolutionmod/images/cards/SeaWolf.png";
     private static final int COST = 1;
     private static final int DAMAGE_AMT = 0;
-    private static final int MERFOLK_BLOCK_AMT = 3;
-    private static final int UPGRADE_MERFOLK_BLOCK_AMT = 1;
+    private static final int BEAST_BLOCK_AMT = 3;
 
     public SeaWolf2() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.ATTACK, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.UNCOMMON, CardTarget.ENEMY);
         this.damage = this.baseDamage = DAMAGE_AMT;
-        this.block = this.baseBlock = MERFOLK_BLOCK_AMT;
+        this.block = this.baseBlock = BEAST_BLOCK_AMT;
     }
 
     @Override
@@ -85,8 +82,8 @@ public class SeaWolf2
 
 	@Override
 	public void triggerOnGlowCheck() {
-		if (isPlayerInThisForm(MerfolkGene.ID)) {
-			this.glowColor = MerfolkGene.COLOR.cpy();
+		if (isPlayerInThisForm(BeastGene.ID)) {
+			this.glowColor = BeastGene.COLOR.cpy();
 		} else {
 			this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
 		}

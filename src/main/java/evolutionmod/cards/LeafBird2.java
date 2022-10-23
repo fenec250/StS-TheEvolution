@@ -28,7 +28,7 @@ public class LeafBird2 extends BaseEvoCard {
     public static final String IMG_PATH = "evolutionmod/images/cards/LeafBird.png";
     private static final int COST = 1;
     private static final int DISCARD_AMT = 3;
-    private static final int UPGRADE_DISCARD_AMT = 1;
+    private static final int UPGRADE_GROWTH_AMT = 1;
     private static final int HARPY_DRAW_AMT = 1;
 
     public LeafBird2() {
@@ -41,6 +41,9 @@ public class LeafBird2 extends BaseEvoCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         addToBot(new LeafBird2Action(p, this.magicNumber));
+        if (upgraded) {
+            addToBot(new ApplyPowerAction(p, p, new GrowthPower(p, UPGRADE_GROWTH_AMT)));
+        }
         formEffect(HarpyGene.ID, ()-> addToBot(new DrawCardAction(HARPY_DRAW_AMT)));
     }
 
@@ -53,7 +56,8 @@ public class LeafBird2 extends BaseEvoCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeMagicNumber(UPGRADE_DISCARD_AMT);
+//            this.upgradeMagicNumber(UPGRADE_DISCARD_AMT);
+            this.rawDescription = UPGRADE_DESCRIPTION;
             this.initializeDescription();
         }
     }

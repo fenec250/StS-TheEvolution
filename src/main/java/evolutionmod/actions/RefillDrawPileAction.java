@@ -31,7 +31,7 @@ public class RefillDrawPileAction extends AbstractGameAction {
 			if (drawPile.group.size() < amount && !discardPile.isEmpty()) {
 				discardPile.group.stream()
 						.collect(Collectors.collectingAndThen(Collectors.toList(), l -> {
-							Collections.shuffle(l, AbstractDungeon.cardRng.random);
+							Collections.shuffle(l, AbstractDungeon.shuffleRng.random);
 							return l.stream();
 						}))
 						.limit(amount - drawPile.group.size())

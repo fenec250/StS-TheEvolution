@@ -2,6 +2,7 @@ package evolutionmod.relics;
 
 import basemod.abstracts.CustomRelic;
 import com.badlogic.gdx.graphics.Texture;
+import com.evacipated.cardcrawl.mod.stslib.actions.defect.EvokeSpecificOrbAction;
 import com.evacipated.cardcrawl.mod.stslib.relics.OnChannelRelic;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -56,21 +57,21 @@ public class OldOutfit extends CustomRelic implements OnChannelRelic {
     public void onChannel(AbstractOrb orb) {
         if (this.pulse && orb instanceof AbstractGene) {
             this.stopPulse();
-            AbstractPlayer player = AbstractDungeon.player;
-
-            addToBot(new AbstractGameAction() {
-                @Override
-                public void update() {
-                    boolean result = player.orbs.remove(orb);
-                    if (result) {
-                        player.orbs.add(new EmptyOrbSlot(player.drawX, player.drawY));
-                        for (int i = 0; i < player.orbs.size(); ++i) {
-                            player.orbs.get(i).setSlot(i, player.maxOrbs);
-                        }
-                    }
-                    this.isDone = true;
-                }
-            });
+            addToTop(new EvokeSpecificOrbAction(orb));
+//            AbstractPlayer player = AbstractDungeon.player;
+//            addToBot(new AbstractGameAction() {
+//                @Override
+//                public void update() {
+//                    boolean result = player.orbs.remove(orb);
+//                    if (result) {
+//                        player.orbs.add(new EmptyOrbSlot(player.drawX, player.drawY));
+//                        for (int i = 0; i < player.orbs.size(); ++i) {
+//                            player.orbs.get(i).setSlot(i, player.maxOrbs);
+//                        }
+//                    }
+//                    this.isDone = true;
+//                }
+//            });
         }
     }
 

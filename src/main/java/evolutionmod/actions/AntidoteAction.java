@@ -16,25 +16,14 @@ import java.util.List;
 
 public class AntidoteAction extends AbstractGameAction {
 
-	private static final UIStrings uiStrings;
-	public static final String[] TEXT;
-	static {
-		uiStrings = CardCrawlGame.languagePack.getUIString("ReprogramAction");
-		TEXT = uiStrings.TEXT;
-	}
-
-	private float startingDuration;
-
 	public AntidoteAction(int amount) {
 		this.amount = amount;
 
 		this.actionType = ActionType.CARD_MANIPULATION;
-		this.startingDuration = Settings.ACTION_DUR_FAST;
-		this.duration = this.startingDuration;
+		this.duration = Settings.ACTION_DUR_FAST;
 	}
 
 	public void update() {
-		// copied from ScryAction
 		if (AbstractDungeon.getMonsters().areMonstersBasicallyDead()) {
 			this.isDone = true;
 		} else {
@@ -55,6 +44,7 @@ public class AntidoteAction extends AbstractGameAction {
 				}
 				statuses.addToTop(card);
 				drawPile.removeCard(card);
+				// show cards in the center of the screen? Limbo?
 			}
 
 			statuses.group.forEach(c ->

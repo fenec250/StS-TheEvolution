@@ -17,36 +17,36 @@
   "evolutionmod:PowerFocus": {
     "NAME": "Power Focus",
     "FLAVOR": "It tickles!",
-    "DESCRIPTIONS": ["The first Gene you Evoke each turn triggers its effect an additional time."]
+    "DESCRIPTIONS": ["The first #yGene you #yEvoke each turn also triggers its effect."]
   },
   "evolutionmod:MagicFocus": {
     "NAME": "Magic Focus",
-    "FLAVOR": "AN_3  loved these.",
-    "DESCRIPTIONS": ["The first Skill you play each combat is played twice."]
+    "FLAVOR": "AN_3 loved these.",
+    "DESCRIPTIONS": ["The first #ySkill you play each combat is played twice."]
   },
   "evolutionmod:StrengthFocus": {
     "NAME": "Strength Focus",
     "FLAVOR": "I'm not sure if it still works.",
-    "DESCRIPTIONS": ["The first Attack you play each combat is played twice."]
+    "DESCRIPTIONS": ["The first #yAttack you play each combat is played twice."]
   },
   "evolutionmod:Whip": {
     "NAME": "Whip",
-    "FLAVOR": "I can use this as a weapon?",
+    "FLAVOR": "I can use this as a weapon!?",
     "DESCRIPTIONS": ["Whenever you apply a debuff to an enemy, they take ", " damage."]
   },
   "evolutionmod:OldOutfit": {
     "NAME": "Old Outfit",
     "FLAVOR": "My favourite outfit, when I was human.",
-    "DESCRIPTIONS": ["Gain [E] at the start of your turn. The first Gene you Channel each turn is removed."]
+    "DESCRIPTIONS": ["Gain [E] at the start of your turn. #yEvoke the first #yGene you #yChannel each turn."]
   },
   "evolutionmod:ScoutMedal": {
     "NAME": "Scout Medal",
     "FLAVOR": "Always prepared.",
-    "DESCRIPTIONS": ["At the start of the combat Scry #b1 card of each type."]
+    "DESCRIPTIONS": ["At the start of the combat #yScry a card of each type."]
   },
   "evolutionmod:Potato2": {
     "NAME": "boss",
     "FLAVOR": "She's found her way back to you.",
-    "DESCRIPTIONS": ["first Adapting card placed on top"]
+    "DESCRIPTIONS": ["first #yAdapting card placed on top"]
   }
 }

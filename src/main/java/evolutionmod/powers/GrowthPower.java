@@ -56,6 +56,7 @@ public class GrowthPower extends AbstractPower {
         if (this.amount >= ENERGY_THRESHOLD) {
             addToBot(new GainEnergyAction(this.amount / ENERGY_THRESHOLD));
             this.amount = this.amount % ENERGY_THRESHOLD;
+            flash();
         }
         if (this.amount <= 0) {
             addToTop(new RemoveSpecificPowerAction(this.owner, this.owner, POWER_ID));

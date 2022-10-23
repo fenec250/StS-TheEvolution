@@ -34,7 +34,6 @@ public class Ritual
     private static final int COST = 1;
     private static final int ADAPT_MAX_AMT = 1;
     private static final int ADAPT_AMT = 1;
-    private static final int UPGRADE_ADAPT_AMT = 1;
 
     public Ritual() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,

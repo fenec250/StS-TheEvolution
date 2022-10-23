@@ -53,7 +53,7 @@ public class Toxin2
 			this.upgradeName();
 			this.upgradeMagicNumber(UPGRADE_POISON_AMT);
 //			this.rawDescription = UPGRADE_DESCRIPTION;
-//			this.initializeDescription();
+			this.initializeDescription();
 		}
 	}
 

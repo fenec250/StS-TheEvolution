@@ -40,7 +40,7 @@ public class TalonStrike
     public void use(AbstractPlayer p, AbstractMonster m) {
         AbstractDungeon.actionManager.addToBottom(new DamageAction(
                 m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
-                AbstractGameAction.AttackEffect.BLUNT_HEAVY));
+                AbstractGameAction.AttackEffect.SLASH_HORIZONTAL));
 
         formEffect(HarpyGene.ID, () -> {
             addToBot(new DrawCardAction(this.magicNumber));

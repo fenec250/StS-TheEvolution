@@ -59,8 +59,8 @@ public class Photosynthesis
                 this.isDone = true;
             }
         });
-        boolean inForm = formEffect(PlantGene.ID);
-        adapt(inForm ? 1 : 0); // calling adapt(0) resets shuffleBackIntoDrawPile
+//        boolean inForm = formEffect(PlantGene.ID);
+        adapt(1); // calling adapt(0) resets shuffleBackIntoDrawPile
         this.useAdaptations(p, m);
     }
 
@@ -80,12 +80,12 @@ public class Photosynthesis
         }
     }
 
-    @Override
-    public void triggerOnGlowCheck() {
-        if (isPlayerInThisForm(PlantGene.ID)) {
-            this.glowColor = PlantGene.COLOR.cpy();
-        } else {
-            this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
-        }
-    }
+//    @Override
+//    public void triggerOnGlowCheck() {
+//        if (isPlayerInThisForm(PlantGene.ID)) {
+//            this.glowColor = PlantGene.COLOR.cpy();
+//        } else {
+//            this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
+//        }
+//    }
 }

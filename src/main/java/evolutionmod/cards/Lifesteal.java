@@ -1,13 +1,17 @@
 package evolutionmod.cards;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.GainBlockAction;
+import com.megacrit.cardcrawl.actions.common.HealAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.core.Settings;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import evolutionmod.actions.SeduceAction;
 import evolutionmod.orbs.SuccubusGene;
 import evolutionmod.patches.AbstractCardEnum;
 
@@ -35,7 +39,7 @@ public class Lifesteal
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         boolean inForm = isPlayerInThisForm(SuccubusGene.ID);
-        addToBot(new SeduceAction(
+        addToBot(new LifestealAction(
                 p, m, inForm, new DamageInfo(p, this.damage, this.damageTypeForTurn),
                 AbstractGameAction.AttackEffect.BLUNT_HEAVY));
         formEffect(SuccubusGene.ID);
@@ -60,6 +64,39 @@ public class Lifesteal
             this.glowColor = SuccubusGene.COLOR.cpy();
         } else {
             this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
+        }
+    }
+    public static class LifestealAction extends AbstractGameAction {
+
+        private DamageInfo info;
+        private boolean healSelf;
+
+        public LifestealAction(AbstractCreature source, AbstractCreature target, boolean healSelf, DamageInfo info, AttackEffect effect) {
+            this.source = source;
+            this.target = target;
+            this.info = info;
+            this.setValues(target, info);
+            this.actionType = ActionType.DAMAGE;
+            this.attackEffect = effect;
+            this.duration = this.startDuration = Settings.ACTION_DUR_FAST;
+            this.healSelf = healSelf;
+        }
+
+        public void update() {
+            this.tickDuration();
+            if (this.isDone) {
+                this.target.damage(this.info);
+                if (this.target.lastDamageTaken > 0) {
+                    if (healSelf) {
+                        AbstractDungeon.actionManager.addToTop(new HealAction(this.source, this.source, this.target.lastDamageTaken));
+                    } else {
+                        AbstractDungeon.actionManager.addToTop(new GainBlockAction(this.source, this.source, this.target.lastDamageTaken));
+                    }
+//				if (!target.isDying) {
+//					AbstractDungeon.actionManager.addToTop(new GainBlockAction(this.target, this.source, this.target.lastDamageTaken));
+//				}
+                }
+            }
         }
     }
 }

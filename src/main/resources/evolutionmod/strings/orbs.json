@@ -1,11 +1,11 @@
 {
   "evolutionmod:CentaurGene": {
     "NAME": "Centaur",
-    "DESCRIPTION": ["Increase the damage of your next Attack by #b", ".", "At the #bstart #bof #byour #bturn and when #yEvoked: NL "]
+    "DESCRIPTION": ["Increase the damage of your next Attack by #b", ".", "At the #bstart #bof #byour #bturn and when #yChannelled: NL "]
   },
   "evolutionmod:PlantGene": {
     "NAME": "Plant",
-    "DESCRIPTION": ["Gain #b", " #yGrowth. Upon reaching 2 Growth gain 1 Energy and reduce Growth by 2.", "At the #bstart #bof #byour #bturn and when #yEvoked: NL "]
+    "DESCRIPTION": ["Gain #b", " #yGrowth. Upon reaching 2 Growth gain 1 Energy and reduce Growth by 2.", "At the #bstart #bof #byour #bturn and when #yChannelled: NL "]
   },
   "evolutionmod:MerfolkGene": {
     "NAME": "Merfolk",
@@ -13,7 +13,7 @@
   },
   "evolutionmod:HarpyGene": {
     "NAME": "Harpy",
-    "DESCRIPTION": ["Draw ", "a card.", " cards.", "At the #bstart #bof #byour #bturn and when #yEvoked: NL "]
+    "DESCRIPTION": ["Draw ", "a card.", " cards.", "At the #bstart #bof #byour #bturn and when #yChannelled: NL "]
   },
   "evolutionmod:LavafolkGene": {
     "NAME": "Lavafolk",
@@ -21,7 +21,7 @@
   },
   "evolutionmod:SuccubusGene": {
     "NAME": "Succubus",
-    "DESCRIPTION": ["Apply #b", " #yLust to a random enemy. Lust reduces the base damage of its next attack.", "At the #bstart #bof #byour #bturn and when #yEvoked: NL "]
+    "DESCRIPTION": ["Apply #b", " #yLust to a random enemy. NL Lust reduces the base damage of its next attack.", "At the #bstart #bof #byour #bturn and when #yChannelled: NL "]
 //    "DESCRIPTION": ["Apply ", " #yLust and ", " #yVulnerable to a random enemy"]
   },
   "evolutionmod:LymeanGene": {
@@ -31,7 +31,7 @@
   },
   "evolutionmod:InsectGene": {
     "NAME": "Insect",
-    "DESCRIPTION": ["Add a #yDrone to your hand. #yDrones are 0-cost Attacks with Exhaust and Ethereal.", "At the #bstart #bof #byour #bturn and when #yEvoked: NL "]
+    "DESCRIPTION": ["Add a #yDrone to your hand. #yDrones are 0-cost Attacks with Exhaust and Ethereal.", "At the #bstart #bof #byour #bturn and when #yChannelled: NL "]
   },
   "evolutionmod:BeastGene": {
     "NAME": "Beast",
@@ -40,13 +40,13 @@
   },
   "evolutionmod:LizardGene": {
     "NAME": "Lizard",
-    "DESCRIPTION": ["Apply #b", " #yPoison", " and deal #b", " damage", " to a random enemy.", "At the #bstart #bof #byour #bturn and when #yEvoked: NL "]
+    "DESCRIPTION": ["Apply #b", " #yPoison", " and deal #b", " damage", " to a random enemy.", "At the #bstart #bof #byour #bturn and when #yChannelled: NL "]
 //    "DESCRIPTION": ["Apply #b", " #yPoison to a random enemy. #yPoison deals damage equal to its amount and reduces by 1 at the end of your turn"]
 //    "DESCRIPTION": ["At the start of your turn deal ", " damage and apply ", " Poison to a random enemy"]
   },
   "evolutionmod:ShadowGene": {
     "NAME": "Shadow",
-    "DESCRIPTION": ["Gain ", " #yShadows. When #yShadows reaches its threshold it deals 2 damage per stack and applies 1 #yWeak to all enemies. NL The initial threshold is 1.", "At the #bstart #bof #byour #bturn and when #yEvoked: NL "]
+    "DESCRIPTION": ["Gain ", " #yShadows. NL When #yShadows reaches its threshold it deals 2 damage per stack and applies 1 #yWeak to all enemies. NL The initial threshold is 1.", "At the #bstart #bof #byour #bturn and when #yChannelled: NL "]
   }
 //
 //  "mystighjcmod:ArtesPlayedPower": {

@@ -2,6 +2,7 @@ package evolutionmod.cards;
 
 import basemod.abstracts.CustomCard;
 import basemod.helpers.TooltipInfo;
+import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
@@ -23,6 +24,7 @@ import evolutionmod.powers.GodlyPowersPower;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -94,19 +96,53 @@ public abstract class BaseEvoCard extends CustomCard {
 				.replaceAll(SuccubusGene.ID, SuccubusGene.COLOR_STRING + SuccubusGene.NAME + "[]");
 	}
 
+	protected static boolean shiftOrb(AbstractPlayer player, AbstractOrb orb) {
+		if (player.orbs.isEmpty() || !player.orbs.contains(orb)) {
+			return false;
+		}
+		int filledOrbCount = player.filledOrbCount();
+		AbstractOrb moving = player.orbs.get(filledOrbCount -1);
+		for (int i = filledOrbCount -1; i > 0 && moving != orb; --i) {
+			AbstractOrb prev = player.orbs.get(i - 1);
+			player.orbs.set(i-1, moving);
+			moving = prev;
+		}
+		player.orbs.set(filledOrbCount-1, moving);
+		for (int i = 0; i < player.orbs.size(); ++i) {
+			player.orbs.get(i).setSlot(i, player.maxOrbs);
+		}
+		return true;
+//	    boolean result = player.orbs.remove(orb);
+//	    if (result) {
+//			int orbCount = filledOrbCount;
+//			if (orbCount < player.maxOrbs) {
+//				AbstractOrb empty = player.orbs.get(orbCount);
+//				player.orbs.add(new EmptyOrbSlot(empty.cX, empty.cY));
+//
+//			}
+//
+//			player.orbs.add(new EmptyOrbSlot(player.drawX, player.drawY));
+//			player.orbs.set(orbCount, orb);
+//		    for (int i = 0; i < player.orbs.size(); ++i) {
+//			    player.orbs.get(i).setSlot(i, player.maxOrbs);
+//		    }
+//	    }
+//	    return result;
+	}
+
 	protected static boolean consumeOrb(AbstractPlayer player, AbstractOrb orb) {
-	    if (player.orbs.isEmpty()) {
-	    	return false;
-	    }
-	    boolean result = player.orbs.remove(orb);
-	    if (result) {
+		if (player.orbs.isEmpty()) {
+			return false;
+		}
+		boolean result = player.orbs.remove(orb);
+		if (result) {
 			player.orbs.add(new EmptyOrbSlot(player.drawX, player.drawY));
-		    for (int i = 0; i < player.orbs.size(); ++i) {
-			    player.orbs.get(i).setSlot(i, player.maxOrbs);
-		    }
-	    }
-	    return result;
-    }
+			for (int i = 0; i < player.orbs.size(); ++i) {
+				player.orbs.get(i).setSlot(i, player.maxOrbs);
+			}
+		}
+		return result;
+	}
 
     protected static boolean consumeOrbs(AbstractPlayer player, Collection<AbstractOrb> orbs) {
 	    if (player.orbs.isEmpty()) {

@@ -2,7 +2,9 @@ package evolutionmod.orbs;
 
 import basemod.helpers.TooltipInfo;
 import com.badlogic.gdx.graphics.Color;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -21,7 +23,6 @@ public class ShadowGene extends AbstractGene {
 	public static final String[] DESCRIPTION = orbStrings.DESCRIPTION;
 	public static final TooltipInfo TOOLTIP = new TooltipInfo(COLOR_STRING + NAME + "[]", "Orb: " + getOrbDescription());
 	public static final String IMG_PATH = "evolutionmod/images/orbs/ShadowGene.png";
-	public static final int WEAK = 2;
 	public static final int CREEPING_SHADOWS = 1;
 
 	public ShadowGene() {
@@ -36,7 +37,20 @@ public class ShadowGene extends AbstractGene {
 
 	@Override
 	public void onEvoke() {
-		apply(AbstractDungeon.player, null, 1, true);
+//		apply(AbstractDungeon.player, null, 1, true);
+	}
+
+	@Override
+	public AbstractGameAction getChannelAction() {
+		AbstractGene gene = this;
+		return new AbstractGameAction() {
+			@Override
+			public void update() {
+				apply(AbstractDungeon.player, null, 1, true);
+				addToTop(new ChannelAction(gene));
+				this.isDone = true;
+			}
+		};
 	}
 
 	@Override
@@ -49,14 +63,11 @@ public class ShadowGene extends AbstractGene {
 	}
 
 	public static void apply(AbstractPlayer p, AbstractMonster m, int times, boolean addToTop) {
-//		int damage = damage();
-//		int weak = weak();
 		int shadows = creepingShadows();
 		for (int i = 0; i < times; ++i) {
 			if (addToTop) {
 				AbstractDungeon.actionManager.addToTop(new ApplyPowerAction(p, p, new ShadowsPower(p, shadows)));
 			} else {
-//			AbstractDungeon.actionManager.addToBottom(new ShadowGeneAction(p, m, weak));
 				AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new ShadowsPower(p, shadows)));
 			}
 		}
@@ -81,10 +92,6 @@ public class ShadowGene extends AbstractGene {
 		return DESCRIPTION[0] + creepingShadows() + DESCRIPTION[1];
 //		return DESCRIPTION[0] + weak() + DESCRIPTION[1];
 //		return DESCRIPTION[0] + damage() + DESCRIPTION[1] + weak() + DESCRIPTION[2];
-	}
-
-	private static int weak() {
-		return WEAK;
 	}
 
 	private static int creepingShadows() {

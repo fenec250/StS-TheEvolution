@@ -2,7 +2,9 @@ package evolutionmod.orbs;
 
 import basemod.helpers.TooltipInfo;
 import com.badlogic.gdx.graphics.Color;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
+import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -34,7 +36,20 @@ public class HarpyGene extends AbstractGene {
 
 	@Override
 	public void onEvoke() {
-		apply(AbstractDungeon.player, null, 1, true);
+//		apply(AbstractDungeon.player, null, 1, true);
+	}
+
+	@Override
+	public AbstractGameAction getChannelAction() {
+		AbstractGene gene = this;
+		return new AbstractGameAction() {
+			@Override
+			public void update() {
+				apply(AbstractDungeon.player, null, 1, true);
+				addToTop(new ChannelAction(gene));
+				this.isDone = true;
+			}
+		};
 	}
 
 	@Override

@@ -74,12 +74,11 @@ public class Tori extends CustomRelic {
                         .count();
                 for (int i = 0; i < count; ++i) {
 
-                    int index = AbstractDungeon.cardRng.random(genesPool.size() - 1);
+                    int index = AbstractDungeon.cardRandomRng.random(genesPool.size() - 1);
                     String geneId = genesPool.get(index);
                     genesPool.remove(index);
 
-                    AbstractGene gene = BaseEvoCard.getGene(geneId);
-                    addToTop(new ChannelAction(gene.makeCopy()));
+                    addToTop(BaseEvoCard.getGene(geneId).getChannelAction());
                 }
                 this.isDone = true;
             }

@@ -1,6 +1,7 @@
 package evolutionmod.cards;
 
 import com.badlogic.gdx.graphics.Color;
+import com.evacipated.cardcrawl.mod.stslib.actions.defect.EvokeSpecificOrbAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
@@ -62,19 +63,14 @@ public class Absorption
 
 	@Override
 	public void use(AbstractPlayer p, AbstractMonster m) {
-		addToBot(new AbstractGameAction() {
-			@Override
-			public void update() {
-				List<AbstractOrb> orbs = p.orbs.stream()
-						.filter(o -> o instanceof AbstractGene)
-						.limit(magicNumber)
-						.collect(Collectors.toList());
-				consumeOrbs(p, orbs);
-
-				orbs.forEach(o -> this.addToTop(new ApplyPowerAction(
-						p, p, new AbsorptionPower(p, 1, ((AbstractGene) o)))));
-				this.isDone = true;
-			}
+		List<AbstractOrb> orbs = p.orbs.stream()
+				.filter(o -> o instanceof AbstractGene)
+				.limit(magicNumber)
+				.collect(Collectors.toList());
+		orbs.forEach(o -> {
+			this.addToBot(new EvokeSpecificOrbAction(o));
+			this.addToBot(new ApplyPowerAction(
+					p, p, new AbsorptionPower(p, 1, ((AbstractGene) o))));
 		});
 	}
 

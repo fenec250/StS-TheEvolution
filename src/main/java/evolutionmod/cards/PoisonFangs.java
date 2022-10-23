@@ -40,22 +40,29 @@ public class PoisonFangs
         AbstractDungeon.actionManager.addToBottom(new DamageAction(
                 m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
                 AbstractGameAction.AttackEffect.BLUNT_LIGHT));
-        formEffect(LizardGene.ID, () -> addToBot(new ApplyPowerAction(
+        if (!this.upgraded) {
+            formEffect(LizardGene.ID, () -> addToBot(new ApplyPowerAction(
                     m, p, new PoisonPower(m, p, this.magicNumber), this.magicNumber)));
+        } else {
+            addToBot(new ApplyPowerAction(m, p, new PoisonPower(m, p, this.magicNumber), this.magicNumber));
+            addToBot(new LizardGene().getChannelAction());
+        }
     }
 
     @Override
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeDamage(UPGRADE_DAMAGE_AMT);
-            this.upgradeMagicNumber(UPGRADE_LIZARD_POISON_AMT);
+//            this.upgradeDamage(UPGRADE_DAMAGE_AMT);
+//            this.upgradeMagicNumber(UPGRADE_LIZARD_POISON_AMT);
+            this.rawDescription = UPGRADE_DESCRIPTION;
+            initializeDescription();
         }
     }
 
     @Override
     public void triggerOnGlowCheck() {
-        if (isPlayerInThisForm(LizardGene.ID)) {
+        if (this.upgraded && isPlayerInThisForm(LizardGene.ID)) {
             this.glowColor = LizardGene.COLOR.cpy();
         } else {
             this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();

@@ -54,8 +54,7 @@ public class ShiftingStrike
             @Override
             public void update() {
                 ((AbstractGene)o).getAdaptation().apply(p, m);
-                consumeOrb(p, o);
-                addToTop(new ChannelAction(o));
+                shiftOrb(p, o);
                 this.isDone = true;
             }
         }));

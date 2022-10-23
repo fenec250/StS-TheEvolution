@@ -18,9 +18,9 @@ public class Hatch
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = "evolutionmod/images/cards/InsectSkl.png";
     private static final int COST = 2;
+    private static final int DRONES_AMT = 2;
     private static final int BLOCK_AMT = 4;
-    private static final int DRONES_AMT = 3;
-    private static final int UPGRADE_DRONES_AMT = 1;
+    private static final int UPGRADE_BLOCK_AMT = 4;
 
     public Hatch() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -36,17 +36,15 @@ public class Hatch
         int drones = this.magicNumber;
         addToBot(new MakeTempCardInHandAction(Drone.createDroneWithInteractions(p), drones));
         addToBot(new InsectGene().getChannelAction());
-        if (this.upgraded) {
-            addToBot(new GainBlockAction(p, this.block));
-        }
+        addToBot(new GainBlockAction(p, this.block));
     }
 
     @Override
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-//            this.upgradeMagicNumber(UPGRADE_DRONES_AMT);
-            this.rawDescription = UPGRADE_DESCRIPTION;
+            this.upgradeBlock(UPGRADE_BLOCK_AMT);
+//            this.rawDescription = UPGRADE_DESCRIPTION;
             this.initializeDescription();
         }
     }

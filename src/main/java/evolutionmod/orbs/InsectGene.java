@@ -2,7 +2,9 @@ package evolutionmod.orbs;
 
 import basemod.helpers.TooltipInfo;
 import com.badlogic.gdx.graphics.Color;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
+import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -29,12 +31,25 @@ public class InsectGene extends AbstractGene {
 	@Override
 	public void onStartOfTurn() {
 		super.onStartOfTurn();
-		apply(AbstractDungeon.player, null, 1);
+		apply(AbstractDungeon.player, null, 1, false);
 	}
 
 	@Override
 	public void onEvoke() {
-		apply(AbstractDungeon.player, null, 1);
+//		apply(AbstractDungeon.player, null, 1);
+	}
+
+	@Override
+	public AbstractGameAction getChannelAction() {
+		AbstractGene gene = this;
+		return new AbstractGameAction() {
+			@Override
+			public void update() {
+				apply(AbstractDungeon.player, null, 1, true);
+				addToTop(new ChannelAction(gene));
+				this.isDone = true;
+			}
+		};
 	}
 
 	@Override
@@ -46,8 +61,12 @@ public class InsectGene extends AbstractGene {
 	public void playChannelSFX() {
 	}
 
-	public static void apply(AbstractPlayer p, AbstractMonster m, int times) {
-		AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(Drone.createDroneWithInteractions(p), times));
+	public static void apply(AbstractPlayer p, AbstractMonster m, int times, boolean addToTop) {
+		if (addToTop) {
+			AbstractDungeon.actionManager.addToTop(new MakeTempCardInHandAction(Drone.createDroneWithInteractions(p), times));
+		} else {
+			AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(Drone.createDroneWithInteractions(p), times));
+		}
 	}
 
 	@Override
@@ -83,7 +102,7 @@ public class InsectGene extends AbstractGene {
 
 		@Override
 		public void apply(AbstractPlayer p, AbstractMonster m) {
-			InsectGene.apply(p, m, this.amount);
+			InsectGene.apply(p, m, this.amount, true);
 		}
 
 		@Override

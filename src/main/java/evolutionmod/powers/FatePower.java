@@ -51,7 +51,8 @@ public class FatePower extends AbstractPower {
     public void atStartOfTurn() {
         super.atStartOfTurn();
         if (this.amount > this.applied) {
-            addToBot(new WaitAction(0.2f));
+            flash();
+            addToBot(new WaitAction(0.7f));
             addToBot(new RefillDrawPileAction(amount - applied));
             addToBot(new ScryAction(amount - applied));
             applied = amount;

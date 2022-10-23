@@ -24,7 +24,7 @@ public class Shrink
     public Shrink() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.POWER, AbstractCardEnum.EVOLUTION_BLUE,
-                CardRarity.UNCOMMON, CardTarget.SELF);
+                CardRarity.RARE, CardTarget.SELF);
         this.magicNumber = this.baseMagicNumber = GAIN_DRAW_AMT;
     }
 

@@ -24,7 +24,7 @@ public class GodlyPowers extends BaseEvoCard {
     public GodlyPowers() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.POWER, AbstractCardEnum.EVOLUTION_BLUE,
-                CardRarity.RARE, CardTarget.SELF);
+                CardRarity.UNCOMMON, CardTarget.SELF);
         this.magicNumber = this.baseMagicNumber = OMNI_AMT;
     }
 

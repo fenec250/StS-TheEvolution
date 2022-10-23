@@ -66,6 +66,7 @@ public class EruptionPower extends TwoAmountPower {
             case THORNS:
                 this.amount2 -= 1;
                 while(this.amount2 <= 0) {
+                    flash();
 					int size = AbstractDungeon.getMonsters().monsters.size();
                     long targets = AbstractDungeon.getMonsters().monsters.stream().filter(m -> !m.isDeadOrEscaped()).count();
                     this.amount2 += COUNTDOWN_AMT + targets;

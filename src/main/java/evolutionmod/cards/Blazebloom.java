@@ -2,20 +2,18 @@ package evolutionmod.cards;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import evolutionmod.orbs.LavafolkGene;
-import evolutionmod.orbs.PlantGene;
 import evolutionmod.patches.AbstractCardEnum;
 import evolutionmod.powers.GrowthPower;
 
-public class Firebloom2
+public class Blazebloom
         extends BaseEvoCard {
-    public static final String ID = "evolutionmod:Firebloom";
+    public static final String ID = "evolutionmod:Blazebloom";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -25,7 +23,7 @@ public class Firebloom2
     private static final int CHANNEL_AMT = 1;
     private static final int UPGRADE_CHANNEL_AMT = 1;
 
-    public Firebloom2() {
+    public Blazebloom() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.UNCOMMON, CardTarget.SELF);
@@ -51,7 +49,7 @@ public class Firebloom2
 
     @Override
     public AbstractCard makeCopy() {
-        return new Firebloom2();
+        return new Blazebloom();
     }
 
     @Override

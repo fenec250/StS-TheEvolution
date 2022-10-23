@@ -22,7 +22,6 @@ public class FireAnts
     public static final String IMG_PATH = "evolutionmod/images/cards/FireAnts.png";
     private static final int COST = 1;
     private static final int EVOKE_AMT = 1;
-    private static final int UPGRADE_EVOKE_AMT = 1;
 
     public FireAnts() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,

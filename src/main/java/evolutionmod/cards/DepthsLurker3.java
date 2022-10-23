@@ -36,7 +36,7 @@ public class DepthsLurker3
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         addToBot(new MerfolkGene().getChannelAction());
-        addToBot(new GainBlockAction(p, ShadowsPower.getThreshold(p) * magicNumber));
+        addToBot(new GainBlockAction(p, this.block));
     }
 
     @Override

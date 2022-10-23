@@ -37,7 +37,7 @@ public class FlameStrike
     public void use(AbstractPlayer p, AbstractMonster m) {
         AbstractDungeon.actionManager.addToBottom(new DamageAllEnemiesAction(p, this.multiDamage,
                 this.damageTypeForTurn,
-                AbstractGameAction.AttackEffect.BLUNT_HEAVY));
+                AbstractGameAction.AttackEffect.FIRE));
         AbstractDungeon.actionManager.addToBottom(new LavafolkGene().getChannelAction());
     }
 

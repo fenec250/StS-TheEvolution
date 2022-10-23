@@ -71,7 +71,7 @@ public class Mutate extends BaseEvoCard {
 					addToTop(getGene(available.get(0)).getChannelAction());
 				} else {
 					while (available.size() > magicNumber) {
-						available.remove(AbstractDungeon.cardRng.random(available.size() - 1));
+						available.remove(AbstractDungeon.cardRandomRng.random(available.size() - 1));
 					}
 					ArrayList<AbstractCard> cardChoices = new ArrayList<>(available.stream()
 							.map(o -> {

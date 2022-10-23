@@ -1,0 +1,59 @@
+{
+  "FORM": {
+    "PROPER_NAME": "Form",
+    "NAMES": [
+      "form",
+      "form:"
+    ],
+    "DESCRIPTION": "Trigger the following effect if you have a Gene of this type, otherwise Channel the gene."
+  },
+  "ADAPT": {
+    "PROPER_NAME": "Adapt",
+    "NAMES": [
+      "adapt"
+    ],
+    "DESCRIPTION": "Consume a channeled Gene, add its effect to the adapting card until the end of the combat and shuffle the card in your draw pile. NL Adapted effects target the same enemy as the card if possible."
+  },
+  "SHIFT": {
+    "PROPER_NAME": "Shift",
+    "NAMES": [
+      "shift"
+    ],
+    "DESCRIPTION": "Recreate the gene at the back of the orb line."
+  },
+  "RANDO": {
+    "PROPER_NAME": "Randomized",
+    "NAMES": [
+      "randomized"
+    ],
+    "DESCRIPTION": "Randomized Forms are selected when the card is created and vary from a card to another."
+  },
+  "FATE": {
+    "PROPER_NAME": "Fate",
+    "NAMES": [
+      "fate"
+    ],
+    "DESCRIPTION": "At the start of next turn, Scry this amount."
+  },
+  "GROWTH": {
+    "PROPER_NAME": "Growth",
+    "NAMES": [
+      "growth"
+    ],
+    "DESCRIPTION": "Upon reaching 2 Growth gain 1 Energy and reduce Growth by 2."
+  },
+  "LUST": {
+    "PROPER_NAME": "Lust",
+    "NAMES": [
+      "lust"
+    ],
+    "DESCRIPTION": "Reduce the base damage of the next attack by this amount."
+  },
+  "SHADOWS": {
+    "PROPER_NAME": "Shadows",
+    "NAMES": [
+      "shadows"
+    ],
+    "DESCRIPTION": "When #yShadows reaches its threshold it deals 2 damage per stack and applies 1 #yWeak to all enemies. NL The threshold starts each combat at 1."
+  }
+}

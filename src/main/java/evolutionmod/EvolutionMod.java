@@ -11,9 +11,13 @@ import basemod.interfaces.PostInitializeSubscriber;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.evacipated.cardcrawl.mod.stslib.Keyword;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.localization.CharacterStrings;
@@ -21,6 +25,7 @@ import com.megacrit.cardcrawl.localization.OrbStrings;
 import com.megacrit.cardcrawl.localization.PotionStrings;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.localization.RelicStrings;
+import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import evolutionmod.cards.*;
 import evolutionmod.character.EvolutionCharacter;
@@ -28,7 +33,6 @@ import evolutionmod.patches.AbstractCardEnum;
 import evolutionmod.patches.EvolutionEnum;
 import evolutionmod.potions.EatMe;
 import evolutionmod.potions.Mutagen;
-import evolutionmod.powers.GrowthPower;
 import evolutionmod.relics.MagicFocus;
 import evolutionmod.relics.NimbleBoots;
 import evolutionmod.relics.OldOutfit;
@@ -39,9 +43,11 @@ import evolutionmod.relics.Tori;
 import evolutionmod.relics.TorisGift;
 import evolutionmod.relics.Whip;
 
+import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @SpireInitializer
 public class EvolutionMod implements
@@ -118,7 +124,7 @@ public class EvolutionMod implements
         cards.add(new ShiftingStrike());
         cards.add(new ChimeraStrike());
         cards.add(new CrystalShard());
-        cards.add(new GeneBlast());
+//        cards.add(new GeneBlast());
 //        cards.add(new GeneFlash());
         //8 skills
         cards.add(new Barkskin());
@@ -141,8 +147,9 @@ public class EvolutionMod implements
         cards.add(new NightMare2());
         cards.add(new Phoenix());
         cards.add(new PegasusDescent());
-        cards.add(new SpiderBite());
-        cards.add(new CursedTouch());
+//        cards.add(new PreyOnTheWeak());
+//        cards.add(new SpiderBite());
+//        cards.add(new CursedTouch());
 //        cards.add(new BlackCat());
         cards.add(new BlackCat2());
 //        cards.add(new SeaWolf());
@@ -158,22 +165,23 @@ public class EvolutionMod implements
         cards.add(new VenomGlands2());
         cards.add(new FireAnts());
 //        cards.add(new Firebloom());
-        cards.add(new Firebloom2());
+        cards.add(new Blazebloom());
         cards.add(new SeerSear());
+        cards.add(new Promise());
 //        cards.add(new LeafBird());
         cards.add(new LeafBird2());
-//        cards.add(new Omen());
 //        cards.add(new Pheromones());
         cards.add(new Pheromones2());
 //        cards.add(new Aphrodisiac());
         cards.add(new Aphrodisiac2());
         cards.add(new HeightenedSenses());
-//        cards.add(new DepthsLurker2());
-        cards.add(new DepthsLurker3());
-        cards.add(new Antidote());
-        cards.add(new ReadTheWaters());
+//        cards.add(new DepthsLurker());
+        cards.add(new DepthsLurker4());
+//        cards.add(new ReadTheWaters());
+        cards.add(new ReadTheWaters2());
         cards.add(new SeaSerpent());
         cards.add(new ShiftingPower());
+        cards.add(new ChimeraPower());
         cards.add(new Adaptation());
         cards.add(new Mutate());
         //exhaust
@@ -186,16 +194,17 @@ public class EvolutionMod implements
         cards.add(new CurrentsDancer());
         cards.add(new Symbiotes());
         cards.add(new Salamander());
-//        cards.add(new DarkDesires());
-        cards.add(new DarkDesires2());
+        cards.add(new DarkDesires());
+//        cards.add(new DarkDesires2());
         cards.add(new Mastery());
         cards.add(new Shrink());
+        cards.add(new Broodmother2());
 
         //Rares.
         //4 attacks
         cards.add(new Stampede());
         cards.add(new Lifesteal());
-        cards.add(new Stalker());
+//        cards.add(new Stalker());
         cards.add(new Eruption());
         cards.add(new Frenzy());
         cards.add(new FeatherStorm());
@@ -205,12 +214,13 @@ public class EvolutionMod implements
 //        cards.add(new Drown2());
         cards.add(new Ritual());
         cards.add(new Photosynthesis());
-        cards.add(new TheFutureIsNow());
-        cards.add(new CrystalShaping());
+//        cards.add(new TheFutureIsNow());
+        cards.add(new Heal());
+        cards.add(new CrystalShaping2());
 
         //6 powers
 //        cards.add(new Broodmother());
-        cards.add(new TheNight());
+        cards.add(new TheNight2());
         cards.add(new GodlyPowers());
         cards.add(new HumanForm());
         cards.add(new Grow());
@@ -235,38 +245,21 @@ public class EvolutionMod implements
 
     @Override
     public void receiveEditKeywords() {
-        String[] keywordForm = {"form"};
-        BaseMod.addKeyword("evolutionmod", "Form", keywordForm, "Trigger the following effect if you have a Gene of this type, otherwise Channel one.");
-        String[] keywordAdapt = {"adapt"};
-        BaseMod.addKeyword("evolutionmod", "Adapt", keywordAdapt, "Consume a channeled Gene. Add its effect to the card until the end of the combat and shuffle this card in your draw pile. NL Adapted effects target the same enemy as the card if possible.");
-        String[] keywordShift = {"shift"};
-        BaseMod.addKeyword("Shift", keywordShift, "Recreate the gene at the back of the orb line.");
-        String[] keywordRando = {"randomized"};
-        BaseMod.addKeyword("Randomized", keywordRando, "Randomized Forms are selected when the card is created and vary from a card to another.");
-        String[] keywordFate = {"fate"};
-        BaseMod.addKeyword("evolutionmod", "Fate", keywordFate, "At the start of next turn, Scry this amount.");
 //        BaseMod.addKeyword("Fate", keywordFate, "Look at the top X cards of your draw pile. You may discard any of them. Discarded cards may trigger the associated effect.");
-        String[] keywordGrowth = {"growth", "Plant"};
-        BaseMod.addKeyword("Growth", keywordGrowth,
-                "Upon reaching " + GrowthPower.ENERGY_THRESHOLD + " Growth gain 1 Energy and reduce Growth by " + GrowthPower.ENERGY_THRESHOLD);
-        String[] keywordDrone = {"drone", "drones"};
-        BaseMod.addKeyword("Drone", keywordDrone,
-                "Drones are 0 cost attacks which benefit from Potency, are Ethereal and Exhaust when played.");
-        String[] keywordRage = {"rage"};
-        BaseMod.addKeyword("Rage", keywordRage,
-                "Whenever you play an Attack this turn, gain this amount of Block times its energy cost.");
-        String[] keywordSubmission = {"lust"};
-        BaseMod.addKeyword("Lust", keywordSubmission,
-                "Reduce the base damage of the next attack by this amount.");
-        String[] keywordVigor = {"vigor", "centaur"};
-        BaseMod.addKeyword("Vigor", keywordVigor,
-                "Increases the damage of your next Attack.");
-        String[] keywordShadows = {"shadows"};
-        BaseMod.addKeyword("Shadows", keywordShadows,
-                "When #yShadows reaches its threshold it deals 2 damage per stack and applies 1 #yWeak to all enemies. The first threshold is 1.");
 
 //        String[] keywordCantrips = {"cantrip", "cantrips"};
 //        BaseMod.addKeyword(keywordCantrips, "Considered a [#5299DC]Spell[] so long as you've played fewer than 3 [#5299DC]Spells[] this turn.");
+
+        Gson gson = new Gson();
+
+        String keywordStrings = Gdx.files.internal("evolutionmod/strings" /*+ "/eng"*/ + "/keywords.json").readString(String.valueOf(StandardCharsets.UTF_8));
+        Type typeToken = new TypeToken<Map<String, Keyword>>() {}.getType();
+
+        Map<String, Keyword> keywords = gson.fromJson(keywordStrings, typeToken);
+
+        keywords.forEach((k,v)->{
+            BaseMod.addKeyword("evolutionmod", v.PROPER_NAME, v.NAMES, v.DESCRIPTION);
+        });
     }
 
     @Override

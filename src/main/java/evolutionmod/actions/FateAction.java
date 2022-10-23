@@ -84,7 +84,7 @@ public class FateAction extends AbstractGameAction {
 							.filter(k)
 							.filter(c -> !copy.contains(c))
 							.collect(Collectors.collectingAndThen(Collectors.toList(), l -> {
-								Collections.shuffle(l, AbstractDungeon.cardRng.random);
+								Collections.shuffle(l, AbstractDungeon.cardRandomRng.random);
 								return l.stream();
 							}))
 							.limit(v)

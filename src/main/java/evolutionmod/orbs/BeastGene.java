@@ -66,12 +66,6 @@ public class BeastGene extends AbstractGene {
 	}
 
 	@Override
-	public void updateDescription() {
-//		super.updateDescription();
-		this.description = getOrbDescription();
-	}
-
-	@Override
 	public AbstractGameAction getChannelAction() {
 		AbstractGene gene = this;
 		return new AbstractGameAction() {
@@ -82,6 +76,12 @@ public class BeastGene extends AbstractGene {
 				this.isDone = true;
 			}
 		};
+	}
+
+	@Override
+	public void updateDescription() {
+//		super.updateDescription();
+		this.description = getOrbDescription();
 	}
 
 	@Override

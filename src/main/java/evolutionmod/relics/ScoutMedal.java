@@ -2,19 +2,22 @@ package evolutionmod.relics;
 
 import basemod.abstracts.CustomRelic;
 import com.badlogic.gdx.graphics.Texture;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
+import com.megacrit.cardcrawl.actions.utility.ScryAction;
+import com.megacrit.cardcrawl.actions.utility.WaitAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.RelicStrings;
-import com.megacrit.cardcrawl.orbs.AbstractOrb;
-import com.megacrit.cardcrawl.relics.FossilizedHelix;
-import evolutionmod.actions.FateAction;
-import evolutionmod.orbs.AbstractGene;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.function.Predicate;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class ScoutMedal extends CustomRelic {
     public static final String ID = "evolutionmod:ScoutMedal";
@@ -40,10 +43,44 @@ public class ScoutMedal extends CustomRelic {
         this.flash();
         this.addToBot(new RelicAboveCreatureAction(AbstractDungeon.player, this));
         this.grayscale = true;
-        HashMap<Predicate<AbstractCard>, Integer> cardSelectors = new HashMap<>();
-        Arrays.stream(AbstractCard.CardType.values())
-                .forEach(t -> cardSelectors.put(c -> c.type == t, 1));
-        this.addToBot(new FateAction(cardSelectors));
+        this.addToBot(new WaitAction(0.7f));
+        this.addToBot(new Action());
         super.atBattleStart();
+    }
+
+    public static class Action extends AbstractGameAction {
+
+        public Action() {
+            this.actionType = ActionType.CARD_MANIPULATION;
+        }
+
+        public void update() {
+            if (!AbstractDungeon.getMonsters().areMonstersBasicallyDead()) {
+                CardGroup drawPile = AbstractDungeon.player.drawPile;
+                Set<AbstractCard> copy = new HashSet<>();
+                if (!drawPile.isEmpty()) {
+                    Arrays.stream(AbstractCard.CardType.values())
+                            .map(t ->
+                                    drawPile.group.stream()
+                                            .filter(c -> c.type == t)
+                                            .filter(c -> !copy.contains(c))
+                                            .collect(Collectors.collectingAndThen(Collectors.toList(), l -> {
+                                                Collections.shuffle(l, AbstractDungeon.cardRandomRng.random);
+                                                return l.stream();
+                                            }))
+                                            .findFirst())
+                            .filter(Optional::isPresent)
+                            .map(Optional::get)
+                            .forEach(c -> {
+                                if (copy.add(c)) {
+                                    drawPile.group.remove(c);
+                                }
+                            });
+                    copy.forEach(drawPile::addToTop);
+                }
+                addToTop(new ScryAction(copy.size()));
+            }
+            this.isDone = true;
+        }
     }
 }

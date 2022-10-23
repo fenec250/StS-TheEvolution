@@ -47,7 +47,6 @@ public class Broodmother2 extends BaseEvoCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeMagicNumber(UPGRADE_GENE_AMT);
             this.rawDescription = UPGRADE_DESCRIPTION;
             this.initializeDescription();
         }

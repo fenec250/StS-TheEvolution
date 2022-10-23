@@ -13,7 +13,7 @@ import evolutionmod.orbs.LizardGene;
 import evolutionmod.patches.AbstractCardEnum;
 import evolutionmod.powers.SalamanderPower;
 
-public class Salamander extends BaseEvoCard implements GlowingCard {
+public class Salamander extends BaseEvoCard {
     public static final String ID = "evolutionmod:Salamander";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -21,6 +21,7 @@ public class Salamander extends BaseEvoCard implements GlowingCard {
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = "evolutionmod/images/cards/Salamander.png";
     private static final int COST = 1;
+    private static final int UPGRADED_COST = 0;
     private static final int SALAMANDER_AMT = 1;
 
     public Salamander() {
@@ -33,12 +34,12 @@ public class Salamander extends BaseEvoCard implements GlowingCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         this.addToBot(new ApplyPowerAction(p, p, new SalamanderPower(p, this.magicNumber)));
-        if (this.upgraded) {
-            addToBot(new LizardGene().getChannelAction());
-            addToBot(new LavafolkGene().getChannelAction());
-        } else {
-            formEffect(LizardGene.ID, () -> addToBot(new LavafolkGene().getChannelAction()));
-        }
+//        if (this.upgraded) {
+//            addToBot(new LizardGene().getChannelAction());
+//            addToBot(new LavafolkGene().getChannelAction());
+//        } else {
+//            formEffect(LizardGene.ID, () -> addToBot(new LavafolkGene().getChannelAction()));
+//        }
     }
 
     @Override
@@ -50,23 +51,9 @@ public class Salamander extends BaseEvoCard implements GlowingCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.rawDescription = UPGRADE_DESCRIPTION;
+            this.upgradeBaseCost(UPGRADED_COST);
+//            this.rawDescription = UPGRADE_DESCRIPTION;
             this.initializeDescription();
         }
-    }
-
-    @Override
-    public int getNumberOfGlows() {
-        return upgraded ? 0 : 1;
-    }
-
-    @Override
-    public boolean isGlowing(int glowIndex) {
-        return isPlayerInThisForm(LizardGene.ID);
-    }
-
-    @Override
-    public Color getGlowColor(int glowIndex) {
-        return LizardGene.COLOR.cpy();
     }
 }

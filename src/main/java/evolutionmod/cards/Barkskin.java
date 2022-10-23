@@ -20,7 +20,7 @@ public class Barkskin
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = "evolutionmod/images/cards/Barkskin.png";
     private static final int COST = 2;
-    private static final int BLOCK_AMT = 10;
+    private static final int BLOCK_AMT = 8;
     private static final int UPGRADE_BLOCK_AMT = 3;
     private static final int GROWTH_AMT = 1;
     private static final int FORM_GROWTH_AMT = 1;
@@ -36,7 +36,7 @@ public class Barkskin
     public void use(AbstractPlayer p, AbstractMonster m) {
         addToBot(new GainBlockAction(p, p, this.block));
         addToBot(new ApplyPowerAction(p, p, new GrowthPower(p, GROWTH_AMT)));
-        BaseEvoCard.formEffect(PlantGene.ID, () -> addToBot(new ApplyPowerAction(p, p, new GrowthPower(p, GROWTH_AMT))));
+        BaseEvoCard.formEffect(PlantGene.ID, () -> addToBot(new ApplyPowerAction(p, p, new GrowthPower(p, FORM_GROWTH_AMT))));
     }
 
     @Override

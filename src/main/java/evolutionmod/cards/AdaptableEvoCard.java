@@ -153,11 +153,12 @@ public abstract class AdaptableEvoCard extends BaseEvoCard {
 			addToBot(new AbstractGameAction() {
 				@Override
 				public void update() {
-					AbstractDungeon.player.orbs.stream()
-							.filter(o -> canAdaptWith(o) > 0)
-							.limit(max)
-							.collect(Collectors.toList())
-							.forEach(o -> tryAdaptingWith(o));
+					for (int i = 0; i < max; ++i) {
+						AbstractDungeon.player.orbs.stream()
+								.filter(o -> canAdaptWith(o) > 0)
+								.findFirst()
+								.ifPresent(o -> tryAdaptingWith(o));
+					}
 					this.isDone = true;
 				}
 			});

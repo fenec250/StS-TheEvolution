@@ -43,7 +43,7 @@ public class CrystalDust
 	private static final int FORM_DRAW = 2;
 
 	private int geneIndex;
-	private AbstractGene gene;
+	private String geneId;
 
 	public CrystalDust() {
 		this((!CardCrawlGame.isInARun() || AbstractDungeon.miscRng == null)
@@ -63,7 +63,7 @@ public class CrystalDust
 
 	@Override
 	public void use(AbstractPlayer p, AbstractMonster m) {
-		BaseEvoCard.formEffect(this.gene.ID, () -> addToBot(new DrawCardAction(FORM_DRAW)));
+		BaseEvoCard.formEffect(this.geneId, () -> addToBot(new DrawCardAction(FORM_DRAW)));
 	}
 
 	@Override
@@ -79,7 +79,7 @@ public class CrystalDust
 
 	@Override
 	public AbstractCard makeCopy() {
-		return this.gene == null ? new CrystalDust() : new CrystalDust(this.geneIndex);
+		return this.geneId == null ? new CrystalDust() : new CrystalDust(this.geneIndex);
 	}
 
 	@Override
@@ -87,9 +87,9 @@ public class CrystalDust
 		if (!this.upgraded) {
 			this.upgradeName();
 			this.upgradeMagicNumber(UPGRADE_COPIES_AMT);
-			this.rawDescription = this.gene == null
+			this.rawDescription = this.geneId == null
 					? UPGRADE_DESCRIPTION
-					: this.gene.ID + EXTENDED_DESCRIPTION[1];
+					: this.geneId + EXTENDED_DESCRIPTION[1];
 			this.initializeDescription();
 		}
 	}
@@ -97,8 +97,8 @@ public class CrystalDust
 
 	@Override
 	public void triggerOnGlowCheck() {
-		if (gene != null && isPlayerInThisForm(gene.ID)) {
-			switch (gene.ID) {
+		if (geneId != null && isPlayerInThisForm(geneId)) {
+			switch (geneId) {
 				case HarpyGene.ID: this.glowColor = HarpyGene.COLOR.cpy(); return;
 				case MerfolkGene.ID: this.glowColor = MerfolkGene.COLOR.cpy(); return;
 				case LavafolkGene.ID: this.glowColor = LavafolkGene.COLOR.cpy(); return;
@@ -120,20 +120,20 @@ public class CrystalDust
 		if (this.geneIndex < 0 || this.geneIndex > 11 - 1) {
 			return;
 		}
-		AbstractGene[] validGenes = {
-				new PlantGene(),
-				new MerfolkGene(),
-				new HarpyGene(),
-				new LavafolkGene(),
-				new SuccubusGene(),
-				new LymeanGene(),
-				new InsectGene(),
-				new BeastGene(),
-				new LizardGene(),
-				new CentaurGene(),
-				new ShadowGene()};
-		this.gene = validGenes[this.geneIndex];
-		this.rawDescription = this.gene.ID + (this.upgraded ? EXTENDED_DESCRIPTION[1] : EXTENDED_DESCRIPTION[0]);
+		String[] validGenes = {
+				PlantGene.ID,
+				MerfolkGene.ID,
+				HarpyGene.ID,
+				LavafolkGene.ID,
+				SuccubusGene.ID,
+				LymeanGene.ID,
+				InsectGene.ID,
+				BeastGene.ID,
+				LizardGene.ID,
+				CentaurGene.ID,
+				ShadowGene.ID};
+		this.geneId = validGenes[this.geneIndex];
+		this.rawDescription = this.geneId + (this.upgraded ? EXTENDED_DESCRIPTION[1] : EXTENDED_DESCRIPTION[0]);
 		initializeDescription();
 	}
 

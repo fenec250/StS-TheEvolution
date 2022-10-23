@@ -29,12 +29,14 @@ public class PegasusDescent
     private static final int COST = 2;
     private static final int DAMAGE_AMT = 7;
     private static final int UPGRADE_DAMAGE_AMT = 3;
+    private static final int FORM_DAMAGE_AMT = 3;
 
     public PegasusDescent() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.ATTACK, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.UNCOMMON, CardTarget.ENEMY);
         this.damage = this.baseDamage = DAMAGE_AMT;
+        this.magicNumber = this.baseMagicNumber = FORM_DAMAGE_AMT;
     }
 
     @Override
@@ -42,28 +44,47 @@ public class PegasusDescent
         if (m != null) {
             this.addToBot(new VFXAction(new WeightyImpactEffect(m.hb.cX, m.hb.cY)));
         }
-        AbstractCard proxy = this;
-        int hits = getHitsNb(p, energyOnUse, proxy);
-        addToBot(new AbstractGameAction() {
-            @Override
-            public void update() {
-                for (int i = 0; i < hits; ++i) {
-                    AbstractDungeon.actionManager.addToBottom(new DamageAction(
-                            m, new DamageInfo(p, damage, damageTypeForTurn),
-                            AbstractGameAction.AttackEffect.BLUNT_LIGHT));
-                }
-                this.isDone = true;
-            }
-        });
-        formEffect(HarpyGene.ID, () -> addToBot(new CentaurGene().getChannelAction()));
+        int hits = getHitsNb(p, energyOnUse, this);
+        for (int i = 0; i < hits; ++i) {
+            AbstractDungeon.actionManager.addToBottom(new DamageAction(
+                    m, new DamageInfo(p, damage, damageTypeForTurn),
+                    AbstractGameAction.AttackEffect.BLUNT_LIGHT));
+        }
+//        AbstractCard proxy = this;
+//        addToBot(new AbstractGameAction() {
+//            @Override
+//            public void update() {
+//                int hits = getHitsNb(p, energyOnUse, proxy);
+//                for (int i = 0; i < hits; ++i) {
+//                    AbstractDungeon.actionManager.addToBottom(new DamageAction(
+//                            m, new DamageInfo(p, damage, damageTypeForTurn),
+//                            AbstractGameAction.AttackEffect.BLUNT_LIGHT));
+//                }
+//                this.isDone = true;
+//            }
+//        });
+//        formEffect(HarpyGene.ID, () -> addToBot(new CentaurGene().getChannelAction()));
+        formEffect(CentaurGene.ID);
     }
 
     @Override
     public void applyPowers() {
-        super.applyPowers();
+        alterDamageAround(super::applyPowers);
         int hits = getHitsNb(AbstractDungeon.player, EnergyPanel.getCurrentEnergy(), this);
-        rawDescription = DESCRIPTION + EXTENDED_DESCRIPTION[0] + hits + EXTENDED_DESCRIPTION[1];
+        rawDescription = EXTENDED_DESCRIPTION[0] + hits + EXTENDED_DESCRIPTION[1];
         initializeDescription();
+    }
+
+    @Override
+    public void calculateCardDamage(AbstractMonster mo) {
+        alterDamageAround(() -> super.calculateCardDamage(mo));
+    }
+
+    private void alterDamageAround(Runnable supercall) {
+        this.baseDamage = DAMAGE_AMT + (upgraded ? UPGRADE_DAMAGE_AMT:0) + (isPlayerInThisForm(CentaurGene.ID) ? this.magicNumber : 0);
+        supercall.run();
+        this.baseDamage = DAMAGE_AMT + (upgraded ? UPGRADE_DAMAGE_AMT:0);
+        this.isDamageModified = this.damage != this.baseDamage;
     }
 
     @Override
@@ -81,8 +102,8 @@ public class PegasusDescent
 
     @Override
     public void triggerOnGlowCheck() {
-        if (isPlayerInThisForm(HarpyGene.ID)) {
-            this.glowColor = HarpyGene.COLOR.cpy();
+        if (isPlayerInThisForm(CentaurGene.ID)) {
+            this.glowColor = CentaurGene.COLOR.cpy();
         } else {
             this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
         }

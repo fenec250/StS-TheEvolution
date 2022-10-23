@@ -1,10 +1,8 @@
 package evolutionmod.cards;
 
-import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
-import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -13,11 +11,10 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.RagePower;
-import evolutionmod.orbs.BeastGene;
 import evolutionmod.patches.AbstractCardEnum;
+import evolutionmod.powers.BestialRagePower;
 
-public class Frenzy
-        extends BaseEvoCard {
+public class Frenzy extends BaseEvoCard {
     public static final String ID = "evolutionmod:Frenzy";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -45,8 +42,7 @@ public class Frenzy
                 m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
                 AbstractGameAction.AttackEffect.SLASH_VERTICAL));
         int rageAmount = RAGE_AMT + (this.upgraded ? UPGRADE_RAGE_AMT : 0);
-        formEffect(BeastGene.ID, () -> addToBot(new ApplyPowerAction(p, p,
-                    new RagePower(p, rageAmount))));
+        addToBot(new ApplyPowerAction(p, p, new BestialRagePower(p, rageAmount)));
     }
 
     @Override
@@ -93,15 +89,6 @@ public class Frenzy
             this.upgradeMagicNumber(UPGRADE_FRENZY_AMT);
             this.rawDescription = UPGRADE_DESCRIPTION;
             this.initializeDescription();
-        }
-    }
-
-    @Override
-    public void triggerOnGlowCheck() {
-        if (isPlayerInThisForm(BeastGene.ID)) {
-            this.glowColor = BeastGene.COLOR.cpy();
-        } else {
-            this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
         }
     }
 }

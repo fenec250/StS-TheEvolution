@@ -33,14 +33,28 @@
 //    "DESCRIPTIONS": ["At the start of your turn if you have Shadow #yForm reduce the #yShadows amount2 by ", " and reduce its damage accordingly. Otherwise Channel a Shadow gene and reduce the amount2 by 1 less."]
 //    "DESCRIPTIONS": ["At the start of your turn if you have a Shadow gene add ", "a", " Shadowbolt to your hand, otherwise Channel a Shadow gene."]
   },
+  "evolutionmod:TheNight2Power": {
+    "NAME": "The Night",
+    "DESCRIPTIONS": ["At the start of your turn gain ", " #yShadows."]
+    //    "DESCRIPTIONS": ["At the start of your turn if you have Shadow #yForm reduce the #yShadows amount2 by ", " and reduce its damage accordingly. Otherwise Channel a Shadow gene and reduce the amount2 by 1 less."]
+    //    "DESCRIPTIONS": ["At the start of your turn if you have a Shadow gene add ", "a", " Shadowbolt to your hand, otherwise Channel a Shadow gene."]
+  },
   "evolutionmod:CurrentsDancerPower": {
     "NAME": "Currents Dancer",
     "DESCRIPTIONS": ["The first time you draw a card after the beginning of your turn gain ", " Block."]
+  },
+  "evolutionmod:CrystalShapingPower": {
+    "NAME": "Crystal Shaping",
+    "DESCRIPTIONS": ["At the start of your turn add ", " random #yCrystal #yBlock, #yCrystal #yShard or #yCrystal #yDust to your hand."]
   },
   "evolutionmod:ShadowsPower": {
     "NAME": "Shadows",
     "DESCRIPTIONS": ["Needs ", " more to reach the next threshold, consuming Shadows to deal ", " damage per stack, apply 1 Weak to ALL enemies and increase the threshold to ", "."]
 //    "DESCRIPTIONS": ["Needs ", " more to reach the next threshold, dealing ", " damage per stack, applying 1 Weak to ALL enemies and increasing the threshold to ", "."]
+  },
+  "evolutionmod:DarkDesiresPower": {
+    "NAME": "Dark Desires",
+    "DESCRIPTIONS": ["Whenever Shadows trigger, apply ", " #yLust to all enemies, reducing the damage of their next attack."]
   },
   "evolutionmod:BramblesPower": {
     "NAME": "Brambles",

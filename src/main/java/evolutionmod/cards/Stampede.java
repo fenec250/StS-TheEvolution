@@ -23,7 +23,7 @@ public class Stampede
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = "evolutionmod/images/cards/Stampede.png";
     private static final int COST = 2;
-    private static final int DAMAGE_AMT = 6;
+    private static final int DAMAGE_AMT = 5;
     private static final int UPGRADE_DAMAGE_AMT = 2;
 
     public Stampede() {
