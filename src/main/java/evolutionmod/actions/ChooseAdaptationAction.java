@@ -12,17 +12,6 @@ import evolutionmod.cards.AdaptableEvoCard;
 import evolutionmod.cards.BaseEvoCard;
 import evolutionmod.cards.Gene;
 import evolutionmod.orbs.AbstractGene;
-import evolutionmod.orbs.BeastGene;
-import evolutionmod.orbs.CentaurGene;
-import evolutionmod.orbs.HarpyGene;
-import evolutionmod.orbs.InsectGene;
-import evolutionmod.orbs.LavafolkGene;
-import evolutionmod.orbs.LizardGene;
-import evolutionmod.orbs.LymeanGene;
-import evolutionmod.orbs.MerfolkGene;
-import evolutionmod.orbs.PlantGene;
-import evolutionmod.orbs.ShadowGene;
-import evolutionmod.orbs.SuccubusGene;
 
 import java.util.List;
 import java.util.stream.Collectors;

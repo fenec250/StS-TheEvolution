@@ -7,17 +7,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import evolutionmod.orbs.BeastGene;
-import evolutionmod.orbs.CentaurGene;
-import evolutionmod.orbs.HarpyGene;
-import evolutionmod.orbs.InsectGene;
-import evolutionmod.orbs.LavafolkGene;
-import evolutionmod.orbs.LizardGene;
-import evolutionmod.orbs.LymeanGene;
-import evolutionmod.orbs.MerfolkGene;
-import evolutionmod.orbs.PlantGene;
-import evolutionmod.orbs.ShadowGene;
-import evolutionmod.orbs.SuccubusGene;
+import evolutionmod.orbs.*;
 import evolutionmod.patches.AbstractCardEnum;
 
 import java.util.ArrayList;
@@ -50,7 +40,7 @@ public class Ritual
         this.adaptationMap.put(BeastGene.ID, new BeastGene.Adaptation(0, ADAPT_MAX_AMT));
         this.adaptationMap.put(SuccubusGene.ID, new SuccubusGene.Adaptation(0, ADAPT_MAX_AMT));
         this.adaptationMap.put(LizardGene.ID, new LizardGene.Adaptation(0, ADAPT_MAX_AMT));
-        this.adaptationMap.put(ShadowGene.ID, new ShadowGene.Adaptation(0, ADAPT_MAX_AMT));
+        this.adaptationMap.put(ShadowGene2.ID, new ShadowGene2.Adaptation(0, ADAPT_MAX_AMT));
         this.adaptationMap.put(LavafolkGene.ID, new LavafolkGene.Adaptation(0, ADAPT_MAX_AMT));
         this.adaptationMap.put(MerfolkGene.ID, new MerfolkGene.Adaptation(0, ADAPT_MAX_AMT));
     }
@@ -107,7 +97,7 @@ public class Ritual
                             case LizardGene.ID: return LizardGene.COLOR.cpy();
                             case BeastGene.ID: return BeastGene.COLOR.cpy();
                             case PlantGene.ID: return PlantGene.COLOR.cpy();
-                            case ShadowGene.ID: return ShadowGene.COLOR.cpy();
+                            case ShadowGene2.ID: return ShadowGene2.COLOR.cpy();
                             case LymeanGene.ID: return LymeanGene.COLOR.cpy();
                             case InsectGene.ID: return InsectGene.COLOR.cpy();
                             case SuccubusGene.ID: return SuccubusGene.COLOR.cpy();

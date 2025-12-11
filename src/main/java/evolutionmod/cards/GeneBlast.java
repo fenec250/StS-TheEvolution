@@ -14,18 +14,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
-import evolutionmod.orbs.AbstractGene;
-import evolutionmod.orbs.BeastGene;
-import evolutionmod.orbs.CentaurGene;
-import evolutionmod.orbs.HarpyGene;
-import evolutionmod.orbs.InsectGene;
-import evolutionmod.orbs.LavafolkGene;
-import evolutionmod.orbs.LizardGene;
-import evolutionmod.orbs.LymeanGene;
-import evolutionmod.orbs.MerfolkGene;
-import evolutionmod.orbs.PlantGene;
-import evolutionmod.orbs.ShadowGene;
-import evolutionmod.orbs.SuccubusGene;
+import evolutionmod.orbs.*;
 import evolutionmod.patches.AbstractCardEnum;
 
 import java.util.List;
@@ -165,7 +154,7 @@ public class GeneBlast
 			case LizardGene.ID: return LizardGene.COLOR.cpy();
 			case BeastGene.ID: return BeastGene.COLOR.cpy();
 			case PlantGene.ID: return PlantGene.COLOR.cpy();
-			case ShadowGene.ID: return ShadowGene.COLOR.cpy();
+			case ShadowGene2.ID: return ShadowGene2.COLOR.cpy();
 			case LymeanGene.ID: return LymeanGene.COLOR.cpy();
 			case InsectGene.ID: return InsectGene.COLOR.cpy();
 			case SuccubusGene.ID: return SuccubusGene.COLOR.cpy();

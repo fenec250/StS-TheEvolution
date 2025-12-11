@@ -11,18 +11,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import evolutionmod.orbs.AbstractGene;
-import evolutionmod.orbs.BeastGene;
-import evolutionmod.orbs.CentaurGene;
-import evolutionmod.orbs.HarpyGene;
-import evolutionmod.orbs.InsectGene;
-import evolutionmod.orbs.LavafolkGene;
-import evolutionmod.orbs.LizardGene;
-import evolutionmod.orbs.LymeanGene;
-import evolutionmod.orbs.MerfolkGene;
-import evolutionmod.orbs.PlantGene;
-import evolutionmod.orbs.ShadowGene;
-import evolutionmod.orbs.SuccubusGene;
+import evolutionmod.orbs.*;
 import evolutionmod.patches.AbstractCardEnum;
 
 import java.util.List;
@@ -69,7 +58,7 @@ public class LoyalCompanion
 	public boolean atBattleStartPreDraw() {
 		if (this.upgraded) {
 			addToBot(((AbstractGene) this.gene.makeCopy()).getChannelAction());
-			this.gene.getAdaptation().apply(AbstractDungeon.player, null);
+			//this.gene.getAdaptation().apply(AbstractDungeon.player, null);
 		}
 		return false;
 	}
@@ -134,7 +123,7 @@ public class LoyalCompanion
 			case LizardGene.ID: return LizardGene.COLOR.cpy();
 			case BeastGene.ID: return BeastGene.COLOR.cpy();
 			case PlantGene.ID: return PlantGene.COLOR.cpy();
-			case ShadowGene.ID: return ShadowGene.COLOR.cpy();
+			case ShadowGene2.ID: return ShadowGene2.COLOR.cpy();
 			case LymeanGene.ID: return LymeanGene.COLOR.cpy();
 			case InsectGene.ID: return InsectGene.COLOR.cpy();
 			case SuccubusGene.ID: return SuccubusGene.COLOR.cpy();
@@ -157,7 +146,7 @@ public class LoyalCompanion
 			if (!CardCrawlGame.isInARun() || AbstractDungeon.miscRng == null) {
 				return;
 			}
-			this.geneIndex = AbstractDungeon.miscRng.random(8 - 1);
+			this.geneIndex = AbstractDungeon.miscRng.random(11 - 1);
 		}
 		AbstractGene[] validGenes = {
 				new PlantGene(),
@@ -167,7 +156,10 @@ public class LoyalCompanion
 				new SuccubusGene(),
 				new LymeanGene(),
 				new InsectGene(),
-				new LizardGene()};
+				new ShadowGene2(),
+				new LizardGene(),
+				new CentaurGene(),
+				new BeastGene()};
 		this.gene = validGenes[this.geneIndex];
 		this.rawDescription = EXTENDED_DESCRIPTION[0] + (!upgraded
 				? this.gene.ID + EXTENDED_DESCRIPTION[1]

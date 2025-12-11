@@ -106,12 +106,13 @@ public class ReadTheWaters2
         this.rawDescription = this.isEthereal ? EXTENDED_DESCRIPTION[0] : DESCRIPTION;
         super.initializeDescription();
     }
-    //    @Override
-//    public void triggerOnGlowCheck() {
-//        if (isPlayerInThisForm(LymeanGene.ID)) {
-//            this.glowColor = LymeanGene.COLOR.cpy();
-//        } else {
-//            this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
-//        }
-//    }
+
+    @Override
+    public void triggerOnGlowCheck() {
+        if (isPlayerInThisForm(LymeanGene.ID)) {
+            this.glowColor = LymeanGene.COLOR.cpy();
+        } else {
+            this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
+        }
+    }
 }

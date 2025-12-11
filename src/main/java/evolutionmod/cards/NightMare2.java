@@ -32,7 +32,6 @@ public class NightMare2
                 CardType.ATTACK, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.UNCOMMON, CardTarget.ENEMY);
         this.damage = this.baseDamage = DAMAGE_AMT;
-//        this.exhaust = true;
     }
 
     @Override

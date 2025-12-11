@@ -105,7 +105,6 @@ public class Promise
             if (AbstractDungeon.getMonsters().areMonstersBasicallyDead()) {
                 this.isDone = true;
             } else {
-//			Iterator var1;
                 if (this.duration == this.startingDuration) {
                     addToTop(new TriggerScryEffectsAction());
 
@@ -125,15 +124,17 @@ public class Promise
 
                     AbstractDungeon.gridSelectScreen.open(fateGroup, fateGroup.size(), true, TEXT[0]);
                 } else {
+                    int lust = this.baseLust;
                     if (!AbstractDungeon.gridSelectScreen.selectedCards.isEmpty()) {
                         AbstractDungeon.gridSelectScreen.selectedCards.forEach(c -> {
                             AbstractDungeon.player.drawPile.removeCard(c);
                             AbstractDungeon.player.drawPile.moveToDiscardPile(c);
                         });
-                        addToTop(new ApplyPowerAction(target, AbstractDungeon.player,
-                                new LustPower(target, this.baseLust + AbstractDungeon.gridSelectScreen.selectedCards.size())));
+                        lust += AbstractDungeon.gridSelectScreen.selectedCards.size();
                         AbstractDungeon.gridSelectScreen.selectedCards.clear();
                     }
+                    addToTop(new ApplyPowerAction(target, AbstractDungeon.player,
+                            new LustPower(target, lust)));
 //				fateGroup.shuffle();
 //				List<AbstractCard> copy = new ArrayList<>(fateGroup.group);
 //				copy.forEach(c -> fateGroup.moveToDeck(c, false));

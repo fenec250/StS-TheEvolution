@@ -19,15 +19,15 @@ public class Blazebloom
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = "evolutionmod/images/cards/Firebloom.png";
-    private static final int COST = 1;
+    private static final int COST = 0;
     private static final int CHANNEL_AMT = 1;
-    private static final int UPGRADE_CHANNEL_AMT = 1;
 
     public Blazebloom() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.UNCOMMON, CardTarget.SELF);
         this.magicNumber = this.baseMagicNumber = CHANNEL_AMT;
+        this.exhaust = true;
     }
 
     @Override
@@ -40,7 +40,8 @@ public class Blazebloom
             @Override
             public void update() {
                 int g = (int)p.orbs.stream().filter(o -> LavafolkGene.ID.equals(o.ID)).count();
-                addToTop(new ApplyPowerAction(p, p, new GrowthPower(p, g)));
+                if (g > 0)
+                    addToTop(new ApplyPowerAction(p, p, new GrowthPower(p, g)));
                 this.isDone = true;
             }
         });
@@ -56,14 +57,9 @@ public class Blazebloom
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeMagicNumber(UPGRADE_CHANNEL_AMT);
+            this.exhaust = false;
+            this.rawDescription = UPGRADE_DESCRIPTION;
             this.initializeDescription();
         }
-    }
-
-    @Override
-    public void initializeDescription() {
-        this.rawDescription = this.magicNumber > 1 ? UPGRADE_DESCRIPTION : DESCRIPTION;
-        super.initializeDescription();
     }
 }

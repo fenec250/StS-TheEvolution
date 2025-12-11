@@ -7,18 +7,7 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.orbs.EmptyOrbSlot;
-import evolutionmod.orbs.AbstractGene;
-import evolutionmod.orbs.BeastGene;
-import evolutionmod.orbs.CentaurGene;
-import evolutionmod.orbs.HarpyGene;
-import evolutionmod.orbs.InsectGene;
-import evolutionmod.orbs.LavafolkGene;
-import evolutionmod.orbs.LizardGene;
-import evolutionmod.orbs.LymeanGene;
-import evolutionmod.orbs.MerfolkGene;
-import evolutionmod.orbs.PlantGene;
-import evolutionmod.orbs.ShadowGene;
-import evolutionmod.orbs.SuccubusGene;
+import evolutionmod.orbs.*;
 import evolutionmod.powers.GodlyPowersPower;
 
 import java.util.ArrayList;
@@ -33,6 +22,19 @@ public abstract class BaseEvoCard extends CustomCard {
 
 	protected List<TooltipInfo> customTooltips;
 	protected String coloredRawDescription;
+
+	public static String[] GeneIds = {
+			PlantGene.ID,
+			MerfolkGene.ID,
+			HarpyGene.ID,
+			LavafolkGene.ID,
+			SuccubusGene.ID,
+			LymeanGene.ID,
+			InsectGene.ID,
+			BeastGene.ID,
+			LizardGene.ID,
+			CentaurGene.ID,
+			ShadowGene2.ID};
 
     public BaseEvoCard(
     		final String id, final String name, final String img, final int cost, final String rawDescription,
@@ -66,7 +68,7 @@ public abstract class BaseEvoCard extends CustomCard {
 				customTooltips = new ArrayList<>();
 			}
 			if (this.rawDescription.contains(LavafolkGene.COLOR_STRING + LavafolkGene.NAME + "[]")) {this.customTooltips.add(LavafolkGene.TOOLTIP);}
-			if (this.rawDescription.contains(ShadowGene.COLOR_STRING + ShadowGene.NAME + "[]")) {this.customTooltips.add(ShadowGene.TOOLTIP);}
+			if (this.rawDescription.contains(ShadowGene2.COLOR_STRING + ShadowGene2.NAME + "[]")) {this.customTooltips.add(ShadowGene2.TOOLTIP);}
 			if (this.rawDescription.contains(InsectGene.COLOR_STRING + InsectGene.NAME + "[]")) {this.customTooltips.add(InsectGene.TOOLTIP);}
 			if (this.rawDescription.contains(HarpyGene.COLOR_STRING + HarpyGene.NAME + "[]")) {this.customTooltips.add(HarpyGene.TOOLTIP);}
 			if (this.rawDescription.contains(MerfolkGene.COLOR_STRING + MerfolkGene.NAME + "[]")) {this.customTooltips.add(MerfolkGene.TOOLTIP);}
@@ -84,7 +86,7 @@ public abstract class BaseEvoCard extends CustomCard {
     	return text
 //					.replaceAll("([^\\]])" + LavafolkGene.NAME, "$1" + LavafolkGene.COLOR_STRING + LavafolkGene.NAME + "[]")
 				.replaceAll(LavafolkGene.ID, LavafolkGene.COLOR_STRING + LavafolkGene.NAME + "[]")
-				.replaceAll(ShadowGene.ID, ShadowGene.COLOR_STRING + ShadowGene.NAME + "[]")
+				.replaceAll(ShadowGene2.ID, ShadowGene2.COLOR_STRING + ShadowGene2.NAME + "[]")
 				.replaceAll(InsectGene.ID, InsectGene.COLOR_STRING + InsectGene.NAME + "[]")
 				.replaceAll(PlantGene.ID, PlantGene.COLOR_STRING + PlantGene.NAME + "[]")
 				.replaceAll(CentaurGene.ID, CentaurGene.COLOR_STRING + CentaurGene.NAME + "[]")
@@ -230,7 +232,7 @@ public abstract class BaseEvoCard extends CustomCard {
     public static AbstractGene getGene(String geneId) {
     	switch (geneId){
 			case LavafolkGene.ID: return new LavafolkGene();
-			case ShadowGene.ID: return new ShadowGene();
+			case ShadowGene2.ID: return new ShadowGene2();
 			case InsectGene.ID: return new InsectGene();
 			case HarpyGene.ID: return new HarpyGene();
 			case MerfolkGene.ID: return new MerfolkGene();

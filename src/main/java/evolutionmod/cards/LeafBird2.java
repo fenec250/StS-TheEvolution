@@ -29,7 +29,7 @@ public class LeafBird2 extends BaseEvoCard {
     private static final int COST = 1;
     private static final int DISCARD_AMT = 3;
     private static final int UPGRADE_GROWTH_AMT = 1;
-    private static final int HARPY_DRAW_AMT = 1;
+    private static final int HARPY_DRAW_AMT = 2;
 
     public LeafBird2() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -40,11 +40,11 @@ public class LeafBird2 extends BaseEvoCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
+        formEffect(HarpyGene.ID, ()-> addToBot(new DrawCardAction(HARPY_DRAW_AMT)));
         addToBot(new LeafBird2Action(p, this.magicNumber));
         if (upgraded) {
             addToBot(new ApplyPowerAction(p, p, new GrowthPower(p, UPGRADE_GROWTH_AMT)));
         }
-        formEffect(HarpyGene.ID, ()-> addToBot(new DrawCardAction(HARPY_DRAW_AMT)));
     }
 
     @Override

@@ -12,18 +12,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import evolutionmod.orbs.AbstractGene;
-import evolutionmod.orbs.BeastGene;
-import evolutionmod.orbs.CentaurGene;
-import evolutionmod.orbs.HarpyGene;
-import evolutionmod.orbs.InsectGene;
-import evolutionmod.orbs.LavafolkGene;
-import evolutionmod.orbs.LizardGene;
-import evolutionmod.orbs.LymeanGene;
-import evolutionmod.orbs.MerfolkGene;
-import evolutionmod.orbs.PlantGene;
-import evolutionmod.orbs.ShadowGene;
-import evolutionmod.orbs.SuccubusGene;
+import evolutionmod.orbs.*;
 import evolutionmod.patches.AbstractCardEnum;
 
 import java.util.List;
@@ -48,7 +37,7 @@ public class CrystalDust
 	public CrystalDust() {
 		this((!CardCrawlGame.isInARun() || AbstractDungeon.miscRng == null)
 				? -1
-				: AbstractDungeon.miscRng.random(11 - 1));
+				: AbstractDungeon.miscRng.random(GeneIds.length - 1));
 	}
 
 	public CrystalDust(int geneIndex) {
@@ -106,7 +95,7 @@ public class CrystalDust
 				case LizardGene.ID: this.glowColor = LizardGene.COLOR.cpy(); return;
 				case BeastGene.ID: this.glowColor = BeastGene.COLOR.cpy(); return;
 				case PlantGene.ID: this.glowColor = PlantGene.COLOR.cpy(); return;
-				case ShadowGene.ID: this.glowColor = ShadowGene.COLOR.cpy(); return;
+				case ShadowGene2.ID: this.glowColor = ShadowGene2.COLOR.cpy(); return;
 				case LymeanGene.ID: this.glowColor = LymeanGene.COLOR.cpy(); return;
 				case InsectGene.ID: this.glowColor = InsectGene.COLOR.cpy(); return;
 				case SuccubusGene.ID: this.glowColor = SuccubusGene.COLOR.cpy(); return;
@@ -116,23 +105,11 @@ public class CrystalDust
 		}
 	}
 
-	private void resetGene() {
-		if (this.geneIndex < 0 || this.geneIndex > 11 - 1) {
+	public void resetGene() {
+		if (this.geneIndex < 0 || this.geneIndex > GeneIds.length - 1) {
 			return;
 		}
-		String[] validGenes = {
-				PlantGene.ID,
-				MerfolkGene.ID,
-				HarpyGene.ID,
-				LavafolkGene.ID,
-				SuccubusGene.ID,
-				LymeanGene.ID,
-				InsectGene.ID,
-				BeastGene.ID,
-				LizardGene.ID,
-				CentaurGene.ID,
-				ShadowGene.ID};
-		this.geneId = validGenes[this.geneIndex];
+		this.geneId = GeneIds[this.geneIndex];
 		this.rawDescription = this.geneId + (this.upgraded ? EXTENDED_DESCRIPTION[1] : EXTENDED_DESCRIPTION[0]);
 		initializeDescription();
 	}

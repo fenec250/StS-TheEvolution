@@ -24,7 +24,7 @@ public class Symbiotes
     public static final String IMG_PATH = "evolutionmod/images/cards/Symbiotes.png";
     private static final int COST = 1;
     private static final int SYMBIOTES_AMT = 1;
-    private static final int FORM_GROWTH_AMT = 1;
+    private static final int FORM_GROWTH_AMT = 2;
     private static final int UPGRADE_GROWTH_AMT = 1;
 
     public Symbiotes() {

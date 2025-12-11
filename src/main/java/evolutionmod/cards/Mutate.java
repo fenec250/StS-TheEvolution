@@ -9,17 +9,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import evolutionmod.orbs.BeastGene;
-import evolutionmod.orbs.CentaurGene;
-import evolutionmod.orbs.HarpyGene;
-import evolutionmod.orbs.InsectGene;
-import evolutionmod.orbs.LavafolkGene;
-import evolutionmod.orbs.LizardGene;
-import evolutionmod.orbs.LymeanGene;
-import evolutionmod.orbs.MerfolkGene;
-import evolutionmod.orbs.PlantGene;
-import evolutionmod.orbs.ShadowGene;
-import evolutionmod.orbs.SuccubusGene;
+import evolutionmod.orbs.*;
 import evolutionmod.patches.AbstractCardEnum;
 
 import java.util.ArrayList;
@@ -65,7 +55,7 @@ public class Mutate extends BaseEvoCard {
 				if (!current.contains(BeastGene.ID)) { available.add(BeastGene.ID);}
 				if (!current.contains(LizardGene.ID)) { available.add(LizardGene.ID);}
 				if (!current.contains(CentaurGene.ID)) { available.add(CentaurGene.ID);}
-				if (!current.contains(ShadowGene.ID)) { available.add(ShadowGene.ID);}
+				if (!current.contains(ShadowGene2.ID)) { available.add(ShadowGene2.ID);}
 
 				if (available.size() == 1) {
 					addToTop(getGene(available.get(0)).getChannelAction());

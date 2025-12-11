@@ -27,8 +27,9 @@ public class Heal
 	public static final String[] EXTENDED_DESCRIPTION = cardStrings.EXTENDED_DESCRIPTION;
 	public static final String IMG_PATH = "evolutionmod/images/cards/LymeanSkl.png";
 	private static final int COST = 1;
-	private static final int HEAL_AMT = 4;
-	private static final int UPGRADE_HEAL_AMT = 6;
+	private static final int CLEANSE_AMT = 2;
+	private static final int HEAL_AMT = 3;
+	private static final int UPGRADE_HEAL_AMT = 2;
 
 	public Heal() {
 		super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -39,7 +40,7 @@ public class Heal
 
 	@Override
 	public void use(AbstractPlayer p, AbstractMonster m) {
-		addToBot(new AntidoteAction(2));
+		addToBot(new AntidoteAction(CLEANSE_AMT));
 	}
 
 	@Override

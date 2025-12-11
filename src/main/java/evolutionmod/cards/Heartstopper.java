@@ -1,6 +1,5 @@
 package evolutionmod.cards;
 
-import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -10,15 +9,13 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.PoisonPower;
-import evolutionmod.orbs.LizardGene;
 import evolutionmod.orbs.SuccubusGene;
 import evolutionmod.patches.AbstractCardEnum;
-import evolutionmod.powers.AphrodisiacPower;
 import evolutionmod.powers.LustPower;
 
-public class Aphrodisiac2
+public class Heartstopper
         extends BaseEvoCard {
-    public static final String ID = "evolutionmod:Aphrodisiac";
+    public static final String ID = "evolutionmod:Heartstopper";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -28,7 +25,7 @@ public class Aphrodisiac2
     private static final int VULNERABLE_AMT = 2;
     private static final int UPGRADE_VULNERABLE_AMT = 1;
 
-    public Aphrodisiac2() {
+    public Heartstopper() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
                 CardRarity.UNCOMMON, CardTarget.ENEMY);
@@ -60,7 +57,7 @@ public class Aphrodisiac2
 
     @Override
     public AbstractCard makeCopy() {
-        return new Aphrodisiac2();
+        return new Heartstopper();
     }
 
     @Override

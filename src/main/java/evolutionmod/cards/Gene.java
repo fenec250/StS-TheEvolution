@@ -8,18 +8,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import evolutionmod.orbs.AbstractGene;
-import evolutionmod.orbs.BeastGene;
-import evolutionmod.orbs.CentaurGene;
-import evolutionmod.orbs.HarpyGene;
-import evolutionmod.orbs.InsectGene;
-import evolutionmod.orbs.LavafolkGene;
-import evolutionmod.orbs.LizardGene;
-import evolutionmod.orbs.LymeanGene;
-import evolutionmod.orbs.MerfolkGene;
-import evolutionmod.orbs.PlantGene;
-import evolutionmod.orbs.ShadowGene;
-import evolutionmod.orbs.SuccubusGene;
+import evolutionmod.orbs.*;
 import evolutionmod.patches.AbstractCardEnum;
 
 public class Gene extends BaseEvoCard {
@@ -108,7 +97,7 @@ public class Gene extends BaseEvoCard {
 		else if (BeastGene.ID.equals(geneId)) { path += "Beast";}
 		else if (LizardGene.ID.equals(geneId)) { path += "Lizard";}
 		else if (CentaurGene.ID.equals(geneId)) { path += "Centaur";}
-		else if (ShadowGene.ID.equals(geneId)) { path += "Shadow";}
+		else if (ShadowGene2.ID.equals(geneId)) { path += "Shadow";}
 		else { return "evolutionmod/images/cards/CrystalDust.png";}
 		return path + "Skl.png";
 	}

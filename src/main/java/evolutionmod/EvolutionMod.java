@@ -17,7 +17,6 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.localization.CharacterStrings;
@@ -25,7 +24,6 @@ import com.megacrit.cardcrawl.localization.OrbStrings;
 import com.megacrit.cardcrawl.localization.PotionStrings;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.localization.RelicStrings;
-import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import evolutionmod.cards.*;
 import evolutionmod.character.EvolutionCharacter;
@@ -108,6 +106,7 @@ public class EvolutionMod implements
 
         //Special
         cards.add(new Drone());
+//        cards.add(new DroneSoldier());
         cards.add(new Feather());
 
         //Commons
@@ -115,7 +114,8 @@ public class EvolutionMod implements
         //10 attacks
         cards.add(new ClawSlash());
 //        cards.add(new Shadowbolt());
-        cards.add(new ShadowWave());
+//        cards.add(new ShadowWave());
+        cards.add(new ShadowWave2());
         cards.add(new TalonStrike());
         cards.add(new FlameStrike());
         cards.add(new PoisonFangs());
@@ -127,7 +127,8 @@ public class EvolutionMod implements
 //        cards.add(new GeneBlast());
 //        cards.add(new GeneFlash());
         //8 skills
-        cards.add(new Barkskin());
+//        cards.add(new Barkskin());
+        cards.add(new Sapling());
 //        cards.add(new Visions());
         cards.add(new Visions2());
         cards.add(new Dive());
@@ -141,19 +142,24 @@ public class EvolutionMod implements
         //Uncommons
         //11 attacks
         cards.add(new PlayingRough());
+        cards.add(new Mossbeast());
+//        cards.add(new VerdantStomp());
 //        cards.add(new StripArmor());
         cards.add(new StripArmor2());
 //        cards.add(new NightMare());
-        cards.add(new NightMare2());
+//        cards.add(new NightMare3());
         cards.add(new Phoenix());
         cards.add(new PegasusDescent());
 //        cards.add(new PreyOnTheWeak());
 //        cards.add(new SpiderBite());
 //        cards.add(new CursedTouch());
+        cards.add(new CursedTouch2());
+        cards.add(new DeathKiss2());
 //        cards.add(new BlackCat());
-        cards.add(new BlackCat2());
+        cards.add(new BlackCat4());
 //        cards.add(new SeaWolf());
         cards.add(new SeaWolf2());
+        cards.add(new Embermane());
         //exhaust
         //18 skills
 //        cards.add(new Strengthen());
@@ -173,54 +179,60 @@ public class EvolutionMod implements
 //        cards.add(new Pheromones());
         cards.add(new Pheromones2());
 //        cards.add(new Aphrodisiac());
-        cards.add(new Aphrodisiac2());
+        cards.add(new Heartstopper());
         cards.add(new HeightenedSenses());
 //        cards.add(new DepthsLurker());
-        cards.add(new DepthsLurker4());
+        cards.add(new DepthsLurker6());
 //        cards.add(new ReadTheWaters());
         cards.add(new ReadTheWaters2());
         cards.add(new SeaSerpent());
         cards.add(new ShiftingPower());
-        cards.add(new ChimeraPower());
+//        cards.add(new ChimeraPower());
         cards.add(new Adaptation());
         cards.add(new Mutate());
         //exhaust
-        cards.add(new Toxin());
+//        cards.add(new Toxin());
         cards.add(new Toxin2());
         cards.add(new Treasure());
         cards.add(new CrystalDust());
+
         //6 powers
         cards.add(new Battleborn());
         cards.add(new CurrentsDancer());
-        cards.add(new Symbiotes());
+        cards.add(new CoralStewards());
+//        cards.add(new Symbiotes());
+//        cards.add(new Broodmother2());
+        cards.add(new NightMare4());
         cards.add(new Salamander());
-        cards.add(new DarkDesires());
+//        cards.add(new HeartBreaker());
 //        cards.add(new DarkDesires2());
         cards.add(new Mastery());
         cards.add(new Shrink());
-        cards.add(new Broodmother2());
 
         //Rares.
         //4 attacks
         cards.add(new Stampede());
-        cards.add(new Lifesteal());
-//        cards.add(new Stalker());
-        cards.add(new Eruption());
+        cards.add(new Seduce());
+//        cards.add(new Lifesteal());
+        cards.add(new Stalker());
+//        cards.add(new DeathKiss());
         cards.add(new Frenzy());
         cards.add(new FeatherStorm());
         cards.add(new SpiderBite2());
         //8 skills
         cards.add(new Drown());
 //        cards.add(new Drown2());
+        cards.add(new Ghost());
         cards.add(new Ritual());
         cards.add(new Photosynthesis());
 //        cards.add(new TheFutureIsNow());
         cards.add(new Heal());
-        cards.add(new CrystalShaping2());
 
         //6 powers
 //        cards.add(new Broodmother());
-        cards.add(new TheNight2());
+//        cards.add(new TheNight2());
+        cards.add(new CrystalShaping2());
+        cards.add(new Eruption());
         cards.add(new GodlyPowers());
         cards.add(new HumanForm());
         cards.add(new Grow());

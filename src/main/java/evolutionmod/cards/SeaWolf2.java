@@ -82,8 +82,8 @@ public class SeaWolf2
 
 	@Override
 	public void triggerOnGlowCheck() {
-		if (isPlayerInThisForm(BeastGene.ID)) {
-			this.glowColor = BeastGene.COLOR.cpy();
+		if (isPlayerInThisForm(MerfolkGene.ID)) {
+			this.glowColor = MerfolkGene.COLOR.cpy();
 		} else {
 			this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
 		}

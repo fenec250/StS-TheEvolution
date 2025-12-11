@@ -26,7 +26,6 @@ public class ShiftingGuard
     public static final String IMG_PATH = "evolutionmod/images/cards/ShiftingGuard.png";
     private static final int COST = 1;
     private static final int BLOCK_AMT = 7;
-    private static final int UPGRADE_BLOCK_AMT = 1;
     private static final int GENE_TRIGGER_AMT = 1;
     private static final int UPGRADE_GENE_TRIGGER_AMT = 1;
 

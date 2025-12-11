@@ -17,6 +17,7 @@ public class LustPower extends AbstractPower {
     public static final String NAME = cardStrings.NAME;
     public static final String[] DESCRIPTIONS = cardStrings.DESCRIPTIONS;
 
+    public int attacksCount = 0;
     public LustPower(AbstractCreature owner, int initialAmount) {
         this.name = NAME;
         this.ID = POWER_ID;
@@ -30,7 +31,9 @@ public class LustPower extends AbstractPower {
 
     @Override
     public void updateDescription() {
-        description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1];
+        description = this.owner.hasPower(InsatiablePower.POWER_ID)
+                ? DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[2] + String.format ("%1$.0f", 100*(1.0-Math.pow(.5, this.owner.getPower(InsatiablePower.POWER_ID).amount))) + DESCRIPTIONS[3]
+                : DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1];
     }
 
     public void stackPower(int stackAmount) {
@@ -49,12 +52,23 @@ public class LustPower extends AbstractPower {
     }
 
     @Override
+    public void onAttack(DamageInfo info, int damageAmount, AbstractCreature target) {
+        super.onAttack(info, damageAmount, target);
+        attacksCount += 1;
+    }
+
+    @Override
     public void atEndOfTurn(boolean isPlayer) {
         super.atEndOfTurn(isPlayer);
         if (!isPlayer
                 && this.owner instanceof AbstractMonster
-                && ((AbstractMonster) this.owner).getIntentBaseDmg() > 0) {
-            addToBot(new ReducePowerAction(this.owner, this.owner, this, this.amount));
+                && attacksCount > 0) {
+            int reduction = this.amount;
+            if (this.owner.hasPower(InsatiablePower.POWER_ID)) {
+                reduction -= (int) Math.ceil(this.amount * Math.pow(1-Math.pow(.5, this.owner.getPower(InsatiablePower.POWER_ID).amount), attacksCount));
+            }
+            addToBot(new ReducePowerAction(this.owner, this.owner, this, reduction));
+            attacksCount = 0;
         }
     }
 }

@@ -6,17 +6,7 @@ import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import evolutionmod.cards.Gene;
-import evolutionmod.orbs.BeastGene;
-import evolutionmod.orbs.CentaurGene;
-import evolutionmod.orbs.HarpyGene;
-import evolutionmod.orbs.InsectGene;
-import evolutionmod.orbs.LavafolkGene;
-import evolutionmod.orbs.LizardGene;
-import evolutionmod.orbs.LymeanGene;
-import evolutionmod.orbs.MerfolkGene;
-import evolutionmod.orbs.PlantGene;
-import evolutionmod.orbs.ShadowGene;
-import evolutionmod.orbs.SuccubusGene;
+import evolutionmod.orbs.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -69,7 +59,7 @@ public class MutagenAction extends AbstractGameAction {
 				if (!current.contains(BeastGene.ID)) { geneGroup.addToTop(new Gene(new BeastGene()));}
 				if (!current.contains(LizardGene.ID)) { geneGroup.addToTop(new Gene(new LizardGene()));}
 				if (!current.contains(CentaurGene.ID)) { geneGroup.addToTop(new Gene(new CentaurGene()));}
-				if (!current.contains(ShadowGene.ID)) { geneGroup.addToTop(new Gene(new ShadowGene()));}
+				if (!current.contains(ShadowGene2.ID)) { geneGroup.addToTop(new Gene(new ShadowGene2()));}
 				if (geneGroup.isEmpty()) {
 					this.isDone = true;
 					return;

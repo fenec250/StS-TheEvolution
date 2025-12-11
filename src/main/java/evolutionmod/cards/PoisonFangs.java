@@ -62,7 +62,7 @@ public class PoisonFangs
 
     @Override
     public void triggerOnGlowCheck() {
-        if (this.upgraded && isPlayerInThisForm(LizardGene.ID)) {
+        if (!this.upgraded && isPlayerInThisForm(LizardGene.ID)) {
             this.glowColor = LizardGene.COLOR.cpy();
         } else {
             this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();

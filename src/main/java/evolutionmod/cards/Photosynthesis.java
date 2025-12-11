@@ -80,12 +80,12 @@ public class Photosynthesis
         }
     }
 
-//    @Override
-//    public void triggerOnGlowCheck() {
-//        if (isPlayerInThisForm(PlantGene.ID)) {
-//            this.glowColor = PlantGene.COLOR.cpy();
-//        } else {
-//            this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
-//        }
-//    }
+    @Override
+    public void triggerOnGlowCheck() {
+        if (isPlayerInThisForm(PlantGene.ID)) {
+            this.glowColor = PlantGene.COLOR.cpy();
+        } else {
+            this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
+        }
+    }
 }

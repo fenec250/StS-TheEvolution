@@ -33,7 +33,7 @@
     "NAMES": [
       "fate"
     ],
-    "DESCRIPTION": "At the start of next turn, Scry this amount."
+    "DESCRIPTION": "At the start of next turn, refill your draw pile to this amount and Scry this amount."
   },
   "GROWTH": {
     "PROPER_NAME": "Growth",

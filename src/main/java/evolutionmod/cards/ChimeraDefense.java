@@ -7,17 +7,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import evolutionmod.orbs.BeastGene;
-import evolutionmod.orbs.CentaurGene;
-import evolutionmod.orbs.HarpyGene;
-import evolutionmod.orbs.InsectGene;
-import evolutionmod.orbs.LavafolkGene;
-import evolutionmod.orbs.LizardGene;
-import evolutionmod.orbs.LymeanGene;
-import evolutionmod.orbs.MerfolkGene;
-import evolutionmod.orbs.PlantGene;
-import evolutionmod.orbs.ShadowGene;
-import evolutionmod.orbs.SuccubusGene;
+import evolutionmod.orbs.*;
 import evolutionmod.patches.AbstractCardEnum;
 
 public class ChimeraDefense
@@ -29,7 +19,7 @@ public class ChimeraDefense
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = "evolutionmod/images/cards/ChimeraDefense.png";
     private static final int COST = 1;
-    private static final int BLOCK_AMT = 7;
+    private static final int BLOCK_AMT = 6;
     private static final int UPGRADE_BLOCK_AMT = 2;
     private static final int ADAPT_MAX_AMT = 4;
     private static final int UPGRADE_ADAPT_MAX_AMT = 2;
@@ -78,7 +68,7 @@ public class ChimeraDefense
                             case LizardGene.ID: return LizardGene.COLOR.cpy();
                             case BeastGene.ID: return BeastGene.COLOR.cpy();
                             case PlantGene.ID: return PlantGene.COLOR.cpy();
-                            case ShadowGene.ID: return ShadowGene.COLOR.cpy();
+                            case ShadowGene2.ID: return ShadowGene2.COLOR.cpy();
                             case LymeanGene.ID: return LymeanGene.COLOR.cpy();
                             case InsectGene.ID: return InsectGene.COLOR.cpy();
                             case SuccubusGene.ID: return SuccubusGene.COLOR.cpy();

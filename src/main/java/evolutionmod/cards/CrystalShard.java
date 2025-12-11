@@ -14,18 +14,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import evolutionmod.orbs.AbstractGene;
-import evolutionmod.orbs.BeastGene;
-import evolutionmod.orbs.CentaurGene;
-import evolutionmod.orbs.HarpyGene;
-import evolutionmod.orbs.InsectGene;
-import evolutionmod.orbs.LavafolkGene;
-import evolutionmod.orbs.LizardGene;
-import evolutionmod.orbs.LymeanGene;
-import evolutionmod.orbs.MerfolkGene;
-import evolutionmod.orbs.PlantGene;
-import evolutionmod.orbs.ShadowGene;
-import evolutionmod.orbs.SuccubusGene;
+import evolutionmod.orbs.*;
 import evolutionmod.patches.AbstractCardEnum;
 
 import java.util.List;
@@ -146,7 +135,7 @@ public class CrystalShard
 						case LizardGene.ID: return LizardGene.COLOR.cpy();
 						case BeastGene.ID: return BeastGene.COLOR.cpy();
 						case PlantGene.ID: return PlantGene.COLOR.cpy();
-						case ShadowGene.ID: return ShadowGene.COLOR.cpy();
+						case ShadowGene2.ID: return ShadowGene2.COLOR.cpy();
 						case LymeanGene.ID: return LymeanGene.COLOR.cpy();
 						case InsectGene.ID: return InsectGene.COLOR.cpy();
 						case SuccubusGene.ID: return SuccubusGene.COLOR.cpy();
@@ -163,7 +152,7 @@ public class CrystalShard
 						case LizardGene.ID: return LizardGene.COLOR.cpy();
 						case BeastGene.ID: return BeastGene.COLOR.cpy();
 						case PlantGene.ID: return PlantGene.COLOR.cpy();
-						case ShadowGene.ID: return ShadowGene.COLOR.cpy();
+						case ShadowGene2.ID: return ShadowGene2.COLOR.cpy();
 						case LymeanGene.ID: return LymeanGene.COLOR.cpy();
 						case InsectGene.ID: return InsectGene.COLOR.cpy();
 						case SuccubusGene.ID: return SuccubusGene.COLOR.cpy();
@@ -175,24 +164,12 @@ public class CrystalShard
 		}
 	}
 
-	private void resetGene() {
+	public void resetGene() {
 		if (this.genesIndexes < 0 || this.genesIndexes > 11 * 10 - 1) {
 			return;
 		}
-		String[] validGenes = {
-				PlantGene.ID,
-				MerfolkGene.ID,
-				HarpyGene.ID,
-				LavafolkGene.ID,
-				SuccubusGene.ID,
-				LymeanGene.ID,
-				InsectGene.ID,
-				BeastGene.ID,
-				LizardGene.ID,
-				CentaurGene.ID,
-				ShadowGene.ID};
-		this.firstGene =  getGene(validGenes[this.genesIndexes / 11]);
-		this.secondGene = getGene(validGenes[this.genesIndexes % 10 == this.genesIndexes / 11 ? 10 : this.genesIndexes % 10]);
+		this.firstGene =  getGene(GeneIds[this.genesIndexes / 11]);
+		this.secondGene = getGene(GeneIds[this.genesIndexes % 10 == this.genesIndexes / 11 ? 10 : this.genesIndexes % 10]);
 		this.rawDescription = EXTENDED_DESCRIPTION[0]
 				+ this.firstGene.ID + EXTENDED_DESCRIPTION[1]
 				+ this.secondGene.ID + EXTENDED_DESCRIPTION[2];

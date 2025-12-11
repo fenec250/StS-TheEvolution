@@ -68,7 +68,7 @@ public class SpiderBite2
 	private void alterDamageAround(Runnable supercall) {
 		this.baseDamage = DAMAGE_AMT;
 		this.baseDamage += this.magicNumber * AbstractDungeon.player.exhaustPile.group.stream()
-				.filter(card -> Drone.ID.equals(card.cardID))
+				.filter(card -> Drone.ID.equals(card.cardID) || DroneSoldier.ID.equals(card.cardID))
 				.count();
 		supercall.run();
 		this.baseDamage = DAMAGE_AMT;

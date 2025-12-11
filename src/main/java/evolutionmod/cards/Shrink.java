@@ -16,7 +16,7 @@ public class Shrink
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-    public static final String IMG_PATH = "evolutionmod/images/cards/Shrink.png";
+    public static final String IMG_PATH = "evolutionmod/images/cards/Shrink2.png";
     private static final int COST = 1;
     private static final int LOSE_ORB_AMT = 1;
     private static final int GAIN_DRAW_AMT = 1;
@@ -24,7 +24,7 @@ public class Shrink
     public Shrink() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.POWER, AbstractCardEnum.EVOLUTION_BLUE,
-                CardRarity.RARE, CardTarget.SELF);
+                CardRarity.UNCOMMON, CardTarget.SELF);
         this.magicNumber = this.baseMagicNumber = GAIN_DRAW_AMT;
     }
 

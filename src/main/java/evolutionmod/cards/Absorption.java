@@ -13,18 +13,7 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
-import evolutionmod.orbs.AbstractGene;
-import evolutionmod.orbs.BeastGene;
-import evolutionmod.orbs.CentaurGene;
-import evolutionmod.orbs.HarpyGene;
-import evolutionmod.orbs.InsectGene;
-import evolutionmod.orbs.LavafolkGene;
-import evolutionmod.orbs.LizardGene;
-import evolutionmod.orbs.LymeanGene;
-import evolutionmod.orbs.MerfolkGene;
-import evolutionmod.orbs.PlantGene;
-import evolutionmod.orbs.ShadowGene;
-import evolutionmod.orbs.SuccubusGene;
+import evolutionmod.orbs.*;
 import evolutionmod.patches.AbstractCardEnum;
 import evolutionmod.powers.AbsorptionPower;
 
@@ -63,9 +52,14 @@ public class Absorption
 
 	@Override
 	public void use(AbstractPlayer p, AbstractMonster m) {
-		List<AbstractOrb> orbs = p.orbs.stream()
+		List<String> types = p.orbs.stream()
 				.filter(o -> o instanceof AbstractGene)
+				.map(o -> o.ID)
+				.distinct()
 				.limit(magicNumber)
+				.collect(Collectors.toList());
+		List<AbstractOrb> orbs = p.orbs.stream()
+				.filter(o -> types.contains(o.ID))
 				.collect(Collectors.toList());
 		orbs.forEach(o -> {
 			this.addToBot(new EvokeSpecificOrbAction(o));
@@ -100,6 +94,8 @@ public class Absorption
 		return upgraded
 				? AbstractDungeon.player.orbs.stream()
 				.filter(o -> o instanceof AbstractGene)
+				.map(o -> o.ID)
+				.distinct()
 				.skip(glowIndex)
 				.findFirst().isPresent()
 				: AbstractDungeon.player.orbs.stream()
@@ -120,7 +116,7 @@ public class Absorption
 						case LizardGene.ID: return LizardGene.COLOR.cpy();
 						case BeastGene.ID: return BeastGene.COLOR.cpy();
 						case PlantGene.ID: return PlantGene.COLOR.cpy();
-						case ShadowGene.ID: return ShadowGene.COLOR.cpy();
+						case ShadowGene2.ID: return ShadowGene2.COLOR.cpy();
 						case LymeanGene.ID: return LymeanGene.COLOR.cpy();
 						case InsectGene.ID: return InsectGene.COLOR.cpy();
 						case SuccubusGene.ID: return SuccubusGene.COLOR.cpy();

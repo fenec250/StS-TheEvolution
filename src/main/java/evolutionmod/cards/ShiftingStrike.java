@@ -27,7 +27,6 @@ public class ShiftingStrike
     public static final String IMG_PATH = "evolutionmod/images/cards/ShiftingStrike.png";
     private static final int COST = 1;
     private static final int DAMAGE_AMT = 8;
-    private static final int UPGRADE_DAMAGE_AMT = 1;
     private static final int GENE_TRIGGER_AMT = 1;
     private static final int UPGRADE_GENE_TRIGGER_AMT = 1;
 
