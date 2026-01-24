@@ -1,6 +1,5 @@
 package evolutionmod.cards;
 
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.utility.ExhaustToHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -8,14 +7,12 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import evolutionmod.orbs.LymeanGene;
-import evolutionmod.orbs.MerfolkGene;
-import evolutionmod.patches.AbstractCardEnum;
-import evolutionmod.powers.FatePower;
+import evolutionmod.orbs.LymeanGene2;
+import evolutionmod.patches.EvolutionEnum;
 
 public class ReadTheWaters2
         extends BaseEvoCard implements OnShuffleCard {
-    public static final String ID = "evolutionmod:ReadTheWaters";
+    public static final String ID = "evolutionmodV2:ReadTheWaters";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -30,7 +27,7 @@ public class ReadTheWaters2
 
     public ReadTheWaters2() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
-                CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
+                CardType.SKILL, EvolutionEnum.EVOLUTION_V2_BLUE,
                 CardRarity.UNCOMMON, CardTarget.NONE);
 //        this.magicNumber = this.baseMagicNumber = LYMEAN_FATE_AMT;
         this.block = this.baseBlock = BLOCK_AMT;
@@ -61,7 +58,7 @@ public class ReadTheWaters2
 //            addToBot(new ApplyPowerAction(p, p, new FatePower(p, this.magicNumber)));
 //        addToBot(new MerfolkGene().getChannelAction());
         this.exhaust = false;
-        formEffect(LymeanGene.ID, () -> this.exhaust = true);
+        formEffect(LymeanGene2.ID, () -> this.exhaust = true);
 //        }
     }
 
@@ -109,8 +106,8 @@ public class ReadTheWaters2
 
     @Override
     public void triggerOnGlowCheck() {
-        if (isPlayerInThisForm(LymeanGene.ID)) {
-            this.glowColor = LymeanGene.COLOR.cpy();
+        if (isPlayerInThisForm(LymeanGene2.ID)) {
+            this.glowColor = LymeanGene2.COLOR.cpy();
         } else {
             this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
         }

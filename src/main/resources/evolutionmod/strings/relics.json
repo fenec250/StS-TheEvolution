@@ -17,7 +17,7 @@
   "evolutionmod:PowerFocus": {
     "NAME": "Power Focus",
     "FLAVOR": "It tickles!",
-    "DESCRIPTIONS": ["The first #yGene you #yEvoke each turn also triggers its effect."]
+    "DESCRIPTIONS": ["The first #yGene you #yEvoke or #yAdapt each turn also triggers its effect."]
   },
   "evolutionmod:MagicFocus": {
     "NAME": "Magic Focus",

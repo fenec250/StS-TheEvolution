@@ -11,6 +11,9 @@ import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.RelicStrings;
+import com.megacrit.cardcrawl.relics.BottledFlame;
+import com.megacrit.cardcrawl.relics.BottledLightning;
+import com.megacrit.cardcrawl.relics.BottledTornado;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -57,6 +60,11 @@ public class ScoutMedal extends CustomRelic {
         public void update() {
             if (!AbstractDungeon.getMonsters().areMonstersBasicallyDead()) {
                 CardGroup drawPile = AbstractDungeon.player.drawPile;
+                Set<String> innate = drawPile.group.stream()
+                        .filter(c -> c.isInnate)
+                        .map(c -> c.cardID)
+                        .collect(Collectors.toSet());
+                addBottledCards(innate);
                 Set<AbstractCard> copy = new HashSet<>();
                 if (!drawPile.isEmpty()) {
                     Arrays.stream(AbstractCard.CardType.values())
@@ -64,6 +72,7 @@ public class ScoutMedal extends CustomRelic {
                                     drawPile.group.stream()
                                             .filter(c -> c.type == t)
                                             .filter(c -> !copy.contains(c))
+                                            .filter(c -> !innate.contains(c.cardID))
                                             .collect(Collectors.collectingAndThen(Collectors.toList(), l -> {
                                                 Collections.shuffle(l, AbstractDungeon.cardRandomRng.random);
                                                 return l.stream();
@@ -81,6 +90,15 @@ public class ScoutMedal extends CustomRelic {
                 addToTop(new ScryAction(copy.size()));
             }
             this.isDone = true;
+        }
+
+        public void addBottledCards(Set<String> innate) {
+            if (AbstractDungeon.player.hasRelic(BottledFlame.ID))
+                innate.add(((BottledFlame) AbstractDungeon.player.getRelic(BottledFlame.ID)).getCard().cardID);
+            if (AbstractDungeon.player.hasRelic(BottledLightning.ID))
+                innate.add(((BottledLightning) AbstractDungeon.player.getRelic(BottledLightning.ID)).getCard().cardID);
+            if (AbstractDungeon.player.hasRelic(BottledTornado.ID))
+                innate.add(((BottledTornado) AbstractDungeon.player.getRelic(BottledTornado.ID)).getCard().cardID);
         }
     }
 }

@@ -8,13 +8,14 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.VulnerablePower;
-import evolutionmod.orbs.PlantGene;
-import evolutionmod.patches.AbstractCardEnum;
+import evolutionmod.orbs.PlantGene2;
+import evolutionmod.patches.EvolutionEnum;
+import evolutionmod.powers.GrowthPower;
 import evolutionmod.powers.LustPower;
 
 public class Pheromones2
         extends BaseEvoCard {
-    public static final String ID = "evolutionmod:Pheromones";
+    public static final String ID = "evolutionmodV2:Pheromones";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -26,14 +27,14 @@ public class Pheromones2
 
     public Pheromones2() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
-                CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
+                CardType.SKILL, EvolutionEnum.EVOLUTION_V2_BLUE,
                 CardRarity.UNCOMMON, CardTarget.ALL_ENEMY);
         this.magicNumber = this.baseMagicNumber = DEBUFF_AMT;
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        boolean form = isPlayerInThisForm(PlantGene.ID);
+        boolean form = isPlayerInThisForm(PlantGene2.ID);
         AbstractDungeon.getMonsters().monsters.stream()
                 .filter(mo -> !mo.isDeadOrEscaped())
                 .filter(mo -> form || mo.getIntentBaseDmg() >= 0)
@@ -42,7 +43,7 @@ public class Pheromones2
                     addToBot(new ApplyPowerAction(mo, p, new LustPower(mo, magicNumber)));
                 });
 
-        formEffect(PlantGene.ID);
+        formEffect(PlantGene2.ID, ()->addToBot(new ApplyPowerAction(p,p,new GrowthPower(p,1),1)));
     }
 
     @Override
@@ -62,8 +63,8 @@ public class Pheromones2
 
     @Override
     public void triggerOnGlowCheck() {
-        if (isPlayerInThisForm(PlantGene.ID)) {
-            this.glowColor = PlantGene.COLOR.cpy();
+        if (isPlayerInThisForm(PlantGene2.ID)) {
+            this.glowColor = PlantGene2.COLOR.cpy();
         } else {
             this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
         }

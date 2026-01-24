@@ -1,22 +1,18 @@
 package evolutionmod.cards;
 
-import com.evacipated.cardcrawl.mod.stslib.cards.interfaces.StartupCard;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.MakeTempCardInDrawPileAction;
-import com.megacrit.cardcrawl.actions.defect.IncreaseMaxOrbAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.IntangiblePlayerPower;
-import com.megacrit.cardcrawl.powers.IntangiblePower;
 import evolutionmod.orbs.ShadowGene2;
-import evolutionmod.patches.AbstractCardEnum;
+import evolutionmod.patches.EvolutionEnum;
 
 public class Ghost
         extends BaseEvoCard {
-    public static final String ID = "evolutionmod:Ghost";
+    public static final String ID = "evolutionmodV2:Ghost";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -29,7 +25,7 @@ public class Ghost
 
     public Ghost() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
-                CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
+                CardType.SKILL, EvolutionEnum.EVOLUTION_V2_BLUE,
                 CardRarity.RARE, CardTarget.SELF);
         this.magicNumber = this.baseMagicNumber = GENES_AMT;
         this.exhaust = true;

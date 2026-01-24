@@ -12,15 +12,14 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.FocusPower;
 import com.megacrit.cardcrawl.powers.WeakPower;
 import com.megacrit.cardcrawl.relics.ChemicalX;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
-import evolutionmod.patches.AbstractCardEnum;
+import evolutionmod.patches.EvolutionEnum;
 
 public class BlackCat4
         extends BaseEvoCard {
-    public static final String ID = "evolutionmod:BlackCat";
+    public static final String ID = "evolutionmodV2:BlackCat";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -31,9 +30,11 @@ public class BlackCat4
     private static final int DAMAGE_AMT = 3;
     private static final int UPGRADE_DAMAGE_AMT = 1;
 
+    public static int refundPool = 0;
+
     public BlackCat4() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
-                CardType.ATTACK, AbstractCardEnum.EVOLUTION_BLUE,
+                CardType.ATTACK, EvolutionEnum.EVOLUTION_V2_BLUE,
                 CardRarity.UNCOMMON, CardTarget.ENEMY);
         this.damage = this.baseDamage = DAMAGE_AMT;
         this.magicNumber = this.baseMagicNumber = DAMAGE_AMT;
@@ -50,9 +51,9 @@ public class BlackCat4
         addToBot(new DamageAction(
                 m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
                 AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
-        if (x > 0) {
-            addToBot(new ApplyPowerAction(m, p, new WeakPower(m, x,false)));
-        }
+//        if (x > 0) {
+//            addToBot(new ApplyPowerAction(m, p, new WeakPower(m, x,false)));
+//        }
 
 //        addToBot(new AbstractGameAction() {
 //            @Override
@@ -61,24 +62,25 @@ public class BlackCat4
 //                this.isDone = true;
 //            }
 //        });
-        addToBot(new AbstractGameAction() {
-            @Override
-            public void update() {
-                if (!freeToPlayOnce) {
-                    p.energy.use(energyOnUse);
-                }
-                this.isDone = true;
-            }
-        });
         AbstractCard anchor = this;
-
-        addToBot(new RefundAction(anchor, GameActionManager.turn));
+        if (!freeToPlayOnce) {
+            addToBot(new AbstractGameAction() {
+                @Override
+                public void update() {
+                    p.energy.use(energyOnUse);
+                    int refund = Math.min(energyOnUse, refundPool);
+                    addToTop(new RefundAction(anchor, refund));
+                    refundPool -= refund;
+                    this.isDone = true;
+                }
+            });
+        }
     }
 
     @Override
     public void applyPowers() {
         alterDamageAround(super::applyPowers);
-        rawDescription = EXTENDED_DESCRIPTION[0];
+        rawDescription = EXTENDED_DESCRIPTION[0] + (refundPool > 0 ? EXTENDED_DESCRIPTION[1] + refundPool + EXTENDED_DESCRIPTION[2] : EXTENDED_DESCRIPTION[3]);
         initializeDescription();
     }
 
@@ -96,6 +98,12 @@ public class BlackCat4
         supercall.run();
         this.baseDamage = this.magicNumber * x;
         this.isDamageModified = this.damage != this.baseDamage;
+    }
+
+    @Override
+    public void atTurnStart() {
+        refundPool = GameActionManager.turn + 1; // not updated to current turn yet
+        super.atTurnStart();
     }
 
     @Override

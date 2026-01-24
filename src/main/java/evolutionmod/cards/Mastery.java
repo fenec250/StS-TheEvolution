@@ -5,7 +5,6 @@ import basemod.helpers.TooltipInfo;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
-import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.actions.defect.IncreaseMaxOrbAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -15,7 +14,7 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import evolutionmod.orbs.*;
-import evolutionmod.patches.AbstractCardEnum;
+import evolutionmod.patches.EvolutionEnum;
 import evolutionmod.powers.MasteryPower;
 
 import java.util.List;
@@ -23,7 +22,7 @@ import java.util.Optional;
 
 public class Mastery
 		extends BaseEvoCard implements CustomSavable<String> {
-	public static final String ID = "evolutionmod:Mastery";
+	public static final String ID = "evolutionmodV2:Mastery";
 	public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;
 	public static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -41,10 +40,9 @@ public class Mastery
 
 	private Mastery(AbstractGene gene) {
 		super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
-				CardType.POWER, AbstractCardEnum.EVOLUTION_BLUE,
+				CardType.POWER, EvolutionEnum.EVOLUTION_V2_BLUE,
 				CardRarity.UNCOMMON, CardTarget.SELF);
 		this.magicNumber = this.baseMagicNumber = FORM_TRIGGER;
-		this.exhaust = true;
 		this.gene = gene;
 		resetGene();
 	}
@@ -130,17 +128,17 @@ public class Mastery
 			}
 		}
 		switch (geneId) {
-			case HarpyGene.ID: this.glowColor = HarpyGene.COLOR.cpy(); return;
-			case MerfolkGene.ID: this.glowColor = MerfolkGene.COLOR.cpy(); return;
-			case LavafolkGene.ID: this.glowColor = LavafolkGene.COLOR.cpy(); return;
-			case CentaurGene.ID: this.glowColor = CentaurGene.COLOR.cpy(); return;
-			case LizardGene.ID: this.glowColor = LizardGene.COLOR.cpy(); return;
-			case BeastGene.ID: this.glowColor = BeastGene.COLOR.cpy(); return;
-			case PlantGene.ID: this.glowColor = PlantGene.COLOR.cpy(); return;
+			case HarpyGene2.ID: this.glowColor = HarpyGene2.COLOR.cpy(); return;
+			case MerfolkGene2.ID: this.glowColor = MerfolkGene2.COLOR.cpy(); return;
+			case LavafolkGene2.ID: this.glowColor = LavafolkGene2.COLOR.cpy(); return;
+			case CentaurGene2.ID: this.glowColor = CentaurGene2.COLOR.cpy(); return;
+			case LizardGene2.ID: this.glowColor = LizardGene2.COLOR.cpy(); return;
+			case BeastGene2.ID: this.glowColor = BeastGene2.COLOR.cpy(); return;
+			case PlantGene2.ID: this.glowColor = PlantGene2.COLOR.cpy(); return;
 			case ShadowGene2.ID: this.glowColor = ShadowGene2.COLOR.cpy(); return;
-			case LymeanGene.ID: this.glowColor = LymeanGene.COLOR.cpy(); return;
-			case InsectGene.ID: this.glowColor = InsectGene.COLOR.cpy(); return;
-			case SuccubusGene.ID: this.glowColor = SuccubusGene.COLOR.cpy(); return;
+			case LymeanGene2.ID: this.glowColor = LymeanGene2.COLOR.cpy(); return;
+			case InsectGene2.ID: this.glowColor = InsectGene2.COLOR.cpy(); return;
+			case SuccubusGene2.ID: this.glowColor = SuccubusGene2.COLOR.cpy(); return;
 			default: this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy(); return;
 		}
 	}

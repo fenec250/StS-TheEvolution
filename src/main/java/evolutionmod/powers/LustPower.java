@@ -32,7 +32,7 @@ public class LustPower extends AbstractPower {
     @Override
     public void updateDescription() {
         description = this.owner.hasPower(InsatiablePower.POWER_ID)
-                ? DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[2] + String.format ("%1$.0f", 100*(1.0-Math.pow(.5, this.owner.getPower(InsatiablePower.POWER_ID).amount))) + DESCRIPTIONS[3]
+                ? DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[2] + String.format ("%1$.0f", 100*(1.0-Math.pow(InsatiablePower.RETAIN_FRACTION, this.owner.getPower(InsatiablePower.POWER_ID).amount))) + DESCRIPTIONS[3]
                 : DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1];
     }
 

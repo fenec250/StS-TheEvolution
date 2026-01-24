@@ -1,6 +1,5 @@
 package evolutionmod.cards;
 
-import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
@@ -12,14 +11,13 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.VulnerablePower;
-import evolutionmod.orbs.BeastGene;
-import evolutionmod.orbs.SuccubusGene;
-import evolutionmod.patches.AbstractCardEnum;
+import evolutionmod.orbs.BeastGene2;
+import evolutionmod.patches.EvolutionEnum;
 import evolutionmod.powers.LustPower;
 
 public class StripArmor2
         extends BaseEvoCard {
-    public static final String ID = "evolutionmod:StripArmor";
+    public static final String ID = "evolutionmodV2:StripArmor";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -34,7 +32,7 @@ public class StripArmor2
 
     public StripArmor2() {
 		super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
-                CardType.ATTACK, AbstractCardEnum.EVOLUTION_BLUE,
+                CardType.ATTACK, EvolutionEnum.EVOLUTION_V2_BLUE,
                 CardRarity.UNCOMMON, CardTarget.ENEMY);
         this.damage = this.baseDamage = DAMAGE_AMT;
         this.magicNumber = this.baseMagicNumber = LUST_AMT;
@@ -50,9 +48,7 @@ public class StripArmor2
 				.filter(mo -> !mo.isDeadOrEscaped())
 				.filter(mo -> mo != m)
 				.forEach(mo -> addToBot(new ApplyPowerAction(mo, p, new LustPower(mo, magicNumber))));
-		if (isPlayerInThisForm(SuccubusGene.ID)) {
-		}
-		if (formEffect(BeastGene.ID)) {
+		if (formEffect(BeastGene2.ID)) {
 			addToBot(new ApplyPowerAction(m, p, new VulnerablePower(m, VULNERABLE_AMT, false)));
 		}
 	}
@@ -68,8 +64,8 @@ public class StripArmor2
 
 	@Override
 	public void triggerOnGlowCheck() {
-		if (isPlayerInThisForm(BeastGene.ID)) {
-			this.glowColor = BeastGene.COLOR.cpy();
+		if (isPlayerInThisForm(BeastGene2.ID)) {
+			this.glowColor = BeastGene2.COLOR.cpy();
 		} else {
 			this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
 		}

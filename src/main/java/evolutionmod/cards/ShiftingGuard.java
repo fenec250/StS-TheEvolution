@@ -11,14 +11,14 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import evolutionmod.orbs.AbstractGene;
-import evolutionmod.patches.AbstractCardEnum;
+import evolutionmod.patches.EvolutionEnum;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class ShiftingGuard
         extends BaseEvoCard {
-    public static final String ID = "evolutionmod:ShiftingGuard";
+    public static final String ID = "evolutionmodV2:ShiftingGuard";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -31,7 +31,7 @@ public class ShiftingGuard
 
     public ShiftingGuard() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
-                CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
+                CardType.SKILL, EvolutionEnum.EVOLUTION_V2_BLUE,
                 CardRarity.COMMON, CardTarget.SELF);
         this.block = this.baseBlock = BLOCK_AMT;
         this.magicNumber = this.baseMagicNumber = GENE_TRIGGER_AMT;
@@ -49,8 +49,7 @@ public class ShiftingGuard
             @Override
             public void update() {
                 ((AbstractGene)o).getAdaptation().apply(p, m);
-                consumeOrb(p, o);
-                addToTop(new ChannelAction(o));
+                shiftOrb(p, o);
                 this.isDone = true;
             }
         }));

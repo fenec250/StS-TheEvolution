@@ -23,6 +23,8 @@ public class OldOutfit extends CustomRelic implements OnChannelRelic {
     public static final String OUTLINE_PATH = "evolutionmod/images/relics/OldOutfit_p.png";
     private static final Texture OUTLINE = new Texture(OUTLINE_PATH);
 
+    public boolean active = true;
+
     public OldOutfit() {
         super(ID, IMG, OUTLINE, RelicTier.BOSS, LandingSound.CLINK);
     }
@@ -36,6 +38,7 @@ public class OldOutfit extends CustomRelic implements OnChannelRelic {
     public void atBattleStart() {
         super.atBattleStart();
         this.beginLongPulse();
+        this.active = true;
     }
 
     @Override
@@ -55,7 +58,8 @@ public class OldOutfit extends CustomRelic implements OnChannelRelic {
 
     @Override
     public void onChannel(AbstractOrb orb) {
-        if (this.pulse && orb instanceof AbstractGene) {
+        if (this.active && orb instanceof AbstractGene) {
+            this.active = false;
             this.stopPulse();
             addToTop(new EvokeSpecificOrbAction(orb));
 //            AbstractPlayer player = AbstractDungeon.player;

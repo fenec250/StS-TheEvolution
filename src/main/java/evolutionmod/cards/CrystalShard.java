@@ -1,7 +1,6 @@
 package evolutionmod.cards;
 
 import basemod.abstracts.CustomSavable;
-import basemod.helpers.TooltipInfo;
 import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
@@ -15,13 +14,11 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import evolutionmod.orbs.*;
-import evolutionmod.patches.AbstractCardEnum;
-
-import java.util.List;
+import evolutionmod.patches.EvolutionEnum;
 
 public class CrystalShard
 		extends BaseEvoCard implements CustomSavable<Integer>, GlowingCard {
-	public static final String ID = "evolutionmod:CrystalShard";
+	public static final String ID = "evolutionmodV2:CrystalShard";
 	public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;
 	public static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -29,28 +26,31 @@ public class CrystalShard
 	public static final String[] EXTENDED_DESCRIPTION = cardStrings.EXTENDED_DESCRIPTION;
 	public static final String IMG_PATH = "evolutionmod/images/cards/CrystalShard.png";
 	private static final int COST = 1;
-	private static final int DAMAGE_AMT = 9;
-	private static final int UPGRADE_DAMAGE_AMT = 2;
+	private static final int DAMAGE_AMT = 6;
+	private static final int UPGRADE_DAMAGE_AMT = 3;
 	private static final int FORM_DAMAGE = 4;
-	private static final int UPGRADE_FORM_DAMAGE = 1;
+	private static final int UPGRADE_FORM_DAMAGE = 0;
 
 	private int genesIndexes;
 	private AbstractGene firstGene; // firstIndex = genesIndex / 10
 	private AbstractGene secondGene; // secoIndex = genesIndex % 10
 
 	public CrystalShard() {
-		this((!CardCrawlGame.isInARun() || AbstractDungeon.miscRng == null)
-				? -1
-				: AbstractDungeon.miscRng.random(11 * 10 - 1));
+		this(-1);
 	}
 
 	public CrystalShard(int geneIndexes) {
 		super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
-				CardType.ATTACK, AbstractCardEnum.EVOLUTION_BLUE,
+				CardType.ATTACK, EvolutionEnum.EVOLUTION_V2_BLUE,
 				CardRarity.COMMON, CardTarget.ENEMY);
 		this.damage = this.baseDamage= DAMAGE_AMT;
 		this.magicNumber = this.baseMagicNumber = FORM_DAMAGE;
 		this.exhaust = true;
+		if (geneIndexes == -1 && CardCrawlGame.isInARun() && AbstractDungeon.miscRng != null) {
+			geneIndexes = AbstractDungeon.miscRng.random(11 * 10 - 1);
+			if (geneIndexes/11==geneIndexes%11) // avoids duplicates when creating an instance without specific genes
+				geneIndexes = 110+geneIndexes/11;
+		}
 		this.genesIndexes = geneIndexes;
 		resetGene();
 	}
@@ -128,34 +128,34 @@ public class CrystalShard
 			case 0:
 				if (isPlayerInThisForm(firstGene.ID)) {
 					switch (firstGene.ID) {
-						case HarpyGene.ID: return HarpyGene.COLOR.cpy();
-						case MerfolkGene.ID: return MerfolkGene.COLOR.cpy();
-						case LavafolkGene.ID: return LavafolkGene.COLOR.cpy();
-						case CentaurGene.ID: return CentaurGene.COLOR.cpy();
-						case LizardGene.ID: return LizardGene.COLOR.cpy();
-						case BeastGene.ID: return BeastGene.COLOR.cpy();
-						case PlantGene.ID: return PlantGene.COLOR.cpy();
+						case HarpyGene2.ID: return HarpyGene2.COLOR.cpy();
+						case MerfolkGene2.ID: return MerfolkGene2.COLOR.cpy();
+						case LavafolkGene2.ID: return LavafolkGene2.COLOR.cpy();
+						case CentaurGene2.ID: return CentaurGene2.COLOR.cpy();
+						case LizardGene2.ID: return LizardGene2.COLOR.cpy();
+						case BeastGene2.ID: return BeastGene2.COLOR.cpy();
+						case PlantGene2.ID: return PlantGene2.COLOR.cpy();
 						case ShadowGene2.ID: return ShadowGene2.COLOR.cpy();
-						case LymeanGene.ID: return LymeanGene.COLOR.cpy();
-						case InsectGene.ID: return InsectGene.COLOR.cpy();
-						case SuccubusGene.ID: return SuccubusGene.COLOR.cpy();
+						case LymeanGene2.ID: return LymeanGene2.COLOR.cpy();
+						case InsectGene2.ID: return InsectGene2.COLOR.cpy();
+						case SuccubusGene2.ID: return SuccubusGene2.COLOR.cpy();
 					}
 				}
 				return AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
 			case 1:
 				if (isPlayerInThisForm(secondGene.ID, firstGene.ID)) {
 					switch (secondGene.ID) {
-						case HarpyGene.ID: return HarpyGene.COLOR.cpy();
-						case MerfolkGene.ID: return MerfolkGene.COLOR.cpy();
-						case LavafolkGene.ID: return LavafolkGene.COLOR.cpy();
-						case CentaurGene.ID: return CentaurGene.COLOR.cpy();
-						case LizardGene.ID: return LizardGene.COLOR.cpy();
-						case BeastGene.ID: return BeastGene.COLOR.cpy();
-						case PlantGene.ID: return PlantGene.COLOR.cpy();
+						case HarpyGene2.ID: return HarpyGene2.COLOR.cpy();
+						case MerfolkGene2.ID: return MerfolkGene2.COLOR.cpy();
+						case LavafolkGene2.ID: return LavafolkGene2.COLOR.cpy();
+						case CentaurGene2.ID: return CentaurGene2.COLOR.cpy();
+						case LizardGene2.ID: return LizardGene2.COLOR.cpy();
+						case BeastGene2.ID: return BeastGene2.COLOR.cpy();
+						case PlantGene2.ID: return PlantGene2.COLOR.cpy();
 						case ShadowGene2.ID: return ShadowGene2.COLOR.cpy();
-						case LymeanGene.ID: return LymeanGene.COLOR.cpy();
-						case InsectGene.ID: return InsectGene.COLOR.cpy();
-						case SuccubusGene.ID: return SuccubusGene.COLOR.cpy();
+						case LymeanGene2.ID: return LymeanGene2.COLOR.cpy();
+						case InsectGene2.ID: return InsectGene2.COLOR.cpy();
+						case SuccubusGene2.ID: return SuccubusGene2.COLOR.cpy();
 					}
 				}
 				return AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
@@ -165,11 +165,11 @@ public class CrystalShard
 	}
 
 	public void resetGene() {
-		if (this.genesIndexes < 0 || this.genesIndexes > 11 * 10 - 1) {
+		if (this.genesIndexes < 0 || this.genesIndexes > 11 * 11 - 1) {
 			return;
 		}
 		this.firstGene =  getGene(GeneIds[this.genesIndexes / 11]);
-		this.secondGene = getGene(GeneIds[this.genesIndexes % 10 == this.genesIndexes / 11 ? 10 : this.genesIndexes % 10]);
+		this.secondGene = getGene(GeneIds[this.genesIndexes % 11]);
 		this.rawDescription = EXTENDED_DESCRIPTION[0]
 				+ this.firstGene.ID + EXTENDED_DESCRIPTION[1]
 				+ this.secondGene.ID + EXTENDED_DESCRIPTION[2];

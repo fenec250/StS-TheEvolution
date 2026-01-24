@@ -2,25 +2,12 @@ package evolutionmod.relics;
 
 import basemod.abstracts.CustomRelic;
 import com.badlogic.gdx.graphics.Texture;
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
-import com.megacrit.cardcrawl.actions.defect.ChannelAction;
-import com.megacrit.cardcrawl.actions.defect.IncreaseMaxOrbAction;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.RelicStrings;
 import evolutionmod.cards.BaseEvoCard;
-import evolutionmod.orbs.AbstractGene;
-import evolutionmod.orbs.BeastGene;
-import evolutionmod.orbs.CentaurGene;
-import evolutionmod.orbs.HarpyGene;
-import evolutionmod.orbs.InsectGene;
-import evolutionmod.orbs.LavafolkGene;
-import evolutionmod.orbs.LizardGene;
-import evolutionmod.orbs.LymeanGene;
-import evolutionmod.orbs.MerfolkGene;
-import evolutionmod.orbs.PlantGene;
-import evolutionmod.orbs.SuccubusGene;
+import evolutionmod.orbs.*;
 
 import java.util.ArrayList;
 
@@ -53,16 +40,17 @@ public class TorisGift extends CustomRelic {
 //        this.addToBot(new IncreaseMaxOrbAction(SLOT_AMT));
 
         ArrayList<String> genesPool = new ArrayList<>();
-        genesPool.add(CentaurGene.ID);
-        genesPool.add(PlantGene.ID);
-        genesPool.add(MerfolkGene.ID);
-        genesPool.add(HarpyGene.ID);
-        genesPool.add(LavafolkGene.ID);
-        genesPool.add(SuccubusGene.ID);
-        genesPool.add(LymeanGene.ID);
-        genesPool.add(InsectGene.ID);
-        genesPool.add(BeastGene.ID);
-        genesPool.add(LizardGene.ID);
+        genesPool.add(CentaurGene2.ID);
+        genesPool.add(PlantGene2.ID);
+        genesPool.add(MerfolkGene2.ID);
+        genesPool.add(HarpyGene2.ID);
+        genesPool.add(LavafolkGene2.ID);
+        genesPool.add(SuccubusGene2.ID);
+        genesPool.add(LymeanGene2.ID);
+        genesPool.add(InsectGene2.ID);
+        genesPool.add(BeastGene2.ID);
+        genesPool.add(LizardGene2.ID);
+        genesPool.add(ShadowGene2.ID);
 
         for (int i = 0; i < GENE_AMT; ++i) {
             String geneId = genesPool.get(AbstractDungeon.cardRandomRng.random(genesPool.size() - 1));

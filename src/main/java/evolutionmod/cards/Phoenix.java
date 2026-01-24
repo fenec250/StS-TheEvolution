@@ -2,20 +2,19 @@ package evolutionmod.cards;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
-import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import evolutionmod.orbs.HarpyGene;
-import evolutionmod.orbs.LavafolkGene;
-import evolutionmod.patches.AbstractCardEnum;
+import evolutionmod.orbs.HarpyGene2;
+import evolutionmod.orbs.LavafolkGene2;
+import evolutionmod.patches.EvolutionEnum;
 
 public class Phoenix
         extends AdaptableEvoCard {
-    public static final String ID = "evolutionmod:Phoenix";
+    public static final String ID = "evolutionmodV2:Phoenix";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -27,7 +26,7 @@ public class Phoenix
 
     public Phoenix() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
-                CardType.ATTACK, AbstractCardEnum.EVOLUTION_BLUE,
+                CardType.ATTACK, EvolutionEnum.EVOLUTION_V2_BLUE,
                 CardRarity.UNCOMMON, CardTarget.ENEMY);
         this.damage = this.baseDamage = DAMAGE_AMT;
     }
@@ -37,17 +36,17 @@ public class Phoenix
         AbstractDungeon.actionManager.addToBottom(new DamageAction(
                 m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
                 AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
-        if (isPlayerInThisForm(HarpyGene.ID)) {
-            addToBot(new LavafolkGene().getChannelAction());
+        if (isPlayerInThisForm(HarpyGene2.ID)) {
+            addToBot(new LavafolkGene2().getChannelAction());
         }
         this.adapt(upgraded ? p.maxOrbs : 1);
-        formEffect(HarpyGene.ID);
+        formEffect(HarpyGene2.ID);
         this.useAdaptations(p, m);
     }
 
     @Override
     public int canAdaptWith(AbstractAdaptation adaptation) {
-        return adaptation.getGeneId().equals(LavafolkGene.ID) ? adaptation.amount : 0;
+        return adaptation.getGeneId().equals(LavafolkGene2.ID) ? adaptation.amount : 0;
     }
 
     @Override
@@ -62,8 +61,8 @@ public class Phoenix
 
     @Override
     public void triggerOnGlowCheck() {
-        if (isPlayerInThisForm(HarpyGene.ID)) {
-            this.glowColor = HarpyGene.COLOR.cpy();
+        if (isPlayerInThisForm(HarpyGene2.ID)) {
+            this.glowColor = HarpyGene2.COLOR.cpy();
         } else {
             this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
         }

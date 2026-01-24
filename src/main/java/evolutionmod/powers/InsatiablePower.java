@@ -13,6 +13,7 @@ public class InsatiablePower extends AbstractPower {
     public static final String NAME = cardStrings.NAME;
     public static final String[] DESCRIPTIONS = cardStrings.DESCRIPTIONS;
 
+    public static final double RETAIN_FRACTION = 0.4;
     public InsatiablePower(AbstractCreature owner, int initialAmount) {
         this.name = NAME;
         this.ID = POWER_ID;
@@ -20,7 +21,7 @@ public class InsatiablePower extends AbstractPower {
 //        this.region128 = new TextureAtlas.AtlasRegion(new Texture("evolutionmod/images/powers/InsectPower84.png"), 0, 0, 84, 84);
 //        this.region48 = new TextureAtlas.AtlasRegion(new Texture("evolutionmod/images/powers/InsectPower32.png"), 0, 0, 32, 32);
         this.loadRegion("demonForm");
-        this.type = PowerType.BUFF;
+        this.type = PowerType.DEBUFF;
         this.amount = initialAmount;
         this.updateDescription();
     }
@@ -34,7 +35,7 @@ public class InsatiablePower extends AbstractPower {
 
     @Override
     public void updateDescription() {
-        this.description = DESCRIPTIONS[0] + String.format ("%1$.0f", 100*(1.0-Math.pow(.5, this.amount)))
+        this.description = DESCRIPTIONS[0] + String.format ("%1$.0f", 100*(1.0-Math.pow(RETAIN_FRACTION, this.amount)))
                 + DESCRIPTIONS[1];
     }
 

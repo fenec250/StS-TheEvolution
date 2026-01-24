@@ -9,13 +9,13 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.VulnerablePower;
-import evolutionmod.orbs.SuccubusGene;
-import evolutionmod.patches.AbstractCardEnum;
+import evolutionmod.orbs.SuccubusGene2;
+import evolutionmod.patches.EvolutionEnum;
 import evolutionmod.powers.LustPower;
 
 public class Charm
         extends BaseEvoCard {
-    public static final String ID = "evolutionmod:Charm";
+    public static final String ID = "evolutionmodV2:Charm";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -29,7 +29,7 @@ public class Charm
 
     public Charm() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
-                CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
+                CardType.SKILL, EvolutionEnum.EVOLUTION_V2_BLUE,
                 CardRarity.COMMON, CardTarget.ENEMY);
         this.magicNumber = this.baseMagicNumber = REDUCTION_AMT;
         this.block = this.baseBlock = BLOCK_AMT;
@@ -40,7 +40,7 @@ public class Charm
         int amount = this.magicNumber;
         addToBot(new GainBlockAction(p, this.block));
         AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(m, p, new LustPower(m, amount), amount));
-        formEffect(SuccubusGene.ID, () -> addToBot(new ApplyPowerAction(m, p, new VulnerablePower(
+        formEffect(SuccubusGene2.ID, () -> addToBot(new ApplyPowerAction(m, p, new VulnerablePower(
                 m, FORM_VULNERABLE, false))));
     }
 
@@ -61,8 +61,8 @@ public class Charm
 
     @Override
     public void triggerOnGlowCheck() {
-        if (isPlayerInThisForm(SuccubusGene.ID)) {
-            this.glowColor = SuccubusGene.COLOR.cpy();
+        if (isPlayerInThisForm(SuccubusGene2.ID)) {
+            this.glowColor = SuccubusGene2.COLOR.cpy();
         } else {
             this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
         }

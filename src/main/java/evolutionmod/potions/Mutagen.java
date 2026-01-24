@@ -11,7 +11,7 @@ import evolutionmod.actions.MutagenAction;
 public class Mutagen extends AbstractPotion {
 
 
-	public static final String POTION_ID = "evolutionmod:Mutagen";
+	public static final String POTION_ID = "evolutionmodV2:Mutagen";
 	private static final PotionStrings potionStrings = CardCrawlGame.languagePack.getPotionString(POTION_ID);
 
 	public static final String NAME = potionStrings.NAME;

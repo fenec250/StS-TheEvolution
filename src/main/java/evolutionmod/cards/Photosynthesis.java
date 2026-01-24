@@ -8,13 +8,13 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.relics.ChemicalX;
-import evolutionmod.orbs.PlantGene;
-import evolutionmod.patches.AbstractCardEnum;
+import evolutionmod.orbs.PlantGene2;
+import evolutionmod.patches.EvolutionEnum;
 import evolutionmod.powers.BramblesPower;
 
 public class Photosynthesis
         extends AdaptableEvoCard {
-    public static final String ID = "evolutionmod:Photosynthesis";
+    public static final String ID = "evolutionmodV2:Photosynthesis";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -27,7 +27,7 @@ public class Photosynthesis
 
     public Photosynthesis() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
-                CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
+                CardType.SKILL, EvolutionEnum.EVOLUTION_V2_BLUE,
                 CardRarity.RARE, CardTarget.SELF);
         this.block = this.baseBlock = BLOCK_AMT;
         this.magicNumber = this.baseMagicNumber = BRAMBLE_AMT;
@@ -66,7 +66,7 @@ public class Photosynthesis
 
     @Override
     public int canAdaptWith(AbstractAdaptation adaptation) {
-        return adaptation.getGeneId().equals(PlantGene.ID) ? 1 : 0;
+        return adaptation.getGeneId().equals(PlantGene2.ID) ? 1 : 0;
     }
 
     @Override
@@ -82,8 +82,8 @@ public class Photosynthesis
 
     @Override
     public void triggerOnGlowCheck() {
-        if (isPlayerInThisForm(PlantGene.ID)) {
-            this.glowColor = PlantGene.COLOR.cpy();
+        if (isPlayerInThisForm(PlantGene2.ID)) {
+            this.glowColor = PlantGene2.COLOR.cpy();
         } else {
             this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
         }

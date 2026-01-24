@@ -11,6 +11,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import evolutionmod.actions.ChooseAdaptationAction;
 import evolutionmod.orbs.AbstractGene;
+import evolutionmod.relics.PowerFocus;
 
 import java.util.HashMap;
 import java.util.List;
@@ -172,6 +173,10 @@ public abstract class AdaptableEvoCard extends BaseEvoCard {
 			addAdaptation(adaptation);
 			this.shuffleBackIntoDrawPile = true;
 			consumeOrb(AbstractDungeon.player, gene);
+			if (AbstractDungeon.player.hasPower(Absorption.AbsorptionPower.POWER_ID))
+				AbstractDungeon.player.getPower(Absorption.AbsorptionPower.POWER_ID).onEvokeOrb(gene);
+			if (AbstractDungeon.player.hasRelic(PowerFocus.ID))
+				AbstractDungeon.player.getRelic(PowerFocus.ID).onEvokeOrb(gene);
 		}
 		return adaptAmount;
 	}

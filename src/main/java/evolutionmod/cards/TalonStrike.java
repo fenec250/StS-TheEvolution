@@ -11,25 +11,25 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import evolutionmod.orbs.HarpyGene;
-import evolutionmod.patches.AbstractCardEnum;
+import evolutionmod.orbs.HarpyGene2;
+import evolutionmod.patches.EvolutionEnum;
 
 public class TalonStrike
         extends BaseEvoCard {
-    public static final String ID = "evolutionmod:TalonStrike";
+    public static final String ID = "evolutionmodV2:TalonStrike";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = "evolutionmod/images/cards/HarpyAtt.png";
-    private static final int COST = 0;
-    private static final int DAMAGE_AMT = 3;
-    private static final int UPGRADE_DAMAGE_AMT = 3;
-    private static final int FORM_CHANGE = 1;
+    private static final int COST = 1;
+    private static final int DAMAGE_AMT = 4;
+    private static final int UPGRADE_DAMAGE_AMT = 2;
+    private static final int FORM_CHANGE = 2;
 
     public TalonStrike() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
-                CardType.ATTACK, AbstractCardEnum.EVOLUTION_BLUE,
+                CardType.ATTACK, EvolutionEnum.EVOLUTION_V2_BLUE,
                 CardRarity.COMMON, CardTarget.ENEMY);
         this.damage = this.baseDamage = DAMAGE_AMT;
         this.magicNumber = this.baseMagicNumber = FORM_CHANGE;
@@ -41,10 +41,12 @@ public class TalonStrike
         AbstractDungeon.actionManager.addToBottom(new DamageAction(
                 m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
                 AbstractGameAction.AttackEffect.SLASH_HORIZONTAL));
+        AbstractDungeon.actionManager.addToBottom(new DamageAction(
+                m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
+                AbstractGameAction.AttackEffect.SLASH_HORIZONTAL));
 
-        formEffect(HarpyGene.ID, () -> {
+        formEffect(HarpyGene2.ID, () -> {
             addToBot(new DrawCardAction(this.magicNumber));
-            addToBot(new DiscardAction(p, p, this.magicNumber, false));
         });
     }
 
@@ -63,8 +65,8 @@ public class TalonStrike
 
     @Override
     public void triggerOnGlowCheck() {
-        if (isPlayerInThisForm(HarpyGene.ID)) {
-            this.glowColor = HarpyGene.COLOR.cpy();
+        if (isPlayerInThisForm(HarpyGene2.ID)) {
+            this.glowColor = HarpyGene2.COLOR.cpy();
         } else {
             this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
         }

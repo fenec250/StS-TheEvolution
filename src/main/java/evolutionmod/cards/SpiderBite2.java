@@ -3,9 +3,8 @@ package evolutionmod.cards;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
-import com.megacrit.cardcrawl.cards.CardGroup;
+import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
-import com.megacrit.cardcrawl.cards.colorless.Bite;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
@@ -13,31 +12,29 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.vfx.combat.BiteEffect;
-import evolutionmod.orbs.InsectGene;
-import evolutionmod.patches.AbstractCardEnum;
-
-import java.util.stream.Collectors;
+import evolutionmod.patches.EvolutionEnum;
 
 public class SpiderBite2
         extends BaseEvoCard {
-    public static final String ID = "evolutionmod:SpiderBite";
+    public static final String ID = "evolutionmodV2:SpiderBite";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = "evolutionmod/images/cards/SpiderBite.png";
     private static final int COST = 3;
-    private static final int DAMAGE_AMT = 18;
+    private static final int DAMAGE_AMT = 20;
 //    private static final int UPGRADE_DAMAGE_AMT = 1;
-    private static final int SPIDER_DAMAGE_AMT = 3;
-    private static final int UPGRADE_SPIDER_DAMAGE_AMT = 2;
+    private static final int SPIDER_DAMAGE_AMT = 2;
+    private static final int DRONES_AMT = 2;
+	private static final int UPGRADE_DRONES_AMT = 1;
 
     public SpiderBite2() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
-                CardType.ATTACK, AbstractCardEnum.EVOLUTION_BLUE,
+                CardType.ATTACK, EvolutionEnum.EVOLUTION_V2_BLUE,
                 CardRarity.RARE, CardTarget.ENEMY);
         this.damage = this.baseDamage = DAMAGE_AMT;
-        this.magicNumber = this.baseMagicNumber = SPIDER_DAMAGE_AMT;
+        this.magicNumber = this.baseMagicNumber = DRONES_AMT;
 		this.cardsToPreview = new Drone();
     }
 
@@ -52,7 +49,7 @@ public class SpiderBite2
 		}
 		AbstractDungeon.actionManager.addToBottom(new DamageAction(
                 m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
-                AbstractGameAction.AttackEffect.NONE));
+                AbstractGameAction.AttackEffect.SMASH));
 	}
 
 	@Override
@@ -67,8 +64,8 @@ public class SpiderBite2
 
 	private void alterDamageAround(Runnable supercall) {
 		this.baseDamage = DAMAGE_AMT;
-		this.baseDamage += this.magicNumber * AbstractDungeon.player.exhaustPile.group.stream()
-				.filter(card -> Drone.ID.equals(card.cardID) || DroneSoldier.ID.equals(card.cardID))
+		this.baseDamage += SPIDER_DAMAGE_AMT * AbstractDungeon.player.exhaustPile.group.stream()
+				.filter(card -> Drone.ID.equals(card.cardID))
 				.count();
 		supercall.run();
 		this.baseDamage = DAMAGE_AMT;
@@ -76,10 +73,18 @@ public class SpiderBite2
 	}
 
 	@Override
+	public void triggerWhenDrawn() {
+		for (int i = 0; i < this.magicNumber; ++i) {
+			this.addToTop(new MakeTempCardInHandAction(Drone.createDroneWithInteractions(AbstractDungeon.player)));
+		}
+		super.triggerWhenDrawn();
+	}
+
+	@Override
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeMagicNumber(UPGRADE_SPIDER_DAMAGE_AMT);
+			this.upgradeMagicNumber(UPGRADE_DRONES_AMT);
         }
     }
 }

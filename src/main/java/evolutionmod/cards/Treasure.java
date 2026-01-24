@@ -8,14 +8,14 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import evolutionmod.patches.AbstractCardEnum;
+import evolutionmod.patches.EvolutionEnum;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 public class Treasure extends BaseEvoCard {
-	public static final String ID = "evolutionmod:Treasure";
+	public static final String ID = "evolutionmodV2:Treasure";
 	public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;
 	public static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -26,7 +26,7 @@ public class Treasure extends BaseEvoCard {
 
 	public Treasure() {
 		super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
-				CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
+				CardType.SKILL, EvolutionEnum.EVOLUTION_V2_BLUE,
 				CardRarity.UNCOMMON, CardTarget.SELF);
 		this.exhaust = true;
 		this.cardsToPreview = new CrystalDust(-1);

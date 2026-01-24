@@ -5,14 +5,11 @@ import com.megacrit.cardcrawl.actions.GameActionManager;
 import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
-import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.WeakPower;
-
-import java.util.List;
-import java.util.stream.Collectors;
+import evolutionmod.powers.SalamanderPower;
 
 public class ShadowGeneAction extends AbstractHalfTargetedAction {
 
@@ -30,12 +27,12 @@ public class ShadowGeneAction extends AbstractHalfTargetedAction {
 			this.isDone = true;
 			return;
 		}
-		List<AbstractMonster> monsters = AbstractDungeon.getCurrRoom().monsters.monsters
-				.stream().filter(m -> !m.isDeadOrEscaped() && m.hasPower(WeakPower.POWER_ID))
-				.collect(Collectors.toList());
-		int damage = GameActionManager.turn + monsters.size();
+//		List<AbstractMonster> monsters = AbstractDungeon.getCurrRoom().monsters.monsters
+//				.stream().filter(m -> !m.isDeadOrEscaped() && m.hasPower(WeakPower.POWER_ID))
+//				.collect(Collectors.toList());
+		int damage = GameActionManager.turn;
 		AbstractDungeon.actionManager.addToTop(new DamageAllEnemiesAction(
-				(AbstractCreature)null,
+				this.source,
 				DamageInfo.createDamageMatrix(damage, true),
 				DamageInfo.DamageType.THORNS,
 				AbstractGameAction.AttackEffect.FIRE));

@@ -2,19 +2,16 @@ package evolutionmod.cards;
 
 import basemod.abstracts.CustomCard;
 import basemod.helpers.TooltipInfo;
-import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.orbs.EmptyOrbSlot;
 import evolutionmod.orbs.*;
+import evolutionmod.orbsV1.*;
 import evolutionmod.powers.GodlyPowersPower;
+import evolutionmod.powers.MasteryPower;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -24,6 +21,18 @@ public abstract class BaseEvoCard extends CustomCard {
 	protected String coloredRawDescription;
 
 	public static String[] GeneIds = {
+			PlantGene2.ID,
+			MerfolkGene2.ID,
+			HarpyGene2.ID,
+			LavafolkGene2.ID,
+			SuccubusGene2.ID,
+			LymeanGene2.ID,
+			InsectGene2.ID,
+			BeastGene2.ID,
+			LizardGene2.ID,
+			CentaurGene2.ID,
+			ShadowGene2.ID};
+	public static String[] GeneV1Ids = {
 			PlantGene.ID,
 			MerfolkGene.ID,
 			HarpyGene.ID,
@@ -34,7 +43,7 @@ public abstract class BaseEvoCard extends CustomCard {
 			BeastGene.ID,
 			LizardGene.ID,
 			CentaurGene.ID,
-			ShadowGene2.ID};
+			ShadowGene.ID};
 
     public BaseEvoCard(
     		final String id, final String name, final String img, final int cost, final String rawDescription,
@@ -67,8 +76,20 @@ public abstract class BaseEvoCard extends CustomCard {
 			if (customTooltips == null) {
 				customTooltips = new ArrayList<>();
 			}
-			if (this.rawDescription.contains(LavafolkGene.COLOR_STRING + LavafolkGene.NAME + "[]")) {this.customTooltips.add(LavafolkGene.TOOLTIP);}
+			if (this.rawDescription.contains(LavafolkGene2.COLOR_STRING + LavafolkGene2.NAME + "[]")) {this.customTooltips.add(LavafolkGene2.TOOLTIP);}
 			if (this.rawDescription.contains(ShadowGene2.COLOR_STRING + ShadowGene2.NAME + "[]")) {this.customTooltips.add(ShadowGene2.TOOLTIP);}
+			if (this.rawDescription.contains(InsectGene2.COLOR_STRING + InsectGene2.NAME + "[]")) {this.customTooltips.add(InsectGene2.TOOLTIP);}
+			if (this.rawDescription.contains(HarpyGene2.COLOR_STRING + HarpyGene2.NAME + "[]")) {this.customTooltips.add(HarpyGene2.TOOLTIP);}
+			if (this.rawDescription.contains(MerfolkGene2.COLOR_STRING + MerfolkGene2.NAME + "[]")) {this.customTooltips.add(MerfolkGene2.TOOLTIP);}
+			if (this.rawDescription.contains(CentaurGene2.COLOR_STRING + CentaurGene2.NAME + "[]")) {this.customTooltips.add(CentaurGene2.TOOLTIP);}
+			if (this.rawDescription.contains(BeastGene2.COLOR_STRING + BeastGene2.NAME + "[]")) {this.customTooltips.add(BeastGene2.TOOLTIP);}
+			if (this.rawDescription.contains(PlantGene2.COLOR_STRING + PlantGene2.NAME + "[]")) {this.customTooltips.add(PlantGene2.TOOLTIP);}
+			if (this.rawDescription.contains(LymeanGene2.COLOR_STRING + LymeanGene2.NAME + "[]")) {this.customTooltips.add(LymeanGene2.TOOLTIP);}
+			if (this.rawDescription.contains(SuccubusGene2.COLOR_STRING + SuccubusGene2.NAME + "[]")) {this.customTooltips.add(SuccubusGene2.TOOLTIP);}
+			if (this.rawDescription.contains(LizardGene2.COLOR_STRING + LizardGene2.NAME + "[]")) {this.customTooltips.add(LizardGene2.TOOLTIP);}
+
+			if (this.rawDescription.contains(LavafolkGene.COLOR_STRING + LavafolkGene.NAME + "[]")) {this.customTooltips.add(LavafolkGene.TOOLTIP);}
+			if (this.rawDescription.contains(ShadowGene.COLOR_STRING + ShadowGene.NAME + "[]")) {this.customTooltips.add(ShadowGene.TOOLTIP);}
 			if (this.rawDescription.contains(InsectGene.COLOR_STRING + InsectGene.NAME + "[]")) {this.customTooltips.add(InsectGene.TOOLTIP);}
 			if (this.rawDescription.contains(HarpyGene.COLOR_STRING + HarpyGene.NAME + "[]")) {this.customTooltips.add(HarpyGene.TOOLTIP);}
 			if (this.rawDescription.contains(MerfolkGene.COLOR_STRING + MerfolkGene.NAME + "[]")) {this.customTooltips.add(MerfolkGene.TOOLTIP);}
@@ -85,8 +106,20 @@ public abstract class BaseEvoCard extends CustomCard {
 	public static String replaceGeneIds(String text) {
     	return text
 //					.replaceAll("([^\\]])" + LavafolkGene.NAME, "$1" + LavafolkGene.COLOR_STRING + LavafolkGene.NAME + "[]")
-				.replaceAll(LavafolkGene.ID, LavafolkGene.COLOR_STRING + LavafolkGene.NAME + "[]")
+				.replaceAll(LavafolkGene2.ID, LavafolkGene2.COLOR_STRING + LavafolkGene2.NAME + "[]")
 				.replaceAll(ShadowGene2.ID, ShadowGene2.COLOR_STRING + ShadowGene2.NAME + "[]")
+				.replaceAll(InsectGene2.ID, InsectGene2.COLOR_STRING + InsectGene2.NAME + "[]")
+				.replaceAll(PlantGene2.ID, PlantGene2.COLOR_STRING + PlantGene2.NAME + "[]")
+				.replaceAll(CentaurGene2.ID, CentaurGene2.COLOR_STRING + CentaurGene2.NAME + "[]")
+				.replaceAll(LymeanGene2.ID, LymeanGene2.COLOR_STRING + LymeanGene2.NAME + "[]")
+				.replaceAll(LizardGene2.ID, LizardGene2.COLOR_STRING + LizardGene2.NAME + "[]")
+				.replaceAll(HarpyGene2.ID, HarpyGene2.COLOR_STRING + HarpyGene2.NAME + "[]")
+				.replaceAll(MerfolkGene2.ID, MerfolkGene2.COLOR_STRING + MerfolkGene2.NAME + "[]")
+				.replaceAll(BeastGene2.ID, BeastGene2.COLOR_STRING + BeastGene2.NAME + "[]")
+				.replaceAll(SuccubusGene2.ID, SuccubusGene2.COLOR_STRING + SuccubusGene2.NAME + "[]")
+
+				.replaceAll(LavafolkGene.ID, LavafolkGene.COLOR_STRING + LavafolkGene.NAME + "[]")
+				.replaceAll(ShadowGene.ID, ShadowGene.COLOR_STRING + ShadowGene.NAME + "[]")
 				.replaceAll(InsectGene.ID, InsectGene.COLOR_STRING + InsectGene.NAME + "[]")
 				.replaceAll(PlantGene.ID, PlantGene.COLOR_STRING + PlantGene.NAME + "[]")
 				.replaceAll(CentaurGene.ID, CentaurGene.COLOR_STRING + CentaurGene.NAME + "[]")
@@ -203,14 +236,15 @@ public abstract class BaseEvoCard extends CustomCard {
 				.anyMatch((orb) -> orb != null && orb.ID != null && orb.ID.equals(geneId));
 		if (hasGene) {
 			action.run();
+			MasteryPower.formTrigger(geneId);
 		} else {
 			boolean bypass = GodlyPowersPower.bypassFormRequirementOnce();
 			if (bypass) {
 				action.run();
 			}
-			AbstractGene gene = getGene(geneId);
-			if (gene != null) {
-				AbstractDungeon.actionManager.addToBottom(gene.getChannelAction());
+			AbstractGene newGene = getGene(geneId);
+			if (newGene != null) {
+				AbstractDungeon.actionManager.addToBottom(newGene.getChannelAction());
 			}
 		}
     }
@@ -219,6 +253,7 @@ public abstract class BaseEvoCard extends CustomCard {
 		boolean hasGene = AbstractDungeon.player.orbs.stream()
 				.anyMatch((orb) -> orb != null && orb.ID != null && orb.ID.equals(geneId));
 		if (hasGene) {
+			MasteryPower.formTrigger(geneId);
 			return true;
 		} else {
 			AbstractGene gene = getGene(geneId);
@@ -231,8 +266,20 @@ public abstract class BaseEvoCard extends CustomCard {
 
     public static AbstractGene getGene(String geneId) {
     	switch (geneId){
-			case LavafolkGene.ID: return new LavafolkGene();
+			case LavafolkGene2.ID: return new LavafolkGene2();
 			case ShadowGene2.ID: return new ShadowGene2();
+			case InsectGene2.ID: return new InsectGene2();
+			case HarpyGene2.ID: return new HarpyGene2();
+			case MerfolkGene2.ID: return new MerfolkGene2();
+			case CentaurGene2.ID: return new CentaurGene2();
+			case BeastGene2.ID: return new BeastGene2();
+			case PlantGene2.ID: return new PlantGene2();
+			case LymeanGene2.ID: return new LymeanGene2();
+			case SuccubusGene2.ID: return new SuccubusGene2();
+			case LizardGene2.ID: return new LizardGene2();
+
+			case LavafolkGene.ID: return new LavafolkGene();
+			case ShadowGene.ID: return new ShadowGene();
 			case InsectGene.ID: return new InsectGene();
 			case HarpyGene.ID: return new HarpyGene();
 			case MerfolkGene.ID: return new MerfolkGene();

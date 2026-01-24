@@ -7,7 +7,6 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.localization.PotionStrings;
 import com.megacrit.cardcrawl.potions.AbstractPotion;
-import evolutionmod.actions.MutagenAction;
 import evolutionmod.powers.LustPower;
 
 public class StolenKiss extends AbstractPotion {
@@ -20,16 +19,21 @@ public class StolenKiss extends AbstractPotion {
 	public static final String[] DESCRIPTIONS = potionStrings.DESCRIPTIONS;
 
 	public StolenKiss() {
+		this(POTION_ID);
+	}
+
+	public StolenKiss(String ID) {
 		// The bottle shape and inside is determined by potion size and color. The actual colors are the main DefaultMod.java
-		super(NAME, POTION_ID, PotionRarity.UNCOMMON, PotionSize.HEART, PotionColor.FIRE);
+		super(NAME, ID, PotionRarity.UNCOMMON, PotionSize.HEART, PotionColor.FIRE);
 
 		// Do you throw this potion at an enemy or do you just consume it.
-		isThrown = true;
+		this.isThrown = true;
+		this.targetRequired = true;
 	}
 
 	@Override
 	public void use(AbstractCreature target) {
-		addToBot(new ApplyPowerAction(target, AbstractDungeon.player, new LustPower(target, getPotency())));
+		addToBot(new ApplyPowerAction(target, AbstractDungeon.player, new LustPower(target, getPotency()), getPotency()));
 	}
 
 	@Override
@@ -50,6 +54,6 @@ public class StolenKiss extends AbstractPotion {
 
 	@Override
 	public int getPotency(final int ascensionLevel) {
-		return 8;
+		return 7;
 	}
 }

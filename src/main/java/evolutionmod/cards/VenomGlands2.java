@@ -1,6 +1,5 @@
 package evolutionmod.cards;
 
-import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -8,14 +7,13 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import evolutionmod.orbs.InsectGene;
-import evolutionmod.orbs.LizardGene;
-import evolutionmod.patches.AbstractCardEnum;
+import evolutionmod.orbs.LizardGene2;
+import evolutionmod.patches.EvolutionEnum;
 import evolutionmod.powers.VenomGlandsPower;
 
 public class VenomGlands2
         extends BaseEvoCard {
-    public static final String ID = "evolutionmod:VenomGlands";
+    public static final String ID = "evolutionmodV2:VenomGlands";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -27,7 +25,7 @@ public class VenomGlands2
 
     public VenomGlands2() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
-                CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
+                CardType.SKILL, EvolutionEnum.EVOLUTION_V2_BLUE,
                 CardRarity.UNCOMMON, CardTarget.SELF);
         this.magicNumber = this.baseMagicNumber = ENVENOM_AMT;
         this.cardsToPreview = new Drone();
@@ -37,7 +35,7 @@ public class VenomGlands2
     public void use(AbstractPlayer p, AbstractMonster m) {
         int poison = this.magicNumber;
 		addToBot(new ApplyPowerAction(p, p, new VenomGlandsPower(p, poison)));
-        formEffect(LizardGene.ID, () -> {
+        formEffect(LizardGene2.ID, () -> {
 			addToBot(new MakeTempCardInHandAction(Drone.createDroneWithInteractions(p)));
         });
     }
@@ -58,8 +56,8 @@ public class VenomGlands2
 
 	@Override
 	public void triggerOnGlowCheck() {
-		if (isPlayerInThisForm(LizardGene.ID)) {
-			this.glowColor = LizardGene.COLOR.cpy();
+		if (isPlayerInThisForm(LizardGene2.ID)) {
+			this.glowColor = LizardGene2.COLOR.cpy();
 		} else {
 			this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
 		}

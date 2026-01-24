@@ -6,12 +6,12 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import evolutionmod.patches.AbstractCardEnum;
+import evolutionmod.patches.EvolutionEnum;
 import evolutionmod.powers.EruptionPower;
 
 public class Eruption
         extends BaseEvoCard {
-    public static final String ID = "evolutionmod:Eruption";
+    public static final String ID = "evolutionmodV2:Eruption";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -24,7 +24,7 @@ public class Eruption
 
     public Eruption() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
-                CardType.POWER, AbstractCardEnum.EVOLUTION_BLUE,
+                CardType.POWER, EvolutionEnum.EVOLUTION_V2_BLUE,
                 CardRarity.RARE, CardTarget.SELF);
 //        this.magicNumber = this.baseMagicNumber = ERUPTION_AMT;
         this.magicNumber = this.baseMagicNumber = ERUPTION_DAMAGE_AMT;

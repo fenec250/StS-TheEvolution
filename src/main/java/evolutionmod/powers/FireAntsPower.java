@@ -1,8 +1,5 @@
 package evolutionmod.powers;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -10,11 +7,9 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
-import com.megacrit.cardcrawl.powers.EnvenomPower;
-import com.megacrit.cardcrawl.powers.FlameBarrierPower;
-import com.megacrit.cardcrawl.powers.LoopPower;
 import evolutionmod.cards.Drone;
-import evolutionmod.orbs.LavafolkGene;
+import evolutionmod.orbs.LavafolkGene2;
+import evolutionmod.orbsV1.LavafolkGene;
 
 public class FireAntsPower extends AbstractPower {
     public static final String POWER_ID = "evolutionmod:FireAntsPower";
@@ -62,7 +57,7 @@ public class FireAntsPower extends AbstractPower {
         super.onExhaust(card);
         if (card instanceof Drone) {
             AbstractDungeon.player.orbs.stream()
-                    .filter(o -> o instanceof LavafolkGene)
+                    .filter(o -> o instanceof LavafolkGene || o instanceof LavafolkGene2)
                     .limit(this.amount)
                     .forEach(o -> {
                         o.triggerEvokeAnimation();

@@ -1,12 +1,8 @@
 package evolutionmod.cards;
 
-import com.evacipated.cardcrawl.mod.stslib.cards.interfaces.StartupCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
-import com.megacrit.cardcrawl.actions.common.DiscardAction;
-import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInDrawPileAction;
-import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -14,14 +10,13 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import evolutionmod.orbs.AbstractGene;
-import evolutionmod.orbs.HarpyGene;
-import evolutionmod.patches.AbstractCardEnum;
+import evolutionmod.orbs.HarpyGene2;
+import evolutionmod.patches.EvolutionEnum;
 
 public class FeatherStorm
         extends BaseEvoCard {
 //        extends BaseEvoCard implements StartupCard {
-    public static final String ID = "evolutionmod:FeatherStorm";
+    public static final String ID = "evolutionmodV2:FeatherStorm";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -37,12 +32,12 @@ public class FeatherStorm
 
     public FeatherStorm() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
-                CardType.ATTACK, AbstractCardEnum.EVOLUTION_BLUE,
+                CardType.ATTACK, EvolutionEnum.EVOLUTION_V2_BLUE,
                 CardRarity.RARE, CardTarget.ENEMY);
         this.damage = this.baseDamage = DAMAGE;
         this.magicNumber = this.baseMagicNumber = FEATHER_AMT;
         this.shouldSpawnFeathers = true;
-        this.cardsToPreview = new Feather();
+        this.cardsToPreview = new Feather(HarpyGene2.ID);
     }
 
     @Override
@@ -51,7 +46,7 @@ public class FeatherStorm
                 m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
                 AbstractGameAction.AttackEffect.SLASH_VERTICAL));
         if (this.shouldSpawnFeathers) {
-            addToBot(new MakeTempCardInDrawPileAction(new Feather(), this.magicNumber, true, true));
+            addToBot(new MakeTempCardInDrawPileAction(new Feather(HarpyGene2.ID), this.magicNumber, true, true));
             this.shouldSpawnFeathers = false;
         }
     }

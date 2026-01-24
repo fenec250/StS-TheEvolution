@@ -3,7 +3,6 @@ package evolutionmod.cards;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
-import com.megacrit.cardcrawl.actions.defect.ChannelAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -13,13 +12,12 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 import com.megacrit.cardcrawl.vfx.combat.WeightyImpactEffect;
-import evolutionmod.orbs.CentaurGene;
-import evolutionmod.orbs.HarpyGene;
-import evolutionmod.patches.AbstractCardEnum;
+import evolutionmod.orbs.CentaurGene2;
+import evolutionmod.patches.EvolutionEnum;
 
 public class PegasusDescent
         extends BaseEvoCard {
-    public static final String ID = "evolutionmod:PegasusDescent";
+    public static final String ID = "evolutionmodV2:PegasusDescent";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -33,7 +31,7 @@ public class PegasusDescent
 
     public PegasusDescent() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
-                CardType.ATTACK, AbstractCardEnum.EVOLUTION_BLUE,
+                CardType.ATTACK, EvolutionEnum.EVOLUTION_V2_BLUE,
                 CardRarity.UNCOMMON, CardTarget.ENEMY);
         this.damage = this.baseDamage = DAMAGE_AMT;
         this.magicNumber = this.baseMagicNumber = FORM_DAMAGE_AMT;
@@ -64,7 +62,7 @@ public class PegasusDescent
 //            }
 //        });
 //        formEffect(HarpyGene.ID, () -> addToBot(new CentaurGene().getChannelAction()));
-        formEffect(CentaurGene.ID);
+        formEffect(CentaurGene2.ID);
     }
 
     @Override
@@ -81,7 +79,7 @@ public class PegasusDescent
     }
 
     private void alterDamageAround(Runnable supercall) {
-        this.baseDamage = DAMAGE_AMT + (upgraded ? UPGRADE_DAMAGE_AMT:0) + (isPlayerInThisForm(CentaurGene.ID) ? this.magicNumber : 0);
+        this.baseDamage = DAMAGE_AMT + (upgraded ? UPGRADE_DAMAGE_AMT:0) + (isPlayerInThisForm(CentaurGene2.ID) ? this.magicNumber : 0);
         supercall.run();
         this.baseDamage = DAMAGE_AMT + (upgraded ? UPGRADE_DAMAGE_AMT:0);
         this.isDamageModified = this.damage != this.baseDamage;
@@ -102,8 +100,8 @@ public class PegasusDescent
 
     @Override
     public void triggerOnGlowCheck() {
-        if (isPlayerInThisForm(CentaurGene.ID)) {
-            this.glowColor = CentaurGene.COLOR.cpy();
+        if (isPlayerInThisForm(CentaurGene2.ID)) {
+            this.glowColor = CentaurGene2.COLOR.cpy();
         } else {
             this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
         }

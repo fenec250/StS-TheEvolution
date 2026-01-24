@@ -21,7 +21,6 @@ import evolutionmod.cards.LoyalCompanion;
 import evolutionmod.cards.DefendEvo;
 import evolutionmod.cards.LoyalWarrior;
 import evolutionmod.cards.StrikeEvo;
-import evolutionmod.patches.AbstractCardEnum;
 import evolutionmod.patches.EvolutionEnum;
 import evolutionmod.relics.TorisGift;
 
@@ -34,11 +33,11 @@ public class EvolutionCharacter extends CustomPlayer {
     public static final String MY_CHARACTER_CORPSE = "evolutionmod/images/char/ded_nila.png";
 //    public static final String MY_CHARACTER_ANIMATION = "evolutionmod/images/char/idle/Animation.scml";
     public static final String MY_CHARACTER_PORTRAIT = "evolutionmod/images/cards/CentaurSkl.png";
-    private static final String ID = "evolutionmod:EvolutionCharacter";
+    private static final String ID = "evolutionmod:EvolutionV2Character";
     private static final CharacterStrings characterStrings = CardCrawlGame.languagePack.getCharacterString(ID);
     private static final String[] NAMES = characterStrings.NAMES;
     private static final String[] TEXT = characterStrings.TEXT;
-    private static final Color melodyLime = CardHelper.getColor(191, 255, 1); //0xbfff00
+    private static final Color EvoTeal = CardHelper.getColor(191, 255, 2); //0xbfff01
     private static final float DIALOG_X_ADJUSTMENT = 0.0F;
     private static final float DIALOG_Y_ADJUSTMENT = 220.0F;
     public static final String[] orbTextures = {
@@ -57,7 +56,7 @@ public class EvolutionCharacter extends CustomPlayer {
 
     public EvolutionCharacter(String name) {
 //        super(name, EvolutionEnum.EVOLUTION_CLASS, orbTextures, "evolutionmod/images/char/orb/vfx.png", null, new SpriterAnimation(MY_CHARACTER_ANIMATION));
-        super(name, EvolutionEnum.EVOLUTION_CLASS, orbTextures,
+        super(name, EvolutionEnum.EVOLUTION_V2_CLASS, orbTextures,
                 "evolutionmod/images/char/orb/vfx.png", null,
                 new SpriterAnimation("evolutionmod/images/char/idle/nila_idle.scml"));
 //                new SpineAnimation("evolutionmod/images/char/idle/Evolution.atlas",
@@ -84,7 +83,7 @@ public class EvolutionCharacter extends CustomPlayer {
 
     @Override
     public Color getSlashAttackColor() {
-        return melodyLime;
+        return EvoTeal;
     }
 
     @Override
@@ -99,12 +98,12 @@ public class EvolutionCharacter extends CustomPlayer {
 
     @Override
     public AbstractCard.CardColor getCardColor() {
-        return AbstractCardEnum.EVOLUTION_BLUE;
+        return EvolutionEnum.EVOLUTION_V2_BLUE;
     }
 
     @Override
     public Color getCardRenderColor() {
-        return melodyLime;
+        return EvoTeal;
     }
 
     @Override
@@ -128,7 +127,7 @@ public class EvolutionCharacter extends CustomPlayer {
 
     @Override
     public Color getCardTrailColor() {
-        return melodyLime;
+        return EvoTeal;
     }
 
     @Override

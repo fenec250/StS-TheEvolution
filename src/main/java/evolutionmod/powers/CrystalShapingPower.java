@@ -16,7 +16,6 @@ import evolutionmod.cards.CrystalShield;
 import evolutionmod.orbs.*;
 
 import java.util.Iterator;
-import java.util.Optional;
 
 public class CrystalShapingPower extends AbstractPower {
     public static final String POWER_ID = "evolutionmod:CrystalShapingPower";
@@ -52,16 +51,16 @@ public class CrystalShapingPower extends AbstractPower {
 
     private int geneInt(AbstractOrb gene) {
         switch (gene.ID) { // should match BaseEvoCard.GeneIds indexes
-            case PlantGene.ID: return 0;
-            case MerfolkGene.ID: return 1;
-            case HarpyGene.ID: return 2;
-            case LavafolkGene.ID: return 3;
-            case SuccubusGene.ID: return 4;
-            case LymeanGene.ID: return 5;
-            case InsectGene.ID: return 6;
-            case BeastGene.ID: return 7;
-            case LizardGene.ID: return 8;
-            case CentaurGene.ID: return 9;
+            case PlantGene2.ID: return 0;
+            case MerfolkGene2.ID: return 1;
+            case HarpyGene2.ID: return 2;
+            case LavafolkGene2.ID: return 3;
+            case SuccubusGene2.ID: return 4;
+            case LymeanGene2.ID: return 5;
+            case InsectGene2.ID: return 6;
+            case BeastGene2.ID: return 7;
+            case LizardGene2.ID: return 8;
+            case CentaurGene2.ID: return 9;
             case ShadowGene2.ID: return 10;
         }
         return -1;
@@ -74,27 +73,30 @@ public class CrystalShapingPower extends AbstractPower {
         for (int i = 0; i < this.amount; ++i) {
             BaseEvoCard card;
             int choice = AbstractDungeon.cardRandomRng.random(2);
+            int geneIndexes = genes.hasNext()
+                    ? geneInt(genes.next())
+                    : AbstractDungeon.cardRandomRng.random(11 - 1);
+            if (choice < 2) {
+                if (genes.hasNext())
+                    geneIndexes = geneIndexes * 11 + geneInt(genes.next());
+                else {
+                    int g2 = AbstractDungeon.cardRandomRng.random(10 - 1);
+                    if (g2 == geneIndexes)
+                        geneIndexes = geneIndexes * 11 + 10;
+                    else
+                        geneIndexes = geneIndexes * 11 + g2;
+                }
+            }
             switch (choice) {
                 case 0:
-                    card = new CrystalShard(
-                            genes.hasNext() ? (geneInt(genes.next())*11 + (genes.hasNext() ? (geneInt(genes.next()))
-                                    : AbstractDungeon.cardRandomRng.random(10 - 1)))
-                                    : AbstractDungeon.cardRandomRng.random(11 * 10 - 1)
-                    );
+                    card = new CrystalShard(geneIndexes);
                     break;
                 case 1:
-                    card = new CrystalShield(
-                            genes.hasNext() ? (geneInt(genes.next())*11 + (genes.hasNext() ? (geneInt(genes.next()))
-                                    : AbstractDungeon.cardRandomRng.random(10 - 1)))
-                                    : AbstractDungeon.cardRandomRng.random(11 * 10 - 1)
-                    );
+                    card = new CrystalShield(geneIndexes);
                     break;
                 case 2:
                 default:
-                    card = new CrystalDust(
-                            genes.hasNext() ? geneInt(genes.next())
-                                    : AbstractDungeon.cardRandomRng.random(11 - 1)
-                    );
+                    card = new CrystalDust(geneIndexes);
                     break;
             }
             addToBot(new MakeTempCardInHandAction(card));

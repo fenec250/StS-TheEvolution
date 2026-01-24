@@ -16,7 +16,7 @@ import evolutionmod.powers.BroodPower;
 
 public class Drone
         extends BaseEvoCard {
-    public static final String ID = "evolutionmod:Drone";
+    public static final String ID = "evolutionmodV2:Drone";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -35,6 +35,7 @@ public class Drone
         this.damage = this.baseDamage = DAMAGE_AMT;
         this.block = this.baseBlock = BLOCK_AMT;
         this.exhaust = true;
+        this.retain = true;
         this.isEthereal = true;
     }
 
@@ -90,6 +91,8 @@ public class Drone
 	public void triggerOnEndOfTurnForPlayingCard() {
         this.dontTriggerOnUseCard = true;
         this.applyPowersToBlock();
+        this.retain = false;
+        this.isEthereal = true;
         AbstractDungeon.actionManager.cardQueue.add(new CardQueueItem(this, true));
     }
 

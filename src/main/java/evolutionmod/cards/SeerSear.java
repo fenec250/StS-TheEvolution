@@ -13,14 +13,13 @@ import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import evolutionmod.actions.RefillDrawPileAction;
 import evolutionmod.actions.TriggerScryEffectsAction;
-import evolutionmod.orbs.LavafolkGene;
-import evolutionmod.orbs.LymeanGene;
-import evolutionmod.patches.AbstractCardEnum;
+import evolutionmod.orbs.LavafolkGene2;
+import evolutionmod.patches.EvolutionEnum;
 import evolutionmod.powers.FatePower;
 
 public class SeerSear
         extends BaseEvoCard {
-    public static final String ID = "evolutionmod:SeerSear";
+    public static final String ID = "evolutionmodV2:SeerSear";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -32,14 +31,14 @@ public class SeerSear
 
     public SeerSear() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
-                CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
+                CardType.SKILL, EvolutionEnum.EVOLUTION_V2_BLUE,
                 CardRarity.UNCOMMON, CardTarget.SELF);
         this.magicNumber = this.baseMagicNumber = FATE_AMT;
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        LavafolkGene lavafolkGene = new LavafolkGene();
+        LavafolkGene2 lavafolkGene = new LavafolkGene2();
         addToBot(lavafolkGene.getChannelAction());
         addToBot(new ApplyPowerAction(p, p, new FatePower(p, this.magicNumber), this.magicNumber, true));
         addToBot(new AbstractGameAction() {
@@ -77,9 +76,9 @@ public class SeerSear
 
         private float startingDuration;
         private CardGroup fateGroup;
-        private LavafolkGene lavafolkGene;
+        private LavafolkGene2 lavafolkGene;
 
-        public SeerSearAction(int fateAmount, LavafolkGene lavafolkGene) {
+        public SeerSearAction(int fateAmount, LavafolkGene2 lavafolkGene) {
             this.amount = fateAmount;
             this.lavafolkGene = lavafolkGene;
 

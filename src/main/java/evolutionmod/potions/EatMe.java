@@ -11,14 +11,19 @@ public class EatMe extends AbstractPotion {
 
 
 	public static final String POTION_ID = "evolutionmod:EatMe";
+	public static final String V2_POTION_ID = "evolutionmodV2:EatMe";
 	private static final PotionStrings potionStrings = CardCrawlGame.languagePack.getPotionString(POTION_ID);
 
 	public static final String NAME = potionStrings.NAME;
 	public static final String[] DESCRIPTIONS = potionStrings.DESCRIPTIONS;
 
 	public EatMe() {
+		this(POTION_ID);
+	}
+
+	public EatMe(String ID) {
 		// The bottle shape and inside is determined by potion size and color. The actual colors are the main DefaultMod.java
-		super(NAME, POTION_ID, PotionRarity.RARE, PotionSize.H, PotionColor.POISON);
+		super(NAME, ID, PotionRarity.RARE, PotionSize.H, PotionColor.POISON);
 
 		// Potency is the damage/magic number equivalent of potions.
 		potency = getPotency();

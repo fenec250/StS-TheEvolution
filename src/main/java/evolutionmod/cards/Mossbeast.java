@@ -9,15 +9,13 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import evolutionmod.orbs.HarpyGene;
-import evolutionmod.orbs.LavafolkGene;
-import evolutionmod.orbs.PlantGene;
-import evolutionmod.patches.AbstractCardEnum;
+import evolutionmod.orbs.PlantGene2;
+import evolutionmod.patches.EvolutionEnum;
 import evolutionmod.powers.GrowthPower;
 
 public class Mossbeast
         extends AdaptableEvoCard {
-    public static final String ID = "evolutionmod:Mossbeast";
+    public static final String ID = "evolutionmodV2:Mossbeast";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -30,7 +28,7 @@ public class Mossbeast
 
     public Mossbeast() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
-                CardType.ATTACK, AbstractCardEnum.EVOLUTION_BLUE,
+                CardType.ATTACK, EvolutionEnum.EVOLUTION_V2_BLUE,
                 CardRarity.UNCOMMON, CardTarget.ENEMY);
         this.damage = this.baseDamage = DAMAGE_AMT;
         this.magicNumber = this.baseMagicNumber = 0;
@@ -42,13 +40,13 @@ public class Mossbeast
                 m, new DamageInfo(p, this.damage, this.damageTypeForTurn),
                 AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
         if (this.upgraded) addToBot(new ApplyPowerAction(p, p, new GrowthPower(p,UPGRADE_GROWTH_AMT)));
-        this.adapt(formEffect(PlantGene.ID)?1:0); // always call adapt(), else shuffleBackIntoDrawPile is not reset properly
+        this.adapt(formEffect(PlantGene2.ID)?1:0); // always call adapt(), else shuffleBackIntoDrawPile is not reset properly
         this.useAdaptations(p, m);
     }
 
     @Override
     public int canAdaptWith(AbstractAdaptation adaptation) {
-        return adaptation.getGeneId().equals(PlantGene.ID) ? adaptation.amount : 0;
+        return adaptation.getGeneId().equals(PlantGene2.ID) ? adaptation.amount : 0;
     }
 
     @Override
@@ -64,8 +62,8 @@ public class Mossbeast
 
     @Override
     public void triggerOnGlowCheck() {
-        if (isPlayerInThisForm(PlantGene.ID)) {
-            this.glowColor = PlantGene.COLOR.cpy();
+        if (isPlayerInThisForm(PlantGene2.ID)) {
+            this.glowColor = PlantGene2.COLOR.cpy();
         } else {
             this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
         }

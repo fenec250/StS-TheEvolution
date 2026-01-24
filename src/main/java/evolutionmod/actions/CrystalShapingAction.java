@@ -7,9 +7,9 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.UIStrings;
-import evolutionmod.cards.CrystalDust;
-import evolutionmod.cards.CrystalShard;
-import evolutionmod.cards.CrystalShield;
+import evolutionmod.cardsV1.CrystalDust;
+import evolutionmod.cardsV1.CrystalShard;
+import evolutionmod.cardsV1.CrystalStone;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -58,7 +58,7 @@ public class CrystalShapingAction extends AbstractGameAction {
 					return;
 				}
 				others = AbstractDungeon.player.exhaustPile.group.stream()
-						.filter(c -> !c.cardID.equals(CrystalShield.ID)) // TODO: how do we make custom tags again?
+						.filter(c -> !c.cardID.equals(CrystalStone.ID)) // TODO: how do we make custom tags again?
 						.filter(c -> !c.cardID.equals(CrystalShard.ID))
 						.filter(c -> !c.cardID.equals(CrystalDust.ID))
 						.collect(Collectors.toList());

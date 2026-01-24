@@ -49,16 +49,16 @@ public class MutagenAction extends AbstractGameAction {
 						.filter(o -> o != null && o.ID != null)
 						.map(o -> o.ID)
 						.collect(Collectors.toList());
-				if (!current.contains(PlantGene.ID)) { geneGroup.addToTop(new Gene(new PlantGene()));}
-				if (!current.contains(MerfolkGene.ID)) { geneGroup.addToTop(new Gene(new MerfolkGene()));}
-				if (!current.contains(HarpyGene.ID)) { geneGroup.addToTop(new Gene(new HarpyGene()));}
-				if (!current.contains(LavafolkGene.ID)) { geneGroup.addToTop(new Gene(new LavafolkGene()));}
-				if (!current.contains(SuccubusGene.ID)) { geneGroup.addToTop(new Gene(new SuccubusGene()));}
-				if (!current.contains(LymeanGene.ID)) { geneGroup.addToTop(new Gene(new LymeanGene()));}
-				if (!current.contains(InsectGene.ID)) { geneGroup.addToTop(new Gene(new InsectGene()));}
-				if (!current.contains(BeastGene.ID)) { geneGroup.addToTop(new Gene(new BeastGene()));}
-				if (!current.contains(LizardGene.ID)) { geneGroup.addToTop(new Gene(new LizardGene()));}
-				if (!current.contains(CentaurGene.ID)) { geneGroup.addToTop(new Gene(new CentaurGene()));}
+				if (!current.contains(PlantGene2.ID)) { geneGroup.addToTop(new Gene(new PlantGene2()));}
+				if (!current.contains(MerfolkGene2.ID)) { geneGroup.addToTop(new Gene(new MerfolkGene2()));}
+				if (!current.contains(HarpyGene2.ID)) { geneGroup.addToTop(new Gene(new HarpyGene2()));}
+				if (!current.contains(LavafolkGene2.ID)) { geneGroup.addToTop(new Gene(new LavafolkGene2()));}
+				if (!current.contains(SuccubusGene2.ID)) { geneGroup.addToTop(new Gene(new SuccubusGene2()));}
+				if (!current.contains(LymeanGene2.ID)) { geneGroup.addToTop(new Gene(new LymeanGene2()));}
+				if (!current.contains(InsectGene2.ID)) { geneGroup.addToTop(new Gene(new InsectGene2()));}
+				if (!current.contains(BeastGene2.ID)) { geneGroup.addToTop(new Gene(new BeastGene2()));}
+				if (!current.contains(LizardGene2.ID)) { geneGroup.addToTop(new Gene(new LizardGene2()));}
+				if (!current.contains(CentaurGene2.ID)) { geneGroup.addToTop(new Gene(new CentaurGene2()));}
 				if (!current.contains(ShadowGene2.ID)) { geneGroup.addToTop(new Gene(new ShadowGene2()));}
 				if (geneGroup.isEmpty()) {
 					this.isDone = true;

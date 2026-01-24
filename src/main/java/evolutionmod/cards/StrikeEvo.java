@@ -9,11 +9,11 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import evolutionmod.patches.AbstractCardEnum;
+import evolutionmod.patches.EvolutionEnum;
 
 public class StrikeEvo
         extends AdaptableEvoCard {
-    public static final String ID = "evolutionmod:StrikeEvo";
+    public static final String ID = "evolutionmodV2:StrikeEvo";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -25,7 +25,7 @@ public class StrikeEvo
 
     public StrikeEvo() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
-                CardType.ATTACK, AbstractCardEnum.EVOLUTION_BLUE,
+                CardType.ATTACK, EvolutionEnum.EVOLUTION_V2_BLUE,
                 CardRarity.BASIC, CardTarget.ENEMY);
         this.damage = this.baseDamage = DAMAGE_AMT;
         this.tags.add(BaseModCardTags.BASIC_STRIKE);

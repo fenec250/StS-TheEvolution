@@ -12,13 +12,13 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import evolutionmod.orbs.*;
-import evolutionmod.patches.AbstractCardEnum;
+import evolutionmod.patches.EvolutionEnum;
 
 import java.util.List;
 
 public class LoyalCompanion
 		extends BaseEvoCard implements CustomSavable<Integer>, StartupCard, GlowingCard {
-	public static final String ID = "evolutionmod:LoyalCompanion";
+	public static final String ID = "evolutionmodV2:LoyalCompanion";
 	public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;
 	public static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -34,7 +34,7 @@ public class LoyalCompanion
 
 	public LoyalCompanion() {
 		super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
-				CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
+				CardType.SKILL, EvolutionEnum.EVOLUTION_V2_BLUE,
 				CardRarity.BASIC, CardTarget.SELF);
 		this.block = this.baseBlock = BLOCK_AMT;
 		this.magicNumber = this.baseMagicNumber = UPGRADE_BLOCK_AMT;
@@ -45,7 +45,7 @@ public class LoyalCompanion
 
 	private LoyalCompanion(int geneIndex) {
 		super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
-				CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
+				CardType.SKILL, EvolutionEnum.EVOLUTION_V2_BLUE,
 				CardRarity.BASIC, CardTarget.SELF);
 		this.block = this.baseBlock = BLOCK_AMT;
 		this.magicNumber = this.baseMagicNumber = UPGRADE_BLOCK_AMT;
@@ -116,17 +116,17 @@ public class LoyalCompanion
 	@Override
 	public Color getGlowColor(int glowIndex) {
 		switch (gene.ID) {
-			case HarpyGene.ID: return HarpyGene.COLOR.cpy();
-			case MerfolkGene.ID: return MerfolkGene.COLOR.cpy();
-			case LavafolkGene.ID: return LavafolkGene.COLOR.cpy();
-			case CentaurGene.ID: return CentaurGene.COLOR.cpy();
-			case LizardGene.ID: return LizardGene.COLOR.cpy();
-			case BeastGene.ID: return BeastGene.COLOR.cpy();
-			case PlantGene.ID: return PlantGene.COLOR.cpy();
+			case HarpyGene2.ID: return HarpyGene2.COLOR.cpy();
+			case MerfolkGene2.ID: return MerfolkGene2.COLOR.cpy();
+			case LavafolkGene2.ID: return LavafolkGene2.COLOR.cpy();
+			case CentaurGene2.ID: return CentaurGene2.COLOR.cpy();
+			case LizardGene2.ID: return LizardGene2.COLOR.cpy();
+			case BeastGene2.ID: return BeastGene2.COLOR.cpy();
+			case PlantGene2.ID: return PlantGene2.COLOR.cpy();
 			case ShadowGene2.ID: return ShadowGene2.COLOR.cpy();
-			case LymeanGene.ID: return LymeanGene.COLOR.cpy();
-			case InsectGene.ID: return InsectGene.COLOR.cpy();
-			case SuccubusGene.ID: return SuccubusGene.COLOR.cpy();
+			case LymeanGene2.ID: return LymeanGene2.COLOR.cpy();
+			case InsectGene2.ID: return InsectGene2.COLOR.cpy();
+			case SuccubusGene2.ID: return SuccubusGene2.COLOR.cpy();
 			default: return AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
 		}
 	}
@@ -149,17 +149,17 @@ public class LoyalCompanion
 			this.geneIndex = AbstractDungeon.miscRng.random(11 - 1);
 		}
 		AbstractGene[] validGenes = {
-				new PlantGene(),
-				new MerfolkGene(),
-				new HarpyGene(),
-				new LavafolkGene(),
-				new SuccubusGene(),
-				new LymeanGene(),
-				new InsectGene(),
+				new PlantGene2(),
+				new MerfolkGene2(),
+				new HarpyGene2(),
+				new LavafolkGene2(),
+				new SuccubusGene2(),
+				new LymeanGene2(),
+				new InsectGene2(),
 				new ShadowGene2(),
-				new LizardGene(),
-				new CentaurGene(),
-				new BeastGene()};
+				new LizardGene2(),
+				new CentaurGene2(),
+				new BeastGene2()};
 		this.gene = validGenes[this.geneIndex];
 		this.rawDescription = EXTENDED_DESCRIPTION[0] + (!upgraded
 				? this.gene.ID + EXTENDED_DESCRIPTION[1]

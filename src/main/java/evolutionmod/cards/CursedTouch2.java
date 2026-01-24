@@ -12,26 +12,26 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.WeakPower;
 import evolutionmod.orbs.ShadowGene2;
-import evolutionmod.patches.AbstractCardEnum;
+import evolutionmod.patches.EvolutionEnum;
 import evolutionmod.powers.LustPower;
 
 public class CursedTouch2
         extends BaseEvoCard {
-    public static final String ID = "evolutionmod:CursedTouch";
+    public static final String ID = "evolutionmodV2:CursedTouch";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = "evolutionmod/images/cards/CursedTouch.png";
     private static final int COST = 1;
-    private static final int DAMAGE_AMT = 5;
+    private static final int DAMAGE_AMT = 6;
     private static final int UPGRADE_DAMAGE_AMT = 2;
     private static final int DEBUFF_AMT = 2;
     private static final int UPGRADE_DEBUFF_AMT = 1;
 
     public CursedTouch2() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
-                CardType.ATTACK, AbstractCardEnum.EVOLUTION_BLUE,
+                CardType.ATTACK, EvolutionEnum.EVOLUTION_V2_BLUE,
                 CardRarity.UNCOMMON, CardTarget.ENEMY);
         this.baseDamage = this.damage = DAMAGE_AMT;
         this.magicNumber = this.baseMagicNumber = DEBUFF_AMT;

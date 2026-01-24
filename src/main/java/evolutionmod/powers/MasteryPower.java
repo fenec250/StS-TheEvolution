@@ -1,7 +1,6 @@
 package evolutionmod.powers;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -12,6 +11,8 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import evolutionmod.cards.AdaptableEvoCard;
 import evolutionmod.cards.BaseEvoCard;
 import evolutionmod.orbs.AbstractGene;
+
+import java.util.Optional;
 
 public class MasteryPower extends AbstractPower {
     public static final String POWER_ID = "evolutionmod:MasteryPower";
@@ -60,6 +61,23 @@ public class MasteryPower extends AbstractPower {
         }
     }
 
+    public static void formTrigger(String geneId) {
+        AbstractDungeon.actionManager.addToBottom(new AbstractGameAction() {
+            @Override
+            public void update() {
+                Optional<AbstractOrb> gene = AbstractDungeon.player.orbs.stream()
+                        .filter((orb) -> orb != null && orb.ID != null && orb.ID.equals(geneId))
+                        .findAny();
+                if (gene.isPresent()) {
+                    String powerId = MasteryPower.powerIdForGene(geneId);
+                    if (AbstractDungeon.player.hasPower(powerId)) {
+                        AbstractDungeon.player.getPower(powerId).onChannel(gene.get());
+                    }
+                }
+                this.isDone = true;
+            }
+        });
+    }
     public static String nameForGene(String geneName) {
         return geneName + DESCRIPTIONS[0];
     }

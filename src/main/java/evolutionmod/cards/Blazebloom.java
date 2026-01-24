@@ -7,13 +7,13 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import evolutionmod.orbs.LavafolkGene;
-import evolutionmod.patches.AbstractCardEnum;
+import evolutionmod.orbs.LavafolkGene2;
+import evolutionmod.patches.EvolutionEnum;
 import evolutionmod.powers.GrowthPower;
 
 public class Blazebloom
         extends BaseEvoCard {
-    public static final String ID = "evolutionmod:Blazebloom";
+    public static final String ID = "evolutionmodV2:Blazebloom";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -24,7 +24,7 @@ public class Blazebloom
 
     public Blazebloom() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
-                CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
+                CardType.SKILL, EvolutionEnum.EVOLUTION_V2_BLUE,
                 CardRarity.UNCOMMON, CardTarget.SELF);
         this.magicNumber = this.baseMagicNumber = CHANNEL_AMT;
         this.exhaust = true;
@@ -33,13 +33,13 @@ public class Blazebloom
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         for (int i = 0; i < this.magicNumber; ++i) {
-            addToBot(new LavafolkGene().getChannelAction());
+            addToBot(new LavafolkGene2().getChannelAction());
         }
 //        formEffect(PlantGene.ID, () -> addToBot(new AbstractGameAction() {
         addToBot(new AbstractGameAction() {
             @Override
             public void update() {
-                int g = (int)p.orbs.stream().filter(o -> LavafolkGene.ID.equals(o.ID)).count();
+                int g = (int)p.orbs.stream().filter(o -> LavafolkGene2.ID.equals(o.ID)).count();
                 if (g > 0)
                     addToTop(new ApplyPowerAction(p, p, new GrowthPower(p, g)));
                 this.isDone = true;

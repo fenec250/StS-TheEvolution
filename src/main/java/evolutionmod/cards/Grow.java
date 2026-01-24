@@ -8,11 +8,11 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import evolutionmod.patches.AbstractCardEnum;
+import evolutionmod.patches.EvolutionEnum;
 
 public class Grow
         extends BaseEvoCard implements StartupCard {
-    public static final String ID = "evolutionmod:Grow";
+    public static final String ID = "evolutionmodV2:Grow";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -24,7 +24,7 @@ public class Grow
 
     public Grow() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
-                CardType.POWER, AbstractCardEnum.EVOLUTION_BLUE,
+                CardType.POWER, EvolutionEnum.EVOLUTION_V2_BLUE,
                 CardRarity.RARE, CardTarget.SELF);
         this.magicNumber = this.baseMagicNumber = COPY_AMT;
     }

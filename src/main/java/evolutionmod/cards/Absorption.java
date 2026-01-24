@@ -1,71 +1,43 @@
 package evolutionmod.cards;
 
-import com.badlogic.gdx.graphics.Color;
-import com.evacipated.cardcrawl.mod.stslib.actions.defect.EvokeSpecificOrbAction;
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.evacipated.cardcrawl.mod.stslib.powers.abstracts.TwoAmountPower;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
-import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
+import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
-import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
-import evolutionmod.orbs.*;
-import evolutionmod.patches.AbstractCardEnum;
-import evolutionmod.powers.AbsorptionPower;
-
-import java.util.List;
-import java.util.stream.Collectors;
+import evolutionmod.orbs.AbstractGene;
+import evolutionmod.patches.EvolutionEnum;
 
 public class Absorption
-		extends BaseEvoCard implements GlowingCard {
-	public static final String ID = "evolutionmod:Absorption";
+		extends BaseEvoCard {
+	public static final String ID = "evolutionmodV2:Absorption";
 	public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;
 	public static final String DESCRIPTION = cardStrings.DESCRIPTION;
 	public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-	public static final String[] EXTENDED_DESCRIPTION = cardStrings.EXTENDED_DESCRIPTION;
 	public static final String IMG_PATH = "evolutionmod/images/cards/Absorption.png";
 	private static final int COST = 1;
-	private static final int ABSORB_AMT = 1;
-	private static final int UPGRADE_ABSORB_AMT = 1;
+	private static final int POWER_AMT = 2;
+	private static final int UPGRADE_POWER_AMT = 1;
 
 	public Absorption() {
 		super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
-				CardType.POWER, AbstractCardEnum.EVOLUTION_BLUE,
-				CardRarity.RARE, CardTarget.SELF);
-		this.magicNumber = this.baseMagicNumber = ABSORB_AMT;
-	}
-
-	@Override
-	public boolean canPlay(AbstractCard card) {
-		if (card == this && AbstractDungeon.player.orbs.stream()
-				.noneMatch(o -> o instanceof AbstractGene)) {
-			this.cantUseMessage = EXTENDED_DESCRIPTION[0];
-			return false;
-		}
-		return super.canPlay(card);
+				CardType.POWER, EvolutionEnum.EVOLUTION_V2_BLUE,
+				CardRarity.UNCOMMON, CardTarget.SELF);
+		this.magicNumber = this.baseMagicNumber = POWER_AMT;
 	}
 
 	@Override
 	public void use(AbstractPlayer p, AbstractMonster m) {
-		List<String> types = p.orbs.stream()
-				.filter(o -> o instanceof AbstractGene)
-				.map(o -> o.ID)
-				.distinct()
-				.limit(magicNumber)
-				.collect(Collectors.toList());
-		List<AbstractOrb> orbs = p.orbs.stream()
-				.filter(o -> types.contains(o.ID))
-				.collect(Collectors.toList());
-		orbs.forEach(o -> {
-			this.addToBot(new EvokeSpecificOrbAction(o));
-			this.addToBot(new ApplyPowerAction(
-					p, p, new AbsorptionPower(p, 1, ((AbstractGene) o))));
-		});
+		this.addToBot(new ApplyPowerAction(
+				p, p, new AbsorptionPower(p, this.magicNumber)));
 	}
 
 	@Override
@@ -77,51 +49,60 @@ public class Absorption
 	public void upgrade() {
 		if (!this.upgraded) {
 			this.upgradeName();
-			this.upgradeMagicNumber(UPGRADE_ABSORB_AMT);
-			this.rawDescription = UPGRADE_DESCRIPTION;
-			this.initializeDescription();
-//			this.upgradeBaseCost(UPGRADED_COST);
+			this.upgradeMagicNumber(UPGRADE_POWER_AMT);
 		}
 	}
 
-	@Override
-	public int getNumberOfGlows() {
-		return upgraded ? 2 : 1;
-	}
+	public static class AbsorptionPower extends TwoAmountPower {
+		public static final String POWER_ID = "evolutionmod:AbsorptionPower1";
+		public static final PowerStrings cardStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
+		public static final String NAME = cardStrings.NAME;
+		public static final String[] DESCRIPTIONS = cardStrings.DESCRIPTIONS;
 
-	@Override
-	public boolean isGlowing(int glowIndex) {
-		return upgraded
-				? AbstractDungeon.player.orbs.stream()
-				.filter(o -> o instanceof AbstractGene)
-				.map(o -> o.ID)
-				.distinct()
-				.skip(glowIndex)
-				.findFirst().isPresent()
-				: AbstractDungeon.player.orbs.stream()
-				.anyMatch(o -> o instanceof AbstractGene);
-	}
+		public AbsorptionPower(AbstractCreature owner, int initialAmount) {
+			this.name = NAME;
+			this.ID = POWER_ID;
+			this.owner = owner;
+//        this.region128 = new TextureAtlas.AtlasRegion(new Texture("evolutionmod/images/powers/lava power 84.png"), 0, 0, 84, 84);
+//        this.region48 = new TextureAtlas.AtlasRegion(new Texture("evolutionmod/images/powers/lava power 32.png"), 0, 0, 32, 32);
+			this.loadRegion("focus");
+			this.type = PowerType.BUFF;
+			this.amount = initialAmount;
+			this.amount2 = initialAmount;
+			updateDescription();
+		}
 
-	@Override
-	public Color getGlowColor(int glowIndex) {
-		return AbstractDungeon.player.orbs.stream()
-				.filter(o -> o instanceof AbstractGene)
-				.skip(glowIndex).findFirst()
-				.map(o -> {
-					switch (o.ID) {
-						case HarpyGene.ID: return HarpyGene.COLOR.cpy();
-						case MerfolkGene.ID: return MerfolkGene.COLOR.cpy();
-						case LavafolkGene.ID: return LavafolkGene.COLOR.cpy();
-						case CentaurGene.ID: return CentaurGene.COLOR.cpy();
-						case LizardGene.ID: return LizardGene.COLOR.cpy();
-						case BeastGene.ID: return BeastGene.COLOR.cpy();
-						case PlantGene.ID: return PlantGene.COLOR.cpy();
-						case ShadowGene2.ID: return ShadowGene2.COLOR.cpy();
-						case LymeanGene.ID: return LymeanGene.COLOR.cpy();
-						case InsectGene.ID: return InsectGene.COLOR.cpy();
-						case SuccubusGene.ID: return SuccubusGene.COLOR.cpy();
-						default: return null;
-					}
-				}).orElse(AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy());
+		@Override
+		public void updateDescription() {
+			description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1] + this.amount2 + DESCRIPTIONS[2];
+		}
+
+		@Override
+		public void onEvokeOrb(AbstractOrb orb) {
+			if (this.amount2 > 0 && orb instanceof AbstractGene) {
+				orb.onStartOfTurn();
+				orb.onEndOfTurn();
+				this.amount2 -= 1;
+				this.flash();
+			}
+			super.onEvokeOrb(orb);
+		}
+
+		public void stackPower(int stackAmount) {
+			this.fontScale = 8.0F;
+			this.amount += stackAmount;
+			if (this.amount <= 0) {
+				AbstractDungeon.actionManager.addToTop(new RemoveSpecificPowerAction(this.owner, this.owner, POWER_ID));
+			}
+			this.amount2 += stackAmount;
+			if (this.amount2 <= 0) {
+				this.amount2 = 0; // should never happen anyway, only if some custom enemy/card reduces arbitrary powers <<wince>>
+			}
+		}
+
+		@Override
+		public void atStartOfTurn() {
+			this.amount2 = this.amount;
+		}
 	}
 }

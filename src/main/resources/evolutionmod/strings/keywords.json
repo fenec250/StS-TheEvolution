@@ -12,14 +12,14 @@
     "NAMES": [
       "adapt"
     ],
-    "DESCRIPTION": "Consume a channeled Gene, add its effect to the adapting card until the end of the combat and shuffle the card in your draw pile. NL Adapted effects target the same enemy as the card if possible."
+    "DESCRIPTION": "Consume a channeled Gene to add its effect to the adapting card until the end of the combat and shuffle the card in your draw pile. NL Adapted effects target the same enemy as the card if possible."
   },
   "SHIFT": {
     "PROPER_NAME": "Shift",
     "NAMES": [
       "shift"
     ],
-    "DESCRIPTION": "Recreate the gene at the back of the orb line."
+    "DESCRIPTION": "Move the gene back to the end of the orb line."
   },
   "RANDO": {
     "PROPER_NAME": "Randomized",
@@ -29,11 +29,11 @@
     "DESCRIPTION": "Randomized Forms are selected when the card is created and vary from a card to another."
   },
   "FATE": {
-    "PROPER_NAME": "Fate",
+    "PROPER_NAME": "Fate V2",
     "NAMES": [
       "fate"
     ],
-    "DESCRIPTION": "At the start of next turn, refill your draw pile to this amount and Scry this amount."
+    "DESCRIPTION": "At the start of next turn, refill your draw pile to this amount and #yScry this amount."
   },
   "GROWTH": {
     "PROPER_NAME": "Growth",
@@ -48,6 +48,34 @@
       "lust"
     ],
     "DESCRIPTION": "Reduce the base damage of the next attack by this amount."
+  },
+  "DRONE": {
+    "PROPER_NAME": "Drone",
+    "NAMES": [
+      "drone", "drones"
+    ],
+    "DESCRIPTION": "0-cost temporary Attack which gives #yBlock if not played."
+  },
+  "FEATHER": {
+    "PROPER_NAME": "Feather",
+    "NAMES": [
+      "feather", "feathers"
+    ],
+    "DESCRIPTION": "0-cost #yHarpy skill which returns #yFeather #yStorm to your hand."
+  },
+  "FEATHERSTORM": {
+    "PROPER_NAME": "Feather Storm",
+    "NAMES": [
+      "featherstorm"
+    ],
+    "DESCRIPTION": "0-cost Attack fetched by #yFeathers."
+  },
+  "RAGE": {
+    "PROPER_NAME": "Rage",
+    "NAMES": [
+      "rage"
+    ],
+    "DESCRIPTION": "Whenever you play an #yAttack, gain this amount of #yBlock"
   },
   "SHADOWS": {
     "PROPER_NAME": "Shadows",

@@ -12,15 +12,15 @@ import evolutionmod.powers.LustPower;
 
 public class SuccubusGeneAction extends AbstractHalfTargetedAction {
 
+	private int lust;
 	private int damage;
-	private int vulnerable;
 
-	public SuccubusGeneAction(AbstractPlayer player, AbstractMonster monster, int lust, int vulnerable) {
+	public SuccubusGeneAction(AbstractPlayer player, AbstractMonster monster, int lust, int damage) {
 		super(player, monster);
 		this.source = player;
 		this.target = monster;
-		this.damage = lust;
-		this.vulnerable = vulnerable;
+		this.lust = lust;
+		this.damage = damage;
 		this.duration = this.startDuration = Settings.ACTION_DUR_FAST;
 		this.actionType = ActionType.DEBUFF;
 	}
@@ -30,16 +30,14 @@ public class SuccubusGeneAction extends AbstractHalfTargetedAction {
 			this.isDone = true;
 			return;
 		}
-		if (damage > 0) {
+		if (lust > 0) {
 			AbstractDungeon.actionManager.addToTop(new ApplyPowerAction(
-					this.target, this.source, new LustPower(this.target, this.damage)));
-//			AbstractDungeon.actionManager.addToTop(new DamageAction(
-//					this.target, new DamageInfo(this.source, this.damage, DamageInfo.DamageType.THORNS),
-//					AttackEffect.FIRE, true));
+					this.target, this.source, new LustPower(this.target, this.lust)));
 		}
-		if (vulnerable > 0) {
-			AbstractDungeon.actionManager.addToTop(
-					new ApplyPowerAction(this.target, this.source, new VulnerablePower(this.target, this.vulnerable, false), this.vulnerable));
+		if (damage > 0) {
+			AbstractDungeon.actionManager.addToTop(new DamageAction(
+					this.target, new DamageInfo(this.source, this.damage, DamageInfo.DamageType.THORNS),
+					AttackEffect.FIRE, true));
 		}
 
 		this.isDone = true;

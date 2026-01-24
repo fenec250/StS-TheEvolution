@@ -1,18 +1,17 @@
 package evolutionmod.cards;
 
-import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import evolutionmod.orbs.MerfolkGene;
-import evolutionmod.patches.AbstractCardEnum;
+import evolutionmod.orbs.MerfolkGene2;
+import evolutionmod.patches.EvolutionEnum;
 
 public class Dive
         extends BaseEvoCard {
-    public static final String ID = "evolutionmod:Dive";
+    public static final String ID = "evolutionmodV2:Dive";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -24,7 +23,7 @@ public class Dive
 
     public Dive() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
-                CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
+                CardType.SKILL, EvolutionEnum.EVOLUTION_V2_BLUE,
                 CardRarity.COMMON, CardTarget.SELF);
         this.block = this.baseBlock = BLOCK_AMT;
         this.baseMagicNumber = this.magicNumber = UPGRADE_BLOCK_AMT;
@@ -34,9 +33,9 @@ public class Dive
     public void use(AbstractPlayer p, AbstractMonster m) {
         AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, this.block));
         if (!upgraded) {
-            formEffect(MerfolkGene.ID);
+            formEffect(MerfolkGene2.ID);
         } else {
-            addToBot(new MerfolkGene().getChannelAction());
+            addToBot(new MerfolkGene2().getChannelAction());
         }
     }
 
@@ -47,7 +46,7 @@ public class Dive
 
     private void alterBlockAround(Runnable supercall) {
         this.baseBlock = BLOCK_AMT + (upgraded ? UPGRADE_BLOCK_AMT : 0);
-        if (!this.upgraded && isPlayerInThisForm(MerfolkGene.ID)) {
+        if (!this.upgraded && isPlayerInThisForm(MerfolkGene2.ID)) {
             this.baseBlock += this.magicNumber;
         }
         supercall.run();
@@ -67,8 +66,8 @@ public class Dive
 
     @Override
     public void triggerOnGlowCheck() {
-        if (!upgraded && isPlayerInThisForm(MerfolkGene.ID)) {
-            this.glowColor = MerfolkGene.COLOR.cpy();
+        if (!upgraded && isPlayerInThisForm(MerfolkGene2.ID)) {
+            this.glowColor = MerfolkGene2.COLOR.cpy();
         } else {
             this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
         }

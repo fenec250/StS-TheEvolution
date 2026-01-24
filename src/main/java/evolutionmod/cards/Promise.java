@@ -14,20 +14,19 @@ import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import evolutionmod.actions.RefillDrawPileAction;
 import evolutionmod.actions.TriggerScryEffectsAction;
-import evolutionmod.orbs.LavafolkGene;
-import evolutionmod.orbs.LymeanGene;
-import evolutionmod.patches.AbstractCardEnum;
+import evolutionmod.orbs.LymeanGene2;
+import evolutionmod.patches.EvolutionEnum;
 import evolutionmod.powers.FatePower;
 import evolutionmod.powers.LustPower;
 
 public class Promise
         extends BaseEvoCard {
-    public static final String ID = "evolutionmod:Promise";
+    public static final String ID = "evolutionmodV2:Promise";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-    public static final String IMG_PATH = "evolutionmod/images/cards/LymeanSkl.png";
+    public static final String IMG_PATH = "evolutionmod/images/cards/Promise.png";
     private static final int COST = 1;
     private static final int FATE_AMT = 2;
     private static final int UPGRADE_FATE_AMT = 2;
@@ -35,14 +34,14 @@ public class Promise
 
     public Promise() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
-                CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
+                CardType.SKILL, EvolutionEnum.EVOLUTION_V2_BLUE,
                 CardRarity.UNCOMMON, CardTarget.ENEMY);
         this.magicNumber = this.baseMagicNumber = FATE_AMT;
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        int lust = formEffect(LymeanGene.ID) ? LYMEAN_LUST_AMT : 0;
+        int lust = formEffect(LymeanGene2.ID) ? LYMEAN_LUST_AMT : 0;
         addToBot(new ApplyPowerAction(p, p, new FatePower(p, this.magicNumber), this.magicNumber, true));
         addToBot(new AbstractGameAction() {
             @Override
@@ -70,8 +69,8 @@ public class Promise
 
     @Override
     public void triggerOnGlowCheck() {
-        if (isPlayerInThisForm(LymeanGene.ID)) {
-            this.glowColor = LymeanGene.COLOR.cpy();
+        if (isPlayerInThisForm(LymeanGene2.ID)) {
+            this.glowColor = LymeanGene2.COLOR.cpy();
         } else {
             this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
         }
@@ -135,6 +134,7 @@ public class Promise
                     }
                     addToTop(new ApplyPowerAction(target, AbstractDungeon.player,
                             new LustPower(target, lust)));
+                    this.isDone = true;
 //				fateGroup.shuffle();
 //				List<AbstractCard> copy = new ArrayList<>(fateGroup.group);
 //				copy.forEach(c -> fateGroup.moveToDeck(c, false));

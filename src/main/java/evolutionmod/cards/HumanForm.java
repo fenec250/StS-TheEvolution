@@ -9,7 +9,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import evolutionmod.orbs.AbstractGene;
-import evolutionmod.patches.AbstractCardEnum;
+import evolutionmod.patches.EvolutionEnum;
 import evolutionmod.powers.HumanFormPower;
 
 import java.util.stream.Collectors;
@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 import static basemod.helpers.BaseModCardTags.FORM;
 
 public class HumanForm extends BaseEvoCard {
-    public static final String ID = "evolutionmod:HumanForm";
+    public static final String ID = "evolutionmodV2:HumanForm";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -29,7 +29,7 @@ public class HumanForm extends BaseEvoCard {
 
     public HumanForm() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
-                CardType.POWER, AbstractCardEnum.EVOLUTION_BLUE,
+                CardType.POWER, EvolutionEnum.EVOLUTION_V2_BLUE,
                 CardRarity.RARE, CardTarget.SELF);
         this.magicNumber = this.baseMagicNumber = OMNI_AMT;
         this.tags.add(FORM);

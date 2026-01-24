@@ -8,14 +8,14 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import evolutionmod.orbs.*;
-import evolutionmod.patches.AbstractCardEnum;
+import evolutionmod.patches.EvolutionEnum;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Ritual
         extends AdaptableEvoCard implements CustomSavable<Integer> {
-    public static final String ID = "evolutionmod:Ritual";
+    public static final String ID = "evolutionmodV2:Ritual";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -27,22 +27,22 @@ public class Ritual
 
     public Ritual() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
-                CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
+                CardType.SKILL, EvolutionEnum.EVOLUTION_V2_BLUE,
                 CardRarity.RARE, CardTarget.SELF);
         this.tags.add(CardTags.HEALING);
         this.exhaust = true;
         this.magicNumber = this.baseMagicNumber = ADAPT_AMT;
-        this.adaptationMap.put(HarpyGene.ID, new HarpyGene.Adaptation(0, ADAPT_MAX_AMT));
-        this.adaptationMap.put(LymeanGene.ID, new LymeanGene.Adaptation(0, ADAPT_MAX_AMT));
-        this.adaptationMap.put(InsectGene.ID, new InsectGene.Adaptation(0, ADAPT_MAX_AMT));
-        this.adaptationMap.put(PlantGene.ID, new PlantGene.Adaptation(0, ADAPT_MAX_AMT));
-        this.adaptationMap.put(CentaurGene.ID, new CentaurGene.Adaptation(0, ADAPT_MAX_AMT));
-        this.adaptationMap.put(BeastGene.ID, new BeastGene.Adaptation(0, ADAPT_MAX_AMT));
-        this.adaptationMap.put(SuccubusGene.ID, new SuccubusGene.Adaptation(0, ADAPT_MAX_AMT));
-        this.adaptationMap.put(LizardGene.ID, new LizardGene.Adaptation(0, ADAPT_MAX_AMT));
+        this.adaptationMap.put(HarpyGene2.ID, new HarpyGene2.Adaptation(0, ADAPT_MAX_AMT));
+        this.adaptationMap.put(LymeanGene2.ID, new LymeanGene2.Adaptation(0, ADAPT_MAX_AMT));
+        this.adaptationMap.put(InsectGene2.ID, new InsectGene2.Adaptation(0, ADAPT_MAX_AMT));
+        this.adaptationMap.put(PlantGene2.ID, new PlantGene2.Adaptation(0, ADAPT_MAX_AMT));
+        this.adaptationMap.put(CentaurGene2.ID, new CentaurGene2.Adaptation(0, ADAPT_MAX_AMT));
+        this.adaptationMap.put(BeastGene2.ID, new BeastGene2.Adaptation(0, ADAPT_MAX_AMT));
+        this.adaptationMap.put(SuccubusGene2.ID, new SuccubusGene2.Adaptation(0, ADAPT_MAX_AMT));
+        this.adaptationMap.put(LizardGene2.ID, new LizardGene2.Adaptation(0, ADAPT_MAX_AMT));
         this.adaptationMap.put(ShadowGene2.ID, new ShadowGene2.Adaptation(0, ADAPT_MAX_AMT));
-        this.adaptationMap.put(LavafolkGene.ID, new LavafolkGene.Adaptation(0, ADAPT_MAX_AMT));
-        this.adaptationMap.put(MerfolkGene.ID, new MerfolkGene.Adaptation(0, ADAPT_MAX_AMT));
+        this.adaptationMap.put(LavafolkGene2.ID, new LavafolkGene2.Adaptation(0, ADAPT_MAX_AMT));
+        this.adaptationMap.put(MerfolkGene2.ID, new MerfolkGene2.Adaptation(0, ADAPT_MAX_AMT));
     }
 
     @Override
@@ -90,17 +90,17 @@ public class Ritual
                     .findFirst()
                     .map(o -> {
                         switch (o.ID) {
-                            case HarpyGene.ID: return HarpyGene.COLOR.cpy();
-                            case MerfolkGene.ID: return MerfolkGene.COLOR.cpy();
-                            case LavafolkGene.ID: return LavafolkGene.COLOR.cpy();
-                            case CentaurGene.ID: return CentaurGene.COLOR.cpy();
-                            case LizardGene.ID: return LizardGene.COLOR.cpy();
-                            case BeastGene.ID: return BeastGene.COLOR.cpy();
-                            case PlantGene.ID: return PlantGene.COLOR.cpy();
+                            case HarpyGene2.ID: return HarpyGene2.COLOR.cpy();
+                            case MerfolkGene2.ID: return MerfolkGene2.COLOR.cpy();
+                            case LavafolkGene2.ID: return LavafolkGene2.COLOR.cpy();
+                            case CentaurGene2.ID: return CentaurGene2.COLOR.cpy();
+                            case LizardGene2.ID: return LizardGene2.COLOR.cpy();
+                            case BeastGene2.ID: return BeastGene2.COLOR.cpy();
+                            case PlantGene2.ID: return PlantGene2.COLOR.cpy();
                             case ShadowGene2.ID: return ShadowGene2.COLOR.cpy();
-                            case LymeanGene.ID: return LymeanGene.COLOR.cpy();
-                            case InsectGene.ID: return InsectGene.COLOR.cpy();
-                            case SuccubusGene.ID: return SuccubusGene.COLOR.cpy();
+                            case LymeanGene2.ID: return LymeanGene2.COLOR.cpy();
+                            case InsectGene2.ID: return InsectGene2.COLOR.cpy();
+                            case SuccubusGene2.ID: return SuccubusGene2.COLOR.cpy();
                             default: return null;
                         }
                     }).orElse(AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy());

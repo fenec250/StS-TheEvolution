@@ -8,8 +8,8 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.watcher.VigorPower;
-import evolutionmod.orbs.LymeanGene;
-import evolutionmod.patches.AbstractCardEnum;
+import evolutionmod.orbs.LymeanGene2;
+import evolutionmod.patches.EvolutionEnum;
 import evolutionmod.powers.FatePower;
 
 import java.util.List;
@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 public class TrueStrike
         extends BaseEvoCard {
-    public static final String ID = "evolutionmod:TrueStrike";
+    public static final String ID = "evolutionmodV2:TrueStrike";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -26,13 +26,14 @@ public class TrueStrike
     private static final int COST = 1;
     private static final int LYMEAN_FATE_AMT = 3;
     private static final int VIGOR_AMT = 2;
-    private static final int UPGRADE_VIGOR_AMT = 1;
+    private static final int MAX_VIGOR_AMT = 8;
+    private static final int UPGRADE_MAX_VIGOR_AMT = 4;
 
     public TrueStrike() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
-                CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
+                CardType.SKILL, EvolutionEnum.EVOLUTION_V2_BLUE,
                 CardRarity.UNCOMMON, CardTarget.SELF);
-        this.magicNumber = this.baseMagicNumber = VIGOR_AMT;
+        this.magicNumber = this.baseMagicNumber = MAX_VIGOR_AMT;
         this.tags.add(CardTags.STRIKE);
     }
 
@@ -44,12 +45,12 @@ public class TrueStrike
                 List<AbstractCard> attacks = p.drawPile.group.stream()
                         .filter(c -> c.type == CardType.ATTACK)
                         .collect(Collectors.toList());
-                addToTop(new ApplyPowerAction(p, p, new VigorPower(p, attacks.size() * magicNumber)));
+                addToTop(new ApplyPowerAction(p, p, new VigorPower(p, Math.min(attacks.size() * VIGOR_AMT, magicNumber))));
                 attacks.forEach(c -> p.drawPile.moveToDiscardPile(c));
                 this.isDone = true;
             }
         });
-        if (formEffect(LymeanGene.ID)) {
+        if (formEffect(LymeanGene2.ID)) {
             addToBot(new ApplyPowerAction(p, p, new FatePower(p, LYMEAN_FATE_AMT)));
         }
     }
@@ -63,16 +64,14 @@ public class TrueStrike
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeMagicNumber(UPGRADE_VIGOR_AMT);
-//            this.rawDescription = UPGRADE_DESCRIPTION;
-//            this.initializeDescription();
+            this.upgradeMagicNumber(UPGRADE_MAX_VIGOR_AMT);
         }
     }
 
     @Override
     public void triggerOnGlowCheck() {
-        if (this.upgraded && isPlayerInThisForm(LymeanGene.ID)) {
-            this.glowColor = LymeanGene.COLOR.cpy();
+        if (this.upgraded && isPlayerInThisForm(LymeanGene2.ID)) {
+            this.glowColor = LymeanGene2.COLOR.cpy();
         } else {
             this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
         }

@@ -1,23 +1,31 @@
 {
   "evolutionmod:GodlyPowersPower": {
     "NAME": "Godly Powers",
-    "DESCRIPTIONS": ["The first ", " #yForm that Channel a gene also apply their conditional effect. NL ", " left this turn."]
+    "DESCRIPTIONS": ["The first #b", " #yForm that Channel a gene also apply their conditional effect. NL #b", " left this turn."]
   },
   "evolutionmod:HumanFormPower": {
     "NAME": "Human Form",
-    "DESCRIPTIONS": ["When you channel a gene #yEvoke it.", "When you channel a gene #yEvoke it ", " times."]
+    "DESCRIPTIONS": ["When you channel a gene #yEvoke it.", "When you channel a gene #yEvoke it #b", " times."]
   },
 
 
   "evolutionmod:MasteryPower": {
     "NAME": "Undefined Mastery",
     "DESCRIPTIONS": [" Mastery",
-      "When you channel a ", " gene, trigger its effect.", " gene, trigger its effect ", " times."]
+      "When you channel a ", " gene or use a matching #yForm, trigger its effect.", " gene, trigger its effect #b", " times."]
   },
   "evolutionmod:AbsorptionPower": {
     "NAME": "Absorption",
     "DESCRIPTIONS": ["Absorbed ",
-      "At the start of your turn trigger a ", " gene.", " gene ", " times."]
+      "At the start of your turn trigger a ", " gene.", " gene #b", " times."]
+  },
+  "evolutionmod:AbsorptionPower1": {
+    "NAME": "Absorption",
+    "DESCRIPTIONS": ["The first #b"," genes #yEvoked or #yAdapted each turn trigger their effect. ( #b", " left this turn)"]
+  },
+  "evolutionmod:FrenzyPower": {
+    "NAME": "Frenzy",
+    "DESCRIPTIONS": ["Your next #b", " Attacks will return an Attack from your discard pile to your hand for each [E] spent."]
   },
   "evolutionmod:DrownPower": {
     "NAME": "Drowning",
@@ -25,80 +33,92 @@
   },
   "evolutionmod:TheNightPower": {
     "NAME": "The Night",
-    "DESCRIPTIONS": ["Increase by ", " the damage dealt by each stack of #yShadows."]
+    "DESCRIPTIONS": ["Increase by #b", " the damage dealt by each stack of #yShadows."]
 //    "DESCRIPTIONS": ["At the start of your turn if you have Shadow #yForm reduce the #yShadows amount2 by ", " and reduce its damage accordingly. Otherwise Channel a Shadow gene and reduce the amount2 by 1 less."]
 //    "DESCRIPTIONS": ["At the start of your turn if you have a Shadow gene add ", "a", " Shadowbolt to your hand, otherwise Channel a Shadow gene."]
   },
   "evolutionmod:TheNight2Power": {
     "NAME": "The Night",
-    "DESCRIPTIONS": ["At the start of your turn gain ", " #yShadows."]
+    "DESCRIPTIONS": ["At the start of your turn gain #b", " #yShadows."]
     //    "DESCRIPTIONS": ["At the start of your turn if you have Shadow #yForm reduce the #yShadows amount2 by ", " and reduce its damage accordingly. Otherwise Channel a Shadow gene and reduce the amount2 by 1 less."]
     //    "DESCRIPTIONS": ["At the start of your turn if you have a Shadow gene add ", "a", " Shadowbolt to your hand, otherwise Channel a Shadow gene."]
   },
   "evolutionmod:CurrentsDancerPower": {
     "NAME": "Currents Dancer",
-    "DESCRIPTIONS": ["The first time you draw a card after the beginning of your turn gain ", " #yBlock."]
+    "DESCRIPTIONS": ["The first time you draw a card after the beginning of your turn gain #b", " #yBlock."]
   },
   "evolutionmod:CrystalShapingPower": {
     "NAME": "Crystal Shaping",
-    "DESCRIPTIONS": ["At the start of your turn randomly add ", " #yCrystal #yBlock, #yCrystal #yShard or #yCrystal #yDust matching your genes to your hand."]
+    "DESCRIPTIONS": ["At the start of your turn randomly add #b", " #yCrystal #yBlock, #yCrystal #yShard or #yCrystal #yDust matching your #yGenes to your hand."]
   },
   "evolutionmod:ShadowsPower": {
     "NAME": "Shadows",
-    "DESCRIPTIONS": ["Needs ", " more to reach the next threshold, consuming #yShadows to deal ", " damage per stack, apply 1 Weak to ALL enemies and increase the threshold to ", "."]
+    "DESCRIPTIONS": ["Needs #b", " more to reach the next threshold, consuming #yShadows to deal #b", " damage per stack and apply #b1 Weak to ALL enemies, then increase the threshold to #b", "."]
 //    "DESCRIPTIONS": ["Needs ", " more to reach the next threshold, dealing ", " damage per stack, applying 1 Weak to ALL enemies and increasing the threshold to ", "."]
   },
   "evolutionmod:DarkDesiresPower": {
     "NAME": "Dark Desires",
-    "DESCRIPTIONS": ["Whenever #yShadows trigger, apply ", " #yLust to all enemies, reducing the damage of their next attack."]
+    "DESCRIPTIONS": ["Whenever #yShadows trigger, apply #b", " #yLust to all enemies, reducing the damage of their next attack."]
   },
   "evolutionmod:HeartBreakerPower": {
     "NAME": "Heart Breaker",
-    "DESCRIPTIONS": ["Your #yShadow genes deal ", " more damage per unique negative effect on their target."]
+    "DESCRIPTIONS": ["Your #yShadow genes deal #b", " more damage per unique negative effect on their target."]
   },
   "evolutionmod:NightMarePower": {
     "NAME": "Night Mare",
-    "DESCRIPTIONS": ["At the start of your turn, increase the damage of your next Attack by ", " per turn in this combat."]
+    "DESCRIPTIONS": ["At the start of your turn, increase the damage of your next Attack by #b", " per turn in this combat."]
   },
   "evolutionmod:InsatiablePower": {
     "NAME": "Insatiable",
-    "DESCRIPTIONS": ["After attacking, keep ", "% #yLust. Multiattacks compound this value."]
+    "DESCRIPTIONS": ["After attacking, keep #b", "% #yLust. Multi-attacks compound this value."]
   },
   "evolutionmod:BramblesPower": {
     "NAME": "Brambles",
-    "DESCRIPTIONS": ["When receiving Attack damage deal ", " damages back. This power is removed at the start of your turn."]
+    "DESCRIPTIONS": ["When receiving Attack damage deal #b", " damages back. This power is removed at the start of your turn."]
   },
   "evolutionmod:GrowthPower": {
     "NAME": "Growth",
-    "DESCRIPTIONS": ["Upon reaching ", " stacks gain 1 Energy and reduce #yGrowth by ", "."]
+    "DESCRIPTIONS": ["Upon reaching #b", " stacks gain #b1 Energy and reduce #yGrowth by #b", "."]
   },
   "evolutionmod:FatePower": {
     "NAME": "Fate",
-    "DESCRIPTIONS": ["At ths start of next turn, return cards from your discard pile to your draw pile until it has at least ", ", then #yScry them."]
+    "DESCRIPTIONS": ["At ths start of next turn, return cards from your discard pile to your draw pile until it has at least #b", ", then #yScry them."]
+  },
+  "evolutionmod:BattlebornPower": {
+    "NAME": "Battleborn",
+    "DESCRIPTIONS": ["At ths start of your next turn, your next #yAttack will deal more damage equal to #b", " times the number of #yAttacks played this turn. #b"," #yAttacks played."]
   },
   "evolutionmod:BestialRage": {
     "NAME": "Bestial Rage",
-    "DESCRIPTIONS": ["When you play an attack this turn, gain ", " #yBlock per #yEnergy spent."]
+    "DESCRIPTIONS": ["When you play an attack this turn, gain #b", " #yBlock per #yEnergy spent."]
   },
   "evolutionmod:EmbermanePower": {
     "NAME": "Flaring Embers",
-    "DESCRIPTIONS": ["Your next attack will ", " #yBlock per #yEnergy spent."]
+    "DESCRIPTIONS": ["Your next attack will #yEvoke Lavafolk genes equal to its cost and refund [E] for each."]
   },
   "evolutionmod:CoralPower": {
     "NAME": "Coral Stewards",
-    "DESCRIPTIONS": ["For every ", " #yBlock you gain, add a #yDrone to your hand.", " #yBlock you gain, add ", " #yDrone to your hand."]
+    "DESCRIPTIONS": ["For every #b", " #yBlock you gain, add a #yDrone to your hand, up to #b", " times per turn. Next in #b", " #yBlock, #b", " left this turn."]
   },
   "evolutionmod:BroodPower": {
     "NAME": "Brood Power",
-    "DESCRIPTIONS": ["Your #yDrones deal ", " more damage and apply ", " more #yBlock."]
+    "DESCRIPTIONS": ["Your #yDrones deal #b", " more damage and apply #b", " more #yBlock."]
   },
   "evolutionmod:SalamanderPower": {
     "NAME": "Salamander",
-    "DESCRIPTIONS": ["Your #yLizard genes also deal ", " damage and your #yLavafolk genes deal ", " more damage."]
+    "DESCRIPTIONS": ["Your #yLizard genes also deal #b", " damage and your #yLavafolk genes deal #b", " more damage."]
+  },
+  "evolutionmod:SalamanderPower2": {
+    "NAME": "Salamander",
+    "DESCRIPTIONS": ["Your genes that deal damage deal #b", " more. Your #yLizard and #ySuccubus genes also deal #b", " damage."]
+  },
+  "evolutionmod:SwampbornPower": {
+    "NAME": "Swampborn",
+    "DESCRIPTIONS": ["Your #yLizard genes target ALL enemies. At the start of your turn, #yChannel #b", " #yLizard genes."]
   },
   "evolutionmod:LustPower": {
     "NAME": "Lust",
-    "DESCRIPTIONS": ["Reduce damage dealt by ", ". Removed after attacking.", ". Reduce by ","% after attacking, compounded by multiattacks."]
+    "DESCRIPTIONS": ["Reduce damage dealt by #b", ". Removed after attacking.", ". Reduce by #b","% after attacking, compounded by multiattacks."]
   },
   "evolutionmod:AphrodisiacPower": {
     "NAME": "Aphrodisiac",
@@ -107,19 +127,23 @@
   },
   "evolutionmod:EruptionPower": {
     "NAME": "Eruption",
-    "DESCRIPTIONS": ["After dealing damage ", " more times deal ", " damage to all enemies."]
+    "DESCRIPTIONS": ["After dealing damage #b", " more times deal #b", " damage to all enemies."]
   },
   "evolutionmod:FireAntsPower": {
     "NAME": "Fire Ants",
     "DESCRIPTIONS": ["Whenever a #yDrone is #yExhausted this turn trigger your oldest #yLavafolk gene.",
-      "Whenever a #yDrone is #yExhausted this turn trigger your ", " oldest #yLavafolk genes."]
+      "Whenever a #yDrone is #yExhausted this turn trigger your #b", " oldest #yLavafolk genes."]
   },
   "evolutionmod:VenomGlandsPower": {
     "NAME": "Venom Glands",
-    "DESCRIPTIONS": ["Whenever an Attack deals unblocked damage this turn, apply ", " #yPoison."]
+    "DESCRIPTIONS": ["Whenever an Attack deals unblocked damage this turn, apply #b", " #yPoison."]
   },
   "evolutionmod:SymbiotesPower": {
     "NAME": "Symbiotes",
-    "DESCRIPTIONS": ["Whenever #yGrowth produces #yEnergy add ", " a #yDrone to your hand.", " #yDrones to your hand."]
+    "DESCRIPTIONS": ["Whenever #yGrowth produces #yEnergy add #b", "a #yDrone to your hand.", " #yDrones to your hand."]
+  },
+  "evolutionmod:LeafWingsPower": {
+    "NAME": "Leaf Wings",
+    "DESCRIPTIONS": ["Whenever #yGrowth produces #yEnergy, draw a card, up to #b", " times this turn (#b", " times left)"]
   }
 }

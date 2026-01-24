@@ -4,7 +4,6 @@ import com.evacipated.cardcrawl.mod.stslib.cards.interfaces.StartupCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
 import com.megacrit.cardcrawl.actions.common.HealAction;
-import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -13,13 +12,11 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import evolutionmod.actions.AntidoteAction;
-import evolutionmod.orbs.AbstractGene;
-import evolutionmod.patches.AbstractCardEnum;
+import evolutionmod.patches.EvolutionEnum;
 
 public class Heal
 		extends BaseEvoCard implements StartupCard {
-	public static final String ID = "evolutionmod:Heal";
+	public static final String ID = "evolutionmodV2:Heal";
 	public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;
 	public static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -33,7 +30,7 @@ public class Heal
 
 	public Heal() {
 		super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
-				CardType.SKILL, AbstractCardEnum.EVOLUTION_BLUE,
+				CardType.SKILL, EvolutionEnum.EVOLUTION_V2_BLUE,
 				CardRarity.RARE, CardTarget.SELF);
 		this.magicNumber = this.baseMagicNumber = HEAL_AMT;
 	}

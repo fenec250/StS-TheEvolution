@@ -7,23 +7,21 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import evolutionmod.actions.CrystalShapingAction;
-import evolutionmod.patches.AbstractCardEnum;
+import evolutionmod.patches.EvolutionEnum;
 import evolutionmod.powers.CrystalShapingPower;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CrystalShaping2 extends BaseEvoCard {
-	public static final String ID = "evolutionmod:CrystalShaping";
+	public static final String ID = "evolutionmodV2:CrystalShaping";
 	public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;
 	public static final String DESCRIPTION = cardStrings.DESCRIPTION;
 	public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
 	public static final String[] EXTENDED_DESCRIPTION = cardStrings.EXTENDED_DESCRIPTION;
-	public static final String IMG_PATH = "evolutionmod/images/cards/CrystalStone.png";
+	public static final String IMG_PATH = "evolutionmod/images/cards/CrystalShaping.png";
 	private static final int COST = 1;
-	private static final int UPGRADED_COST = 0;
 	private static final int POWER_AMT = 1;
 
 	private static final List<AbstractCard> previewCards = new ArrayList<AbstractCard>() {{
@@ -37,7 +35,7 @@ public class CrystalShaping2 extends BaseEvoCard {
 
 	public CrystalShaping2() {
 		super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
-				CardType.POWER, AbstractCardEnum.EVOLUTION_BLUE,
+				CardType.POWER, EvolutionEnum.EVOLUTION_V2_BLUE,
 				CardRarity.UNCOMMON, CardTarget.SELF);
 		this.magicNumber = this.baseMagicNumber = POWER_AMT;
 	}
@@ -56,7 +54,8 @@ public class CrystalShaping2 extends BaseEvoCard {
 	public void upgrade() {
 		if (!this.upgraded) {
 			this.upgradeName();
-			this.upgradeBaseCost(UPGRADED_COST);
+			this.isInnate = true;
+			this.rawDescription = UPGRADE_DESCRIPTION;
 			this.initializeDescription();
 		}
 	}
