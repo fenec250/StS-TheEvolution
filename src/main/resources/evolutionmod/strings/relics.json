@@ -9,6 +9,16 @@
     "FLAVOR": "She's found her way back to you.",
     "DESCRIPTIONS": ["Start each combat with #b1 additional Orb slot and random genes in all Orb slots."]
   },
+  "evolutionmod:TorisGiftV1": {
+    "NAME": "Tori's gift",
+    "FLAVOR": "A gift from your mentor.",
+    "DESCRIPTIONS": ["Start each combat with a random #yGene."]
+  },
+  "evolutionmod:ToriV1": {
+    "NAME": "Tori",
+    "FLAVOR": "She's found her way back to you.",
+    "DESCRIPTIONS": ["Start each combat with #b1 additional Orb slot and random genes in all Orb slots."]
+  },
   "evolutionmod:NimbleBoots": {
     "NAME": "Nimble Boots",
     "FLAVOR": "",

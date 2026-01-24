@@ -1,0 +1,48 @@
+package evolutionmod.cardsV1;
+
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.defect.DecreaseMaxOrbAction;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.localization.CardStrings;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.powers.DrawPower;
+import evolutionmod.cards.BaseEvoCard;
+import evolutionmod.patches.EvolutionEnum;
+
+public class Shrink
+        extends BaseEvoCard {
+    public static final String cardID = "Shrink";
+    public static final String ID = "evolutionmod:"+cardID;
+	public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("evolutionmod:"+cardID);
+    public static final String NAME = cardStrings.NAME;
+    public static final String DESCRIPTION = cardStrings.DESCRIPTION;
+    public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
+    public static final String IMG_PATH = "evolutionmod/images/cards/Shrink.png";
+    private static final int COST = 1;
+    private static final int LOSE_ORB_AMT = 1;
+    private static final int GAIN_DRAW_AMT = 1;
+
+    public Shrink() {
+        super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
+                CardType.POWER, EvolutionEnum.EVOLUTION_BLUE,
+                CardRarity.UNCOMMON, CardTarget.SELF);
+        this.magicNumber = this.baseMagicNumber = GAIN_DRAW_AMT;
+    }
+
+    @Override
+    public void use(AbstractPlayer p, AbstractMonster m) {
+        addToBot(new DecreaseMaxOrbAction(LOSE_ORB_AMT));
+        addToBot(new ApplyPowerAction(p, p, new DrawPower(p, this.magicNumber), this.magicNumber));
+    }
+
+    @Override
+    public void upgrade() {
+        if (!this.upgraded) {
+            this.upgradeName();
+            this.isInnate = true;
+            this.rawDescription = UPGRADE_DESCRIPTION;
+            this.initializeDescription();
+        }
+    }
+}

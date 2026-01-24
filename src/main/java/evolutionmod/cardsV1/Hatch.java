@@ -1,0 +1,74 @@
+package evolutionmod.cardsV1;
+
+import com.megacrit.cardcrawl.actions.common.GainBlockAction;
+import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
+import com.megacrit.cardcrawl.actions.defect.ChannelAction;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.localization.CardStrings;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import evolutionmod.cards.BaseEvoCard;
+import evolutionmod.cards.Drone;
+import evolutionmod.orbsV1.InsectGene;
+import evolutionmod.patches.EvolutionEnum;
+
+public class Hatch
+        extends BaseEvoCard {
+    public static final String cardID = "Hatch";
+    public static final String ID = "evolutionmod:"+cardID;
+	public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings("evolutionmod:"+cardID);
+    public static final String NAME = cardStrings.NAME;
+    public static final String DESCRIPTION = cardStrings.DESCRIPTION;
+    public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
+    public static final String IMG_PATH = "evolutionmod/images/cards/InsectSkl.png";
+    private static final int COST = 2;
+    private static final int BLOCK_AMT = 4;
+    private static final int DRONES_AMT = 3;
+    private static final int UPGRADE_DRONES_AMT = 1;
+
+    public Hatch() {
+        super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
+                CardType.SKILL, EvolutionEnum.EVOLUTION_BLUE,
+                CardRarity.COMMON, CardTarget.SELF);
+        this.block = this.baseBlock = BLOCK_AMT;
+        this.magicNumber = this.baseMagicNumber = DRONES_AMT;
+        this.cardsToPreview = new Drone();
+    }
+
+    @Override
+    public void use(AbstractPlayer p, AbstractMonster m) {
+        int drones = this.magicNumber;
+        addToBot(new MakeTempCardInHandAction(Drone.createDroneWithInteractions(p), drones));
+        addToBot(new ChannelAction(new InsectGene()));
+        if (this.upgraded) {
+            addToBot(new GainBlockAction(p, this.block));
+        } else {
+//            formEffect(InsectGene.ID, () -> addToBot(new GainBlockAction(p, this.block)));
+        }
+    }
+
+    @Override
+    public void upgrade() {
+        if (!this.upgraded) {
+            this.upgradeName();
+//            this.upgradeMagicNumber(UPGRADE_DRONES_AMT);
+            this.rawDescription = UPGRADE_DESCRIPTION;
+            this.initializeDescription();
+        }
+    }
+
+//    @Override
+//    public int getNumberOfGlows() {
+//        return upgraded ? 0 : 1;
+//    }
+//
+//    @Override
+//    public boolean isGlowing(int glowIndex) {
+//        return isPlayerInThisForm(InsectGene.ID);
+//    }
+//
+//    @Override
+//    public Color getGlowColor(int glowIndex) {
+//        return InsectGene.COLOR.cpy();
+//    }
+}

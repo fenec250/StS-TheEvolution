@@ -42,12 +42,13 @@ public class Feather
         addToBot(new DiscardAction(p, p, this.magicNumber, false));
         formEffect(harpyOrbId, () ->
                 addToBot(new MoveCardsAction(p.hand, p.discardPile,
-                    c -> c.cardID.equals(FeatherStorm.ID), 1)));
+                    c -> c.cardID.equals(FeatherStorm.ID)
+                            || c.cardID.equals(evolutionmod.cardsV1.FeatherStorm.ID), 1)));
     }
 
     @Override
     public AbstractCard makeCopy() {
-        return new Feather();
+        return new Feather(harpyOrbId);
     }
 
     @Override
@@ -63,7 +64,9 @@ public class Feather
     @Override
     public void triggerOnGlowCheck() {
         if (isPlayerInThisForm(harpyOrbId)
-            && AbstractDungeon.player.discardPile.group.stream().anyMatch(c -> FeatherStorm.ID.equals(c.cardID))) {
+            && AbstractDungeon.player.discardPile.group.stream()
+                .anyMatch(c -> FeatherStorm.ID.equals(c.cardID)
+                        || evolutionmod.cardsV1.FeatherStorm.ID.equals(c.cardID))) {
             this.glowColor = HarpyGene2.COLOR.cpy();
         } else {
 			this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();

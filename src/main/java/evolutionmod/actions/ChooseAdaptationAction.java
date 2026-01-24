@@ -1,15 +1,10 @@
 package evolutionmod.actions;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
-import com.megacrit.cardcrawl.characters.AbstractPlayer;
-import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import evolutionmod.cards.AdaptableEvoCard;
-import evolutionmod.cards.BaseEvoCard;
 import evolutionmod.cards.Gene;
 import evolutionmod.orbs.AbstractGene;
 

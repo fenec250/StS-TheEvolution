@@ -5,5 +5,12 @@
     ],
     "TEXT": [
       "The Evolution wields the power to shape their body to overcome their foe."]
+  },
+  "evolutionmod:EvolutionCharacter": {
+    "NAMES": [
+      "The Evolution V1"
+    ],
+    "TEXT": [
+      "(Old version) The Evolution wields the power to shape their body to overcome their foe."]
   }
 }

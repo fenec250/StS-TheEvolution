@@ -8,13 +8,9 @@ import com.megacrit.cardcrawl.actions.utility.WaitAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import evolutionmod.cards.BaseEvoCard;
-import evolutionmod.orbs.HarpyGene;
-import evolutionmod.orbs.PlantGene;
 import evolutionmod.powers.GrowthPower;
 
 import java.util.Iterator;
-import java.util.function.Supplier;
 
 public class LeafBirdAction extends AbstractGameAction {
 
