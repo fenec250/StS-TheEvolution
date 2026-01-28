@@ -1,5 +1,6 @@
 package evolutionmod.cards;
 
+import basemod.BaseMod;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.*;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
@@ -24,7 +25,7 @@ public class Frenzy extends BaseEvoCard {
     public static final String IMG_PATH = "evolutionmod/images/cards/Frenzy.png";
     private static final int COST = 0;
     private static final int DAMAGE_AMT = 6;
-    private static final int UPGRADE_DAMAGE_AMT = 4;
+    private static final int UPGRADE_DAMAGE_AMT = 2;
     private static final int POWER_AMT = 1;
     private static final int FORM_POWER_AMT = 1;
 
@@ -99,7 +100,7 @@ public class Frenzy extends BaseEvoCard {
             if (card.type == AbstractCard.CardType.ATTACK) {
                 this.flash();
                 this.addToTop(new ReducePowerAction(this.owner, this.owner, POWER_ID, 1));
-                while (energy > 0 && player.hand.size() < 10 && player.discardPile.getAttacks().size() > 0) {
+                while (energy > 0 && player.hand.size() < BaseMod.MAX_HAND_SIZE && player.discardPile.getAttacks().size() > 0) {
                     player.discardPile.moveToHand(player.discardPile.getRandomCard(CardType.ATTACK, true));
                     energy -= 1;
                 }

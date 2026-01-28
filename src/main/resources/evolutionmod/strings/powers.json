@@ -144,6 +144,11 @@
   },
   "evolutionmod:LeafWingsPower": {
     "NAME": "Leaf Wings",
-    "DESCRIPTIONS": ["Whenever #yGrowth produces #yEnergy, draw a card, up to #b", " times this turn (#b", " times left)"]
+//    "DESCRIPTIONS": ["Whenever #yGrowth produces #yEnergy, draw a card, up to #b", " times this turn (#b", " times left)"],
+    "DESCRIPTIONS": ["The next time #yGrowth produces #yEnergy, draw #b", " card.", " cards."]
+  },
+  "evolutionmod:BarkskinPower": {
+    "NAME": "Barkskin",
+    "DESCRIPTIONS": ["Whenever #yGrowth produces #yEnergy, gain #b", " #yPlated #yArmor."]
   }
 }

@@ -107,7 +107,7 @@ public class Transform extends BaseEvoCard {
 			case PlantGene2.ID: switch (gene2) {
 //				case PlantGene2.ID: return new LeafBird2();
 //				case MerfolkGene2.ID: return new CurrentsDancer2();
-				case HarpyGene2.ID: return new LeafWings();
+				case HarpyGene2.ID: return new LeafWings2();
 				case LavafolkGene2.ID: return new Blazebloom();
 				case SuccubusGene2.ID: return new Pheromones2();
 //				case LymeanGene2.ID: return new ReadTheWaters2();
@@ -133,7 +133,7 @@ public class Transform extends BaseEvoCard {
 				default: return new Dive();
 			}
 			case HarpyGene2.ID: switch (gene2) {
-				case PlantGene2.ID: return new LeafWings();
+				case PlantGene2.ID: return new LeafWings2();
 				case MerfolkGene2.ID: return new CurrentsDancer();
 //				case HarpyGene2.ID: return new CurrentsDancer();
 				case LavafolkGene2.ID: return new Phoenix();

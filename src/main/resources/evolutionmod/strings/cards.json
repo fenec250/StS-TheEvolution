@@ -61,7 +61,7 @@
   },
   "evolutionmodV2:Drown": {
     "NAME": "Drown",
-    "DESCRIPTION": "Gain !B! Block NL At the end of this turn the enemy will take damage equal to your Block.",
+    "DESCRIPTION": "Gain !B! Block. NL At the end of this turn the enemy will take damage equal to your Block. NL evolutionmod:Adapt with your rightmost evolutionmod:MerfolkGene2 gene.",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmodV2:CoralStewards": {
@@ -152,7 +152,7 @@
   },
   "evolutionmodV2:SeaWolf": {
     "NAME": "Sea Wolf",
-    "DESCRIPTION": "Deal !D! damage. NL Add !M! damage per 3 Block you have. NL evolutionmod:MerfolkGene2 evolutionmod:Form: gain !B! Block first.",
+    "DESCRIPTION": "Deal !D! damage. NL Add !M! damage per 3 Block you have. NL Channel a evolutionmod:MerfolkGene2 gene.",
     "UPGRADE_DESCRIPTION": ""
   },
   "evolutionmodV2:Frenzy": {
@@ -177,7 +177,7 @@
   },
   "evolutionmodV2:DepthsLurker": {
     "NAME": "Depths Lurker",
-    "DESCRIPTION": "Gain !B! Block. NL Add !M! Block per turn this combat lasted. NL evolutionmod:MerfolkGene2 evolutionmod:Form: add 1 more Block per turn.",
+    "DESCRIPTION": "Gain !B! Block. NL Add !M! Block per turn this combat lasted. NL Channel a evolutionmod:MerfolkGene2 gene.",
     "UPGRADE_DESCRIPTION": "",
     "EXTENDED_DESCRIPTION": []
   },
@@ -193,8 +193,8 @@
   },
   "evolutionmodV2:BlackCat": {
     "NAME": "Black Cat",
-    "DESCRIPTION": "Deal !M! * X damage. NL Refund X, up to the number of turns this combat lasted, shared across the turn.",
-    "EXTENDED_DESCRIPTION": ["Deal !M! * X damage ( !D! ). NL ", "Refund X, up to ", ".", "No Refund left."]
+    "DESCRIPTION": "Deal !M!X damage. NL Refund X, up to the number of turns this combat lasted each turn.",
+    "EXTENDED_DESCRIPTION": ["Deal !M!X damage ( !D! ). NL ", "Refund X, up to ", " this turn.", "No Refund left this turn."]
   },
   "evolutionmodV2:NightMare": {
     "NAME": "Night Mare",
@@ -269,13 +269,20 @@
   },
   "evolutionmodV2:LeafWings": {
     "NAME": "Leaf Wings",
-    "DESCRIPTION": "When evolutionmod:Growth triggers, draw a card, up to !M! times per turn. NL evolutionmod:HarpyGene2 evolutionmod:Form: gain 1 Growth.",
-    "UPGRADE_DESCRIPTION": "When evolutionmod:Growth triggers, draw a card, up to !M! times per turn. NL evolutionmod:HarpyGene2 evolutionmod:Form: gain 2 Growth."
+//    "DESCRIPTION": "When evolutionmod:Growth triggers, draw a card, up to !M! times per turn. NL evolutionmod:HarpyGene2 evolutionmod:Form: gain 1 Growth.",
+//    "UPGRADE_DESCRIPTION": "When evolutionmod:Growth triggers, draw a card, up to !M! times per turn. NL evolutionmod:HarpyGene2 evolutionmod:Form: gain 2 Growth.",
+    "DESCRIPTION": "The next time evolutionmod:Growth triggers, draw !M! card. NL Gain 1 evolutionmod:Growth. NL evolutionmod:HarpyGene2 evolutionmod:Form: draw 1 card.",
+    "UPGRADE_DESCRIPTION": "Draw 1 card. NL The next time evolutionmod:Growth triggers, draw !M! card. NL Gain 1 evolutionmod:Growth. NL evolutionmod:HarpyGene2 evolutionmod:Form: draw 1 card."
   },
   "evolutionmodV2:Photosynthesis": {
     "NAME": "Photosynthesis",
-    "DESCRIPTION": "Gain !B! Block X times. Whenever you are attacked this turn, deal !M! * X damage back. NL evolutionmod:Adapt this with a evolutionmod:PlantGene2 gene.",
+    "DESCRIPTION": "Gain !B! Block X times. NL Whenever you are attacked this turn, deal !M! * X damage back. NL evolutionmod:Adapt this with a evolutionmod:PlantGene2 gene.",
     "UPGRADE_DESCRIPTION": ""
+  },
+  "evolutionmodV2:Barkskin": {
+    "NAME": "Barkskin",
+    "DESCRIPTION": "Gain !M!X *Plated *Armor. NL Whenever evolutionmod:Growth triggers, gain 1 Plated Armor. NL Gain X evolutionmod:Growth.",
+    "UPGRADE_DESCRIPTION": "Gain !M!X+!M! *Plated *Armor. NL Whenever evolutionmod:Growth triggers, gain 1 Plated Armor. NL Gain X+1 evolutionmod:Growth."
   },
   "evolutionmodV2:Mossbeast": {
     "NAME": "Mossbeast",
@@ -377,10 +384,10 @@
   },
   "evolutionmodV2:Mastery": {
     "NAME": "Gene Mastery",
-    "DESCRIPTION": "When you Channel the [#F04040]Imprinted[] gene or use a matching evolutionmod:Form effect, trigger its effect. NL [#F04040]Imprinted[] evolutionmod:Form: gain an Orb slot",
-    "UPGRADE_DESCRIPTION": "When you Channel an [#F04040]Imprinted[] gene or use a matching evolutionmod:Form effect, trigger its effect. NL Gain an Orb slot and Channel the [#F04040]Imprinted[] gene.",
+    "DESCRIPTION": "When you Channel the [#F04040]Imprinted[] gene or use a matching evolutionmod:Form effect, trigger the gene's effect. NL [#F04040]Imprinted[] evolutionmod:Form: gain an Orb slot",
+    "UPGRADE_DESCRIPTION": "When you Channel an [#F04040]Imprinted[] gene or use a matching evolutionmod:Form effect, trigger the gene's effect. NL Gain an Orb slot and Channel the [#F04040]Imprinted[] gene.",
     "EXTENDED_DESCRIPTION": [
-      "When you Channel a ", " gene or use a matching evolutionmod:Form effect, trigger its effect. NL ",
+      "When you Channel a ", " gene or use a matching evolutionmod:Form effect, trigger the gene's effect. NL ",
       " evolutionmod:Form: gain an Orb slot.", "Gain an Orb slot and Channel a ", " gene.",
       " Mastery", "I need to channel a Gene first."]
   },
@@ -411,8 +418,8 @@
   },
   "evolutionmodV2:HumanForm": {
     "NAME": "Human Form",
-    "DESCRIPTION": "Trigger all your genes !M! times and Evoke them. NL When you Channel a gene, trigger it !M! times and Evoke it.",
-    "UPGRADE_DESCRIPTION": ""
+    "DESCRIPTION": "Evoke all your genes. NL When you Channel a gene, trigger it !M! times and Evoke it.",
+    "UPGRADE_DESCRIPTION": "Trigger all your genes !M! times and Evoke them. NL When you Channel a gene, trigger it !M! times and Evoke it."
   },
   "evolutionmodV2:Gene": {
     "NAME": "Gene",
@@ -435,7 +442,7 @@
 //    "NAME": "Offbeat",
 //    "DESCRIPTION": "Deal !D! damage. NL Tempo !melodyMod:T!: gain [E]",
 //    "UPGRADE_DESCRIPTION": "",
-//    "EXTENDED_DESCRIPTION": ["Deal !D! damage twice"]
+//    "EXTENDED_DESCRIPTION": ["Deal !D! damage twice", "*Plated *Armor"]
 //  },
 //  "mysticmodref:ClosingBarrage": {
 //    "NAME": "Closing Barrage",

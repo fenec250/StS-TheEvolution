@@ -128,7 +128,6 @@ public class EvolutionMod implements
         cards.add(new ShadowBolt());
         cards.add(new TalonStrike());
         cards.add(new FlameStrike());
-//        cards.add(new PoisonFangs());
         cards.add(new HeavyKick());
 
         cards.add(new ShiftingStrike());
@@ -165,6 +164,8 @@ public class EvolutionMod implements
         cards.add(new VenomGlands2());
         cards.add(new FireAnts());
         cards.add(new Blazebloom());
+        cards.add(new Toxin2());
+        cards.add(new LeafWings2());
         cards.add(new SeerSear());
         cards.add(new Promise());
         cards.add(new CurrentsDancer());
@@ -174,20 +175,18 @@ public class EvolutionMod implements
         cards.add(new DepthsLurker());
         cards.add(new ReadTheWaters2());
         cards.add(new SeaSerpent());
-//        cards.add(new ShiftingPower());
+
         cards.add(new Transform());
         cards.add(new Adaptation());
         cards.add(new Mutate());
         //exhaust
-        cards.add(new Toxin2());
         cards.add(new Treasure());
         cards.add(new CrystalDust());
 
         //6 powers
         cards.add(new Battleborn());
-//        cards.add(new CurrentsDancer());
         cards.add(new CoralStewards());
-        cards.add(new LeafWings());
+//        cards.add(new LeafWings());
         cards.add(new NightMare());
         cards.add(new Salamander());
         cards.add(new Mastery());
@@ -198,24 +197,21 @@ public class EvolutionMod implements
         //4 attacks
         cards.add(new Stampede());
         cards.add(new Seduce());
-//        cards.add(new Stalker());
-//        cards.add(new DeathKiss());
         cards.add(new Frenzy());
         cards.add(new FeatherStorm());
         cards.add(new SpiderBite2());
         //8 skills
-        cards.add(new Drown());
-//        cards.add(new Drown2());
+        cards.add(new Drown2());
         cards.add(new Ghost());
         cards.add(new Ritual());
-        cards.add(new Photosynthesis());
         cards.add(new Heal());
+//        cards.add(new Photosynthesis());
 
         //6 powers
-//        cards.add(new Broodmother());
-//        cards.add(new TheNight2());
         cards.add(new Swampborn());
         cards.add(new Eruption());
+        cards.add(new Barkskin());
+
         cards.add(new GodlyPowers());
         cards.add(new HumanForm());
         cards.add(new Grow());

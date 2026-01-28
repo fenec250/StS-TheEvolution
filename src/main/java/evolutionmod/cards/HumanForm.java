@@ -25,7 +25,6 @@ public class HumanForm extends BaseEvoCard {
     public static final String IMG_PATH = "evolutionmod/images/cards/HumanForm.png";
     private static final int COST = 3;
     private static final int OMNI_AMT = 2;
-    private static final int UPGRADE_OMNI_AMT = 1;
 
     public HumanForm() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -33,7 +32,6 @@ public class HumanForm extends BaseEvoCard {
                 CardRarity.RARE, CardTarget.SELF);
         this.magicNumber = this.baseMagicNumber = OMNI_AMT;
         this.tags.add(FORM);
-//        this.isEthereal = true;
     }
 
     @Override
@@ -45,8 +43,10 @@ public class HumanForm extends BaseEvoCard {
                         .filter(o -> o instanceof AbstractGene)
                         .collect(Collectors.toList())
                         .forEach(o -> {
-                            for(int i = 0; i < magicNumber; ++i) {
-                                ((AbstractGene) o).getAdaptation().apply(p, null);
+                            if (upgraded) {
+                                for (int i = 0; i < magicNumber; ++i) {
+                                    ((AbstractGene) o).getAdaptation().apply(p, null);
+                                }
                             }
                             addToTop(new EvokeSpecificOrbAction(o));
                         });
@@ -65,10 +65,8 @@ public class HumanForm extends BaseEvoCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-//            this.isEthereal = false;
-            this.upgradeMagicNumber(UPGRADE_OMNI_AMT);
-//            this.rawDescription = UPGRADE_DESCRIPTION;
-//            this.initializeDescription();
+            this.rawDescription = UPGRADE_DESCRIPTION;
+            this.initializeDescription();
         }
     }
 }

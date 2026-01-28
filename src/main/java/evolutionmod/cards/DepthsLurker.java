@@ -21,11 +21,10 @@ public class DepthsLurker
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = "evolutionmod/images/cards/DepthsLurker.png";
     private static final int COST = 1;
-    private static final int BLOCK_AMT = 4;
+    private static final int BLOCK_AMT = 3;
     private static final int UPGRADE_BLOCK_AMT = 1;
     private static final int TURN_BLOCK_AMT = 1;
     private static final int UPGRADE_TURN_BLOCK_AMT = 1;
-    private static final int FORM_TURN_BLOCK_AMT = 1;
 
     public DepthsLurker() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -38,7 +37,7 @@ public class DepthsLurker
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         addToBot(new GainBlockAction(p, this.block));
-        formEffect(MerfolkGene2.ID);
+        addToBot(new MerfolkGene2().getChannelAction());
     }
 
 
@@ -48,8 +47,7 @@ public class DepthsLurker
     }
 
     private void alterBlockAround(Runnable supercall) {
-        int mult = this.magicNumber + (isPlayerInThisForm(MerfolkGene2.ID)?FORM_TURN_BLOCK_AMT:0);
-        this.baseBlock = BLOCK_AMT + (upgraded ? UPGRADE_BLOCK_AMT : 0) + GameActionManager.turn * mult;
+        this.baseBlock = BLOCK_AMT + (upgraded ? UPGRADE_BLOCK_AMT : 0) + GameActionManager.turn * this.magicNumber;
         supercall.run();
         this.baseBlock = BLOCK_AMT + (upgraded ? UPGRADE_BLOCK_AMT : 0);
         this.isBlockModified = this.block != this.baseBlock;
@@ -58,9 +56,6 @@ public class DepthsLurker
     @Override
     public AbstractCard makeCopy() {
         AbstractCard card = new DepthsLurker();
-        if (CardCrawlGame.dungeon != null && AbstractDungeon.currMapNode != null && AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT) {
-            card.setCostForTurn(Math.max(COST - GameActionManager.turn/2, 0));
-        }
         return card;
     }
 
@@ -70,15 +65,6 @@ public class DepthsLurker
             this.upgradeName();
             this.upgradeBlock(UPGRADE_BLOCK_AMT);
             this.upgradeMagicNumber(UPGRADE_TURN_BLOCK_AMT);
-        }
-    }
-
-    public void triggerOnGlowCheck() {
-        super.triggerOnGlowCheck();
-        if (isPlayerInThisForm(MerfolkGene2.ID)) {
-            this.glowColor = MerfolkGene2.COLOR.cpy();
-        } else {
-            this.glowColor = BLUE_BORDER_GLOW_COLOR.cpy();
         }
     }
 }

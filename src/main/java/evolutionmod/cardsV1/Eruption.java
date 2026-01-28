@@ -8,6 +8,7 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import evolutionmod.cards.BaseEvoCard;
 import evolutionmod.patches.EvolutionEnum;
+import evolutionmod.powers.EruptionPower;
 
 public class Eruption
         extends BaseEvoCard {
@@ -33,11 +34,7 @@ public class Eruption
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-//        addToBot(new ApplyPowerAction(p, p, new EruptionPower(p, this.magicNumber)));
-        addToBot(new ApplyPowerAction(p, p, new ExplosionPower(p, this.magicNumber)));
-//        if (upgraded) {
-//            addToBot(new ChannelAction(new LavafolkGene()));
-//        }
+        addToBot(new ApplyPowerAction(p, p, new EruptionPower(p, this.magicNumber)));
     }
 
     @Override
