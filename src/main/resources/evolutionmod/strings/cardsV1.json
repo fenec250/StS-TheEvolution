@@ -482,8 +482,8 @@
   },
   "evolutionmod:Mastery": {
     "NAME": "Gene Mastery",
-    "DESCRIPTION": "When you Channel an [#F04040]Imprinted[] gene, trigger its effect. NL [#F04040]Imprinted[] evolutionmod:Form: gain an Orb slot",
-    "UPGRADE_DESCRIPTION": "When you Channel an [#F04040]Imprinted[] gene, trigger its effect. NL Gain an Orb slot and Channel the [#F04040]Imprinted[] gene.",
+    "DESCRIPTION": "When you Channel an [#F04040]Imprinted[] gene or use a matching evolutionmod:Form effect, trigger the gene's effect. NL [#F04040]Imprinted[] evolutionmod:Form: gain an Orb slot",
+    "UPGRADE_DESCRIPTION": "When you Channel an [#F04040]Imprinted[] gene or use a matching evolutionmod:Form effect, trigger the gene's effect. NL Gain an Orb slot and Channel the [#F04040]Imprinted[] gene.",
     "EXTENDED_DESCRIPTION": [
       "When you Channel a ", " gene, trigger its effect. NL ",
       " evolutionmod:Form: gain an Orb slot.", "Gain an Orb slot and Channel a ", " gene.",

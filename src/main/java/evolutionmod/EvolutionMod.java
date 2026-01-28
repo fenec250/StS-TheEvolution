@@ -26,8 +26,8 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.localization.RelicStrings;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import evolutionmod.cards.*;
+import evolutionmod.character.EvolutionV2Character;
 import evolutionmod.character.EvolutionCharacter;
-import evolutionmod.character.EvolutionV1Character;
 import evolutionmod.patches.EvolutionEnum;
 import evolutionmod.potions.EatMe;
 import evolutionmod.potions.Mutagen;
@@ -56,9 +56,21 @@ public class EvolutionMod implements
     private static final String powerCardPortrait = "evolutionmod/images/1024/bg_power_evo.png";
     private static final String energyOrbPortrait = "evolutionmod/images/1024/evolution_orb.png";
     private static final String charButton1 = "evolutionmod/images/charSelect/button1.png";
-    private static final String charButton2 = "evolutionmod/images/charSelect/button2.png";
-    private static final String charPortrait = "evolutionmod/images/charSelect/portrait.png";
     private static final String miniManaSymbol = "evolutionmod/images/manaSymbol.png";
+
+    private static final Color evo_brown = CardHelper.getColor(140, 64, 0); // 0x8b4000
+    private static final String attackCard2 = "evolutionmod/images/512/bg_attack_evo2.png";
+    private static final String skillCard2 = "evolutionmod/images/512/bg_skill_evo2.png";
+    private static final String powerCard2 = "evolutionmod/images/512/bg_power_evo2.png";
+    private static final String energyOrb2 = "evolutionmod/images/512/evolution_orb2.png";
+    private static final String attackCardPortrait2 = "evolutionmod/images/1024/bg_attack_evo2.png";
+    private static final String skillCardPortrait2 = "evolutionmod/images/1024/bg_skill_evo2.png";
+    private static final String powerCardPortrait2 = "evolutionmod/images/1024/bg_power_evo2.png";
+    private static final String energyOrbPortrait2 = "evolutionmod/images/1024/evolution_orb2.png";
+    private static final String charButton2 = "evolutionmod/images/charSelect/button2.png";
+    private static final String miniManaSymbol2 = "evolutionmod/images/manaSymbol2.png";
+
+    private static final String charPortrait = "evolutionmod/images/charSelect/portrait.png";
     public static ModPanel settingsPanel;
 
 
@@ -66,10 +78,10 @@ public class EvolutionMod implements
         BaseMod.subscribe(this);
 
         BaseMod.addColor(EvolutionEnum.EVOLUTION_V2_BLUE,
-                evo_green, evo_green, evo_green, evo_green, evo_green, evo_green, evo_green,
-                attackCard, skillCard, powerCard, energyOrb,
-                attackCardPortrait, skillCardPortrait, powerCardPortrait, energyOrbPortrait,
-                miniManaSymbol);
+                evo_brown, evo_brown, evo_brown, evo_brown, evo_brown, evo_brown, evo_brown,
+                attackCard2, skillCard2, powerCard2, energyOrb2,
+                attackCardPortrait2, skillCardPortrait2, powerCardPortrait2, energyOrbPortrait2,
+                miniManaSymbol2);
         BaseMod.addColor(EvolutionEnum.EVOLUTION_BLUE,
                 evo_green, evo_green, evo_green, evo_green, evo_green, evo_green, evo_green,
                 attackCard, skillCard, powerCard, energyOrb,
@@ -313,7 +325,7 @@ public class EvolutionMod implements
 
     @Override
     public void receiveEditCharacters() {
-        BaseMod.addCharacter(new EvolutionCharacter(CardCrawlGame.playerName), charButton2, charPortrait, EvolutionEnum.EVOLUTION_V2_CLASS);
+        BaseMod.addCharacter(new EvolutionV2Character(CardCrawlGame.playerName), charButton2, charPortrait, EvolutionEnum.EVOLUTION_V2_CLASS);
         BaseMod.addPotion(EatMe.class, Color.BROWN, Color.CLEAR, Color.CLEAR,
                 EatMe.V2_POTION_ID, EvolutionEnum.EVOLUTION_V2_CLASS);
         BaseMod.addPotion(Mutagen.class, Color.ORANGE, Color.VIOLET, Color.GREEN,
@@ -321,11 +333,13 @@ public class EvolutionMod implements
         BaseMod.addPotion(StolenKiss.class, Color.RED, Color.PINK, Color.CLEAR,
                 StolenKiss.POTION_ID, EvolutionEnum.EVOLUTION_V2_CLASS);
 
-        BaseMod.addCharacter(new EvolutionV1Character(CardCrawlGame.playerName), charButton1, charPortrait, EvolutionEnum.EVOLUTION_CLASS);
+        BaseMod.addCharacter(new EvolutionCharacter(CardCrawlGame.playerName), charButton1, charPortrait, EvolutionEnum.EVOLUTION_CLASS);
         BaseMod.addPotion(EatMe.class, Color.BROWN, Color.CLEAR, Color.CLEAR,
                 EatMe.POTION_ID, EvolutionEnum.EVOLUTION_CLASS);
         BaseMod.addPotion(MutagenV1.class, Color.ORANGE, Color.VIOLET, Color.GREEN,
                 MutagenV1.POTION_ID, EvolutionEnum.EVOLUTION_CLASS);
+        BaseMod.addPotion(StolenKiss.class, Color.RED, Color.PINK, Color.CLEAR,
+                StolenKiss.POTION_ID, EvolutionEnum.EVOLUTION_CLASS);
 
     }
 

@@ -7,7 +7,7 @@ import com.megacrit.cardcrawl.helpers.CardLibrary;
 
 public class EvolutionEnum {
 
-    @SpireEnum
+    @SpireEnum(name="EVOLUTION_V2")
     public static AbstractPlayer.PlayerClass EVOLUTION_V2_CLASS;
     @SpireEnum
     public static AbstractPlayer.PlayerClass EVOLUTION_CLASS;

@@ -17,27 +17,27 @@ import com.megacrit.cardcrawl.helpers.ScreenShake;
 import com.megacrit.cardcrawl.localization.CharacterStrings;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
-import evolutionmod.cardsV1.LoyalCompanion;
-import evolutionmod.cardsV1.DefendEvo;
-import evolutionmod.cardsV1.LoyalWarrior;
-import evolutionmod.cardsV1.StrikeEvo;
+import evolutionmod.cards.LoyalCompanion;
+import evolutionmod.cards.DefendEvo;
+import evolutionmod.cards.LoyalWarrior;
+import evolutionmod.cards.StrikeEvo;
 import evolutionmod.patches.EvolutionEnum;
-import evolutionmod.relics.TorisGiftV1;
+import evolutionmod.relics.TorisGift;
 
 import java.util.ArrayList;
 
-public class EvolutionV1Character extends CustomPlayer {
+public class EvolutionV2Character extends CustomPlayer {
     public static final int ENERGY_PER_TURN = 3;
     public static final String MY_CHARACTER_SHOULDER_1 = "evolutionmod/images/char/Campfire1.png";
     public static final String MY_CHARACTER_SHOULDER_2 = "evolutionmod/images/char/Campfire2.png";
     public static final String MY_CHARACTER_CORPSE = "evolutionmod/images/char/ded_nila.png";
 //    public static final String MY_CHARACTER_ANIMATION = "evolutionmod/images/char/idle/Animation.scml";
     public static final String MY_CHARACTER_PORTRAIT = "evolutionmod/images/cards/CentaurSkl.png";
-    private static final String ID = "evolutionmod:EvolutionCharacter";
+    private static final String ID = "evolutionmod:EvolutionV2Character";
     private static final CharacterStrings characterStrings = CardCrawlGame.languagePack.getCharacterString(ID);
     private static final String[] NAMES = characterStrings.NAMES;
     private static final String[] TEXT = characterStrings.TEXT;
-    private static final Color EvoV1Teal = CardHelper.getColor(191, 255, 1); //0xbfff00
+    private static final Color EvoTeal = CardHelper.getColor(191, 255, 2); //0xbfff01
     private static final float DIALOG_X_ADJUSTMENT = 0.0F;
     private static final float DIALOG_Y_ADJUSTMENT = 220.0F;
     public static final String[] orbTextures = {
@@ -54,10 +54,13 @@ public class EvolutionV1Character extends CustomPlayer {
 		    "evolutionmod/images/char/orb/layer5d.png"
     };
 
-    public EvolutionV1Character(String name) {
-        super(name, EvolutionEnum.EVOLUTION_CLASS, orbTextures,
+    public EvolutionV2Character(String name) {
+//        super(name, EvolutionEnum.EVOLUTION_CLASS, orbTextures, "evolutionmod/images/char/orb/vfx.png", null, new SpriterAnimation(MY_CHARACTER_ANIMATION));
+        super(name, EvolutionEnum.EVOLUTION_V2_CLASS, orbTextures,
                 "evolutionmod/images/char/orb/vfx.png", null,
                 new SpriterAnimation("evolutionmod/images/char/idle/nila_idle.scml"));
+//                new SpineAnimation("evolutionmod/images/char/idle/Evolution.atlas",
+//                        "evolutionmod/images/char/idle/Evolution.json", 0.33f));
         this.dialogX = this.drawX + DIALOG_X_ADJUSTMENT * Settings.scale;
         this.dialogY = this.drawY + DIALOG_Y_ADJUSTMENT * Settings.scale;
 
@@ -80,7 +83,7 @@ public class EvolutionV1Character extends CustomPlayer {
 
     @Override
     public Color getSlashAttackColor() {
-        return EvoV1Teal;
+        return EvoTeal;
     }
 
     @Override
@@ -95,12 +98,12 @@ public class EvolutionV1Character extends CustomPlayer {
 
     @Override
     public AbstractCard.CardColor getCardColor() {
-        return EvolutionEnum.EVOLUTION_BLUE;
+        return EvolutionEnum.EVOLUTION_V2_BLUE;
     }
 
     @Override
     public Color getCardRenderColor() {
-        return EvoV1Teal;
+        return EvoTeal;
     }
 
     @Override
@@ -124,7 +127,7 @@ public class EvolutionV1Character extends CustomPlayer {
 
     @Override
     public Color getCardTrailColor() {
-        return EvoV1Teal;
+        return EvoTeal;
     }
 
     @Override
@@ -156,7 +159,7 @@ public class EvolutionV1Character extends CustomPlayer {
 
     @Override
     public AbstractPlayer newInstance() {
-        return new EvolutionV1Character(this.name);
+        return new EvolutionV2Character(this.name);
     }
 
     @Override
@@ -180,8 +183,8 @@ public class EvolutionV1Character extends CustomPlayer {
     @Override
     public ArrayList<String> getStartingRelics() {
         ArrayList<String> retVal = new ArrayList<>();
-        retVal.add(TorisGiftV1.ID);
-        UnlockTracker.markRelicAsSeen(TorisGiftV1.ID);
+        retVal.add(TorisGift.ID);
+        UnlockTracker.markRelicAsSeen(TorisGift.ID);
         return retVal;
     }
 
