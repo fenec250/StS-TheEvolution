@@ -385,24 +385,24 @@ public class EvolutionMod implements
         BaseMod.addRelicToCustomPool(new TorisGift(), EvolutionEnum.EVOLUTION_V2_BLUE);
         UnlockTracker.markRelicAsSeen(TorisGift.ID);
         //common
-        BaseMod.addRelicToCustomPool(new NimbleBoots(), EvolutionEnum.EVOLUTION_V2_BLUE);
-        UnlockTracker.markRelicAsSeen(NimbleBoots.ID);
+//        BaseMod.addRelicToCustomPool(new NimbleBoots(), EvolutionEnum.EVOLUTION_V2_BLUE);
+//        UnlockTracker.markRelicAsSeen(NimbleBoots.ID);
         //uncommon
-        BaseMod.addRelicToCustomPool(new PowerFocus(), EvolutionEnum.EVOLUTION_V2_BLUE);
-        UnlockTracker.markRelicAsSeen(PowerFocus.ID);
+//        BaseMod.addRelicToCustomPool(new PowerFocus(), EvolutionEnum.EVOLUTION_V2_BLUE);
+//        UnlockTracker.markRelicAsSeen(PowerFocus.ID);
         //rare
-        BaseMod.addRelicToCustomPool(new MagicFocus(), EvolutionEnum.EVOLUTION_V2_BLUE);
-        UnlockTracker.markRelicAsSeen(MagicFocus.ID);
-        BaseMod.addRelicToCustomPool(new StrengthFocus(), EvolutionEnum.EVOLUTION_V2_BLUE);
-        UnlockTracker.markRelicAsSeen(StrengthFocus.ID);
-        BaseMod.addRelicToCustomPool(new ScoutMedal(), EvolutionEnum.EVOLUTION_V2_BLUE);
-        UnlockTracker.markRelicAsSeen(ScoutMedal.ID);
+//        BaseMod.addRelicToCustomPool(new MagicFocus(), EvolutionEnum.EVOLUTION_V2_BLUE);
+//        UnlockTracker.markRelicAsSeen(MagicFocus.ID);
+//        BaseMod.addRelicToCustomPool(new StrengthFocus(), EvolutionEnum.EVOLUTION_V2_BLUE);
+//        UnlockTracker.markRelicAsSeen(StrengthFocus.ID);
+//        BaseMod.addRelicToCustomPool(new ScoutMedal(), EvolutionEnum.EVOLUTION_V2_BLUE);
+//        UnlockTracker.markRelicAsSeen(ScoutMedal.ID);
         //shop
-        BaseMod.addRelicToCustomPool(new Whip(), EvolutionEnum.EVOLUTION_V2_BLUE);
-        UnlockTracker.markRelicAsSeen(Whip.ID);
+//        BaseMod.addRelicToCustomPool(new Whip(), EvolutionEnum.EVOLUTION_V2_BLUE);
+//        UnlockTracker.markRelicAsSeen(Whip.ID);
         //boss
-        BaseMod.addRelicToCustomPool(new OldOutfit(), EvolutionEnum.EVOLUTION_V2_BLUE);
-        UnlockTracker.markRelicAsSeen(OldOutfit.ID);
+//        BaseMod.addRelicToCustomPool(new OldOutfit(), EvolutionEnum.EVOLUTION_V2_BLUE);
+//        UnlockTracker.markRelicAsSeen(OldOutfit.ID);
         BaseMod.addRelicToCustomPool(new Tori(), EvolutionEnum.EVOLUTION_V2_BLUE);
         UnlockTracker.markRelicAsSeen(Tori.ID);
 

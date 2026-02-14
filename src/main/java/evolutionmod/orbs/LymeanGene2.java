@@ -19,7 +19,7 @@ public class LymeanGene2 extends AbstractGene {
 	public static final OrbStrings orbStrings = CardCrawlGame.languagePack.getOrbString(ID);
 	public static final String NAME = orbStrings.NAME;
 	public static final String COLOR_STRING = "[#50FFFE]";
-	public static final Color COLOR = new Color(0x80DFFF00);
+	public static final Color COLOR = new Color(0xBFFFFF00);
 	public static final String[] DESCRIPTION = orbStrings.DESCRIPTION;
 	public static final TooltipInfo TOOLTIP = new TooltipInfo(COLOR_STRING + NAME + "[]", "Orb: " + getOrbDescription());
 	public static final String IMG_PATH = "evolutionmod/images/orbs/LymeanGene.png";

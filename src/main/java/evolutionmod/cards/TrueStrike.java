@@ -45,7 +45,8 @@ public class TrueStrike
                 List<AbstractCard> attacks = p.drawPile.group.stream()
                         .filter(c -> c.type == CardType.ATTACK)
                         .collect(Collectors.toList());
-                addToTop(new ApplyPowerAction(p, p, new VigorPower(p, Math.min(attacks.size() * VIGOR_AMT, magicNumber))));
+                int vigor = Math.min(attacks.size() * VIGOR_AMT, magicNumber);
+                if (vigor > 0) addToTop(new ApplyPowerAction(p, p, new VigorPower(p, vigor)));
                 attacks.forEach(c -> p.drawPile.moveToDiscardPile(c));
                 this.isDone = true;
             }

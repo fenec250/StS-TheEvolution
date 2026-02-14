@@ -44,6 +44,7 @@ public class OldOutfit extends CustomRelic implements OnChannelRelic {
     @Override
     public void atTurnStart() {
         this.beginLongPulse();
+        this.active = true;
     }
 
     @Override

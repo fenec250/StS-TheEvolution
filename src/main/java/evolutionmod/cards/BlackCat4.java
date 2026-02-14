@@ -1,6 +1,7 @@
 package evolutionmod.cards;
 
 import com.evacipated.cardcrawl.mod.stslib.actions.common.RefundAction;
+import com.evacipated.cardcrawl.mod.stslib.cards.interfaces.StartupCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.GameActionManager;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
@@ -18,7 +19,7 @@ import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 import evolutionmod.patches.EvolutionEnum;
 
 public class BlackCat4
-        extends BaseEvoCard {
+        extends BaseEvoCard implements StartupCard {
     public static final String ID = "evolutionmodV2:BlackCat";
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
@@ -31,6 +32,7 @@ public class BlackCat4
     private static final int UPGRADE_DAMAGE_AMT = 1;
 
     public static int refundPool = 0;
+    public boolean firstTurnFlag = false;
 
     public BlackCat4() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -101,8 +103,15 @@ public class BlackCat4
     }
 
     @Override
+    public boolean atBattleStartPreDraw() {
+        firstTurnFlag = true;
+        return false;
+    }
+
+    @Override
     public void atTurnStart() {
-        refundPool = GameActionManager.turn + 1; // not updated to current turn yet
+        refundPool = GameActionManager.turn + (firstTurnFlag ? 0 : 1); // not updated to current turn yet
+        firstTurnFlag = false;
         super.atTurnStart();
     }
 
